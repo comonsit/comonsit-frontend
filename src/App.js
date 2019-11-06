@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch} from "react-router-dom";
-// import Layout from './hoc/Layout/Layout'
+import Layout from './hoc/Layout/Layout'
 import homeContainer from './containers/HomeContainer/HomeContainer';
 // import login from './containers/Login/Login';
 // import contacto from './containers/Contacto/Contacto';
@@ -8,7 +8,7 @@ import homeContainer from './containers/HomeContainer/HomeContainer';
 function App() {
 
   return (
-    <>
+    <Layout>
       <Switch>
           {/*<Route path="/contacto" component={contacto}/>*/}
           {/*<Route path="/login" component={login}/>*/}
@@ -16,7 +16,7 @@ function App() {
           {/* TODO: make 404 in redirect */}
           <Redirect to="/"/>
       </Switch>
-    </>
+    </Layout>
   );
 }
 
