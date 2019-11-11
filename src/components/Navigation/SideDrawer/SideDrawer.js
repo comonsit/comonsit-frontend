@@ -17,13 +17,13 @@ const sideDrawer = (props) => {
                 show={props.open}/>
                 {/* meter props closed aquí está feo porque piques lo que sea lo va a cerrar, no sólo links*/}
             <div className={attachedClasses.join(' ')} onClick={props.closed}>
-                <div className={classes.Logo}>
-                    <Logo/>
-                </div>
-                <nav>
-                    <NavigationItems
-                    isAuthenticated={props.isAuth}/>
-                </nav>
+              <div className={classes.Logo}>
+                  <Logo/>
+              </div>
+              <nav>
+                <NavigationItems
+                  isAuthenticated={props.isAuth}/>
+              </nav>
             </div>
         </>
     );
