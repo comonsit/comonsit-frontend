@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink} from "react-router-dom";
 import classes from './Toolbar.module.css';
 import Logo from '../Logo/Logo'
-// import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle'
+import Hamburguesa from '../SideDrawer/Hamburguesa/Hamburguesa'
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
@@ -34,6 +34,8 @@ const toolbar = (props) => (
               </li>
             </ul>
         </nav>
+        <Hamburguesa
+          clicked={props.showMenu}/>
     </header>
 );
 
