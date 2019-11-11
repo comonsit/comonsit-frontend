@@ -25,7 +25,7 @@ class Layout extends Component {
     const isAuthenticated = true  // TODO: implement check if logged in
     let classes, menu
     if (isAuthenticated){
-      classes = []
+      classes = [cl.Content]
       menu = (
         <>
           <Toolbar/>

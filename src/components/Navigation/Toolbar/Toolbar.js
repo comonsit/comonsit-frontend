@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink} from "react-router-dom";
 import classes from './Toolbar.module.css';
+import Logo from '../Logo/Logo'
 // import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle'
 
 const toolbar = (props) => (
@@ -8,7 +9,7 @@ const toolbar = (props) => (
         <div className={classes.Logo}>
             {/*Aquí iría el logo*/}
             <NavLink to="/" exact activeClassName={classes.active}>
-              <h3>ComonSit</h3>
+              <Logo/>
             </NavLink>
         </div>
         <nav className={classes.DesktopOnly}>
@@ -17,13 +18,19 @@ const toolbar = (props) => (
                 <NavLink to="/" exact activeClassName={classes.active}>Inicio</NavLink>
               </li>
               <li className={classes.NavigationItem}>
-                <NavLink to="/" exact activeClassName={classes.active}>Economía Solidaria</NavLink>
+                <NavLink to="/conocenos" exact activeClassName={classes.active}>Conócenos</NavLink>
               </li>
               <li className={classes.NavigationItem}>
-                <NavLink to="/" exact activeClassName={classes.active}>Conócenos</NavLink>
+                <NavLink to="/origen" exact activeClassName={classes.active}>Origen</NavLink>
               </li>
               <li className={classes.NavigationItem}>
-                <NavLink to="/login" exact activeClassName={classes.active}>Login</NavLink>
+                <NavLink to="/publicaciones" exact activeClassName={classes.active}>Publicaciones</NavLink>
+              </li>
+              <li className={classes.NavigationItem}>
+                <NavLink to="/contacto" exact activeClassName={classes.active}>Contacto</NavLink>
+              </li>
+              <li className={classes.NavigationItem}>
+                <NavLink to="/login" exact activeClassName={classes.active}>Acceso</NavLink>
               </li>
             </ul>
         </nav>
