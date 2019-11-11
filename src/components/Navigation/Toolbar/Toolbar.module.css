@@ -11,48 +11,22 @@
     box-sizing: border-box;
 }
 
+.DesktopOnly {
+    display: flex;
+    align-items: center;
+}
+
 .Logo {
     height: 100%;  /* sin este, se extiende el logo width:100%??*/
 }
 
 @media (min-width: 500px) {
-  .NavigationItems {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    height: 100%;
-  }
-  .NavigationItem {
-    display: flex;
-    width: auto;
-    padding-right: 10px;
-    /* el center es por el flex */
-    align-items: center;
-  }
 
-  .NavigationItem a {
-    height: 100%;
-    padding: 16px 10px;
-    text-decoration: none;
-    color: #243746;
-  }
-
-  .NavigationItem a.active {
-    font-weight: bold;
-    text-decoration: underline;
-  }
-
-  .NavigationItem a:hover {
-    color: white;
-  }
 }
 
 
 @media (max-width: 499px) {
     .DesktopOnly {
-        display: none;
+      display: none;
     }
 }

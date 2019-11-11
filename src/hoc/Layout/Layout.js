@@ -2,24 +2,24 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import cl from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-// import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 //import DashToolbar from '../../components/Navigation/DashToolbar/DashToolbar';
 
 class Layout extends Component {
 
-  // state = {
-  //   showSideDrawer: false
-  // }
-  //
-  // sideDrawerOpenHandler = () => {
-  //   this.setState((prevState) => {
-  //     return {showSideDrawer: !prevState.showSideDrawer};
-  //   });
-  // }
-  //
-  // sideDrawerClosedHandler = () => {
-  //   this.setState({showSideDrawer: false});
-  // }
+  state = {
+    showSideDrawer: false
+  }
+
+  sideDrawerOpenHandler = () => {
+    this.setState((prevState) => {
+      return {showSideDrawer: !prevState.showSideDrawer};
+    });
+  }
+
+  sideDrawerClosedHandler = () => {
+    this.setState({showSideDrawer: false});
+  }
 
   render() {
     const isAuthenticated = true  // TODO: implement check if logged in
@@ -28,7 +28,12 @@ class Layout extends Component {
       classes = [cl.Content]
       menu = (
         <>
-          <Toolbar/>
+          <SideDrawer
+            isAuth={this.props.isAuthenticated}
+            open={this.state.showSideDrawer}
+            closed={this.sideDrawerClosedHandler}/>
+          <Toolbar
+            showMenu={this.sideDrawerOpenHandler}/>
         </>
         )
     } else {

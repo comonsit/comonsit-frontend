@@ -3,6 +3,7 @@ import { NavLink} from "react-router-dom";
 import classes from './Toolbar.module.css';
 import Logo from '../Logo/Logo'
 import Hamburguesa from '../SideDrawer/Hamburguesa/Hamburguesa'
+import NavigationItems from '../NavigationItems/NavigationItems'
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
@@ -13,26 +14,7 @@ const toolbar = (props) => (
             </NavLink>
         </div>
         <nav className={classes.DesktopOnly}>
-            <ul className={classes.NavigationItems}>
-              <li className={classes.NavigationItem}>
-                <NavLink to="/" exact activeClassName={classes.active}>Inicio</NavLink>
-              </li>
-              <li className={classes.NavigationItem}>
-                <NavLink to="/conocenos" exact activeClassName={classes.active}>Conócenos</NavLink>
-              </li>
-              <li className={classes.NavigationItem}>
-                <NavLink to="/origen" exact activeClassName={classes.active}>Origen</NavLink>
-              </li>
-              <li className={classes.NavigationItem}>
-                <NavLink to="/publicaciones" exact activeClassName={classes.active}>Publicaciones</NavLink>
-              </li>
-              <li className={classes.NavigationItem}>
-                <NavLink to="/contacto" exact activeClassName={classes.active}>Contacto</NavLink>
-              </li>
-              <li className={classes.NavigationItem}>
-                <NavLink to="/login" exact activeClassName={classes.active}>Acceso</NavLink>
-              </li>
-            </ul>
+            <NavigationItems/>
         </nav>
         <Hamburguesa
           clicked={props.showMenu}/>
