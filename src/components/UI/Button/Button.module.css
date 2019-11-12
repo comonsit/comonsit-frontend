@@ -1,0 +1,33 @@
+.Button {
+    background-color: #D5B49E;
+    border: .2rem solid white;
+    border-radius: .4rem;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 1rem 2rem;
+    margin: 1rem;
+    font-weight: bold;
+}
+
+.Button:hover {
+  border: .2rem solid #D5B49E;
+  font-weight: normal;
+  color: #D5B49E;
+  background-color: white;
+  font-weight: bold;
+}
+
+.Button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.Success {
+  /*TODO*/
+}
+
+.Danger {
+  /*TODO*/
+}
