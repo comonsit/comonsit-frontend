@@ -24,7 +24,7 @@
   font-weight: bold;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 62em) {
   .NavigationItems {
     list-style: none;
     margin: 0;
@@ -50,7 +50,7 @@
 }
 
 
-@media (max-width: 499px) {
+@media (max-width: 61.99em) {
     .DesktopOnly {
         display: none;
     }
