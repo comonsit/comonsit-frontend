@@ -7,14 +7,15 @@
 .NavigationItem {
   display: flex;
   width: auto;
-  padding-right: 10px;
+  padding-right: 1rem;
   /* el center es por el flex */
   align-items: center;
+  font-size: 1.5em;
 }
 
 .NavigationItem a {
   height: 100%;
-  padding: 20px 0px;
+  padding: 2rem 0;
   text-decoration: none;
   color: #243746;
 }
@@ -34,7 +35,7 @@
   }
 
   .NavigationItem a {
-    padding: 16px 10px;
+    padding: 0rem 1rem;
   }
 
   .NavigationItem a.active {

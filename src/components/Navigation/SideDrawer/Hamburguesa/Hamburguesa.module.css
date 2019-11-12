@@ -1,20 +1,20 @@
 .Hamburguesa {
-    width: 70px;
+    width: 7rem;
     height: 100%;
     display: flex;
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
+    padding: 1rem;
     box-sizing: border-box;
     cursor: pointer;
 }
 
 .Hamburguesa div {
     width: 90%;
-    height: 5px;
+    height: .5rem;
     background-color: white;
-    border-radius: 1px;
+    border-radius: .1rem;
 }
 
 @media (min-width: 500px) {

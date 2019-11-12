@@ -1,9 +1,13 @@
-body {
+html {
+  font-size: 62.5%;  /*dflt 1rem 16px*/
   margin: 0;
   color: #243746;
   font-family: 'Libre Baskerville', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
 
 }
 

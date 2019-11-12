@@ -1,5 +1,5 @@
 .Toolbar {
-    height: 72px;   /* TODO: ajustar a erm? o viewport with media query? */
+    height: 7rem;
     width: 100%;
     position: fixed;
     top: 0;
