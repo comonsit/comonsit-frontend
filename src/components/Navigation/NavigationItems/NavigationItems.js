@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 import cl from './NavigationItems.module.css';
 
@@ -21,11 +21,12 @@ const navigationItems = (props) => (
         <li className={cl.NavigationItem}>
           <NavLink to="/contacto" exact activeClassName={cl.active}>Contacto</NavLink>
         </li>
-        <li className={cl.NavigationItem}>
-          <NavLink to="/login" exact activeClassName={cl.active}>Acceso</NavLink>
+        <li className={cl.NavigationItemSpecial}>
+          <NavLink to="/login" exact activeClassName={cl.active}>Acceder</NavLink>
         </li>
       </ul>
     </div>
 );
+
 
 export default navigationItems
