@@ -77,6 +77,10 @@
     height: 100%;
   }
 
+  .NavigationItem {
+    font-size: 1em;
+  }
+
   .NavigationItem a {
     padding: 0rem 1rem;
   }
