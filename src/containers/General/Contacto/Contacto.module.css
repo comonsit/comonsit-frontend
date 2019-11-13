@@ -1,0 +1,30 @@
+.Paragraph {
+  padding: 4rem 4rem;
+}
+
+.Paragraph h2 {
+  text-align: center;
+}
+
+.Paragraph p {
+  margin-top: 5rem;
+  text-align: justify;
+}
+
+.MailTo {
+  text-decoration: none;
+  color: #BBC392;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.MailTo:hover {
+  text-decoration: underline;
+  color: #99a268;
+}
+
+@media (min-width: 42em) {
+  .Paragraph {
+    padding: 7rem 15rem;
+  }
+}

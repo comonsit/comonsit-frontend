@@ -5,8 +5,9 @@ import homeContainer from './containers/General/HomeContainer/HomeContainer';
 import conocenos from './containers/General/Conocenos/Conocenos';
 import origen from './containers/General/Origen/Origen';
 import publicaciones from './containers/General/Publicaciones/Publicaciones';
+import contacto from './containers/General/Contacto/Contacto';
 // import login from './containers/Login/Login';
-// import contacto from './containers/Contacto/Contacto';
+
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/conocenos" component={conocenos}/>
           <Route path="/origen" component={origen}/>
           <Route path="/publicaciones" component={publicaciones}/>
+          <Route path="/contacto" component={contacto}/>
           <Route path="/" exact component={homeContainer}/>
           {/* TODO: make 404 in redirect */}
           <Redirect to="/"/>
