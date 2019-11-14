@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes'
-import axios from '../../axios-orders.js';
+// import axios from '../../axios-orders.js';
 
 
 export const setSocios = (socios) => {
@@ -11,15 +11,15 @@ export const setSocios = (socios) => {
 
 export const initSocios = () => {
     return dispatch => {
-        axios.get('/Socios.json')
-            .then(response => {
-                // en axios en response.data están los datos.
-                console.log(response.data)
-                dispatch(setSocios(response.data))
-            })
-            .catch(error => {
-                // TODO: FALTA!!
-                //dispatch(fetchIngredientsFailed())
-            })
+        // axios.get('/Socios.json')
+        //     .then(response => {
+        //         // en axios en response.data están los datos.
+        //         console.log(response.data)
+        //         dispatch(setSocios(response.data))
+        //     })
+        //     .catch(error => {
+        //         // TODO: FALTA!!
+        //         //dispatch(fetchIngredientsFailed())
+        //     })
     }
 }

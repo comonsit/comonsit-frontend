@@ -1,3 +1,10 @@
 export {
-    initSalas
-} from './salas'
+    initSocios
+} from './socios'
+
+export {
+    auth,
+    logout,
+    setAuthRedirectPath,
+    authCheckState
+} from './auth'

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import {NavLink} from "react-router-dom";
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 
 // import Spinner from '../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
 import Button from '../../../components/UI/Button/Button'
 import classes from './Acceso.module.css'
-// import * as actions from '../../store/actions'
-// import { updateObject } from '../../store/utility'
+import * as actions from '../../../store/actions'
+import { updateObject } from '../../../store/reducers/utility'
 // import {checkValidity } from '../../../utilities/validity'
 
 class Auth extends Component {
@@ -119,6 +119,7 @@ class Auth extends Component {
         return (
             <div className={classes.AccesoContainer}>
               <div className={classes.Acceso}>
+                <h4>Bienvenido {this.props.socio}</h4>
                 <form onSubmit={this.submitHandler}>
                   {form}
                   <NavLink to="/" exact>Olvidé mi contraseña</NavLink>
@@ -130,22 +131,22 @@ class Auth extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         loading: state.auth.loading,
-//         error: state.auth.error,
-//         isAuthenticated: state.auth.token !== null,
-//         buildingBurger: state.burgerBuilder.building,
-//         authRedirectPath: state.auth.authRedirectPath
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+        // buildingBurger: state.burgerBuilder.building,
+        authRedirectPath: state.auth.authRedirectPath
+    }
+}
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
-//         // si venimos de aquí siempre reenviaremos a casa!!!
-//         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
+        // si venimos de aquí siempre reenviaremos a casa!!!
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+    }
+}
 
-export default Auth
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)
