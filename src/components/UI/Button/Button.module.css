@@ -1,5 +1,5 @@
 .Button {
-    background-color: #D5B49E;
+    background-color: #8BA5E0;
     border: .2rem solid white;
     border-radius: .4rem;
     color: white;
@@ -12,9 +12,9 @@
 }
 
 .Button:hover {
-  border: .2rem solid #D5B49E;
+  border: .2rem solid #5e86e0;
   font-weight: normal;
-  color: #D5B49E;
+  color: #5e86e0;
   background-color: white;
   font-weight: bold;
 }

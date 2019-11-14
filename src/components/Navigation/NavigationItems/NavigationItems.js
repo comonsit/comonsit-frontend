@@ -22,7 +22,7 @@ const navigationItems = (props) => (
           <NavLink to="/contacto" exact activeClassName={cl.active}>Contacto</NavLink>
         </li>
         <li className={cl.NavigationItemSpecial}>
-          <NavLink to="/login" exact activeClassName={cl.active}>Acceder</NavLink>
+          <NavLink to="/acceso" exact activeClassName={cl.active}>Acceder</NavLink>
         </li>
       </ul>
     </div>
