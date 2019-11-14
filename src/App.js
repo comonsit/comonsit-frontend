@@ -8,6 +8,7 @@ import publicaciones from './containers/General/Publicaciones/Publicaciones';
 import contacto from './containers/General/Contacto/Contacto';
 import acceso from './containers/General/Acceso/Acceso';
 import panel from './containers/Panel/Socios/Socios';
+import Logout from './containers/Panel/Logout/Logout';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/socios" exact component={panel}/>
           <Route path="/acopios" exact component={panel}/>
           <Route path="/aportaciones" exact component={panel}/>
+          <Route path="/logout" component={Logout }/>
           <Route path="/" exact component={homeContainer}/>
           {/* TODO: make 404 in redirect */}
           <Redirect to="/"/>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import { connect } from 'react-redux'
 
 // import Spinner from '../../../components/UI/Spinner/Spinner'
@@ -7,8 +7,8 @@ import Input from '../../../components/UI/Input/Input'
 import Button from '../../../components/UI/Button/Button'
 import classes from './Acceso.module.css'
 import * as actions from '../../../store/actions'
-// import { updateObject } from '../../../store/reducers/utility'
-// import {checkValidity } from '../../../utilities/validity'
+import { updateObject } from '../../../store/reducers/utility'
+import {checkValidity } from '../../../utilities/validity'
 
 class Auth extends Component {
     state = {
@@ -56,19 +56,19 @@ class Auth extends Component {
 
     // para estar revisando cada vez que el texto se modifica
     inputChangedHandler  = (event, controlName) => {
-        // const updatedControls = updateObject(this.state.controls, {
-        //     [controlName]: updateObject(this.state.controls[controlName], {
-        //         value: event.target.value,
-        //         valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
-        //         touched: true
-        //     })
-        // })
-        // this.setState({controls: updatedControls})
+        const updatedControls = updateObject(this.state.controls, {
+            [controlName]: updateObject(this.state.controls[controlName], {
+                value: event.target.value,
+                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
+                touched: true
+            })
+        })
+        this.setState({controls: updatedControls})
     }
 
     submitHandler = (event, ) => {
-        // event.preventDefault()
-        // this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp)
+        event.preventDefault()
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp)
     }
 
     switchAuthModeHandler = () => {
@@ -111,13 +111,15 @@ class Auth extends Component {
         //     )
         // }
 
-        // let authRedirect = null
-        // if (this.props.isAuthenticated) {
-        //     authRedirect = <Redirect to={this.props.authRedirectPath}/>
-        // }
+        let authRedirect = null  // TODO: usar: this.props.authRedirectPath
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={"/socios"}/>
+        }
 
+        // TODO: hacer Olvidé mi contraseña NavLink GENÉRICO!
         return (
             <div className={classes.AccesoContainer}>
+              {authRedirect}
               <div className={classes.Acceso}>
                 <form onSubmit={this.submitHandler}>
                   {form}
@@ -144,7 +146,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
         // si venimos de aquí siempre reenviaremos a casa!!!
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/publicaciones'))  // TODO: CHECK!!
     }
 }
 

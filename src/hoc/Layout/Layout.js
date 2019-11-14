@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import {connect } from 'react-redux'
 import cl from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
@@ -22,9 +22,15 @@ class Layout extends Component {
   }
 
   render() {
-    const isAuthenticated = false  // TODO: implement check if logged in
     let classes, menu
-    if (isAuthenticated){
+    if (this.props.isAuthenticated){
+    //if (true){
+      classes = [cl.PContent]
+      menu = (
+        <PToolbar
+          showMenu={this.sideDrawerOpenHandler}/>
+      )
+    } else {
       classes = [cl.Content]
       menu = (
         <>
@@ -36,12 +42,6 @@ class Layout extends Component {
             showMenu={this.sideDrawerOpenHandler}/>
         </>
         )
-    } else {
-      classes = [cl.PContent]
-      menu = (
-        <PToolbar
-          showMenu={this.sideDrawerOpenHandler}/>
-      )
     }
 
     return (
@@ -55,4 +55,11 @@ class Layout extends Component {
   }
 }
 
-export default withRouter(Layout)
+const mapStateToProps = state => {
+    return {
+        // da un True si estamos autenticados
+        isAuthenticated: state.auth.token !== null
+    }
+}
+
+export default connect(mapStateToProps)(Layout)

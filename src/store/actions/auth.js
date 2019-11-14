@@ -81,7 +81,7 @@ export const auth = (email, password, isSignUp) => {
         if (email === "xmary@comonsit.com" && password === "clave123") {
           localStorage.setItem('token', 'idTokn55')
           // hacemos un cálculo de cuál será la fecha en la que expirará
-          const expirationDate = new Date(new Date().getTime() + 15 * 1000)
+          const expirationDate = new Date(new Date().getTime() + 10000 * 1000)  // TODO: cuánto de expiración?
           localStorage.setItem('expirationDate', expirationDate)
           localStorage.setItem('userId', "theLOCALid")
           dispatch(authSuccess('idTokn55', "theLOCALid"))
