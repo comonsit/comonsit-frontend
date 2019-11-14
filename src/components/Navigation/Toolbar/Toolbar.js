@@ -8,7 +8,6 @@ import NavigationItems from '../NavigationItems/NavigationItems'
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
         <div className={classes.Logo}>
-            {/*Aquí iría el logo*/}
             <NavLink to="/" exact activeClassName={classes.active}>
               <Logo/>
             </NavLink>

@@ -1,0 +1,10 @@
+.Logo {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5rem 2rem; 
+}
+
+.Logo img {
+  max-height: 100%;
+  max-width: 100%;
+}

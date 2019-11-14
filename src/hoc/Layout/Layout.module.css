@@ -2,3 +2,8 @@
   /* para tener un margen, más el espacio del toolbar */
   margin-top: 7rem;
 }
+
+.PContent {
+  /* para tener un margen, más el espacio del toolbar */
+  margin-left: 20vw;
+}

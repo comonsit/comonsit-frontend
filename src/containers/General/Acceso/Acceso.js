@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import {NavLink} from "react-router-dom";
 import { connect } from 'react-redux'
 
-// import Spinner from '../../components/UI/Spinner/Spinner'
+// import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
 import Button from '../../../components/UI/Button/Button'
 import classes from './Acceso.module.css'
 import * as actions from '../../../store/actions'
-import { updateObject } from '../../../store/reducers/utility'
+// import { updateObject } from '../../../store/reducers/utility'
 // import {checkValidity } from '../../../utilities/validity'
 
 class Auth extends Component {
@@ -119,7 +119,6 @@ class Auth extends Component {
         return (
             <div className={classes.AccesoContainer}>
               <div className={classes.Acceso}>
-                <h4>Bienvenido {this.props.socio}</h4>
                 <form onSubmit={this.submitHandler}>
                   {form}
                   <NavLink to="/" exact>Olvidé mi contraseña</NavLink>

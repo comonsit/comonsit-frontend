@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import cl from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
-//import DashToolbar from '../../components/Navigation/DashToolbar/DashToolbar';
+import PToolbar from '../../components/NavigationPanel/PToolbar/PToolbar';
 
 class Layout extends Component {
 
@@ -22,7 +22,7 @@ class Layout extends Component {
   }
 
   render() {
-    const isAuthenticated = true  // TODO: implement check if logged in
+    const isAuthenticated = false  // TODO: implement check if logged in
     let classes, menu
     if (isAuthenticated){
       classes = [cl.Content]
@@ -37,10 +37,10 @@ class Layout extends Component {
         </>
         )
     } else {
-      classes = []
+      classes = [cl.PContent]
       menu = (
-        <>
-        </>
+        <PToolbar
+          showMenu={this.sideDrawerOpenHandler}/>
       )
     }
 

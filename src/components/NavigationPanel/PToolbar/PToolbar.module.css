@@ -1,0 +1,41 @@
+.Toolbar {
+    height: 100vh;
+    width: 25vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #243746;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    box-sizing: border-box;
+    flex-flow: column;
+    align-items: flex-flex-start;
+}
+
+.User {
+  padding: 1rem;
+}
+
+.User h3 {
+  color: white;
+  text-align: right;
+}
+
+.DesktopOnly {
+    display: flex;
+    align-items: center;
+}
+
+.Logo {
+  margin: 2rem;
+}
+
+@media (min-width: 62em) {
+
+}
+
+
+@media (max-width: 61.99em) {
+
+}
