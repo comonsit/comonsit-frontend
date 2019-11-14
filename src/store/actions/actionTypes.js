@@ -1,0 +1,2 @@
+export const SET_SOCIOS = 'SET_SOCIOS'
+export const FETCH_SOCIOS_FAILED = 'FETCH_SOCIOS_FAILED'
