@@ -8,7 +8,7 @@ class Socios extends Component {
   state = {}
 
   componentDidMount () {
-    this.props.onInitSocios()
+    this.props.onInitSocios(this.props.token)
   }
 
   render () {
@@ -32,13 +32,14 @@ class Socios extends Component {
 
 const mapStateToProps = state => {
     return {
-      regiones: state.socios.socios
+      regiones: state.socios.socios,
+      token: state.auth.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      onInitSocios: () => dispatch(actions.initSocios()),
+      onInitSocios: (token) => dispatch(actions.initSocios(token)),
     }
 }
 

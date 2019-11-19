@@ -9,9 +9,13 @@ export const setSocios = (socios) => {
     }
 }
 
-export const initSocios = () => {
+export const initSocios = (token) => {
+
     return dispatch => {
-        axios.get('/comunidades.json')
+        const authData = {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }
+        axios.get('/users.json', authData)
             .then(response => {
                 // en axios en response.data están los datos.
                 console.log(response.data)

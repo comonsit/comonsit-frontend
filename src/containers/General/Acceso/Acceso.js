@@ -16,13 +16,13 @@ class Auth extends Component {
             email: {
                 elementType: 'input',
                 elementConfig: {
-                    type: 'email',
+                    type: 'username',
                     placeholder: 'Usuario'
                 },
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
+                    minLength: 4
                 },
                 valid: false,
                 touched: false
@@ -103,6 +103,7 @@ class Auth extends Component {
         //     form = <Spinner />
         // }
 
+        // TODO:
         // let errorMessage = null
         //
         // if (this.props.error) {
