@@ -94,15 +94,16 @@ export const authCheckState = () => {
             // por qué este logout
             dispatch(logout())
         } else {
-            const expirationDate = new Date( localStorage.getItem('expirationDate'))
-            if (expirationDate <= new Date()) {
-                dispatch(logout())
-            } else {
-                const userId = localStorage.getItem('userId')
-                dispatch(authSuccess(token, userId))
-                // pasamos la resta de segundos que quedan
-                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
-            }
+            // TODO: METER LÓGICA REFRESH
+            // const expirationDate = new Date( localStorage.getItem('expirationDate'))
+            // if (expirationDate <= new Date()) {
+            //     // dispatch(logout())
+            // } else {
+          const userId = localStorage.getItem('userId')
+          dispatch(authSuccess(token, userId))
+          // pasamos la resta de segundos que quedan
+          //dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
+
         }
     }
 }

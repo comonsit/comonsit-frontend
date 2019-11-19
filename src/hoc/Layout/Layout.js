@@ -57,7 +57,6 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
-        // da un True si estamos autenticados
         isAuthenticated: state.auth.token !== null
     }
 }
