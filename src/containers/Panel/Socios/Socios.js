@@ -16,14 +16,41 @@ class Socios extends Component {
     if (this.props.regiones) {
       console.log(this.props.regiones)
       tmp = this.props.regiones.map((s, i) => (
-        <h3>{i}-{s.nombre_de_comunidad}-{s.nombre_region}</h3>
+        <tr>
+          <td>{s.clave_socio}</td>
+          <td>{s.nombres}</td>
+          <td>{s.apellidos}</td>
+          <td>{s.comunidad.nombre_region}</td>
+          <td>{s.comunidad.nombre_de_comunidad}</td>
+          <td>{s.fecha_ingr_yomol_atel}</td>
+          <td>C</td>
+          <td>M</td>
+          <td>X</td>
+          <td>T</td>
+        </tr>
       ))
     }
     return (
       <div className={classes.AccesoContainer}>
         <div className={classes.Acceso}>
           <h1>BIENVENIDOS</h1>
-          {tmp}
+          <table className={classes.TablaSocios}>
+          <tr>
+            <th>Clave</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Región</th>
+            <th>Comunidad</th>
+            <th>Ingreso YA</th>
+            <th>Café</th>
+            <th>Miel</th>
+            <th>Xapon</th>
+            <th>Trabajador</th>
+          </tr>
+          <tbody>
+            {tmp}
+          </tbody>
+          </table>
         </div>
       </div>
     )

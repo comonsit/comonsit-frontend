@@ -24,7 +24,6 @@ class Layout extends Component {
   render() {
     let classes, menu
     if (this.props.isAuthenticated){
-    //if (true){
       classes = [cl.PContent]
       menu = (
         <PToolbar

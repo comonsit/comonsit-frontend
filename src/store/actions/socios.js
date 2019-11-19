@@ -15,7 +15,7 @@ export const initSocios = (token) => {
         const authData = {
           headers: { 'Authorization': `Bearer ${token}` }
         }
-        axios.get('/users.json', authData)
+        axios.get('/socios.json', authData)
             .then(response => {
                 // en axios en response.data están los datos.
                 console.log(response.data)

@@ -7,6 +7,7 @@ import sociosReducer from './store/reducers/socios'
 import authReducer from './store/reducers/auth'
 import thunk from 'redux-thunk';
 import './index.css';
+import './assets/fonts/Arquitecta.otf'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
