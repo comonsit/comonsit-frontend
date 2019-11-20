@@ -1,3 +1,8 @@
+.Container h1 {
+  font-family: 'Arquitecta';
+  padding-left: 2rem;
+}
+
 .TablaSocios {
   min-width: 30rem;
   background: ;
@@ -6,7 +11,7 @@
 }
 
 .TablaSocios tbody tr:nth-child(odd) {
-  background: #d0d2d4;
+  background: #dddedf;
 }
 
 .TablaSocios th {
@@ -19,6 +24,28 @@
 }
 
 .TablaSocios tbody tr:hover {
-  /* border: 2px solid #21a75a; TODO: ??? */
-  background-color: #BBC392
+  border: 2px solid #21a75a; /* TODO: ??? */
+  background-color: #BBC392;
+  cursor: pointer;
+}
+
+.AC {
+  background-color: #2bc71b;
+  border-radius: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.BA {
+  background-color: #ec573c;
+  border-radius: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.NP {
+  background-color: #868a86;
+  border-radius: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
