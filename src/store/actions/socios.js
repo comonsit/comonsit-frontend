@@ -9,6 +9,13 @@ export const setSocios = (socios) => {
     }
 }
 
+export const setSelSocios = (selectedSocio) => {
+    return {
+        type: actionTypes.SET_SEL_SOCIO,
+        selectedSocio: selectedSocio
+    }
+}
+
 export const initSocios = (token) => {
 
     return dispatch => {
@@ -23,7 +30,25 @@ export const initSocios = (token) => {
             })
             .catch(error => {
                 // TODO: FALTA!!
-                //dispatch(fetchIngredientsFailed())
+                //dispatch(fetchSociosFailed())
+            })
+    }
+}
+
+export const fetchSelSocio = (token, socioId) => {
+
+    return dispatch => {
+        const authData = {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }
+        axios.get(`/socios/${socioId}.json`, authData)
+            .then(response => {
+                console.log('SINGLE SOCIO:' + response.data)
+                dispatch(setSelSocios(response.data))
+            })
+            .catch(error => {
+                // TODO: FALTA!!
+                //dispatch(fetchSociosFailed())
             })
     }
 }

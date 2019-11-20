@@ -14,9 +14,14 @@ class Socios extends Component {
     this.props.onInitSocios(this.props.token)
   }
 
-  fetchDetails(id){
+  fetchDetails =(id) => {
     console.log('ME PICARON'+id);
     this.setState({socioSeleccionado: true});
+    this.props.onFetchSelSocios(this.props.token, id)
+  }
+
+  cancelSelected =() => {
+    this.setState({ socioSeleccionado: false});
   }
 
   getStatusColor(status)  {
@@ -41,7 +46,7 @@ class Socios extends Component {
       tmp = this.props.regiones.map((s, i) => (
         <tr
           id={s.clave_socio + i}
-          onClick={() => this.fetchDetails(i)}>
+          onClick={() => this.fetchDetails(s.clave_socio)}>
           <td>{s.clave_socio}</td>
           <td>{s.nombres} {s.apellidos}</td>
           <td>{s.comunidad.nombre_region}</td>
@@ -54,12 +59,20 @@ class Socios extends Component {
         </tr>
       ))
     }
-    selectedSocio = <div> SOY EL SOCIO </div>
+    selectedSocio = <div> NO HAY SOCIO </div>
+    if (this.props.selSocio) {
+      selectedSocio = (
+        <div>
+          <h3>{this.props.selSocio.nombres} {this.props.selSocio.apellidos}</h3>
+          <p>{this.props.selSocio.prod_trab}</p>
+        </div>
+      )
+    }
     return (
       <>
         <Modal
           show={this.state.socioSeleccionado}
-          modalClosed={this.purchaseCancelHandler}>
+          modalClosed={this.cancelSelected}>
           {selectedSocio}
         </Modal>
         <div className={classes.Container}>
@@ -89,6 +102,7 @@ class Socios extends Component {
 const mapStateToProps = state => {
     return {
       regiones: state.socios.socios,
+      selSocio: state.socios.selectedSocio,
       token: state.auth.token
     }
 }
@@ -96,6 +110,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
+      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId))
     }
 }
 

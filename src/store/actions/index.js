@@ -1,5 +1,6 @@
 export {
-    initSocios
+    initSocios,
+    fetchSelSocio
 } from './socios'
 
 export {
