@@ -62,7 +62,7 @@ class Socios extends Component {
     selectedSocio = <div> NO HAY SOCIO </div>
     if (this.props.selSocio) {
       selectedSocio = (
-        <div>
+        <div className={classes.Selected}>
           <h3>{this.props.selSocio.nombres} {this.props.selSocio.apellidos}</h3>
           <p>{this.props.selSocio.prod_trab}</p>
         </div>
