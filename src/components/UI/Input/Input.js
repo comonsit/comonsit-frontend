@@ -2,10 +2,13 @@ import React from 'react'
 import classes from './Input.module.css'
 
 const input = (props) => {
+    let label = null
     let inputElement = null;
     const inputClasses = [classes.InputElement]
     let validationError = null
-
+    if (props.label) {
+      label = <label className={classes.Label}>{props.label}</label>
+    }
     // esta lógica ajustará el estilo cuando el input sea inválido
     // if (props.invalid && props.shouldValidate && props.touched) {
     //     inputClasses.push(classes.Invalid)
@@ -49,9 +52,10 @@ const input = (props) => {
                 onChange={props.changed} />
     }
 
+
     return (
         <div className={classes.Input}>
-            <label className={classes.Label}>{props.label}</label>
+            {label}
             {inputElement}
             {validationError}
         </div>
