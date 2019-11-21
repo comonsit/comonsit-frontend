@@ -49,25 +49,3 @@
   width: 1.5rem;
   height: 1.5rem;
 }
-
-.Element {
-  font-family: 'Arquitecta';
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 100%;
-  align-items: center;
-  border-bottom: 1px solid #BBC392;
-}
-
-.Element label {
-  font-weight: bold;
-  width: 30%;
-  text-align: center;
-  padding-right: 1rem;
-}
-
-.Element p {
-  width: 70%;
-  padding-left: 1rem;
-}
