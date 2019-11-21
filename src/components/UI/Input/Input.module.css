@@ -33,6 +33,12 @@
     background-color: #ccc;
 }
 
+.InputElement:disabled {
+  border: none;
+  font-size: default;
+  color: black;
+}
+
 .Invalid {
     border: 1px solid red;
     background-color: #FDA49A;

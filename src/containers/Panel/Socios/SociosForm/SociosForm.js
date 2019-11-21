@@ -4,31 +4,15 @@ import { connect } from 'react-redux'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import classes from './SociosForm.module.css'
-import * as actions from '../../../../store/actions'
+// import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
-// {"clave_socio": "Clave Socio",
-// "nombres": "Nombre",
-// "apellidos": "Apellidos",
-// "nombre_de_comunidad": "Comunidad",
-// "nombre_region": "Región",
-// "curp": "CURP",
-// "telefono": "Teléfono",
-// "fecha_nacimiento": "Fecha de Nacimiento",
-// "fecha_ingr_yomol_atel": "Ingreso a Yomol A'tel",
-// "fecha_ingr_programa": "Ingreso a Comon Sit Ca'teltic",
-// "cargo": "Cargo",
-// "prod_trab": "Productor/Trabajador",
-// "clave_anterior": "Clave Café",
-// "estatus_cafe": "Estatus Café",
-// "estatus_miel": "Estatus Miel",
-// "estatus_yip": "Estatus Yip Antsetic",
-// "estatus_gral": "Estatus General"
-// }
+
 class SociosForm extends Component {
   state = {
-    editable: false,
+    editing: false,
+    formIsValid: true,
     socioForm: {
       nombres: {
         elementType: 'input',
@@ -41,7 +25,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       apellidos: {
@@ -55,7 +39,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       comunidad: {
@@ -72,7 +56,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       region: {
@@ -89,7 +73,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       curp: {
@@ -103,13 +87,13 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       telefono: {
         elementType: 'input',
         elementConfig: {
-          type: 'text',
+          type: 'tel',
           placeholder: '9191110000'
         },
         label: 'Teléfono',
@@ -120,7 +104,7 @@ class SociosForm extends Component {
           maxLength: 12,
           isNumeric: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       fecha_nacimiento: {
@@ -135,7 +119,7 @@ class SociosForm extends Component {
           required: true,
           isDate: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       fecha_ingr_yomol_atel: {
@@ -150,7 +134,7 @@ class SociosForm extends Component {
           required: true,
           isDate: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       fecha_ingr_programa: {
@@ -165,7 +149,7 @@ class SociosForm extends Component {
           required: true,
           isDate: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       cargo: {
@@ -181,7 +165,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       prod_trab: {
@@ -197,7 +181,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       clave_anterior: {
@@ -211,7 +195,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       estatus_cafe: {
@@ -228,7 +212,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       estatus_miel: {
@@ -245,7 +229,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       estatus_yip: {
@@ -262,7 +246,7 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
       estatus_gral: {
@@ -279,19 +263,23 @@ class SociosForm extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
       },
     }
   }
 
   componentDidMount () {
-
+    updateObject(this.state.socioForm.nombres, {
+        value: this.props.selSocio.nombres
+    })
   }
 
-  onSubmitForm = () => {
+  onSubmitForm = (event) => {
+    event.preventDefault();
+    this.setState({editing: false})
     // TODO:
-    // event.preventDefault();
+    //
     //
     // const formData = {}
     // for (let formElementIdentifier in this.state.socioForm) {
@@ -304,6 +292,7 @@ class SociosForm extends Component {
     // }
     //
     // this.props.onEditSocio(socio, this.props.token)
+
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -323,22 +312,22 @@ class SociosForm extends Component {
 
     let formIsValid = true
     for (let inputIds in updatedSocioForm) {
+      console.log(inputIds + ' IS--> '+ updatedSocioForm[inputIds].valid);
         formIsValid = updatedSocioForm[inputIds].valid && formIsValid
     }
 
     this.setState({socioForm: updatedSocioForm, formIsValid: formIsValid})
   }
 
-  onToggleEditable = () => {
-    this.setState(prevState => {
-        return {editable: !prevState.editable}
-    })
+  onStartEditing = () => {
+    this.setState({editing: true})
+    console.log("Editable is: "+this.state.editing);
   }
 
   render () {
     // SINGLE SOCIO
     const formElementsArray = []
-    let formElements
+    let formElements, submitButton
     for (let key in this.state.socioForm) {
       console.log(key + this.state.socioForm[key]);
       formElementsArray.push({
@@ -357,21 +346,32 @@ class SociosForm extends Component {
               shouldValidate={formElement.config.validation}
               invalid={!formElement.config.valid}
               touched={formElement.config.touched}
+              disabled={!this.state.editing}
               changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
           ))
+    }
+
+    if (this.state.editing) {
+      submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}>Guardar</Button>
+    }else {
+      submitButton=null
     }
 
     return (
       <>
         <div className={classes.Header}>
           <h1>{this.props.selSocio.clave_socio}</h1>
-          <Button btnType="Success" disabled={!this.state.formIsValid}>Editar</Button>
+          <Button
+            btnType="Success"
+            clicked={this.onStartEditing}
+            disabled={this.state.editing}
+            >Editar</Button>
         </div>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>
           {formElements}
           </div>
-          <Button btnType="Success" disabled={!this.state.formIsValid}>Guardar</Button>
+          {submitButton}
         </form>
       </>
     )

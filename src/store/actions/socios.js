@@ -16,6 +16,12 @@ export const setSelSocios = (selectedSocio) => {
     }
 }
 
+export const unSelectSocio = () => {
+    return {
+        type: actionTypes.UNSELECT_SOCIO
+    }
+}
+
 export const initSocios = (token) => {
 
     return dispatch => {

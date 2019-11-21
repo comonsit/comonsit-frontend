@@ -22,6 +22,7 @@ class Socios extends Component {
 
   cancelSelected =() => {
     this.setState({ socioSeleccionado: false});
+    this.props.unSelSocio()
   }
 
   onToggleEditable = () => {
@@ -46,7 +47,8 @@ class Socios extends Component {
   }
 
   render () {
-    let socioData, form
+    let socioData = <div>**** UN SPINNER ****</div>
+    let form = <div>**** UN SPINNER ****</div>
 
     // MAKE SOCIO LIST
     if (this.props.listaSocios) {
@@ -68,13 +70,10 @@ class Socios extends Component {
       ))
     }
 
-    if (this.props.selSocio) {
+    if (this.state.socioSeleccionado && this.props.selSocio) {
       form = (
         <SociosForm/>
       )
-    } else {
-      // TODO: show spinner?
-      form = null
     }
 
 
@@ -120,7 +119,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
-      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId))
+      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
+      unSelSocio: () => dispatch(actions.unSelectSocio())
     }
 }
 

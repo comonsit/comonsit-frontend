@@ -1,6 +1,7 @@
 export const SET_SOCIOS = 'SET_SOCIOS'
 export const SET_SEL_SOCIO = 'SET_SEL_SOCIO'
 export const FETCH_SOCIOS_FAILED = 'FETCH_SOCIOS_FAILED'
+export const UNSELECT_SOCIO = 'UNSELECT_SOCIO'
 
 export const AUTH_START = 'AUTH_START'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'

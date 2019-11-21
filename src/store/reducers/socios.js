@@ -18,10 +18,17 @@ const setSelSocios = (state, action) => {
     })
 }
 
+const unSelSocios = (state) => {
+    return updateObject(state, {
+        selectedSocio: null,
+    })
+}
+
 const reducer = (state=initialState, action) => {
     switch(action.type) {
         case actionTypes.SET_SOCIOS: return setSocios(state, action)
         case actionTypes.SET_SEL_SOCIO: return setSelSocios(state, action)
+        case actionTypes.UNSELECT_SOCIO: return unSelSocios(state)
         //case actionTypes.FETCH_SOCIOS_FAILED: return updateObject(state, {error: true})
         default:
             return state
