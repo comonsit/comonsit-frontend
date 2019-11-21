@@ -27,13 +27,10 @@
 .NavigationItemSpecial {
   display: flex;
   width: auto;
-  /* el center es por el flex */
-  align-items: center;
   font-size: 1.1em;
   background-color: #D5B49E;
   border: .3rem solid white;
   border-radius: .4rem;
-
   outline: none;
   cursor: pointer;
   font: inherit;
