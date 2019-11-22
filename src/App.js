@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import { Redirect, Route, withRouter, Switch} from "react-router-dom";
 import * as actions from './store/actions'
 
@@ -58,9 +58,9 @@ class App extends Component {
       )
     }
     return (
-      <Layout>
-        <Switch>
-          <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
+      <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
+        <Layout>
+          <Switch>
             <Route path="/conocenos" component={conocenos}/>
             <Route path="/origen" component={origen}/>
             <Route path="/publicaciones" component={publicaciones}/>
@@ -71,9 +71,9 @@ class App extends Component {
             <Route path="/" exact component={homeContainer}/>
             {/* TODO: make 404 in redirect */}
             <Redirect to="/"/>
-          </IntlProvider>
-        </Switch>
-      </Layout>
+          </Switch>
+        </Layout>
+      </IntlProvider>
     );
   }
 

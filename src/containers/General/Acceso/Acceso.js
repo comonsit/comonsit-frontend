@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {NavLink, Redirect} from "react-router-dom";
+import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 
 // import Spinner from '../../../components/UI/Spinner/Spinner'
@@ -124,8 +125,8 @@ class Auth extends Component {
               <div className={classes.Acceso}>
                 <form onSubmit={this.submitHandler}>
                   {form}
-                  <NavLink to="/" exact>Olvidé mi contraseña</NavLink>
-                  <Button btnType="Success">Submit</Button>
+                  <NavLink to="/" exact><FormattedMessage id="acceder.pswd-help"/></NavLink>
+                  <Button btnType="Success"><FormattedMessage id="acceder.submit"/></Button>
                 </form>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import {FormattedMessage} from 'react-intl';
 import {connect } from 'react-redux'
 import * as actions from '../../store/actions'
-import {FormattedMessage} from 'react-intl';
 import cl from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
@@ -63,7 +63,7 @@ class Layout extends Component {
         </main>
         <nav className={cl.LangDropdownNav}>
           <ul className={cl.LangDropdownList}>
-           <li className={cl.LangDropdownListItem}>Idioma
+           <li className={cl.LangDropdownListItem}><FormattedMessage id="language"/> ▼
             <ul className={cl.Dropdown}>
               <li><button type="button" onClick={() => this.onChangeLanguage('es')}>Español</button></li>
               <li><button type="button" onClick={() => this.onChangeLanguage('tz')}>Tseltal</button></li>

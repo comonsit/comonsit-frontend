@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 
 import Input from '../../../../components/UI/Input/Input';
@@ -352,7 +353,7 @@ class SociosForm extends Component {
     }
 
     if (this.state.editing) {
-      submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}>Guardar</Button>
+      submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="socioForm.saveButton"/></Button>
     }else {
       submitButton=null
     }
@@ -365,7 +366,7 @@ class SociosForm extends Component {
             btnType="Success"
             clicked={this.onStartEditing}
             disabled={this.state.editing}
-            >Editar</Button>
+            ><FormattedMessage id="socioForm.editButton"/></Button>
         </div>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink} from "react-router-dom";
+import {FormattedMessage} from 'react-intl';
 import classes from './PToolbar.module.css';
 import PLogo from '../PLogo/PLogo'
 import Hamburguesa from '../../Navigation/SideDrawer/Hamburguesa/Hamburguesa';
@@ -16,7 +17,7 @@ const ptoolbar = (props) =>{
       <header className={attachedClasses.join(' ')}>
         <div className={classes.User}>
           <h3>xMary Pérez</h3>
-            <NavLink onClick={props.closed} to="/logout">Cerrar Sesión</NavLink>
+            <NavLink onClick={props.closed} to="/logout"><FormattedMessage id="pmenu.logout"/></NavLink>
         </div>
 
         <nav>
