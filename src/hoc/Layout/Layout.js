@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {connect } from 'react-redux'
+import * as actions from '../../store/actions'
+import {FormattedMessage} from 'react-intl';
 import cl from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import PToolbar from '../../components/NavigationPanel/PToolbar/PToolbar';
+
 
 class Layout extends Component {
 
@@ -19,6 +22,10 @@ class Layout extends Component {
 
   sideDrawerClosedHandler = () => {
     this.setState({showSideDrawer: false});
+  }
+
+  onChangeLanguage = (lang) => {
+    this.props.onToggleLang(lang);
   }
 
   render() {
@@ -54,6 +61,16 @@ class Layout extends Component {
         <main className={classes.join(' ')}>
             {this.props.children}
         </main>
+        <nav className={cl.LangDropdownNav}>
+          <ul className={cl.LangDropdownList}>
+           <li className={cl.LangDropdownListItem}>Idioma
+            <ul className={cl.Dropdown}>
+              <li><button type="button" onClick={() => this.onChangeLanguage('es')}>Español</button></li>
+              <li><button type="button" onClick={() => this.onChangeLanguage('tz')}>Tseltal</button></li>
+            </ul>
+           </li>
+         </ul>
+        </nav>
       </>
     )
   }
@@ -65,4 +82,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Layout)
+const mapDispatchToProps = dispatch => {
+    return {
+        onToggleLang: (lang) => dispatch(actions.onChangeLocale(lang))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)

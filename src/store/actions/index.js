@@ -5,6 +5,10 @@ export {
 } from './socios'
 
 export {
+  onChangeLocale
+} from './locale'
+
+export {
     auth,
     logout,
     setAuthRedirectPath,

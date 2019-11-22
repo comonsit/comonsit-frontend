@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import * as actions from './store/actions'
+import { IntlProvider, addLocaleData } from 'react-intl';
 import { Redirect, Route, withRouter, Switch} from "react-router-dom";
+import * as actions from './store/actions'
+
 import Layout from './hoc/Layout/Layout'
 import homeContainer from './containers/General/HomeContainer/HomeContainer';
 import conocenos from './containers/General/Conocenos/Conocenos';
@@ -10,7 +12,18 @@ import publicaciones from './containers/General/Publicaciones/Publicaciones';
 import contacto from './containers/General/Contacto/Contacto';
 import acceso from './containers/General/Acceso/Acceso';
 import panel from './containers/Panel/Socios/Socios';
-import Logout from './containers/Panel/Logout/Logout';
+import logout from './containers/Panel/Logout/Logout';
+
+// import languageObject from './translations/messages'
+import messages_es from './translations/es.json'
+import messages_tz from './translations/tz.json'
+
+const messages = {
+  'es': messages_es,
+  'tz': messages_tz
+}
+// const language = navigator.language.split(/[-_]/)[0]
+
 // import asyncComponent from './hoc/asyncComponent/asyncComponent'
 //
 // // estos pedazos no se cargarán al inicio, sólo hasta que se soliciten
@@ -47,16 +60,18 @@ class App extends Component {
     return (
       <Layout>
         <Switch>
+          <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
             <Route path="/conocenos" component={conocenos}/>
             <Route path="/origen" component={origen}/>
             <Route path="/publicaciones" component={publicaciones}/>
             <Route path="/contacto" component={contacto}/>
             <Route path="/acceso" exact component={acceso}/>
-            <Route path="/logout" component={Logout }/>
+            <Route path="/logout" component={logout}/>
             {authenticatedRoutes}
             <Route path="/" exact component={homeContainer}/>
             {/* TODO: make 404 in redirect */}
             <Redirect to="/"/>
+          </IntlProvider>
         </Switch>
       </Layout>
     );
@@ -65,9 +80,14 @@ class App extends Component {
 
 }
 
+// App.defaultProps = {
+//   locale: 'en'
+// }
+
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        locale: state.locale.selectedLanguage
     }
 }
 
