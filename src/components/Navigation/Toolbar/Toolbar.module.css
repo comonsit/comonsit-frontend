@@ -11,6 +11,11 @@
     box-sizing: border-box;
 }
 
+.HambDiv {
+  width: 6rem;
+  padding-right: 1rem;
+}
+
 .DesktopOnly {
     display: flex;
     align-items: center;
@@ -21,7 +26,9 @@
 }
 
 @media (min-width: 62em) {
-
+  .HambDiv {
+    display: none;
+  }
 }
 
 
@@ -29,4 +36,5 @@
     .DesktopOnly {
       display: none;
     }
+
 }

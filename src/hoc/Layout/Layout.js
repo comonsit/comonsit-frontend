@@ -26,8 +26,13 @@ class Layout extends Component {
     if (this.props.isAuthenticated){
       classes = [cl.PContent]
       menu = (
-        <PToolbar
-          showMenu={this.sideDrawerOpenHandler}/>
+        <>
+          <PToolbar
+            showMenu={this.sideDrawerOpenHandler}
+            isAuth={this.props.isAuthenticated}
+            open={this.state.showSideDrawer}
+            closed={this.sideDrawerClosedHandler}/>
+        </>
       )
     } else {
       classes = [cl.Content]

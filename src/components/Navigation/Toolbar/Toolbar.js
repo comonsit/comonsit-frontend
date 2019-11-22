@@ -15,8 +15,10 @@ const toolbar = (props) => (
         <nav className={classes.DesktopOnly}>
             <NavigationItems/>
         </nav>
+        <div className={classes.HambDiv}>
         <Hamburguesa
           clicked={props.showMenu}/>
+        </div>
     </header>
 );
 

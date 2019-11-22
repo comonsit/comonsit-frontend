@@ -5,7 +5,7 @@ import cl from './PNavigationItems.module.css';
 
 const pnavigationItems = (props) => (
     <div className={cl.Logo}>
-      <div className={cl.NavigationItems}>
+      <div className={cl.NavigationItems} onClick={props.clicked}>
         <div className={cl.NavigationItem}>
           <NavLink to="/socios" exact activeClassName={cl.active}>Socios</NavLink>
         </div>

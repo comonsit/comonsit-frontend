@@ -2,8 +2,14 @@
   /* para tener un margen, más el espacio del toolbar */
   margin-top: 7rem;
 }
-
 .PContent {
   /* para tener un margen, más el espacio del toolbar */
-  margin-left: 20vw;
+  margin-left: 1rem;
+}
+
+@media (min-width: 62em) {
+  .PContent {
+    /* para tener un margen, más el espacio del toolbar */
+    margin-left: 20vw;
+  }
 }
