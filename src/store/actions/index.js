@@ -12,5 +12,9 @@ export {
     auth,
     logout,
     setAuthRedirectPath,
-    authCheckState
+    authCheckState,
+
+    fetchGralData,
+    setRegiones,
+    setComunidades
 } from './auth'

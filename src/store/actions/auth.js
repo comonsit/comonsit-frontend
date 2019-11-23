@@ -65,6 +65,7 @@ export const auth = (username, password, isSignUp) => {
                 // TODO: CHANGE FOR USE REFRESH!? response.data.refresh
                 localStorage.setItem('userId', response.data.localId)
                 dispatch(authSuccess(response.data.access, response.data.localId))
+
                 // TODO: update to refresh?
                 // dispatch (checkAuthTimeout(response.data.expiresIn))
             })
@@ -104,6 +105,52 @@ export const authCheckState = () => {
           // pasamos la resta de segundos que quedan
           //dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
 
+          // TODO: ¿do we need token here? should it be role?
+          dispatch(fetchGralData(token, userId))
         }
+    }
+}
+
+
+export const fetchGralData = (token, userId) => {
+    return dispatch => {
+        const authData = {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }
+        axios.get('/comunidades.json', authData)
+            .then(response => {
+                // en axios en response.data están los datos.
+                console.log(response.data)
+                dispatch(setComunidades(response.data))
+            })
+            .catch(error => {
+                // TODO: FALTA!!
+                //dispatch(fetchSociosFailed())
+            })
+        axios.get('/regiones.json', authData)
+            .then(response => {
+                // en axios en response.data están los datos.
+                console.log(response.data)
+                dispatch(setRegiones(response.data))
+            })
+            .catch(error => {
+                // TODO: FALTA!!
+                //dispatch(fetchSociosFailed())
+            })
+    }
+}
+
+export const setRegiones = (regiones) => {
+    return {
+        type: actionTypes.SET_REGIONES,
+        regiones: regiones
+    }
+}
+
+
+export const setComunidades = (comunidades) => {
+    return {
+        type: actionTypes.SET_COMUNIDADES,
+        comunidades: comunidades
     }
 }

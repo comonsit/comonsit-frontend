@@ -6,7 +6,9 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
-    authRedirectPath: '/acopios'
+    authRedirectPath: '/acopios',
+    regiones: null,
+    comunidades: null
 }
 
 const authSuccess = (state, action) => {
@@ -35,6 +37,18 @@ const setAuthRedirectPath = (state, action) => {
     })
 }
 
+const setRegiones = (state, action) => {
+    return updateObject(state, {
+        regiones: action.regiones,
+    })
+}
+
+const setComunidades = (state, action) => {
+    return updateObject(state, {
+        comunidades: action.comunidades,
+    })
+}
+
 const reducer = (state=initialState , action) => {
     switch(action.type) {
         case actionTypes.AUTH_START: return updateObject(state, { error: null, loading: true})
@@ -42,6 +56,8 @@ const reducer = (state=initialState , action) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action)
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action)
         case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action)
+        case actionTypes.SET_REGIONES: return setRegiones(state, action)
+        case actionTypes.SET_COMUNIDADES: return setComunidades(state, action)
         default: return state
     }
 
