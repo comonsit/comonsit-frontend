@@ -65,7 +65,7 @@ export const auth = (username, password, isSignUp) => {
                 // TODO: CHANGE FOR USE REFRESH!? response.data.refresh
                 localStorage.setItem('userId', response.data.localId)
                 dispatch(authSuccess(response.data.access, response.data.localId))
-
+                dispatch(fetchGralData(response.data.access, response.data.localId))
                 // TODO: update to refresh?
                 // dispatch (checkAuthTimeout(response.data.expiresIn))
             })
