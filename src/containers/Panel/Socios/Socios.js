@@ -19,6 +19,7 @@ class Socios extends Component {
   showSocio =(id) => {
     this.setState({socioSeleccionado: true});
     this.props.onFetchSelSocios(this.props.token, id)
+    // TODO: leer redux editado y hacer un re-render si hubo cambios
   }
 
   cancelSelected =() => {
@@ -52,6 +53,7 @@ class Socios extends Component {
     let form = <div>**** UN SPINNER ****</div>
 
     // MAKE SOCIO LIST
+    // TODO: checar si es null para poner vacío??
     if (this.props.listaSocios) {
       console.log(this.props.listaSocios)
       socioData = this.props.listaSocios.map((s, i) => (
@@ -60,8 +62,8 @@ class Socios extends Component {
           onClick={() => this.showSocio(s.clave_socio)}>
           <td>{s.clave_socio}</td>
           <td>{s.nombres} {s.apellidos}</td>
-          <td>{s.comunidad.nombre_region}</td>
-          <td>{s.comunidad.nombre_de_comunidad}</td>
+          <td>{s.comunidad_id ? s.comunidad_id.nombre_region : ""}</td>
+          <td>{s.comunidad_id ? s.comunidad_id.nombre_de_comunidad : ""}</td>
           <td>{s.fecha_ingr_yomol_atel}</td>
           <td>{this.getStatusColor(s.estatus_cafe)}</td>
           <td>{this.getStatusColor(s.estatus_miel)}</td>

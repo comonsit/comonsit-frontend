@@ -58,3 +58,44 @@ export const fetchSelSocio = (token, socioId) => {
             })
     }
 }
+
+export const updateSocioSuccess = (id, orderData) => {
+    return {
+        type: actionTypes.UPDATE_SOCIO_SUCCESS
+    }
+}
+
+export const updateSocioFailed = (error) => {
+    return {
+        type: actionTypes.UPDATE_SOCIO_FAILED,
+        error: error
+    }
+}
+
+export const updateSocioStart = () => {
+    return {
+        type: actionTypes.UPDATE_SOCIO_START
+    }
+}
+
+export const updateSocio = (socioData, socioId, token) => {
+    // este formato gracias al thunk
+    return dispatch => {
+      const authData = {
+        headers: { 'Authorization': `Bearer ${token}` },
+        clave_socio: socioId,
+        ...socioData
+      }
+      console.log("EDITANDO SOCIO!!!");
+      dispatch(updateSocioStart())
+      axios.put(`/socios/${socioId}.json`, authData)
+          .then(response => {
+            console.log("SOCIO EDITADO YEEEI");
+            dispatch(updateSocioSuccess(response.data.name, socioData ))
+          })
+          .catch(error => {
+            console.log("SOCIO FALLÓ BU?");
+              dispatch(updateSocioFailed(error))
+          })
+    }
+}

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import classes from './SociosForm.module.css'
-// import * as actions from '../../../../store/actions'
+import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
@@ -52,7 +52,7 @@ class SociosForm extends Component {
             options: this.props.comunidades.map(r => ({"value": r.nombre_de_comunidad, "displayValue": r.nombre_de_comunidad}))
           },
           label: 'Comunidad',
-          value: this.props.selSocio.comunidad.nombre_de_comunidad,
+          value: this.props.selSocio.comunidad_id.nombre_de_comunidad,
           validation: {
             required: true
           },
@@ -65,7 +65,7 @@ class SociosForm extends Component {
             options: this.props.regiones.map(r => ({"value": r.nombre_de_region, "displayValue": r.nombre_de_region}))
           },
           label: 'Región',
-          value: this.props.selSocio.comunidad.nombre_region,
+          value: this.props.selSocio.comunidad_id.nombre_region,
           validation: {
             required: true
           },
@@ -274,20 +274,18 @@ class SociosForm extends Component {
   onSubmitForm = (event) => {
     event.preventDefault();
     this.setState({editing: false})
-    // TODO:
-    //
-    //
-    // const formData = {}
-    // for (let formElementIdentifier in this.state.socioForm) {
-    //   formData[formElementIdentifier] = this.state.socioForm[formElementIdentifier].value
-    // }
-    //
-    // const socio = {
-    //     socioData: formData,
-    //     userId: this.props.userId
-    // }
-    //
-    // this.props.onEditSocio(socio, this.props.token)
+
+
+    const formData = {}
+    for (let formElementIdentifier in this.state.socioForm) {
+      formData[formElementIdentifier] = this.state.socioForm[formElementIdentifier].value
+    }
+
+    const socio = {
+        ...formData
+    }
+
+    this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
 
   }
 
@@ -308,7 +306,6 @@ class SociosForm extends Component {
 
     let formIsValid = true
     for (let inputIds in updatedSocioForm) {
-      console.log(inputIds + ' IS--> '+ updatedSocioForm[inputIds].valid);
         formIsValid = updatedSocioForm[inputIds].valid && formIsValid
     }
 
@@ -323,7 +320,10 @@ class SociosForm extends Component {
   render () {
     // SINGLE SOCIO
     const formElementsArray = []
-    let formElements, submitButton
+    // TODO: lógica de loading / Success / Failed pendiente!!
+    let formElements = <div>**** UN SPINNER ****</div>
+    let submitButton
+
     for (let key in this.state.socioForm) {
       console.log(key + this.state.socioForm[key]);
       formElementsArray.push({
@@ -383,4 +383,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(SociosForm)
+const mapDispatchToProps = dispatch => {
+    return {
+      onEditSocio: (socioData, token) => dispatch(actions.updateSocio(socioData, token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SociosForm)
