@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
+import Spinner from '../../../../components/UI/Spinner/Spinner';
 import classes from './SociosForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -307,7 +308,7 @@ class SociosForm extends Component {
     const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "prod_trab", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
     const formElementsArray = []
     // TODO: lógica de loading / Success / Failed pendiente!!
-    let formElements = <div>**** UN SPINNER ****</div>
+    let formElements = <Spinner/>
     let submitButton
 
     sociosFormOrder.forEach(key => {

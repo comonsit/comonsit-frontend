@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import SociosForm from './SociosForm/SociosForm';
 import Modal from '../../../components/UI/Modal/Modal';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
 
@@ -60,8 +61,8 @@ class Socios extends Component {
   }
 
   render () {
-    let socioData = <div>**** UN SPINNER ****</div>
-    let form = <div>**** UN SPINNER ****</div>
+    let socioData = <Spinner/>
+    let form = <Spinner/>
 
     // MAKE SOCIO LIST
     // TODO: checar si es null para poner vacío??
