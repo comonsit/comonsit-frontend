@@ -37,8 +37,9 @@ export const logout = () => {
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
-            //dispatch(logout())
-        }, expirationTime * 1000)
+            console.log("5 MINUTE LOGOUT")
+            dispatch(logout())
+        }, expirationTime)
     }
 }
 
@@ -60,14 +61,15 @@ export const auth = (username, password, isSignUp) => {
                 // console.log(response);
                 localStorage.setItem('token', response.data.access)
                 // hacemos un cálculo de cuál será la fecha en la que expirará
-                // const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
-                // localStorage.setItem('expirationDate', expirationDate)
+                const fiveMinutes = 5 * 60 * 1000
+                const expirationDate = new Date(new Date().getTime() + fiveMinutes)
                 // TODO: CHANGE FOR USE REFRESH!? response.data.refresh
+                // const expirationRefreshDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+                localStorage.setItem('expirationDate', expirationDate)
                 localStorage.setItem('userId', response.data.localId)
                 dispatch(authSuccess(response.data.access, response.data.localId))
                 dispatch(fetchGralData(response.data.access, response.data.localId))
-                // TODO: update to refresh?
-                // dispatch (checkAuthTimeout(response.data.expiresIn))
+                dispatch (checkAuthTimeout(fiveMinutes))
             })
             .catch(err=> {
                 //console.log(err)
@@ -92,21 +94,21 @@ export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token')
         if (!token) {
-            // por qué este logout
+            console.log("NO TOKEN LOGOUT")
             dispatch(logout())
         } else {
-            // TODO: METER LÓGICA REFRESH
-            // const expirationDate = new Date( localStorage.getItem('expirationDate'))
-            // if (expirationDate <= new Date()) {
-            //     // dispatch(logout())
-            // } else {
-          const userId = localStorage.getItem('userId')
-          dispatch(authSuccess(token, userId))
-          // pasamos la resta de segundos que quedan
-          //dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
-
-          // TODO: ¿do we need token here? should it be role?
-          dispatch(fetchGralData(token, userId))
+          // TODO: METER LÓGICA REFRESH
+          const expirationDate = new Date( localStorage.getItem('expirationDate'))
+          if (expirationDate <= new Date()) {
+            console.log("OLD TOKEN LOGOUT")
+            dispatch(logout())
+          } else {
+            const userId = localStorage.getItem('userId')
+            dispatch(authSuccess(token, userId))
+            console.log("NEW LOGOUT CALCULATION");
+            dispatch (checkAuthTimeout(expirationDate - new Date().getTime()))
+            dispatch(fetchGralData(token, userId))
+          }
         }
     }
 }
