@@ -101,22 +101,24 @@ class Socios extends Component {
         </Modal>
         <div className={classes.Container}>
           <h1><FormattedMessage id="socios.title"/></h1>
-          <table className={classes.TablaSocios}>
-          <tr>
-            <th><FormattedMessage id="socios.clave"/></th>
-            <th><FormattedMessage id="socios.nombre"/></th>
-            <th><FormattedMessage id="socios.region"/></th>
-            <th><FormattedMessage id="socios.comunidad"/></th>
-            <th><FormattedMessage id="socios.ingreso-ya"/></th>
-            <th><FormattedMessage id="socios.cafe"/></th>
-            <th><FormattedMessage id="socios.miel"/></th>
-            <th><FormattedMessage id="socios.jabon"/></th>
-            <th><FormattedMessage id="socios.general"/></th>
-          </tr>
-          <tbody>
-            {socioData}
-          </tbody>
-          </table>
+          <div className={classes.TableContainer}>
+            <table className={classes.TablaSocios}>
+              <tr>
+                <th><FormattedMessage id="socios.clave"/></th>
+                <th><FormattedMessage id="socios.nombre"/></th>
+                <th><FormattedMessage id="socios.region"/></th>
+                <th><FormattedMessage id="socios.comunidad"/></th>
+                <th><FormattedMessage id="socios.ingreso-ya"/></th>
+                <th><FormattedMessage id="socios.cafe"/></th>
+                <th><FormattedMessage id="socios.miel"/></th>
+                <th><FormattedMessage id="socios.jabon"/></th>
+                <th><FormattedMessage id="socios.general"/></th>
+              </tr>
+              <tbody>
+                {socioData}
+              </tbody>
+            </table>
+          </div>
         </div>
       </>
     )

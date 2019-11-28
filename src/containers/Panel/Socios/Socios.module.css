@@ -4,9 +4,13 @@
   margin-left: 5rem;
 }
 
+.TableContainer {
+  width: 100%;
+  overflow: scroll;
+}
+
 .TablaSocios {
   min-width: 30rem;
-  background: ;
   font-family: 'Arquitecta';
   color: #34495E;
 }
