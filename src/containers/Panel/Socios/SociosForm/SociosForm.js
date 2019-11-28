@@ -49,23 +49,10 @@ class SociosForm extends Component {
         comunidad: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.comunidades.map(r => ({"value": r.nombre_de_comunidad, "displayValue": r.nombre_de_comunidad}))
+            options: this.props.comunidades.map(r => ({"value": r.id, "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region}))
           },
-          label: 'Comunidad',
-          value: this.props.selSocio.comunidad_id.nombre_de_comunidad,
-          validation: {
-            required: true
-          },
-          valid: true,
-          touched: false,
-        },
-        region: {
-          elementType: 'select',
-          elementConfig: {
-            options: this.props.regiones.map(r => ({"value": r.nombre_de_region, "displayValue": r.nombre_de_region}))
-          },
-          label: 'Región',
-          value: this.props.selSocio.comunidad_id.nombre_region,
+          label: 'Comunidad Región',
+          value: this.props.selSocio.comunidad,
           validation: {
             required: true
           },

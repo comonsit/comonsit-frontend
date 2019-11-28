@@ -33,6 +33,11 @@ class Socios extends Component {
     })
   }
 
+  getComunidad = (id) => {
+    const index = this.props.comunidades.findIndex(x => x.id === id)
+    return this.props.comunidades[index].nombre_de_comunidad
+  }
+
   getStatusColor = (status) => {
     let st = null
     switch (status) {
@@ -62,8 +67,8 @@ class Socios extends Component {
           onClick={() => this.showSocio(s.clave_socio)}>
           <td>{s.clave_socio}</td>
           <td>{s.nombres} {s.apellidos}</td>
-          <td>{s.comunidad_id ? s.comunidad_id.nombre_region : ""}</td>
-          <td>{s.comunidad_id ? s.comunidad_id.nombre_de_comunidad : ""}</td>
+          <td>{s.comunidad ? this.getComunidad(s.comunidad) : ""}</td>
+          <td>{s.region ? s.region : ""}</td>
           <td>{s.fecha_ingr_yomol_atel}</td>
           <td>{this.getStatusColor(s.estatus_cafe)}</td>
           <td>{this.getStatusColor(s.estatus_miel)}</td>
@@ -115,7 +120,8 @@ const mapStateToProps = state => {
     return {
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
-      token: state.auth.token
+      token: state.auth.token,
+      comunidades: state.auth.comunidades
     }
 }
 
