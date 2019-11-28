@@ -317,7 +317,7 @@ class SociosForm extends Component {
       })
     })
 
-    if (this.props.selSocio) {
+    if (this.props.selSocio && ! this.props.loading) {
       formElements = formElementsArray.map(formElement => (
           <div className={classes.Inputs}>
             <Input
@@ -364,6 +364,7 @@ class SociosForm extends Component {
 const mapStateToProps = state => {
     return {
       selSocio: state.socios.selectedSocio,
+      loading: state.socios.loading,
       token: state.auth.token,
       regiones: state.auth.regiones,
       comunidades: state.auth.comunidades,

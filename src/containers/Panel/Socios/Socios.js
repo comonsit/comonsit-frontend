@@ -16,6 +16,12 @@ class Socios extends Component {
     this.props.onInitSocios(this.props.token)
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.updated !== prevProps.updated) {
+      this.props.onInitSocios(this.props.token)
+    }
+  }
+
   showSocio =(id) => {
     this.setState({socioSeleccionado: true});
     this.props.onFetchSelSocios(this.props.token, id)
@@ -120,6 +126,7 @@ const mapStateToProps = state => {
     return {
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
+      updated: state.socios.updated,
       token: state.auth.token,
       comunidades: state.auth.comunidades
     }
