@@ -303,18 +303,20 @@ class SociosForm extends Component {
 
   render () {
     // SINGLE SOCIO
+    // TODO: done to keep order in Safari. improvement?
+    const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "prod_trab", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
     const formElementsArray = []
     // TODO: lógica de loading / Success / Failed pendiente!!
     let formElements = <div>**** UN SPINNER ****</div>
     let submitButton
 
-    for (let key in this.state.socioForm) {
-      console.log(key + this.state.socioForm[key]);
+    sociosFormOrder.forEach(key => {
       formElementsArray.push({
         id: key,
         config: this.state.socioForm[key]
       })
-    }
+    })
+
     if (this.props.selSocio) {
       formElements = formElementsArray.map(formElement => (
             <Input

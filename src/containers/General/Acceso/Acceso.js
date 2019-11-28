@@ -80,13 +80,14 @@ class Auth extends Component {
     }
 
     render () {
-        const formElementsArray = []
-        for (let key in this.state.controls) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.controls[key]
-            })
-        }
+      const keysOrder = ["email", "password"]
+      const formElementsArray = []
+      keysOrder.forEach(key => {
+        formElementsArray.push({
+            id: key,
+            config: this.state.controls[key]
+        })
+      })
 
         let form = formElementsArray.map(formElement => (
             <Input
