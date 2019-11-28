@@ -138,10 +138,7 @@ class SociosForm extends Component {
         cargo: {
           elementType: 'select',
           elementConfig: {
-            options: [
-              {value: 'Abatilel', displayValue: 'Abatilel'},
-              {value: 'Poxtaywanej', displayValue: 'Poxtaywanej'},
-            ]
+            options: this.props.cargos.map(r => ({"value": r.id, "displayValue": r.nombre_de_cargo}))
           },
           label: 'Cargo',
           value: this.props.selSocio.cargo,
@@ -366,7 +363,8 @@ const mapStateToProps = state => {
       selSocio: state.socios.selectedSocio,
       token: state.auth.token,
       regiones: state.auth.regiones,
-      comunidades: state.auth.comunidades
+      comunidades: state.auth.comunidades,
+      cargos: state.auth.cargos
     }
 }
 

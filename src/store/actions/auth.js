@@ -137,6 +137,16 @@ export const fetchGralData = (token, userId) => {
                 // TODO: FALTA!!
                 //dispatch(fetchSociosFailed())
             })
+        axios.get('/cargos.json', authData)
+            .then(response => {
+                // en axios en response.data están los datos.
+                console.log(response.data)
+                dispatch(setCargos(response.data))
+            })
+            .catch(error => {
+                // TODO: FALTA!!
+                //dispatch(fetchSociosFailed())
+            })
     }
 }
 
@@ -152,5 +162,13 @@ export const setComunidades = (comunidades) => {
     return {
         type: actionTypes.SET_COMUNIDADES,
         comunidades: comunidades
+    }
+}
+
+
+export const setCargos = (cargos) => {
+    return {
+        type: actionTypes.SET_CARGOS,
+        cargos: cargos
     }
 }

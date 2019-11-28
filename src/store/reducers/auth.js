@@ -49,6 +49,12 @@ const setComunidades = (state, action) => {
     })
 }
 
+const setCargos = (state, action) => {
+    return updateObject(state, {
+        cargos: action.cargos,
+    })
+}
+
 const reducer = (state=initialState , action) => {
     switch(action.type) {
         case actionTypes.AUTH_START: return updateObject(state, { error: null, loading: true})
@@ -58,6 +64,7 @@ const reducer = (state=initialState , action) => {
         case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action)
         case actionTypes.SET_REGIONES: return setRegiones(state, action)
         case actionTypes.SET_COMUNIDADES: return setComunidades(state, action)
+        case actionTypes.SET_CARGOS: return setCargos(state, action)
         default: return state
     }
 

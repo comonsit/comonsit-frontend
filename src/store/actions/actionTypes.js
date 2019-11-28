@@ -8,6 +8,7 @@ export const UPDATE_SOCIO_START = 'UPDATE_SOCIO_START'
 
 export const SET_REGIONES = 'SET_REGIONES'
 export const SET_COMUNIDADES = 'SET_COMUNIDADES'
+export const SET_CARGOS = 'SET_CARGOS'
 
 export const CHANGE_LOCALE = 'CHANGE_LOCALE'
 
