@@ -12,9 +12,9 @@
 }
 
 .Button:hover {
-  border: .2rem solid #5e86e0;
+  border: .2rem solid #D5B49E;
   font-weight: normal;
-  color: #5e86e0;
+  color: #D5B49E;
   background-color: white;
   font-weight: bold;
 }
@@ -26,6 +26,11 @@
 
 .Success {
   background-color: #8BA5E0;
+}
+
+.Success:hover {
+  border: .2rem solid #8BA5E0;
+  color: #8BA5E0;
 }
 
 .Danger {

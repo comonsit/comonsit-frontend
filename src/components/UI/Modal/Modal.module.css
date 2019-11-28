@@ -4,13 +4,12 @@
     background-color: white;
     width: 90vw;
     border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px black;
     padding: 2rem;
     left: 5vw;
     top: 3rem;
     box-sizing: border-box;
     transition: all 0.3s ease-out;
-    border-radius: 1rem;
+    border-radius: .5rem;
 }
 
 @media (min-width: 62em) {

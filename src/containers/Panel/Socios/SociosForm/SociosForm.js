@@ -319,6 +319,7 @@ class SociosForm extends Component {
 
     if (this.props.selSocio) {
       formElements = formElementsArray.map(formElement => (
+          <div className={classes.Inputs}>
             <Input
               label={formElement.config.label}
               key= {formElement.id}
@@ -330,6 +331,7 @@ class SociosForm extends Component {
               touched={formElement.config.touched}
               disabled={!this.state.editing}
               changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+          </div>
           ))
     }
 
@@ -342,9 +344,8 @@ class SociosForm extends Component {
     return (
       <>
         <div className={classes.Header}>
-          <h1>{this.props.selSocio.clave_socio}</h1>
+          <h2><FormattedMessage id="socioForm.title"/>: {this.props.selSocio.clave_socio}</h2>
           <Button
-            btnType="Success"
             clicked={this.onStartEditing}
             disabled={this.state.editing}
             ><FormattedMessage id="socioForm.editButton"/></Button>

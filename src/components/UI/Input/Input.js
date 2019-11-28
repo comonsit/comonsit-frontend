@@ -7,7 +7,11 @@ const input = (props) => {
     const inputClasses = [classes.InputElement]
     let validationError = null
     if (props.label) {
-      label = <label className={classes.Label}>{props.label}</label>
+      label = (
+        <div className={classes.Label}>
+          <label>{props.label}</label>
+        </div>
+      )
     }
     // esta lógica ajustará el estilo cuando el input sea inválido
     // if (props.invalid && props.shouldValidate && props.touched) {

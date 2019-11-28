@@ -1,6 +1,8 @@
 .Form {
   height: 60vh;
   overflow-y:scroll;
+  border: .3rem solid #243746;
+  border-radius: .5rem;
 }
 
 .Header {
@@ -8,4 +10,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: .5rem 2rem;
+}
+
+.Inputs {
+  border: 1px solid #ccc;
+  padding: 0;
 }
