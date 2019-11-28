@@ -19,7 +19,7 @@
 }
 
 .LangDropdownList {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 20vw;
   background: #243746;
