@@ -22,7 +22,7 @@
   "menu.login": "Ochan",
   "pmenu.socios": "Socioetic",
   "pmenu.acopios": "Acopioetic",
-  "pmenu.aportaciones": "Och Taqu'in",
+  "pmenu.solicitudes": "Ya sc'an Taqu'in",
   "pmenu.logout": "Loquel",
   "socios.title": "Socioetic",
   "socios.clave": "Clave",
@@ -35,5 +35,6 @@
   "socios.jabon": "Xapon",
   "socios.general": "Comonsit",
   "socioForm.saveButton": "Ochanel",
-  "socioForm.editButton": "Yantesel"
+  "socioForm.editButton": "Yantesel",
+  "solicitudes.title": "Ya sc'an Taqu'in"
 }

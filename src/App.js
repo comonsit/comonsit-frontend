@@ -11,7 +11,8 @@ import origen from './containers/General/Origen/Origen';
 import publicaciones from './containers/General/Publicaciones/Publicaciones';
 import contacto from './containers/General/Contacto/Contacto';
 import acceso from './containers/General/Acceso/Acceso';
-import panel from './containers/Panel/Socios/Socios';
+import socios from './containers/Panel/Socios/Socios';
+import solicitudes from './containers/Panel/Solicitudes/Solicitudes';
 import logout from './containers/Panel/Logout/Logout';
 
 // import languageObject from './translations/messages'
@@ -50,10 +51,10 @@ class App extends Component {
     if (this.props.isAuthenticated) {
       authenticatedRoutes = (
         <>
-          <Route path="/d" exact component={panel}/>
-          <Route path="/socios" exact component={panel}/>
-          <Route path="/acopios" exact component={panel}/>
-          <Route path="/aportaciones" exact component={panel}/>
+          <Route path="/d" exact component={socios}/>
+          <Route path="/socios" exact component={socios}/>
+          <Route path="/acopios" exact component={socios}/>
+          <Route path="/solicitudes" exact component={solicitudes}/>
         </>
       )
     }

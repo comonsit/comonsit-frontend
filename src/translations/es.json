@@ -22,7 +22,7 @@
   "menu.login": "Acceder",
   "pmenu.socios": "Socios",
   "pmenu.acopios": "Acopios",
-  "pmenu.aportaciones": "Aportaciones",
+  "pmenu.solicitudes": "Solicitudes",
   "pmenu.logout": "Cerrar Sesión",
   "socios.title": "Socios",
   "socios.clave": "Clave",
@@ -35,5 +35,6 @@
   "socios.jabon": "Jabón",
   "socios.general": "General",
   "socioForm.saveButton": "Guardar",
-  "socioForm.editButton": "Editar"
+  "socioForm.editButton": "Editar",
+  "solicitudes.title": "Solicitudes"
 }

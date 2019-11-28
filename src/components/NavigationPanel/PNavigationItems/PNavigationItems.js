@@ -14,7 +14,7 @@ const pnavigationItems = (props) => (
           <NavLink to="/acopios" exact activeClassName={cl.active}><FormattedMessage id="pmenu.acopios"/></NavLink>
         </div>
         <div className={cl.NavigationItem}>
-          <NavLink to="/aportaciones" exact activeClassName={cl.active}><FormattedMessage id="pmenu.aportaciones"/></NavLink>
+          <NavLink to="/solicitudes" exact activeClassName={cl.active}><FormattedMessage id="pmenu.solicitudes"/></NavLink>
         </div>
       </div>
     </div>
