@@ -375,7 +375,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      onEditSocio: (socioData, token) => dispatch(actions.updateSocio(socioData, token))
+      onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token))
     }
 }
 

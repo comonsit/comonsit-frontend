@@ -18,7 +18,8 @@ const setSocios = (state, action) => {
 const setSelSocios = (state, action) => {
     return updateObject(state, {
         selectedSocio: action.selectedSocio,
-        updated: false
+        updated: false,
+        newSocio: false
     })
 }
 
