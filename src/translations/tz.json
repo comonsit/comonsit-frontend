@@ -21,7 +21,7 @@
   "menu.contact": "Ts'ibayaotic",
   "menu.login": "Ochan",
   "pmenu.socios": "Socioetic",
-  "pmenu.acopios": "Acopioetic",
+  "pmenu.acopios": "Acopiohetic",
   "pmenu.solicitudes": "Ya sc'an Taqu'in",
   "pmenu.logout": "Loquel",
   "socios.title": "Socioetic",
@@ -38,5 +38,6 @@
   "socioForm.saveButton": "Ochanel",
   "socioForm.editButton": "Yantesel",
   "socioForm.title": "Socio",
-  "solicitudes.title": "Ya sc'an Taqu'in"
+  "solicitudes.title": "Ya sc'an Taqu'in",
+  "acopios.title": "Acopiohetic"
 }

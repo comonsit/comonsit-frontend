@@ -13,6 +13,7 @@ import contacto from './containers/General/Contacto/Contacto';
 import acceso from './containers/General/Acceso/Acceso';
 import socios from './containers/Panel/Socios/Socios';
 import solicitudes from './containers/Panel/Solicitudes/Solicitudes';
+import acopios from './containers/Panel/Acopios/Acopios';
 import logout from './containers/Panel/Logout/Logout';
 
 // import languageObject from './translations/messages'
@@ -53,7 +54,7 @@ class App extends Component {
         <>
           <Route path="/d" exact component={socios}/>
           <Route path="/socios" exact component={socios}/>
-          <Route path="/acopios" exact component={socios}/>
+          <Route path="/acopios" exact component={acopios}/>
           <Route path="/solicitudes" exact component={solicitudes}/>
         </>
       )
