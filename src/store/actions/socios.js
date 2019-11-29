@@ -22,6 +22,12 @@ export const unSelectSocio = () => {
     }
 }
 
+export const newSocio = () => {
+    return {
+        type: actionTypes.NEW_SOCIO
+    }
+}
+
 export const initSocios = (token) => {
 
     return dispatch => {

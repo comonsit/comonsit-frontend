@@ -16,35 +16,35 @@ class SociosForm extends Component {
     super(props);
     //// TODO: this.props.map here should be done???
     this.state = {
-      editing: false,
-      formIsValid: true,
+      editing: this.props.new,
+      formIsValid: !this.props.new,
       socioForm: {
         nombres: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'Juan'
+            placeholder: '..nombre..'
           },
           label: 'Nombres',
           value: this.props.selSocio.nombres,
           validation: {
             required: true
           },
-          valid: true,
+          valid: !this.props.new,
           touched: false,
         },
         apellidos: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'Hernández Hernández'
+            placeholder: '..apellidos..'
           },
           label: 'Apellidos',
           value: this.props.selSocio.apellidos,
           validation: {
             required: true
           },
-          valid: true,
+          valid: !this.props.new,
           touched: false,
         },
         comunidad: {
@@ -64,21 +64,21 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'AAAA571203A00'
+            placeholder: '..curp..'
           },
           label: 'CURP',
           value: this.props.selSocio.curp,
           validation: {
             required: true
           },
-          valid: true,
+          valid: !this.props.new,
           touched: false,
         },
         telefono: {
           elementType: 'input',
           elementConfig: {
             type: 'tel',
-            placeholder: '9191110000'
+            placeholder: '..teléfono..'
           },
           label: 'Teléfono',
           value: this.props.selSocio.telefono,
@@ -88,14 +88,13 @@ class SociosForm extends Component {
             maxLength: 12,
             isNumeric: true
           },
-          valid: true,
+          valid: !this.props.new,
           touched: false,
         },
         fecha_nacimiento: {
           elementType: 'input',
           elementConfig: {
-            type: 'date',
-            placeholder: '1957-12-03'
+            type: 'date'
           },
           label: 'Fecha de Nacimiento',
           value: this.props.selSocio.fecha_nacimiento,
@@ -103,14 +102,13 @@ class SociosForm extends Component {
             required: true,
             isDate: true
           },
-          valid: true,
+          valid: !this.props.new,
           touched: false,
         },
         fecha_ingr_yomol_atel: {
           elementType: 'input',
           elementConfig: {
-            type: 'date',
-            placeholder: "1957-12-03"
+            type: 'date'
           },
           label: "Fecha ingreso a Yomol A'tel",
           value: this.props.selSocio.fecha_ingr_yomol_atel,
@@ -118,14 +116,13 @@ class SociosForm extends Component {
             required: true,
             isDate: true
           },
-          valid: true,
+          valid: !this.props.new,
           touched: false,
         },
         fecha_ingr_programa: {
           elementType: 'input',
           elementConfig: {
-            type: 'date',
-            placeholder: "1957-12-03"
+            type: 'date'
           },
           label: "Fecha ingreso a Programa",
           value: this.props.selSocio.fecha_ingr_programa,
@@ -133,7 +130,7 @@ class SociosForm extends Component {
             required: true,
             isDate: true
           },
-          valid: true,
+          valid: !this.props.new,
           touched: false,
         },
         cargo: {
@@ -169,12 +166,12 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'XXX1234'
+            placeholder: ''
           },
           label: 'Clave Café',
           value: this.props.selSocio.clave_anterior,
           validation: {
-            required: true
+            required: false
           },
           valid: true,
           touched: false,
@@ -194,7 +191,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
-          touched: false,
+          touched: true,
         },
         estatus_miel: {
           elementType: 'select',
@@ -211,7 +208,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
-          touched: false,
+          touched: true,
         },
         estatus_yip: {
           elementType: 'select',
@@ -228,7 +225,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
-          touched: false,
+          touched: true,
         },
         estatus_gral: {
           elementType: 'select',
@@ -245,7 +242,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
-          touched: false,
+          touched: true,
         },
       }
     }
@@ -270,8 +267,11 @@ class SociosForm extends Component {
         ...formData
     }
 
-    this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
-
+    if (this.props.new) {
+      // this.props.onCreateNewSocio(socio, this.props.token)
+    } else {
+      this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
+    }
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -299,7 +299,6 @@ class SociosForm extends Component {
 
   onStartEditing = () => {
     this.setState({editing: true})
-    console.log("Editable is: "+this.state.editing);
   }
 
   render () {
@@ -309,7 +308,7 @@ class SociosForm extends Component {
     const formElementsArray = []
     // TODO: lógica de loading / Success / Failed pendiente!!
     let formElements = <Spinner/>
-    let submitButton
+    let submitButton, editButton, submitType
 
     sociosFormOrder.forEach(key => {
       formElementsArray.push({
@@ -336,20 +335,20 @@ class SociosForm extends Component {
           ))
     }
 
-    if (this.state.editing) {
+
+    if (this.state.editing || this.props.new) {
       submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="socioForm.saveButton"/></Button>
+      editButton = null
     }else {
-      submitButton=null
+      submitButton = null
+      editButton = <Button clicked={this.onStartEditing} disabled={this.state.editing}><FormattedMessage id="socioForm.editButton"/></Button>
     }
 
     return (
       <>
         <div className={classes.Header}>
           <h2><FormattedMessage id="socioForm.title"/>: {this.props.selSocio.clave_socio}</h2>
-          <Button
-            clicked={this.onStartEditing}
-            disabled={this.state.editing}
-            ><FormattedMessage id="socioForm.editButton"/></Button>
+          {editButton}
         </div>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>
@@ -369,7 +368,8 @@ const mapStateToProps = state => {
       token: state.auth.token,
       regiones: state.auth.regiones,
       comunidades: state.auth.comunidades,
-      cargos: state.auth.cargos
+      cargos: state.auth.cargos,
+      new: state.socios.newSocio
     }
 }
 

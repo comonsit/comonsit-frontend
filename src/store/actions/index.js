@@ -2,7 +2,8 @@ export {
     initSocios,
     fetchSelSocio,
     unSelectSocio,
-    updateSocio
+    updateSocio,
+    newSocio
 } from './socios'
 
 export {

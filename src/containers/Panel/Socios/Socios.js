@@ -42,7 +42,8 @@ class Socios extends Component {
   }
 
   onNewSocio = () => {
-
+    this.setState({socioSeleccionado: true});
+    this.props.onNewSocios()
   }
 
   getComunidad = (id) => {
@@ -131,6 +132,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
+      onNewSocios: () => dispatch(actions.newSocio()),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
       unSelSocio: () => dispatch(actions.unSelectSocio())
     }
