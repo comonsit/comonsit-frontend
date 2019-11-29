@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import SociosForm from './SociosForm/SociosForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Table from '../../../components/UI/Table/Table';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
 
@@ -26,7 +27,6 @@ class Socios extends Component {
   showSocio =(id) => {
     this.setState({socioSeleccionado: true});
     this.props.onFetchSelSocios(this.props.token, id)
-    // TODO: leer redux editado y hacer un re-render si hubo cambios
   }
 
   cancelSelected =() => {
@@ -45,44 +45,36 @@ class Socios extends Component {
     return this.props.comunidades[index].nombre_de_comunidad
   }
 
-  getStatusColor = (status) => {
-    let st = null
-    switch (status) {
-      case ('AC'):
-        st = <div className={classes.AC}></div>
-        break;
-      case ('BA'):
-        st = <div className={classes.BA}></div>
-        break;
-      default:
-        st = <div className={classes.NP}></div>
-    }
-    return st
-  }
-
   render () {
-    let socioData = <Spinner/>
+    const sociosHeaders = ["socios.clave", "socios.nombre", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general"]
+    const colors = {
+      'AC': "Green",
+      'BA': "Red",
+      'NP': "Gray"
+    }
+    const coloredColumns = {
+      "socios.cafe": colors,
+      "socios.miel": colors,
+      "socios.jabon": colors,
+      "socios.general": colors
+    }
+    let socioTableData
     let form = <Spinner/>
 
-    // MAKE SOCIO LIST
-    // TODO: checar si es null para poner vacío??
     if (this.props.listaSocios && this.props.comunidades) {
-      console.log(this.props.listaSocios)
-      socioData = this.props.listaSocios.map((s, i) => (
-        <tr
-          id={s.clave_socio + i}
-          onClick={() => this.showSocio(s.clave_socio)}>
-          <td>{s.clave_socio}</td>
-          <td>{s.nombres} {s.apellidos}</td>
-          <td>{s.comunidad ? this.getComunidad(s.comunidad) : ""}</td>
-          <td>{s.region ? s.region : ""}</td>
-          <td>{s.fecha_ingr_yomol_atel}</td>
-          <td>{this.getStatusColor(s.estatus_cafe)}</td>
-          <td>{this.getStatusColor(s.estatus_miel)}</td>
-          <td>{this.getStatusColor(s.estatus_yip)}</td>
-          <td>{this.getStatusColor(s.estatus_gral)}</td>
-        </tr>
-      ))
+      socioTableData = this.props.listaSocios.map((s, i) => {
+        return {
+          "socios.clave": s.clave_socio,
+          "socios.nombre": s.nombres +' '+ s.apellidos,
+          "socios.comunidad": s.comunidad ? this.getComunidad(s.comunidad) : "",
+          "socios.region": s.region ? s.region : "",
+          "socios.ingreso-ya": s.fecha_ingr_yomol_atel,
+          "socios.cafe": s.estatus_cafe,
+          "socios.miel": s.estatus_miel,
+          "socios.jabon": s.estatus_yip ,
+          "socios.general": s.estatus_gral
+        }
+      })
     }
 
     if (this.state.socioSeleccionado && this.props.selSocio) {
@@ -101,24 +93,13 @@ class Socios extends Component {
         </Modal>
         <div className={classes.Container}>
           <h1><FormattedMessage id="socios.title"/></h1>
-          <div className={classes.TableContainer}>
-            <table className={classes.TablaSocios}>
-              <tr>
-                <th><FormattedMessage id="socios.clave"/></th>
-                <th><FormattedMessage id="socios.nombre"/></th>
-                <th><FormattedMessage id="socios.region"/></th>
-                <th><FormattedMessage id="socios.comunidad"/></th>
-                <th><FormattedMessage id="socios.ingreso-ya"/></th>
-                <th><FormattedMessage id="socios.cafe"/></th>
-                <th><FormattedMessage id="socios.miel"/></th>
-                <th><FormattedMessage id="socios.jabon"/></th>
-                <th><FormattedMessage id="socios.general"/></th>
-              </tr>
-              <tbody>
-                {socioData}
-              </tbody>
-            </table>
-          </div>
+          <Table
+            headers={sociosHeaders}
+            data={socioTableData}
+            clicked={this.showSocio}
+            clickId={"socios.clave"}
+            colors={coloredColumns}
+            />
         </div>
       </>
     )
