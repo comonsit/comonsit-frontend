@@ -66,7 +66,7 @@ class Socios extends Component {
 
     // MAKE SOCIO LIST
     // TODO: checar si es null para poner vacío??
-    if (this.props.listaSocios) {
+    if (this.props.listaSocios && this.props.comunidades) {
       console.log(this.props.listaSocios)
       socioData = this.props.listaSocios.map((s, i) => (
         <tr
