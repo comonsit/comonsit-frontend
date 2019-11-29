@@ -6,6 +6,7 @@ import SociosForm from './SociosForm/SociosForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Table from '../../../components/UI/Table/Table';
+import Button from '../../../components/UI/Button/Button';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
 
@@ -38,6 +39,10 @@ class Socios extends Component {
     this.setState(prevState => {
         return {editable: !prevState.editable}
     })
+  }
+
+  onNewSocio = () => {
+
   }
 
   getComunidad = (id) => {
@@ -92,7 +97,14 @@ class Socios extends Component {
           {form}
         </Modal>
         <div className={classes.Container}>
-          <h1><FormattedMessage id="socios.title"/></h1>
+          <div className={classes.HeaderContainer}>
+            <h1><FormattedMessage id="socios.title"/></h1>
+            <div className={classes.ButtonContainer}>
+              <Button
+                clicked={this.onNewSocio}
+                ><FormattedMessage id="socios.newSocioButton"/></Button>
+            </div>
+          </div>
           <Table
             headers={sociosHeaders}
             data={socioTableData}
