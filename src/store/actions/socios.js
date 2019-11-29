@@ -85,23 +85,60 @@ export const updateSocioStart = () => {
 }
 
 export const updateSocio = (socioData, socioId, token) => {
-    // este formato gracias al thunk
     return dispatch => {
       const authData = {
         headers: { 'Authorization': `Bearer ${token}` },
         clave_socio: socioId,
         ...socioData
       }
-      console.log("EDITANDO SOCIO!!!");
       dispatch(updateSocioStart())
       axios.put(`/socios/${socioId}.json`, authData)
           .then(response => {
-            console.log("SOCIO EDITADO YEEEI");
             dispatch(updateSocioSuccess(response.data.name, socioData ))
           })
           .catch(error => {
             console.log("SOCIO FALLÓ BU?");
               dispatch(updateSocioFailed(error))
           })
+    }
+}
+
+export const createNewSocio = (socioData, token) => {
+    return dispatch => {
+      const authData = {
+        headers: { 'Authorization': `Bearer ${token}` },
+        ...socioData
+      }
+      dispatch(newSocioStart())
+      axios.post(`/socios/`, authData)
+          .then(response => {
+            console.log("NUEVO SOCIO YEEEI");
+            console.log(response.data);
+            dispatch(newSocioSuccess(response.data.name, socioData ))
+          })
+          .catch(error => {
+            console.log("NUEVO SOCIO FALLÓ BU?");
+            console.log(error);
+            dispatch(newSocioFailed(error))
+          })
+    }
+}
+
+export const newSocioSuccess = (id, orderData) => {
+    return {
+        type: actionTypes.NEW_SOCIO_SUCCESS
+    }
+}
+
+export const newSocioFailed = (error) => {
+    return {
+        type: actionTypes.NEW_SOCIO_FAILED,
+        error: error
+    }
+}
+
+export const newSocioStart = () => {
+    return {
+        type: actionTypes.NEW_SOCIO_START
     }
 }

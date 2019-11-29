@@ -3,7 +3,8 @@ export {
     fetchSelSocio,
     unSelectSocio,
     updateSocio,
-    newSocio
+    newSocio,
+    createNewSocio
 } from './socios'
 
 export {

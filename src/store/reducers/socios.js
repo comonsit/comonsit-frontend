@@ -47,6 +47,7 @@ const updateSocioFailed = (state) => {
 const newSocio = (state) => {
   return updateObject(state, {
       newSocio: true,
+      updated: false,
       selectedSocio: {
         clave_socio: "NUEVO",
         region: 1,
@@ -57,7 +58,7 @@ const newSocio = (state) => {
         fecha_nacimiento: "",
         fecha_ingr_yomol_atel: "",
         fecha_ingr_programa: "",
-        prod_trab: "",
+        prod_trab: "PR",
         clave_anterior: "",
         estatus_cafe: "NP",
         estatus_miel: "NP",
@@ -69,6 +70,21 @@ const newSocio = (state) => {
   })
 }
 
+const newSocioStart = (state) => {
+    return updateObject(state, {loading: true})
+}
+
+const newSocioSuccess = (state) => {
+  return updateObject(state, {
+      loading: false,
+      updated: true
+  })
+}
+
+const newSocioFailed = (state) => {
+    return updateObject(state, {loading: false})
+}
+
 const reducer = (state=initialState, action) => {
     switch(action.type) {
         case actionTypes.SET_SOCIOS: return setSocios(state, action)
@@ -78,6 +94,9 @@ const reducer = (state=initialState, action) => {
         case actionTypes.UPDATE_SOCIO_SUCCESS: return updateSocioSuccess(state)
         case actionTypes.UPDATE_SOCIO_FAILED: return updateSocioFailed(state)
         case actionTypes.NEW_SOCIO: return newSocio(state)
+        case actionTypes.NEW_SOCIO_START: return newSocioStart(state)
+        case actionTypes.NEW_SOCIO_SUCCESS: return newSocioSuccess(state)
+        case actionTypes.NEW_SOCIO_FAILED: return newSocioFailed(state)
         //case actionTypes.FETCH_SOCIOS_FAILED: return updateObject(state, {error: true})
         default:
             return state

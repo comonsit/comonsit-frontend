@@ -23,7 +23,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..nombre..'
+            placeholder: '..nombre'
           },
           label: 'Nombres',
           value: this.props.selSocio.nombres,
@@ -37,7 +37,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..apellidos..'
+            placeholder: '..apellidos'
           },
           label: 'Apellidos',
           value: this.props.selSocio.apellidos,
@@ -64,7 +64,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..curp..'
+            placeholder: '..curp'
           },
           label: 'CURP',
           value: this.props.selSocio.curp,
@@ -78,7 +78,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'tel',
-            placeholder: '..teléfono..'
+            placeholder: '..teléfono'
           },
           label: 'Teléfono',
           value: this.props.selSocio.telefono,
@@ -268,7 +268,7 @@ class SociosForm extends Component {
     }
 
     if (this.props.new) {
-      // this.props.onCreateNewSocio(socio, this.props.token)
+      this.props.onCreateNewSocio(socio, this.props.token)
     } else {
       this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
     }
@@ -308,7 +308,7 @@ class SociosForm extends Component {
     const formElementsArray = []
     // TODO: lógica de loading / Success / Failed pendiente!!
     let formElements = <Spinner/>
-    let submitButton, editButton, submitType
+    let submitButton, editButton
 
     sociosFormOrder.forEach(key => {
       formElementsArray.push({
@@ -375,7 +375,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token))
+      onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
+      onCreateNewSocio: (socioData, token) => dispatch(actions.createNewSocio(socioData, token)),
     }
 }
 
