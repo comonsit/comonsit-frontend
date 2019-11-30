@@ -146,18 +146,28 @@ class SociosForm extends Component {
           valid: true,
           touched: false,
         },
-        prod_trab: {
-          elementType: 'select',
+        productor: {
+          elementType: 'checkbox',
           elementConfig: {
-            options: [
-              {value: 'PR', displayValue: 'Productor'},
-              {value: 'TR', displayValue: 'Trabajador'},
-            ]
+            type: 'checkbox'
           },
-          label: 'Productor Trabajador',
-          value: this.props.selSocio.prod_trab,
+          label: 'Productor',
+          value: this.props.selSocio.productor,
           validation: {
-            required: true
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
+        trabajador: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: 'Trabajador',
+          value: this.props.selSocio.trabajador,
+          validation: {
+            required: false
           },
           valid: true,
           touched: false,
@@ -275,10 +285,9 @@ class SociosForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    // TODO:
-    // ahora sí lo clonamos??? AAAHHH!
+
     const updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
-        value: event.target.value,
+        value: this.state.socioForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
         valid: checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation),
         // esto del touched me parece muy ineficiente e innecesario! es sólo para que no sea rojo al principio? :S
         touched: true
@@ -314,10 +323,9 @@ class SociosForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "prod_trab", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
+    const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "productor", "trabajador", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
     const formElementsArray = []
     let supportData
-    // TODO: lógica de loading / Success / Failed pendiente!!
     let formElements = <Spinner/>
     let submitButton, editButton
 

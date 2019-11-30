@@ -13,12 +13,12 @@ const input = (props) => {
         </div>
       )
     }
-    // esta lógica ajustará el estilo cuando el input sea inválido
-    // if (props.invalid && props.shouldValidate && props.touched) {
-    //     inputClasses.push(classes.Invalid)
-    //     // aquí habría que tunear a partir del state
-    //     validationError = (<p className={classes.InvalidMessage}>Please add a valid value!</p>)
-    // }
+
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputClasses.push(classes.Invalid)
+        // aquí habría que tunear a partir del state
+        validationError = (<p className={classes.InvalidMessage}>Please add a valid value!</p>)
+    }
 
     switch (props.elementType ) {
         case ( 'input' ):
@@ -26,6 +26,15 @@ const input = (props) => {
                  className={inputClasses.join(' ')}
                  {...props.elementConfig}
                  value={props.value}
+                 disabled={props.disabled}
+                 onChange={props.changed} />
+            break
+        case ( 'checkbox' ):
+            inputElement = <input
+                 className={inputClasses.join(' ')}
+                 {...props.elementConfig}
+                value={props.value}
+                 checked={props.value}
                  disabled={props.disabled}
                  onChange={props.changed} />
             break
