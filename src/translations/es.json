@@ -38,6 +38,7 @@
   "socioForm.saveButton": "Guardar",
   "socioForm.editButton": "Editar",
   "socioForm.title": "Socio",
+  "socioForm.age": "años",
   "solicitudes.title": "Solicitudes",
   "acopios.title": "Acopios"
 }

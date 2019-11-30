@@ -301,11 +301,22 @@ class SociosForm extends Component {
     this.setState({editing: true})
   }
 
+  calculateAge = (birthdayString) => { // birthday is a date
+    const birthday = new Date(birthdayString).toString() !== 'Invalid Date' ? new Date(birthdayString).getTime() : null
+    if (birthday){
+      const ageDate = new Date(Date.now() - birthday); // miliseconds from epoch
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    } else {
+      return ""
+    }
+}
+
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "prod_trab", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
     const formElementsArray = []
+    let supportData
     // TODO: lógica de loading / Success / Failed pendiente!!
     let formElements = <Spinner/>
     let submitButton, editButton
@@ -318,21 +329,32 @@ class SociosForm extends Component {
     })
 
     if (this.props.selSocio && ! this.props.loading) {
-      formElements = formElementsArray.map(formElement => (
-          <div className={classes.Inputs}>
-            <Input
-              label={formElement.config.label}
-              key= {formElement.id}
-              elementType={formElement.config.elementType }
-              elementConfig={formElement.config.elementConfig }
-              value={formElement.config.value}
-              shouldValidate={formElement.config.validation}
-              invalid={!formElement.config.valid}
-              touched={formElement.config.touched}
-              disabled={!this.state.editing}
-              changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
-          </div>
-          ))
+      formElements = formElementsArray.map(formElement => {
+        if (formElement.id == "fecha_nacimiento" || formElement.id == "fecha_ingr_yomol_atel") {
+          supportData = (
+            <div className={classes.SupportData}>
+              <p>{this.calculateAge(formElement.config.value) + ' '} <FormattedMessage id="socioForm.age"/></p>
+            </div>          )
+        } else {
+          supportData = null
+        }
+        return (
+            <div className={classes.Inputs}>
+              <Input
+                label={formElement.config.label}
+                key= {formElement.id}
+                elementType={formElement.config.elementType }
+                elementConfig={formElement.config.elementConfig }
+                value={formElement.config.value}
+                shouldValidate={formElement.config.validation}
+                invalid={!formElement.config.valid}
+                touched={formElement.config.touched}
+                disabled={!this.state.editing}
+                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+                {supportData}
+            </div>
+            )
+      })
     }
 
 
