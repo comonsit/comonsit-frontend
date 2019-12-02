@@ -40,5 +40,14 @@
   "socioForm.title": "Socio",
   "socioForm.age": "yabilal",
   "solicitudes.title": "Ya sc'an Taqu'in",
+  "solicitudes.new": "yachil Yasc'an",
+  "solicitudes.folio_solicitud": "Folio",
+  "solicitudes.fecha_solicitud": "Fecha",
+  "solicitudes.clave_socio": "Clave Socio",
+  "solicitudes.tipo_credito": "Tipo de Crédito",
+  "solicitudes.monto_solicitado": "Monto",
+  "solicitudes.plazo_de_pago_solicitado": "Plazo",
+  "solicitudes.estatus_solicitud": "Estatus",
+  "solicitudes.estatus_ej_credito": "Estatus ejercicio",
   "acopios.title": "Acopiohetic"
 }

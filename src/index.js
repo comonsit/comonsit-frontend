@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import sociosReducer from './store/reducers/socios'
+import solicitudReducer from './store/reducers/solicitudes'
 import authReducer from './store/reducers/auth'
 import localeReducer from './store/reducers/locale'
 import thunk from 'redux-thunk';
@@ -16,7 +17,8 @@ import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
     socios: sociosReducer,
     auth: authReducer,
-    locale: localeReducer
+    locale: localeReducer,
+    solicitudes: solicitudReducer
 })
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;

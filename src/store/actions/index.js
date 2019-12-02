@@ -8,6 +8,15 @@ export {
 } from './socios'
 
 export {
+    initSolicitudes
+    // fetchSelSolicitud,
+    // unSelectSolicitud,
+    // updateSocio,
+    // newSocio,
+    // createNewSocio
+} from './solicitudes'
+
+export {
   onChangeLocale
 } from './locale'
 
