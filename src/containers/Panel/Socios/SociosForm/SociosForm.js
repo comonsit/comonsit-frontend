@@ -338,7 +338,7 @@ class SociosForm extends Component {
 
     if (this.props.selSocio && ! this.props.loading) {
       formElements = formElementsArray.map(formElement => {
-        if (formElement.id == "fecha_nacimiento" || formElement.id == "fecha_ingr_yomol_atel") {
+        if (formElement.id === "fecha_nacimiento" || formElement.id === "fecha_ingr_yomol_atel") {
           supportData = (
             <div className={classes.SupportData}>
               <p>{this.calculateAge(formElement.config.value) + ' '} <FormattedMessage id="socioForm.age"/></p>
