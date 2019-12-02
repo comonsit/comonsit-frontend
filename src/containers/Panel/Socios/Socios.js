@@ -52,7 +52,7 @@ class Socios extends Component {
   }
 
   render () {
-    const sociosHeaders = ["socios.clave", "socios.nombre", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general"]
+    const sociosHeaders = ["socios.nombre", "socios.clave", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general"]
     const colors = {
       'AC': "Green",
       'BA': "Red",
@@ -70,8 +70,8 @@ class Socios extends Component {
     if (this.props.listaSocios && this.props.comunidades) {
       socioTableData = this.props.listaSocios.map((s, i) => {
         return {
-          "socios.clave": s.clave_socio,
           "socios.nombre": s.nombres +' '+ s.apellidos,
+          "socios.clave": s.clave_socio,
           "socios.comunidad": s.comunidad ? this.getComunidad(s.comunidad) : "",
           "socios.region": s.region ? s.region : "",
           "socios.ingreso-ya": s.fecha_ingr_yomol_atel,
