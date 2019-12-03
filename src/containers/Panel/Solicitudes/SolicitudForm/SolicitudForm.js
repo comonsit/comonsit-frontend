@@ -86,7 +86,7 @@ class SolicitudForm extends Component {
             ]
           },
           label: 'Actividad Productiva',
-          value: 'OT',
+          value: 'CA',
           validation: {
             required: true
           },
@@ -100,14 +100,14 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..descripción'
           },
-          label: 'Actividad Productiva - Otra',
+          label: 'OTRA',
           value: '',
           validation: {
             required: false
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: true
         },
         mot_credito: {
           elementType: 'select',
@@ -122,11 +122,11 @@ class SolicitudForm extends Component {
             ]
           },
           label: 'Motivo de Crédito',
-          value: 'OT',
+          value: 'TR',
           validation: {
             required: true
           },
-          valid: !this.props.new,
+          valid: true,
           touched: false,
           hide: false
         },
@@ -136,14 +136,14 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..motivo'
           },
-          label: 'Motivo de Crédito - Otro',
+          label: 'OTRO',
           value: '',
           validation: {
             required: false
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: true
         },
         emergencia_medica: {
           elementType: 'checkbox',
@@ -163,6 +163,7 @@ class SolicitudForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'number',
+            max: '9999999',
             min: '0'
           },
           label: 'Monto Solicitado',
@@ -202,7 +203,7 @@ class SolicitudForm extends Component {
           validation: {
             required: true
           },
-          valid: !this.props.new,
+          valid: true,
           touched: false,
           hide: false
         },
