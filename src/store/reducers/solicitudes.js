@@ -3,6 +3,7 @@ import { updateObject } from './utility'
 
 const initialState = {
     solicitudes: null,
+    loading: false
 }
 
 const setSocios = (state, action) => {
@@ -11,10 +12,28 @@ const setSocios = (state, action) => {
     })
 }
 
+const newSolicitudStart = (state) => {
+    return updateObject(state, {loading: true})
+}
+
+const newSolicitudSuccess = (state) => {
+  return updateObject(state, {
+      loading: false,
+      updated: true
+  })
+}
+
+const newSolicitudFailed = (state) => {
+    return updateObject(state, {loading: false})
+}
+
 const reducer = (state=initialState, action) => {
     switch(action.type) {
         case actionTypes.SET_SOLICITUDES: return setSocios(state, action)
         //case actionTypes.FETCH_SOCIOS_FAILED: return updateObject(state, {error: true})
+        case actionTypes.NEW_SOLICITUD_START: return newSolicitudStart(state)
+        case actionTypes.NEW_SOLICITUD_SUCCESS: return newSolicitudSuccess(state)
+        case actionTypes.NEW_SOLICITUD_FAILED: return newSolicitudFailed(state)
         default:
             return state
     }

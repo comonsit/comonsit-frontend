@@ -8,12 +8,12 @@ export {
 } from './socios'
 
 export {
-    initSolicitudes
+    initSolicitudes,
     // fetchSelSolicitud,
     // unSelectSolicitud,
     // updateSocio,
     // newSocio,
-    // createNewSocio
+    createNewSolicitud
 } from './solicitudes'
 
 export {

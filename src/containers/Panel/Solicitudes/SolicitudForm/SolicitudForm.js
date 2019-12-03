@@ -58,11 +58,11 @@ class SolicitudForm extends Component {
             ]
           },
           label: 'Tipo de Crédito',
-          value: '',
+          value: 'MC',
           validation: {
             required: true
           },
-          valid: false,
+          valid: true,
           touched: false,
           hide: false
         },
@@ -86,11 +86,11 @@ class SolicitudForm extends Component {
             ]
           },
           label: 'Actividad Productiva',
-          value: '',
+          value: 'OT',
           validation: {
             required: true
           },
-          valid: false,
+          valid: true,
           touched: false,
           hide: false
         },
@@ -105,9 +105,9 @@ class SolicitudForm extends Component {
           validation: {
             required: false
           },
-          valid: false,
+          valid: true,
           touched: false,
-          hide: true
+          hide: false
         },
         mot_credito: {
           elementType: 'select',
@@ -122,7 +122,7 @@ class SolicitudForm extends Component {
             ]
           },
           label: 'Motivo de Crédito',
-          value: '',
+          value: 'OT',
           validation: {
             required: true
           },
@@ -141,9 +141,9 @@ class SolicitudForm extends Component {
           validation: {
             required: false
           },
-          valid: false,
+          valid: true,
           touched: false,
-          hide: true
+          hide: false
         },
         emergencia_medica: {
           elementType: 'checkbox',
@@ -179,7 +179,7 @@ class SolicitudForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'number',
-            placeholder: '..nombre'
+            placeholder: '..# meses'
           },
           label: 'Plazo de Pago',
           value: '',
@@ -241,12 +241,16 @@ class SolicitudForm extends Component {
       formData[formElementIdentifier] = this.state.solicitudForm[formElementIdentifier].value
     }
 
-    const socio = {
-        ...formData
+    //// TODO: eliminate estatus data with working workflow
+    const solicitud = {
+        ...formData,
+        estatus_ej_credito: 'RV',
+        estatus_evaluacion: 'RV',
+        estatus_solicitud: 'RV'
     }
 
     // if (this.props.new) {
-      this.props.onCreateNewSolicitud(socio, this.props.token)
+      this.props.onCreateNewSolicitud(solicitud, this.props.token)
     // } else {
     //   this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
     // }
@@ -359,23 +363,17 @@ class SolicitudForm extends Component {
 
 const mapStateToProps = state => {
     return {
-      selSocio: state.socios.selectedSocio,
-      loading: state.socios.loading,
-      token: state.auth.token,
-      regiones: state.auth.regiones,
-      comunidades: state.auth.comunidades,
-      cargos: state.auth.cargos,
-      new: state.socios.newSocio
+      token: state.auth.token
+      // new: state.socios.newSocio
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
-      onCreateNewSolicitud: (socioData, token) => dispatch(actions.createNewSocio(socioData, token)),
+      //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
+      onCreateNewSolicitud: (solData, token) => dispatch(actions.createNewSolicitud(solData, token)),
     }
 }
-
 
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SolicitudForm))

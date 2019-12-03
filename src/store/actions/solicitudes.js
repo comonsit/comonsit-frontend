@@ -26,3 +26,39 @@ export const initSolicitudes = (token) => {
       })
   }
 }
+
+export const createNewSolicitud = (solData, token) => {
+    return dispatch => {
+      const authData = {
+        headers: { 'Authorization': `Bearer ${token}` },
+      }
+      dispatch(newSolicitudStart())
+      axios.post(`/solic-creditos/`, solData, authData)
+          .then(response => {
+            dispatch(newSolicitudSuccess(response.data.folio_solicitud, solData ))
+          })
+          .catch(error => {
+            console.log(error);
+            dispatch(newSolicitudFailed(error))
+          })
+    }
+}
+
+export const newSolicitudSuccess = (id, orderData) => {
+    return {
+        type: actionTypes.NEW_SOLICITUD_SUCCESS
+    }
+}
+
+export const newSolicitudFailed = (error) => {
+    return {
+        type: actionTypes.NEW_SOLICITUD_FAILED,
+        error: error
+    }
+}
+
+export const newSolicitudStart = () => {
+    return {
+        type: actionTypes.NEW_SOLICITUD_START
+    }
+}
