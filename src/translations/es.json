@@ -49,5 +49,7 @@
   "solicitudes.plazo_de_pago_solicitado": "Plazo",
   "solicitudes.estatus_solicitud": "Estatus",
   "solicitudes.estatus_ej_credito": "Estatus ejercicio",
+  "solicitudForm.title": "Solicitud Nueva",
+  "solicitudForm.saveButton": "Guardar",
   "acopios.title": "Acopios"
 }

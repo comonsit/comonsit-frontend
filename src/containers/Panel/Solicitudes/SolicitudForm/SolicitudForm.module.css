@@ -1,0 +1,13 @@
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 2rem;
+}
+
+.Header h1 {
+  font-family: 'Arquitecta';
+  padding-left: 2rem;
+  margin-left: 5rem;
+}

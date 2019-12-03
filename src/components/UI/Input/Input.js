@@ -4,6 +4,7 @@ import classes from './Input.module.css'
 const input = (props) => {
     let label = null
     let inputElement = null;
+    const containerClasses = [classes.Input]
     const inputClasses = [classes.InputElement]
     let validationError = null
     if (props.label) {
@@ -12,6 +13,10 @@ const input = (props) => {
           <label>{props.label}</label>
         </div>
       )
+    }
+
+    if (props.hide) {
+      containerClasses.push(classes.HideMe)
     }
 
     if (props.invalid && props.shouldValidate && props.touched) {
@@ -41,8 +46,9 @@ const input = (props) => {
         case ( 'textarea' ):
             inputElement = <textarea
                 className={inputClasses.join(' ')}
-                {...props}
+                {...props.elementConfig}
                 value={props.value}
+                disabled={props.disabled}
                 onChange={props.changed} />
             break
         case ( 'select' ):
@@ -69,7 +75,7 @@ const input = (props) => {
 
 
     return (
-        <div className={classes.Input}>
+        <div className={containerClasses.join(' ')}>
             {label}
             {inputElement}
             {validationError}

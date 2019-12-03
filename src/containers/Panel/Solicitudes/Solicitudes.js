@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {FormattedMessage} from 'react-intl';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // import SolicitudForm from './SolicitudForm/SolicitudForm';
@@ -43,7 +44,7 @@ class Solicitudes extends Component {
 
   onNewSolicitud = () => {
     this.setState({solicSeleccionado: true});
-    // this.props.onNewSocios()
+    this.props.history.push('solicitud-formato');
   }
 
   getComunidad = (id) => {
@@ -142,4 +143,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Solicitudes)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Solicitudes))

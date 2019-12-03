@@ -53,3 +53,7 @@
 .InvalidMessage {
     font-size: .5rem
 }
+
+.HideMe {
+  display: none;
+}
