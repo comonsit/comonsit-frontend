@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 
@@ -252,6 +252,7 @@ class SolicitudForm extends Component {
 
     // if (this.props.new) {
       this.props.onCreateNewSolicitud(solicitud, this.props.token)
+      this.setState({editing: false})
     // } else {
     //   this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
     // }
@@ -342,6 +343,8 @@ class SolicitudForm extends Component {
       })
     }
 
+    const updatedRedirect = (this.props.updated && !this.state.editing) ? <Redirect to="/solicitudes"/> : null
+
     return (
       <>
         <div className={classes.Header}>
@@ -356,6 +359,7 @@ class SolicitudForm extends Component {
             disabled={!this.state.formIsValid}>
             <FormattedMessage id="solicitudForm.saveButton"/>
           </Button>
+          {updatedRedirect}
         </form>
       </>
     )
@@ -364,8 +368,10 @@ class SolicitudForm extends Component {
 
 const mapStateToProps = state => {
     return {
-      token: state.auth.token
-      // new: state.socios.newSocio
+      token: state.auth.token,
+      loading: state.solicitudes.loading,
+      updated: state.solicitudes.updated
+      // new: state.solicitudes.newSolicitud
     }
 }
 
@@ -377,4 +383,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SolicitudForm))
+export default connect(mapStateToProps, mapDispatchToProps)(SolicitudForm)

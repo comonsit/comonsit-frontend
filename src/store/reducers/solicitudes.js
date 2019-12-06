@@ -3,7 +3,8 @@ import { updateObject } from './utility'
 
 const initialState = {
   solicitudes: null,
-  loading: false
+  loading: false,
+  updated: false
 }
 
 const setSocios = (state, action) => {
@@ -13,7 +14,10 @@ const setSocios = (state, action) => {
 }
 
 const newSolicitudStart = (state) => {
-  return updateObject(state, {loading: true})
+  return updateObject(state, {
+    loading: true,
+    updated: false
+  })
 }
 
 const newSolicitudSuccess = (state) => {
@@ -24,7 +28,10 @@ const newSolicitudSuccess = (state) => {
 }
 
 const newSolicitudFailed = (state) => {
-  return updateObject(state, {loading: false})
+  return updateObject(state, {
+    loading: false,
+    updated: false
+  })
 }
 
 const reducer = (state=initialState, action) => {
