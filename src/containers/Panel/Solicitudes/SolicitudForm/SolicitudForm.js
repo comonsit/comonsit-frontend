@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Modal from '../../../../components/UI/Modal/Modal';
+import Table from '../../../../components/UI/Table/Table'
 import classes from './SolicitudForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -19,6 +21,7 @@ class SolicitudForm extends Component {
     this.state = {
       editing: true,
       formIsValid: false,
+      searchingOpen: false,
       solicitudForm: {
         clave_socio: {
           elementType: 'input',
@@ -234,7 +237,6 @@ class SolicitudForm extends Component {
 
   onSubmitForm = (event) => {
     event.preventDefault();
-    this.setState({editing: false})
 
 
     const formData = {}
@@ -252,7 +254,7 @@ class SolicitudForm extends Component {
 
     // if (this.props.new) {
       this.props.onCreateNewSolicitud(solicitud, this.props.token)
-      this.setState({editing: false})
+      // this.setState({editing: false})
     // } else {
     //   this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
     // }
@@ -294,8 +296,39 @@ class SolicitudForm extends Component {
     this.setState({solicitudForm: updatedForm, formIsValid: formIsValid})
   }
 
-  onStartEditing = () => {
-    this.setState({editing: true})
+  // onStartEditing = () => {
+  //   this.setState({editing: true})
+  // }
+
+  onSearchSocio = () => {
+    this.setState({searchingOpen: true})
+  }
+
+  cancelSearch =() => {
+    this.setState({searchingOpen: false, socioSeleccionado: null})
+    this.props.unSelSocio()
+  }
+
+  //// TODO: código duplicado de socios!!! eliminar y llamar de otro lado! o arreglar en backend
+  getComunidad = (id) => {
+    const index = this.props.comunidades.findIndex(x => x.id === id)
+    return this.props.comunidades[index].nombre_de_comunidad
+  }
+
+  selectSocio =(id) => {
+    const updatedForm = updateObject(this.state.solicitudForm, {
+        clave_socio: updateObject(this.state.solicitudForm.clave_socio, {
+            value: id
+        })
+    })
+    this.setState({
+      socioSeleccionado: {
+        clave_socio: id,
+      },
+      searchingOpen: false,
+      solicitudForm: updatedForm
+    });
+    this.props.onFetchSelSocios(this.props.token, id)
   }
 
   render () {
@@ -303,7 +336,8 @@ class SolicitudForm extends Component {
     // TODO: done to keep order in Safari. improvement?
     const sociosFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "act_productiva", "act_productiva_otro", "mot_credito", "mot_credito_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor"]
     const formElementsArray = []
-    let supportData
+    const formClasses = [classes.Form]
+    let supportData, supportButton
     let formElements = <Spinner/>
 
     sociosFormOrder.forEach(key => {
@@ -316,14 +350,19 @@ class SolicitudForm extends Component {
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
         if (formElement.id === "clave_socio") {
-          supportData = (
-            <div className={classes.SupportData}>
-              <p>...el nombre del socio automatizado...</p>
-            </div>          )
+          if (this.props.selSocio && this.state.solicitudForm.clave_socio.value) {
+            supportData = (
+              <div className={classes.SupportData}>
+                <p>{this.props.selSocio.nombres} {this.props.selSocio.apellidos} de región {this.props.selSocio.region}</p>
+              </div>)
+          }
+          supportButton = (<Button btnType="Short" clicked={this.onSearchSocio}><FormattedMessage id="solicitudForm.searchSocio"/></Button>)
         } else {
           supportData = null
+          supportButton = null
         }
         return (
+          <div>
             <div className={classes.Inputs}>
               <Input
                 label={formElement.config.label}
@@ -337,21 +376,76 @@ class SolicitudForm extends Component {
                 disabled={!this.state.editing}
                 hide={formElement.config.hide}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
-                {supportData}
+              {supportButton}
             </div>
+            {supportData}
+          </div>
             )
       })
     }
+
+     //////////////
+     // Move to Socios or to separate container for listaSocios
+     const sociosHeaders = ["socios.nombre", "socios.clave", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general"]
+     const colors = {
+       'AC': "Green",
+       'BA': "Red",
+       'NP': "Gray"
+     }
+     const coloredColumns = {
+       "socios.cafe": colors,
+       "socios.miel": colors,
+       "socios.jabon": colors,
+       "socios.general": colors
+     }
+     let socioTableData
+     formClasses.push(classes.noScroll)
+
+     // TODO: Si el fetch de listasocios no está hecho va a tronar!!!
+     // hacer fetch en inicialización, o mover a su propio container, o hacer fetch!!!
+     if (this.props.listaSocios && this.props.comunidades) {
+
+       socioTableData = this.props.listaSocios.map((s, i) => {
+         return {
+           "socios.nombre": s.nombres +' '+ s.apellidos,
+           "socios.clave": s.clave_socio,
+           "socios.comunidad": s.comunidad ? this.getComunidad(s.comunidad) : "",
+           "socios.region": s.region ? s.region : "",
+           "socios.ingreso-ya": s.fecha_ingr_yomol_atel,
+           "socios.cafe": s.estatus_cafe,
+           "socios.miel": s.estatus_miel,
+           "socios.jabon": s.estatus_yip ,
+           "socios.general": s.estatus_gral
+         }
+       })
+     }
+
+
 
     const updatedRedirect = (this.props.updated && !this.state.editing) ? <Redirect to="/solicitudes"/> : null
 
     return (
       <>
+        <Modal
+          show={this.state.searchingOpen}
+          modalClosed={this.cancelSearch}>
+          <h3>Búsqueda de Socios...pendiente</h3>
+          <div
+            className={classes.TableContainer}>
+            <Table
+              headers={sociosHeaders}
+              data={socioTableData}
+              clicked={this.selectSocio}
+              clickId={"socios.clave"}
+              colors={coloredColumns}
+              />
+          </div>
+        </Modal>
         <div className={classes.Header}>
           <h1><FormattedMessage id="solicitudForm.title"/></h1>
         </div>
         <form onSubmit={this.onSubmitForm}>
-          <div className={classes.Form}>
+          <div className={formClasses.join(' ')}>
           {formElements}
           </div>
           <Button
@@ -370,7 +464,10 @@ const mapStateToProps = state => {
     return {
       token: state.auth.token,
       loading: state.solicitudes.loading,
-      updated: state.solicitudes.updated
+      updated: state.solicitudes.updated,
+      listaSocios: state.socios.socios,
+      selSocio: state.socios.selectedSocio,
+      comunidades: state.auth.comunidades
       // new: state.solicitudes.newSolicitud
     }
 }
@@ -379,6 +476,8 @@ const mapDispatchToProps = dispatch => {
     return {
       //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
       onCreateNewSolicitud: (solData, token) => dispatch(actions.createNewSolicitud(solData, token)),
+      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
+      unSelSocio: () => dispatch(actions.unSelectSocio())
     }
 }
 

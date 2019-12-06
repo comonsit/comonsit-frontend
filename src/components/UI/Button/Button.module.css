@@ -36,3 +36,9 @@
 .Danger {
   /*TODO*/
 }
+
+.Short {
+  height: 4rem;
+  font-size: .6em;
+  padding: 0;
+}
