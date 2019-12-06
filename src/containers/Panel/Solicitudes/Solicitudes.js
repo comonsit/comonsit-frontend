@@ -56,7 +56,7 @@ class Solicitudes extends Component {
 
   onNewSolicitud = () => {
     // this.setState({showSolicitudModal: true});
-    this.props.history.push('solicitud-solicitudInfoato');
+    this.props.history.push('solicitud-formato');
   }
 
   getComunidad = (id) => {
