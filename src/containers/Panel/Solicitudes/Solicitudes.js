@@ -13,7 +13,8 @@ import * as actions from '../../../store/actions'
 
 class Solicitudes extends Component {
   state = {
-    solicSeleccionado: false,
+    showSolicitudModal: false,
+    selectedSol: null
   }
 
   componentDidMount () {
@@ -21,18 +22,29 @@ class Solicitudes extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.updated !== prevProps.updated) {
-      this.props.onInitSolicitudes(this.props.token)
+    // TODO: pendiente hasta que editemos el socio en Modal
+    // if(this.props.updated !== prevProps.updated) {
+    //   this.props.onInitSolicitudes(this.props.token)
+    // }
+    if(this.props.selectedSol !== prevProps.selectedSol) {
+      console.log('CAMBIANDO EL ESTADO');
+      this.setState({selectedSol: this.props.selectedSol})
     }
   }
 
   showSolicitud =(id) => {
-    // this.setState({solicSeleccionado: true});
+    this.setState({
+      showSolicitudModal: true
+    });
+    this.props.onFetchSelSocios(this.props.token, id)
     // this.props.onFetchSelSocios(this.props.token, id)
   }
 
   cancelSelected =() => {
-    this.setState({ solicSeleccionado: false});
+    this.setState({
+      showSolicitudModal: false,
+      selectedSol: null
+    });
     // this.props.unSelSocio()
   }
 
@@ -43,8 +55,8 @@ class Solicitudes extends Component {
   }
 
   onNewSolicitud = () => {
-    this.setState({solicSeleccionado: true});
-    this.props.history.push('solicitud-formato');
+    // this.setState({showSolicitudModal: true});
+    this.props.history.push('solicitud-solicitudInfoato');
   }
 
   getComunidad = (id) => {
@@ -69,10 +81,30 @@ class Solicitudes extends Component {
       "solicitudes.estatus_ej_credito": colors
     }
     let solTableData
-    let form = <Spinner/>
+    let solicitudInfo = <Spinner/>
+
+    // TODO: Mover a Container independiente informativo!!
+    if (this.state.selectedSol) {
+      solicitudInfo = (
+        <div>
+          <h3>Folio: {this.state.selectedSol.folio_solicitud} </h3>
+          <h4>clave de Socio: {this.state.selectedSol.clave_socio} </h4>
+          <h5>Generado por: {this.state.selectedSol.autor} </h5>
+          <h5>Tipo: {this.state.selectedSol.tipo_credito} </h5>
+          <h5>A {this.state.selectedSol.plazo_de_pago_solicitado} Meses </h5>
+          <h5>Por ${this.state.selectedSol.monto_solicitado} </h5>
+          <h5>...más información útil para decidir... </h5>
+          <Button
+            clicked={this.cancelSelected}
+            >Aprobar</Button>
+          <Button
+            clicked={this.cancelSelected}
+            >Rechazar</Button>
+        </div>
+      )
+    }
 
     if (this.props.listaSolicitudes && this.props.comunidades) {
-      console.log(this.props.listaSolicitudes);
       solTableData = this.props.listaSolicitudes.map((s, i) => {
         return {
           "solicitudes.folio_solicitud": s.folio_solicitud,
@@ -87,20 +119,21 @@ class Solicitudes extends Component {
       })
     }
 
+    console.log(this.props.selectedSol);
+
     // TODO:
     // if (this.state.solicitudSeleccionado && this.props.selSol) {
-    //   form = (
+    //   solicitudInfo = (
     //     <SolicitudForm/>
     //   )
     // }
 
-
     return (
       <>
         <Modal
-          show={this.state.solicSeleccionado}
+          show={this.state.showSolicitudModal}
           modalClosed={this.cancelSelected}>
-          {form}
+          {solicitudInfo}
         </Modal>
         <div className={classes.Container}>
           <div className={classes.HeaderContainer}>
@@ -127,19 +160,20 @@ class Solicitudes extends Component {
 const mapStateToProps = state => {
     return {
       listaSolicitudes: state.solicitudes.solicitudes,
+      selectedSol: state.solicitudes.selectedSolicitud,
       comunidades: state.auth.comunidades,
       token: state.auth.token,
-      // selSocio: state.socios.selectedSocio,
+      // selSocio: state.socios.selectedSol,
       // updated: state.socios.updated,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      onInitSolicitudes: (token) => dispatch(actions.initSolicitudes(token))
+      onInitSolicitudes: (token) => dispatch(actions.initSolicitudes(token)),
       // onNewSocios: () => dispatch(actions.newSocio()),
-      // onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      // unSelSocio: () => dispatch(actions.unSelectSocio())
+      onFetchSelSocios: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
+      unSelSol: () => dispatch(actions.unSelectSolicitud())
     }
 }
 

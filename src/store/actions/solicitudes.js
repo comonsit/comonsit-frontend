@@ -44,7 +44,7 @@ export const createNewSolicitud = (solData, token) => {
     }
 }
 
-export const newSolicitudSuccess = (id, orderData) => {
+export const newSolicitudSuccess = (id) => {
     return {
         type: actionTypes.NEW_SOLICITUD_SUCCESS
     }
@@ -61,4 +61,37 @@ export const newSolicitudStart = () => {
     return {
         type: actionTypes.NEW_SOLICITUD_START
     }
+}
+
+export const fetchSelSolicitud = (token, solId) => {
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    console.log('GET SOL');
+    axios.get(`/solic-creditos/${solId}.json`, authData)
+      .then(response => {
+        console.log('FETCHED SOL');
+        console.log(response.data)
+        dispatch(setSelSolicitud(response.data))
+      })
+      .catch(error => {
+        // TODO: FALTA!!
+        //dispatch(fetchSociosFailed())
+      })
+  }
+}
+
+export const setSelSolicitud = (selectedSolicitud) => {
+    return {
+        type: actionTypes.SET_SEL_SOLICITUD,
+        selectedSolicitud: selectedSolicitud
+    }
+}
+
+
+export const unSelectSolicitud = () => {
+  return {
+    type: actionTypes.UNSELECT_SOLICITUD
+  }
 }

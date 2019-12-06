@@ -4,7 +4,8 @@ import { updateObject } from './utility'
 const initialState = {
   solicitudes: null,
   loading: false,
-  updated: false
+  updated: false,
+  selectedSolicitud: null
 }
 
 const setSocios = (state, action) => {
@@ -34,6 +35,18 @@ const newSolicitudFailed = (state) => {
   })
 }
 
+const setSelSolicitud = (state, action) => {
+  return updateObject(state, {
+    selectedSolicitud: action.selectedSolicitud
+  })
+}
+
+const unSetSelSolicitud = (state) => {
+  return updateObject(state, {
+    selectedSocio: null,
+  })
+}
+
 const reducer = (state=initialState, action) => {
   switch(action.type) {
     case actionTypes.SET_SOLICITUDES: return setSocios(state, action)
@@ -41,6 +54,8 @@ const reducer = (state=initialState, action) => {
     case actionTypes.NEW_SOLICITUD_START: return newSolicitudStart(state)
     case actionTypes.NEW_SOLICITUD_SUCCESS: return newSolicitudSuccess(state)
     case actionTypes.NEW_SOLICITUD_FAILED: return newSolicitudFailed(state)
+    case actionTypes.SET_SEL_SOLICITUD: return setSelSolicitud(state, action)
+    case actionTypes.UNSELECT_SOLICITUD: return unSetSelSolicitud(state)
     default:
       return state
   }

@@ -9,10 +9,10 @@ export {
 
 export {
     initSolicitudes,
-    // fetchSelSolicitud,
-    // unSelectSolicitud,
-    // updateSocio,
-    // newSocio,
+    unSelectSolicitud,
+    fetchSelSolicitud,
+    // update,
+    // new,
     createNewSolicitud
 } from './solicitudes'
 
