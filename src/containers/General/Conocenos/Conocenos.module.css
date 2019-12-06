@@ -16,3 +16,9 @@
     padding: 7rem 15rem;
   }
 }
+
+.Calendario {
+  border: 0;
+  width: 60vw;
+  height: 60vh;
+}
