@@ -29,7 +29,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..clave del socio'
           },
-          label: 'Nombres',
+          label: (<FormattedMessage id="solicitudForm.clave_socio"/>),
           value: '',
           validation: {
             required: true
@@ -43,7 +43,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'date'
           },
-          label: 'Fecha de Solicitud',
+          label: (<FormattedMessage id="solicitudForm.fecha_solicitud"/>),
           value: '',
           validation: {
             required: true,
@@ -61,7 +61,7 @@ class SolicitudForm extends Component {
               {value: 'CP', displayValue: 'Crédito Productivo'}
             ]
           },
-          label: 'Tipo de Crédito',
+          label: (<FormattedMessage id="solicitudForm.tipo_credito"/>),
           value: 'MC',
           validation: {
             required: true
@@ -89,7 +89,7 @@ class SolicitudForm extends Component {
               {value: 'OT', displayValue: 'Otro'}
             ]
           },
-          label: 'Actividad Productiva',
+          label: (<FormattedMessage id="solicitudForm.act_productiva"/>),
           value: 'CA',
           validation: {
             required: true
@@ -104,7 +104,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..descripción'
           },
-          label: 'OTRA',
+          label: (<FormattedMessage id="solicitudForm.otra"/>),
           value: '',
           validation: {
             required: false
@@ -125,7 +125,7 @@ class SolicitudForm extends Component {
               {value: 'OT', displayValue: 'Otro'}
             ]
           },
-          label: 'Motivo de Crédito',
+          label: (<FormattedMessage id="solicitudForm.motivo_credito"/>),
           value: 'TR',
           validation: {
             required: true
@@ -140,7 +140,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..motivo'
           },
-          label: 'OTRO',
+          label: (<FormattedMessage id="solicitudForm.other"/>),
           value: '',
           validation: {
             required: false
@@ -154,7 +154,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label: 'Emergencia Médica',
+          label:  (<FormattedMessage id="solicitudForm.emergencia_medica"/>),
           value: false,
           validation: {
             required: false
@@ -170,7 +170,7 @@ class SolicitudForm extends Component {
             max: '9999999',
             min: '0'
           },
-          label: 'Monto Solicitado',
+          label:  (<FormattedMessage id="solicitudForm.monto_solicitado"/>),
           value: '',
           validation: {
             required: true,
@@ -186,7 +186,7 @@ class SolicitudForm extends Component {
             type: 'number',
             placeholder: '..# meses'
           },
-          label: 'Plazo de Pago',
+          label:  (<FormattedMessage id="solicitudForm.plazo_de_pago_solicitado"/>),
           value: '',
           validation: {
             required: true,
@@ -202,7 +202,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..justificación'
           },
-          label: 'Justificación',
+          label:  (<FormattedMessage id="solicitudForm.justificacion_credito"/>),
           value: '',
           validation: {
             required: true
@@ -218,7 +218,7 @@ class SolicitudForm extends Component {
             placeholder: '..',
             maxlength: '100'
           },
-          label: 'Comentarios',
+          label:  (<FormattedMessage id="solicitudForm.comentarios_promotor"/>),
           value: '',
           validation: {
             required: false
@@ -232,7 +232,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label: 'Mesa de Control - Pregunta 1',
+          label:  (<FormattedMessage id="solicitudForm.pregunta_1"/>),
           value: false,
           validation: {
             required: false
@@ -246,7 +246,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label: 'Mesa de Control - Pregunta 1',
+          label:  (<FormattedMessage id="solicitudForm.pregunta_2"/>),
           value: false,
           validation: {
             required: false
@@ -260,7 +260,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label: 'Mesa de Control - Pregunta 1',
+          label:  (<FormattedMessage id="solicitudForm.pregunta_3"/>),
           value: false,
           validation: {
             required: false
@@ -274,7 +274,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label: 'Mesa de Control - Pregunta 1',
+          label:  (<FormattedMessage id="solicitudForm.pregunta_4"/>),
           value: false,
           validation: {
             required: false
@@ -290,7 +290,7 @@ class SolicitudForm extends Component {
             placeholder: '..',
             maxlength: '100'
           },
-          label: 'irregularidades',
+          label:  (<FormattedMessage id="solicitudForm.irregularidades"/>),
           value: '',
           validation: {
             required: false
