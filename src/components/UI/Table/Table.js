@@ -8,16 +8,17 @@ const table = (props) => {
   let tableHeaders = null
   let tableData = <Spinner/>
   if (props.headers) {
-    tableHeaders = props.headers.map(h => (
-      <th><FormattedMessage id={h}/></th>
+    tableHeaders = props.headers.map((h, i) => (
+      <th key={i}><FormattedMessage id={h}/></th>
     ))
   }
 
   if (props.data) {
-    tableData = props.data.map(row => (
+    tableData = props.data.map((row, i) => (
       <tr
         onClick={() => props.clicked(row[props.clickId])}
         id={row[props.clickId]}
+        key={i}
         >
         <TableRow
           rowOrder={props.headers}

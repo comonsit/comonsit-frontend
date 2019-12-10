@@ -4,11 +4,11 @@ import classes from './TableRow.module.css'
 const tableRow = (props) => {
   let row = []
   if (props.rowData) {
-    row = props.rowOrder.map(k => {
+    row = props.rowOrder.map((k, i) => {
       if (k in props.colors) {
-        return <td><div className={classes[props.colors[k][props.rowData[k]]]}></div></td>
+        return <td key={i}><div className={classes[props.colors[k][props.rowData[k]]]}></div></td>
       } else {
-        return <td>{props.rowData[k]}</td>
+        return <td key={i}>{props.rowData[k]}</td>
       }
     })
   }

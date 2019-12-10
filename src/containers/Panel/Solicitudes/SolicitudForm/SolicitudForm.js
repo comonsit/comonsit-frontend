@@ -373,7 +373,9 @@ class SolicitudForm extends Component {
           supportButton = null
         }
         return (
-          <div>
+          <div
+            key= {formElement.id}
+            >
             <div className={classes.Inputs}>
               <Input
                 label={formElement.config.label}

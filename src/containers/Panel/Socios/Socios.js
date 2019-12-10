@@ -111,6 +111,7 @@ class Socios extends Component {
             data={socioTableData}
             clicked={this.showSocio}
             clickId={"socios.clave"}
+            useKey={"socios.clave"}
             colors={coloredColumns}
             />
         </div>

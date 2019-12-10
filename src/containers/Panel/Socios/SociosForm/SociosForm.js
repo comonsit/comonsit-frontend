@@ -366,7 +366,9 @@ class SociosForm extends Component {
           supportData = null
         }
         return (
-            <div className={classes.Inputs}>
+            <div
+              className={classes.Inputs}
+              key= {formElement.id}>
               <Input
                 label={formElement.config.label}
                 key= {formElement.id}
