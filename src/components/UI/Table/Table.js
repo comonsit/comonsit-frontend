@@ -6,10 +6,10 @@ import TableRow from './TableRow/TableRow'
 
 const table = (props) => {
   let tableHeaders = null
-  let tableData = <Spinner/>
+  let tableData  = <tr><td><Spinner/></td></tr>  // TODO: add default value if no data
   if (props.headers) {
     tableHeaders = props.headers.map((h, i) => (
-      <th key={i}><FormattedMessage id={h}/></th>
+      <td key={i}><FormattedMessage id={h}/></td>
     ))
   }
 
@@ -33,9 +33,11 @@ const table = (props) => {
   return (
     <div className={classes.TableContainer}>
       <table className={classes.TablaSocios}>
-        <tr>
-          {tableHeaders}
-        </tr>
+        <thead>
+          <tr>
+            {tableHeaders}
+          </tr>
+        </thead>
         <tbody>
           {tableData}
         </tbody>
