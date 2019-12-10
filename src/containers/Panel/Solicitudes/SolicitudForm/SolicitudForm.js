@@ -262,6 +262,7 @@ class SolicitudForm extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
 
+
     const updatedFormElement = updateObject(this.state.solicitudForm[inputIdentifier], {
         value: this.state.solicitudForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
         valid: checkValidity(event.target.value, this.state.solicitudForm[inputIdentifier].validation),
@@ -272,17 +273,26 @@ class SolicitudForm extends Component {
         [inputIdentifier]: updatedFormElement
     })
 
+    // TODO: duplicated code
     //Hide/Show Other option
     if (inputIdentifier === 'mot_credito') {
       updatedForm = updateObject(updatedForm, {
           mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
-              hide: event.target.value !== 'OT'
+              hide: event.target.value !== 'OT',
+              valid: event.target.value !== 'OT',
+              validation: {
+                required: event.target.value === 'OT'
+              }
           })
       })
     } else if (inputIdentifier === 'act_productiva'  ) {
       updatedForm = updateObject(updatedForm, {
           act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
-              hide: event.target.value !== 'OT'
+              hide: event.target.value !== 'OT',
+              valid: event.target.value !== 'OT',
+              validation: {
+                required: event.target.value === 'OT'
+              }
           })
       })
     }
