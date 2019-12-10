@@ -5,7 +5,7 @@ export const checkValidity = (value, rules, additional=false) => {
     }
 
     if (rules.required) {
-        isValid = value.trim() !== '' && isValid
+      isValid = value.trim() !== '' && isValid
     }
 
     if (rules.minLength) {
@@ -27,7 +27,7 @@ export const checkValidity = (value, rules, additional=false) => {
     }
 
     if (rules.pairedWith) {
-      isValid = additional || value && isValid
+      isValid = additional || value
     }
 
     return isValid;
