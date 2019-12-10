@@ -154,7 +154,8 @@ class SociosForm extends Component {
           label: 'Productor',
           value: this.props.selSocio.productor,
           validation: {
-            required: false
+            required: false,
+            pairedWith: 'trabajador'
           },
           valid: true,
           touched: false,
@@ -167,7 +168,8 @@ class SociosForm extends Component {
           label: 'Trabajador',
           value: this.props.selSocio.trabajador,
           validation: {
-            required: false
+            required: false,
+            pairedWith: 'productor'
           },
           valid: true,
           touched: false,
@@ -286,14 +288,26 @@ class SociosForm extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
 
-    const updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
-        value: this.state.socioForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-        valid: checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation),
-        // esto del touched me parece muy ineficiente e innecesario! es sólo para que no sea rojo al principio? :S
-        touched: true
-    })
+    let additional, updatedFormElement
+    let pairedValidation = true
 
-    // por qué copiamos todo!?
+    // Special case for chaining checkbox into single Validation value
+    if (inputIdentifier === 'trabajador' || inputIdentifier === 'productor') {
+      additional = this.state.socioForm[this.state.socioForm[inputIdentifier].validation.pairedWith].value
+      updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
+          value: event.target.checked,
+          touched: true
+      })
+      pairedValidation = checkValidity(event.target.checked, this.state.socioForm[inputIdentifier].validation, additional)
+
+    } else {
+      updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
+          value: event.target.value,
+          valid: checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation),
+          touched: true
+      })
+    }
+
     const updatedSocioForm = updateObject(this.state.socioForm, {
         [inputIdentifier]: updatedFormElement
     })
@@ -303,7 +317,10 @@ class SociosForm extends Component {
         formIsValid = updatedSocioForm[inputIds].valid && formIsValid
     }
 
-    this.setState({socioForm: updatedSocioForm, formIsValid: formIsValid})
+    if (!pairedValidation) {
+      alert("Por favor agrega al menos Productor o Trabajador como opción")
+    }
+    this.setState({socioForm: updatedSocioForm, formIsValid: formIsValid && pairedValidation})
   }
 
   onStartEditing = () => {

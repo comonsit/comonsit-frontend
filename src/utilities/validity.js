@@ -1,5 +1,4 @@
-// No está pedorra esta manera de hacer validación?
-export const checkValidity = (value, rules) => {
+export const checkValidity = (value, rules, additional=false) => {
     let isValid = true;
     if (!rules) {
         return true;
@@ -25,6 +24,10 @@ export const checkValidity = (value, rules) => {
     if (rules.isNumeric) {
         const pattern = /^\d+$/;
         isValid = pattern.test(value) && isValid
+    }
+
+    if (rules.pairedWith) {
+      isValid = additional || value && isValid
     }
 
     return isValid;
