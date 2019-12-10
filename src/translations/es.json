@@ -49,6 +49,8 @@
   "solicitudes.plazo_de_pago_solicitado": "Plazo",
   "solicitudes.estatus_solicitud": "Estatus",
   "solicitudes.estatus_ej_credito": "Estatus ejercicio",
+  "solicitudes.approve": "Aprobar",
+  "solicitudes.disapprove": "Rechazar",
   "solicitudForm.title": "Solicitud Nueva",
   "solicitudForm.saveButton": "Guardar",
   "solicitudForm.searchSocio": "Buscar Socio",

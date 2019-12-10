@@ -96,10 +96,10 @@ class Solicitudes extends Component {
           <h5>...más información útil para decidir... </h5>
           <Button
             clicked={this.cancelSelected}
-            >Aprobar</Button>
+            ><FormattedMessage id="solicitudes.approve"/></Button>
           <Button
             clicked={this.cancelSelected}
-            >Rechazar</Button>
+            ><FormattedMessage id="solicitudes.disapprove"/></Button>
         </div>
       )
     }

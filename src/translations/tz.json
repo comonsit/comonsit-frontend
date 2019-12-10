@@ -49,8 +49,10 @@
   "solicitudes.plazo_de_pago_solicitado": "Plazo",
   "solicitudes.estatus_solicitud": "Estatus",
   "solicitudes.estatus_ej_credito": "Estatus ejercicio",
+  "solicitudes.approve": "Lec",
+  "solicitudes.disapprove": "Ma' lec",
   "solicitudForm.title": "Yachil Yasc'an",
   "solicitudForm.saveButton": "Ochanel",
-  "solicitudForm.searchSocio": "Buscar Socio",
+  "solicitudForm.searchSocio": "Bin Socio",
   "acopios.title": "Acopiohetic"
 }
