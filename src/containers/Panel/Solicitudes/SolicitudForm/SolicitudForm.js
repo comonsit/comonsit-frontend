@@ -227,6 +227,78 @@ class SolicitudForm extends Component {
           touched: false,
           hide: false
         },
+        pregunta_1: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: 'Mesa de Control - Pregunta 1',
+          value: false,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+          hide: false
+        },
+        pregunta_2: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: 'Mesa de Control - Pregunta 1',
+          value: false,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+          hide: false
+        },
+        pregunta_3: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: 'Mesa de Control - Pregunta 1',
+          value: false,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+          hide: false
+        },
+        pregunta_4: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: 'Mesa de Control - Pregunta 1',
+          value: false,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+          hide: false
+        },
+        irregularidades: {
+          elementType: 'textarea',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..',
+            maxlength: '100'
+          },
+          label: 'irregularidades',
+          value: '',
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+          hide: false
+        },
       }
     }
   }
@@ -345,7 +417,7 @@ class SolicitudForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const sociosFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "act_productiva", "act_productiva_otro", "mot_credito", "mot_credito_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor"]
+    const sociosFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "act_productiva", "act_productiva_otro", "mot_credito", "mot_credito_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let supportData, supportButton
