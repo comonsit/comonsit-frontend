@@ -30,5 +30,16 @@ export const checkValidity = (value, rules, additional=false) => {
       isValid = additional || value
     }
 
+    if (rules.todayOrOlder) {
+      const someDate = new Date(value).toString() !== 'Invalid Date' ? new Date(value) : null
+      if (someDate){
+        const today = new Date();
+        today.setHours(0,0,0,0)
+        isValid = someDate <= today
+      } else {
+        isValid = false
+      }
+    }
+
     return isValid;
 }

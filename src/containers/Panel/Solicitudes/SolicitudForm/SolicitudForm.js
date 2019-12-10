@@ -46,7 +46,8 @@ class SolicitudForm extends Component {
           label: 'Fecha de Solicitud',
           value: '',
           validation: {
-            required: true
+            required: true,
+            todayOrOlder: true
           },
           valid: false,
           touched: false,
