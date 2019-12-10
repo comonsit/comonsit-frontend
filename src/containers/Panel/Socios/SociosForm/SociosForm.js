@@ -100,7 +100,8 @@ class SociosForm extends Component {
           value: this.props.selSocio.fecha_nacimiento,
           validation: {
             required: true,
-            isDate: true
+            isDate: true,
+            todayOrOlder: true
           },
           valid: !this.props.new,
           touched: false,
@@ -114,7 +115,8 @@ class SociosForm extends Component {
           value: this.props.selSocio.fecha_ingr_yomol_atel,
           validation: {
             required: true,
-            isDate: true
+            isDate: true,
+            todayOrOlder: true
           },
           valid: !this.props.new,
           touched: false,
@@ -331,7 +333,7 @@ class SociosForm extends Component {
     const birthday = new Date(birthdayString).toString() !== 'Invalid Date' ? new Date(birthdayString).getTime() : null
     if (birthday){
       const ageDate = new Date(Date.now() - birthday); // miliseconds from epoch
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
+      return ageDate.getUTCFullYear() - 1970
     } else {
       return ""
     }
