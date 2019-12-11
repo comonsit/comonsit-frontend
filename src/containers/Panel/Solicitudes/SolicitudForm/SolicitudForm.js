@@ -104,7 +104,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..descripción'
           },
-          label: (<FormattedMessage id="solicitudForm.otra"/>),
+          label: (<FormattedMessage id="solicitudForm.other"/>),
           value: '',
           validation: {
             required: false
@@ -216,7 +216,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'text',
             placeholder: '..',
-            maxlength: '100'
+            maxLength: '100'
           },
           label:  (<FormattedMessage id="solicitudForm.comentarios_promotor"/>),
           value: '',
@@ -288,7 +288,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'text',
             placeholder: '..',
-            maxlength: '100'
+            maxLength: '100'
           },
           label:  (<FormattedMessage id="solicitudForm.irregularidades"/>),
           value: '',
@@ -383,7 +383,8 @@ class SolicitudForm extends Component {
   //   this.setState({editing: true})
   // }
 
-  onSearchSocio = () => {
+  onSearchSocio = (event) => {
+    event.preventDefault();
     this.setState({searchingOpen: true})
   }
 
