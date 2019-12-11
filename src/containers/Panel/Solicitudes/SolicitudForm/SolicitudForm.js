@@ -327,7 +327,7 @@ class SolicitudForm extends Component {
 
     // if (this.props.new) {
       this.props.onCreateNewSolicitud(solicitud, this.props.token)
-      // this.setState({editing: false})
+      this.setState({editing: false})
     // } else {
     //   this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
     // }
