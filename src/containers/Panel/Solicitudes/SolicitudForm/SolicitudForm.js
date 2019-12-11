@@ -434,7 +434,7 @@ class SolicitudForm extends Component {
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
         if (formElement.id === "clave_socio") {
-          if (this.props.selSocio && this.state.solicitudForm.clave_socio.value) {
+          if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.solicitudForm.clave_socio.value) {
             supportData = (
               <div className={classes.SupportData}>
                 <p>{this.props.selSocio.nombres} {this.props.selSocio.apellidos} de región {this.props.selSocio.region}</p>
