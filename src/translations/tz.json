@@ -24,6 +24,7 @@
   "pmenu.acopios": "Acopiohetic",
   "pmenu.solicitudes": "Ya sc'an Taqu'in",
   "pmenu.logout": "Loquel",
+  "pmenu.tsumbalil": "Tsumbalil",
   "socios.title": "Socioetic",
   "socios.clave": "Clave yu'un Socio",
   "socios.nombre": "sBihil",
@@ -88,5 +89,6 @@
   "solicitudForm.irregularidades": "Binti ma' lec",
   "solicitudForm.aval": "Socio Aval",
   "solicitudForm.familiar_responsable": "Familiar Responsable",
-  "acopios.title": "Acopiohetic"
+  "acopios.title": "Acopiohetic",
+  "tsumbalil.title": "Biluquetic Ts'umbalil"
 }

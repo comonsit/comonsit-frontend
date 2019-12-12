@@ -23,6 +23,7 @@
   "pmenu.socios": "Socios",
   "pmenu.acopios": "Acopios",
   "pmenu.solicitudes": "Solicitudes",
+  "pmenu.tsumbalil": "Tsumbalil",
   "pmenu.logout": "Cerrar Sesión",
   "socios.title": "Socios",
   "socios.clave": "Clave de Socio",
@@ -88,5 +89,6 @@
   "solicitudForm.irregularidades": "Irregularidades",
   "solicitudForm.aval": "Socio Aval",
   "solicitudForm.familiar_responsable": "Familiar Responsable",
-  "acopios.title": "Acopios"
+  "acopios.title": "Acopios",
+  "tsumbalil.title": "Información Ts'umbalil"
 }

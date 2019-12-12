@@ -16,6 +16,9 @@ const pnavigationItems = (props) => (
         <div className={cl.NavigationItem}>
           <NavLink to="/solicitudes" exact activeClassName={cl.active}><FormattedMessage id="pmenu.solicitudes"/></NavLink>
         </div>
+        <div className={cl.NavigationItem}>
+          <NavLink to="/tsumbalil" exact activeClassName={cl.active}><FormattedMessage id="pmenu.tsumbalil"/></NavLink>
+        </div>
       </div>
     </div>
 );
