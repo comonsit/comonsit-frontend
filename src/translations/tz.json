@@ -90,5 +90,8 @@
   "solicitudForm.aval": "Socio Aval",
   "solicitudForm.familiar_responsable": "Familiar Responsable",
   "acopios.title": "Acopiohetic",
-  "tsumbalil.title": "Biluquetic Ts'umbalil"
+  "tsumbalil.title": "Comonaletic",
+  "tsumbalil.nombre_de_comunidad": "Comonal",
+  "tsumbalil.nombre_region": "Region",
+  "tsumbalil.newComunidad": "Yachil Comonal"
 }

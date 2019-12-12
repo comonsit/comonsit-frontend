@@ -90,5 +90,8 @@
   "solicitudForm.aval": "Socio Aval",
   "solicitudForm.familiar_responsable": "Familiar Responsable",
   "acopios.title": "Acopios",
-  "tsumbalil.title": "Información Ts'umbalil"
+  "tsumbalil.title": "Comunidades",
+  "tsumbalil.nombre_de_comunidad": "Comunidad",
+  "tsumbalil.nombre_region": "Región",
+  "tsumbalil.newComunidad": "Nueva Comunidad"
 }

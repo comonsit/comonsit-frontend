@@ -19,7 +19,17 @@ class Tsumbalil extends Component {
   }
 
   render () {
-
+    const comunidadHeaders = ["tsumbalil.nombre_de_comunidad", "tsumbalil.nombre_region"]
+    let comunidadData
+    if (this.props.comunidades) {
+      console.log(this.props.comunidades);
+      comunidadData = this.props.comunidades.map((c, i) => {
+        return {
+          "tsumbalil.nombre_de_comunidad": c.nombre_de_comunidad,
+          "tsumbalil.nombre_region": c.nombre_region
+        }
+      })
+    }
 
     return (
       <>
@@ -27,9 +37,18 @@ class Tsumbalil extends Component {
           <div className={classes.HeaderContainer}>
             <h1><FormattedMessage id="tsumbalil.title"/></h1>
             <div className={classes.ButtonContainer}>
+              <Button
+                clicked={this.onNewComunidad}
+                ><FormattedMessage id="tsumbalil.newComunidad"/></Button>
             </div>
           </div>
-
+          <Table
+            headers={comunidadHeaders}
+            data={comunidadData}
+            clicked={this.showComunidad}
+            clickId={"comunidad.id"}
+            useKey={"comunidad.id"}
+            />
         </div>
       </>
     )

@@ -5,7 +5,7 @@ const tableRow = (props) => {
   let row = []
   if (props.rowData) {
     row = props.rowOrder.map((k, i) => {
-      if (k in props.colors) {
+      if (props.colors && k in props.colors) {
         return <td key={i}><div className={classes[props.colors[k][props.rowData[k]]]}></div></td>
       } else {
         return <td key={i}>{props.rowData[k]}</td>
