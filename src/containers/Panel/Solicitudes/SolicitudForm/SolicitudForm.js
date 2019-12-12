@@ -17,11 +17,11 @@ import { checkValidity } from '../../../../utilities/validity'
 class SolicitudForm extends Component {
   constructor(props) {
     super(props);
-    //// TODO: this.props.map here should be done???
     this.state = {
       editing: true,
       formIsValid: false,
       searchingOpen: false,
+      selectingFor: null,
       solicitudForm: {
         clave_socio: {
           elementType: 'input',
@@ -299,6 +299,37 @@ class SolicitudForm extends Component {
           touched: false,
           hide: false
         },
+        aval: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..clave del socio aval'
+          },
+          label: (<FormattedMessage id="solicitudForm.aval"/>),
+          value: '',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false,
+          hide: false
+        },
+        familiar_responsable: {
+          elementType: 'textarea',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..',
+            maxLength: '100'
+          },
+          label:  (<FormattedMessage id="solicitudForm.familiar_responsable"/>),
+          value: '',
+          validation: {
+            required: true
+          },
+          valid: true,
+          touched: false,
+          hide: false
+        },
       }
     }
   }
@@ -310,7 +341,6 @@ class SolicitudForm extends Component {
 
   onSubmitForm = (event) => {
     event.preventDefault();
-
 
     const formData = {}
     for (let formElementIdentifier in this.state.solicitudForm) {
@@ -383,9 +413,9 @@ class SolicitudForm extends Component {
   //   this.setState({editing: true})
   // }
 
-  onSearchSocio = (event) => {
+  onSearchSocio = (event, element) => {
     event.preventDefault();
-    this.setState({searchingOpen: true})
+    this.setState({searchingOpen: true, selectingFor: element})
   }
 
   cancelSearch =() => {
@@ -401,7 +431,7 @@ class SolicitudForm extends Component {
 
   selectSocio =(id) => {
     const updatedForm = updateObject(this.state.solicitudForm, {
-        clave_socio: updateObject(this.state.solicitudForm.clave_socio, {
+        [this.state.selectingFor]: updateObject(this.state.solicitudForm[this.state.selectingFor], {
             value: id
         })
     })
@@ -418,13 +448,13 @@ class SolicitudForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const sociosFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "act_productiva", "act_productiva_otro", "mot_credito", "mot_credito_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades"]
+    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "act_productiva", "act_productiva_otro", "mot_credito", "mot_credito_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "aval", "familiar_responsable"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let supportData, supportButton
     let formElements = <Spinner/>
 
-    sociosFormOrder.forEach(key => {
+    solicitudFormOrder.forEach(key => {
       formElementsArray.push({
         id: key,
         config: this.state.solicitudForm[key]
@@ -433,14 +463,14 @@ class SolicitudForm extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
-        if (formElement.id === "clave_socio") {
-          if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.solicitudForm.clave_socio.value) {
+        if (formElement.id === "clave_socio" || formElement.id === "aval") {
+          if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.solicitudForm[formElement.id].value) {
             supportData = (
               <div className={classes.SupportData}>
                 <p>{this.props.selSocio.nombres} {this.props.selSocio.apellidos} de región {this.props.selSocio.region}</p>
               </div>)
           }
-          supportButton = (<Button btnType="Short" clicked={this.onSearchSocio}><FormattedMessage id="solicitudForm.searchSocio"/></Button>)
+          supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="solicitudForm.searchSocio"/></Button>)
         } else {
           supportData = null
           supportButton = null
@@ -472,7 +502,7 @@ class SolicitudForm extends Component {
 
      //////////////
      // Move to Socios or to separate container for listaSocios
-     const sociosHeaders = ["socios.nombre", "socios.clave", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general"]
+     const sociosHeaders = ["socios.nombre", "socios.clave", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general", ]
      const colors = {
        'AC': "Green",
        'BA': "Red",
