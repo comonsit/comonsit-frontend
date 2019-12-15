@@ -161,7 +161,7 @@ const mapStateToProps = state => {
     return {
       listaSolicitudes: state.solicitudes.solicitudes,
       selectedSol: state.solicitudes.selectedSolicitud,
-      comunidades: state.auth.comunidades,
+      comunidades: state.generalData.comunidades,
       token: state.auth.token,
       // selSocio: state.socios.selectedSol,
       // updated: state.socios.updated,

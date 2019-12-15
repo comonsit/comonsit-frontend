@@ -583,7 +583,7 @@ const mapStateToProps = state => {
       updated: state.solicitudes.updated,
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
-      comunidades: state.auth.comunidades
+      comunidades: state.generalData.comunidades
       // new: state.solicitudes.newSolicitud
     }
 }

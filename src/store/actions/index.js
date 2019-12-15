@@ -21,12 +21,14 @@ export {
 } from './locale'
 
 export {
-    auth,
-    logout,
-    setAuthRedirectPath,
-    authCheckState,
-
-    fetchGralData,
-    setRegiones,
-    setComunidades
+  auth,
+  logout,
+  setAuthRedirectPath,
+  authCheckState,
 } from './auth'
+
+export {
+  fetchGralData,
+  setRegiones,
+  setComunidades
+} from './generalData'

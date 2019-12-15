@@ -35,12 +35,6 @@ class Socios extends Component {
     this.props.unSelSocio()
   }
 
-  onToggleEditable = () => {
-    this.setState(prevState => {
-        return {editable: !prevState.editable}
-    })
-  }
-
   onNewSocio = () => {
     this.setState({socioSeleccionado: true});
     this.props.onNewSocios()
@@ -126,7 +120,7 @@ const mapStateToProps = state => {
       selSocio: state.socios.selectedSocio,
       updated: state.socios.updated,
       token: state.auth.token,
-      comunidades: state.auth.comunidades
+      comunidades: state.generalData.comunidades
     }
 }
 

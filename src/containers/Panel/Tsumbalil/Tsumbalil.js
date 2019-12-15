@@ -11,6 +11,19 @@ import * as actions from '../../../store/actions'
 
 class Tsumbalil extends Component {
   state = {
+    comunidadSelected: false
+  }
+
+  showComunidad =(id) => {
+    this.setState({comunidadSelected: true});
+  }
+
+  cancelSelected =() => {
+    this.setState({ comunidadSelected: false});
+  }
+
+  onNewSocio = () => {
+    this.setState({socioSeleccionado: true});
   }
 
   getComunidad = (id) => {
@@ -57,7 +70,7 @@ class Tsumbalil extends Component {
 
 const mapStateToProps = state => {
     return {
-      comunidades: state.auth.comunidades
+      comunidades: state.generalData.comunidades
     }
 }
 
