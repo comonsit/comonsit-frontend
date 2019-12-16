@@ -36,8 +36,8 @@
   "socios.jabon": "Xapon",
   "socios.general": "Comonsit",
   "socios.newSocioButton": "Yachil Socio",
-  "socioForm.saveButton": "Ochanel",
-  "socioForm.editButton": "Yantesel",
+  "saveButton": "Ochanel",
+  "editButton": "Yantesel",
   "socioForm.title": "Socio",
   "socioForm.age": "yabilal",
   "socioForm.nombres": "sBihil",
@@ -69,7 +69,6 @@
   "solicitudes.approve": "Lec",
   "solicitudes.disapprove": "Ma' lec",
   "solicitudForm.title": "Yachil Yasc'an",
-  "solicitudForm.saveButton": "Ochanel",
   "solicitudForm.searchSocio": "Bin Socio",
   "solicitudForm.clave_socio": "Clave yuun Socio",
   "solicitudForm.fecha_solicitud": "Ora yu'un Solicitud",
@@ -93,5 +92,8 @@
   "tsumbalil.title": "Comonaletic",
   "tsumbalil.nombre_de_comunidad": "Comonal",
   "tsumbalil.nombre_region": "Region",
-  "tsumbalil.newComunidad": "Yachil Comonal"
+  "tsumbalil.newComunidad": "Yachil Comonal",
+  "tsumbalil.id": "#",
+  "comunidadForm.title": "Comonal",
+  "comunidadForm.nombre_de_comunidad": "Comunidad sBihil"
 }

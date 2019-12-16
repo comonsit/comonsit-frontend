@@ -567,7 +567,7 @@ class SolicitudForm extends Component {
           <Button
             btnType="Success"
             disabled={!this.state.formIsValid}>
-            <FormattedMessage id="solicitudForm.saveButton"/>
+            <FormattedMessage id="saveButton"/>
           </Button>
           {updatedRedirect}
         </form>

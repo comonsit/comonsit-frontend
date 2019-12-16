@@ -30,5 +30,8 @@ export {
 export {
   fetchGralData,
   setRegiones,
-  setComunidades
+  setComunidades,
+  updateComunidad,
+  selectComunidad,
+  unSelectComunidad
 } from './generalData'

@@ -289,7 +289,6 @@ class SociosForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     let additional, updatedFormElement
     let pairedValidation = true
 
@@ -388,11 +387,11 @@ class SociosForm extends Component {
 
 
     if (this.state.editing || this.props.new) {
-      submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="socioForm.saveButton"/></Button>
+      submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="saveButton"/></Button>
       editButton = null
     }else {
       submitButton = null
-      editButton = <Button clicked={this.onStartEditing} disabled={this.state.editing}><FormattedMessage id="socioForm.editButton"/></Button>
+      editButton = <Button clicked={this.onStartEditing} disabled={this.state.editing}><FormattedMessage id="editButton"/></Button>
     }
 
     return (

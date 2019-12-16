@@ -36,8 +36,8 @@
   "socios.jabon": "Jabón",
   "socios.general": "General",
   "socios.newSocioButton": "Nuevo Socio",
-  "socioForm.saveButton": "Guardar",
-  "socioForm.editButton": "Editar",
+  "saveButton": "Guardar",
+  "editButton": "Editar",
   "socioForm.title": "Socio",
   "socioForm.age": "años",
   "socioForm.nombres": "Nombres",
@@ -69,7 +69,6 @@
   "solicitudes.approve": "Aprobar",
   "solicitudes.disapprove": "Rechazar",
   "solicitudForm.title": "Solicitud Nueva",
-  "solicitudForm.saveButton": "Guardar",
   "solicitudForm.searchSocio": "Buscar Socio",
   "solicitudForm.clave_socio": "Clave de Socio",
   "solicitudForm.fecha_solicitud": "Fecha de Solicitud",
@@ -93,5 +92,8 @@
   "tsumbalil.title": "Comunidades",
   "tsumbalil.nombre_de_comunidad": "Comunidad",
   "tsumbalil.nombre_region": "Región",
-  "tsumbalil.newComunidad": "Nueva Comunidad"
+  "tsumbalil.newComunidad": "Nueva Comunidad",
+  "tsumbalil.id": "#",
+  "comunidadForm.title": "Comunidad",
+  "comunidadForm.nombre_de_comunidad": "Nombre de Comunidad"
 }
