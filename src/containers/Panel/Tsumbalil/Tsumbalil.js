@@ -35,8 +35,9 @@ class Tsumbalil extends Component {
     this.props.unSelComunidad()
   }
 
-  onNewSocio = () => {
-    this.setState({socioSeleccionado: true});
+  onNewComunidad = () => {
+    this.setState({ comunidadSelected: true});
+    this.props.onNewComunidad()
   }
 
   render () {
@@ -101,7 +102,8 @@ const mapDispatchToProps = dispatch => {
     return {
       selectComunidad: (id) => dispatch(actions.selectComunidad(id)),
       unSelComunidad: () => dispatch(actions.unSelectComunidad()),
-      fetchGralData: (token) => dispatch(actions.fetchGralData(token))
+      fetchGralData: (token) => dispatch(actions.fetchGralData(token)),
+      onNewComunidad: () => dispatch(actions.newComunidad()),
     }
 }
 

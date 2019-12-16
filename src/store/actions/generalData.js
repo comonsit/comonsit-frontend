@@ -107,3 +107,44 @@ export const unSelectComunidad = () => {
     type: actionTypes.UNSELECT_COMUNIDAD
   }
 }
+
+export const newComunidad = () => {
+  return {
+    type: actionTypes.NEW_COMUNIDAD
+  }
+}
+
+export const createNewComunidad = (data, token) => {
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    dispatch(newComunidadStart())
+    axios.post(`/comunidades/`, data, authData)
+      .then(response => {
+        dispatch(newComunidadSuccess(response.data.name, data ))
+      })
+      .catch(error => {
+        dispatch(newComunidadFailed(error))
+      })
+  }
+}
+
+export const newComunidadSuccess = () => {
+  return {
+    type: actionTypes.NEW_COMUNIDAD_SUCCESS
+  }
+}
+
+export const newComunidadFailed = (error) => {
+  return {
+    type: actionTypes.NEW_COMUNIDAD_FAILED,
+    error: error
+  }
+}
+
+export const newComunidadStart = () => {
+  return {
+    type: actionTypes.NEW_COMUNIDAD_START
+  }
+}

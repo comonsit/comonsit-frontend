@@ -59,6 +59,31 @@ const unSelComunidad = (state) => {
   })
 }
 
+const newComunidad = (state) => {
+  return updateObject(state, {
+    newComunidad: true,
+    updated: false,
+    selectedComunidad: {
+      nombre_de_comunidad: "",
+      region: 1
+    }
+  })
+}
+
+const newComunidadStart = (state) => {
+  return updateObject(state, {loading: true})
+}
+
+const newComunidadSuccess = (state) => {
+  return updateObject(state, {
+    loading: false,
+    updated: true
+  })
+}
+
+const newComunidadFailed = (state) => {
+  return updateObject(state, {loading: false})
+}
 
 const reducer = (state=initialState , action) => {
   switch(action.type) {
@@ -70,6 +95,10 @@ const reducer = (state=initialState , action) => {
     case actionTypes.UPDATE_COMUNIDAD_FAILED: return updateComunidadFailed(state)
     case actionTypes.SET_SEL_COMUNIDAD: return setSelComunidad(state, action)
     case actionTypes.UNSELECT_COMUNIDAD: return unSelComunidad(state)
+    case actionTypes.NEW_COMUNIDAD: return newComunidad(state)
+    case actionTypes.NEW_COMUNIDAD_START: return newComunidadStart(state)
+    case actionTypes.NEW_COMUNIDAD_SUCCESS: return newComunidadSuccess(state)
+    case actionTypes.NEW_COMUNIDAD_FAILED: return newComunidadFailed(state)
     default: return state
   }
 }

@@ -175,7 +175,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onEditComunidad: (comunidadData, id, token) => dispatch(actions.updateComunidad(comunidadData, id, token)),
-      // onCreateNewComunidad: (comunidadData, token) => dispatch(actions.createNewComunidad(comunidadData, token)),
+      onCreateNewComunidad: (comunidadData, token) => dispatch(actions.createNewComunidad(comunidadData, token)),
     }
 }
 

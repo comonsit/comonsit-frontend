@@ -33,5 +33,7 @@ export {
   setComunidades,
   updateComunidad,
   selectComunidad,
-  unSelectComunidad
+  unSelectComunidad,
+  newComunidad,
+  createNewComunidad
 } from './generalData'
