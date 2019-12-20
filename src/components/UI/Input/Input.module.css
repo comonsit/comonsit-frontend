@@ -57,3 +57,8 @@
 .HideMe {
   display: none;
 }
+
+.InvalidMessage {
+  color: red;
+  font-size: 1em
+}

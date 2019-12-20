@@ -22,7 +22,7 @@ const input = (props) => {
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(classes.Invalid)
         // aquí habría que tunear a partir del state
-        validationError = (<p className={classes.InvalidMessage}>Please add a valid value!</p>)
+        validationError = (<p className={classes.InvalidMessage}>&#60;&#8209;&#8209;</p>)
     }
 
     switch (props.elementType ) {
