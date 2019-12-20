@@ -79,7 +79,7 @@ export const auth = (username, password, isSignUp) => {
           })
           .catch(error => {
             if (error.response) {
-              dispatch(authFail(error.response.data.detail))
+              dispatch(authFail("Usuario o Clave incorrectos."))
             } else if (error.request) {
               console.log(error.request);
               dispatch(authFail('Servidor No Responde'))
@@ -100,8 +100,6 @@ export const refreshToken = () => {
         console.log('REFRESHING TOKEN')
         localStorage.setItem('token', response.data.access)
         const fiveMinutes = 5 * 60 * 1000
-        const refreshExpirationDate = new Date(new Date().getTime() + fiveMinutes)
-        localStorage.setItem('refreshExpirationDate', refreshExpirationDate)
         dispatch(authSuccess(response.data.access, response.data.localId))
         dispatch (startTokenTimeout(fiveMinutes, false))
       })
