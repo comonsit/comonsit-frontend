@@ -78,7 +78,13 @@ export const auth = (username, password, isSignUp) => {
               dispatch(startRefreshTokenTimeout(twentyFourHours))
           })
           .catch(error => {
-            dispatch(authFail(error.response.data.detail))
+            if (error.response) {
+              dispatch(authFail(error.response.data.detail))
+            } else if (error.request) {
+              console.log(error.request);
+              dispatch(authFail('Servidor No Responde'))
+            }
+
           })
   }
 }
