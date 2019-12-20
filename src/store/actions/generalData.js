@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
 
 
-export const fetchGralData = (token, userId) => {
+export const fetchGralData = (token) => {
   return dispatch => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }

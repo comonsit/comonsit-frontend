@@ -24,21 +24,27 @@ export const authFail = (error) => {
 }
 
 export const logout = () => {
-    // aquí borramos los datos guardados localmente
     localStorage.removeItem('token')
-    localStorage.removeItem('expirationDate')
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('refreshExpirationDate')
     localStorage.removeItem('userId')
-
     return {
         type: actionTypes.AUTH_LOGOUT
     }
 }
 
-// checamos si no ha caducado nuestro token
-export const checkAuthTimeout = (expirationTime) => {
+export const startTokenTimeout = (expirationTime) => {
   return dispatch => {
     setTimeout(() => {
-      console.log("5 MINUTE LOGOUT")
+      dispatch(refreshToken())
+    }, expirationTime)
+  }
+}
+
+export const startRefreshTokenTimeout = (expirationTime) => {
+  return dispatch => {
+    setTimeout(() => {
+      console.log("TIMEOUT LOGOUT")
       dispatch(logout())
     }, expirationTime)
   }
@@ -53,24 +59,23 @@ export const auth = (username, password, isSignUp) => {
       }
 
       let url = '/token/'
-      // if (isSignUp) {
-      //     url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCY-xEqGegh-QwupLT-_OTkv5uTFSt_Ky0'
-      // }
 
       axios.post(url , authData)
           .then(response => {
-              // console.log(response);
               localStorage.setItem('token', response.data.access)
+              localStorage.setItem('refreshToken', response.data.refresh)
               // hacemos un cálculo de cuál será la fecha en la que expirará
               const fiveMinutes = 5 * 60 * 1000
-              const expirationDate = new Date(new Date().getTime() + fiveMinutes)
+              const twentyFourHours = 24 * 60 * 60 * 1000
+              const refreshExpirationDate = new Date(new Date().getTime() + twentyFourHours)
               // TODO: CHANGE FOR USE REFRESH!? response.data.refresh
               // const expirationRefreshDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-              localStorage.setItem('expirationDate', expirationDate)
+              localStorage.setItem('refreshExpirationDate', refreshExpirationDate)
               localStorage.setItem('userId', response.data.localId)
               dispatch(authSuccess(response.data.access, response.data.localId))
-              dispatch(fetchGralData(response.data.access, response.data.localId))
-              dispatch (checkAuthTimeout(fiveMinutes))
+              dispatch(fetchGralData(response.data.access))
+              dispatch(startTokenTimeout(fiveMinutes))
+              dispatch(startRefreshTokenTimeout(twentyFourHours))
           })
           .catch(err=> {
               //console.log(err)
@@ -79,6 +84,29 @@ export const auth = (username, password, isSignUp) => {
   }
 }
 
+
+export const refreshToken = () => {
+  return dispatch => {
+    const rToken = {
+        refresh: localStorage.getItem('refreshToken')
+    }
+    axios.post('/token/refresh/' , rToken)
+      .then(response => {
+        console.log('REFRESHING TOKEN')
+        localStorage.setItem('token', response.data.access)
+        const fiveMinutes = 5 * 60 * 1000
+        const refreshExpirationDate = new Date(new Date().getTime() + fiveMinutes)
+        localStorage.setItem('refreshExpirationDate', refreshExpirationDate)
+        dispatch(authSuccess(response.data.access, response.data.localId))
+        dispatch (startTokenTimeout(fiveMinutes, false))
+      })
+      .catch(err=> {
+        console.log('FAILED TO REFRESH')
+        console.log(err.response.data.error);
+        dispatch(authFail(err.response.data.error))
+      })
+  }
+}
 
 
 
@@ -89,8 +117,7 @@ export const setAuthRedirectPath = (path) => {
     }
 }
 
-// aquí al iniciar (en app) cargamos los datos
-// ... de la sesión anterior, token y expiration date
+
 export const authCheckState = () => {
   return dispatch => {
     const token = localStorage.getItem('token')
@@ -98,14 +125,15 @@ export const authCheckState = () => {
       dispatch(logout())
     } else {
       // TODO: METER LÓGICA REFRESH
-      const expirationDate = new Date( localStorage.getItem('expirationDate'))
-      if (expirationDate <= new Date()) {
+      const refreshExpirationDate = new Date( localStorage.getItem('refreshExpirationDate'))
+      if (refreshExpirationDate <= new Date()) {
         dispatch(logout())
       } else {
+        dispatch(refreshToken())
         const userId = localStorage.getItem('userId')
         dispatch(authSuccess(token, userId))
-        dispatch (checkAuthTimeout(expirationDate - new Date().getTime()))
-        dispatch(fetchGralData(token, userId))
+        dispatch(startRefreshTokenTimeout(refreshExpirationDate - new Date().getTime()))
+        dispatch(fetchGralData(token))
       }
     }
   }
