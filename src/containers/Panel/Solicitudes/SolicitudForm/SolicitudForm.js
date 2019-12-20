@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
+import axios from '../../../../store/axios-be.js'
 
+import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
@@ -18,7 +20,6 @@ class SolicitudForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: true,
       formIsValid: false,
       searchingOpen: false,
       selectingFor: null,
@@ -357,7 +358,6 @@ class SolicitudForm extends Component {
 
     // if (this.props.new) {
       this.props.onCreateNewSolicitud(solicitud, this.props.token)
-      this.setState({editing: false})
     // } else {
     //   this.props.onEditSocio(socio, this.props.selSocio.clave_socio, this.props.token)
     // }
@@ -405,13 +405,8 @@ class SolicitudForm extends Component {
         formIsValid = updatedForm[inputIds].valid && formIsValid
     }
 
-    console.log(updatedForm);
     this.setState({solicitudForm: updatedForm, formIsValid: formIsValid})
   }
-
-  // onStartEditing = () => {
-  //   this.setState({editing: true})
-  // }
 
   onSearchSocio = (event, element) => {
     event.preventDefault();
@@ -489,7 +484,7 @@ class SolicitudForm extends Component {
                 shouldValidate={formElement.config.validation}
                 invalid={!formElement.config.valid}
                 touched={formElement.config.touched}
-                disabled={!this.state.editing}
+                disabled={this.props.loading}
                 hide={formElement.config.hide}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
               {supportButton}
@@ -538,7 +533,7 @@ class SolicitudForm extends Component {
 
 
 
-    const updatedRedirect = (this.props.updated && !this.state.editing) ? <Redirect to="/solicitudes"/> : null
+    const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
     return (
       <>
@@ -598,4 +593,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SolicitudForm)
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(SolicitudForm, axios))

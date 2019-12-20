@@ -57,6 +57,7 @@ class Solicitudes extends Component {
   onNewSolicitud = () => {
     // this.setState({showSolicitudModal: true});
     this.props.history.push('solicitud-formato');
+    this.props.onNewSol()
   }
 
   getComunidad = (id) => {
@@ -171,7 +172,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onInitSolicitudes: (token) => dispatch(actions.initSolicitudes(token)),
-      // onNewSocios: () => dispatch(actions.newSocio()),
+      onNewSol: () => dispatch(actions.newSolicitud()),
       onFetchSelSocios: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
       unSelSol: () => dispatch(actions.unSelectSolicitud())
     }

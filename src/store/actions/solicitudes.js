@@ -38,9 +38,14 @@ export const createNewSolicitud = (solData, token) => {
             dispatch(newSolicitudSuccess(response.data.folio_solicitud, solData ))
           })
           .catch(error => {
-            console.log(error);
-            dispatch(newSolicitudFailed(error))
+            dispatch(newSolicitudFailed())
           })
+    }
+}
+
+export const newSolicitud = () => {
+    return {
+        type: actionTypes.NEW_SOLICITUD
     }
 }
 

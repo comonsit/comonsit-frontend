@@ -11,8 +11,7 @@ export {
     initSolicitudes,
     unSelectSolicitud,
     fetchSelSolicitud,
-    // update,
-    // new,
+    newSolicitud,
     createNewSolicitud
 } from './solicitudes'
 
