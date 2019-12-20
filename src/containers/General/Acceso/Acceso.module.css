@@ -32,6 +32,11 @@
   color: #385d79;
 }
 
+.ErrorMessage {
+  color: red;
+  font-size: .8em;
+}
+
 @media (min-width: 42em) {
   .Acceso {
     width: 35rem;
