@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 // import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
 import Button from '../../../components/UI/Button/Button'
+import Spinner from '../../../components/UI/Spinner/Spinner'
 import classes from './Acceso.module.css'
 import * as actions from '../../../store/actions'
 import { updateObject } from '../../../store/reducers/utility'
@@ -101,18 +102,17 @@ class Auth extends Component {
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
         ))
 
-        // if (this.props.loading) {
-        //     form = <Spinner />
-        // }
+        if (this.props.loading) {
+            form = <Spinner />
+        }
 
-        // TODO:
-        // let errorMessage = null
-        //
-        // if (this.props.error) {
-        //     errorMessage = (
-        //         <p>{this.props.error.message}</p>
-        //     )
-        // }
+        let errorMessage = null
+
+        if (this.props.error) {
+            errorMessage = (
+                <p className={classes.ErrorMessage}>{this.props.error}</p>
+            )
+        }
 
         let authRedirect = null  // TODO: usar: this.props.authRedirectPath
         if (this.props.isAuthenticated) {
@@ -129,6 +129,7 @@ class Auth extends Component {
                   <NavLink to="/" exact><FormattedMessage id="acceder.pswd-help"/></NavLink>
                   <Button btnType="Success"><FormattedMessage id="acceder.submit"/></Button>
                 </form>
+                {errorMessage}
               </div>
             </div>
         )
@@ -140,7 +141,6 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
-        // buildingBurger: state.burgerBuilder.building,
         authRedirectPath: state.auth.authRedirectPath
     }
 }

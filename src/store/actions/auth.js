@@ -77,9 +77,8 @@ export const auth = (username, password, isSignUp) => {
               dispatch(startTokenTimeout(fiveMinutes))
               dispatch(startRefreshTokenTimeout(twentyFourHours))
           })
-          .catch(err=> {
-              //console.log(err)
-              dispatch(authFail(err.response.data.error))
+          .catch(error => {
+            dispatch(authFail(error.response.data.detail))
           })
   }
 }
@@ -102,8 +101,8 @@ export const refreshToken = () => {
       })
       .catch(err=> {
         console.log('FAILED TO REFRESH')
-        console.log(err.response.data.error);
-        dispatch(authFail(err.response.data.error))
+        console.log(err.response.data);
+        dispatch(authFail(err.response.data.detail))
       })
   }
 }
