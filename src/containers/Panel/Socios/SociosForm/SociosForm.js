@@ -25,7 +25,7 @@ class SociosForm extends Component {
             type: 'text',
             placeholder: '..nombre'
           },
-          label: (<FormattedMessage id="socioForm.nombres"/>),
+          label: (<FormattedMessage id="nombres"/>),
           value: this.props.selSocio.nombres,
           validation: {
             required: true
@@ -39,7 +39,7 @@ class SociosForm extends Component {
             type: 'text',
             placeholder: '..apellidos'
           },
-          label: (<FormattedMessage id="socioForm.apellidos"/>),
+          label: (<FormattedMessage id="apellidos"/>),
           value: this.props.selSocio.apellidos,
           validation: {
             required: true
@@ -80,7 +80,7 @@ class SociosForm extends Component {
             type: 'tel',
             placeholder: '..teléfono'
           },
-          label: (<FormattedMessage id="socioForm.telefono"/>),
+          label: (<FormattedMessage id="telefono"/>),
           value: this.props.selSocio.telefono,
           validation: {
             required: true,

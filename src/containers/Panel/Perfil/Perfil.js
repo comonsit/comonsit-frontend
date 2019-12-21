@@ -25,7 +25,7 @@ class Perfil extends Component {
             type: 'text',
             placeholder: '..nombres'
           },
-          label: (<FormattedMessage id="perfil.nombre"/>),
+          label: (<FormattedMessage id="nombres"/>),
           value: this.props.user.first_name,
           validation: {
             required: true
@@ -40,7 +40,7 @@ class Perfil extends Component {
             type: 'text',
             placeholder: '..nombres'
           },
-          label: (<FormattedMessage id="perfil.apellido"/>),
+          label: (<FormattedMessage id="apellidos"/>),
           value: this.props.user.last_name,
           validation: {
             required: true
@@ -55,7 +55,7 @@ class Perfil extends Component {
             type: 'tel',
             placeholder: '..teléfono'
           },
-          label: (<FormattedMessage id="socioForm.telefono"/>),
+          label: (<FormattedMessage id="telefono"/>),
           value: this.props.user.phone,
           validation: {
             required: false,
