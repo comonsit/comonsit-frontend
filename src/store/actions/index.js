@@ -34,5 +34,6 @@ export {
   selectComunidad,
   unSelectComunidad,
   newComunidad,
-  createNewComunidad
+  createNewComunidad,
+  setUser
 } from './generalData'
