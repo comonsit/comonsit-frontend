@@ -16,6 +16,7 @@ import tsumbalil from './containers/Panel/Tsumbalil/Tsumbalil';
 import solicitudes from './containers/Panel/Solicitudes/Solicitudes';
 import solicitudForm from './containers/Panel/Solicitudes/SolicitudForm/SolicitudForm';
 import acopios from './containers/Panel/Acopios/Acopios';
+import perfil from './containers/Panel/Perfil/Perfil';
 import logout from './containers/Panel/Logout/Logout';
 
 // import languageObject from './translations/messages'
@@ -56,6 +57,7 @@ class App extends Component {
         <>
           <Route path="/d" exact component={socios}/>
           <Route path="/socios" exact component={socios}/>
+          <Route path="/perfil" exact component={perfil}/>
           <Route path="/acopios" exact component={acopios}/>
           <Route path="/tsumbalil" exact component={tsumbalil}/>
           <Route path="/solicitudes" exact component={solicitudes}/>

@@ -95,5 +95,6 @@
   "tsumbalil.newComunidad": "Nueva Comunidad",
   "tsumbalil.id": "#",
   "comunidadForm.title": "Comunidad",
-  "comunidadForm.nombre_de_comunidad": "Nombre de Comunidad"
+  "comunidadForm.nombre_de_comunidad": "Nombre de Comunidad",
+  "perfil.title": "Perfil"
 }
