@@ -12,24 +12,28 @@ export const fetchGralData = (token) => {
         dispatch(setComunidades(response.data))
       })
       .catch(error => {
-        // TODO: FALTA!!
-        //dispatch(fetchComunidadsFailed())
+        // TODO: 
       })
     axios.get('/regiones.json', authData)
       .then(response => {
         dispatch(setRegiones(response.data))
       })
       .catch(error => {
-        // TODO: FALTA!!
-        //dispatch(fetchComunidadsFailed())
+        // TODO:
       })
     axios.get('/cargos.json', authData)
       .then(response => {
         dispatch(setCargos(response.data))
       })
       .catch(error => {
-        // TODO: FALTA!!
-        //dispatch(fetchComunidadsFailed())
+        // TODO:
+      })
+    axios.get('/users/me.json', authData)
+      .then(response => {
+        dispatch(setUser(response.data))
+      })
+      .catch(error => {
+        // TODO:
       })
   }
 }
@@ -54,6 +58,14 @@ export const setCargos = (cargos) => {
   return {
     type: actionTypes.SET_CARGOS,
     cargos: cargos
+  }
+}
+
+
+export const setUser = (user) => {
+  return {
+    type: actionTypes.SET_USER,
+    user: user
   }
 }
 

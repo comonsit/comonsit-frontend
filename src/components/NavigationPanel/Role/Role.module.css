@@ -1,0 +1,27 @@
+.Container {
+  border-radius: .8rem;
+  border: 1px solid white;
+  display: inline-block;
+  font-size: .7em;
+  padding: .3rem;
+}
+
+.GE {
+  background-color: #D5B49E;
+  color: #243746;
+}
+
+.SO {
+  background-color: #BBC392;
+  color: #243746;
+}
+
+.PR {
+  background-color: #92c3c0;
+  color: #243746;
+}
+
+.CO {
+  background-color: #ac92c3;
+  color: #243746;
+}

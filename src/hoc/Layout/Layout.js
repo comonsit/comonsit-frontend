@@ -30,7 +30,8 @@ class Layout extends Component {
 
   render() {
     let classes, menu
-    if (this.props.isAuthenticated){
+    if (this.props.isAuthenticated && this.props.user){
+      console.log(this.props.user);
       classes = [cl.PContent]
       menu = (
         <>
@@ -38,6 +39,7 @@ class Layout extends Component {
             showMenu={this.sideDrawerOpenHandler}
             isAuth={this.props.isAuthenticated}
             open={this.state.showSideDrawer}
+            user={this.props.user}
             closed={this.sideDrawerClosedHandler}/>
         </>
       )
@@ -78,7 +80,8 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        user: state.generalData.user
     }
 }
 

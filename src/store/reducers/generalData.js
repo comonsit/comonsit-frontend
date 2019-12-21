@@ -4,6 +4,7 @@ import { updateObject } from './utility'
 const initialState = {
   regiones: null,
   comunidades: null,
+  user: null,
   selectedComunidad: null,
   cargos: null,
   loading: false,
@@ -27,6 +28,12 @@ const setComunidades = (state, action) => {
 const setCargos = (state, action) => {
   return updateObject(state, {
     cargos: action.cargos,
+  })
+}
+
+const setUser = (state, action) => {
+  return updateObject(state, {
+    user: action.user,
   })
 }
 
@@ -90,6 +97,7 @@ const reducer = (state=initialState , action) => {
     case actionTypes.SET_REGIONES: return setRegiones(state, action)
     case actionTypes.SET_COMUNIDADES: return setComunidades(state, action)
     case actionTypes.SET_CARGOS: return setCargos(state, action)
+    case actionTypes.SET_USER: return setUser(state, action)
     case actionTypes.UPDATE_COMUNIDAD_START: return updateComunidadStart(state)
     case actionTypes.UPDATE_COMUNIDAD_SUCCESS: return updateComunidadSuccess(state)
     case actionTypes.UPDATE_COMUNIDAD_FAILED: return updateComunidadFailed(state)
