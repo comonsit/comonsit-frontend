@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 
 import SociosForm from './SociosForm/SociosForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Table from '../../../components/UI/Table/Table';
+import RTable from '../../../components/UI/RTable/RTable';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
 
+
 class Socios extends Component {
   state = {
     socioSeleccionado: false,
+    tempSocio: null
   }
 
   componentDidMount () {
@@ -46,43 +48,67 @@ class Socios extends Component {
   }
 
   render () {
-    const sociosHeaders = ["socios.nombre", "socios.clave", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general"]
-    const colors = {
-      'AC': "Green",
-      'BA': "Red",
-      'NP': "Gray"
-    }
-    const coloredColumns = {
-      "socios.cafe": colors,
-      "socios.miel": colors,
-      "socios.jabon": colors,
-      "socios.general": colors
-    }
-    let socioTableData
-    let form = <Spinner/>
-
-    if (this.props.listaSocios && this.props.comunidades) {
-      socioTableData = this.props.listaSocios.map((s, i) => {
-        return {
-          "socios.nombre": s.nombres +' '+ s.apellidos,
-          "socios.clave": s.clave_socio,
-          "socios.comunidad": s.comunidad ? this.getComunidad(s.comunidad) : "",
-          "socios.region": s.region ? s.region : "",
-          "socios.ingreso-ya": s.fecha_ingr_yomol_atel,
-          "socios.cafe": s.estatus_cafe,
-          "socios.miel": s.estatus_miel,
-          "socios.jabon": s.estatus_yip ,
-          "socios.general": s.estatus_gral
-        }
-      })
-    }
-
-    if (this.state.socioSeleccionado && this.props.selSocio) {
-      form = (
-        <SociosForm/>
-      )
-    }
-
+    const columns = [
+        {
+          Header: 'Socios',
+          columns: [
+            {
+              Header: 'Nombre',
+              accessor: 'nombres',
+            },
+            {
+              Header: 'Apellidos',
+              accessor: 'apellidos',
+            },
+            {
+              Header: 'Clave',
+              accessor: 'clave_socio',
+            },
+            {
+              Header: 'Comunidad',
+              accessor: 'comunidad',
+            },
+            {
+              Header: 'Región',
+              accessor: 'region',
+            },
+            {
+              Header: 'Café',
+              accessor: 'estatus_cafe',
+            },
+            {
+              Header: 'Miel',
+              accessor: 'estatus_miel',
+            },
+            {
+              Header: 'Jabón',
+              accessor: 'estatus_yip',
+            },
+            {
+              Header: 'Estatus General',
+              accessor: 'estatus_gral',
+            },
+          ],
+        },
+      ]
+      //
+      // const colors = {
+      //   'AC': "Green",
+      //   'BA': "Red",
+      //   'NP': "Gray"
+      // }
+      // const coloredColumns = {
+      //   "socios.cafe": colors,
+      //   "socios.miel": colors,
+      //   "socios.jabon": colors,
+      //   "socios.general": colors
+      // }
+      let form = <Spinner/>
+      if (this.state.socioSeleccionado && this.props.selSocio) {
+        form = (
+          <SociosForm/>
+        )
+      }
 
     return (
       <>
@@ -100,13 +126,10 @@ class Socios extends Component {
                 ><FormattedMessage id="socios.newSocioButton"/></Button>
             </div>
           </div>
-          <Table
-            headers={sociosHeaders}
-            data={socioTableData}
-            clicked={this.showSocio}
-            clickId={"socios.clave"}
-            useKey={"socios.clave"}
-            colors={coloredColumns}
+          <RTable
+            columns={columns}
+            data={this.props.listaSocios}
+            onRowClick={row => this.showSocio(row.values.clave_socio)}
             />
         </div>
       </>
