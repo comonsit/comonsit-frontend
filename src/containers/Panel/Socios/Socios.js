@@ -49,9 +49,6 @@ class Socios extends Component {
 
   render () {
     const columns = [
-        {
-          Header: 'Socios',
-          columns: [
             {
               Header: 'Nombre',
               accessor: 'nombres',
@@ -88,9 +85,7 @@ class Socios extends Component {
               Header: 'Estatus General',
               accessor: 'estatus_gral',
             },
-          ],
-        },
-      ]
+          ]
       //
       // const colors = {
       //   'AC': "Green",

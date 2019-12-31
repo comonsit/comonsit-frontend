@@ -1,6 +1,7 @@
 import React from 'react'
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, useGlobalFilter } from 'react-table'
 import classes from './RTable.module.css'
+import GlobalFilter from './Filters/GlobalFilter'
 
 
 const RTable = ({ columns, data, onRowClick }) => {
@@ -11,11 +12,15 @@ const RTable = ({ columns, data, onRowClick }) => {
     headerGroups,
     rows,
     prepareRow,
+    state,
+    preGlobalFilteredRows,
+    setGlobalFilter
   } = useTable(
     {
       columns,
       data,
       },
+    useGlobalFilter,
     useSortBy
 )
 
@@ -23,6 +28,13 @@ const RTable = ({ columns, data, onRowClick }) => {
   return (
     <table className={classes.TablaSocios} {...getTableProps()}>
       <thead>
+        <tr>
+          <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={state.globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
+        </tr>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
