@@ -47,6 +47,24 @@ class Socios extends Component {
     return this.props.comunidades[index].nombre_de_comunidad
   }
 
+  renderStatus = cellInfo => {
+    const colors = {
+      "AC": "#2bc71b",
+      "BA": "#ec573c",
+      "NP": "#868a86"
+    }
+
+     return (
+       <div
+        style={{
+          borderRadius: "2rem",
+          width: "2rem",
+          height: "2rem",
+          backgroundColor: colors[cellInfo.cell.value] }}
+       />
+     );
+ };
+
   render () {
     const columns = [
             {
@@ -72,18 +90,22 @@ class Socios extends Component {
             {
               Header: 'Café',
               accessor: 'estatus_cafe',
+              Cell: this.renderStatus
             },
             {
               Header: 'Miel',
               accessor: 'estatus_miel',
+              Cell: this.renderStatus
             },
             {
               Header: 'Jabón',
               accessor: 'estatus_yip',
+              Cell: this.renderStatus
             },
             {
               Header: 'Estatus General',
               accessor: 'estatus_gral',
+              Cell: this.renderStatus
             },
           ]
 
