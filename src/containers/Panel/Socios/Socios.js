@@ -86,18 +86,7 @@ class Socios extends Component {
               accessor: 'estatus_gral',
             },
           ]
-      //
-      // const colors = {
-      //   'AC': "Green",
-      //   'BA': "Red",
-      //   'NP': "Gray"
-      // }
-      // const coloredColumns = {
-      //   "socios.cafe": colors,
-      //   "socios.miel": colors,
-      //   "socios.jabon": colors,
-      //   "socios.general": colors
-      // }
+
       let form = <Spinner/>
       if (this.state.socioSeleccionado && this.props.selSocio) {
         form = (

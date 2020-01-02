@@ -28,3 +28,36 @@
   background-color: #BBC392;
   cursor: pointer;
 }
+
+
+.AC {
+  background-color: #2bc71b;
+  border-radius: .4rem;
+  font-size: 0;
+}
+
+.BA {
+  background-color: #ec573c;
+  border-radius: .4rem;
+  font-size: 0;
+}
+
+.NP {
+  background-color: #868a86;
+  border-radius: .4rem;
+  font-size: 0;
+}
+
+.Blue {
+  background-color: #31489a;
+  border-radius: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.Yellow {
+  background-color: #d1df2c;
+  border-radius: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
