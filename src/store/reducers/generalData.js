@@ -3,7 +3,7 @@ import { updateObject } from './utility'
 
 const initialState = {
   regiones: null,
-  comunidades: null,
+  comunidades: [{}],
   user: null,
   selectedComunidad: null,
   cargos: null,

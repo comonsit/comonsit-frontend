@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ComunidadForm from './ComunidadForm/ComunidadForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Table from '../../../components/UI/Table/Table';
+import RTable from '../../../components/UI/RTable/RTable';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Tsumbalil.module.css'
 import * as actions from '../../../store/actions'
@@ -41,24 +41,29 @@ class Tsumbalil extends Component {
   }
 
   render () {
-    const comunidadHeaders = ["tsumbalil.id", "tsumbalil.nombre_de_comunidad", "tsumbalil.nombre_region"]
-    let comunidadData
     let form = <Spinner/>
-    if (this.props.comunidades) {
-      comunidadData = this.props.comunidades.map((c, i) => {
-        return {
-          "tsumbalil.id": c.id,
-          "tsumbalil.nombre_de_comunidad": c.nombre_de_comunidad,
-          "tsumbalil.nombre_region": c.nombre_region
-        }
-      })
-    }
 
     if (this.state.comunidadSelected && this.props.selComunidad) {
       form = (
         <ComunidadForm/>
       )
     }
+
+    const columns = [
+      {
+        Header: '#',
+        accessor: 'id',
+        width: 5
+      },
+      {
+        Header: 'Comunidad',
+        accessor: 'nombre_de_comunidad'
+      },
+      {
+        Header: 'Región',
+        accessor: 'nombre_region'
+      },
+    ]
 
     return (
       <>
@@ -76,12 +81,10 @@ class Tsumbalil extends Component {
                 ><FormattedMessage id="tsumbalil.newComunidad"/></Button>
             </div>
           </div>
-          <Table
-            headers={comunidadHeaders}
-            data={comunidadData}
-            clicked={this.showComunidad}
-            clickId={"tsumbalil.id"}
-            useKey={"tsumbalil.id"}
+          <RTable
+            columns={columns}
+            data={this.props.comunidades}
+            onRowClick={row => this.showComunidad(row.values.id)}
             />
         </div>
       </>
