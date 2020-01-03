@@ -1,39 +1,83 @@
-import React from 'react'
-import { useTable, useSortBy, useGlobalFilter } from 'react-table'
+import React, { useState } from 'react'
+import { useTable, useSortBy, useFilters, useGlobalFilter } from 'react-table'
 import classes from './RTable.module.css'
 import GlobalFilter from './Filters/GlobalFilter'
+import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
+import DefaultColumnFilter from './Filters/DefaultColumnFilter'
 
 const RTable = ({ columns, data, onRowClick}) => {
-  // Use the state and functions returned from useTable to build your UI
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    state,
-    preGlobalFilteredRows,
-    setGlobalFilter
-  } = useTable(
-    {
-      columns,
-      data,
+
+  const [advancedSearch, setAdvancedSearch] = useState(false);
+
+  const filterTypes = React.useMemo(
+    () => ({
+      // Add a new fuzzyTextFilterFn filter type.
+      fuzzyText: fuzzyTextFilterFn,
+      // Or, override the default text filter to use
+      // "startWith"
+      text: (rows, id, filterValue) => {
+        return rows.filter(row => {
+          const rowValue = row.values[id]
+          return rowValue !== undefined
+            ? String(rowValue)
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
+            : true
+        })
       },
-    useGlobalFilter,
-    useSortBy
-)
+    }),
+    []
+  )
+
+  const defaultColumn = React.useMemo(
+    () => ({
+      // Let's set up our default Filter UI
+      Filter: DefaultColumnFilter,
+    }),
+    []
+  )
+
+  // Use the state and functions returned from useTable to build your UI
+    const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      prepareRow,
+      state,
+      preGlobalFilteredRows,
+      setGlobalFilter
+    } = useTable(
+      {
+        columns,
+        data,
+        defaultColumn,
+        filterTypes,
+      },
+      useFilters,
+      useGlobalFilter,
+      useSortBy
+  )
+
 
   // Render the UI for your table
   return (
     <table className={classes.TablaSocios} {...getTableProps()}>
       <thead>
         <tr>
-          <th>
+          <th className={classes.SearchHeader} colspan="2">
             <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
                 globalFilter={state.globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
+          </th>
+          <th
+            colspan="0">
+            <label className={classes.Switch}>
+              <input type="checkbox" onChange={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
+              <span className={classes.RoundSlider}></span>
+            </label>
           </th>
         </tr>
         {headerGroups.map(headerGroup => (
@@ -48,6 +92,8 @@ const RTable = ({ columns, data, onRowClick}) => {
                         : ' ▲'
                       : ''}
                   </span>
+
+                <div>{advancedSearch && column.canFilter ? column.render('Filter') : null}</div>
               </th>
             ))}
           </tr>

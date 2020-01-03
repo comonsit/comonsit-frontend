@@ -6,6 +6,7 @@ import SociosForm from './SociosForm/SociosForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
+import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
@@ -82,30 +83,42 @@ class Socios extends Component {
             {
               Header: 'Comunidad',
               accessor: 'comunidad',
+              Filter: SelectColumnFilter,
+              filter: 'includes',
             },
             {
               Header: 'Región',
               accessor: 'region',
+              Filter: SelectColumnFilter,
+              filter: 'includes',
             },
             {
               Header: 'Café',
               accessor: 'estatus_cafe',
-              Cell: this.renderStatus
+              Cell: this.renderStatus,
+              Filter: SelectColumnFilter,
+              filter: 'includes',
             },
             {
               Header: 'Miel',
               accessor: 'estatus_miel',
-              Cell: this.renderStatus
+              Cell: this.renderStatus,
+              Filter: SelectColumnFilter,
+              filter: 'includes',
             },
             {
               Header: 'Jabón',
               accessor: 'estatus_yip',
-              Cell: this.renderStatus
+              Cell: this.renderStatus,
+              Filter: SelectColumnFilter,
+              filter: 'includes',
             },
             {
               Header: 'Estatus General',
               accessor: 'estatus_gral',
-              Cell: this.renderStatus
+              Cell: this.renderStatus,
+              Filter: SelectColumnFilter,
+              filter: 'includes',
             },
           ]
 
