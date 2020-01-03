@@ -28,7 +28,7 @@ const RTable = ({ columns, data, onRowClick}) => {
     <table className={classes.TablaSocios} {...getTableProps()}>
       <thead>
         <tr>
-          <th>          
+          <th>
             <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
                 globalFilter={state.globalFilter}
