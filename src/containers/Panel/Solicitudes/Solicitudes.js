@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // import SolicitudForm from './SolicitudForm/SolicitudForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Table from '../../../components/UI/Table/Table';
+import RTable from '../../../components/UI/RTable/RTable';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
@@ -60,28 +60,63 @@ class Solicitudes extends Component {
     this.props.onNewSol()
   }
 
-  getComunidad = (id) => {
-    const index = this.props.comunidades.findIndex(x => x.id === id)
-    return this.props.comunidades[index].nombre_de_comunidad
-  }
+  renderStatus = cellInfo => {
+    const colors = {
+      "AP": "#2bc71b",
+      "RV": "#d1df2c",
+      "RE": "#ec573c",
+      "CA": "#868a86"
+    }
+
+     return (
+       <div
+        style={{
+          borderRadius: "2rem",
+          width: "2rem",
+          height: "2rem",
+          backgroundColor: colors[cellInfo.cell.value] }}
+       />
+     )
+ }
 
   render () {
-    //// TODO: fecha de solicitud por año (filtro)
-    // TODO: mandar comunidad y región del socio
-    const solicitudHeaders = ["solicitudes.folio_solicitud", "solicitudes.fecha_solicitud", "solicitudes.clave_socio", "solicitudes.tipo_credito", "solicitudes.monto_solicitado", "solicitudes.plazo_de_pago_solicitado", "solicitudes.estatus_solicitud", "solicitudes.estatus_ej_credito"]
+    const columns = [
+      {
+        Header: 'Folio',
+        accessor: 'folio_solicitud'
+      },
+      {
+        Header: 'Fecha',
+        accessor: 'fecha_solicitud'
+      },
+      {
+        Header: 'Clave Socio',
+        accessor: 'clave_socio'
+      },
+      {
+        Header: 'Tipo de Crédito',
+        accessor: 'tipo_credito'
+      },
+      {
+        Header: 'Monto',
+        accessor: 'monto_solicitado'
+      },
+      {
+        Header: 'Plazo',
+        accessor: 'plazo_de_pago_solicitado'
+      },
+      {
+        Header: 'Estatus',
+        accessor: 'estatus_solicitud',
+        Cell: this.renderStatus
+      },
+      {
+        Header: 'Estatus Ejercicio',
+        accessor: 'estatus_ej_credito',
+        Cell: this.renderStatus
+      }
+    ]
 
-    const colors = {
-      'CO': "Green",  // Cobrado
-      'AP': "Blue",   // Aprobado
-      'RV': "Yellow", // Revisión
-      'RE': "Red",     // Rechazado
-      'CA': "Gray"    // Cancelado
-    }
-    const coloredColumns = {
-      "solicitudes.estatus_solicitud": colors,
-      "solicitudes.estatus_ej_credito": colors
-    }
-    let solTableData
     let solicitudInfo = <Spinner/>
 
     // TODO: Mover a Container independiente informativo!!
@@ -105,20 +140,8 @@ class Solicitudes extends Component {
       )
     }
 
-    if (this.props.listaSolicitudes && this.props.comunidades) {
-      solTableData = this.props.listaSolicitudes.map((s, i) => {
-        return {
-          "solicitudes.folio_solicitud": s.folio_solicitud,
-          "solicitudes.fecha_solicitud": s.fecha_solicitud,
-          "solicitudes.clave_socio": s.clave_socio,
-          "solicitudes.tipo_credito": s.tipo_credito,
-          "solicitudes.monto_solicitado": s.monto_solicitado,
-          "solicitudes.plazo_de_pago_solicitado": s.plazo_de_pago_solicitado,
-          "solicitudes.estatus_solicitud": s.estatus_solicitud,
-          "solicitudes.estatus_ej_credito": s.estatus_ej_credito
-        }
-      })
-    }
+    console.log(this.props.listaSolicitudes)
+
 
     console.log(this.props.selectedSol);
 
@@ -145,12 +168,10 @@ class Solicitudes extends Component {
                 ><FormattedMessage id="solicitudes.new"/></Button>
             </div>
           </div>
-          <Table
-            headers={solicitudHeaders}
-            data={solTableData}
-            clicked={this.showSolicitud}
-            clickId={"solicitudes.folio_solicitud"}
-            colors={coloredColumns}
+          <RTable
+            columns={columns}
+            data={this.props.listaSolicitudes}
+            onRowClick={row => this.showSolicitud(row.values.folio_solicitud)}
             />
         </div>
       </>
