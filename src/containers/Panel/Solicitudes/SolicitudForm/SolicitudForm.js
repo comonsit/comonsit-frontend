@@ -9,7 +9,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
-import Table from '../../../../components/UI/Table/Table'
+import RTable from '../../../../components/UI/RTable/RTable'
 import classes from './SolicitudForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -418,16 +418,12 @@ class SolicitudForm extends Component {
     this.props.unSelSocio()
   }
 
-  //// TODO: código duplicado de socios!!! eliminar y llamar de otro lado! o arreglar en backend
-  getComunidad = (id) => {
-    const index = this.props.comunidades.findIndex(x => x.id === id)
-    return this.props.comunidades[index].nombre_de_comunidad
-  }
-
   selectSocio =(id) => {
     const updatedForm = updateObject(this.state.solicitudForm, {
         [this.state.selectingFor]: updateObject(this.state.solicitudForm[this.state.selectingFor], {
-            value: id
+            value: id,
+            valid: true,
+            touched: true
         })
     })
     this.setState({
@@ -439,6 +435,24 @@ class SolicitudForm extends Component {
     });
     this.props.onFetchSelSocios(this.props.token, id)
   }
+
+  renderStatus = cellInfo => {
+    const colors = {
+      "AC": "#2bc71b",
+      "BA": "#ec573c",
+      "NP": "#868a86"
+    }
+
+     return (
+       <div
+        style={{
+          borderRadius: "2rem",
+          width: "2rem",
+          height: "2rem",
+          backgroundColor: colors[cellInfo.cell.value] }}
+       />
+     );
+ };
 
   render () {
     // SINGLE SOCIO
@@ -495,41 +509,50 @@ class SolicitudForm extends Component {
       })
     }
 
-     //////////////
-     // Move to Socios or to separate container for listaSocios
-     const sociosHeaders = ["socios.nombre", "socios.clave", "socios.comunidad", "socios.region", "socios.ingreso-ya", "socios.cafe", "socios.miel", "socios.jabon", "socios.general", ]
-     const colors = {
-       'AC': "Green",
-       'BA': "Red",
-       'NP': "Gray"
-     }
-     const coloredColumns = {
-       "socios.cafe": colors,
-       "socios.miel": colors,
-       "socios.jabon": colors,
-       "socios.general": colors
-     }
-     let socioTableData
      formClasses.push(classes.noScroll)
 
-     // TODO: Si el fetch de listasocios no está hecho va a tronar!!!
-     // hacer fetch en inicialización, o mover a su propio container, o hacer fetch!!!
-     if (this.props.listaSocios && this.props.comunidades) {
-
-       socioTableData = this.props.listaSocios.map((s, i) => {
-         return {
-           "socios.nombre": s.nombres +' '+ s.apellidos,
-           "socios.clave": s.clave_socio,
-           "socios.comunidad": s.comunidad ? this.getComunidad(s.comunidad) : "",
-           "socios.region": s.region ? s.region : "",
-           "socios.ingreso-ya": s.fecha_ingr_yomol_atel,
-           "socios.cafe": s.estatus_cafe,
-           "socios.miel": s.estatus_miel,
-           "socios.jabon": s.estatus_yip ,
-           "socios.general": s.estatus_gral
-         }
-       })
-     }
+     const columns = [
+             {
+               Header: 'Nombre',
+               accessor: 'nombres',
+             },
+             {
+               Header: 'Apellidos',
+               accessor: 'apellidos',
+             },
+             {
+               Header: 'Clave',
+               accessor: 'clave_socio',
+             },
+             {
+               Header: 'Comunidad',
+               accessor: 'comunidad',
+             },
+             {
+               Header: 'Región',
+               accessor: 'region',
+             },
+             {
+               Header: 'Café',
+               accessor: 'estatus_cafe',
+               Cell: this.renderStatus
+             },
+             {
+               Header: 'Miel',
+               accessor: 'estatus_miel',
+               Cell: this.renderStatus
+             },
+             {
+               Header: 'Jabón',
+               accessor: 'estatus_yip',
+               Cell: this.renderStatus
+             },
+             {
+               Header: 'Estatus General',
+               accessor: 'estatus_gral',
+               Cell: this.renderStatus
+             },
+           ]
 
 
 
@@ -543,12 +566,10 @@ class SolicitudForm extends Component {
           <h3>Búsqueda de Socios...pendiente</h3>
           <div
             className={classes.TableContainer}>
-            <Table
-              headers={sociosHeaders}
-              data={socioTableData}
-              clicked={this.selectSocio}
-              clickId={"socios.clave"}
-              colors={coloredColumns}
+            <RTable
+              columns={columns}
+              data={this.props.listaSocios}
+              onRowClick={row => this.selectSocio(row.values.clave_socio)}
               />
           </div>
         </Modal>
