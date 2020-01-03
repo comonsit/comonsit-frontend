@@ -97,5 +97,7 @@
   "comunidadForm.title": "Comunidad",
   "comunidadForm.nombre_de_comunidad": "Nombre de Comunidad",
   "perfil.title": "Perfil",
-  "buscar": "Buscar"
+  "buscar": "Buscar",
+  "apagar": "apagar",
+  "all": "todos"
 }

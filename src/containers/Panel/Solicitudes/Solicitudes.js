@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
+import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
+import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
+import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
@@ -83,7 +86,9 @@ class Solicitudes extends Component {
     const columns = [
       {
         Header: 'Folio',
-        accessor: 'folio_solicitud'
+        accessor: 'folio_solicitud',
+        Filter: '',
+        filter: ''
       },
       {
         Header: 'Fecha',
@@ -95,25 +100,35 @@ class Solicitudes extends Component {
       },
       {
         Header: 'Tipo de Crédito',
-        accessor: 'tipo_credito'
+        accessor: 'tipo_credito',
+        Filter: SelectColumnFilter,
+        filter: 'includes',        
       },
       {
         Header: 'Monto',
-        accessor: 'monto_solicitado'
+        accessor: 'monto_solicitado',
+        Filter: SliderColumnFilter,
+        filter: filterGreaterThan
       },
       {
         Header: 'Plazo',
-        accessor: 'plazo_de_pago_solicitado'
+        accessor: 'plazo_de_pago_solicitado',
+        Filter: SliderColumnFilter,
+        filter: 'equals'
       },
       {
         Header: 'Estatus',
         accessor: 'estatus_solicitud',
-        Cell: this.renderStatus
+        Cell: this.renderStatus,
+        Filter: SelectColumnFilter,
+        filter: 'includes',
       },
       {
         Header: 'Estatus Ejercicio',
         accessor: 'estatus_ej_credito',
-        Cell: this.renderStatus
+        Cell: this.renderStatus,
+        Filter: SelectColumnFilter,
+        filter: 'includes',
       }
     ]
 

@@ -6,6 +6,7 @@ import ComunidadForm from './ComunidadForm/ComunidadForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
+import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Tsumbalil.module.css'
 import * as actions from '../../../store/actions'
@@ -53,7 +54,8 @@ class Tsumbalil extends Component {
       {
         Header: '#',
         accessor: 'id',
-        width: 5
+        Filter: '',
+        filter: ''
       },
       {
         Header: 'Comunidad',
@@ -61,7 +63,9 @@ class Tsumbalil extends Component {
       },
       {
         Header: 'Región',
-        accessor: 'nombre_region'
+        accessor: 'nombre_region',
+        Filter: SelectColumnFilter,
+        filter: 'includes'
       },
     ]
 
