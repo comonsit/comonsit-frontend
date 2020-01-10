@@ -52,7 +52,7 @@ class Tsumbalil extends Component {
 
     const columns = [
       {
-        Header: '#',
+        Header: '# C',
         accessor: 'id',
         Filter: '',
         filter: ''
@@ -60,6 +60,12 @@ class Tsumbalil extends Component {
       {
         Header: 'Comunidad',
         accessor: 'nombre_de_comunidad'
+      },
+      {
+        Header: '# R',
+        accessor: 'region',
+        Filter: SelectColumnFilter,
+        filter: 'includes'
       },
       {
         Header: 'Región',
