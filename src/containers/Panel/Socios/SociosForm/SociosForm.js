@@ -416,7 +416,6 @@ const mapStateToProps = state => {
       selSocio: state.socios.selectedSocio,
       loading: state.socios.loading,
       token: state.auth.token,
-      regiones: state.generalData.regiones,
       comunidades: state.generalData.comunidades,
       cargos: state.generalData.cargos,
       new: state.socios.newSocio

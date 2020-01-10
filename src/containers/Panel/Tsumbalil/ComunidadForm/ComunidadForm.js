@@ -36,7 +36,7 @@ class ComunidadForm extends Component {
         region: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.regiones.map(r => ({"value": r.id, "displayValue": r.nombre_de_region}))
+            options: this.props.regiones.map(r => ({"value": r.id, "displayValue": r.id +' - ' +r.nombre_de_region}))
           },
           label: (<FormattedMessage id="tsumbalil.nombre_region"/>),
           value: this.props.selComunidad.region,
