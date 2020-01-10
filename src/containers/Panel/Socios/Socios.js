@@ -69,6 +69,10 @@ class Socios extends Component {
   render () {
     const columns = [
             {
+              Header: 'Clave',
+              accessor: 'clave_socio',
+            },
+            {
               Header: 'Nombre',
               accessor: 'nombres',
             },
@@ -77,20 +81,20 @@ class Socios extends Component {
               accessor: 'apellidos',
             },
             {
-              Header: 'Clave',
-              accessor: 'clave_socio',
-            },
-            {
-              Header: 'Comunidad',
-              accessor: 'comunidad',
-              Filter: SelectColumnFilter,
-              filter: 'includes',
-            },
-            {
               Header: 'Región',
               accessor: 'region',
               Filter: SelectColumnFilter,
               filter: 'includes',
+            },
+            {
+              Header: 'Comunidad',
+              accessor: 'nombre_comunidad',
+              Filter: SelectColumnFilter,
+              filter: 'includes',
+            },
+            {
+              Header: 'Clave Café',
+              accessor: 'clave_anterior',
             },
             {
               Header: 'Café',

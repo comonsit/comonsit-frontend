@@ -10,6 +10,7 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
 import RTable from '../../../../components/UI/RTable/RTable'
+import SelectColumnFilter from '../../../../components/UI/RTable/Filters/SelectColumnFilter';
 import classes from './SolicitudForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -513,6 +514,10 @@ class SolicitudForm extends Component {
 
      const columns = [
              {
+               Header: 'Clave',
+               accessor: 'clave_socio',
+             },
+             {
                Header: 'Nombre',
                accessor: 'nombres',
              },
@@ -521,36 +526,48 @@ class SolicitudForm extends Component {
                accessor: 'apellidos',
              },
              {
-               Header: 'Clave',
-               accessor: 'clave_socio',
+               Header: 'Región',
+               accessor: 'region',
+               Filter: SelectColumnFilter,
+               filter: 'includes',
              },
              {
                Header: 'Comunidad',
-               accessor: 'comunidad',
+               accessor: 'nombre_comunidad',
+               Filter: SelectColumnFilter,
+               filter: 'includes',
              },
              {
-               Header: 'Región',
-               accessor: 'region',
+               Header: 'Clave Café',
+               accessor: 'clave_anterior',
              },
              {
                Header: 'Café',
                accessor: 'estatus_cafe',
-               Cell: this.renderStatus
+               Cell: this.renderStatus,
+               Filter: SelectColumnFilter,
+               filter: 'includes',
              },
              {
                Header: 'Miel',
                accessor: 'estatus_miel',
-               Cell: this.renderStatus
+               Cell: this.renderStatus,
+               Filter: SelectColumnFilter,
+               filter: 'includes',
              },
              {
                Header: 'Jabón',
                accessor: 'estatus_yip',
-               Cell: this.renderStatus
+               Cell: this.renderStatus,
+               Filter: SelectColumnFilter,
+               filter: 'includes',
              },
              {
                Header: 'Estatus General',
                accessor: 'estatus_gral',
-               Cell: this.renderStatus
+               Cell: this.renderStatus,
+               Filter: SelectColumnFilter,
+               filter: 'includes',
              },
            ]
 
