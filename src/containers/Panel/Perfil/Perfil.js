@@ -59,7 +59,8 @@ class Perfil extends Component {
           value: this.props.user.phone,
           validation: {
             required: false,
-            maxLength: 12,
+            minLength: 10,
+            maxLength: 10,
             isNumeric: true
           },
           valid: true,

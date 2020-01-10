@@ -85,7 +85,7 @@ class SociosForm extends Component {
           validation: {
             required: true,
             minLength: 10,
-            maxLength: 12,
+            maxLength: 10,
             isNumeric: true
           },
           valid: !this.props.new,
