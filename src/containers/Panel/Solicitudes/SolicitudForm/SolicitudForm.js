@@ -341,6 +341,10 @@ class SolicitudForm extends Component {
 
   }
 
+  componentWillUnmount() {
+    this.props.unSelSocio()
+  }
+
   onSubmitForm = (event) => {
     event.preventDefault();
 
