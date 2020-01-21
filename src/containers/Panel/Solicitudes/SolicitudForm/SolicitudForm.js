@@ -9,8 +9,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
-import RTable from '../../../../components/UI/RTable/RTable'
-import SelectColumnFilter from '../../../../components/UI/RTable/Filters/SelectColumnFilter';
+import SociosList from '../../Socios/SociosList/SociosList';
 import classes from './SolicitudForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -516,65 +515,6 @@ class SolicitudForm extends Component {
 
      formClasses.push(classes.noScroll)
 
-     const columns = [
-             {
-               Header: 'Clave',
-               accessor: 'clave_socio',
-             },
-             {
-               Header: 'Nombre',
-               accessor: 'nombres',
-             },
-             {
-               Header: 'Apellidos',
-               accessor: 'apellidos',
-             },
-             {
-               Header: 'Región',
-               accessor: 'region',
-               Filter: SelectColumnFilter,
-               filter: 'includes',
-             },
-             {
-               Header: 'Comunidad',
-               accessor: 'nombre_comunidad',
-               Filter: SelectColumnFilter,
-               filter: 'includes',
-             },
-             {
-               Header: 'Clave Café',
-               accessor: 'clave_anterior',
-             },
-             {
-               Header: 'Café',
-               accessor: 'estatus_cafe',
-               Cell: this.renderStatus,
-               Filter: SelectColumnFilter,
-               filter: 'includes',
-             },
-             {
-               Header: 'Miel',
-               accessor: 'estatus_miel',
-               Cell: this.renderStatus,
-               Filter: SelectColumnFilter,
-               filter: 'includes',
-             },
-             {
-               Header: 'Jabón',
-               accessor: 'estatus_yip',
-               Cell: this.renderStatus,
-               Filter: SelectColumnFilter,
-               filter: 'includes',
-             },
-             {
-               Header: 'Estatus General',
-               accessor: 'estatus_gral',
-               Cell: this.renderStatus,
-               Filter: SelectColumnFilter,
-               filter: 'includes',
-             },
-           ]
-
 
 
     const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
@@ -587,10 +527,9 @@ class SolicitudForm extends Component {
           <h3>Búsqueda de Socios...pendiente</h3>
           <div
             className={classes.TableContainer}>
-            <RTable
-              columns={columns}
-              data={this.props.listaSocios}
-              onRowClick={row => this.selectSocio(row.values.clave_socio)}
+            <SociosList
+              listaSocios={this.props.listaSocios}
+              onClick={row => this.selectSocio(row.values.clave_socio)}
               />
           </div>
         </Modal>

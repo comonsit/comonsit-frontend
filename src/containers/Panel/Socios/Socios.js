@@ -3,10 +3,9 @@ import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 
 import SociosForm from './SociosForm/SociosForm';
+import SociosList from './SociosList/SociosList';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import RTable from '../../../components/UI/RTable/RTable';
-import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
@@ -49,90 +48,22 @@ class Socios extends Component {
     return this.props.comunidades[index].nombre_de_comunidad
   }
 
-  renderStatus = cellInfo => {
-    const colors = {
-      "AC": "#2bc71b",
-      "BA": "#ec573c",
-      "NP": "#868a86"
-    }
-
-     return (
-       <div
-        style={{
-          borderRadius: "2rem",
-          width: "2rem",
-          height: "2rem",
-          backgroundColor: colors[cellInfo.cell.value] }}
-       />
-     );
- };
-
   render () {
-    const columns = [
-            {
-              Header: 'Clave',
-              accessor: 'clave_socio',
-            },
-            {
-              Header: <FormattedMessage id="socios.nombre"/>,
-              accessor: 'nombres',
-            },
-            {
-              Header: <FormattedMessage id="socios.apellidos"/>,
-              accessor: 'apellidos',
-            },
-            {
-              Header: <FormattedMessage id="socios.region"/>,
-              accessor: 'region',
-              Filter: SelectColumnFilter,
-              filter: 'includes',
-            },
-            {
-              Header: <FormattedMessage id="socios.comunidad"/>,
-              accessor: 'nombre_comunidad',
-              Filter: SelectColumnFilter,
-              filter: 'includes',
-            },
-            {
-              Header: <FormattedMessage id="socios.claveCafe"/>,
-              accessor: 'clave_anterior',
-            },
-            {
-              Header: <FormattedMessage id="socios.cafe"/>,
-              accessor: 'estatus_cafe',
-              Cell: this.renderStatus,
-              Filter: SelectColumnFilter,
-              filter: 'includes',
-            },
-            {
-              Header: <FormattedMessage id="socios.miel"/>,
-              accessor: 'estatus_miel',
-              Cell: this.renderStatus,
-              Filter: SelectColumnFilter,
-              filter: 'includes',
-            },
-            {
-              Header: <FormattedMessage id="socios.jabon"/>,
-              accessor: 'estatus_yip',
-              Cell: this.renderStatus,
-              Filter: SelectColumnFilter,
-              filter: 'includes',
-            },
-            {
-              Header: <FormattedMessage id="socios.general"/>,
-              accessor: 'estatus_gral',
-              Cell: this.renderStatus,
-              Filter: SelectColumnFilter,
-              filter: 'includes',
-            },
-          ]
-
-      let form = <Spinner/>
+      let form, socioList = <Spinner/>
       if (this.state.socioSeleccionado && this.props.selSocio) {
         form = (
           <SociosForm/>
         )
       }
+
+      if (this.props.listaSocios) {
+        socioList = (<SociosList
+                      listaSocios={this.props.listaSocios}
+                      onClick={row => this.showSocio(row.values.clave_socio)}
+                      />)
+      }
+
+
 
     return (
       <>
@@ -152,11 +83,7 @@ class Socios extends Component {
           </div>
 
           <button><a href={baseURL + "/sociosXLSX/"}><FormattedMessage id="sociosXLSX"/></a></button>
-        <RTable
-            columns={columns}
-            data={this.props.listaSocios}
-            onRowClick={row => this.showSocio(row.values.clave_socio)}
-            />
+          {socioList}
         </div>
       </>
     )
