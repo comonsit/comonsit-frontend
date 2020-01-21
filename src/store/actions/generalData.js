@@ -28,6 +28,13 @@ export const fetchGralData = (token) => {
       .catch(error => {
         // TODO:
       })
+    axios.get('/cargos-coop.json', authData)
+      .then(response => {
+        dispatch(setCargosCoop(response.data))
+      })
+      .catch(error => {
+        // TODO:
+      })
     axios.get('/users/me.json', authData)
       .then(response => {
         dispatch(setUser(response.data))
@@ -61,6 +68,12 @@ export const setCargos = (cargos) => {
   }
 }
 
+export const setCargosCoop = (cargosCoop) => {
+  return {
+    type: actionTypes.SET_CARGOS_COOP,
+    cargosCoop: cargosCoop
+  }
+}
 
 export const setUser = (user) => {
   return {

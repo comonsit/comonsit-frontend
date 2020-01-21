@@ -7,6 +7,7 @@ const initialState = {
   user: null,
   selectedComunidad: null,
   cargos: null,
+  cargosCoop: null,
   loading: false,
   updated: false,
   newComunidad: false
@@ -28,6 +29,12 @@ const setComunidades = (state, action) => {
 const setCargos = (state, action) => {
   return updateObject(state, {
     cargos: action.cargos,
+  })
+}
+
+const setCargosCoop = (state, action) => {
+  return updateObject(state, {
+    cargosCoop: action.cargosCoop,
   })
 }
 
@@ -97,6 +104,7 @@ const reducer = (state=initialState , action) => {
     case actionTypes.SET_REGIONES: return setRegiones(state, action)
     case actionTypes.SET_COMUNIDADES: return setComunidades(state, action)
     case actionTypes.SET_CARGOS: return setCargos(state, action)
+    case actionTypes.SET_CARGOS_COOP: return setCargosCoop(state, action)
     case actionTypes.SET_USER: return setUser(state, action)
     case actionTypes.UPDATE_COMUNIDAD_START: return updateComunidadStart(state)
     case actionTypes.UPDATE_COMUNIDAD_SUCCESS: return updateComunidadSuccess(state)

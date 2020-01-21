@@ -148,6 +148,19 @@ class SociosForm extends Component {
           valid: true,
           touched: false,
         },
+        cargo_coop: {
+          elementType: 'select',
+          elementConfig: {
+            options: this.props.cargosCoop.map(r => ({"value": r.id, "displayValue": r.nombre_cargo_coop}))
+          },
+          label: (<><FormattedMessage id="socioForm.cargoCoop"/>*</>),
+          value: this.props.selSocio.cargo_coop,
+          validation: {
+            required: true
+          },
+          valid: true,
+          touched: false,
+        },
         productor: {
           elementType: 'checkbox',
           elementConfig: {
@@ -341,7 +354,7 @@ class SociosForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "productor", "trabajador", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
+    const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "productor", "trabajador", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
     const formElementsArray = []
     let supportData
     let formElements = <Spinner/>
@@ -418,6 +431,7 @@ const mapStateToProps = state => {
       token: state.auth.token,
       comunidades: state.generalData.comunidades,
       cargos: state.generalData.cargos,
+      cargosCoop: state.generalData.cargosCoop,
       new: state.socios.newSocio
     }
 }
