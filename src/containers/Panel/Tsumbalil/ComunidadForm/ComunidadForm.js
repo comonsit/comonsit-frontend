@@ -25,7 +25,7 @@ class ComunidadForm extends Component {
             type: 'text',
             placeholder: '..nombre comunidad'
           },
-          label: (<FormattedMessage id="comunidadForm.nombre_de_comunidad"/>),
+          label: (<><FormattedMessage id="comunidadForm.nombre_de_comunidad"/>*</>),
           value: this.props.selComunidad.nombre_de_comunidad,
           validation: {
             required: true
@@ -38,7 +38,7 @@ class ComunidadForm extends Component {
           elementConfig: {
             options: this.props.regiones.map(r => ({"value": r.id, "displayValue": r.id +' - ' +r.nombre_de_region}))
           },
-          label: (<FormattedMessage id="tsumbalil.nombre_region"/>),
+          label: (<><FormattedMessage id="tsumbalil.nombre_region"/>*</>),
           value: this.props.selComunidad.region,
           validation: {
             required: true
