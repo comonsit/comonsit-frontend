@@ -10,6 +10,7 @@ import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColu
 import Button from '../../../components/UI/Button/Button';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
+import { baseURL } from '../../../store/axios-be.js'
 
 
 class Socios extends Component {
@@ -149,7 +150,9 @@ class Socios extends Component {
                 ><FormattedMessage id="socios.newSocioButton"/></Button>
             </div>
           </div>
-          <RTable
+
+          <button><a href={baseURL + "/sociosXLSX/"}><FormattedMessage id="sociosXLSX"/></a></button>
+        <RTable
             columns={columns}
             data={this.props.listaSocios}
             onRowClick={row => this.showSocio(row.values.clave_socio)}
