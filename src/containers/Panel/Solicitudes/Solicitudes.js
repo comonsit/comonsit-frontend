@@ -85,46 +85,46 @@ class Solicitudes extends Component {
   render () {
     const columns = [
       {
-        Header: 'Folio',
+        Header: <FormattedMessage id="solicitudes.folio_solicitud"/>,
         accessor: 'folio_solicitud',
         Filter: '',
         filter: ''
       },
       {
-        Header: 'Fecha',
+        Header: <FormattedMessage id="solicitudes.fecha_solicitud"/>,
         accessor: 'fecha_solicitud'
       },
       {
-        Header: 'Clave Socio',
+        Header: <FormattedMessage id="solicitudes.clave_socio"/>,
         accessor: 'clave_socio'
       },
       {
-        Header: 'Tipo de Crédito',
+        Header: <FormattedMessage id="solicitudes.tipo_credito"/>,
         accessor: 'tipo_credito',
         Filter: SelectColumnFilter,
-        filter: 'includes',        
+        filter: 'includes',
       },
       {
-        Header: 'Monto',
+        Header: <FormattedMessage id="solicitudes.monto_solicitado"/>,
         accessor: 'monto_solicitado',
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },
       {
-        Header: 'Plazo',
+        Header: <FormattedMessage id="solicitudes.plazo_de_pago_solicitado"/>,
         accessor: 'plazo_de_pago_solicitado',
         Filter: SliderColumnFilter,
         filter: 'equals'
       },
       {
-        Header: 'Estatus',
+        Header: <FormattedMessage id="solicitudes.estatus_solicitud"/>,
         accessor: 'estatus_solicitud',
         Cell: this.renderStatus,
         Filter: SelectColumnFilter,
         filter: 'includes',
       },
       {
-        Header: 'Estatus Ejercicio',
+        Header: <FormattedMessage id="solicitudes.estatus_ej_credito"/>,
         accessor: 'estatus_ej_credito',
         Cell: this.renderStatus,
         Filter: SelectColumnFilter,

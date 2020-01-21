@@ -58,7 +58,7 @@ class Tsumbalil extends Component {
         filter: ''
       },
       {
-        Header: 'Comunidad',
+        Header: <FormattedMessage id="comunidad"/>,
         accessor: 'nombre_de_comunidad'
       },
       {
@@ -68,7 +68,7 @@ class Tsumbalil extends Component {
         filter: 'includes'
       },
       {
-        Header: 'Región',
+        Header: <FormattedMessage id="region"/>,
         accessor: 'nombre_region',
         Filter: SelectColumnFilter,
         filter: 'includes'

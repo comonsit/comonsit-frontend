@@ -26,8 +26,10 @@
   "pmenu.tsumbalil": "Tsumbalil",
   "pmenu.logout": "Cerrar Sesión",
   "socios.title": "Socios",
-  "socios.clave": "Clave de Socio",
+  "socios.clave": "Clave",
+  "socios.claveCafe": "Clave otra",
   "socios.nombre": "Nombre",
+  "socios.apellidos": "Apellidos",
   "socios.region": "Región",
   "socios.comunidad": "Comunidad",
   "socios.ingreso-ya": "Ingreso YA",
@@ -101,5 +103,7 @@
   "buscar": "Buscar",
   "apagar": "apagar",
   "all": "todos",
-  "sociosXLSX": "Descargar socios.xlsx"
+  "sociosXLSX": "Descargar socios.xlsx",
+  "comunidad": "Comunidad",
+  "region": "Region"
 }

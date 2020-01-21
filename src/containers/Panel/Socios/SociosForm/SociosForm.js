@@ -23,7 +23,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..nombre'
+            placeholder: '..'
           },
           label: (<><FormattedMessage id="nombres"/>*</>),
           value: this.props.selSocio.nombres,
@@ -37,7 +37,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..apellidos'
+            placeholder: '..'
           },
           label: (<><FormattedMessage id="apellidos"/>*</>),
           value: this.props.selSocio.apellidos,
@@ -64,7 +64,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..curp'
+            placeholder: '..'
           },
           label: (<FormattedMessage id="socioForm.curp"/>),
           value: this.props.selSocio.curp,
@@ -78,7 +78,7 @@ class SociosForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'tel',
-            placeholder: '..teléfono'
+            placeholder: '..'
           },
           label: (<FormattedMessage id="telefono"/>),
           value: this.props.selSocio.telefono,
