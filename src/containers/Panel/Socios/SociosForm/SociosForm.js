@@ -25,7 +25,7 @@ class SociosForm extends Component {
             type: 'text',
             placeholder: '..nombre'
           },
-          label: (<FormattedMessage id="nombres"/>),
+          label: (<><FormattedMessage id="nombres"/>*</>),
           value: this.props.selSocio.nombres,
           validation: {
             required: true
@@ -39,7 +39,7 @@ class SociosForm extends Component {
             type: 'text',
             placeholder: '..apellidos'
           },
-          label: (<FormattedMessage id="apellidos"/>),
+          label: (<><FormattedMessage id="apellidos"/>*</>),
           value: this.props.selSocio.apellidos,
           validation: {
             required: true
@@ -52,7 +52,7 @@ class SociosForm extends Component {
           elementConfig: {
             options: this.props.comunidades.map(r => ({"value": r.id, "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region}))
           },
-          label: (<FormattedMessage id="socioForm.comunidad"/>),
+          label: (<><FormattedMessage id="socioForm.comunidad"/>*</>),
           value: this.props.selSocio.comunidad,
           validation: {
             required: true
@@ -69,10 +69,10 @@ class SociosForm extends Component {
           label: (<FormattedMessage id="socioForm.curp"/>),
           value: this.props.selSocio.curp,
           validation: {
-            required: true
+            required: false
           },
-          valid: !this.props.new,
-          touched: false,
+          valid: true,
+          touched: true,
         },
         telefono: {
           elementType: 'input',
@@ -83,20 +83,20 @@ class SociosForm extends Component {
           label: (<FormattedMessage id="telefono"/>),
           value: this.props.selSocio.telefono,
           validation: {
-            required: true,
+            required: false,
             minLength: 10,
             maxLength: 10,
             isNumeric: true
           },
-          valid: !this.props.new,
-          touched: false,
+          valid: true,
+          touched: true,
         },
         fecha_nacimiento: {
           elementType: 'input',
           elementConfig: {
             type: 'date'
           },
-          label: (<FormattedMessage id="socioForm.fecha_nacimiento"/>),
+          label: (<><FormattedMessage id="socioForm.fecha_nacimiento"/>*</>),
           value: this.props.selSocio.fecha_nacimiento,
           validation: {
             required: true,
@@ -111,7 +111,7 @@ class SociosForm extends Component {
           elementConfig: {
             type: 'date'
           },
-          label: (<FormattedMessage id="socioForm.fecha_ingr_yomol_atel"/>),
+          label: (<><FormattedMessage id="socioForm.fecha_ingr_yomol_atel"/>*</>),
           value: this.props.selSocio.fecha_ingr_yomol_atel,
           validation: {
             required: true,
@@ -126,7 +126,7 @@ class SociosForm extends Component {
           elementConfig: {
             type: 'date'
           },
-          label: (<FormattedMessage id="socioForm.fecha_ingr_programa"/>),
+          label: (<><FormattedMessage id="socioForm.fecha_ingr_programa"/>*</>),
           value: this.props.selSocio.fecha_ingr_programa,
           validation: {
             required: true,
@@ -140,7 +140,7 @@ class SociosForm extends Component {
           elementConfig: {
             options: this.props.cargos.map(r => ({"value": r.id, "displayValue": r.nombre_de_cargo}))
           },
-          label: (<FormattedMessage id="socioForm.cargo"/>),
+          label: (<><FormattedMessage id="socioForm.cargo"/>*</>),
           value: this.props.selSocio.cargo,
           validation: {
             required: true
@@ -199,7 +199,7 @@ class SociosForm extends Component {
               {value: 'BA', displayValue: 'Baja'},
             ]
           },
-          label: (<FormattedMessage id="socioForm.estatus_cafe"/>),
+          label: (<><FormattedMessage id="socioForm.estatus_cafe"/>*</>),
           value: this.props.selSocio.estatus_cafe,
           validation: {
             required: true
@@ -216,7 +216,7 @@ class SociosForm extends Component {
               {value: 'BA', displayValue: 'Baja'},
             ]
           },
-          label: (<FormattedMessage id="socioForm.estatus_miel"/>),
+          label: (<><FormattedMessage id="socioForm.estatus_miel"/>*</>),
           value: this.props.selSocio.estatus_miel,
           validation: {
             required: true
@@ -233,7 +233,7 @@ class SociosForm extends Component {
               {value: 'BA', displayValue: 'Baja'},
             ]
           },
-          label: (<FormattedMessage id="socioForm.estatus_yip"/>),
+          label: (<><FormattedMessage id="socioForm.estatus_yip"/>*</>),
           value: this.props.selSocio.estatus_yip,
           validation: {
             required: true
@@ -250,7 +250,7 @@ class SociosForm extends Component {
               {value: 'BA', displayValue: 'Baja'},
             ]
           },
-          label: (<FormattedMessage id="socioForm.estatus_gral"/>),
+          label: (<p><FormattedMessage id="socioForm.estatus_gral"/>*</p>),
           value: this.props.selSocio.estatus_gral,
           validation: {
             required: true
