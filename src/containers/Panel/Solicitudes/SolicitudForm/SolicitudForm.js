@@ -31,7 +31,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..clave del socio'
           },
-          label: (<FormattedMessage id="solicitudForm.clave_socio"/>),
+          label: (<><FormattedMessage id="solicitudForm.clave_socio"/>*</>),
           value: '',
           validation: {
             required: true
@@ -45,7 +45,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'date'
           },
-          label: (<FormattedMessage id="solicitudForm.fecha_solicitud"/>),
+          label: (<><FormattedMessage id="solicitudForm.fecha_solicitud"/>*</>),
           value: '',
           validation: {
             required: true,
@@ -63,7 +63,7 @@ class SolicitudForm extends Component {
               {value: 'CP', displayValue: 'Crédito Productivo'}
             ]
           },
-          label: (<FormattedMessage id="solicitudForm.tipo_credito"/>),
+          label: (<><FormattedMessage id="solicitudForm.tipo_credito"/>*</>),
           value: 'MC',
           validation: {
             required: true
@@ -91,7 +91,7 @@ class SolicitudForm extends Component {
               {value: 'OT', displayValue: 'Otro'}
             ]
           },
-          label: (<FormattedMessage id="solicitudForm.act_productiva"/>),
+          label: (<><FormattedMessage id="solicitudForm.act_productiva"/>*</>),
           value: 'CA',
           validation: {
             required: true
@@ -127,7 +127,7 @@ class SolicitudForm extends Component {
               {value: 'OT', displayValue: 'Otro'}
             ]
           },
-          label: (<FormattedMessage id="solicitudForm.motivo_credito"/>),
+          label: (<><FormattedMessage id="solicitudForm.motivo_credito"/>*</>),
           value: 'TR',
           validation: {
             required: true
@@ -172,7 +172,7 @@ class SolicitudForm extends Component {
             max: '9999999',
             min: '0'
           },
-          label:  (<FormattedMessage id="solicitudForm.monto_solicitado"/>),
+          label:  (<><FormattedMessage id="solicitudForm.monto_solicitado"/>*</>),
           value: '',
           validation: {
             required: true,
@@ -188,7 +188,7 @@ class SolicitudForm extends Component {
             type: 'number',
             placeholder: '..# meses'
           },
-          label:  (<FormattedMessage id="solicitudForm.plazo_de_pago_solicitado"/>),
+          label:  (<><FormattedMessage id="solicitudForm.plazo_de_pago_solicitado"/>*</>),
           value: '',
           validation: {
             required: true,
@@ -207,7 +207,7 @@ class SolicitudForm extends Component {
           label:  (<FormattedMessage id="solicitudForm.justificacion_credito"/>),
           value: '',
           validation: {
-            required: true
+            required: false
           },
           valid: true,
           touched: false,
@@ -234,7 +234,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label:  (<FormattedMessage id="solicitudForm.pregunta_1"/>),
+          label:  (<><FormattedMessage id="solicitudForm.pregunta_1"/>*</>),
           value: false,
           validation: {
             required: false
@@ -248,7 +248,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label:  (<FormattedMessage id="solicitudForm.pregunta_2"/>),
+          label:  (<><FormattedMessage id="solicitudForm.pregunta_2"/>*</>),
           value: false,
           validation: {
             required: false
@@ -262,7 +262,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label:  (<FormattedMessage id="solicitudForm.pregunta_3"/>),
+          label:  (<><FormattedMessage id="solicitudForm.pregunta_3"/>*</>),
           value: false,
           validation: {
             required: false
@@ -276,7 +276,7 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'checkbox'
           },
-          label:  (<FormattedMessage id="solicitudForm.pregunta_4"/>),
+          label:  (<><FormattedMessage id="solicitudForm.pregunta_4"/>*</>),
           value: false,
           validation: {
             required: false
@@ -307,7 +307,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..clave del socio aval'
           },
-          label: (<FormattedMessage id="solicitudForm.aval"/>),
+          label: (<><FormattedMessage id="solicitudForm.aval"/>*</>),
           value: '',
           validation: {
             required: true
@@ -323,7 +323,7 @@ class SolicitudForm extends Component {
             placeholder: '..',
             maxLength: '100'
           },
-          label:  (<FormattedMessage id="solicitudForm.familiar_responsable"/>),
+          label:  (<><FormattedMessage id="solicitudForm.familiar_responsable"/>*</>),
           value: '',
           validation: {
             required: true
