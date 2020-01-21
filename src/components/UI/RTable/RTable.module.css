@@ -22,10 +22,6 @@
 
 .SearchHeader {
   border-bottom: none;
-  /* display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; */
 }
 
 .SearchHeader span {
@@ -34,6 +30,11 @@
   border: 1px solid #34495E;
   border-radius: .5rem;
   padding: 0 1rem;
+  display: flex;
+}
+
+.SearchHeader span input {
+  padding-left: 1rem;
 }
 
 .TablaSocios td {
