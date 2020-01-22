@@ -12,7 +12,7 @@ export const fetchGralData = (token) => {
         dispatch(setComunidades(response.data))
       })
       .catch(error => {
-        // TODO: 
+        // TODO:
       })
     axios.get('/regiones.json', authData)
       .then(response => {
@@ -31,6 +31,13 @@ export const fetchGralData = (token) => {
     axios.get('/cargos-coop.json', authData)
       .then(response => {
         dispatch(setCargosCoop(response.data))
+      })
+      .catch(error => {
+        // TODO:
+      })
+    axios.get('/empresas.json', authData)
+      .then(response => {
+        dispatch(setEmpresas(response.data))
       })
       .catch(error => {
         // TODO:
@@ -72,6 +79,13 @@ export const setCargosCoop = (cargosCoop) => {
   return {
     type: actionTypes.SET_CARGOS_COOP,
     cargosCoop: cargosCoop
+  }
+}
+
+export const setEmpresas = (empresas) => {
+  return {
+    type: actionTypes.SET_EMPRESAS,
+    empresas: empresas
   }
 }
 

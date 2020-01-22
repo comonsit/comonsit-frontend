@@ -8,6 +8,7 @@ const initialState = {
   selectedComunidad: null,
   cargos: null,
   cargosCoop: null,
+  empresas: null,
   loading: false,
   updated: false,
   newComunidad: false
@@ -35,6 +36,12 @@ const setCargos = (state, action) => {
 const setCargosCoop = (state, action) => {
   return updateObject(state, {
     cargosCoop: action.cargosCoop,
+  })
+}
+
+const setEmpresas = (state, action) => {
+  return updateObject(state, {
+    empresas: action.empresas,
   })
 }
 
@@ -105,6 +112,7 @@ const reducer = (state=initialState , action) => {
     case actionTypes.SET_COMUNIDADES: return setComunidades(state, action)
     case actionTypes.SET_CARGOS: return setCargos(state, action)
     case actionTypes.SET_CARGOS_COOP: return setCargosCoop(state, action)
+    case actionTypes.SET_EMPRESAS: return setEmpresas(state, action)
     case actionTypes.SET_USER: return setUser(state, action)
     case actionTypes.UPDATE_COMUNIDAD_START: return updateComunidadStart(state)
     case actionTypes.UPDATE_COMUNIDAD_SUCCESS: return updateComunidadSuccess(state)
