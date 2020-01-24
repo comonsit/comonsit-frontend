@@ -64,6 +64,18 @@ class Acopios extends Component {
         accessor: 'nombre_socio'
       },
       {
+        Header: <FormattedMessage id="region"/>,
+        accessor: 'region',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+      },
+      {
+        Header: <FormattedMessage id="comunidad"/>,
+        accessor: 'comunidad',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+      },
+      {
         Header: <FormattedMessage id="fecha"/>,
         accessor: 'fecha',
         Filter: SliderColumnFilter,
