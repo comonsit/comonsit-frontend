@@ -60,6 +60,10 @@ class Acopios extends Component {
         filter: 'includes'
       },
       {
+        Header: <FormattedMessage id="nombres"/>,
+        accessor: 'nombre_socio'
+      },
+      {
         Header: <FormattedMessage id="fecha"/>,
         accessor: 'fecha',
         Filter: SliderColumnFilter,
