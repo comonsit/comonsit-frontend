@@ -16,6 +16,14 @@ export {
 } from './solicitudes'
 
 export {
+    initAcopios,
+    // unSelectAcopio,
+    // fetchSelAcopio,
+    // newAcopio,
+    // createNewAcopio
+} from './acopios'
+
+export {
   onChangeLocale
 } from './locale'
 

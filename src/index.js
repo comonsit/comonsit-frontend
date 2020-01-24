@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import sociosReducer from './store/reducers/socios'
 import generalDataReducer from './store/reducers/generalData'
 import solicitudReducer from './store/reducers/solicitudes'
+import acopioReducer from './store/reducers/acopios'
 import authReducer from './store/reducers/auth'
 import localeReducer from './store/reducers/locale'
 import thunk from 'redux-thunk';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     locale: localeReducer,
     solicitudes: solicitudReducer,
+    acopios: acopioReducer,
     generalData: generalDataReducer
 })
 

@@ -92,7 +92,6 @@
   "solicitudForm.irregularidades": "Binti ma' lec",
   "solicitudForm.aval": "Socio Aval",
   "solicitudForm.familiar_responsable": "Familiar Responsable",
-  "acopios.title": "Acopiohetic",
   "tsumbalil.title": "Comonaletic",
   "tsumbalil.nombre_de_comunidad": "Comonal",
   "tsumbalil.nombre_region": "Region",
@@ -106,5 +105,12 @@
   "all": "pisil",
   "sociosXLSX": "Lehel socios.xlsx",
   "comunidad": "Comonal",
-  "region": "Region"
+  "region": "Region",
+  "kilos": "Kilos",
+  "acopios.tipo_producto": "Bin Producto",
+  "ingreso": "jayeb Taqu'in",
+  "fecha": "Bin Ora",
+  "clave": "Clave Socio",
+  "acopios.title": "Acopiohetic",
+  "acopios.newAcopio": "Yachil Acopio"
 }

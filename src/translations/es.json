@@ -92,7 +92,6 @@
   "solicitudForm.irregularidades": "Irregularidades",
   "solicitudForm.aval": "Socio Aval",
   "solicitudForm.familiar_responsable": "Familiar Responsable",
-  "acopios.title": "Acopios",
   "tsumbalil.title": "Comunidades",
   "tsumbalil.nombre_de_comunidad": "Comunidad",
   "tsumbalil.nombre_region": "Región",
@@ -106,5 +105,12 @@
   "all": "todos",
   "sociosXLSX": "Descargar socios.xlsx",
   "comunidad": "Comunidad",
-  "region": "Region"
+  "region": "Region",
+  "kilos": "Kilos",
+  "acopios.tipo_producto": "Tipo de Producto",
+  "ingreso": "Ingreso",
+  "fecha": "Fecha",
+  "clave": "Clave Socio",
+  "acopios.title": "Acopios",
+  "acopios.newAcopio": "Nuevo Acopio"
 }
