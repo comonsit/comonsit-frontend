@@ -8,7 +8,7 @@ const initialState = {
   selectedSolicitud: null
 }
 
-const setSocios = (state, action) => {
+const setSolicitudes = (state, action) => {
   return updateObject(state, {
     solicitudes: action.solicitudes,
   })
@@ -50,14 +50,14 @@ const setSelSolicitud = (state, action) => {
 
 const unSetSelSolicitud = (state) => {
   return updateObject(state, {
-    selectedSocio: null,
+    selectedSolicitud: null,
   })
 }
 
 const reducer = (state=initialState, action) => {
   switch(action.type) {
-    case actionTypes.SET_SOLICITUDES: return setSocios(state, action)
-    //case actionTypes.FETCH_SOCIOS_FAILED: return updateObject(state, {error: true})
+    case actionTypes.SET_SOLICITUDES: return setSolicitudes(state, action)
+    //case actionTypes.FETCH_SOLICITUDES_FAILED: return updateObject(state, {error: true})
     case actionTypes.NEW_SOLICITUD: return newSolicitud(state)
     case actionTypes.NEW_SOLICITUD_START: return newSolicitudStart(state)
     case actionTypes.NEW_SOLICITUD_SUCCESS: return newSolicitudSuccess(state)
