@@ -65,7 +65,7 @@ const RTable = ({ columns, data, onRowClick}) => {
     <table className={classes.TablaSocios} {...getTableProps()}>
       <thead>
         <tr>
-          <th className={classes.SearchHeader} colspan="2">
+          <th className={classes.SearchHeader} colSpan="2">
             <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
                 globalFilter={state.globalFilter}
@@ -73,7 +73,7 @@ const RTable = ({ columns, data, onRowClick}) => {
               />
           </th>
           <th
-            colspan="0">
+            colSpan="0">
             <label className={classes.Switch}>
               <input type="checkbox" onChange={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
               <span className={classes.RoundSlider}></span>
