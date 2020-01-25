@@ -39,7 +39,6 @@ class Acopios extends Component {
 
   onNewAcopio = () => {
     this.setState({ acopioSelected: true});
-    // console.log('ACOPIO FORM')
     this.props.history.push('acopio-formato');
     this.props.onNewAcop()
   }
