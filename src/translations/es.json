@@ -73,7 +73,7 @@
   "solicitudes.approve": "Aprobar",
   "solicitudes.disapprove": "Rechazar",
   "solicitudForm.title": "Solicitud Nueva",
-  "solicitudForm.searchSocio": "Buscar Socio",
+  "searchSocio": "Buscar Socio",
   "solicitudForm.clave_socio": "Clave de Socio",
   "solicitudForm.fecha_solicitud": "Fecha de Solicitud",
   "solicitudForm.tipo_credito": "Tipo de Crédito",
@@ -112,5 +112,10 @@
   "fecha": "Fecha",
   "clave": "Clave Socio",
   "acopios.title": "Acopios",
-  "acopios.newAcopio": "Nuevo Acopio"
+  "acopios.newAcopio": "Nuevo Acopio",
+  "selectSocio": "Haz click en el socio",
+  "acopioForm.ingreso": "Ingreso",
+  "acopioForm.kilos_de_producto": "Kilos de Producto",
+  "acopioForm.tipo_de_producto": "Tipo de Producto",
+  "acopioForm.title": "Forma Acopio"
 }

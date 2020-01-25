@@ -26,47 +26,47 @@ export const initAcopios = (token) => {
       })
   }
 }
-//
-// export const createNewAcopio = (acopData, token) => {
-//     return dispatch => {
-//       const authData = {
-//         headers: { 'Authorization': `Bearer ${token}` },
-//       }
-//       dispatch(newAcopioStart())
-//       axios.post(`/acopios/`, acopioData, authData)
-//           .then(response => {
-//             dispatch(newAcopioSuccess(response.data.id, acopioData ))
-//           })
-//           .catch(error => {
-//             dispatch(newAcopioFailed())
-//           })
-//     }
-// }
-//
-// export const newAcopio = () => {
-//     return {
-//         type: actionTypes.NEW_ACOPIO
-//     }
-// }
-//
-// export const newAcopioSuccess = (id) => {
-//     return {
-//         type: actionTypes.NEW_ACOPIO_SUCCESS
-//     }
-// }
-//
-// export const newAcopioFailed = (error) => {
-//     return {
-//         type: actionTypes.NEW_ACOPIO_FAILED,
-//         error: error
-//     }
-// }
-//
-// export const newAcopioStart = () => {
-//     return {
-//         type: actionTypes.NEW_ACOPIO_START
-//     }
-// }
+
+export const createNewAcopio = (acopioData, token) => {
+    return dispatch => {
+      const authData = {
+        headers: { 'Authorization': `Bearer ${token}` },
+      }
+      dispatch(newAcopioStart())
+      axios.post(`/acopios/`, acopioData, authData)
+          .then(response => {
+            dispatch(newAcopioSuccess(response.data.id, acopioData ))
+          })
+          .catch(error => {
+            dispatch(newAcopioFailed())
+          })
+    }
+}
+
+export const newAcopio = () => {
+    return {
+        type: actionTypes.NEW_ACOPIO
+    }
+}
+
+export const newAcopioSuccess = (id) => {
+    return {
+        type: actionTypes.NEW_ACOPIO_SUCCESS
+    }
+}
+
+export const newAcopioFailed = (error) => {
+    return {
+        type: actionTypes.NEW_ACOPIO_FAILED,
+        error: error
+    }
+}
+
+export const newAcopioStart = () => {
+    return {
+        type: actionTypes.NEW_ACOPIO_START
+    }
+}
 //
 // export const fetchSelAcopio = (token, acopioId) => {
 //   return dispatch => {

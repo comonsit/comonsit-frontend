@@ -19,8 +19,8 @@ export {
     initAcopios,
     // unSelectAcopio,
     // fetchSelAcopio,
-    // newAcopio,
-    // createNewAcopio
+    newAcopio,
+    createNewAcopio
 } from './acopios'
 
 export {

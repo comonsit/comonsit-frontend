@@ -39,9 +39,9 @@ class Acopios extends Component {
 
   onNewAcopio = () => {
     this.setState({ acopioSelected: true});
-    console.log('ACOPIO FORM')
-    // this.props.history.push('acopio-formato');
-    // this.props.onNewAcop()
+    // console.log('ACOPIO FORM')
+    this.props.history.push('acopio-formato');
+    this.props.onNewAcop()
   }
 
   render () {
@@ -138,7 +138,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onInitAcopios: (token) => dispatch(actions.initAcopios(token)),
-      // onNewAcop: () => dispatch(actions.newAcopio()),
+      onNewAcop: () => dispatch(actions.newAcopio()),
       // onFetchSelAcopio: (token, solId) => dispatch(actions.fetchSelAcopio(token, acopioId)),
       // unSelAcopio: () => dispatch(actions.unSelectAcopio())
     }

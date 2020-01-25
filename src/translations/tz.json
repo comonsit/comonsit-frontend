@@ -73,7 +73,7 @@
   "solicitudes.approve": "Lec",
   "solicitudes.disapprove": "Ma' lec",
   "solicitudForm.title": "Yachil Yasc'an",
-  "solicitudForm.searchSocio": "Bin Socio",
+  "searchSocio": "Bin Socio",
   "solicitudForm.clave_socio": "Clave yuun Socio",
   "solicitudForm.fecha_solicitud": "Ora yu'un Solicitud",
   "solicitudForm.tipo_credito": "Bin Crédito",
@@ -112,5 +112,10 @@
   "fecha": "Bin Ora",
   "clave": "Clave Socio",
   "acopios.title": "Acopiohetic",
-  "acopios.newAcopio": "Yachil Acopio"
+  "acopios.newAcopio": "Yachil Acopio",
+  "selectSocio": "Leha te socio",
+  "acopioForm.ingreso": "Jayeb Taquin",
+  "acopioForm.kilos_de_producto": "Kilos",
+  "acopioForm.tipo_de_producto": "Bin Producto",
+  "acopioForm.title": "Te Acopio"
 }

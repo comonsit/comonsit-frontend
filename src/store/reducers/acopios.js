@@ -3,8 +3,8 @@ import { updateObject } from './utility'
 
 const initialState = {
   acopios: [{}],
-  // loading: false,
-  // updated: false,
+  loading: false,
+  updated: false,
   // selectedAcopio: null
 }
 
@@ -13,42 +13,42 @@ const setAcopios = (state, action) => {
     acopios: action.acopios,
   })
 }
-//
-// const newSolicitud = (state) => {
+
+const newAcopio = (state) => {
+  return updateObject(state, {
+    loading: false,
+    updated: false
+  })
+}
+
+const newAcopioStart = (state) => {
+  return updateObject(state, {
+    loading: true,
+    updated: false
+  })
+}
+
+const newAcopioSuccess = (state) => {
+  return updateObject(state, {
+    loading: false,
+    updated: true
+  })
+}
+
+const newAcopioFailed = (state) => {
+  return updateObject(state, {
+    loading: false,
+    updated: false
+  })
+}
+
+// const setSelAcopio = (state, action) => {
 //   return updateObject(state, {
-//     loading: false,
-//     updated: false
+//     selectedAcopio: action.selectedAcopio
 //   })
 // }
 //
-// const newSolicitudStart = (state) => {
-//   return updateObject(state, {
-//     loading: true,
-//     updated: false
-//   })
-// }
-//
-// const newSolicitudSuccess = (state) => {
-//   return updateObject(state, {
-//     loading: false,
-//     updated: true
-//   })
-// }
-//
-// const newSolicitudFailed = (state) => {
-//   return updateObject(state, {
-//     loading: false,
-//     updated: false
-//   })
-// }
-//
-// const setSelSolicitud = (state, action) => {
-//   return updateObject(state, {
-//     selectedSolicitud: action.selectedSolicitud
-//   })
-// }
-//
-// const unSetSelSolicitud = (state) => {
+// const unSetSelAcopio = (state) => {
 //   return updateObject(state, {
 //     selectedSocio: null,
 //   })
@@ -58,12 +58,12 @@ const reducer = (state=initialState, action) => {
   switch(action.type) {
     case actionTypes.SET_ACOPIOS: return setAcopios(state, action)
     //case actionTypes.FETCH_SOCIOS_FAILED: return updateObject(state, {error: true})
-    // case actionTypes.NEW_ACOPIO: return newSolicitud(state)
-    // case actionTypes.NEW_ACOPIO_START: return newSolicitudStart(state)
-    // case actionTypes.NEW_ACOPIO_SUCCESS: return newSolicitudSuccess(state)
-    // case actionTypes.NEW_ACOPIO_FAILED: return newSolicitudFailed(state)
-    // case actionTypes.SET_SEL_ACOPIO: return setSelSolicitud(state, action)
-    // case actionTypes.UNSELECT_ACOPIO: return unSetSelSolicitud(state)
+    case actionTypes.NEW_ACOPIO: return newAcopio(state)
+    case actionTypes.NEW_ACOPIO_START: return newAcopioStart(state)
+    case actionTypes.NEW_ACOPIO_SUCCESS: return newAcopioSuccess(state)
+    case actionTypes.NEW_ACOPIO_FAILED: return newAcopioFailed(state)
+    // case actionTypes.SET_SEL_ACOPIO: return setSelAcopio(state, action)
+    // case actionTypes.UNSELECT_ACOPIO: return unSetSelAcopio(state)
     default:
       return state
   }
