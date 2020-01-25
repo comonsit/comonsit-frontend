@@ -88,12 +88,10 @@ class Perfil extends Component {
     axios.patch('/users/me.json', formData, authData)
       .then(response => {
         this.setState({loading: false})
-        console.log(response.data)
         this.props.updateUser(response.data)
         //dispatch update user data
       })
       .catch(error => {
-        console.log(error)
         this.setState({loading: true})
       })
   }

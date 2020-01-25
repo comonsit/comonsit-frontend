@@ -30,7 +30,6 @@ class Solicitudes extends Component {
     //   this.props.onInitSolicitudes(this.props.token)
     // }
     if(this.props.selectedSol !== prevProps.selectedSol) {
-      console.log('CAMBIANDO EL ESTADO');
       this.setState({selectedSol: this.props.selectedSol})
     }
   }
@@ -154,11 +153,6 @@ class Solicitudes extends Component {
         </div>
       )
     }
-
-    console.log(this.props.listaSolicitudes)
-
-
-    console.log(this.props.selectedSol);
 
     // TODO:
     // if (this.state.solicitudSeleccionado && this.props.selSol) {

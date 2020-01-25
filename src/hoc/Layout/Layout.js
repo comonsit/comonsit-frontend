@@ -31,7 +31,6 @@ class Layout extends Component {
   render() {
     let classes, menu
     if (this.props.isAuthenticated && this.props.user){
-      console.log(this.props.user);
       classes = [cl.PContent]
       menu = (
         <>

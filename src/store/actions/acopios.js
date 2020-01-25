@@ -16,8 +16,6 @@ export const initAcopios = (token) => {
     }
     axios.get('/acopios.json', authData)
       .then(response => {
-        console.log("FETCHING ACOPIOS");
-        // console.log(response.data)
         dispatch(setAcopios(response.data))
       })
       .catch(error => {
@@ -73,11 +71,8 @@ export const newAcopioStart = () => {
 //     const authData = {
 //       headers: { 'Authorization': `Bearer ${token}` }
 //     }
-//     console.log('GET ACOPIO');
 //     axios.get(`/acopios/${acopioId}.json`, authData)
 //       .then(response => {
-//         console.log('FETCHED ACOPIO');
-//         console.log(response.data)
 //         dispatch(setSelAcopio(response.data))
 //       })
 //       .catch(error => {

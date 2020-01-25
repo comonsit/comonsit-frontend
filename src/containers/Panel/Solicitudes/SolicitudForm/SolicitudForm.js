@@ -440,24 +440,6 @@ class SolicitudForm extends Component {
     this.props.onFetchSelSocios(this.props.token, id)
   }
 
-  renderStatus = cellInfo => {
-    const colors = {
-      "AC": "#2bc71b",
-      "BA": "#ec573c",
-      "NP": "#868a86"
-    }
-
-     return (
-       <div
-        style={{
-          borderRadius: "2rem",
-          width: "2rem",
-          height: "2rem",
-          backgroundColor: colors[cellInfo.cell.value] }}
-       />
-     );
- };
-
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
@@ -483,7 +465,7 @@ class SolicitudForm extends Component {
                 <p>{this.props.selSocio.nombres} {this.props.selSocio.apellidos} de región {this.props.selSocio.region}</p>
               </div>)
           }
-          supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="solicitudForm.searchSocio"/></Button>)
+          supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
         } else {
           supportData = null
           supportButton = null

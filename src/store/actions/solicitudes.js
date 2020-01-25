@@ -16,8 +16,6 @@ export const initSolicitudes = (token) => {
     }
     axios.get('/solic-creditos.json', authData)
       .then(response => {
-        console.log("FETCHING SOLICITUDES");
-        // console.log(response.data)
         dispatch(setSolicitudes(response.data))
       })
       .catch(error => {
@@ -73,11 +71,8 @@ export const fetchSelSolicitud = (token, solId) => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }
     }
-    console.log('GET SOL');
     axios.get(`/solic-creditos/${solId}.json`, authData)
       .then(response => {
-        console.log('FETCHED SOL');
-        console.log(response.data)
         dispatch(setSelSolicitud(response.data))
       })
       .catch(error => {
