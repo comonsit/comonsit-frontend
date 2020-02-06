@@ -7,6 +7,7 @@ import sociosReducer from './store/reducers/socios'
 import generalDataReducer from './store/reducers/generalData'
 import solicitudReducer from './store/reducers/solicitudes'
 import acopioReducer from './store/reducers/acopios'
+import movimientoReducer from './store/reducers/movimientos'
 import authReducer from './store/reducers/auth'
 import localeReducer from './store/reducers/locale'
 import thunk from 'redux-thunk';
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     locale: localeReducer,
     solicitudes: solicitudReducer,
     acopios: acopioReducer,
+    movimientos: movimientoReducer,
     generalData: generalDataReducer
 })
 

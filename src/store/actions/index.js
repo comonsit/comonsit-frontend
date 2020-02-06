@@ -24,6 +24,15 @@ export {
 } from './acopios'
 
 export {
+    initMovimientos,
+    // unSelectAcopio,
+    // fetchSelAcopio,
+    // newAcopio,
+    // createNewAcopio
+} from './movimientos'
+
+
+export {
   onChangeLocale
 } from './locale'
 

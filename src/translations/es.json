@@ -21,6 +21,7 @@
   "menu.contact": "Contacto",
   "menu.login": "Acceder",
   "pmenu.socios": "Socios",
+  "pmenu.movimientos": "Movimientos",
   "pmenu.acopios": "Acopios",
   "pmenu.solicitudes": "Solicitudes",
   "pmenu.tsumbalil": "Tsumbalil",
@@ -117,5 +118,13 @@
   "acopioForm.ingreso": "Ingreso",
   "acopioForm.kilos_de_producto": "Kilos de Producto",
   "acopioForm.tipo_de_producto": "Tipo de Producto",
-  "acopioForm.title": "Forma Acopio"
+  "acopioForm.title": "Forma Acopio",
+  "movimientos.title": "Movimientos",
+  "movimientos.newMovimiento": "Nuevo Movimiento",
+  "movimientos.actualizar": "actualizar",
+  "movimientos.aportacion_retiro": "Aportación o Retiro",
+  "movimientos.monto": "monto",
+  "movimientos.fecha_banco": "Fecha Bancos",
+  "movimientos.tipo": "Tipo de movimiento",
+  "movimientos.empresa": "Empresa"
 }

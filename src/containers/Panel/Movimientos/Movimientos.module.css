@@ -1,0 +1,39 @@
+.Container h1 {
+  font-family: 'Arquitecta';
+  padding-left: 2rem;
+  margin-left: 5rem;
+}
+
+.HeaderContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ButtonContainer {
+  width: 14rem;
+  height: 5rem;
+}
+
+.Form {
+  padding: 3rem;
+  max-width: 60rem;
+  align-items: center;
+  display: flex;
+}
+
+.Form div {
+  border: none;
+}
+
+.Inputs {
+  border: 1px solid #ccc;
+  padding: 0;
+  display: flex;
+}
+
+.TableContainer {
+  height: 60vh;
+  overflow-y:scroll;
+  border: .3rem solid #243746;
+  border-radius: .5rem;
+}

@@ -21,6 +21,7 @@
   "menu.contact": "Ts'ibayaotic",
   "menu.login": "Ochan",
   "pmenu.socios": "Socioetic",
+  "pmenu.movimientos": "Beh Taqu'in",
   "pmenu.acopios": "Acopiohetic",
   "pmenu.solicitudes": "Ya sc'an Taqu'in",
   "pmenu.logout": "Loquel",
@@ -117,5 +118,13 @@
   "acopioForm.ingreso": "Jayeb Taquin",
   "acopioForm.kilos_de_producto": "Kilos",
   "acopioForm.tipo_de_producto": "Bin Producto",
-  "acopioForm.title": "Te Acopio"
+  "acopioForm.title": "Te Acopio",
+  "movimientos.title": "Movimientoetic",
+  "movimientos.newMovimiento": "Yachil Movimiento",
+  "movimientos.actualizar": "lehel",
+  "movimientos.aportacion_retiro": "Aportación o Retiro",
+  "movimientos.monto": "Jayeb",
+  "movimientos.fecha_banco": "Bin ora Bancos",
+  "movimientos.tipo": "Bin movimiento",
+  "movimientos.empresa": "Empresa"
 }
