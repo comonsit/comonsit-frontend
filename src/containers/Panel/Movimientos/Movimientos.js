@@ -7,6 +7,7 @@ import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import RTable from '../../../components/UI/RTable/RTable';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
@@ -42,6 +43,10 @@ class Movimientos extends Component {
         hide: false
       }
     }
+  }
+
+  componentDidMount () {
+    this.props.onInitSocios(this.props.token)
   }
 
   componentWillUnmount() {
@@ -143,6 +148,7 @@ class Movimientos extends Component {
 
   render () {
 
+    let sociosBusqueda = <Spinner/>
     const columns = [
       {
         Header: <FormattedMessage id="movimientos.aportacion_retiro"/>,
@@ -176,7 +182,14 @@ class Movimientos extends Component {
       }
     ]
 
-
+    if (this.props.listaSocios && this.state.searchingOpen) {
+      sociosBusqueda = (
+        <SociosList
+            listaSocios={this.props.listaSocios}
+            onClick={row => this.selectSocio(row.values.clave_socio)}
+            />
+      )
+    }
 
     return (
       <>
@@ -186,10 +199,7 @@ class Movimientos extends Component {
             <h3><FormattedMessage id="selectSocio"/></h3>
             <div
               className={classes.TableContainer}>
-            <SociosList
-                listaSocios={this.props.listaSocios}
-                onClick={row => this.selectSocio(row.values.clave_socio)}
-                />
+            {sociosBusqueda}
             </div>
           </Modal>
 
@@ -250,6 +260,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+      onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onInitMovimientos: (token, socioId) => dispatch(actions.initMovimientos(token, socioId)),
       // onNewMovimiento: () => dispatch(actions.newMovimiento()),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),

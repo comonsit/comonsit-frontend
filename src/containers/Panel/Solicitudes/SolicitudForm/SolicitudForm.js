@@ -337,7 +337,7 @@ class SolicitudForm extends Component {
 
 
   componentDidMount () {
-
+    this.props.onInitSocios(this.props.token)
   }
 
   componentWillUnmount() {
@@ -446,6 +446,7 @@ class SolicitudForm extends Component {
     const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "act_productiva", "act_productiva_otro", "mot_credito", "mot_credito_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "aval", "familiar_responsable"]
     const formElementsArray = []
     const formClasses = [classes.Form]
+    let sociosBusqueda = <Spinner/>
     let supportData, supportButton
     let formElements = <Spinner/>
 
@@ -501,6 +502,15 @@ class SolicitudForm extends Component {
 
     const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
+    if (this.state.searchingOpen && this.props.listaSocios) {
+      sociosBusqueda = (
+        <SociosList
+          listaSocios={this.props.listaSocios}
+          onClick={row => this.selectSocio(row.values.clave_socio)}
+          />
+      )
+    }
+
     return (
       <>
         <Modal
@@ -509,10 +519,7 @@ class SolicitudForm extends Component {
           <h3>Búsqueda de Socios...pendiente</h3>
           <div
             className={classes.TableContainer}>
-            <SociosList
-              listaSocios={this.props.listaSocios}
-              onClick={row => this.selectSocio(row.values.clave_socio)}
-              />
+            {sociosBusqueda}
           </div>
         </Modal>
         <div className={classes.Header}>
@@ -549,6 +556,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
+      onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onCreateNewSolicitud: (solData, token) => dispatch(actions.createNewSolicitud(solData, token)),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
       unSelSocio: () => dispatch(actions.unSelectSocio())

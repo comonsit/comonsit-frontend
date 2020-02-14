@@ -112,7 +112,7 @@ class AcopioForm extends Component {
 
 
   componentDidMount () {
-
+    this.props.onInitSocios(this.props.token)
   }
 
   componentWillUnmount() {
@@ -244,7 +244,7 @@ class AcopioForm extends Component {
      formClasses.push(classes.noScroll)
 
      // TODO: SHOULD NOT RE-RENDER all list each time
-     if (this.props.listaSocios) {
+     if (this.state.searchingOpen && this.props.listaSocios) {
        sociosLista = (<SociosList
                        listaSocios={this.props.listaSocios}
                        onClick={row => this.selectSocio(row.values.clave_socio)}
@@ -298,6 +298,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
+      onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onCreateNewAcopio: (solData, token) => dispatch(actions.createNewAcopio(solData, token)),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
       unSelSocio: () => dispatch(actions.unSelectSocio())
