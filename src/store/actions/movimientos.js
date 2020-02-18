@@ -9,6 +9,12 @@ export const setMovimientos = (movimientos) => {
   }
 }
 
+export const unSetMovimientos = () => {
+  return {
+    type: actionTypes.UNSET_MOVIMIENTOS
+  }
+}
+
 export const initMovimientos = (token, socioId) => {
   return dispatch => {
     const authData = {

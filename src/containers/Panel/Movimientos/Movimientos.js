@@ -11,7 +11,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
-// import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
+import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import * as actions from '../../../store/actions'
 
 
@@ -51,6 +51,7 @@ class Movimientos extends Component {
 
   componentWillUnmount() {
     this.props.unSelSocio()
+    this.props.unSetMov()
   }
 
 
@@ -146,6 +147,14 @@ class Movimientos extends Component {
     this.updateData(id)
   }
 
+  renderType = cellInfo => {
+    if (cellInfo.cell.value) {
+      return (<p style={{color: "#2bc71b"}}>A</p>)
+    } else {
+      return (<p style={{color: "#ec573c"}}>R</p>)
+    }
+ }
+
   render () {
 
     let sociosBusqueda = <Spinner/>
@@ -153,8 +162,9 @@ class Movimientos extends Component {
       {
         Header: <FormattedMessage id="movimientos.aportacion_retiro"/>,
         accessor: 'aportacion',
-        // Filter: SelectColumnFilter,
-        // filter: 'includes',
+        Cell: this.renderType,
+        Filter: SelectColumnFilter,
+        filter: 'includes',
       },
       {
         Header: <FormattedMessage id="fecha"/>,
@@ -264,7 +274,8 @@ const mapDispatchToProps = dispatch => {
       onInitMovimientos: (token, socioId) => dispatch(actions.initMovimientos(token, socioId)),
       // onNewMovimiento: () => dispatch(actions.newMovimiento()),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio())
+      unSelSocio: () => dispatch(actions.unSelectSocio()),
+      unSetMov: () => dispatch(actions.unSetMovimientos())
       // onFetchSelMovimiento: (token, solId) => dispatch(actions.fetchSelMovimiento(token, movimientoId)),
       // unSelMovimiento: () => dispatch(actions.unSelectMovimiento())
     }

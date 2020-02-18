@@ -25,6 +25,7 @@ export {
 
 export {
     initMovimientos,
+    unSetMovimientos
     // unSelectAcopio,
     // fetchSelAcopio,
     // newAcopio,
