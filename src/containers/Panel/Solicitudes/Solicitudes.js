@@ -13,6 +13,7 @@ import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreat
 import Button from '../../../components/UI/Button/Button';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
+import roles from '../../../store/roles'
 
 class Solicitudes extends Component {
   state = {
@@ -134,9 +135,10 @@ class Solicitudes extends Component {
     let solicitudInfo = <Spinner/>
 
     // TODO: Mover a Container independiente informativo!!
-    if (this.state.selectedSol) {
+    if (this.state.selectedSol && this.props.role !== roles.PR) {
       solicitudInfo = (
         <div>
+          <h1>Info para el {this.props.role}</h1>
           <h3>Folio: {this.state.selectedSol.folio_solicitud} </h3>
           <h4>clave de Socio: {this.state.selectedSol.clave_socio} </h4>
           <h5>Generado por: {this.state.selectedSol.autor} </h5>
@@ -152,6 +154,8 @@ class Solicitudes extends Component {
             ><FormattedMessage id="solicitudes.disapprove"/></Button>
         </div>
       )
+    } else {
+      solicitudInfo = "Eres un " + this.props.role + " ...pelas"
     }
 
     // TODO:
@@ -194,6 +198,7 @@ const mapStateToProps = state => {
       selectedSol: state.solicitudes.selectedSolicitud,
       comunidades: state.generalData.comunidades,
       token: state.auth.token,
+      role: state.generalData.role
       // selSocio: state.socios.selectedSol,
       // updated: state.socios.updated,
     }

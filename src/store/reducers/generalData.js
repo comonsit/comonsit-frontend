@@ -1,10 +1,12 @@
 import * as actionTypes from '../actions/actionTypes'
+import roles from '../roles.js';
 import { updateObject } from './utility'
 
 const initialState = {
   regiones: null,
   comunidades: [{}],
   user: null,
+  role: roles.SO,
   selectedComunidad: null,
   cargos: null,
   cargosCoop: null,
@@ -48,6 +50,7 @@ const setEmpresas = (state, action) => {
 const setUser = (state, action) => {
   return updateObject(state, {
     user: action.user,
+    role: roles[action.user.role]
   })
 }
 

@@ -1,14 +1,9 @@
 import React from 'react';
 import classes from './Role.module.css';
+import roles from '../../../store/roles'
 
 
 const role = (props) =>{
-  const roles = {
-    'SO': "Socio",
-    'PR': "Promotor",
-    'CO': "Coordinador",
-    'GE': "Gerente"
-  }
   const attachedClasses = [classes.Container, classes[props.userRole]]
 
   return (
