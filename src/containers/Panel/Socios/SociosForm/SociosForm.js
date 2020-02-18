@@ -166,7 +166,7 @@ class SociosForm extends Component {
           elementConfig: {
             options: this.props.empresas.map(r => ({"value": r.id, "displayValue": r.nombre_empresa}))
           },
-          label: (<><FormattedMessage id="socioForm.empresa"/>*</>),
+          label: (<><FormattedMessage id="empresa"/>*</>),
           value: this.props.selSocio.empresa,
           validation: {
             required: true

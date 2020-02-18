@@ -17,6 +17,7 @@ import solicitudes from './containers/Panel/Solicitudes/Solicitudes';
 import solicitudForm from './containers/Panel/Solicitudes/SolicitudForm/SolicitudForm';
 import acopios from './containers/Panel/Acopios/Acopios';
 import movimientos from './containers/Panel/Movimientos/Movimientos';
+import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
 import acopioForm from './containers/Panel/Acopios/AcopioForm/AcopioForm';
 import perfil from './containers/Panel/Perfil/Perfil';
 import logout from './containers/Panel/Logout/Logout';
@@ -64,6 +65,7 @@ class App extends Component {
           <Route path="/acopio-formato" exact component={acopioForm}/>
           <Route path="/tsumbalil" exact component={tsumbalil}/>
           <Route path="/movimientos" exact component={movimientos}/>
+          <Route path="/movimiento-formato" exact component={movimientosForm}/>
           <Route path="/solicitudes" exact component={solicitudes}/>
           <Route path="/solicitud-formato" exact component={solicitudForm}/>
         </>

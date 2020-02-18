@@ -60,7 +60,7 @@
   "socioForm.estatus_miel": "Chaptic",
   "socioForm.estatus_yip": "Yip Antsetic",
   "socioForm.estatus_gral": "Comonsit",
-  "socioForm.empresa": "Empresa",
+  "empresa": "Empresa",
   "solicitudes.title": "Ya sc'an Taqu'in",
   "solicitudes.new": "yachil Yasc'an",
   "solicitudes.folio_solicitud": "Folio",
@@ -75,7 +75,6 @@
   "solicitudes.disapprove": "Ma' lec",
   "solicitudForm.title": "Yachil Yasc'an",
   "searchSocio": "Bin Socio",
-  "solicitudForm.clave_socio": "Clave yuun Socio",
   "solicitudForm.fecha_solicitud": "Ora yu'un Solicitud",
   "solicitudForm.tipo_credito": "Bin Crédito",
   "solicitudForm.act_productiva": "Bin ya spas",
@@ -126,5 +125,9 @@
   "movimientos.monto": "Jayeb",
   "movimientos.fecha_banco": "Bin ora Bancos",
   "movimientos.tipo": "Bin movimiento",
-  "movimientos.empresa": "Empresa"
+  "empresa": "Empresa",
+  "movimientosForm.fecha_entrega": "Bin Ora Loc'",
+  "movimientosForm.monto": "Jayeb",
+  "movimientosForm.fecha_banco": "Bon Ora och ta Banco",
+  "movimientosForm.fecha_banco": "Och te Aportacion ma'uc teme Retiro"
 }

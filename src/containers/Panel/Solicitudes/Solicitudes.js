@@ -94,7 +94,7 @@ class Solicitudes extends Component {
         accessor: 'fecha_solicitud'
       },
       {
-        Header: <FormattedMessage id="solicitudes.clave_socio"/>,
+        Header: <FormattedMessage id="clave_socio"/>,
         accessor: 'clave_socio'
       },
       {

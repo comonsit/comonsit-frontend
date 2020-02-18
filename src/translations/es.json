@@ -60,12 +60,12 @@
   "socioForm.estatus_miel": "Estatus Miel",
   "socioForm.estatus_yip": "Estatus Yip Antsetic",
   "socioForm.estatus_gral": "Estatus General",
-  "socioForm.empresa": "Empresa",
+  "empresa": "Empresa",
   "solicitudes.title": "Solicitudes",
   "solicitudes.new": "Nueva Solicitud",
   "solicitudes.folio_solicitud": "Folio",
   "solicitudes.fecha_solicitud": "Fecha",
-  "solicitudes.clave_socio": "Clave Socio",
+  "clave_socio": "Clave Socio",
   "solicitudes.tipo_credito": "Tipo de Crédito",
   "solicitudes.monto_solicitado": "Monto",
   "solicitudes.plazo_de_pago_solicitado": "Plazo",
@@ -75,7 +75,6 @@
   "solicitudes.disapprove": "Rechazar",
   "solicitudForm.title": "Solicitud Nueva",
   "searchSocio": "Buscar Socio",
-  "solicitudForm.clave_socio": "Clave de Socio",
   "solicitudForm.fecha_solicitud": "Fecha de Solicitud",
   "solicitudForm.tipo_credito": "Tipo de Crédito",
   "solicitudForm.act_productiva": "Actividad Productiva",
@@ -126,5 +125,9 @@
   "movimientos.monto": "monto",
   "movimientos.fecha_banco": "Fecha Bancos",
   "movimientos.tipo": "Tipo de movimiento",
-  "movimientos.empresa": "Empresa"
+  "empresa": "Empresa",
+  "movimientosForm.fecha_entrega": "Fecha de Entrega",
+  "movimientosForm.monto": "Monto",
+  "movimientosForm.fecha_banco": "Fecha Banco",
+  "movimientosForm.title": "Alta de Aportacion o Retiro"
 }

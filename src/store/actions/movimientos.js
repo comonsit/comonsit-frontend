@@ -26,7 +26,48 @@ export const initMovimientos = (token, socioId) => {
       })
       .catch(error => {
         // TODO: FALTA!!
-        //dispatch(fetchAcopioesFailed())
+        //dispatch(fetchMovimientosesFailed())
       })
   }
+}
+
+export const createNewMovimiento = (movimientoData, token) => {
+    return dispatch => {
+      const authData = {
+        headers: { 'Authorization': `Bearer ${token}` },
+      }
+      dispatch(newMovimientoStart())
+      axios.post(`/movimientos/`, movimientoData, authData)
+          .then(response => {
+            dispatch(newMovimientoSuccess(response.data.id, movimientoData ))
+          })
+          .catch(error => {
+            dispatch(newMovimientoFailed())
+          })
+    }
+}
+
+export const newMovimiento = () => {
+    return {
+        type: actionTypes.NEW_MOVIMIENTO
+    }
+}
+
+export const newMovimientoSuccess = (id) => {
+    return {
+        type: actionTypes.NEW_MOVIMIENTO_SUCCESS
+    }
+}
+
+export const newMovimientoFailed = (error) => {
+    return {
+        type: actionTypes.NEW_MOVIMIENTO_FAILED,
+        error: error
+    }
+}
+
+export const newMovimientoStart = () => {
+    return {
+        type: actionTypes.NEW_MOVIMIENTO_START
+    }
 }

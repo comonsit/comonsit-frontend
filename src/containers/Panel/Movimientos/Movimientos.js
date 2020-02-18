@@ -126,8 +126,9 @@ class Movimientos extends Component {
   }
 
   onNewMovimiento = () => {
-    // this.props.history.push('movimiento-formato');
-    // this.props.onNewMovimiento()
+    this.setState({ acopioSelected: true});
+    this.props.history.push('movimiento-formato');
+    this.props.onNewMov()
   }
 
   selectSocio =(id) => {
@@ -272,7 +273,7 @@ const mapDispatchToProps = dispatch => {
     return {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onInitMovimientos: (token, socioId) => dispatch(actions.initMovimientos(token, socioId)),
-      // onNewMovimiento: () => dispatch(actions.newMovimiento()),
+      onNewMov: () => dispatch(actions.newMovimiento()),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
       unSelSocio: () => dispatch(actions.unSelectSocio()),
       unSetMov: () => dispatch(actions.unSetMovimientos())

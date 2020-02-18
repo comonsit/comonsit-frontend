@@ -30,7 +30,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..clave del socio'
           },
-          label: (<><FormattedMessage id="solicitudForm.clave_socio"/>*</>),
+          label: (<><FormattedMessage id="clave_socio"/>*</>),
           value: '',
           validation: {
             required: true
