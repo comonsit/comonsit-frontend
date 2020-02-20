@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
+import axios from '../../../../store/axios-be.js'
 
+import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
@@ -288,6 +290,11 @@ class SociosForm extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.updated !== prevProps.updated) {
+      this.setState({editing: false})
+    }
+  }
 
   componentDidMount () {
 
@@ -295,8 +302,6 @@ class SociosForm extends Component {
 
   onSubmitForm = (event) => {
     event.preventDefault();
-    this.setState({editing: false})
-
 
     const formData = {}
     for (let formElementIdentifier in this.state.socioForm) {
@@ -412,10 +417,13 @@ class SociosForm extends Component {
     }
 
 
-    if (this.state.editing || this.props.new) {
+    if (this.state.editing) {
       submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="saveButton"/></Button>
       editButton = null
-    }else {
+    } else if (this.props.new) {
+      submitButton = null
+      editButton = null
+    } else {
       submitButton = null
       editButton = <Button clicked={this.onStartEditing} disabled={this.state.editing}><FormattedMessage id="editButton"/></Button>
     }
@@ -441,6 +449,7 @@ const mapStateToProps = state => {
     return {
       selSocio: state.socios.selectedSocio,
       loading: state.socios.loading,
+      updated: state.socios.updated,
       token: state.auth.token,
       comunidades: state.generalData.comunidades,
       cargos: state.generalData.cargos,
@@ -457,4 +466,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SociosForm)
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(SociosForm, axios))

@@ -90,6 +90,7 @@ export const updateSocio = (socioData, socioId, token) => {
     axios.put(`/socios/${socioId}.json`, authData)
       .then(response => {
         dispatch(updateSocioSuccess(response.data.name, socioData ))
+        alert('Socio ' + response.data.clave_socio + ' editado correctamente')
       })
       .catch(error => {
         dispatch(updateSocioFailed(error))
@@ -106,6 +107,7 @@ export const createNewSocio = (socioData, token) => {
     axios.post(`/socios/`, socioData, authData)
       .then(response => {
         dispatch(newSocioSuccess(response.data.name, socioData ))
+        alert('Socio ' + response.data.clave_socio + ' creado correctamente')
       })
       .catch(error => {
         dispatch(newSocioFailed(error))
