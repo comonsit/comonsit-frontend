@@ -127,6 +127,7 @@ export const updateComunidad = (data, id, token) => {
     axios.put(`/comunidades/${id}.json`, authData)
       .then(response => {
         dispatch(updateComunidadSuccess(response.data.name, data ))
+        alert('Comunidad ' + response.data.id + ' editada correctamente')
       })
       .catch(error => {
         dispatch(updateComunidadFailed(error))
@@ -162,6 +163,7 @@ export const createNewComunidad = (data, token) => {
     axios.post(`/comunidades/`, data, authData)
       .then(response => {
         dispatch(newComunidadSuccess(response.data.name, data ))
+        alert('Comunidad ' + response.data.id + ' creada correctamente')
       })
       .catch(error => {
         dispatch(newComunidadFailed(error))

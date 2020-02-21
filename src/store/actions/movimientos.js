@@ -40,6 +40,7 @@ export const createNewMovimiento = (movimientoData, token) => {
       axios.post(`/movimientos/`, movimientoData, authData)
           .then(response => {
             dispatch(newMovimientoSuccess(response.data.id, movimientoData ))
+            alert('Movimiento ' + response.data.id + ' creado correctamente')
           })
           .catch(error => {
             dispatch(newMovimientoFailed())

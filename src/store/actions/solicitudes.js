@@ -34,6 +34,7 @@ export const createNewSolicitud = (solData, token) => {
       axios.post(`/solic-creditos/`, solData, authData)
           .then(response => {
             dispatch(newSolicitudSuccess(response.data.folio_solicitud, solData ))
+            alert('Solicitud ' + response.data.folio_solicitud + ' creado correctamente')
           })
           .catch(error => {
             dispatch(newSolicitudFailed())

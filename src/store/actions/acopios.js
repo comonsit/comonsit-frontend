@@ -34,6 +34,7 @@ export const createNewAcopio = (acopioData, token) => {
       axios.post(`/acopios/`, acopioData, authData)
           .then(response => {
             dispatch(newAcopioSuccess(response.data.id, acopioData ))
+            alert('Acopio ' + response.data.id + ' creado correctamente')
           })
           .catch(error => {
             dispatch(newAcopioFailed())
