@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import Modal from '../../components/UI/Modal/Modal';
 
@@ -11,23 +12,19 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
     componentWillMount () {
       this.requestInterceptor = axios.interceptors.request.use(req => {
-        this.setState({error: null})
-        console.log('HANDLER req');
+        this.setState({error: 0})
         console.log(req);
         return req
       })
       this.reqonseInterceptor = axios.interceptors.response.use(res => res, error => {
         console.log('HANDLER error');
-        // err.response.data.detail
-        const errorMessage = JSON.stringify(error.response.data)
-        console.log(errorMessage);
-        this.setState({error: errorMessage})
+        this.setState({error: error.response.data})
       })
     }
 
     componentWillUnmount () {
       axios.interceptors.request.eject(this.requestInterceptor)
-      axios.interceptors.request.eject(this.reqonseInterceptor)
+      axios.interceptors.response.eject(this.reqonseInterceptor)
     }
 
     errorConfirmedHandler = () => {
@@ -35,12 +32,21 @@ const withErrorHandler = (WrappedComponent, axios) => {
     }
 
     render() {
+      let errorInfo = []
+      if (this.state.error) {
+        for (let key in this.state.error) {
+          errorInfo.push(<p>{this.state.error[key]} -- {key}</p>)
+        }
+      }
+
       return (
         <>
           <Modal
             show={this.state.error}
             modalClosed={this.errorConfirmedHandler}>
-            {this.state.error ? this.state.error : null}
+            <FormattedMessage id="error.title"/>
+            {errorInfo}
+            <FormattedMessage id="error.message1"/>
           </Modal>
           <WrappedComponent {...this.props}/>
         </>

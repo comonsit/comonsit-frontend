@@ -129,5 +129,7 @@
   "movimientosForm.fecha_entrega": "Bin Ora Loc'",
   "movimientosForm.monto": "Jayeb",
   "movimientosForm.fecha_banco": "Bon Ora och ta Banco",
-  "movimientosForm.fecha_banco": "Och te Aportacion ma'uc teme Retiro"
+  "movimientosForm.fecha_banco": "Och te Aportacion ma'uc teme Retiro",
+  "error.title": "Ma'lec te Servidor",
+  "error.message1": "Te bin laj apas, ma' och ta servidor."
 }
