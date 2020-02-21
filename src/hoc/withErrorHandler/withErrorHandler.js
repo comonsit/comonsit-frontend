@@ -33,7 +33,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
     render() {
       let errorInfo = []
-      if (this.state.error) {
+      if (typeof this.state.error === "string") {
+        errorInfo = this.state.error
+      } else {
         for (let key in this.state.error) {
           errorInfo.push(<p>{this.state.error[key]} -- {key}</p>)
         }
