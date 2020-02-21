@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
+import axios from '../../../../store/axios-be.js'
 
+import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
@@ -179,4 +181,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ComunidadForm)
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ComunidadForm, axios))
