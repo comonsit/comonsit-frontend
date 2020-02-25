@@ -34,7 +34,12 @@
 }
 
 .Danger {
-  /*TODO*/
+  background-color: #c23f3f;
+}
+
+.Danger:hover {
+  border: .2rem solid #c23f3f;
+  color: #c23f3f;
 }
 
 .Short {
