@@ -43,7 +43,7 @@ class Solicitudes extends Component {
   }
 
   goMesaControl = status => {
-    // this.props.history.push('mesa-control');
+    this.props.history.push('mesa-control');
   }
 
   cancelSelected =() => {

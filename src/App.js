@@ -15,6 +15,7 @@ import socios from './containers/Panel/Socios/Socios';
 import tsumbalil from './containers/Panel/Tsumbalil/Tsumbalil';
 import solicitudes from './containers/Panel/Solicitudes/Solicitudes';
 import solicitudForm from './containers/Panel/Solicitudes/SolicitudForm/SolicitudForm';
+import mesaControl from './containers/Panel/Solicitudes/MesaControl/MesaControl';
 import acopios from './containers/Panel/Acopios/Acopios';
 import movimientos from './containers/Panel/Movimientos/Movimientos';
 import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
@@ -68,6 +69,7 @@ class App extends Component {
           <Route path="/movimiento-formato" exact component={movimientosForm}/>
           <Route path="/solicitudes" exact component={solicitudes}/>
           <Route path="/solicitud-formato" exact component={solicitudForm}/>
+          <Route path="/mesa-control" exact component={mesaControl}/>
         </>
       )
     }
