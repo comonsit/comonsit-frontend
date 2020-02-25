@@ -20,6 +20,11 @@
   padding:0 2rem;
 }
 
+.LabelLong {
+  width: 70%;
+  max-width: none;
+}
+
 .InputElement {
     outline: none;
     border: 2px solid #dddedf;

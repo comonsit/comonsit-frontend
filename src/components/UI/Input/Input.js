@@ -6,14 +6,18 @@ const input = (props) => {
     let inputElement = null;
     const containerClasses = [classes.Input]
     const inputClasses = [classes.InputElement]
+    const labelClasses = [classes.Label]
     let validationError = null
+
+    if (props.labelLong) { labelClasses.push(classes.LabelLong) }
     if (props.label) {
       label = (
-        <div className={classes.Label}>
+        <div className={labelClasses.join(' ')}>
           <label>{props.label}</label>
         </div>
       )
     }
+
 
     if (props.hide) {
       containerClasses.push(classes.HideMe)
