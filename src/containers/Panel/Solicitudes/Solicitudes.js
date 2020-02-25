@@ -13,7 +13,7 @@ import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreat
 import Button from '../../../components/UI/Button/Button';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
-import roles from '../../../store/roles'
+import roles, { isGerencia } from '../../../store/roles'
 
 class Solicitudes extends Component {
   state = {
@@ -35,12 +35,15 @@ class Solicitudes extends Component {
     }
   }
 
-  showSolicitud =(id) => {
+  showSolicitud = id => {
     this.setState({
       showSolicitudModal: true
     });
-    this.props.onFetchSelSocios(this.props.token, id)
-    // this.props.onFetchSelSocios(this.props.token, id)
+    this.props.onFetchSelSol(this.props.token, id)
+  }
+
+  goMesaControl = status => {
+    // this.props.history.push('mesa-control');
   }
 
   cancelSelected =() => {
@@ -132,30 +135,35 @@ class Solicitudes extends Component {
       }
     ]
 
+    let solicitudInfoButton = null
     let solicitudInfo = <Spinner/>
 
     // TODO: Mover a Container independiente informativo!!
-    if (this.state.selectedSol && this.props.role !== roles.PR) {
+    if (this.state.selectedSol) {
       solicitudInfo = (
         <div>
-          <h1>Info para el {this.props.role}</h1>
-          <h3>Folio: {this.state.selectedSol.folio_solicitud} </h3>
+          <h3>Solicitud: #{this.state.selectedSol.folio_solicitud} </h3>
           <h4>clave de Socio: {this.state.selectedSol.clave_socio} </h4>
           <h5>Generado por: {this.state.selectedSol.promotor} </h5>
           <h5>Tipo: {this.state.selectedSol.tipo_credito} </h5>
           <h5>A {this.state.selectedSol.plazo_de_pago_solicitado} Meses </h5>
           <h5>Por ${this.state.selectedSol.monto_solicitado} </h5>
-          <h5>...más información útil para decidir... </h5>
+          ...
           <Button
             clicked={this.cancelSelected}
-            ><FormattedMessage id="solicitudes.approve"/></Button>
+            disabled
+            ><FormattedMessage id="editButton"/></Button>
           <Button
             clicked={this.cancelSelected}
-            ><FormattedMessage id="solicitudes.disapprove"/></Button>
+            ><FormattedMessage id="cancelButton"/></Button>
         </div>
       )
-    } else {
-      solicitudInfo = "Eres un " + this.props.role + " ...pelas"
+      if (this.state.selectedSol.estatus_solicitud === 'RV' && isGerencia(this.props.role)) {
+        solicitudInfoButton = <Button
+          clicked={this.goMesaControl}
+          btnType="Success"
+          ><FormattedMessage id="solicitudes.goToMesaControl"/></Button>
+      }
     }
 
     // TODO:
@@ -171,6 +179,7 @@ class Solicitudes extends Component {
           show={this.state.showSolicitudModal}
           modalClosed={this.cancelSelected}>
           {solicitudInfo}
+          {solicitudInfoButton}
         </Modal>
         <div className={classes.Container}>
           <div className={classes.HeaderContainer}>
@@ -208,7 +217,7 @@ const mapDispatchToProps = dispatch => {
     return {
       onInitSolicitudes: (token) => dispatch(actions.initSolicitudes(token)),
       onNewSol: () => dispatch(actions.newSolicitud()),
-      onFetchSelSocios: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
+      onFetchSelSol: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
       unSelSol: () => dispatch(actions.unSelectSolicitud())
     }
 }

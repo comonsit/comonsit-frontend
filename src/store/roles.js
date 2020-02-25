@@ -5,4 +5,6 @@ const roles = {
   'GE': "Gerente"
 }
 
+export const isGerencia = rl => rl === roles.CO || rl === roles.GE
+
 export default roles
