@@ -122,17 +122,48 @@ class MesaControl extends Component {
   componentWillUnmount() {
   }
 
-  onSubmitForm = event => {
+  onApproveForm = event => {
     event.preventDefault();
-    // this.props.onApproveSolForm(this.props.token)
+    this.onSubmitForm('AP')
   }
   onDisapproveForm = event => {
     event.preventDefault();
     if (!this.state.mesaControlForm.comentarios_coordinador.value) {
       alert('Por favor agrega algún comentario del porqué estás rechazando')
     } else {
-      // this.props.onDisapproveSol(this.props.token)
+      this.onSubmitForm('RE')
     }
+  }
+
+  onSubmitForm = status => {
+    const form = {
+        comentarios_coordinador: this.state.mesaControlForm.comentarios_coordinador.value,
+        estatus_solicitud: status
+    }
+
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+    // TODO: implement loading view
+    // this.setState({loading: true})
+
+    axios.patch('/solic-creditos/'+this.props.selectedSol.folio_solicitud+'.json', form, authData)
+      .then(response => {
+        // this.setState({loading: false})
+        // this.props.updateUser(response.data)
+        if (status === 'AP') {
+          alert('Solicitud de Crédito aprobado correctamente')
+        } else {
+          alert('Solicitud de Crédito rechazada y enviada a promotor')
+        }
+        // push or pop back to history?
+        this.props.history.push('solicitudes');
+        //dispatch update user data
+      })
+      .catch(error => {
+        this.setState({loading: true})
+      })
+    // this.props.onApproveSolForm(this.props.token)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -256,7 +287,7 @@ class MesaControl extends Component {
         {solicitudInfo}
         <hr/>
         <form
-          onSubmit={this.onSubmitForm.bind(this)}
+          onSubmit={this.onApproveForm.bind(this)}
           className={classes.FormDiv}
           >
           <h2><FormattedMessage id="mesaControl.revisionCoord"/></h2>
