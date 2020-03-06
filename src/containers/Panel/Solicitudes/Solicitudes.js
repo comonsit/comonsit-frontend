@@ -3,7 +3,6 @@ import {FormattedMessage} from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// import SolicitudForm from './SolicitudForm/SolicitudForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
@@ -13,7 +12,7 @@ import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreat
 import Button from '../../../components/UI/Button/Button';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
-import roles, { isGerencia } from '../../../store/roles'
+import { isGerencia } from '../../../store/roles'
 
 class Solicitudes extends Component {
   state = {
@@ -26,10 +25,6 @@ class Solicitudes extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // TODO: pendiente hasta que editemos el socio en Modal
-    // if(this.props.updated !== prevProps.updated) {
-    //   this.props.onInitSolicitudes(this.props.token)
-    // }
     if(this.props.selectedSol !== prevProps.selectedSol) {
       this.setState({selectedSol: this.props.selectedSol})
     }
@@ -42,26 +37,14 @@ class Solicitudes extends Component {
     this.props.onFetchSelSol(this.props.token, id)
   }
 
-  goMesaControl = status => {
-    this.props.history.push('mesa-control');
-  }
-
   cancelSelected =() => {
     this.setState({
       showSolicitudModal: false,
       selectedSol: null
     });
-    // this.props.unSelSocio()
-  }
-
-  onToggleEditable = () => {
-    // this.setState(prevState => {
-    //     return {editable: !prevState.editable}
-    // })
   }
 
   onNewSolicitud = () => {
-    // this.setState({showSolicitudModal: true});
     this.props.history.push('solicitud-formato');
     this.props.onNewSol()
   }
@@ -138,7 +121,6 @@ class Solicitudes extends Component {
     let solicitudInfoButton = null
     let solicitudInfo = <Spinner/>
 
-    // TODO: Mover a Container independiente informativo!!
     if (this.state.selectedSol) {
       solicitudInfo = (
         <div>
@@ -160,18 +142,11 @@ class Solicitudes extends Component {
       )
       if (this.state.selectedSol.estatus_solicitud === 'RV' && isGerencia(this.props.role)) {
         solicitudInfoButton = <Button
-          clicked={this.goMesaControl}
+          clicked={() => this.props.history.push('mesa-control')}
           btnType="Success"
           ><FormattedMessage id="solicitudes.goToMesaControl"/></Button>
       }
     }
-
-    // TODO:
-    // if (this.state.solicitudSeleccionado && this.props.selSol) {
-    //   solicitudInfo = (
-    //     <SolicitudForm/>
-    //   )
-    // }
 
     return (
       <>
@@ -205,11 +180,8 @@ const mapStateToProps = state => {
     return {
       listaSolicitudes: state.solicitudes.solicitudes,
       selectedSol: state.solicitudes.selectedSolicitud,
-      comunidades: state.generalData.comunidades,
       token: state.auth.token,
       role: state.generalData.role
-      // selSocio: state.socios.selectedSol,
-      // updated: state.socios.updated,
     }
 }
 
