@@ -14,8 +14,7 @@ import { baseURL } from '../../../store/axios-be.js'
 
 class Socios extends Component {
   state = {
-    socioSeleccionado: false,
-    tempSocio: null
+    socioSeleccionado: false
   }
 
   componentDidMount () {
@@ -23,8 +22,9 @@ class Socios extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.updated !== prevProps.updated) {
+    if(this.props.updated && this.props.updated !== prevProps.updated) {
       this.props.onInitSocios(this.props.token)
+      this.setState({ socioSeleccionado: false});
     }
   }
 

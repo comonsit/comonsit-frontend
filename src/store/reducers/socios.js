@@ -36,7 +36,8 @@ const updateSocioStart = (state) => {
 const updateSocioSuccess = (state) => {
   return updateObject(state, {
     loading: false,
-    updated: true
+    updated: true,
+    selectedSocio: null
   })
 }
 
@@ -78,7 +79,8 @@ const newSocioStart = (state) => {
 const newSocioSuccess = (state) => {
   return updateObject(state, {
     loading: false,
-    updated: true
+    updated: true,
+    selectedSocio: null
   })
 }
 

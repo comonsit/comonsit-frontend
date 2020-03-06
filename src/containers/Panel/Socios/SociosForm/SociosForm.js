@@ -290,16 +290,6 @@ class SociosForm extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if(this.props.updated !== prevProps.updated) {
-      this.setState({editing: false})
-    }
-  }
-
-  componentDidMount () {
-
-  }
-
   onSubmitForm = (event) => {
     event.preventDefault();
 
