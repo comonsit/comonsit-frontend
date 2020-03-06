@@ -418,7 +418,7 @@ class SolicitudForm extends Component {
   }
 
   cancelSearch =() => {
-    this.setState({searchingOpen: false, socioSeleccionado: null})
+    this.setState({searchingOpen: false})
     this.props.unSelSocio()
   }
 
@@ -431,9 +431,6 @@ class SolicitudForm extends Component {
         })
     })
     this.setState({
-      socioSeleccionado: {
-        clave_socio: id,
-      },
       searchingOpen: false,
       solicitudForm: updatedForm
     });
