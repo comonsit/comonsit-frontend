@@ -7,6 +7,7 @@ import SociosList from './SociosList/SociosList';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
+import Title from '../../../components/UI/Title/Title';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
 import { baseURL } from '../../../store/axios-be.js'
@@ -73,14 +74,12 @@ class Socios extends Component {
           {form}
         </Modal>
         <div className={classes.Container}>
-          <div className={classes.HeaderContainer}>
-            <h1><FormattedMessage id="socios.title"/></h1>
-            <div className={classes.ButtonContainer}>
-              <Button
-                clicked={this.onNewSocio}
-                ><FormattedMessage id="socios.newSocioButton"/></Button>
-            </div>
-          </div>
+          <Title
+            titleName="socios.title">
+            <Button
+              clicked={this.onNewSocio}
+              ><FormattedMessage id="socios.newSocioButton"/></Button>
+          </Title>
 
           <button><a href={baseURL + "/sociosXLSX/"}><FormattedMessage id="sociosXLSX"/></a></button>
           {socioList}

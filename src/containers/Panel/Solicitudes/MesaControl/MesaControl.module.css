@@ -14,15 +14,3 @@
   bottom: 0;
   overflow-y:scroll;
 }
-
-.Header {
-  padding-left: 2rem;
-  margin-left: 5rem;
-
-}
-
-.Header h1 {
-  font-family: 'Arquitecta';
-  display: flex;
-  justify-content: space-between;
-}

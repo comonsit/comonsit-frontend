@@ -8,6 +8,7 @@ import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Title from '../../../../components/UI/Title/Title';
 import classes from './MesaControl.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -279,9 +280,8 @@ class MesaControl extends Component {
 
     return (
       <>
-        <div className={classes.Header}>
-          <h1><FormattedMessage id="mesaControl.title"/></h1>
-        </div>
+        <Title
+          titleName="mesaControl.title"/>
         {solicitudInfo}
         <hr/>
         <form

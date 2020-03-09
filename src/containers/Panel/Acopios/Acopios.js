@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import RTable from '../../../components/UI/RTable/RTable';
+import Title from '../../../components/UI/Title/Title';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
@@ -107,14 +108,12 @@ class Acopios extends Component {
           modalClosed={this.cancelSelected}>
         </Modal>
         <div className={classes.Container}>
-          <div className={classes.HeaderContainer}>
-            <h1><FormattedMessage id="acopios.title"/></h1>
-            <div className={classes.ButtonContainer}>
-              <Button
-                clicked={this.onNewAcopio}
-                ><FormattedMessage id="acopios.newAcopio"/></Button>
-            </div>
-          </div>
+          <Title
+            titleName="acopios.title">
+            <Button
+              clicked={this.onNewAcopio}
+              ><FormattedMessage id="acopios.newAcopio"/></Button>
+          </Title>
           <RTable
             columns={columns}
             data={this.props.listaAcopios}

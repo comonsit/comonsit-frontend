@@ -10,6 +10,7 @@ import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColu
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
 import Button from '../../../components/UI/Button/Button';
+import Title from '../../../components/UI/Title/Title';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
@@ -157,14 +158,12 @@ class Solicitudes extends Component {
           {solicitudInfoButton}
         </Modal>
         <div className={classes.Container}>
-          <div className={classes.HeaderContainer}>
-            <h1><FormattedMessage id="solicitudes.title"/></h1>
-            <div className={classes.ButtonContainer}>
-              <Button
-                clicked={this.onNewSolicitud}
-                ><FormattedMessage id="solicitudes.new"/></Button>
-            </div>
-          </div>
+          <Title
+            titleName="solicitudes.title">
+            <Button
+              clicked={this.onNewSolicitud}
+              ><FormattedMessage id="solicitudes.new"/></Button>
+          </Title>
           <RTable
             columns={columns}
             data={this.props.listaSolicitudes}

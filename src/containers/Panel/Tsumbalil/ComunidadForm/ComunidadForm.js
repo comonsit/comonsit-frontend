@@ -7,6 +7,7 @@ import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Title from '../../../../components/UI/Title/Title';
 import classes from './ComunidadForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -148,10 +149,12 @@ class ComunidadForm extends Component {
 
     return (
       <>
-        <div className={classes.Header}>
-          <h2><FormattedMessage id="comunidadForm.title"/>: {this.state.comunidadForm.nombre_de_comunidad.value}</h2>
+        <Title
+          titleName="comunidadForm.title"
+          titleNameEx={this.state.comunidadForm.nombre_de_comunidad.value}
+          >
           {editButton}
-        </div>
+        </Title>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>
           {formElements}

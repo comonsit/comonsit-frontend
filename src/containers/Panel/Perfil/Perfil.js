@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import Title from '../../../components/UI/Title/Title';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 import axios from '../../../store/axios-be.js';
@@ -167,10 +168,10 @@ class Perfil extends Component {
     return (
       <>
       <div className={classes.Container}>
-        <div className={classes.HeaderContainer}>
-          <h1><FormattedMessage id="perfil.title"/></h1>
+        <Title
+          titleName="perfil.title">
           {editButton}
-        </div>
+        </Title>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>
           {formElements}

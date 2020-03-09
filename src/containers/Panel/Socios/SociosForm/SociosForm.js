@@ -7,6 +7,7 @@ import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Title from '../../../../components/UI/Title/Title';
 import classes from './SociosForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -420,10 +421,12 @@ class SociosForm extends Component {
 
     return (
       <>
-        <div className={classes.Header}>
-          <h2><FormattedMessage id="socioForm.title"/>: {this.props.selSocio.clave_socio}</h2>
+        <Title
+          titleName="socioForm.title"
+          titleNameEx={this.props.selSocio.clave_socio}
+          >
           {editButton}
-        </div>
+        </Title>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>
           {formElements}

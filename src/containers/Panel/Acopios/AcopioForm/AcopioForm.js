@@ -9,6 +9,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
+import Title from '../../../../components/UI/Title/Title';
 import SociosList from '../../Socios/SociosList/SociosList';
 import classes from './AcopioForm.module.css'
 import * as actions from '../../../../store/actions'
@@ -262,9 +263,8 @@ class AcopioForm extends Component {
             {sociosLista}
           </div>
         </Modal>
-        <div className={classes.Header}>
-          <h1><FormattedMessage id="acopioForm.title"/></h1>
-        </div>
+        <Title
+          titleName="acopioForm.title"/>
         <form onSubmit={this.onSubmitForm}>
           <div className={formClasses.join(' ')}>
           {formElements}

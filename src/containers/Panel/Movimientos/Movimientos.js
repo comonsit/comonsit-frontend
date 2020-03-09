@@ -8,6 +8,7 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import RTable from '../../../components/UI/RTable/RTable';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Title from '../../../components/UI/Title/Title';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
@@ -215,14 +216,12 @@ class Movimientos extends Component {
           </Modal>
 
         <div className={classes.Container}>
-          <div className={classes.HeaderContainer}>
-            <h1><FormattedMessage id="movimientos.title"/></h1>
-            <div className={classes.ButtonContainer}>
-              <Button
-                clicked={this.onNewMovimiento}
-                ><FormattedMessage id="movimientos.newMovimiento"/></Button>
-            </div>
-          </div>
+          <Title
+            titleName="movimientos.title">
+            <Button
+              clicked={this.onNewMovimiento}
+              ><FormattedMessage id="movimientos.newMovimiento"/></Button>
+          </Title>
           <form className={classes.Form} onSubmit={this.onSubmitForm}>
             <div className={classes.Inputs}>
               <Input

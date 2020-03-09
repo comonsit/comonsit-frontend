@@ -8,6 +8,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
+import Title from '../../../components/UI/Title/Title';
 import classes from './Tsumbalil.module.css'
 import * as actions from '../../../store/actions'
 
@@ -83,14 +84,12 @@ class Tsumbalil extends Component {
           {form}
         </Modal>
         <div className={classes.Container}>
-          <div className={classes.HeaderContainer}>
-            <h1><FormattedMessage id="tsumbalil.title"/></h1>
-            <div className={classes.ButtonContainer}>
-              <Button
-                clicked={this.onNewComunidad}
-                ><FormattedMessage id="tsumbalil.newComunidad"/></Button>
-            </div>
-          </div>
+          <Title
+            titleName="tsumbalil.title">
+            <Button
+              clicked={this.onNewComunidad}
+              ><FormattedMessage id="tsumbalil.newComunidad"/></Button>
+          </Title>
           <RTable
             columns={columns}
             data={this.props.comunidades}
