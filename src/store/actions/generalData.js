@@ -119,12 +119,10 @@ export const updateComunidadStart = () => {
 export const updateComunidad = (data, id, token) => {
   return dispatch => {
     const authData = {
-      headers: { 'Authorization': `Bearer ${token}` },
-      id: id,
-      ...data
+      headers: { 'Authorization': `Bearer ${token}`},
     }
     dispatch(updateComunidadStart())
-    axios.put(`/comunidades/${id}.json`, authData)
+    axios.put(`/comunidades/${id}.json`, data, authData)
       .then(response => {
         dispatch(updateComunidadSuccess(response.data.name, data ))
         alert('Comunidad ' + response.data.id + ' editada correctamente')

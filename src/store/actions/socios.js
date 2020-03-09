@@ -82,12 +82,14 @@ export const updateSocioStart = () => {
 export const updateSocio = (socioData, socioId, token) => {
   return dispatch => {
     const authData = {
-      headers: { 'Authorization': `Bearer ${token}` },
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    const data = {
       clave_socio: socioId,
       ...socioData
     }
     dispatch(updateSocioStart())
-    axios.put(`/socios/${socioId}.json`, authData)
+    axios.put(`/socios/${socioId}.json`, data, authData)
       .then(response => {
         dispatch(updateSocioSuccess(response.data.name, socioData ))
         alert('Socio ' + response.data.clave_socio + ' editado correctamente')
