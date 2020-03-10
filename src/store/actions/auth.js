@@ -105,8 +105,9 @@ export const refreshToken = () => {
       })
       .catch(err=> {
         console.log('FAILED TO REFRESH')
-        console.log(err.response.data);
-        dispatch(authFail(err.response.data.detail))
+        alert(err)
+        // console.log(err.response.data);
+        // dispatch(authFail(err.response.data.detail))
       })
   }
 }
