@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import FileSaver from 'file-saver';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 
@@ -11,7 +12,7 @@ import Title from '../../../components/UI/Title/Title';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
-import { baseURL } from '../../../store/axios-be.js'
+import axios from '../../../store/axios-be.js'
 
 
 
@@ -46,6 +47,20 @@ class Socios extends Component {
     this.props.onNewSocios()
   }
 
+  getXLSX = () => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+    axios.get('/sociosXLSX/', authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, 'socios.xlsx')
+      })
+      .catch(error => {
+        // TODO:
+      })
+  }
+
   getComunidad = (id) => {
     const index = this.props.comunidades.findIndex(x => x.id === id)
     return this.props.comunidades[index].nombre_de_comunidad
@@ -68,7 +83,7 @@ class Socios extends Component {
       }
 
       if (isGerencia(this.props.role)) {
-        downloadXLSButton = (<button><a href={baseURL + "/sociosXLSX/"}><FormattedMessage id="sociosXLSX"/></a></button>)
+        downloadXLSButton = (<button onClick={this.getXLSX}><FormattedMessage id="sociosXLSX"/></button>)
         newSocioButton = (<Button clicked={this.onNewSocio}><FormattedMessage id="socios.newSocioButton"/></Button>)
       }
 
