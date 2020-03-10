@@ -11,6 +11,7 @@ import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
 import classes from './Tsumbalil.module.css'
 import * as actions from '../../../store/actions'
+import { isGerencia } from '../../../store/roles'
 
 class Tsumbalil extends Component {
   state = {
@@ -28,8 +29,10 @@ class Tsumbalil extends Component {
   }
 
   showComunidad =(id) => {
-    this.setState({comunidadSelected: true});
-    this.props.selectComunidad(id)
+    if (isGerencia(this.props.role)) {
+      this.setState({comunidadSelected: true});
+      this.props.selectComunidad(id)
+    }
   }
 
   cancelSelected =() => {
@@ -76,6 +79,8 @@ class Tsumbalil extends Component {
       },
     ]
 
+    const newComunidadButton = isGerencia(this.props.role) ? (<Button clicked={this.onNewComunidad}><FormattedMessage id="tsumbalil.newComunidad"/></Button>) : null
+
     return (
       <>
         <Modal
@@ -86,9 +91,7 @@ class Tsumbalil extends Component {
         <div className={classes.Container}>
           <Title
             titleName="tsumbalil.title">
-            <Button
-              clicked={this.onNewComunidad}
-              ><FormattedMessage id="tsumbalil.newComunidad"/></Button>
+            {newComunidadButton}
           </Title>
           <RTable
             columns={columns}
@@ -106,7 +109,8 @@ const mapStateToProps = state => {
       comunidades: state.generalData.comunidades,
       updated: state.generalData.updated,
       selComunidad: state.generalData.selectedComunidad,
-      token: state.auth.token
+      token: state.auth.token,
+      role: state.generalData.role
     }
 }
 
