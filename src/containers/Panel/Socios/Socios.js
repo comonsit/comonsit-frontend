@@ -10,7 +10,9 @@ import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
+import { isGerencia } from '../../../store/roles'
 import { baseURL } from '../../../store/axios-be.js'
+
 
 
 class Socios extends Component {
@@ -50,6 +52,7 @@ class Socios extends Component {
   }
 
   render () {
+      let downloadXLSButton, newSocioButton = null
       let form, socioList = <Spinner/>
       if (this.state.socioSeleccionado && this.props.selSocio) {
         form = (
@@ -64,6 +67,10 @@ class Socios extends Component {
                       />)
       }
 
+      if (isGerencia(this.props.role)) {
+        downloadXLSButton = (<button><a href={baseURL + "/sociosXLSX/"}><FormattedMessage id="sociosXLSX"/></a></button>)
+        newSocioButton = (<Button clicked={this.onNewSocio}><FormattedMessage id="socios.newSocioButton"/></Button>)
+      }
 
 
     return (
@@ -76,12 +83,9 @@ class Socios extends Component {
         <div className={classes.Container}>
           <Title
             titleName="socios.title">
-            <Button
-              clicked={this.onNewSocio}
-              ><FormattedMessage id="socios.newSocioButton"/></Button>
+            {newSocioButton}
           </Title>
-
-          <button><a href={baseURL + "/sociosXLSX/"}><FormattedMessage id="sociosXLSX"/></a></button>
+          {downloadXLSButton}
           {socioList}
         </div>
       </>
@@ -95,7 +99,8 @@ const mapStateToProps = state => {
       selSocio: state.socios.selectedSocio,
       updated: state.socios.updated,
       token: state.auth.token,
-      comunidades: state.generalData.comunidades
+      comunidades: state.generalData.comunidades,
+      role: state.generalData.role
     }
 }
 

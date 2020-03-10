@@ -10,6 +10,7 @@ import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
 import classes from './SociosForm.module.css'
 import * as actions from '../../../../store/actions'
+import { isGerencia } from '../../../../store/roles'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
@@ -367,7 +368,7 @@ class SociosForm extends Component {
     const formElementsArray = []
     let supportData
     let formElements = <Spinner/>
-    let submitButton, editButton
+    let submitButton, editButton = null
 
     sociosFormOrder.forEach(key => {
       formElementsArray.push({
@@ -408,16 +409,19 @@ class SociosForm extends Component {
     }
 
 
-    if (this.state.editing) {
-      submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="saveButton"/></Button>
-      editButton = null
-    } else if (this.props.new) {
-      submitButton = null
-      editButton = null
-    } else {
-      submitButton = null
-      editButton = <Button clicked={this.onStartEditing} disabled={this.state.editing}><FormattedMessage id="editButton"/></Button>
+    if (isGerencia(this.props.role)) {
+      if (this.state.editing) {
+        submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="saveButton"/></Button>
+        editButton = null
+      } else if (this.props.new) {
+        submitButton = null
+        editButton = null
+      } else {
+        submitButton = null
+        editButton = <Button clicked={this.onStartEditing} disabled={this.state.editing}><FormattedMessage id="editButton"/></Button>
+      }
     }
+
 
     return (
       <>
@@ -448,6 +452,7 @@ const mapStateToProps = state => {
       cargos: state.generalData.cargos,
       cargosCoop: state.generalData.cargosCoop,
       empresas: state.generalData.empresas,
+      role: state.generalData.role,
       new: state.socios.newSocio
     }
 }
