@@ -47,14 +47,15 @@ class Acopios extends Component {
     this.props.onNewAcop()
   }
 
-  getXLSX = () => {
+  getXLSX = type => {
+    const url = (type) ? '/acopiosXLSX/?tipo_de_producto='+type : '/acopiosXLSX/'
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` },
       responseType: 'blob',
     }
-    axios.get('/acopiosXLSX/', authData)
+    axios.get(url, authData)
       .then(response => {
-        FileSaver.saveAs(response.data, 'acopios.xlsx')
+        FileSaver.saveAs(response.data, 'acopios'+type+'.xlsx')
       })
       .catch(error => {
         // TODO:
@@ -121,7 +122,21 @@ class Acopios extends Component {
     let downloadXLSButton = null
 
     if (isGerencia(this.props.role)) {
-      downloadXLSButton = (<button onClick={this.getXLSX}><FormattedMessage id="acopiosXLSX"/></button>)
+      downloadXLSButton = (
+        <nav className={classes.LangDropdownNav}>
+          <ul className={classes.LangDropdownList}>
+           <li className={classes.LangDropdownListItem}><FormattedMessage id="acopiosXLSX"/> ▼
+            <ul className={classes.Dropdown}>
+              <li><button type="button" onClick={() => this.getXLSX('')}>Todos</button></li>
+              <li><button type="button" onClick={() => this.getXLSX('CF')}>Café</button></li>
+              <li><button type="button" onClick={() => this.getXLSX('MI')}>Miel</button></li>
+              <li><button type="button" onClick={() => this.getXLSX('JA')}>Jabón</button></li>
+              <li><button type="button" onClick={() => this.getXLSX('SL')}>Salarios</button></li>
+            </ul>
+           </li>
+         </ul>
+        </nav>
+        )
     }
 
     return (
