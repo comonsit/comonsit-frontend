@@ -58,14 +58,14 @@ class AcopioForm extends Component {
           elementType: 'select',
           elementConfig: {
             options: [
-              {value: 'CA', displayValue: 'Cafe'},
+              {value: 'CF', displayValue: 'Cafe'},
               {value: 'MI', displayValue: 'Miel'},
               {value: 'JA', displayValue: 'Jabon'},
               {value: 'SL', displayValue: 'Salarios'}
             ]
           },
           label: (<><FormattedMessage id="acopioForm.tipo_de_producto"/>*</>),
-          value: 'CA',
+          value: 'CF',
           validation: {
             required: true
           },
