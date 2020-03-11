@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FileSaver from 'file-saver';
 import {FormattedMessage} from 'react-intl';
 import classes from './Acopios.module.css'
 import { connect } from 'react-redux';
@@ -11,6 +12,8 @@ import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColu
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
 import * as actions from '../../../store/actions'
+import { isGerencia } from '../../../store/roles'
+import axios from '../../../store/axios-be.js'
 
 
 class Acopios extends Component {
@@ -42,6 +45,20 @@ class Acopios extends Component {
     this.setState({ acopioSelected: true});
     this.props.history.push('acopio-formato');
     this.props.onNewAcop()
+  }
+
+  getXLSX = () => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+    axios.get('/acopiosXLSX/', authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, 'acopios.xlsx')
+      })
+      .catch(error => {
+        // TODO:
+      })
   }
 
   render () {
@@ -101,6 +118,12 @@ class Acopios extends Component {
       },
     ]
 
+    let downloadXLSButton = null
+
+    if (isGerencia(this.props.role)) {
+      downloadXLSButton = (<button onClick={this.getXLSX}><FormattedMessage id="acopiosXLSX"/></button>)
+    }
+
     return (
       <>
         <Modal
@@ -114,6 +137,7 @@ class Acopios extends Component {
               clicked={this.onNewAcopio}
               ><FormattedMessage id="acopios.newAcopio"/></Button>
           </Title>
+          {downloadXLSButton}
           <RTable
             columns={columns}
             data={this.props.listaAcopios}
@@ -130,6 +154,7 @@ const mapStateToProps = state => {
       // selectedAcopio: state.acopios.selectedAcopio,
       listaAcopios: state.acopios.acopios,
       token: state.auth.token,
+      role: state.generalData.role
     }
 }
 
