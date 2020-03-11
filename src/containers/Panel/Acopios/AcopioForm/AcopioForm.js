@@ -83,7 +83,7 @@ class AcopioForm extends Component {
           label:  (<><FormattedMessage id="acopioForm.kilos_de_producto"/>*</>),
           value: '',
           validation: {
-            required: true,
+            required: false,
             isNumeric: true
           },
           valid: false,
@@ -149,6 +149,21 @@ class AcopioForm extends Component {
     let updatedForm = updateObject(this.state.acopioForm, {
         [inputIdentifier]: updatedFormElement
     })
+
+    // Hide Kilos option if not applicable
+    if (inputIdentifier === 'tipo_de_producto') {
+      const hideKilos = !(event.target.value === 'CF' || event.target.value === 'MI')
+      updatedForm = updateObject(updatedForm, {
+          kilos_de_producto: updateObject(updatedForm.kilos_de_producto, {
+              hide: hideKilos,
+              valid: hideKilos,
+              value: null,
+              validation: {
+                required: hideKilos
+              }
+          })
+      })
+    }
 
     let formIsValid = true
     for (let inputIds in updatedForm) {
