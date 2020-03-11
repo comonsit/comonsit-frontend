@@ -121,6 +121,7 @@
   "acopioForm.kilos_de_producto": "Kilos de Producto",
   "acopioForm.tipo_de_producto": "Tipo de Producto",
   "acopioForm.title": "Forma Acopio",
+  "acopioForm.avg_price": "Precio Promedio",
   "movimientos.title": "Movimientos",
   "movimientos.newMovimiento": "Nuevo Movimiento",
   "movimientos.actualizar": "Buscar Movimientos",

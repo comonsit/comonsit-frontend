@@ -210,6 +210,11 @@ class AcopioForm extends Component {
               </div>)
           }
           supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
+        } else if (formElement.id === "kilos_de_producto" && this.state.acopioForm.kilos_de_producto.value > 0 && this.state.acopioForm.ingreso.value > 0) {
+          supportData = (
+            <div className={classes.SupportData}>
+              <p><FormattedMessage id="acopioForm.avg_price"/>: {Math.round(this.state.acopioForm.ingreso.value / this.state.acopioForm.kilos_de_producto.value)}</p>
+            </div>)
         } else {
           supportData = null
           supportButton = null
