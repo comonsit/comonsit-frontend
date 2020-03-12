@@ -13,6 +13,10 @@ import {
 } from 'react-vis';
 import classes from './Acopios.module.css'
 import { connect } from 'react-redux';
+import Bee from '../../../Icons/Bee.js';
+import Money from '../../../Icons/Money.js';
+import Soap from '../../../Icons/Soap.js';
+import Coffee from '../../../Icons/Coffee.js';
 
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
@@ -122,6 +126,18 @@ class Acopios extends Component {
     this.setState({hint: value});
   };
 
+  renderStatus = cellInfo => {
+
+    switch(cellInfo.cell.value) {
+      case "CF": return (<Coffee width="20px" height="20px" />)
+      case "MI": return (<Bee width="20px" height="20px" />)
+      case "JA": return (<Soap width="20px" height="20px" />)
+      case "SL": return (<Money style={{color: "green"}} width="20px" height="20px" />)
+      default:
+        return (<p>?{cellInfo.cell.value}</p>)
+    }
+ };
+
   render () {
 
     const columns = [
@@ -168,6 +184,7 @@ class Acopios extends Component {
       {
         Header: <FormattedMessage id="acopios.tipo_producto"/>,
         accessor: 'tipo_de_producto',
+        Cell: this.renderStatus,
         Filter: SelectColumnFilter,
         filter: 'includes',
       },

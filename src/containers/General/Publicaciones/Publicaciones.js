@@ -8,6 +8,7 @@ function Publicaciones() {
       <h3><FormattedMessage id="publicaciones.title"/></h3>
       <p><FormattedMessage id="publicaciones.text1"/></p>
       <p><FormattedMessage id="publicaciones.text2"/></p>
+      <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
   );
 }
