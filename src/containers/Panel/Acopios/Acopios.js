@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
 import {FormattedMessage} from 'react-intl';
+import {
+  XYPlot,
+  XAxis,
+  YAxis,
+  DiscreteColorLegend,
+  VerticalGridLines,
+  HorizontalGridLines,
+  VerticalBarSeries,
+  Hint
+} from 'react-vis';
 import classes from './Acopios.module.css'
 import { connect } from 'react-redux';
 
@@ -18,17 +28,57 @@ import axios from '../../../store/axios-be.js'
 
 class Acopios extends Component {
   state = {
-    acopioSelected: false
+    acopioSelected: false,
+    coffeeData: [],
+    honeyData: [],
+    soapData: [],
+    salarioData: [],
+    hint: null
   }
 
   componentDidMount () {
     this.props.onInitAcopios(this.props.token)
+    this.getYearSum()
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.updated !== prevProps.updated) {
       this.props.onInitAcopios(this.props.token)
     }
+  }
+
+  getYearSum = () => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+    axios.get('/acopios/year_sum/', authData)
+      .then(response => {
+        this.populateYearSum(response.data)
+      })
+      .catch(error => {
+        // TODO:
+      })
+  }
+
+  populateYearSum = data => {
+    const cData = []
+    const hData = []
+    const soData = []
+    const saData = []
+
+    for (let yearData of data) {
+      cData.push({x: yearData.fecha__year, y: yearData.year_sum_cf})
+      hData.push({x: yearData.fecha__year, y: yearData.year_sum_mi})
+      soData.push({x: yearData.fecha__year, y: yearData.year_sum_ja})
+      saData.push({x: yearData.fecha__year, y: yearData.year_sum_sl})
+    }
+
+    this.setState({
+      coffeeData: cData,
+      honeyData: hData,
+      soapData: soData,
+      salarioData: saData,
+    })
   }
 
   showAcopio =(id) => {
@@ -61,6 +111,16 @@ class Acopios extends Component {
         // TODO:
       })
   }
+
+  _forgetValue = () => {
+    this.setState({
+      hint: null
+    });
+  };
+
+  _rememberValue = value => {
+    this.setState({hint: value});
+  };
 
   render () {
 
@@ -145,13 +205,58 @@ class Acopios extends Component {
           show={this.state.acopioSelected}
           modalClosed={this.cancelSelected}>
         </Modal>
-        <div className={classes.Container}>
+        <div>
           <Title
             titleName="acopios.title">
             <Button
               clicked={this.onNewAcopio}
               ><FormattedMessage id="acopios.newAcopio"/></Button>
           </Title>
+          <div className={classes.AllGraphs}>
+            <XYPlot yDomain={[0, 5000]} xType="ordinal"  width={600} height={300} className={classes.Graphs}>
+              <DiscreteColorLegend
+                style={{position: 'absolute', left: '50px', top: '10px'}}
+                orientation="horizontal"
+                items={[
+                  {
+                    title: 'Café',
+                    color: '#92c3c0'
+                  },
+                  {
+                    title: 'Miel',
+                    color: '#D5B49E'
+                  },
+                  {
+                    title: 'Jabones',
+                    color: '#ac92c3'
+                  },
+                  {
+                    title: 'Salarios',
+                    color: '#BBC392'
+                  }
+                ]}
+              />
+              <VerticalGridLines />
+              <HorizontalGridLines />
+              <XAxis />
+              <YAxis tickPadding={0} />
+              <VerticalBarSeries
+                data={this.state.coffeeData}
+                color="#92c3c0"
+                onValueMouseOver={this._rememberValue}
+                onValueMouseOut={this._forgetValue}
+                />
+              <VerticalBarSeries data={this.state.honeyData} color="#D5B49E" />
+              <VerticalBarSeries data={this.state.soapData} color="#ac92c3" />
+              <VerticalBarSeries data={this.state.salarioData} color="#BBC392" />
+              {this.state.hint ? (<Hint value={this.state.hint}>
+                                    <div style={{background: '#656564', padding: '.5rem', borderRadius: "1rem"}}>
+                                      <p style={{fontSize: ".8em"}}>En {this.state.hint.x} se acopiaron ${this.state.hint.y} de café</p>
+                                    </div>
+                                  </Hint> ): null}
+            </XYPlot>
+      </div>
+      <div>
           {downloadXLSButton}
           <RTable
             columns={columns}
@@ -159,6 +264,7 @@ class Acopios extends Component {
             onRowClick={row => this.showAcopio(row.values.id)}
             />
         </div>
+      </div>
       </>
     )
   }
