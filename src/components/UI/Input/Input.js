@@ -69,6 +69,21 @@ const input = (props) => {
                     ))}
                 </select>)
             break
+        case ( 'select_mult' ):
+            inputElement = (
+                <select
+                    className={inputClasses.join(' ')}
+                    disabled={props.disabled}
+                    onChange={props.changed}
+                    multiple
+                    >
+                    {props.elementConfig.options.map(option => (
+                        <option key={option.value} value={option.value} selected={props.value.includes(option.value)}>
+                            {option.displayValue}
+                        </option>
+                    ))}
+                </select>)
+            break
         default:
             inputElement = <input
                 className={inputClasses.join(' ')}
