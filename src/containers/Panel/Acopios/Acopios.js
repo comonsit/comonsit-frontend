@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
 import {FormattedMessage} from 'react-intl';
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  DiscreteColorLegend,
-  VerticalGridLines,
-  HorizontalGridLines,
-  VerticalBarSeries,
-  Hint
-} from 'react-vis';
 import classes from './Acopios.module.css'
 import { connect } from 'react-redux';
 import Bee from '../../../Icons/Bee.js';
 import Money from '../../../Icons/Money.js';
 import Soap from '../../../Icons/Soap.js';
 import Coffee from '../../../Icons/Coffee.js';
+
+import AcopioGraph from './AcopioGraph/AcopioGraph';
 
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
@@ -37,7 +29,10 @@ class Acopios extends Component {
     honeyData: [],
     soapData: [],
     salarioData: [],
-    hint: null
+    hintCF: null,
+    hintMI: null,
+    hintJA: null,
+    hintSA: null
   }
 
   componentDidMount () {
@@ -116,14 +111,29 @@ class Acopios extends Component {
       })
   }
 
-  _forgetValue = () => {
+  _forgetValues = () => {
     this.setState({
-      hint: null
+      hintCF: null,
+      hintMI: null,
+      hintJA: null,
+      hintSA: null
     });
   };
 
-  _rememberValue = value => {
-    this.setState({hint: value});
+  _rememberValueCF = value => {
+    this.setState({hintCF: value});
+  };
+
+  _rememberValueMI = value => {
+    this.setState({hintMI: value});
+  };
+
+  _rememberValueJA = value => {
+    this.setState({hintJA: value});
+  };
+
+  _rememberValueSA = value => {
+    this.setState({hintSA: value});
   };
 
   renderStatus = cellInfo => {
@@ -230,58 +240,48 @@ class Acopios extends Component {
               ><FormattedMessage id="acopios.newAcopio"/></Button>
           </Title>
           <div className={classes.AllGraphs}>
-            <XYPlot yDomain={[0, 5000]} xType="ordinal"  width={600} height={300} className={classes.Graphs}>
-              <DiscreteColorLegend
-                style={{position: 'absolute', left: '50px', top: '10px'}}
-                orientation="horizontal"
-                items={[
-                  {
-                    title: 'Café',
-                    color: '#92c3c0'
-                  },
-                  {
-                    title: 'Miel',
-                    color: '#D5B49E'
-                  },
-                  {
-                    title: 'Jabones',
-                    color: '#ac92c3'
-                  },
-                  {
-                    title: 'Salarios',
-                    color: '#BBC392'
-                  }
-                ]}
+            <AcopioGraph
+              data={this.state.coffeeData}
+              label="Cafe"
+              color="#92c3c0"
+              mouseOver={this._rememberValueCF}
+              mouseOut={this._forgetValues}
+              hint={this.state.hintCF}
               />
-              <VerticalGridLines />
-              <HorizontalGridLines />
-              <XAxis />
-              <YAxis tickPadding={0} />
-              <VerticalBarSeries
-                data={this.state.coffeeData}
-                color="#92c3c0"
-                onValueMouseOver={this._rememberValue}
-                onValueMouseOut={this._forgetValue}
-                />
-              <VerticalBarSeries data={this.state.honeyData} color="#D5B49E" />
-              <VerticalBarSeries data={this.state.soapData} color="#ac92c3" />
-              <VerticalBarSeries data={this.state.salarioData} color="#BBC392" />
-              {this.state.hint ? (<Hint value={this.state.hint}>
-                                    <div style={{background: '#656564', padding: '.5rem', borderRadius: "1rem"}}>
-                                      <p style={{fontSize: ".8em"}}>En {this.state.hint.x} se acopiaron ${this.state.hint.y} de café</p>
-                                    </div>
-                                  </Hint> ): null}
-            </XYPlot>
-      </div>
-      <div>
-          {downloadXLSButton}
-          <RTable
-            columns={columns}
-            data={this.props.listaAcopios}
-            onRowClick={row => this.showAcopio(row.values.id)}
-            />
+            <AcopioGraph
+              data={this.state.honeyData}
+              label="Miel"
+              color="#D5B49E"
+              mouseOver={this._rememberValueMI}
+              mouseOut={this._forgetValues}
+              hint={this.state.hintMI}
+              />
+            <AcopioGraph
+              data={this.state.soapData}
+              label="Jabón"
+              color="#ac92c3"
+              mouseOver={this._rememberValueJA}
+              mouseOut={this._forgetValues}
+              hint={this.state.hintJA}
+              />
+            <AcopioGraph
+              data={this.state.soapData}
+              label="Salarios"
+              color="#BBC392"
+              mouseOver={this._rememberValueSA}
+              mouseOut={this._forgetValues}
+              hint={this.state.hintSA}
+              />
+          </div>
+          <div>
+            {downloadXLSButton}
+            <RTable
+              columns={columns}
+              data={this.props.listaAcopios}
+              onRowClick={row => this.showAcopio(row.values.id)}
+              />
+          </div>
         </div>
-      </div>
       </>
     )
   }

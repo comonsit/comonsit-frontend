@@ -1,3 +1,8 @@
+.AllGraphs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 
 .LangDropdownList {
   list-style: none;
