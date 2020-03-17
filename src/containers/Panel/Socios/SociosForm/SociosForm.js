@@ -208,32 +208,32 @@ class SociosForm extends Component {
           valid: true,
           touched: false,
         },
-        // puesto: {
-        //   elementType: 'select',
-        //   elementConfig: {
-        //     options: this.props.puestos.map(r => ({"value": r.id, "displayValue": r.puesto}))
-        //   },
-        //   label: (<><FormattedMessage id="puesto"/>*</>),
-        //   value: this.props.selSocio.puesto,
-        //   validation: {
-        //     required: false
-        //   },
-        //   valid: true,
-        //   touched: false,
-        // },
-        // fuente: {
-        //   elementType: 'select',
-        //   elementConfig: {
-        //     options: this.props.fuentes.map(r => ({"value": r.id, "displayValue": r.fuente}))
-        //   },
-        //   label: (<><FormattedMessage id="fuente"/>*</>),
-        //   value: this.props.selSocio.fuente,
-        //   validation: {
-        //     required: false
-        //   },
-        //   valid: true,
-        //   touched: false,
-        // },
+        puesto: {
+          elementType: 'select',
+          elementConfig: {
+            options: this.props.puestos.map(r => ({"value": r.id, "displayValue": r.puesto}))
+          },
+          label: (<><FormattedMessage id="puesto"/>*</>),
+          value: this.props.selSocio.puesto,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
+        fuente: {
+          elementType: 'select',
+          elementConfig: {
+            options: this.props.fuentes.map(r => ({"value": r.id, "displayValue": r.fuente}))
+          },
+          label: (<><FormattedMessage id="fuente"/>*</>),
+          value: this.props.selSocio.fuente,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
         clave_anterior: {
           elementType: 'input',
           elementConfig: {
@@ -458,7 +458,7 @@ class SociosForm extends Component {
     // TODO: done to keep order in Safari. improvement?
     const sociosFormOrder = [
       "nombres", "apellido_paterno", "apellido_materno", "comunidad", "curp", "telefono", "fecha_nacimiento",
-      "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "empresa", "clave_anterior",
+      "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "empresa", "puesto", "fuente", "clave_anterior",
       "genero", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_trabajador", "estatus_gral", "doc_curp", "doc_act_nac", "doc_ine", "doc_domicilio"
     ]
     const formElementsArray = []
@@ -548,6 +548,8 @@ const mapStateToProps = state => {
       cargos: state.generalData.cargos,
       cargosCoop: state.generalData.cargosCoop,
       empresas: state.generalData.empresas,
+      fuentes: state.generalData.fuentes,
+      puestos: state.generalData.puestos,
       role: state.generalData.role,
       new: state.socios.newSocio
     }

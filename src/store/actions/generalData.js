@@ -42,6 +42,20 @@ export const fetchGralData = (token) => {
       .catch(error => {
         // TODO:
       })
+    axios.get('/fuentes.json', authData)
+      .then(response => {
+        dispatch(setFuentes(response.data))
+      })
+      .catch(error => {
+        // TODO:
+      })
+    axios.get('/puestos.json', authData)
+      .then(response => {
+        dispatch(setPuestos(response.data))
+      })
+      .catch(error => {
+        // TODO:
+      })
     axios.get('/users/me.json', authData)
       .then(response => {
         dispatch(setUser(response.data))
@@ -86,6 +100,20 @@ export const setEmpresas = (empresas) => {
   return {
     type: actionTypes.SET_EMPRESAS,
     empresas: empresas
+  }
+}
+
+export const setFuentes = (fuentes) => {
+  return {
+    type: actionTypes.SET_FUENTES,
+    fuentes: fuentes
+  }
+}
+
+export const setPuestos = (puestos) => {
+  return {
+    type: actionTypes.SET_PUESTOS,
+    puestos: puestos
   }
 }
 
