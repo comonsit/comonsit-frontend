@@ -33,8 +33,12 @@ const sociosList = (props) => {
             accessor: 'nombres',
           },
           {
-            Header: <FormattedMessage id="socios.apellidos"/>,
-            accessor: 'apellidos',
+            Header: <FormattedMessage id="apellido_paterno"/>,
+            accessor: 'apellido_paterno',
+          },
+          {
+            Header: <FormattedMessage id="apellido_materno"/>,
+            accessor: 'apellido_materno',
           },
           {
             Header: <FormattedMessage id="socios.region"/>,
@@ -69,6 +73,13 @@ const sociosList = (props) => {
           {
             Header: <FormattedMessage id="socios.jabon"/>,
             accessor: 'estatus_yip',
+            Cell: renderStatus,
+            Filter: SelectColumnFilter,
+            filter: 'includes',
+          },
+          {
+            Header: <FormattedMessage id="socios.trabajador"/>,
+            accessor: 'estatus_trabajador',
             Cell: renderStatus,
             Filter: SelectColumnFilter,
             filter: 'includes',
