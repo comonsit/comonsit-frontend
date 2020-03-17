@@ -52,7 +52,6 @@ const newSocio = (state) => {
     selectedSocio: {
     "clave_socio": "NUEVO",
     "region": 1,
-    "nombre_comunidad": "",
     "nombres": "",
     "apellido_paterno": "",
     "apellido_materno": "",
