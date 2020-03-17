@@ -14,7 +14,7 @@ import classes from './AcopioGraph.module.css'
 
 const acopioGraph = (props) => {
   return (
-    <XYPlot yDomain={[0, 5000]} xType="ordinal"  width={450} height={200} className={classes.Graphs}>
+    <XYPlot yDomain={[0, 5000]} xType="ordinal"  width={400} height={200} className={classes.Graphs}>
       <DiscreteColorLegend
         style={{position: 'absolute', left: '50px', top: '10px'}}
         orientation="horizontal"
