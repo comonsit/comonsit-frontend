@@ -316,7 +316,7 @@ class SociosForm extends Component {
           valid: true,
           touched: true,
         },
-        estatus_gral: {
+        estatus_comonSit: {
           elementType: 'select',
           elementConfig: {
             options: [
@@ -325,8 +325,8 @@ class SociosForm extends Component {
               {value: 'BA', displayValue: 'Baja'},
             ]
           },
-          label: (<p><FormattedMessage id="socioForm.estatus_gral"/>*</p>),
-          value: this.props.selSocio.estatus_gral,
+          label: (<p><FormattedMessage id="socioForm.estatus_comonSit"/>*</p>),
+          value: this.props.selSocio.estatus_comonSit,
           validation: {
             required: true
           },
@@ -459,7 +459,7 @@ class SociosForm extends Component {
     const sociosFormOrder = [
       "nombres", "apellido_paterno", "apellido_materno", "comunidad", "curp", "telefono", "fecha_nacimiento",
       "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "empresa", "puesto", "fuente", "clave_anterior",
-      "genero", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_trabajador", "estatus_gral", "doc_curp", "doc_act_nac", "doc_ine", "doc_domicilio"
+      "genero", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_trabajador", "estatus_comonSit", "doc_curp", "doc_act_nac", "doc_ine", "doc_domicilio"
     ]
     const formElementsArray = []
     let supportData

@@ -66,7 +66,7 @@ const newSocio = (state) => {
     "estatus_miel": "NP",
     "estatus_yip": "NP",
     "estatus_trabajador": "NP",
-    "estatus_gral": "NP",
+    "estatus_comonSit": "NP",
     "doc_curp": false,
     "doc_act_nac": false,
     "doc_ine": false,

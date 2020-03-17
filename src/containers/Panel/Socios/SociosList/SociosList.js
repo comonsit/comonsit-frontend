@@ -86,7 +86,7 @@ const sociosList = (props) => {
           },
           {
             Header: <FormattedMessage id="socios.general"/>,
-            accessor: 'estatus_gral',
+          accessor: 'estatus_comonSit',
             Cell: renderStatus,
             Filter: SelectColumnFilter,
             filter: 'includes',
