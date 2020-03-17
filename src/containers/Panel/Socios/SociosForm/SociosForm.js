@@ -37,14 +37,28 @@ class SociosForm extends Component {
           valid: !this.props.new,
           touched: false,
         },
-        apellidos: {
+        apellido_paterno: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
             placeholder: '..'
           },
-          label: (<><FormattedMessage id="apellidos"/>*</>),
-          value: this.props.selSocio.apellidos,
+          label: (<><FormattedMessage id="apellido_paterno"/>*</>),
+          value: this.props.selSocio.apellido_paterno,
+          validation: {
+            required: true
+          },
+          valid: !this.props.new,
+          touched: false,
+        },
+        apellido_materno: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..'
+          },
+          label: (<><FormattedMessage id="apellido_materno"/>*</>),
+          value: this.props.selSocio.apellido_materno,
           validation: {
             required: true
           },
@@ -110,6 +124,22 @@ class SociosForm extends Component {
           valid: !this.props.new,
           touched: false,
         },
+        genero: {
+          elementType: 'select',
+          elementConfig: {
+            options: [
+              {value: 'MA', displayValue: 'Masculino'},
+              {value: 'FE', displayValue: 'Femenino'}
+            ]
+          },
+          label: (<p><FormattedMessage id="socioForm.genero"/>*</p>),
+          value: this.props.selSocio.genero,
+          validation: {
+            required: true
+          },
+          valid: true,
+          touched: true,
+        },
         fecha_ingr_yomol_atel: {
           elementType: 'input',
           elementConfig: {
@@ -153,7 +183,7 @@ class SociosForm extends Component {
           touched: false,
         },
         cargo_coop: {
-          elementType: 'select',
+          elementType: 'select_mult',
           elementConfig: {
             options: this.props.cargosCoop.map(r => ({"value": r.id, "displayValue": r.nombre_cargo_coop}))
           },
@@ -173,39 +203,37 @@ class SociosForm extends Component {
           label: (<><FormattedMessage id="empresa"/>*</>),
           value: this.props.selSocio.empresa,
           validation: {
-            required: true
+            required: false
           },
           valid: true,
           touched: false,
         },
-        productor: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label: (<FormattedMessage id="socioForm.productor"/>),
-          value: this.props.selSocio.productor,
-          validation: {
-            required: false,
-            pairedWith: 'trabajador'
-          },
-          valid: true,
-          touched: false,
-        },
-        trabajador: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label: (<FormattedMessage id="socioForm.trabajador"/>),
-          value: this.props.selSocio.trabajador,
-          validation: {
-            required: false,
-            pairedWith: 'productor'
-          },
-          valid: true,
-          touched: false,
-        },
+        // puesto: {
+        //   elementType: 'select',
+        //   elementConfig: {
+        //     options: this.props.puestos.map(r => ({"value": r.id, "displayValue": r.puesto}))
+        //   },
+        //   label: (<><FormattedMessage id="puesto"/>*</>),
+        //   value: this.props.selSocio.puesto,
+        //   validation: {
+        //     required: false
+        //   },
+        //   valid: true,
+        //   touched: false,
+        // },
+        // fuente: {
+        //   elementType: 'select',
+        //   elementConfig: {
+        //     options: this.props.fuentes.map(r => ({"value": r.id, "displayValue": r.fuente}))
+        //   },
+        //   label: (<><FormattedMessage id="fuente"/>*</>),
+        //   value: this.props.selSocio.fuente,
+        //   validation: {
+        //     required: false
+        //   },
+        //   valid: true,
+        //   touched: false,
+        // },
         clave_anterior: {
           elementType: 'input',
           elementConfig: {
@@ -271,6 +299,23 @@ class SociosForm extends Component {
           valid: true,
           touched: true,
         },
+        estatus_trabajador: {
+          elementType: 'select',
+          elementConfig: {
+            options: [
+              {value: 'AC', displayValue: 'ACTIVO'},
+              {value: 'NP', displayValue: 'No Participa'},
+              {value: 'BA', displayValue: 'Baja'},
+            ]
+          },
+          label: (<><FormattedMessage id="socioForm.estatus_trabajador"/>*</>),
+          value: this.props.selSocio.estatus_trabajador,
+          validation: {
+            required: true
+          },
+          valid: true,
+          touched: true,
+        },
         estatus_gral: {
           elementType: 'select',
           elementConfig: {
@@ -287,6 +332,58 @@ class SociosForm extends Component {
           },
           valid: true,
           touched: true,
+        },
+        doc_curp: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: (<FormattedMessage id="socioForm.doc_curp"/>),
+          value: this.props.selSocio.doc_curp,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
+        doc_domicilio: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: (<FormattedMessage id="socioForm.doc_domicilio"/>),
+          value: this.props.selSocio.doc_domicilio,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
+        doc_act_nac: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: (<FormattedMessage id="socioForm.doc_act_nac"/>),
+          value: this.props.selSocio.doc_act_nac,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
+        doc_ine: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: (<FormattedMessage id="socioForm.doc_ine"/>),
+          value: this.props.selSocio.doc_ine,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
         },
       }
     }
@@ -312,25 +409,23 @@ class SociosForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    let additional, updatedFormElement
-    let pairedValidation = true
+    let updatedFormElement
 
-    // Special case for chaining checkbox into single Validation value
-    if (inputIdentifier === 'trabajador' || inputIdentifier === 'productor') {
-      additional = this.state.socioForm[this.state.socioForm[inputIdentifier].validation.pairedWith].value
+    // TODO: create a generic for checkboxes and multiples:
+    if (inputIdentifier === 'cargo_coop') {
       updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
-          value: event.target.checked,
+          value: Array.from(event.target.selectedOptions, option => option.value),
+          valid: checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation),
           touched: true
       })
-      pairedValidation = checkValidity(event.target.checked, this.state.socioForm[inputIdentifier].validation, additional)
-
     } else {
       updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
-          value: event.target.value,
+          value: this.state.socioForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
           valid: checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation),
           touched: true
       })
     }
+
 
     const updatedSocioForm = updateObject(this.state.socioForm, {
         [inputIdentifier]: updatedFormElement
@@ -341,10 +436,7 @@ class SociosForm extends Component {
         formIsValid = updatedSocioForm[inputIds].valid && formIsValid
     }
 
-    if (!pairedValidation) {
-      alert("Por favor agrega al menos Productor o Trabajador como opción")
-    }
-    this.setState({socioForm: updatedSocioForm, formIsValid: formIsValid && pairedValidation})
+    this.setState({socioForm: updatedSocioForm, formIsValid: formIsValid })
   }
 
   onStartEditing = () => {
@@ -364,7 +456,11 @@ class SociosForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const sociosFormOrder = ["nombres", "apellidos", "comunidad", "curp", "telefono", "fecha_nacimiento", "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "empresa", "productor", "trabajador", "clave_anterior", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_gral"]
+    const sociosFormOrder = [
+      "nombres", "apellido_paterno", "apellido_materno", "comunidad", "curp", "telefono", "fecha_nacimiento",
+      "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "empresa", "clave_anterior",
+      "genero", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_trabajador", "estatus_gral", "doc_curp", "doc_act_nac", "doc_ine", "doc_domicilio"
+    ]
     const formElementsArray = []
     let supportData
     let formElements = <Spinner/>
