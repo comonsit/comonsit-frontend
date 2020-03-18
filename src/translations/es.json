@@ -136,6 +136,7 @@
   "movimientos.monto": "monto",
   "movimientos.fecha_banco": "Fecha Bancos",
   "movimientos.tipo": "Tipo de Aportacion",
+  "movimientos.saldo": "Saldo al día de hoy",
   "empresa": "Empresa",
   "movimientosForm.fecha_entrega": "Fecha de Entrega",
   "movimientosForm.monto": "Monto",

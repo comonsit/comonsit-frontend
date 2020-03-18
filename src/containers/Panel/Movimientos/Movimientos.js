@@ -14,17 +14,15 @@ import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import * as actions from '../../../store/actions'
+import axios from '../../../store/axios-be.js'
 
 
 class Movimientos extends Component {
   state = {
     movimientoSelected: false,
     searchingOpen: false,
-    selSocio: {
-      nombres: '',
-      apellidos: '',
-      region: ''
-    },
+    selSocio: '',
+    saldo: null,
     formIsValid: false,
     form: {
       clave_socio: {
@@ -58,19 +56,12 @@ class Movimientos extends Component {
 
 // TODO: CLEAN-UP or avoid this if null empties!
   componentDidUpdate(prevProps) {
+    console.log(this.props.selSocio)
     if(this.props.selSocio !== prevProps.selSocio) {
       if (this.props.selSocio) {
-        this.setState({selSocio: {
-          nombres: this.props.selSocio.nombres,
-          apellidos: this.props.selSocio.apellidos,
-          region: this.props.selSocio.region,
-        }});
+        this.setState({selSocio: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno });
       } else {
-        this.setState({selSocio: {
-          nombres: '',
-          apellidos: '',
-          region: '',
-        }});
+        this.setState({selSocio: ''});
       }
     }
   }
@@ -84,6 +75,7 @@ class Movimientos extends Component {
     console.log('el socio es: ' + id)
     this.props.onFetchSelSocios(this.props.token, id)
     this.props.onInitMovimientos(this.props.token, id)
+    this.getSaldo(id)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -104,6 +96,19 @@ class Movimientos extends Component {
     }
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
+  }
+
+  getSaldo = id => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+    axios.get('/movimientos/saldo/?clave_socio='+id, authData)
+      .then(response => {
+        this.setState({saldo: response.data.saldo})
+      })
+      .catch(error => {
+        // TODO:
+      })
   }
 
   showMovimiento =(id) => {
@@ -160,6 +165,7 @@ class Movimientos extends Component {
   render () {
 
     let sociosBusqueda = <Spinner/>
+    let movimientosResults = null
     const columns = [
       {
         Header: <FormattedMessage id="movimientos.aportacion_retiro"/>,
@@ -203,6 +209,24 @@ class Movimientos extends Component {
       )
     }
 
+    if (this.props.listaMovimientos && this.state.saldo) {
+      movimientosResults = (
+        <>
+          <div>
+            <p><strong>{this.state.selSocio}</strong></p>
+            <p><FormattedMessage id="movimientos.saldo"/>: ${this.state.saldo}</p>
+          </div>
+          <RTable
+            columns={columns}
+            data={this.props.listaMovimientos}
+            onRowClick={row => this.showMovimiento(row.values.id)}
+            />
+        </>
+      )
+    } else {
+      movimientosResults = null
+    }
+
     return (
       <>
           <Modal
@@ -222,37 +246,34 @@ class Movimientos extends Component {
               clicked={this.onNewMovimiento}
               ><FormattedMessage id="movimientos.newMovimiento"/></Button>
           </Title>
-          <form className={classes.Form} onSubmit={this.onSubmitForm}>
-            <div className={classes.Inputs}>
-              <Input
-                label={this.state.form.clave_socio.label}
-                key= {'movimientoSocio1'}
-                elementType={this.state.form.clave_socio.elementType}
-                elementConfig={this.state.form.clave_socio.elementConfig}
-                value={this.state.form.clave_socio.value}
-                shouldValidate={this.state.form.clave_socio.validation}
-                invalid={!this.state.form.clave_socio.valid}
-                touched={this.state.form.clave_socio.touched}
-                disabled={this.props.loading}
-                hide={this.state.form.clave_socio.hide}
-                changed={(event) => this.inputChangedHandler(event, 'clave_socio')}
-                />
-              <Button btnType="Short" clicked={(event) => this.onSearchSocio(event)}><FormattedMessage id="searchSocio"/></Button>
-            </div>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}>
-              <FormattedMessage id="movimientos.actualizar"/>
-            </Button>
-          </form>
-          <div>
-            <p>{this.state.selSocio.nombres} {this.state.selSocio.apellidos} {this.state.selSocio.nombres ? 'de región' : ''} {this.state.selSocio.region}</p>
+          <div className={classes.FormContainer}>
+            <form className={classes.Form} onSubmit={this.onSubmitForm}>
+              <div className={classes.Inputs}>
+                <Input
+                  label={this.state.form.clave_socio.label}
+                  key= {'movimientoSocio1'}
+                  elementType={this.state.form.clave_socio.elementType}
+                  elementConfig={this.state.form.clave_socio.elementConfig}
+                  value={this.state.form.clave_socio.value}
+                  shouldValidate={this.state.form.clave_socio.validation}
+                  invalid={!this.state.form.clave_socio.valid}
+                  touched={this.state.form.clave_socio.touched}
+                  disabled={this.props.loading}
+                  hide={this.state.form.clave_socio.hide}
+                  changed={(event) => this.inputChangedHandler(event, 'clave_socio')}
+                  />
+              </div>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}>
+                <FormattedMessage id="movimientos.actualizar"/>
+              </Button>
+            </form>
+            <Button btnType="Short" clicked={(event) => this.onSearchSocio(event)}><FormattedMessage id="searchSocio"/></Button>
           </div>
-          <RTable
-            columns={columns}
-            data={this.props.listaMovimientos}
-            onRowClick={row => this.showMovimiento(row.values.id)}
-            />
+          <div className={classes.ResultsContainer}>
+            {movimientosResults}
+          </div>
         </div>
       </>
     )

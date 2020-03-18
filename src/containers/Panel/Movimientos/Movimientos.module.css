@@ -1,12 +1,28 @@
-.Form {
+.FormContainer {
   padding: 3rem;
   max-width: 60rem;
+  border: 1px solid #dddedf;
+  border-radius: .5rem;
+}
+
+.Form {
   align-items: center;
   display: flex;
 }
 
 .Form div {
   border: none;
+}
+
+.ResultsContainer {
+  margin-top: 2rem;
+  padding: 3rem;
+  border: 1px solid #dddedf;
+  border-radius: .5rem;
+}
+
+.ResultsContainer p {
+  font-family: 'Arquitecta';
 }
 
 .Inputs {
