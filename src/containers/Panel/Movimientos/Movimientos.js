@@ -56,7 +56,6 @@ class Movimientos extends Component {
 
 // TODO: CLEAN-UP or avoid this if null empties!
   componentDidUpdate(prevProps) {
-    console.log(this.props.selSocio)
     if(this.props.selSocio !== prevProps.selSocio) {
       if (this.props.selSocio) {
         this.setState({selSocio: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno });
@@ -72,7 +71,6 @@ class Movimientos extends Component {
   }
 
   updateData = id => {
-    console.log('el socio es: ' + id)
     this.props.onFetchSelSocios(this.props.token, id)
     this.props.onInitMovimientos(this.props.token, id)
     this.getSaldo(id)

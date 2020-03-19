@@ -72,33 +72,23 @@ class MovimientosForm extends Component {
           touched: false,
           hide: false
         },
-        empresa: {
+        proceso: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.empresas.map(r => ({"value": r.id, "displayValue": r.nombre_empresa}))
+            options: [
+              {value: 'CF', displayValue: 'Café'},
+              {value: 'MI', displayValue: 'Miel'},
+              {value: 'JA', displayValue: 'Jabón'},
+              {value: 'SL', displayValue: 'Salarios'},
+            ]
           },
-          label: (<><FormattedMessage id="empresa"/>*</>),
-          value: 1,
+          label: (<><FormattedMessage id="movimientosForm.proceso"/>*</>),
+          value: 'CF',
           validation: {
             required: true
           },
           valid: true,
-          touched: false,
-        },
-        fecha_banco: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'date'
-          },
-          label: (<><FormattedMessage id="movimientosForm.fecha_banco"/>*</>),
-          value: '',
-          validation: {
-            required: true,
-            todayOrOlder: true
-          },
-          valid: false,
-          touched: false,
-          hide: false
+          touched: true,
         },
         aportacion: {
           elementType: 'checkbox',
@@ -131,6 +121,51 @@ class MovimientosForm extends Component {
           valid: true,
           touched: true,
         },
+        responsable_entrega: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..'
+          },
+          label: (<><FormattedMessage id="movimientosForm.responsable_entrega"/>*</>),
+          value: '',
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+          hide: false
+        },
+        fecha_banco: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'date'
+          },
+          label: (<><FormattedMessage id="movimientosForm.fecha_banco"/>*</>),
+          value: null,
+          validation: {
+            required: true,
+            todayOrOlder: true
+          },
+          valid: false,
+          touched: false,
+          hide: false
+        },
+        referencia_banco: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..'
+          },
+          label: (<><FormattedMessage id="movimientosForm.referencia_banco"/>*</>),
+          value: '',
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false,
+          hide: false
+        }
       }
     }
   }
@@ -147,9 +182,18 @@ class MovimientosForm extends Component {
   onSubmitForm = (event) => {
     event.preventDefault();
 
-    const formData = {}
+    let formData = {}
     for (let formElementIdentifier in this.state.movimientoForm) {
       formData[formElementIdentifier] = this.state.movimientoForm[formElementIdentifier].value
+    }
+
+    // If data was hidden, values will not be sent to avoid confusion.
+    if (this.state.movimientoForm.tipo_de_movimiento.value === 'EF') {
+      console.log('')
+      formData = updateObject(formData, {
+        fecha_banco: null,
+        referencia_banco: null
+      })
     }
 
     // if (this.props.new) {
@@ -171,6 +215,37 @@ class MovimientosForm extends Component {
     let updatedForm = updateObject(this.state.movimientoForm, {
         [inputIdentifier]: updatedFormElement
     })
+
+    // TODO: Improve
+    // Logic to hide or show Bank information
+    const hide = {
+        hide: true,
+        valid: true,
+        validation: {
+          required: false
+        }
+    }
+
+    const show = {
+        hide: false,
+        validation: {
+          required: true
+        }
+    }
+
+    if (inputIdentifier === 'tipo_de_movimiento') {
+      if(event.target.value === 'EF') {
+        updatedForm = updateObject(updatedForm, {
+            fecha_banco: updateObject(updatedForm.fecha_banco, hide),
+            referencia_banco: updateObject(updatedForm.referencia_banco, hide),
+        })
+      } else {
+        updatedForm = updateObject(updatedForm, {
+            fecha_banco: updateObject(updatedForm.fecha_banco, show),
+            referencia_banco: updateObject(updatedForm.referencia_banco, show),
+        })
+      }
+    }
 
     let formIsValid = true
     for (let inputIds in updatedForm) {
@@ -206,7 +281,7 @@ class MovimientosForm extends Component {
   }
 
   render () {
-    const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "empresa", "fecha_banco", "aportacion", "tipo_de_movimiento"]
+    const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "aportacion",  "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
@@ -226,7 +301,7 @@ class MovimientosForm extends Component {
           if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.movimientoForm[formElement.id].value) {
             supportData = (
               <div className={classes.SupportData}>
-                <p>{this.props.selSocio.nombres} {this.props.selSocio.apellidos} de región {this.props.selSocio.region}</p>
+                <p>{this.props.selSocio.nombres} {this.props.selSocio.apellido_paterno} {this.props.selSocio.apellido_materno} de {this.props.selSocio.comunidad}</p>
               </div>)
           }
           supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
