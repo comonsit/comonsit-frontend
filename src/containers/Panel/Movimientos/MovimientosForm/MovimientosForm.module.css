@@ -29,3 +29,70 @@
   padding: 0 6rem;
   font-family: 'Arquitecta';
 }
+
+.ToggleContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.Aportacion {
+  width: 20%;
+  padding: .7rem 4rem;
+  border-radius: 1rem 0 0 0;
+  text-align: center;
+}
+
+.Aportacion p {
+  font-family: 'Arquitecta';
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.AportacionActive {
+  background-color: #243746;
+  color: white;
+  text-decoration: underline;
+}
+
+.AportacionInactive {
+  border-top: 2px solid #243746;
+  border-left: 2px solid #243746;
+  color: gray;
+  cursor: pointer;
+}
+
+.AportacionInactive:hover {
+  color: #243746;
+  text-decoration: underline;
+}
+
+.Retiro {
+  width: 20%;
+  padding: .7rem 4rem;
+  border-radius: 0 1rem 0 0;
+  text-align: center;
+}
+
+.Retiro p {
+  font-family: 'Arquitecta';
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.RetiroInactive {
+  border-top: 2px solid #b45050;
+  border-right: 2px solid #b45050;
+  color: gray;
+  cursor: pointer;
+}
+
+.RetiroInactive:hover {
+  color: #b45050;
+  text-decoration: underline;
+}
+
+.RetiroActive {
+  background-color: #b45050;
+  color: white;
+  text-decoration: underline;
+}

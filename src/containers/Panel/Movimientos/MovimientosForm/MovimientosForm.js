@@ -91,18 +91,8 @@ class MovimientosForm extends Component {
           touched: true,
         },
         aportacion: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label: (<FormattedMessage id="movimientos.aportacion_retiro"/>),
           value: true,
-          validation: {
-            required: false,
-            // pairedWith: 'trabajador'
-          },
-          valid: true,
-          touched: false,
+          valid: true
         },
         tipo_de_movimiento: {
           elementType: 'select',
@@ -280,8 +270,13 @@ class MovimientosForm extends Component {
     this.props.onFetchSelSocios(this.props.token, id)
   }
 
+  onToggleType = result => {
+    const updatedForm = updateObject(this.state.movimientoForm, {aportacion: {value: result, valid: true}})
+    this.setState({movimientoForm: updatedForm });
+  }
+
   render () {
-    const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "aportacion",  "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
+    const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
@@ -349,6 +344,16 @@ class MovimientosForm extends Component {
       )
     }
 
+    let aportacionClasses = [classes.Aportacion]
+    let retiroClasses = [classes.Retiro]
+    if (this.state.movimientoForm.aportacion.value) {
+      aportacionClasses.push(classes.AportacionActive)
+      retiroClasses.push(classes.RetiroInactive)
+    } else {
+      aportacionClasses.push(classes.AportacionInactive)
+      retiroClasses.push(classes.RetiroActive)
+    }
+
     return (
       <>
         <Modal
@@ -362,6 +367,18 @@ class MovimientosForm extends Component {
         </Modal>
         <Title
           titleName="movimientosForm.title"/>
+        <div className={classes.ToggleContainer}>
+          <div
+            onClick={() => this.onToggleType(true)}
+            className={aportacionClasses.join(' ')}>
+            <p>APORTACIÓN</p>
+          </div>
+          <div
+            onClick={() => this.onToggleType(false)}
+            className={retiroClasses.join(' ')}>
+            <p>RETIRO</p>
+          </div>
+        </div>
         <form onSubmit={this.onSubmitForm}>
           <div className={formClasses.join(' ')}>
           {formElements}
