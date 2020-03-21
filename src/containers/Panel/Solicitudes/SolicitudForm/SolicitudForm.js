@@ -163,7 +163,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: true
         },
         monto_solicitado: {
           elementType: 'input',
@@ -354,11 +354,18 @@ class SolicitudForm extends Component {
     }
 
     //// TODO: eliminate estatus data with working workflow
-    const solicitud = {
+    let solicitud = {
         ...formData,
         estatus_ej_credito: 'RV',
         estatus_evaluacion: 'RV',
         estatus_solicitud: 'RV'
+    }
+
+    if (this.state.solicitudForm.tipo_credito.value === 'CP') {
+      solicitud = updateObject(solicitud, {
+        mot_credito: 'TR',
+        mot_credito_otro: null
+      })
     }
 
     // if (this.props.new) {
@@ -381,25 +388,47 @@ class SolicitudForm extends Component {
         [inputIdentifier]: updatedFormElement
     })
 
-    // TODO: duplicated code
-    //Hide/Show Other option
-    if (inputIdentifier === 'mot_credito') {
+    // TODO: Improve process
+    if (inputIdentifier === 'tipo_credito') {
+      const hideIfTR = event.target.value === 'CP'
+      updatedForm = updateObject(updatedForm, {
+          mot_credito: updateObject(updatedForm.mot_credito, {
+              hide: hideIfTR
+          }),
+          mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
+              hide: hideIfTR || this.state.solicitudForm.mot_credito.value !== 'OT'
+          }),
+          emergencia_medica: updateObject(updatedForm.emergencia_medica, {
+              hide: hideIfTR || this.state.solicitudForm.mot_credito.value !== 'SA'
+          }),
+      })
+    } else if (inputIdentifier === 'mot_credito') {
+      const hideOther = event.target.value !== 'OT'
+      const hideSalud = event.target.value !== 'SA'
       updatedForm = updateObject(updatedForm, {
           mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
-              hide: event.target.value !== 'OT',
-              valid: event.target.value !== 'OT',
+              hide: hideOther,
+              valid: hideOther,
               validation: {
-                required: event.target.value === 'OT'
+                required: !hideOther
+              }
+          }),
+          emergencia_medica: updateObject(updatedForm.emergencia_medica, {
+              hide: hideSalud,
+              valid: hideSalud,
+              validation: {
+                required: !hideSalud
               }
           })
       })
     } else if (inputIdentifier === 'act_productiva'  ) {
+      const hideOther = event.target.value !== 'OT'
       updatedForm = updateObject(updatedForm, {
           act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
-              hide: event.target.value !== 'OT',
-              valid: event.target.value !== 'OT',
+              hide: hideOther,
+              valid: hideOther,
               validation: {
-                required: event.target.value === 'OT'
+                required: !hideOther
               }
           })
       })
