@@ -401,10 +401,17 @@ class SolicitudForm extends Component {
           emergencia_medica: updateObject(updatedForm.emergencia_medica, {
               hide: hideIfTR || this.state.solicitudForm.mot_credito.value !== 'SA'
           }),
+          act_productiva: updateObject(updatedForm.act_productiva, {
+              hide: !hideIfTR && this.state.solicitudForm.mot_credito.value !== 'TR'
+          }),
+          act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
+              hide: (!hideIfTR && this.state.solicitudForm.mot_credito.value !== 'TR') || this.state.solicitudForm.act_productiva.value !== 'OT'
+          }),
       })
     } else if (inputIdentifier === 'mot_credito') {
       const hideOther = event.target.value !== 'OT'
       const hideSalud = event.target.value !== 'SA'
+      const hideActProd = event.target.value !== 'TR'
       updatedForm = updateObject(updatedForm, {
           mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
               hide: hideOther,
@@ -418,6 +425,20 @@ class SolicitudForm extends Component {
               valid: hideSalud,
               validation: {
                 required: !hideSalud
+              }
+          }),
+          act_productiva: updateObject(updatedForm.act_productiva, {
+              hide: hideActProd,
+              valid: hideActProd,
+              validation: {
+                required: !hideActProd
+              }
+          }),
+          act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
+              hide: hideActProd || this.state.solicitudForm.act_productiva.value !== 'OT',
+              valid: hideActProd,
+              validation: {
+                required: !hideActProd
               }
           })
       })
@@ -470,7 +491,7 @@ class SolicitudForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "act_productiva", "act_productiva_otro", "mot_credito", "mot_credito_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "aval", "familiar_responsable"]
+    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "aval", "familiar_responsable"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
