@@ -354,12 +354,7 @@ class SolicitudForm extends Component {
     }
 
     //// TODO: eliminate estatus data with working workflow
-    let solicitud = {
-        ...formData,
-        estatus_ej_credito: 'RV',
-        estatus_evaluacion: 'RV',
-        estatus_solicitud: 'RV'
-    }
+    let solicitud = {...formData}
 
     if (this.state.solicitudForm.tipo_credito.value === 'CP') {
       solicitud = updateObject(solicitud, {
@@ -367,6 +362,8 @@ class SolicitudForm extends Component {
         mot_credito_otro: null
       })
     }
+
+    // TODO: meter mot_credito !== 'SA' emergencia_medica: false??
 
     // if (this.props.new) {
       this.props.onCreateNewSolicitud(solicitud, this.props.token)
