@@ -79,7 +79,7 @@
   "solicitudes.monto_solicitado": "Monto",
   "solicitudes.plazo_de_pago_solicitado": "Plazo",
   "solicitudes.estatus_solicitud": "Estatus",
-  "solicitudes.estatus_ej_credito": "Estatus ejercicio",
+  "solicitudes.estatus_evaluacion": "Estatus Evaluación",
   "solicitudes.disapprove": "Rechazar",
   "solicitudes.goToMesaControl": "Mesa de Control",
   "solicitudForm.title": "Solicitud Nueva",

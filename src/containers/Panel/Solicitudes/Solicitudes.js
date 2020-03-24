@@ -111,8 +111,8 @@ class Solicitudes extends Component {
         filter: 'includes',
       },
       {
-        Header: <FormattedMessage id="solicitudes.estatus_ej_credito"/>,
-        accessor: 'estatus_ej_credito',
+        Header: <FormattedMessage id="solicitudes.estatus_evaluacion"/>,
+      accessor: 'estatus_evaluacion',
         Cell: this.renderStatus,
         Filter: SelectColumnFilter,
         filter: 'includes',
