@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
 
+import SolicitudDetail from '../SolicitudDetail/SolicitudDetail';
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
@@ -240,43 +241,9 @@ class MesaControl extends Component {
     const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
     if (this.props.selectedSol) {
-      solicitudInfo = (
-        <div className={classes.infoDiv}>
-          <h2><FormattedMessage id="mesaControl.solicitud"/></h2>
-          <h3><FormattedMessage id="mesaControl.datos"/></h3>
-          <p><b><FormattedMessage id="nombre_productor"/>:</b> {this.props.selectedSol.nombre_productor}</p>
-          <p><b><FormattedMessage id="clave"/>:</b> {this.props.selectedSol.clave_socio}</p>
-          <p><b><FormattedMessage id="comunidad"/>:</b> {this.props.selectedSol.comunidad}</p>
-          <p><b><FormattedMessage id="region"/>:</b> {this.props.selectedSol.region}</p>
-          <p><b><FormattedMessage id="folio"/>:</b> {this.props.selectedSol.folio_solicitud}</p>
-          <p><b><FormattedMessage id="area_proceso"/>:</b> ¿¿??</p>
-
-          <h3><FormattedMessage id="mesaControl.descripcion"/></h3>
-          <p><b><FormattedMessage id="monto"/>:</b> ${this.props.selectedSol.monto_solicitado}</p>
-          <p><b><FormattedMessage id="tipo_credito"/>:</b> {this.props.selectedSol.tipo_credito}</p>
-          <p><b><FormattedMessage id="interes_mensual"/>:</b> 4% (¿automático?)</p>
-          <p><b><FormattedMessage id="forma_pago"/>:</b> Efectivo (¿automático?)</p>
-          <p><b><FormattedMessage id="mesaControl.ingresos_de_cooperativa"/>:</b> ¿¿ingresos coop??</p>
-          <p><b><FormattedMessage id="prestamo_sobre_ingresos"/>:</b> {this.props.selectedSol.monto_solicitado} / ingresos_cooperativa *100%</p>
-          <p><b><FormattedMessage id="mesaControl.tiempoSolicitud"/>:</b> {this.props.selectedSol.plazo_de_pago_solicitado}</p>
-          <br/>
-          ¡GRAFIQUITA AQUÍ!
-
-          <p><b><FormattedMessage id="aval"/>:</b> {this.props.selectedSol.aval_nombre}</p>
-          <p><b><FormattedMessage id="justificacion"/>:</b> ¿¿comentarios promotor?? {this.props.selectedSol.comentarios_promotor} </p>
-
-          <h3><FormattedMessage id="mesaControl.observaciones"/></h3>
-          <p><b><FormattedMessage id="mesaControl.promotResponsable"/>:</b> {this.props.selectedSol.promotor}</p>
-          <p><b><FormattedMessage id="cargo"/>:</b> {this.props.selectedSol.cargo}</p>
-          <p><b><FormattedMessage id="cargo_coop"/>:</b> {this.props.selectedSol.cargo_coop}</p>
-          <p><b><FormattedMessage id="cargo_mision"/>:</b> ¿¿cargo misión??</p>
-          <p><b><FormattedMessage id="ingreso_a_YA"/>:</b> {this.props.selectedSol.fecha_ingr_yomol_atel}</p>
-          <p><b><FormattedMessage id="mesaControl.porc_acopio_por_anio"/>:</b> ¿¿??</p>
-          <br/>
-          <p><b><FormattedMessage id="mesaControl.familiaresYA"/>:</b> ¿¿??</p>
-        </div>
-      )
+      solicitudInfo = <SolicitudDetail solicitud={this.props.selectedSol} />
     }
+
 
     return (
       <>

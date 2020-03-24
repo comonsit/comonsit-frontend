@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import SolicitudDetail from './SolicitudDetail/SolicitudDetail';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
@@ -125,12 +126,7 @@ class Solicitudes extends Component {
     if (this.state.selectedSol) {
       solicitudInfo = (
         <div>
-          <h3>Solicitud: #{this.state.selectedSol.folio_solicitud} </h3>
-          <h4>clave de Socio: {this.state.selectedSol.clave_socio} </h4>
-          <h5>Generado por: {this.state.selectedSol.promotor} </h5>
-          <h5>Tipo: {this.state.selectedSol.tipo_credito} </h5>
-          <h5>A {this.state.selectedSol.plazo_de_pago_solicitado} Meses </h5>
-          <h5>Por ${this.state.selectedSol.monto_solicitado} </h5>
+          <SolicitudDetail solicitud={this.state.selectedSol} />
           ...
           <Button
             clicked={this.cancelSelected}

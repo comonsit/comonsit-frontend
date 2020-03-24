@@ -363,6 +363,12 @@ class SolicitudForm extends Component {
       })
     }
 
+    //TEMP!!!
+    const tempChat = solicitud.comentarios_promotor
+    delete solicitud.comentarios_promotor
+    solicitud['chat'] = [{'comentario': tempChat}]
+
+
     // TODO: meter mot_credito !== 'SA' emergencia_medica: false??
 
     // if (this.props.new) {
