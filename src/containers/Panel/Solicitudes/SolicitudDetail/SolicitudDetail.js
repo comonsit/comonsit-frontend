@@ -1,49 +1,87 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedDate, IntlProvider } from 'react-intl';
 import classes from './SolicitudDetail.module.css'
+
+import TextElement from '../../../../components/UI/TextElement/TextElement';
 
 
 const solicitudDetail = (props) => {
-  return (
-    <div className={classes.infoDiv}>
-      <h2><FormattedMessage id="mesaControl.solicitud"/></h2>
-      <h3><FormattedMessage id="mesaControl.datos"/></h3>
-      <p><b><FormattedMessage id="nombre_productor"/>:</b> {props.solicitud.nombre_productor}</p>
-      <p><b><FormattedMessage id="clave"/>:</b> {props.solicitud.clave_socio}</p>
-      <p><b><FormattedMessage id="comunidad"/>:</b> {props.solicitud.comunidad}</p>
-      <p><b><FormattedMessage id="region"/>:</b> {props.solicitud.region}</p>
-      <p><b><FormattedMessage id="folio"/>:</b> {props.solicitud.folio_solicitud}</p>
-      <p><b><FormattedMessage id="area_proceso"/>:</b> ¿¿??</p>
-      <br/>
-      <h3><FormattedMessage id="mesaControl.descripcion"/></h3>
-      <p><b><FormattedMessage id="monto"/>:</b> ${props.solicitud.monto_solicitado}</p>
-      <p><b><FormattedMessage id="tipo_credito"/>:</b> {props.solicitud.tipo_credito}</p>
-      <p><b><FormattedMessage id="interes_mensual"/>:</b> 4% (¿automático?)</p>
-      <p><b><FormattedMessage id="forma_pago"/>:</b> Efectivo (¿automático?)</p>
-      <p><b><FormattedMessage id="mesaControl.ingresos_de_cooperativa"/>:</b> ¿¿ingresos coop??</p>
-      <p><b><FormattedMessage id="prestamo_sobre_ingresos"/>:</b> {props.solicitud.monto_solicitado} / ingresos_cooperativa *100%</p>
-      <p><b><FormattedMessage id="mesaControl.tiempoSolicitud"/>:</b> {props.solicitud.plazo_de_pago_solicitado}</p>
-      <br/>
-      ¡GRAFIQUITA AQUÍ!
+  const items1 = ["nombre_productor", "clave_socio", "comunidad", "region", "area_proceso", "cargo", "cargo_coop", "fecha_ingr_yomol_atel", "porc_acopio_por_anio"]
+  const items1Array = items1.map(id => {
+    return (<TextElement
+              label={id}
+              content={props.solicitud[id]}
+              />)
+  })
 
-      <p><b><FormattedMessage id="aval"/>:</b> {props.solicitud.aval_nombre}</p>
-      <p><b><FormattedMessage id="justificacion"/>:</b> ¿¿comentarios promotor?? {props.solicitud.comentarios_promotor} </p>
-      <br/>
-      <h3><FormattedMessage id="mesaControl.observaciones"/></h3>
-      <p><b><FormattedMessage id="mesaControl.promotResponsable"/>:</b> {props.solicitud.promotor}</p>
-      <p><b><FormattedMessage id="cargo"/>:</b> {props.solicitud.cargo}</p>
-      <p><b><FormattedMessage id="cargo_coop"/>:</b> {props.solicitud.cargo_coop}</p>
-      <p><b><FormattedMessage id="cargo_mision"/>:</b> ¿¿cargo misión??</p>
-      <p><b><FormattedMessage id="ingreso_a_YA"/>:</b> {props.solicitud.fecha_ingr_yomol_atel}</p>
-      <p><b><FormattedMessage id="mesaControl.porc_acopio_por_anio"/>:</b> ¿¿??</p>
-      <br/>
-      <p><b><FormattedMessage id="mesaControl.familiaresYA"/>:</b> ¿¿??</p>
-      <br/>
+  const items2 = ["monto_solicitado", "tipo_credito", "actProductiva", "motCredito", "plazo_de_pago_solicitado", "fecha_solicitud"]
+  let content
+  const items2Array = items2.map(id => {
+    if ((id === "act_productiva" || id === "mot_credito") && props.solicitud[id] === 'OT') {
+      content = props.solicitud[id+"_otro"]
+    } else {
+      content = props.solicitud[id]
+    }
+    return (<TextElement
+              label={id}
+              content={content}
+              isNum={id === "monto_solicitado"}
+              />)
+  })
+
+  const items3 = ["aval_nombre", "familiar_responsable", "justificacion_credito", "promotor", "irregularidades"]
+  const items3Array = items3.map(id => {
+    return (<TextElement
+              label={id}
+              content={props.solicitud[id]}
+              />)
+  })
+
+  return (
+    <div className={classes.Container}>
+      <div className={classes.Title}>
+        <h2><FormattedMessage id="mesaControl.solicitud"/> {props.solicitud.folio_solicitud}</h2>
+      </div>
+      <div className={classes.SubSection}>
+        <div className={classes.SubTitle}>
+          <h3><FormattedMessage id="mesaControl.datos"/></h3>
+        </div>
+        {items1Array}
+      </div>
+      <div className={classes.SubSection}>
+        <div className={classes.SubTitle}>
+          <h3><FormattedMessage id="mesaControl.descripcion"/></h3>
+        </div>
+        {items2Array}
+      </div>
+      <div className={classes.SubSection}>
+        <div className={classes.SubTitle}>
+          <h3><FormattedMessage id="mesaControl.observaciones"/></h3>
+        </div>
+        {items3Array}
+      </div>
       <h3>Comentarios</h3>
       {props.solicitud.chat.map(comment => (
-          <div key={comment.id}>
-            <p>{comment.user}: {comment.comentario}</p>
-            <p>{comment.fecha}</p>
+          <div
+            className={classes.Comment}
+            key={comment.id}>
+            <div className={classes.Label}>
+              <p>{comment.user}:</p>
+            </div>
+            <div className={classes.ChatContainer}>
+              <div className={classes.ChatDate}>
+                <p>
+                  <IntlProvider locale='es'>
+                    <FormattedDate
+                      value={new Date(comment.fecha)}
+                      day="numeric"
+                      month="long"
+                      year="numeric"/>
+                  </IntlProvider>
+                </p>
+              </div>
+              <p>{comment.comentario}</p>
+            </div>
           </div>
       ))}
     </div>

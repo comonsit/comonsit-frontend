@@ -71,3 +71,8 @@
 .Dropdown li button:hover {
   background: #1e5785
 }
+
+.Table {
+  display: flex;
+  flex-direction: column;
+}

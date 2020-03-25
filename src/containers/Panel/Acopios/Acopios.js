@@ -273,7 +273,7 @@ class Acopios extends Component {
               hint={this.state.hintSA}
               />
           </div>
-          <div>
+          <div className={classes.Table}>
             {downloadXLSButton}
             <RTable
               columns={columns}

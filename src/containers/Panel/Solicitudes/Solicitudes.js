@@ -127,14 +127,6 @@ class Solicitudes extends Component {
       solicitudInfo = (
         <div>
           <SolicitudDetail solicitud={this.state.selectedSol} />
-          ...
-          <Button
-            clicked={this.cancelSelected}
-            disabled
-            ><FormattedMessage id="editButton"/></Button>
-          <Button
-            clicked={this.cancelSelected}
-            ><FormattedMessage id="cancelButton"/></Button>
         </div>
       )
       if (this.state.selectedSol.estatus_solicitud === 'RV' && isGerencia(this.props.role)) {
@@ -150,8 +142,12 @@ class Solicitudes extends Component {
         <Modal
           show={this.state.showSolicitudModal}
           modalClosed={this.cancelSelected}>
-          {solicitudInfo}
-          {solicitudInfoButton}
+          <div className={classes.Container}>
+            <div className={classes.InfoContainer}>
+              {solicitudInfo}
+            </div>
+            {solicitudInfoButton}
+          </div>
         </Modal>
         <div className={classes.Container}>
           <Title

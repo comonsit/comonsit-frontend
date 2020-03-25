@@ -1,0 +1,11 @@
+.Container {
+  background-color: #f6fcf9;
+  padding: 2rem;
+  border-radius: .5rem;
+}
+
+.InfoContainer {
+  height: 70vh;
+  overflow-y:scroll;
+  border: .1rem solid #243746;
+}

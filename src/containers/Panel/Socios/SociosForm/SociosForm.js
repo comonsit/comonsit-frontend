@@ -520,7 +520,7 @@ class SociosForm extends Component {
 
 
     return (
-      <>
+      <div className={classes.Container}>
         <Title
           titleName="socioForm.title"
           titleNameEx={this.props.selSocio.clave_socio}
@@ -533,7 +533,7 @@ class SociosForm extends Component {
           </div>
           {submitButton}
         </form>
-      </>
+      </div>
     )
   }
 }
