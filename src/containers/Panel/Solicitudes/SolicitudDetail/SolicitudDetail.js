@@ -14,11 +14,12 @@ const solicitudDetail = (props) => {
               />)
   })
 
-  const items2 = ["monto_solicitado", "tipo_credito", "actProductiva", "motCredito", "plazo_de_pago_solicitado", "fecha_solicitud"]
+  const items2 = ["monto_solicitado", "tipo_credito_nombre", "act_productiva_nombre", "mot_credito_nombre", "plazo_de_pago_solicitado", "fecha_solicitud"]
   let content
   const items2Array = items2.map(id => {
-    if ((id === "act_productiva" || id === "mot_credito") && props.solicitud[id] === 'OT') {
-      content = props.solicitud[id+"_otro"]
+    if ((id === "act_productiva_nombre" || id === "mot_credito_nombre") && props.solicitud[id] === 'Otro') {
+      // slice to covert: "act_productiva_nombre" into "act_productiva_otro"
+      content = props.solicitud[id]+': '+props.solicitud[id.slice(0,-7)+"_otro"]
     } else {
       content = props.solicitud[id]
     }
