@@ -38,6 +38,11 @@
     color: #243746;
 }
 
+.InputElementFocused {
+    outline: none;
+    background-color: white;
+}
+
 .InputElement:focus {
     outline: none;
     background-color: white;

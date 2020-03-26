@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, FormattedNumber, IntlProvider} from 'react-intl';
 import classes from './Movimientos.module.css'
 import { connect } from 'react-redux';
 
@@ -210,9 +210,9 @@ class Movimientos extends Component {
     if (this.props.listaMovimientos && this.state.saldo) {
       movimientosResults = (
         <>
-          <div>
+          <div className={classes.SocioName}>
             <p><strong>{this.state.selSocio}</strong></p>
-            <p><FormattedMessage id="movimientos.saldo"/>: ${this.state.saldo}</p>
+            <p><FormattedMessage id="movimientos.saldo"/>: <IntlProvider locale='en'><FormattedNumber value={this.state.saldo} style="currency" currency="USD"/></IntlProvider></p>
           </div>
           <RTable
             columns={columns}
@@ -223,6 +223,16 @@ class Movimientos extends Component {
       )
     } else {
       movimientosResults = null
+    }
+
+    let socioClasses = [classes.porSocio]
+    let comunidadClasses = [classes.porComunidad]
+    if (true) {
+      socioClasses.push(classes.porSocioActive)
+      comunidadClasses.push(classes.porComunidadInactive)
+    } else {
+      // socioClasses.push(classes.porSocioInactive)
+      // comunidadClasses.push(classes.porComunidadActive)
     }
 
     return (
@@ -245,6 +255,18 @@ class Movimientos extends Component {
               ><FormattedMessage id="movimientos.newMovimiento"/></Button>
           </Title>
           <div className={classes.FormContainer}>
+            <div className={classes.ToggleContainer}>
+              <div
+                onClick={() => ({})}
+                className={socioClasses.join(' ')}>
+                <p><FormattedMessage id="movimientos.buscarSocio"/></p>
+              </div>
+              <div
+                onClick={() => ({})}
+                className={comunidadClasses.join(' ')}>
+                <p><FormattedMessage id="movimientos.buscarComunidad"/></p>
+              </div>
+            </div>
             <form className={classes.Form} onSubmit={this.onSubmitForm}>
               <div className={classes.Inputs}>
                 <Input
@@ -259,6 +281,7 @@ class Movimientos extends Component {
                   disabled={this.props.loading}
                   hide={this.state.form.clave_socio.hide}
                   changed={(event) => this.inputChangedHandler(event, 'clave_socio')}
+                  focused
                   />
               </div>
               <Button

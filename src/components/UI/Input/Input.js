@@ -9,6 +9,8 @@ const input = (props) => {
     const labelClasses = [classes.Label]
     let validationError = null
 
+    if (props.focused) { inputClasses.push(classes.InputElementFocused)
+    }
     if (props.labelLong) { labelClasses.push(classes.LabelLong) }
     if (props.label) {
       label = (

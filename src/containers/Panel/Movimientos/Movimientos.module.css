@@ -1,8 +1,15 @@
 .FormContainer {
-  padding: 3rem;
+  padding: 0rem;
   max-width: 60rem;
   border: 1px solid #dddedf;
   border-radius: .5rem;
+  background-color: #f6fcf9;
+  margin: 0 auto;
+}
+
+.FormContainer h3 {
+  text-align: center;
+  font-family: 'Arquitecta';
 }
 
 .Form {
@@ -14,11 +21,17 @@
   border: none;
 }
 
+.SocioName {
+  font-size: 1.6em;
+}
+
 .ResultsContainer {
   margin-top: 2rem;
   padding: 3rem;
   border: 1px solid #dddedf;
   border-radius: .5rem;
+  border-radius: .5rem;
+  background-color: #f6fcf9;
 }
 
 .ResultsContainer p {
@@ -36,4 +49,54 @@
   overflow-y:scroll;
   border: .3rem solid #243746;
   border-radius: .5rem;
+}
+
+.ToggleContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.porSocio {
+  width: 50%;
+  padding: .7rem 4rem;
+  border-radius: .5rem 0 0 0;
+  text-align: center;
+}
+.porSocio p {
+  font-family: 'Arquitecta';
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.porSocioActive {
+  background-color: #f6fcf9;
+  text-decoration: underline;
+}
+
+.porComunidad {
+  width: 50%;
+  padding: .7rem 4rem;
+  border-radius: 0 .5rem 0 0;
+  text-align: center;
+}
+
+.porComunidad p {
+  font-family: 'Arquitecta';
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.porComunidadInactive {
+  border-bottom: 1px solid #dddedf;
+  border-left: 1px solid #dddedf;
+  /* border-bottom: 2px solid #243746; */
+  background-color: #ffffff;
+  color: gray;
+  cursor: not-allowed;
+}
+
+.porComunidadInactive:hover {
+  /* color: #243746; */
+  text-decoration: underline;
 }
