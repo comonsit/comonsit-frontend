@@ -202,7 +202,7 @@ class SolicitudForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..justificación'
+            placeholder: '..'
           },
           label:  (<FormattedMessage id="solicitudForm.justificacion_credito"/>),
           value: '',
@@ -494,7 +494,7 @@ class SolicitudForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "comentarios_promotor", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "aval", "familiar_responsable"]
+    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "justificacion_credito", "aval", "familiar_responsable", "comentarios_promotor"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
