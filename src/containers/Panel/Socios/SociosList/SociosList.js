@@ -16,8 +16,9 @@ const sociosList = (props) => {
        <div
         style={{
           borderRadius: "2rem",
-          width: "2rem",
-          height: "2rem",
+          width: "1.5rem",
+          height: "1.5rem",
+          margin: "auto",
           backgroundColor: colors[cellInfo.cell.value] }}
        />
      );

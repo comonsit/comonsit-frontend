@@ -1,7 +1,10 @@
 
 .TableContainer {
-  width: 100%;
-  overflow: scroll;
+  /* display: block; */
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border-bottom: 1px solid #34495E;
 }
 
 .TablaSocios {
@@ -38,7 +41,9 @@
 }
 
 .TablaSocios td {
-  padding: .5rem 2rem;
+  padding: .5rem .8rem;
+  font-size: .9em
+
 }
 
 .TablaSocios tbody tr:hover {
@@ -132,4 +137,10 @@ input:checked + .RoundSlider:before {
   border-radius: 1.5rem;
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.Pagination {
+  padding: 0.5rem;
+  font-family: 'Arquitecta';
+  color: #34495E;
 }

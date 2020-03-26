@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useTable, useSortBy, useFilters, useGlobalFilter } from 'react-table'
+import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination } from 'react-table'
 import classes from './RTable.module.css'
 import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
@@ -42,80 +42,141 @@ const RTable = ({ columns, data, onRowClick}) => {
       getTableProps,
       getTableBodyProps,
       headerGroups,
-      rows,
+      page,
       prepareRow,
       state,
       preGlobalFilteredRows,
-      setGlobalFilter
+      setGlobalFilter,
+      canPreviousPage,
+      canNextPage,
+      pageOptions,
+      pageCount,
+      gotoPage,
+      nextPage,
+      previousPage,
+      setPageSize,
+      state: { pageIndex, pageSize },
+
     } = useTable(
       {
         columns,
         data,
         defaultColumn,
         filterTypes,
+        initialState: { pageIndex: 0 },
       },
       useFilters,
       useGlobalFilter,
-      useSortBy
+      useSortBy,
+      usePagination
   )
 
 
   // Render the UI for your table
   return (
-    <table className={classes.TablaSocios} {...getTableProps()}>
-      <thead>
-        <tr>
-          <th className={classes.SearchHeader} colSpan="2">
-            <GlobalFilter
-                preGlobalFilteredRows={preGlobalFilteredRows}
-                globalFilter={state.globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              />
-          </th>
-          <th
-            colSpan="0">
-            <label className={classes.Switch}>
-              <input type="checkbox" onChange={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
-              <span className={classes.RoundSlider}></span>
-            </label>
-          </th>
-        </tr>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render('Header')}
-                <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? ' ▼'
-                        : ' ▲'
-                      : ''}
-                  </span>
-
-                <div>{advancedSearch && column.canFilter ? column.render('Filter') : null}</div>
+    <>
+      <div className={classes.TableContainer}>
+        <table className={classes.TablaSocios} {...getTableProps()}>
+          <thead>
+            <tr>
+              <th className={classes.SearchHeader} colSpan="4">
+                <GlobalFilter
+                    preGlobalFilteredRows={preGlobalFilteredRows}
+                    globalFilter={state.globalFilter}
+                    setGlobalFilter={setGlobalFilter}
+                  />
               </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(
-          (row, i) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                onClick={() => onRowClick(row)}
-                >
-                {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                })}
+              <th
+                colSpan="0">
+                <label className={classes.Switch}>
+                  <input type="checkbox" onChange={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
+                  <span className={classes.RoundSlider}></span>
+                </label>
+              </th>
+            </tr>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render('Header')}
+                    <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? ' ▼'
+                            : ' ▲'
+                          : ''}
+                      </span>
+
+                    <div>{advancedSearch && column.canFilter ? column.render('Filter') : null}</div>
+                  </th>
+                ))}
               </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map(
+              (row, i) => {
+                prepareRow(row);
+                return (
+                  <tr
+                    {...row.getRowProps()}
+                    onClick={() => onRowClick(row)}
+                    >
+                    {row.cells.map(cell => {
+                      return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    })}
+                  </tr>
+                )}
             )}
-        )}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+      <div className={classes.Pagination}>
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>{' '}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </button>{' '}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>{' '}
+        <span>
+          {' '}
+          <strong>
+            {pageIndex + 1} de {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Ir a:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(page)
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+        <select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value))
+          }}
+        >
+          {[10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Mostrar {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
+
   )
 }
 
