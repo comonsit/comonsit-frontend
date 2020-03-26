@@ -99,7 +99,7 @@ class Solicitudes extends Component {
         filter: filterGreaterThan
       },
       {
-        Header: <FormattedMessage id="solicitudes.plazo_de_pago_solicitado"/>,
+        Header: <FormattedMessage id="plazo_de_pago_solicitado"/>,
         accessor: 'plazo_de_pago_solicitado',
         Filter: SliderColumnFilter,
         filter: 'equals'
