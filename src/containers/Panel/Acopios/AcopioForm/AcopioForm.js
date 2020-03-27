@@ -10,6 +10,7 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
+import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
 import classes from './AcopioForm.module.css'
 import * as actions from '../../../../store/actions'
@@ -17,12 +18,25 @@ import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
 
+const status = {
+  'CF': 'estatus_cafe',
+  'MI': 'estatus_miel',
+  'JA': 'estatus_yip',
+  'SL': 'estatus_trabajador'
+}
+
 class AcopioForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       formIsValid: false,
       searchingOpen: false,
+      processOptions: {
+            CF: 'NP',
+            MI: 'NP',
+            JA: 'NP',
+            SL: 'NP'
+      },
       acopioForm: {
         clave_socio: {
           elementType: 'input',
@@ -37,7 +51,11 @@ class AcopioForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          socioSupport: {
+            supportButton: (event) => this.onSearchSocio(event),
+            loseFocus: () => this.searchByFocus('clave_socio')
+          }
         },
         fecha: {
           elementType: 'input',
@@ -55,21 +73,12 @@ class AcopioForm extends Component {
           hide: false
         },
         tipo_de_producto: {
-          elementType: 'select',
-          elementConfig: {
-            options: [
-              {value: 'CF', displayValue: 'Cafe'},
-              {value: 'MI', displayValue: 'Miel'},
-              {value: 'JA', displayValue: 'Jabon'},
-              {value: 'SL', displayValue: 'Salarios'}
-            ]
-          },
-          label: (<><FormattedMessage id="acopioForm.tipo_de_producto"/>*</>),
-          value: 'CF',
+          elementType: 'icons',
+          value: null,
           validation: {
             required: true
           },
-          valid: true,
+          valid: false,
           touched: false,
           hide: false
         },
@@ -111,6 +120,34 @@ class AcopioForm extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
+      let newProceso = this.state.acopioForm.tipo_de_producto
+      const newProcessValues = this.state.processOptions
+
+      for (let id in status) {
+        newProcessValues[id] = this.props.selSocio[status[id]]
+      }
+      newProceso = updateObject(this.state.acopioForm.tipo_de_producto, {
+          value: null,
+          valid: false,
+          touched: false
+      })
+
+      const updatedForm = updateObject(this.state.acopioForm, {
+        tipo_de_producto: newProceso,
+        clave_socio: updateObject(this.state.acopioForm.clave_socio, {
+          supportData: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno + ' de ' + this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
+        })
+      })
+
+      this.setState({
+        processOptions: newProcessValues,
+        acopioForm: updatedForm,
+        formIsValid: this.checkIfFormIsValid(updatedForm)
+      });
+    }
+  }
 
   componentDidMount () {
     this.props.onInitSocios(this.props.token)
@@ -165,12 +202,15 @@ class AcopioForm extends Component {
       })
     }
 
-    let formIsValid = true
-    for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
-    }
+    this.setState({acopioForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+  }
 
-    this.setState({acopioForm: updatedForm, formIsValid: formIsValid})
+  checkIfFormIsValid = (form) => {
+    let formIsValid = true
+    for (let inputIds in form) {
+        formIsValid = form[inputIds].valid && formIsValid
+    }
+    return formIsValid
   }
 
   onSearchSocio = (event, element) => {
@@ -199,6 +239,37 @@ class AcopioForm extends Component {
     this.props.onFetchSelSocios(this.props.token, id)
   }
 
+  searchByFocus = inputIdentifier => {
+    const value = this.state.acopioForm.clave_socio.value
+    // TODO: validation of socio to search
+    if (!isNaN(value)) {
+      this.props.onFetchSelSocios(this.props.token, value)
+    }
+  }
+
+  OnChooseProcess = current => {
+    // event.preventDefault();
+    const previous = this.state.acopioForm.tipo_de_producto.value
+    if (previous !== current && this.props.selSocio && this.props.selSocio[status[current]] === 'AC') {
+      const newProcesses = updateObject(this.state.processOptions, {
+        [previous]: this.props.selSocio[status[previous]],
+        [current]: 'SEL'
+      })
+      const updatedForm = updateObject(this.state.acopioForm, {
+          tipo_de_producto: updateObject(this.state.acopioForm.tipo_de_producto, {
+              value: current,
+              valid: true,
+              touched: true
+          })
+      })
+      this.setState({
+        processOptions: newProcesses,
+        acopioForm: updatedForm,
+        formIsValid: this.checkIfFormIsValid(updatedForm)
+      });
+    }
+  }
+
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
@@ -217,45 +288,48 @@ class AcopioForm extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
-        if (formElement.id === "clave_socio") {
-          if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.acopioForm[formElement.id].value) {
+        if (formElement.id === "tipo_de_producto" ) {
+          return (
+            <div className={classes.Inputs}>
+              <ProcessSelector label={formElement.id} processes={this.state.processOptions} clicked={this.OnChooseProcess}/>
+            </div>
+              )
+        } else {
+          if (formElement.id === "kilos_de_producto" && this.state.acopioForm.kilos_de_producto.value > 0 && this.state.acopioForm.ingreso.value > 0) {
             supportData = (
               <div className={classes.SupportData}>
-                <p>{this.props.selSocio.nombres} {this.props.selSocio.apellidos} de región {this.props.selSocio.region}</p>
+                <p><FormattedMessage id="acopioForm.avg_price"/>: {Math.round(this.state.acopioForm.ingreso.value / this.state.acopioForm.kilos_de_producto.value)}</p>
               </div>)
+          } else {
+            supportData = null
+            supportButton = null
           }
-          supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
-        } else if (formElement.id === "kilos_de_producto" && this.state.acopioForm.kilos_de_producto.value > 0 && this.state.acopioForm.ingreso.value > 0) {
-          supportData = (
-            <div className={classes.SupportData}>
-              <p><FormattedMessage id="acopioForm.avg_price"/>: {Math.round(this.state.acopioForm.ingreso.value / this.state.acopioForm.kilos_de_producto.value)}</p>
-            </div>)
-        } else {
-          supportData = null
-          supportButton = null
-        }
-        return (
-          <div
-            key= {formElement.id}
-            >
-            <div className={classes.Inputs}>
-              <Input
-                label={formElement.config.label}
-                key= {formElement.id}
-                elementType={formElement.config.elementType }
-                elementConfig={formElement.config.elementConfig }
-                value={formElement.config.value}
-                shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
-                touched={formElement.config.touched}
-                disabled={this.props.loading}
-                hide={formElement.config.hide}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
-              {supportButton}
+          return (
+            <div
+              key= {formElement.id}
+              >
+              <div className={classes.Inputs}>
+                <Input
+                  label={formElement.config.label}
+                  key= {formElement.id}
+                  elementType={formElement.config.elementType }
+                  elementConfig={formElement.config.elementConfig }
+                  value={formElement.config.value}
+                  shouldValidate={formElement.config.validation}
+                  invalid={!formElement.config.valid}
+                  touched={formElement.config.touched}
+                  disabled={this.props.loading}
+                  hide={formElement.config.hide}
+                  changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                  supportData={formElement.config.supportData}
+                  socioSupport={formElement.config.socioSupport}
+                  />
+                {supportButton}
+              </div>
+              {supportData}
             </div>
-            {supportData}
-          </div>
-            )
+              )
+        }
       })
     }
 
@@ -308,6 +382,7 @@ const mapStateToProps = state => {
       updated: state.acopios.updated,
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
+      comunidades: state.generalData.comunidades
       // new: state.acopios.newAcopio
     }
 }

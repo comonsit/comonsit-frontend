@@ -31,7 +31,6 @@ class MovimientosForm extends Component {
     this.state = {
       formIsValid: false,
       searchingOpen: false,
-      selectingFor: null,
       processOptions: {
             CF: 'NP',
             MI: 'NP',
@@ -352,7 +351,6 @@ class MovimientosForm extends Component {
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
-    let supportData, supportButton
     let formElements = <Spinner/>
 
     movimientoFormOrder.forEach(key => {
@@ -371,18 +369,6 @@ class MovimientosForm extends Component {
             </div>
               )
         } else {
-          // if (formElement.id === "clave_socio") {
-          //   if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.movimientoForm[formElement.id].value) {
-          //     supportData = (
-          //       <div className={classes.SupportData}>
-          //         <p>{this.props.selSocio.nombres} {this.props.selSocio.apellido_paterno} {this.props.selSocio.apellido_materno} de {this.props.selSocio.comunidad}</p>
-          //       </div>)
-          //   }
-          //   supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
-          // } else {
-          //   supportData = null
-          //   supportButton = null
-          // }
           return (
             <div
               key= {formElement.id}
