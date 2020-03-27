@@ -10,12 +10,19 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
+import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
 import classes from './SolicitudForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
+const status = {
+  'CF': 'estatus_cafe',
+  'MI': 'estatus_miel',
+  'JA': 'estatus_yip',
+  'SL': 'estatus_trabajador'
+}
 
 class SolicitudForm extends Component {
   constructor(props) {
@@ -24,6 +31,12 @@ class SolicitudForm extends Component {
       formIsValid: false,
       searchingOpen: false,
       selectingFor: null,
+      processOptions: {
+            CF: 'NP',
+            MI: 'NP',
+            JA: 'NP',
+            SL: 'NP'
+      },
       solicitudForm: {
         clave_socio: {
           elementType: 'input',
@@ -38,7 +51,12 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: {
+            supportButton: (event) => this.onSearchSocio(event, 'clave_socio'),
+            loseFocus: () => this.searchByFocus('clave_socio')
+          }
         },
         fecha_solicitud: {
           elementType: 'input',
@@ -53,7 +71,21 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
+        },
+        proceso: {
+          elementType: 'icons',
+          value: null,
+          validation: {
+            required: true
+          },
+          valid: false,
+          touched: false,
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         tipo_credito: {
           elementType: 'select',
@@ -70,7 +102,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         act_productiva: {
           elementType: 'select',
@@ -98,7 +132,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         act_productiva_otro: {
           elementType: 'input',
@@ -113,7 +149,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: true
+          hide: true,
+          supportData: null,
+          socioSupport: null
         },
         mot_credito: {
           elementType: 'select',
@@ -134,7 +172,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         mot_credito_otro: {
           elementType: 'input',
@@ -149,7 +189,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: true
+          hide: true,
+          supportData: null,
+          socioSupport: null
         },
         emergencia_medica: {
           elementType: 'checkbox',
@@ -163,7 +205,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: true
+          hide: true,
+          supportData: null,
+          socioSupport: null
         },
         monto_solicitado: {
           elementType: 'input',
@@ -180,7 +224,9 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         plazo_de_pago_solicitado: {
           elementType: 'input',
@@ -196,7 +242,9 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         justificacion_credito: {
           elementType: 'input',
@@ -211,7 +259,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         comentarios_promotor: {
           elementType: 'textarea',
@@ -227,7 +277,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         pregunta_1: {
           elementType: 'checkbox',
@@ -241,7 +293,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         pregunta_2: {
           elementType: 'checkbox',
@@ -255,7 +309,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         pregunta_3: {
           elementType: 'checkbox',
@@ -269,7 +325,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         pregunta_4: {
           elementType: 'checkbox',
@@ -283,7 +341,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         irregularidades: {
           elementType: 'textarea',
@@ -299,7 +359,9 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
         aval: {
           elementType: 'input',
@@ -314,7 +376,12 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: {
+            supportButton: (event) => this.onSearchSocio(event, 'aval'),
+            loseFocus: () => this.searchByFocus('aval')
+          }
         },
         familiar_responsable: {
           elementType: 'textarea',
@@ -328,14 +395,47 @@ class SolicitudForm extends Component {
           validation: {
             required: true
           },
-          valid: true,
+          valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: null,
+          socioSupport: null
         },
       }
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.selSocio && this.props.selSocio !== prevProps.selSocio) {
+      console.log('UPDATING SOCIO')
+      let newProceso = this.state.solicitudForm.proceso
+      const newProcessValues = this.state.processOptions
+
+      if (this.state.selectingFor === 'clave_socio') {
+        for (let id in status) {
+          newProcessValues[id] = this.props.selSocio[status[id]]
+        }
+        newProceso = updateObject(this.state.solicitudForm.proceso, {
+            value: null,
+            valid: false,
+            touched: false
+        })
+      }
+
+      const updatedForm = updateObject(this.state.solicitudForm, {
+          proceso: newProceso,
+          [this.state.selectingFor]: updateObject(this.state.solicitudForm[this.state.selectingFor], {
+            supportData: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno + ' de ' + this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
+          })
+      })
+
+      this.setState({
+        processOptions: newProcessValues,
+        solicitudForm: updatedForm,
+        formIsValid: this.checkIfFormIsValid(updatedForm)
+      });
+    }
+  }
 
   componentDidMount () {
     this.props.onInitSocios(this.props.token)
@@ -458,12 +558,15 @@ class SolicitudForm extends Component {
       })
     }
 
-    let formIsValid = true
-    for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
-    }
+    this.setState({solicitudForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+  }
 
-    this.setState({solicitudForm: updatedForm, formIsValid: formIsValid})
+  checkIfFormIsValid = (form) => {
+    let formIsValid = true
+    for (let inputIds in form) {
+        formIsValid = form[inputIds].valid && formIsValid
+    }
+    return formIsValid
   }
 
   onSearchSocio = (event, element) => {
@@ -471,7 +574,7 @@ class SolicitudForm extends Component {
     this.setState({searchingOpen: true, selectingFor: element})
   }
 
-  cancelSearch =() => {
+  cancelSearch = () => {
     this.setState({searchingOpen: false})
     this.props.unSelSocio()
   }
@@ -491,14 +594,47 @@ class SolicitudForm extends Component {
     this.props.onFetchSelSocios(this.props.token, id)
   }
 
+  searchByFocus = inputIdentifier => {
+    const value = this.state.solicitudForm[inputIdentifier].value
+    // TODO: validation of socio to search
+    if (!isNaN(value)) {
+      this.setState({ selectingFor: inputIdentifier })
+      this.props.onFetchSelSocios(this.props.token, value)
+    }
+  }
+
+  OnChooseProcess = current => {
+    // event.preventDefault();
+    const previous = this.state.solicitudForm.proceso.value
+    if (previous !== current && this.props.selSocio && this.props.selSocio[status[current]] === 'AC') {
+      const newProcesses = updateObject(this.state.processOptions, {
+        [previous]: this.props.selSocio[status[previous]],
+        [current]: 'SEL'
+      })
+      console.log(newProcesses)
+      const updatedForm = updateObject(this.state.solicitudForm, {
+          proceso: updateObject(this.state.solicitudForm.proceso, {
+              value: current,
+              valid: true,
+              touched: true
+          })
+      })
+      this.setState({
+        processOptions: newProcesses,
+        solicitudForm: updatedForm,
+        formIsValid: this.checkIfFormIsValid(updatedForm)
+      });
+    }
+  }
+
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "justificacion_credito", "aval", "familiar_responsable", "comentarios_promotor"]
+    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "proceso", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "justificacion_credito", "aval", "familiar_responsable", "comentarios_promotor"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
-    let supportData, supportButton
+    let supportFunction
     let formElements = <Spinner/>
 
     solicitudFormOrder.forEach(key => {
@@ -510,40 +646,43 @@ class SolicitudForm extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
-        if (formElement.id === "clave_socio" || formElement.id === "aval") {
-          if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.solicitudForm[formElement.id].value) {
-            supportData = (
-              <div className={classes.SupportData}>
-                <p>{this.props.selSocio.nombres} {this.props.selSocio.apellidos} de región {this.props.selSocio.region}</p>
-              </div>)
-          }
-          supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
-        } else {
-          supportData = null
-          supportButton = null
-        }
-        return (
-          <div
-            key= {formElement.id}
-            >
+        if (formElement.id === "proceso" ) {
+          return (
             <div className={classes.Inputs}>
-              <Input
-                label={formElement.config.label}
-                key= {formElement.id}
-                elementType={formElement.config.elementType }
-                elementConfig={formElement.config.elementConfig }
-                value={formElement.config.value}
-                shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
-                touched={formElement.config.touched}
-                disabled={this.props.loading}
-                hide={formElement.config.hide}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
-              {supportButton}
+              <ProcessSelector label={formElement.id+'_nombre'} processes={this.state.processOptions} clicked={this.OnChooseProcess}/>
             </div>
-            {supportData}
-          </div>
-            )
+              )
+        } else {
+          if (formElement.id === "clave_socio" || formElement.id === "aval") {
+            supportFunction = () => this.props.onFetchSelSocios(this.props.token, this.state.solicitudForm[formElement.id].value)
+          } else {
+            supportFunction = null
+          }
+          return (
+            <div
+              key= {formElement.id}
+              >
+              <div className={classes.Inputs}>
+                <Input
+                  label={formElement.config.label}
+                  key= {formElement.id}
+                  elementType={formElement.config.elementType }
+                  elementConfig={formElement.config.elementConfig }
+                  value={formElement.config.value}
+                  shouldValidate={formElement.config.validation}
+                  invalid={!formElement.config.valid}
+                  touched={formElement.config.touched}
+                  disabled={this.props.loading}
+                  hide={formElement.config.hide}
+                  changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                  onLoseFocus={supportFunction}
+                  supportData={formElement.config.supportData}
+                  socioSupport={formElement.config.socioSupport}
+                />
+              </div>
+            </div>
+              )
+        }
       })
     }
 
@@ -561,6 +700,7 @@ class SolicitudForm extends Component {
           />
       )
     }
+
 
     return (
       <>

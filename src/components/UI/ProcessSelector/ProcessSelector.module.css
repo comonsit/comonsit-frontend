@@ -1,0 +1,66 @@
+.Container {
+  font-family: 'Arquitecta';
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.Label {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  max-width: 12rem;
+  text-align: right;
+  margin-right: 1rem;
+  padding:0 2rem;
+}
+
+.IconContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  outline: none;
+  border: 2px solid #dddedf;
+  padding: .5rem .5rem;
+  width: 100%;
+  margin: 1rem 0rem;
+  margin-right: 1rem;
+}
+
+.Icon {
+  width: 3rem;
+  height: 3rem;
+  color: white;
+  border-radius: .3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+}
+
+.IconDisabled {
+  background-color: #ccc;
+  cursor:not-allowed;
+}
+
+.IconSelected {
+  background-color: #235ee4;
+}
+
+.IconSelected:hover {
+  /* background-color: #5274a7; */
+  /* border: 1px solid #1f57ab; */
+}
+
+.IconAvailable {
+  border: 1px solid #243746;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.IconAvailable:hover {
+  background-color: #235ee4;
+}

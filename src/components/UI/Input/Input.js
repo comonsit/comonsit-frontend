@@ -1,9 +1,14 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl';
 import classes from './Input.module.css'
+import Button from '../Button/Button'
+
 
 const input = (props) => {
     let label = null
-    let inputElement = null;
+    let inputElement = null
+    let support = null
+    let button = null
     const containerClasses = [classes.Input]
     const inputClasses = [classes.InputElement]
     const labelClasses = [classes.Label]
@@ -38,6 +43,7 @@ const input = (props) => {
                  {...props.elementConfig}
                  value={props.value}
                  disabled={props.disabled}
+                 onBlur={props.socioSupport ? props.socioSupport.loseFocus : null}
                  onChange={props.changed} />
             break
         case ( 'checkbox' ):
@@ -91,16 +97,30 @@ const input = (props) => {
                 className={inputClasses.join(' ')}
                 {...props}
                 value={props.value}
-                onChange={props.changed} />
+                onChange={props.changed}
+                 />
+    }
+
+    if (props.supportData) {
+      support = ( <div className={classes.SupportData}>
+                    <p>{props.supportData}</p>
+                </div>)
+    }
+    if (props.socioSupport) {
+      button = (<Button btnType="Short" clicked={props.socioSupport.supportButton}><FormattedMessage id="searchSocio"/></Button>)
     }
 
 
     return (
+      <>
         <div className={containerClasses.join(' ')}>
             {label}
             {inputElement}
             {validationError}
         </div>
+        {support}
+        {button}
+      </>
     )
 }
 

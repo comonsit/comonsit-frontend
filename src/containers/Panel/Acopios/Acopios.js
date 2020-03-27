@@ -137,12 +137,11 @@ class Acopios extends Component {
   };
 
   renderStatus = cellInfo => {
-
     switch(cellInfo.cell.value) {
-      case "CF": return (<Coffee width="20px" height="20px" />)
-      case "MI": return (<Bee width="20px" height="20px" />)
-      case "JA": return (<Soap width="20px" height="20px" />)
-      case "SL": return (<Money style={{color: "green"}} width="20px" height="20px" />)
+      case "CF": return (<Coffee fill="#243746" width="18px" height="18px"/>)
+      case "MI": return (<Bee fill="#243746" width="20px" height="20px"/>)
+      case "JA": return (<Soap fill="#243746" width="20px" height="20px"/>)
+      case "SL": return (<Money fill="#243746" width="20px" height="20px" />)
       default:
         return (<p>?{cellInfo.cell.value}</p>)
     }

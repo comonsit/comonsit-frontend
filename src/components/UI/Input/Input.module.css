@@ -70,3 +70,10 @@
   color: red;
   font-size: 1em
 }
+
+.SupportData p {
+  font-size: .8em;
+  padding: 0 6rem;
+  font-family: 'Arquitecta';
+  color: #243746;
+}
