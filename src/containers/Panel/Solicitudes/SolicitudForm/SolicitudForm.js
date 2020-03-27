@@ -71,9 +71,7 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         proceso: {
           elementType: 'icons',
@@ -83,9 +81,7 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         tipo_credito: {
           elementType: 'select',
@@ -102,9 +98,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         act_productiva: {
           elementType: 'select',
@@ -132,9 +126,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         act_productiva_otro: {
           elementType: 'input',
@@ -149,9 +141,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: true,
-          supportData: null,
-          socioSupport: null
+          hide: true
         },
         mot_credito: {
           elementType: 'select',
@@ -172,9 +162,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         mot_credito_otro: {
           elementType: 'input',
@@ -189,9 +177,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: true,
-          supportData: null,
-          socioSupport: null
+          hide: true
         },
         emergencia_medica: {
           elementType: 'checkbox',
@@ -205,9 +191,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: true,
-          supportData: null,
-          socioSupport: null
+          hide: true
         },
         monto_solicitado: {
           elementType: 'input',
@@ -224,9 +208,7 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         plazo_de_pago_solicitado: {
           elementType: 'input',
@@ -242,9 +224,7 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         justificacion_credito: {
           elementType: 'input',
@@ -259,9 +239,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         comentarios_promotor: {
           elementType: 'textarea',
@@ -277,9 +255,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         pregunta_1: {
           elementType: 'checkbox',
@@ -293,9 +269,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         pregunta_2: {
           elementType: 'checkbox',
@@ -309,9 +283,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         pregunta_3: {
           elementType: 'checkbox',
@@ -325,9 +297,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         pregunta_4: {
           elementType: 'checkbox',
@@ -341,9 +311,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         irregularidades: {
           elementType: 'textarea',
@@ -359,9 +327,7 @@ class SolicitudForm extends Component {
           },
           valid: true,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
         aval: {
           elementType: 'input',
@@ -397,16 +363,15 @@ class SolicitudForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false,
-          supportData: null,
-          socioSupport: null
+          hide: false
         },
       }
     }
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.selSocio && this.props.selSocio !== prevProps.selSocio) {
+    // update if previous was null or clave_socio changed
+    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
       let newProceso = this.state.solicitudForm.proceso
       const newProcessValues = this.state.processOptions
 
@@ -651,16 +616,10 @@ class SolicitudForm extends Component {
             </div>
               )
         } else {
-          if (formElement.id === "clave_socio" || formElement.id === "aval") {
-            supportFunction = () => this.props.onFetchSelSocios(this.props.token, this.state.solicitudForm[formElement.id].value)
-          } else {
-            supportFunction = null
-          }
           return (
-            <div
-              key= {formElement.id}
-              >
-              <div className={classes.Inputs}>
+              <div
+                key= {formElement.id}
+                className={classes.Inputs}>
                 <Input
                   label={formElement.config.label}
                   key= {formElement.id}
@@ -673,12 +632,10 @@ class SolicitudForm extends Component {
                   disabled={this.props.loading}
                   hide={formElement.config.hide}
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                  onLoseFocus={supportFunction}
                   supportData={formElement.config.supportData}
                   socioSupport={formElement.config.socioSupport}
                 />
               </div>
-            </div>
               )
         }
       })
