@@ -49,3 +49,11 @@
   text-align: right;
   margin: 0;
 }
+
+.Checkmark {
+  color: #92c3c0;
+}
+
+.Cross {
+  color: #f73f2a;
+}

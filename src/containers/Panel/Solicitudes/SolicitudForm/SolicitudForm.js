@@ -488,11 +488,7 @@ class SolicitudForm extends Component {
               }
           }),
           emergencia_medica: updateObject(updatedForm.emergencia_medica, {
-              hide: hideSalud,
-              valid: hideSalud,
-              validation: {
-                required: !hideSalud
-              }
+              hide: hideSalud
           }),
           act_productiva: updateObject(updatedForm.act_productiva, {
               hide: hideActProd,

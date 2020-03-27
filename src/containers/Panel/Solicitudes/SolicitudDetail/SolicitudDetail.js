@@ -20,6 +20,9 @@ const solicitudDetail = (props) => {
     if ((id === "act_productiva_nombre" || id === "mot_credito_nombre") && props.solicitud[id] === 'Otro') {
       // slice to covert: "act_productiva_nombre" into "act_productiva_otro"
       content = props.solicitud[id]+': '+props.solicitud[id.slice(0,-7)+"_otro"]
+    } else if (id === "mot_credito_nombre" && props.solicitud[id] === 'Salud') {
+      const emergency = props.solicitud.emergencia_medica ? ' (emergencia)' : ''
+      content = props.solicitud[id]+ emergency
     } else {
       content = props.solicitud[id]
     }
@@ -37,6 +40,15 @@ const solicitudDetail = (props) => {
               content={props.solicitud[id]}
               />)
   })
+
+  const preguntas_mesa = ["pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4"]
+  const preguntas_mesaArray = preguntas_mesa.map((id, index) => {
+    const answered = (props.solicitud[id]) ? (<span className={classes.Checkmark}>&#10004;</span>) : (<span className={classes.Cross}>&#10006;</span>)
+    return(<p className={classes.Question}>{index+1}. {answered}</p>)
+  })
+  
+  items3Array.push(<TextElement label={'preguntas_mesa'} content={preguntas_mesaArray}/>)
+
 
   return (
     <div className={classes.Container}>
