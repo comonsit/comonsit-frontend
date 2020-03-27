@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   XYPlot,
   XAxis,
@@ -14,17 +15,11 @@ import classes from './AcopioGraph.module.css'
 
 const acopioGraph = (props) => {
   return (
-    <XYPlot yDomain={[0, 5000]} xType="ordinal"  width={400} height={200} className={classes.Graphs}>
-      <DiscreteColorLegend
-        style={{position: 'absolute', left: '50px', top: '10px'}}
-        orientation="horizontal"
-        items={[
-          {
-            title: props.label,
-            color: props.color
-          }
-        ]}
-      />
+  <div className={classes.Container}>
+    <div className={classes.Label}>
+      <label><FormattedMessage id={props.label}/></label>
+    </div>
+    <XYPlot yPadding={10} xType="ordinal"  width={400} height={200} className={classes.Graphs}>
       <VerticalGridLines />
       <HorizontalGridLines />
       <XAxis />
@@ -40,6 +35,7 @@ const acopioGraph = (props) => {
                           </div>
                         </Hint> ): null}
     </XYPlot>
+  </div>
   )
 }
 
