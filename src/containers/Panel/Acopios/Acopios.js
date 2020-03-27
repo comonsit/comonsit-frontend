@@ -8,7 +8,7 @@ import Money from '../../../Icons/Money.js';
 import Soap from '../../../Icons/Soap.js';
 import Coffee from '../../../Icons/Coffee.js';
 
-import AcopioGraph from './AcopioGraph/AcopioGraph';
+import AcopioGraph from '../../../components/Graphs/AcopioGraph/AcopioGraph';
 
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
