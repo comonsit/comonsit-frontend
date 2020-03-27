@@ -407,7 +407,6 @@ class SolicitudForm extends Component {
 
   componentDidUpdate(prevProps) {
     if(this.props.selSocio && this.props.selSocio !== prevProps.selSocio) {
-      console.log('UPDATING SOCIO')
       let newProceso = this.state.solicitudForm.proceso
       const newProcessValues = this.state.processOptions
 
@@ -611,7 +610,6 @@ class SolicitudForm extends Component {
         [previous]: this.props.selSocio[status[previous]],
         [current]: 'SEL'
       })
-      console.log(newProcesses)
       const updatedForm = updateObject(this.state.solicitudForm, {
           proceso: updateObject(this.state.solicitudForm.proceso, {
               value: current,

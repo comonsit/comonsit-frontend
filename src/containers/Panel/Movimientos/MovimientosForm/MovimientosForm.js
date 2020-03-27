@@ -179,7 +179,6 @@ class MovimientosForm extends Component {
 
     // If data was hidden, values will not be sent to avoid confusion.
     if (this.state.movimientoForm.tipo_de_movimiento.value === 'EF') {
-      console.log('')
       formData = updateObject(formData, {
         fecha_banco: null,
         referencia_banco: null

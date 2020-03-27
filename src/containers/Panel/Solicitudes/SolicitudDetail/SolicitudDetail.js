@@ -14,7 +14,7 @@ const solicitudDetail = (props) => {
               />)
   })
 
-  const items2 = ["monto_solicitado", "tipo_credito_nombre", "act_productiva_nombre", "mot_credito_nombre", "plazo_de_pago_solicitado", "fecha_solicitud"]
+  const items2 = ["monto_solicitado", "proceso_nombre", "tipo_credito_nombre", "act_productiva_nombre", "mot_credito_nombre", "plazo_de_pago_solicitado", "fecha_solicitud"]
   let content
   const items2Array = items2.map(id => {
     if ((id === "act_productiva_nombre" || id === "mot_credito_nombre") && props.solicitud[id] === 'Otro') {
