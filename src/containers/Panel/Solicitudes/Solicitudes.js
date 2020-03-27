@@ -15,11 +15,13 @@ import Title from '../../../components/UI/Title/Title';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
+import axios from '../../../store/axios-be.js'
 
 class Solicitudes extends Component {
   state = {
     showSolicitudModal: false,
-    selectedSol: null
+    selectedSol: null,
+    saldos: null
   }
 
   componentDidMount () {
@@ -32,17 +34,28 @@ class Solicitudes extends Component {
     }
   }
 
-  showSolicitud = id => {
+  showSolicitud = (id, socio) => {
     this.setState({
       showSolicitudModal: true
     });
     this.props.onFetchSelSol(this.props.token, id)
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+    axios.get('/acopios/year_sum/?clave_socio='+socio, authData)
+      .then(response => {
+        this.setState({saldos: response.data})
+      })
+      .catch(error => {
+        // TODO:
+      })
   }
 
   cancelSelected =() => {
     this.setState({
       showSolicitudModal: false,
-      selectedSol: null
+      selectedSol: null,
+      saldos: null
     });
   }
 
@@ -123,10 +136,13 @@ class Solicitudes extends Component {
     let solicitudInfoButton = null
     let solicitudInfo = <Spinner/>
 
-    if (this.state.selectedSol) {
+    if (this.state.selectedSol && this.state.saldos) {
       solicitudInfo = (
         <div>
-          <SolicitudDetail solicitud={this.state.selectedSol} />
+          <SolicitudDetail
+            solicitud={this.state.selectedSol}
+            saldos={this.state.saldos}
+          />
         </div>
       )
       if (this.state.selectedSol.estatus_solicitud === 'RV' && isGerencia(this.props.role)) {
@@ -159,7 +175,7 @@ class Solicitudes extends Component {
           <RTable
             columns={columns}
             data={this.props.listaSolicitudes}
-            onRowClick={row => this.showSolicitud(row.values.folio_solicitud)}
+            onRowClick={(row, socio) => this.showSolicitud(row.values.folio_solicitud, row.values.clave_socio)}
             />
         </div>
       </>

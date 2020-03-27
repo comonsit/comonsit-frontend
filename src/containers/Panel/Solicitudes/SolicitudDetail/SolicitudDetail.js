@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage, FormattedDate, IntlProvider } from 'react-intl';
 import classes from './SolicitudDetail.module.css'
 
+import SolicSaldosGraph from '../../../../components/Graphs/SolicSaldosGraph/SolicSaldosGraph';
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 
 
@@ -32,6 +33,16 @@ const solicitudDetail = (props) => {
               isNum={id === "monto_solicitado"}
               />)
   })
+  // TODO: FIX!!
+  // code duplicated with TextElement... just to avoid <p><div></div></p>
+  items2Array.push(<div key={'graph_montoVsacopios'} className={classes.ContentContainer}>
+                    <div className={classes.Label}>
+                      <label><FormattedMessage id={'graph_montoVsacopios'}/></label>
+                    </div>
+                    <div className={classes.Content}>
+                      <SolicSaldosGraph data={props.saldos} monto={props.solicitud.monto_solicitado}/>
+                    </div>
+                  </div>)
 
   const items3 = ["aval_nombre", "familiar_responsable", "justificacion_credito", "promotor", "irregularidades"]
   const items3Array = items3.map(id => {
@@ -44,9 +55,9 @@ const solicitudDetail = (props) => {
   const preguntas_mesa = ["pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4"]
   const preguntas_mesaArray = preguntas_mesa.map((id, index) => {
     const answered = (props.solicitud[id]) ? (<span className={classes.Checkmark}>&#10004;</span>) : (<span className={classes.Cross}>&#10006;</span>)
-    return(<p className={classes.Question}>{index+1}. {answered}</p>)
+    return(<span key={index} className={classes.Question}>{index+1}. {answered}</span>)
   })
-  
+
   items3Array.push(<TextElement label={'preguntas_mesa'} content={preguntas_mesaArray}/>)
 
 

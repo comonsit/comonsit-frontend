@@ -188,5 +188,10 @@
   "promotor": "Promotor",
   "irregularidades": "Irregularidades",
   "proceso_nombre": "Proceso",
-  "preguntas_mesa": "Preguntas Mesa Control"
+  "preguntas_mesa": "Preguntas Mesa Control",
+  "graph_montoVsacopios": "Histórico de Acopios VS Solicitado",
+  "cafe": "Café",
+  "miel": "Miel",
+  "jabon": "Jabón",
+  "salarios": "Salarios"
 }
