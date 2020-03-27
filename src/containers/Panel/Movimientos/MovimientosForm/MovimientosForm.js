@@ -10,12 +10,20 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
+import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
 import classes from './MovimientosForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
+
+const status = {
+  'CF': 'estatus_cafe',
+  'MI': 'estatus_miel',
+  'JA': 'estatus_yip',
+  'SL': 'estatus_trabajador'
+}
 
 class MovimientosForm extends Component {
   constructor(props) {
@@ -24,6 +32,12 @@ class MovimientosForm extends Component {
       formIsValid: false,
       searchingOpen: false,
       selectingFor: null,
+      processOptions: {
+            CF: 'NP',
+            MI: 'NP',
+            JA: 'NP',
+            SL: 'NP'
+      },
       movimientoForm: {
         clave_socio: {
           elementType: 'input',
@@ -38,7 +52,11 @@ class MovimientosForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          socioSupport: {
+            supportButton: (event) => this.onSearchSocio(event),
+            loseFocus: () => this.searchByFocus('clave_socio')
+          }
         },
         fecha_entrega: {
           elementType: 'input',
@@ -73,22 +91,14 @@ class MovimientosForm extends Component {
           hide: false
         },
         proceso: {
-          elementType: 'select',
-          elementConfig: {
-            options: [
-              {value: 'CF', displayValue: 'Café'},
-              {value: 'MI', displayValue: 'Miel'},
-              {value: 'JA', displayValue: 'Jabón'},
-              {value: 'SL', displayValue: 'Salarios'},
-            ]
-          },
-          label: (<><FormattedMessage id="movimientosForm.proceso"/>*</>),
-          value: 'CF',
+          elementType: 'icons',
+          value: null,
           validation: {
             required: true
           },
-          valid: true,
-          touched: true,
+          valid: false,
+          touched: false,
+          hide: false
         },
         aportacion: {
           value: true,
@@ -157,6 +167,35 @@ class MovimientosForm extends Component {
           hide: false
         }
       }
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
+      let newProceso = this.state.movimientoForm.proceso
+      const newProcessValues = this.state.processOptions
+
+      for (let id in status) {
+        newProcessValues[id] = this.props.selSocio[status[id]]
+      }
+      newProceso = updateObject(this.state.movimientoForm.proceso, {
+          value: null,
+          valid: false,
+          touched: false
+      })
+
+      const updatedForm = updateObject(this.state.movimientoForm, {
+        proceso: newProceso,
+        clave_socio: updateObject(this.state.movimientoForm.clave_socio, {
+          supportData: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno + ' de ' + this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
+        })
+      })
+
+      this.setState({
+        processOptions: newProcessValues,
+        movimientoForm: updatedForm,
+        formIsValid: this.checkIfFormIsValid(updatedForm)
+      });
     }
   }
 
@@ -236,17 +275,20 @@ class MovimientosForm extends Component {
       }
     }
 
-    let formIsValid = true
-    for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
-    }
-
-    this.setState({movimientoForm: updatedForm, formIsValid: formIsValid})
+    this.setState({movimientoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
   }
 
-  onSearchSocio = (event, element) => {
+  checkIfFormIsValid = (form) => {
+    let formIsValid = true
+    for (let inputIds in form) {
+        formIsValid = form[inputIds].valid && formIsValid
+    }
+    return formIsValid
+  }
+
+  onSearchSocio = (event) => {
     event.preventDefault();
-    this.setState({searchingOpen: true, selectingFor: element})
+    this.setState({searchingOpen: true})
   }
 
   cancelSearch =() => {
@@ -274,6 +316,37 @@ class MovimientosForm extends Component {
     this.setState({movimientoForm: updatedForm });
   }
 
+  searchByFocus = inputIdentifier => {
+    const value = this.state.movimientoForm.clave_socio.value
+    // TODO: validation of socio to search
+    if (!isNaN(value)) {
+      this.props.onFetchSelSocios(this.props.token, value)
+    }
+  }
+
+  OnChooseProcess = current => {
+    // event.preventDefault();
+    const previous = this.state.movimientoForm.proceso.value
+    if (previous !== current && this.props.selSocio && this.props.selSocio[status[current]] === 'AC') {
+      const newProcesses = updateObject(this.state.processOptions, {
+        [previous]: this.props.selSocio[status[previous]],
+        [current]: 'SEL'
+      })
+      const updatedForm = updateObject(this.state.movimientoForm, {
+          proceso: updateObject(this.state.movimientoForm.proceso, {
+              value: current,
+              valid: true,
+              touched: true
+          })
+      })
+      this.setState({
+        processOptions: newProcesses,
+        movimientoForm: updatedForm,
+        formIsValid: this.checkIfFormIsValid(updatedForm)
+      });
+    }
+  }
+
   render () {
     const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
     const formElementsArray = []
@@ -291,40 +364,49 @@ class MovimientosForm extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
-        if (formElement.id === "clave_socio") {
-          if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.movimientoForm[formElement.id].value) {
-            supportData = (
-              <div className={classes.SupportData}>
-                <p>{this.props.selSocio.nombres} {this.props.selSocio.apellido_paterno} {this.props.selSocio.apellido_materno} de {this.props.selSocio.comunidad}</p>
-              </div>)
-          }
-          supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
-        } else {
-          supportData = null
-          supportButton = null
-        }
-        return (
-          <div
-            key= {formElement.id}
-            >
+        if (formElement.id === "proceso" ) {
+          return (
             <div className={classes.Inputs}>
-              <Input
-                label={formElement.config.label}
-                key= {formElement.id}
-                elementType={formElement.config.elementType }
-                elementConfig={formElement.config.elementConfig }
-                value={formElement.config.value}
-                shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
-                touched={formElement.config.touched}
-                disabled={this.props.loading}
-                hide={formElement.config.hide}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
-              {supportButton}
+              <ProcessSelector label={formElement.id+'_nombre'} processes={this.state.processOptions} clicked={this.OnChooseProcess}/>
             </div>
-            {supportData}
-          </div>
-            )
+              )
+        } else {
+          // if (formElement.id === "clave_socio") {
+          //   if (this.props.selSocio && this.props.selSocio.clave_socio === this.state.movimientoForm[formElement.id].value) {
+          //     supportData = (
+          //       <div className={classes.SupportData}>
+          //         <p>{this.props.selSocio.nombres} {this.props.selSocio.apellido_paterno} {this.props.selSocio.apellido_materno} de {this.props.selSocio.comunidad}</p>
+          //       </div>)
+          //   }
+          //   supportButton = (<Button btnType="Short" clicked={(event) => this.onSearchSocio(event, formElement.id)}><FormattedMessage id="searchSocio"/></Button>)
+          // } else {
+          //   supportData = null
+          //   supportButton = null
+          // }
+          return (
+            <div
+              key= {formElement.id}
+              >
+              <div className={classes.Inputs}>
+                <Input
+                  label={formElement.config.label}
+                  key= {formElement.id}
+                  elementType={formElement.config.elementType }
+                  elementConfig={formElement.config.elementConfig }
+                  value={formElement.config.value}
+                  shouldValidate={formElement.config.validation}
+                  invalid={!formElement.config.valid}
+                  touched={formElement.config.touched}
+                  disabled={this.props.loading}
+                  hide={formElement.config.hide}
+                  changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                  supportData={formElement.config.supportData}
+                  socioSupport={formElement.config.socioSupport}
+                  />
+              </div>
+            </div>
+              )
+        }
       })
     }
 
@@ -401,7 +483,8 @@ const mapStateToProps = state => {
       loading: state.movimientos.loading,
       updated: state.movimientos.updated,
       listaSocios: state.socios.socios,
-      selSocio: state.socios.selectedSocio
+      selSocio: state.socios.selectedSocio,
+      comunidades: state.generalData.comunidades
     }
 }
 
