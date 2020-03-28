@@ -15,7 +15,6 @@ import Title from '../../../components/UI/Title/Title';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
-import axios from '../../../store/axios-be.js'
 
 class Solicitudes extends Component {
   state = {
@@ -31,7 +30,9 @@ class Solicitudes extends Component {
   componentDidUpdate(prevProps) {
     if(this.props.selectedSol !== prevProps.selectedSol) {
       this.setState({selectedSol: this.props.selectedSol})
-    }
+    } else if(this.props.saldo !== prevProps.saldo) {
+          this.setState({saldos: this.props.saldo})
+        }
   }
 
   showSolicitud = (id, socio) => {
@@ -39,16 +40,7 @@ class Solicitudes extends Component {
       showSolicitudModal: true
     });
     this.props.onFetchSelSol(this.props.token, id)
-    const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
-    }
-    axios.get('/acopios/year_sum/?clave_socio='+socio, authData)
-      .then(response => {
-        this.setState({saldos: response.data})
-      })
-      .catch(error => {
-        // TODO:
-      })
+    this.props.onGetSocioSaldo(this.props.token, socio)
   }
 
   cancelSelected =() => {
@@ -188,7 +180,8 @@ const mapStateToProps = state => {
       listaSolicitudes: state.solicitudes.solicitudes,
       selectedSol: state.solicitudes.selectedSolicitud,
       token: state.auth.token,
-      role: state.generalData.role
+      role: state.generalData.role,
+      saldo: state.acopios.socioSaldo
     }
 }
 
@@ -197,7 +190,8 @@ const mapDispatchToProps = dispatch => {
       onInitSolicitudes: (token) => dispatch(actions.initSolicitudes(token)),
       onNewSol: () => dispatch(actions.newSolicitud()),
       onFetchSelSol: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
-      unSelSol: () => dispatch(actions.unSelectSolicitud())
+      unSelSol: () => dispatch(actions.unSelectSolicitud()),
+      onGetSocioSaldo: (token, socioId) => dispatch(actions.getSocioSaldo(token, socioId))
     }
 }
 

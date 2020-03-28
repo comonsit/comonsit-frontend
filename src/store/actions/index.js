@@ -20,7 +20,9 @@ export {
     // unSelectAcopio,
     // fetchSelAcopio,
     newAcopio,
-    createNewAcopio
+    createNewAcopio,
+    getSocioSaldo,
+    clearSocioSaldo
 } from './acopios'
 
 export {

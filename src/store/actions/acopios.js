@@ -66,6 +66,44 @@ export const newAcopioStart = () => {
         type: actionTypes.NEW_ACOPIO_START
     }
 }
+
+export const getSocioSaldo = (token, socio) => {
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    axios.get('/acopios/year_sum/?clave_socio='+socio, authData)
+      .then(response => {
+        console.log('GOT A SALDO')
+        dispatch(setSocioSaldo(response.data, socio))
+      })
+      .catch(error => {
+        console.log('GOT AN ERROR AT  SALDO')
+        dispatch(getSocioSaldoFailed())
+      })
+  }
+}
+
+export const setSocioSaldo = (saldo, socio) => {
+  return {
+    type: actionTypes.SET_SOCIO_SALDO,
+    socioSaldo: saldo,
+    selSocio: socio
+  }
+}
+
+export const getSocioSaldoFailed = (error) => {
+    return {
+        type: actionTypes.GET_SOCIO_SALDO_FAILED,
+        error: error
+    }
+}
+
+export const clearSocioSaldo = () => {
+  return {
+    type: actionTypes.CLEAR_SOCIO_SALDO
+  }
+}
 //
 // export const fetchSelAcopio = (token, acopioId) => {
 //   return dispatch => {

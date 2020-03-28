@@ -21,6 +21,8 @@ class MesaControl extends Component {
     super(props);
     this.state = {
       formIsValid: false,
+      selectedSol: this.props.selectedSol,
+      saldos: this.props.saldo,
       mesaControlForm: {
         pregunta_0: {
           elementType: 'checkbox',
@@ -117,6 +119,16 @@ class MesaControl extends Component {
     }
   }
 
+  // If props have not been received?
+  // componentDidUpdate(prevProps) {
+  //   if(this.props.selectedSol !== prevProps.selectedSol) {
+  //     alert('FALLA DE REFRESH PROPS?')
+  //     this.setState({selectedSol: this.props.selectedSol})
+  //   } else if(this.props.saldo !== prevProps.saldo) {
+  //     alert('FALLA DE REFRESH PROPS?')
+  //     this.setState({saldos: this.props.saldo})
+  //   }
+  // }
 
   componentDidMount () {
   }
@@ -149,7 +161,8 @@ class MesaControl extends Component {
     // TODO: implement loading view
     // this.setState({loading: true})
 
-    axios.patch('/solic-creditos/'+this.props.selectedSol.folio_solicitud+'.json', form, authData)
+    // TODO: check
+    axios.patch('/solic-creditos/'+this.props.selectedSol && this.props.socioSaldo.folio_solicitud+'.json', form, authData)
       .then(response => {
         // this.setState({loading: false})
         // this.props.updateUser(response.data)
@@ -240,8 +253,17 @@ class MesaControl extends Component {
 
     const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
-    if (this.props.selectedSol) {
-      solicitudInfo = <SolicitudDetail solicitud={this.props.selectedSol} />
+    if (this.state.selectedSol && this.state.saldos) {
+      if  (this.state.selectedSol.clave_socio === this.props.selSocioSaldo) {
+        solicitudInfo = <SolicitudDetail saldos={this.state.saldos} solicitud={this.props.selectedSol} />
+      } else {
+        // TODO: Un-needed alert?
+        alert('Algo falló!!!!! Revisar con Mauricio')
+        console.log('FALLA!')
+        console.log(this.props.selectedSol)
+        console.log(this.props.saldos)
+        console.log(this.props.selSocioSaldo)
+      }
     }
 
 
@@ -283,6 +305,8 @@ const mapStateToProps = state => {
       loading: state.solicitudes.loading,
       updated: state.solicitudes.updated,
       selectedSol: state.solicitudes.selectedSolicitud,
+      saldo: state.acopios.socioSaldo,
+      selSocioSaldo: state.acopios.selSocio,
     }
 }
 

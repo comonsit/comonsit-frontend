@@ -5,6 +5,8 @@ const initialState = {
   acopios: [{}],
   loading: false,
   updated: false,
+  socioSaldo: null,
+  selSocio: null
   // selectedAcopio: null
 }
 
@@ -42,6 +44,22 @@ const newAcopioFailed = (state) => {
   })
 }
 
+const setSocioSaldo = (state, action) => {
+  return updateObject(state, {
+    socioSaldo: action.socioSaldo,
+    selSocio: action.selSocio
+  })
+}
+
+const clearSocioSaldo = (state, action) => {
+  return updateObject(state, {
+    socioSaldo: null,
+    selSocio: null
+  })
+}
+
+
+
 // const setSelAcopio = (state, action) => {
 //   return updateObject(state, {
 //     selectedAcopio: action.selectedAcopio
@@ -62,6 +80,8 @@ const reducer = (state=initialState, action) => {
     case actionTypes.NEW_ACOPIO_START: return newAcopioStart(state)
     case actionTypes.NEW_ACOPIO_SUCCESS: return newAcopioSuccess(state)
     case actionTypes.NEW_ACOPIO_FAILED: return newAcopioFailed(state)
+    case actionTypes.SET_SOCIO_SALDO: return setSocioSaldo(state, action)
+    case actionTypes.CLEAR_SOCIO_SALDO: return clearSocioSaldo(state, action)
     // case actionTypes.SET_SEL_ACOPIO: return setSelAcopio(state, action)
     // case actionTypes.UNSELECT_ACOPIO: return unSetSelAcopio(state)
     default:
