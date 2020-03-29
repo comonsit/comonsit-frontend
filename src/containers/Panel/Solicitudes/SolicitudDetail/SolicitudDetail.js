@@ -54,8 +54,13 @@ const solicitudDetail = (props) => {
 
   const preguntas_mesa = ["pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4"]
   const preguntas_mesaArray = preguntas_mesa.map((id, index) => {
-    const answered = (props.solicitud[id]) ? (<span className={classes.Checkmark}>&#10004;</span>) : (<span className={classes.Cross}>&#10006;</span>)
-    return(<span key={index} className={classes.Question}>{index+1}. {answered}</span>)
+    if (props.solicitud[id] === null) {
+      return(<span key={index} className={classes.Question}>{index+1}. &nbsp;&nbsp;&nbsp; </span>)
+    } else if (props.solicitud[id] === true) {
+      return(<span key={index} className={classes.Question}>{index+1}. <span className={classes.Checkmark}>&#10004;</span>&nbsp;&nbsp; </span>)
+    } else {
+      return(<span key={index} className={classes.Question}>{index+1}. <span className={classes.Cross}>&#10006;</span>&nbsp;&nbsp; </span>)
+    }
   })
 
   items3Array.push(<TextElement label={'preguntas_mesa'} content={preguntas_mesaArray}/>)
