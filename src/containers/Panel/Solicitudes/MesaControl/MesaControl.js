@@ -24,21 +24,6 @@ class MesaControl extends Component {
       selectedSol: this.props.selectedSol,
       saldos: this.props.saldo,
       mesaControlForm: {
-        pregunta_0: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label:  (<FormattedMessage id="mesaControl.pregunta_0"/>),
-          longLabel: true,
-          value: false,
-          validation: {
-            required: true
-          },
-          valid: true,
-          touched: false,
-          hide: false
-        },
         pregunta_1: {
           elementType: 'checkbox',
           elementConfig: {
@@ -99,6 +84,22 @@ class MesaControl extends Component {
           touched: false,
           hide: false
         },
+        irregularidades: {
+          elementType: 'textarea',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..',
+            maxLength: '100'
+          },
+          label:  (<FormattedMessage id="mesaControl.irregularidades"/>),
+          value: '',
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: true,
+          hide: false
+        },
         comentarios_coordinador: {
           elementType: 'textarea',
           elementConfig: {
@@ -150,10 +151,18 @@ class MesaControl extends Component {
   }
 
   onSubmitForm = status => {
-    const form = {
-        comentarios_coordinador: this.state.mesaControlForm.comentarios_coordinador.value,
-        estatus_solicitud: status
+    let formData = {}
+    for (let formElementIdentifier in this.state.mesaControlForm) {
+      formData[formElementIdentifier] = this.state.mesaControlForm[formElementIdentifier].value
     }
+
+    //// TODO: eliminate estatus data with working workflow
+    formData = {
+      ...formData,
+      estatus_solicitud: status,
+      chat: [{'comentario': this.state.mesaControlForm.comentarios_coordinador.value}]
+    }
+
 
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
@@ -162,10 +171,12 @@ class MesaControl extends Component {
     // this.setState({loading: true})
 
     // TODO: check
-    axios.patch('/solic-creditos/'+this.props.selectedSol && this.props.socioSaldo.folio_solicitud+'.json', form, authData)
+    axios.patch('/solic-creditos/' +this.props.selectedSol.folio_solicitud+'.json', formData, authData)
       .then(response => {
         // this.setState({loading: false})
         // this.props.updateUser(response.data)
+        console.log('CAMBIAR STATUS === AP POR:')
+        console.log(response.data.estatus_solicitud)
         if (status === 'AP') {
           alert('Solicitud de Crédito aprobado correctamente')
         } else {
@@ -209,7 +220,7 @@ class MesaControl extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const mesaControlFormOrder = ["pregunta_0", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "comentarios_coordinador"]
+    const mesaControlFormOrder = ["pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "comentarios_coordinador"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements, solicitudInfo = <Spinner/>
@@ -271,8 +282,10 @@ class MesaControl extends Component {
       <>
         <Title
           titleName="mesaControl.title"/>
-        {solicitudInfo}
-        <hr/>
+        <div className={classes.Container}>
+        <div className={classes.InfoContainer}>
+          {solicitudInfo}
+          </div>
         <form
           onSubmit={this.onApproveForm.bind(this)}
           className={classes.FormDiv}
@@ -294,6 +307,7 @@ class MesaControl extends Component {
           </Button>
           {updatedRedirect}
         </form>
+      </div>
       </>
     )
   }

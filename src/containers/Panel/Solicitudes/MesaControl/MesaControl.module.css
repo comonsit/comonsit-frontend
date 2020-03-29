@@ -1,8 +1,23 @@
-.FormDiv {
-  position:fixed;
+.Container {
+  background-color: #f6fcf9;
+}
+.InfoContainer {
   height: 40vh;
-  max-height: 50%;
-  width: 100%;
-  bottom: 0;
   overflow-y:scroll;
+  border: .1rem solid #243746;
+  margin: 3rem 3rem 0 3rem;
+  border-radius: .5rem;
+}
+
+.FormDiv {
+  height: 40vh;
+  overflow-y:scroll;
+  border: .1rem solid #243746;
+  margin: 3rem;
+  border-radius: .5rem;
+  background-color: #fff;
+}
+
+.FormDiv h2 {
+  margin-left: 4rem;
 }
