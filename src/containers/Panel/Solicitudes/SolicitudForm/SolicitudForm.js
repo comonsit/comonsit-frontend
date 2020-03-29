@@ -257,78 +257,6 @@ class SolicitudForm extends Component {
           touched: false,
           hide: false
         },
-        pregunta_1: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label:  (<><FormattedMessage id="solicitudForm.pregunta_1"/>*</>),
-          value: false,
-          validation: {
-            required: false
-          },
-          valid: true,
-          touched: false,
-          hide: false
-        },
-        pregunta_2: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label:  (<><FormattedMessage id="solicitudForm.pregunta_2"/>*</>),
-          value: false,
-          validation: {
-            required: false
-          },
-          valid: true,
-          touched: false,
-          hide: false
-        },
-        pregunta_3: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label:  (<><FormattedMessage id="solicitudForm.pregunta_3"/>*</>),
-          value: false,
-          validation: {
-            required: false
-          },
-          valid: true,
-          touched: false,
-          hide: false
-        },
-        pregunta_4: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label:  (<><FormattedMessage id="solicitudForm.pregunta_4"/>*</>),
-          value: false,
-          validation: {
-            required: false
-          },
-          valid: true,
-          touched: false,
-          hide: false
-        },
-        irregularidades: {
-          elementType: 'textarea',
-          elementConfig: {
-            type: 'text',
-            placeholder: '..',
-            maxLength: '100'
-          },
-          label:  (<FormattedMessage id="solicitudForm.irregularidades"/>),
-          value: '',
-          validation: {
-            required: false
-          },
-          valid: true,
-          touched: false,
-          hide: false
-        },
         aval: {
           elementType: 'input',
           elementConfig: {
@@ -427,13 +355,11 @@ class SolicitudForm extends Component {
       })
     }
 
-    //TEMP!!!
-    const tempChat = solicitud.comentarios_promotor
-    delete solicitud.comentarios_promotor
-    solicitud['chat'] = [{'comentario': tempChat}]
-
-
-    // TODO: meter mot_credito !== 'SA' emergencia_medica: false??
+    const currentComment = solicitud.comentarios_promotor
+    solicitud = updateObject(solicitud, {
+      chat: [{'comentario': currentComment}],
+      emergencia_medica: (this.state.solicitudForm.mot_credito.value !== 'SA') ? false : this.state.solicitudForm.emergencia_medica.value
+    })
 
     // if (this.props.new) {
       this.props.onCreateNewSolicitud(solicitud, this.props.token)
@@ -589,7 +515,7 @@ class SolicitudForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "proceso", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "justificacion_credito", "aval", "familiar_responsable", "comentarios_promotor"]
+    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "proceso", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "justificacion_credito", "aval", "familiar_responsable", "comentarios_promotor"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
