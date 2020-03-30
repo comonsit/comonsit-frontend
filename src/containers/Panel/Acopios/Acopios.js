@@ -264,7 +264,7 @@ class Acopios extends Component {
               hint={this.state.hintJA}
               />
             <AcopioGraph
-              data={this.state.soapData}
+              data={this.state.salarioData}
               label="Salarios"
               color="#BBC392"
               mouseOver={this._rememberValueSA}
