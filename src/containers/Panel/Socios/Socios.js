@@ -83,7 +83,7 @@ class Socios extends Component {
       }
 
       if (isGerencia(this.props.role)) {
-        downloadXLSButton = (<button onClick={this.getXLSX}><FormattedMessage id="sociosXLSX"/></button>)
+        downloadXLSButton = (<div className={classes.XLSButton} cl><button onClick={this.getXLSX}><FormattedMessage id="sociosXLSX"/></button></div>)
         newSocioButton = (<Button clicked={this.onNewSocio}><FormattedMessage id="socios.newSocioButton"/></Button>)
       }
 
@@ -100,8 +100,10 @@ class Socios extends Component {
             titleName="socios.title">
             {newSocioButton}
           </Title>
-          {downloadXLSButton}
-          {socioList}
+          <div className={classes.Table}>
+            {downloadXLSButton}
+            {socioList}
+          </div>
         </div>
       </>
     )
