@@ -358,7 +358,7 @@ class SolicitudForm extends Component {
     const currentComment = solicitud.comentarios_promotor
     solicitud = updateObject(solicitud, {
       chat: [{'comentario': currentComment}],
-      emergencia_medica: (this.state.solicitudForm.mot_credito.value !== 'SA') ? false : this.state.solicitudForm.emergencia_medica.value
+      emergencia_medica: (solicitud.mot_credito === 'SA') ? this.state.solicitudForm.emergencia_medica.value : false
     })
 
     // if (this.props.new) {
