@@ -38,6 +38,22 @@
     color: #243746;
 }
 
+.InputElement[multiple] {
+  background: none;
+  width:auto;
+  min-height:18rem;
+  padding: .2rem 1rem;
+  border-width: 2px;
+  border-style: inset;
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}
+
+.InputElement[multiple] option {
+  padding: .2rem 1rem;
+}
+
 .InputElementFocused {
     outline: none;
     background-color: white;
