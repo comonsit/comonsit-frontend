@@ -7,7 +7,7 @@ import TextElement from '../../../../components/UI/TextElement/TextElement';
 
 
 const solicitudDetail = (props) => {
-  const items1 = ["nombre_productor", "clave_socio", "comunidad", "region", "area_proceso", "cargo", "cargo_coop", "fecha_ingr_yomol_atel", "porc_acopio_por_anio"]
+  const items1 = ["nombre_productor", "clave_socio", "comunidad", "region", "area_proceso", "cargo", "cargo_coop", "fecha_ingr_yomol_atel"]
   const items1Array = items1.map(id => {
     return (<TextElement
               label={id}
