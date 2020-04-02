@@ -483,7 +483,7 @@ class SolicitudForm extends Component {
   searchByFocus = inputIdentifier => {
     const value = this.state.solicitudForm[inputIdentifier].value
     // TODO: validation of socio to search
-    if (!isNaN(value)) {
+    if (value && !isNaN(value)) {
       this.setState({ selectingFor: inputIdentifier })
       this.props.onFetchSelSocios(this.props.token, value)
     }

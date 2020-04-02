@@ -242,7 +242,7 @@ class AcopioForm extends Component {
   searchByFocus = inputIdentifier => {
     const value = this.state.acopioForm.clave_socio.value
     // TODO: validation of socio to search
-    if (!isNaN(value)) {
+    if (value && !isNaN(value)) {
       this.props.onFetchSelSocios(this.props.token, value)
     }
   }
