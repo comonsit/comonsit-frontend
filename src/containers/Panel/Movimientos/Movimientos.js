@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormattedMessage, FormattedNumber, IntlProvider} from 'react-intl';
+import {FormattedMessage, FormattedNumber, IntlProvider, FormattedDate} from 'react-intl';
 import classes from './Movimientos.module.css'
 import { connect } from 'react-redux';
 
@@ -212,7 +212,15 @@ class Movimientos extends Component {
         <>
           <div className={classes.SocioName}>
             <p><strong>{this.state.selSocio}</strong></p>
-            <p><FormattedMessage id="movimientos.saldo"/>: <IntlProvider locale='en'><FormattedNumber value={this.state.saldo} style="currency" currency="USD"/></IntlProvider></p>
+
+            <p><FormattedMessage id="movimientos.saldo"/><IntlProvider locale='es'>
+                            <FormattedDate
+                              value={new Date()}
+                              day="numeric"
+                              month="long"
+                              year="numeric"/>
+                          </IntlProvider>:</p>
+                          <p><IntlProvider locale='en'><FormattedNumber value={this.state.saldo} style="currency" currency="USD"/></IntlProvider></p>
           </div>
           <RTable
             columns={columns}
