@@ -534,7 +534,11 @@ class SolicitudForm extends Component {
         if (formElement.id === "proceso" ) {
           return (
             <div className={classes.Inputs}>
-              <ProcessSelector label={formElement.id+'_nombre'} processes={this.state.processOptions} clicked={this.OnChooseProcess}/>
+              <ProcessSelector
+                label={formElement.id+'_nombre'}
+                processes={this.state.processOptions}
+                clicked={this.OnChooseProcess}
+              />
             </div>
               )
         } else {
@@ -584,7 +588,7 @@ class SolicitudForm extends Component {
         <Modal
           show={this.state.searchingOpen}
           modalClosed={this.cancelSearch}>
-          <h3>Búsqueda de Socios...pendiente</h3>
+          <h3><FormattedMessage id="solicitudForm.elige"/></h3>
           <div
             className={classes.TableContainer}>
             {sociosBusqueda}
