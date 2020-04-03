@@ -187,21 +187,6 @@ class AcopioForm extends Component {
         [inputIdentifier]: updatedFormElement
     })
 
-    // Hide Kilos option if not applicable
-    if (inputIdentifier === 'tipo_de_producto') {
-      const hideKilos = !(event.target.value === 'CF' || event.target.value === 'MI')
-      updatedForm = updateObject(updatedForm, {
-          kilos_de_producto: updateObject(updatedForm.kilos_de_producto, {
-              hide: hideKilos,
-              valid: hideKilos,
-              value: null,
-              validation: {
-                required: hideKilos
-              }
-          })
-      })
-    }
-
     this.setState({acopioForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
   }
 
@@ -255,13 +240,26 @@ class AcopioForm extends Component {
         [previous]: this.props.selSocio[status[previous]],
         [current]: 'SEL'
       })
+
+      // Hide Kilos option if not applicable
+      const hideKilos = !(current === 'CF' || current === 'MI')
+
       const updatedForm = updateObject(this.state.acopioForm, {
           tipo_de_producto: updateObject(this.state.acopioForm.tipo_de_producto, {
               value: current,
               valid: true,
               touched: true
+          }),
+          kilos_de_producto: updateObject(this.state.acopioForm.kilos_de_producto, {
+              hide: hideKilos,
+              valid: hideKilos,
+              value: null,
+              validation: {
+                required: hideKilos
+              }
           })
       })
+      
       this.setState({
         processOptions: newProcesses,
         acopioForm: updatedForm,
