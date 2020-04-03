@@ -243,7 +243,8 @@ class SociosForm extends Component {
           label: (<FormattedMessage id="socioForm.clave_anterior"/>),
           value: this.props.selSocio.clave_anterior,
           validation: {
-            required: false
+            required: false,
+            maxLength: 11
           },
           valid: true,
           touched: false,
@@ -458,8 +459,9 @@ class SociosForm extends Component {
     // TODO: done to keep order in Safari. improvement?
     const sociosFormOrder = [
       "nombres", "apellido_paterno", "apellido_materno", "comunidad", "curp", "telefono", "fecha_nacimiento",
-      "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "empresa", "puesto", "fuente", "clave_anterior",
-      "genero", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_trabajador", "estatus_comonSit", "doc_curp", "doc_act_nac", "doc_ine", "doc_domicilio"
+      "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "clave_anterior",
+      "genero", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_trabajador", "estatus_comonSit",
+      "empresa", "puesto", "fuente", "doc_curp", "doc_act_nac", "doc_ine", "doc_domicilio"
     ]
     const formElementsArray = []
     let supportData

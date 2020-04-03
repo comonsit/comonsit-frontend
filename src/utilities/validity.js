@@ -26,6 +26,11 @@ export const checkValidity = (value, rules, additional=false) => {
         isValid = pattern.test(value) && isValid
     }
 
+    if (rules.isDecimal) {
+        const pattern = /^[0-9]+([.,][0-9]{1,2})?$/;
+        isValid = pattern.test(value) && isValid
+    }
+
     if (rules.pairedWith) {
       isValid = additional || value
     }

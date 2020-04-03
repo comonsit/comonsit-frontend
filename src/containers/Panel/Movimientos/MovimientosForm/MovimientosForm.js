@@ -77,13 +77,14 @@ class MovimientosForm extends Component {
           elementConfig: {
             type: 'number',
             max: '9999999',
-            min: '0'
+            min: '0',
+            step: '.01'
           },
           label:  (<><FormattedMessage id="movimientosForm.monto"/>*</>),
           value: '',
           validation: {
             required: true,
-            isNumeric: true
+            isDecimal: true
           },
           valid: false,
           touched: false,

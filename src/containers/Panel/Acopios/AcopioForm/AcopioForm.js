@@ -87,13 +87,14 @@ class AcopioForm extends Component {
           elementConfig: {
             type: 'number',
             max: '9999999',
-            min: '0'
+            min: '0',
+            step: '.01'
           },
           label:  (<><FormattedMessage id="acopioForm.kilos_de_producto"/>*</>),
           value: '',
           validation: {
             required: false,
-            isNumeric: true
+            isDecimal: true
           },
           valid: false,
           touched: false,
@@ -104,13 +105,14 @@ class AcopioForm extends Component {
           elementConfig: {
             type: 'number',
             max: '9999999',
-            min: '0'
+            min: '0',
+            step: '.01'
           },
           label:  (<><FormattedMessage id="acopioForm.ingreso"/>*</>),
           value: '',
           validation: {
             required: true,
-            isNumeric: true
+            isDecimal: true
           },
           valid: false,
           touched: false,
@@ -259,7 +261,7 @@ class AcopioForm extends Component {
               }
           })
       })
-      
+
       this.setState({
         processOptions: newProcesses,
         acopioForm: updatedForm,

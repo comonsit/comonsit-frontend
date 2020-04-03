@@ -198,13 +198,14 @@ class SolicitudForm extends Component {
           elementConfig: {
             type: 'number',
             max: '9999999',
-            min: '0'
+            min: '0',
+            step: '.01'
           },
           label:  (<><FormattedMessage id="solicitudForm.monto_solicitado"/>*</>),
           value: '',
           validation: {
             required: true,
-            isNumeric: true
+            isDecimal: true
           },
           valid: false,
           touched: false,
