@@ -74,7 +74,6 @@ export const getSocioSaldo = (token, socio) => {
     }
     axios.get('/acopios/year_sum/?clave_socio='+socio, authData)
       .then(response => {
-        console.log('GOT A SALDO')
         dispatch(setSocioSaldo(response.data, socio))
       })
       .catch(error => {

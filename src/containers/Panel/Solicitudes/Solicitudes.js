@@ -60,7 +60,8 @@ class Solicitudes extends Component {
     const colors = {
       "AP": "#2bc71b",
       "RV": "#d1df2c",
-      "RE": "#ec573c",
+      "RE": "#c23f3f",
+      "NE": "#235ee4",
       "CA": "#868a86"
     }
 
@@ -125,7 +126,7 @@ class Solicitudes extends Component {
       }
     ]
 
-    let solicitudInfoButton = null
+    let mesaControlButton, evaluacionButton = null
     let solicitudInfo = <Spinner/>
 
     if (this.state.selectedSol && this.state.saldos) {
@@ -137,11 +138,17 @@ class Solicitudes extends Component {
           />
         </div>
       )
+
       if (this.state.selectedSol.estatus_solicitud === 'RV' && isGerencia(this.props.role)) {
-        solicitudInfoButton = <Button
+        mesaControlButton = <Button
           clicked={() => this.props.history.push('mesa-control')}
           btnType="Success"
           ><FormattedMessage id="solicitudes.goToMesaControl"/></Button>
+      } else if (this.state.selectedSol.estatus_solicitud === 'AP' && this.state.selectedSol.estatus_evaluacion === 'RV' && this.props.role === 'Gerente') {
+        evaluacionButton = <Button
+          clicked={() => this.props.history.push('evaluacion')}
+          btnType="Success"
+          ><FormattedMessage id="solicitudes.goToEvaluacion"/></Button>
       }
     }
 
@@ -154,7 +161,8 @@ class Solicitudes extends Component {
             <div className={classes.InfoContainer}>
               {solicitudInfo}
             </div>
-            {solicitudInfoButton}
+            {mesaControlButton}
+            {evaluacionButton}
           </div>
         </Modal>
         <div className={classes.Container}>
