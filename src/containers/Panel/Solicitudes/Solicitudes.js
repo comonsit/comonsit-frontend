@@ -3,10 +3,12 @@ import {FormattedMessage} from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import SolicitudDetail from './SolicitudDetail/SolicitudDetail';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
+import Input from '../../../components/UI/Input/Input';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
@@ -15,12 +17,34 @@ import Title from '../../../components/UI/Title/Title';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
+import { updateObject } from '../../../store/reducers/utility'
+import { checkValidity } from '../../../utilities/validity'
+import axios from '../../../store/axios-be.js'
 
 class Solicitudes extends Component {
   state = {
     showSolicitudModal: false,
     selectedSol: null,
-    saldos: null
+    saldos: null,
+    formIsValid: false,
+    negociacionForm: {
+      comentarios_promotor: {
+        elementType: 'textarea',
+        elementConfig: {
+          type: 'text',
+          placeholder: '..',
+          maxLength: '100'
+        },
+        label:  (<FormattedMessage id="comentariosPromotor"/>),
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false,
+        hide: false
+      }
+    }
   }
 
   componentDidMount () {
@@ -31,8 +55,8 @@ class Solicitudes extends Component {
     if(this.props.selectedSol !== prevProps.selectedSol) {
       this.setState({selectedSol: this.props.selectedSol})
     } else if(this.props.saldo !== prevProps.saldo) {
-          this.setState({saldos: this.props.saldo})
-        }
+      this.setState({saldos: this.props.saldo})
+    }
   }
 
   showSolicitud = (id, socio) => {
@@ -74,6 +98,57 @@ class Solicitudes extends Component {
           backgroundColor: colors[cellInfo.cell.value] }}
        />
      )
+ }
+
+ onSubmitForm = event => {
+   event.preventDefault();
+   const formData = {
+     estatus_evaluacion: 'RV',
+     chat: [{'comentario': this.state.negociacionForm.comentarios_promotor.value}]
+   }
+
+   const authData = {
+     headers: { 'Authorization': `Bearer ${this.props.token}` }
+   }
+   // TODO: implement loading view
+   // this.setState({loading: true})
+
+   axios.patch('/solic-creditos/' +this.props.selectedSol.folio_solicitud+'.json', formData, authData)
+     .then(response => {
+      // this.setState({loading: false})
+      alert('Renegociación enviada correctamente.')
+       // push or pop back to history?
+       this.setState({
+         showSolicitudModal: false,
+         selectedSol: null,
+         saldos: null
+       });
+       this.props.onInitSolicitudes(this.props.token)
+       //dispatch update user data
+     })
+     .catch(error => {
+       // alert('ALGO FALLÓ!')
+     })
+ }
+
+ inputChangedHandler = (event, inputIdentifier) => {
+
+   const updatedFormElement = updateObject(this.state.negociacionForm[inputIdentifier], {
+       value: event.target.value,
+       valid: checkValidity(event.target.value, this.state.negociacionForm[inputIdentifier].validation),
+       touched: true
+   })
+
+   let updatedForm = updateObject(this.state.negociacionForm, {
+       [inputIdentifier]: updatedFormElement
+   })
+
+   let formIsValid = true
+   for (let inputIds in updatedForm) {
+     formIsValid = updatedForm[inputIds].valid && formIsValid
+   }
+
+   this.setState({negociacionForm: updatedForm, formIsValid: formIsValid})
  }
 
   render () {
@@ -126,7 +201,7 @@ class Solicitudes extends Component {
       }
     ]
 
-    let mesaControlButton, evaluacionButton = null
+    let mesaControlButton, evaluacionButton, form = null
     let solicitudInfo = <Spinner/>
 
     if (this.state.selectedSol && this.state.saldos) {
@@ -149,6 +224,37 @@ class Solicitudes extends Component {
           clicked={() => this.props.history.push('evaluacion')}
           btnType="Success"
           ><FormattedMessage id="solicitudes.goToEvaluacion"/></Button>
+      } else if (this.state.selectedSol.estatus_solicitud === 'AP' && this.state.selectedSol.estatus_evaluacion === 'NE') {
+        form = (
+          <form onSubmit={this.onSubmitForm}>
+            <div className={classes.Form}>
+              <div
+                key= {"comentarios_promotor"}
+                >
+                <div className={classes.Inputs}>
+                  <Input
+                    label={this.state.negociacionForm.comentarios_promotor.label}
+                    labelLong={this.state.negociacionForm.comentarios_promotor.longLabel}
+                    key= {"comentarios_promotor"}
+                    elementType={this.state.negociacionForm.comentarios_promotor.elementType }
+                    elementConfig={this.state.negociacionForm.comentarios_promotor.elementConfig }
+                    value={this.state.negociacionForm.comentarios_promotor.value}
+                    shouldValidate={this.state.negociacionForm.comentarios_promotor.validation}
+                    invalid={!this.state.negociacionForm.comentarios_promotor.valid}
+                    touched={this.state.negociacionForm.comentarios_promotor.touched}
+                    disabled={this.props.loading}
+                    hide={this.state.negociacionForm.comentarios_promotor.hide}
+                    changed={(event) => this.inputChangedHandler(event, "comentarios_promotor")}/>
+                </div>
+              </div>
+            </div>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}>
+              <FormattedMessage id="reNegotiateButton"/>
+            </Button>
+          </form>
+        )
       }
     }
 
@@ -163,6 +269,7 @@ class Solicitudes extends Component {
             </div>
             {mesaControlButton}
             {evaluacionButton}
+            {form}
           </div>
         </Modal>
         <div className={classes.Container}>
@@ -203,4 +310,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Solicitudes))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Solicitudes, axios)))

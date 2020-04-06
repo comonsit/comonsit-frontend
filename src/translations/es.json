@@ -217,5 +217,7 @@
   "negotiateButton": "Negociar",
   "evaluacion.30saldo": "Opción 30% = ",
   "evaluacion.50saldo": "Opción 50% = ",
-  "mesaControl.evaluacion": "Evaluación"
+  "mesaControl.evaluacion": "Evaluación",
+  "comentariosPromotor": "Comentarios para re-negociación",
+  "reNegotiateButton": "Solicitar Renegociación"
 }
