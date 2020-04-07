@@ -44,7 +44,7 @@ class Evaluacion extends Component {
           touched: false,
           hide: false
         },
-        plazo_de_pago_aprobado: {
+        plazo_aprobado: {
           elementType: 'input',
           elementConfig: {
             type: 'number',
@@ -144,7 +144,7 @@ class Evaluacion extends Component {
         console.log('CAMBIAR STATUS === AP POR:')
         console.log(response.data.estatus_solicitud)
         if (status === 'AP') {
-          alert('Solicitud de Crédito aprobado correctamente')
+          alert('Solicitud de Crédito aprobado correctamente. Contrato: ' + response.data.contrato + ' creado.')
         } else if (status === 'NE') {
           alert('Solicitud de Crédito enviada a negociación')
         } else {
@@ -184,7 +184,7 @@ class Evaluacion extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const evaluacionFormOrder = ["monto_aprobado", "plazo_de_pago_aprobado", "comentarios_gerente"]
+    const evaluacionFormOrder = ["monto_aprobado", "plazo_aprobado", "comentarios_gerente"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements, solicitudInfo = <Spinner/>
