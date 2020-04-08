@@ -32,10 +32,11 @@ class Evaluacion extends Component {
             type: 'number',
             max: '9999999',
             min: '0',
-            step: '.01'
+            step: '.01',
+            placeholder: '$__.__'
           },
           label:  (<><FormattedMessage id="evaluacion.montoAprobado"/>*</>),
-          value: '',
+          value: null,
           validation: {
             required: true,
             isDecimal: true
@@ -48,13 +49,32 @@ class Evaluacion extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'number',
-            placeholder: '..# meses'
+            placeholder: '# meses'
           },
           label:  (<><FormattedMessage id="evaluacion.plazoPagoAprobado"/>*</>),
-          value: '',
+          value: null,
           validation: {
             required: true,
             isNumeric: true
+          },
+          valid: false,
+          touched: false,
+          hide: false
+        },
+        tasa_aprobada: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'number',
+            max: '100',
+            min: '1',
+            step: '.0001',
+            placeholder: '__%'
+          },
+          label:  (<><FormattedMessage id="evaluacion.tasa_aprobada"/>*</>),
+          value: null,
+          validation: {
+            required: true,
+            isDecimalExact: true
           },
           valid: false,
           touched: false,
@@ -118,8 +138,10 @@ class Evaluacion extends Component {
 
   onSubmitForm = status => {
     let formData = {}
-    for (let formElementIdentifier in this.state.evaluacionForm) {
-      formData[formElementIdentifier] = this.state.evaluacionForm[formElementIdentifier].value
+    if (status === 'AP') {
+      for (let formElementIdentifier in this.state.evaluacionForm) {
+        formData[formElementIdentifier] = this.state.evaluacionForm[formElementIdentifier].value
+      }
     }
 
     //// TODO: eliminate estatus data with working workflow
@@ -184,7 +206,7 @@ class Evaluacion extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const evaluacionFormOrder = ["monto_aprobado", "plazo_aprobado", "comentarios_gerente"]
+    const evaluacionFormOrder = ["monto_aprobado", "plazo_aprobado", "tasa_aprobada", "comentarios_gerente"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements, solicitudInfo = <Spinner/>
