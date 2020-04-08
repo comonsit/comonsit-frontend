@@ -48,7 +48,8 @@ class Creditos extends Component {
     const colors = {
       "PA": "#2bc71b",
       "VE": "#d1df2c",
-      "VI": "#235ee4"
+      "VI": "#235ee4",
+      "PF": "#be23e4"
     }
 
      return (
@@ -103,7 +104,7 @@ class Creditos extends Component {
       },
       {
         Header: <FormattedMessage id="solicitudes.tipo_credito"/>,
-        accessor: "creditos.solicitudes.tipo_credito"
+        accessor: "tipo_credito"
       },
       {
         Header: <FormattedMessage id="monto"/>,
