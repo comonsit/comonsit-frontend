@@ -8,6 +8,9 @@ const pnavigationItems = (props) => (
     <div className={cl.Logo}>
       <div className={cl.NavigationItems} onClick={props.clicked}>
         <div className={cl.NavigationItem}>
+          <NavLink to="/creditos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.creditos"/></NavLink>
+        </div>
+        <div className={cl.NavigationItem}>
           <NavLink to="/socios" exact activeClassName={cl.active}><FormattedMessage id="pmenu.socios"/></NavLink>
         </div>
         <div className={cl.NavigationItem}>

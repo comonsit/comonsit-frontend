@@ -20,6 +20,7 @@
   "menu.publication": "Hunetic",
   "menu.contact": "Ts'ibayaotic",
   "menu.login": "Ochan",
+  "pmenu.creditos": "Creditohetic",
   "pmenu.socios": "Socioetic",
   "pmenu.movimientos": "Beh Taqu'in",
   "pmenu.acopios": "Acopiohetic",
@@ -220,5 +221,13 @@
   "evaluacion.50saldo": "50% = ",
   "mesaControl.evaluacion": "Evaluacion",
   "comentariosPromotor": "Bin xchihat",
-  "reNegotiateButton": "Yach'il Negociacion"
+  "reNegotiateButton": "Yach'il Negociacion",
+  "creditos.title": "Contratos",
+  "creditos.fecha_inicio": "Bin Ora Hahch",
+  "monto": "Jayeb Taqu'in",
+  "plazo": "Jayeb Uh",
+  "tasa": "Tasa",
+  "estatus": "Estatus",
+  "creditos.estatus_ejecucion": "Estatus Ej",
+  "creditos.deuda_al_dia": "Jayeb ay to sc'an"
 }

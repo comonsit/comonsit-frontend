@@ -18,6 +18,7 @@ import solicitudForm from './containers/Panel/Solicitudes/SolicitudForm/Solicitu
 import mesaControl from './containers/Panel/Solicitudes/MesaControl/MesaControl';
 import evaluacion from './containers/Panel/Solicitudes/Evaluacion/Evaluacion';
 import acopios from './containers/Panel/Acopios/Acopios';
+import creditos from './containers/Panel/Creditos/Creditos';
 import movimientos from './containers/Panel/Movimientos/Movimientos';
 import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
 import acopioForm from './containers/Panel/Acopios/AcopioForm/AcopioForm';
@@ -64,6 +65,7 @@ class App extends Component {
           <Route path="/socios" exact component={socios}/>
           <Route path="/perfil" exact component={perfil}/>
           <Route path="/acopios" exact component={acopios}/>
+          <Route path="/creditos" exact component={creditos}/>
           <Route path="/acopio-formato" exact component={acopioForm}/>
           <Route path="/tsumbalil" exact component={tsumbalil}/>
           <Route path="/movimientos" exact component={movimientos}/>

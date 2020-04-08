@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import sociosReducer from './store/reducers/socios'
 import generalDataReducer from './store/reducers/generalData'
 import solicitudReducer from './store/reducers/solicitudes'
+import creditosReducer from './store/reducers/creditos'
 import acopioReducer from './store/reducers/acopios'
 import movimientoReducer from './store/reducers/movimientos'
 import authReducer from './store/reducers/auth'
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     solicitudes: solicitudReducer,
     acopios: acopioReducer,
     movimientos: movimientoReducer,
-    generalData: generalDataReducer
+    generalData: generalDataReducer,
+    creditos: creditosReducer
 })
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;

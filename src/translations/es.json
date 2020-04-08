@@ -20,6 +20,7 @@
   "menu.publication": "Publicaicones",
   "menu.contact": "Contacto",
   "menu.login": "Acceder",
+  "pmenu.creditos": "Créditos",
   "pmenu.socios": "Socios",
   "pmenu.movimientos": "Aportaciones",
   "pmenu.acopios": "Acopios",
@@ -220,5 +221,13 @@
   "evaluacion.50saldo": "Opción 50% = ",
   "mesaControl.evaluacion": "Evaluación",
   "comentariosPromotor": "Comentarios para re-negociación",
-  "reNegotiateButton": "Solicitar Renegociación"
+  "reNegotiateButton": "Solicitar Renegociación",
+  "creditos.title": "Contratos de Crédito",
+  "creditos.fecha_inicio": "Fecha Inicio",
+  "monto": "Monto",
+  "plazo": "Plazo",
+  "tasa": "Tasa",
+  "estatus": "Estatus",
+  "creditos.estatus_ejecucion": "Estatus Ejecución",
+  "creditos.deuda_al_dia": "Deuda al día"
 }

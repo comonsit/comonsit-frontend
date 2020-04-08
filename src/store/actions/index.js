@@ -26,6 +26,10 @@ export {
 } from './acopios'
 
 export {
+  initCreditos
+} from './creditos'
+
+export {
     initMovimientos,
     unSetMovimientos,
     newMovimiento,
