@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
-// import ContratoDetail from './ContratoDetail/ContratoDetail';
+import ContratoDetail from './ContratoDetail/ContratoDetail';
 import Modal from '../../../components/UI/Modal/Modal';
-// import Spinner from '../../../components/UI/Spinner/Spinner';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
@@ -19,28 +19,40 @@ import axios from '../../../store/axios-be.js'
 class Creditos extends Component {
   state = {
     showContratoModal: false,
+    selectedContrato: null,
+    loading: false
   }
 
   componentDidMount () {
     this.props.onInitCreditos(this.props.token)
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if(this.props.selectedContrato !== prevProps.selectedContrato) {
-  //     this.setState({selectedContrato: this.props.selectedContrato})
-  //   }
-  // }
-
-  showContrato = (id, socio) => {
+  showContrato = id => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+    // TODO: implement loading view
     this.setState({
-      showContratoModal: true
-    });
-    // this.props.onFetchSelContrato(this.props.token, id)
+      loading: true,
+      showContratoModal: true,
+    })
+
+    axios.get('/contratos/' + id + '.json', authData)
+      .then(response => {
+        this.setState({
+          loading: false,
+          selectedContrato: response.data
+        });
+      })
+      .catch(error => {
+        // alert('ALGO FALLÓ!')
+      })
   }
 
   cancelSelected =() => {
     this.setState({
       showContratoModal: false,
+      selectedContrato: null
     });
   }
 
@@ -79,10 +91,10 @@ class Creditos extends Component {
          backgroundColor: colors[cellInfo.cell.value] }}
       />
     )
-}
-
+  }
 
   render () {
+    let contrato = <Spinner/>
     const columns = [
       {
         Header: '#',
@@ -146,6 +158,10 @@ class Creditos extends Component {
       }
     ]
 
+    if (this.state.selectedContrato && !this.state.loading) {
+      console.log(this.state.selectedContrato)
+      contrato = <ContratoDetail contrato={this.state.selectedContrato}/>
+    }
 
     return (
       <>
@@ -154,6 +170,7 @@ class Creditos extends Component {
           modalClosed={this.cancelSelected}>
           <div className={classes.Container}>
             <div className={classes.InfoContainer}>
+              {contrato}
             </div>
           </div>
         </Modal>
@@ -164,7 +181,7 @@ class Creditos extends Component {
           <RTable
             columns={columns}
             data={this.props.listaCreditos}
-            onRowClick={() => {}}
+            onRowClick={(row) => this.showContrato(row.values.folio)}
             />
         </div>
       </>

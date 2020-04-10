@@ -1,0 +1,18 @@
+.Container {
+  /* bottom: 60vh; */
+  background-color: #fff;
+  padding: .7rem;
+  margin: 0;
+}
+
+.Title h2 {
+  text-align: center;
+}
+
+.SubSection {
+  border-bottom: 1px solid #ccc;
+}
+
+.SubTitle h3 {
+  margin-left: 2rem;
+}

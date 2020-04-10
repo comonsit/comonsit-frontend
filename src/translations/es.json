@@ -229,5 +229,11 @@
   "tasa": "Tasa",
   "estatus": "Estatus",
   "creditos.estatus_ejecucion": "Estatus Ejecución",
-  "creditos.deuda_al_dia": "Deuda al día"
+  "creditos.deuda_al_dia": "Deuda al día",
+  "contratoDetail.title": "PAGARÉ DE CRÉDITO PARA PAGO ÚNICO",
+  "contratoDetail.datos": "DATOS DEL PRESTATARIO",
+  "contratoDetail.especificaciones": "ESPECIFICACIONES DEL CRÉDITO",
+  "contratoDetail.informacion": "INFORMACIÓN SOBRE EL PAGO DEL CRÉDITO",
+  "contratoDetail.texto1": "(Firmando el presente PAGARÉ me comprometo a pagar en tiempo y forma el préstamo que COMON SIT CA'TELTIC me ha hecho).",
+  "contratoDetail.firma": "Nombre y firma del prestatario(a)"
 }
