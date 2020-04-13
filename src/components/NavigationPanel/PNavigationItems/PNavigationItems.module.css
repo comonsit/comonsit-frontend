@@ -10,14 +10,14 @@
   margin-top: 1rem;
   /* el center es por el flex */
   align-items: center;
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
 }
 
 .NavigationItem a {
   height: 100%;
-  padding: .5rem 2rem;
-  margin: .5rem 0rem;
+  padding: .4rem 2rem;
+  margin: 0rem;
   text-decoration: none;
   color: white;
 }
