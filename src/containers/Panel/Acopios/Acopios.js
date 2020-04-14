@@ -12,6 +12,7 @@ import AcopioGraph from '../../../components/Graphs/AcopioGraph/AcopioGraph';
 
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
+import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import RTable from '../../../components/UI/RTable/RTable';
 import Title from '../../../components/UI/Title/Title';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
@@ -97,6 +98,7 @@ class Acopios extends Component {
   }
 
   getXLSX = type => {
+    type = type === 'ALL' ? '' : type
     const url = (type) ? '/acopiosXLSX/?tipo_de_producto='+type : '/acopiosXLSX/'
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` },
@@ -208,21 +210,8 @@ class Acopios extends Component {
     let downloadXLSButton = null
 
     if (isGerencia(this.props.role)) {
-      downloadXLSButton = (
-        <nav className={classes.LangDropdownNav}>
-          <ul className={classes.LangDropdownList}>
-           <li className={classes.LangDropdownListItem}><FormattedMessage id="acopiosXLSX"/> ▼
-            <ul className={classes.Dropdown}>
-              <li><button type="button" onClick={() => this.getXLSX('')}>Todos</button></li>
-              <li><button type="button" onClick={() => this.getXLSX('CF')}>Café</button></li>
-              <li><button type="button" onClick={() => this.getXLSX('MI')}>Miel</button></li>
-              <li><button type="button" onClick={() => this.getXLSX('JA')}>Jabón</button></li>
-              <li><button type="button" onClick={() => this.getXLSX('SL')}>Salarios</button></li>
-            </ul>
-           </li>
-         </ul>
-        </nav>
-        )
+      const processList = ['ALL', 'CF', 'MI', 'JA', 'SL']
+      downloadXLSButton = <HoverButton title="acopiosXLSX" items={processList} clicked={this.getXLSX}/>
     }
 
     return (
