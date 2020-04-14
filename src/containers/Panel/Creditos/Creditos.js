@@ -57,22 +57,9 @@ class Creditos extends Component {
   }
 
   renderStatus = cellInfo => {
-    const colors = {
-      "PA": "#2bc71b",
-      "VE": "#d1df2c",
-      "VI": "#235ee4",
-      "PF": "#be23e4"
-    }
-
-     return (
-       <div
-        style={{
-          borderRadius: "2rem",
-          width: "2rem",
-          height: "2rem",
-          backgroundColor: colors[cellInfo.cell.value] }}
-       />
-     )
+    const cellClasses= [classes.CellStatus]
+    cellClasses.push(classes[cellInfo.cell.value])
+    return (<div className={cellClasses.join(' ')}><FormattedMessage id={'creditos.status.'+cellInfo.cell.value}/></div>)
  }
 
  renderStatusEj= cellInfo => {

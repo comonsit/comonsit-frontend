@@ -8,7 +8,7 @@ const sociosList = (props) => {
   const renderStatus = cellInfo => {
     const colors = {
       "AC": "#2bc71b",
-      "BA": "#ec573c",
+      "BA": "#c23f3f",
       "NP": "#868a86"
     }
 
