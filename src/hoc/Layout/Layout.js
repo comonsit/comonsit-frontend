@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {FormattedMessage} from 'react-intl';
 import {connect } from 'react-redux'
 import * as actions from '../../store/actions'
 import cl from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import HoverButton from '../../components/UI/HoverButton/HoverButton';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import PToolbar from '../../components/NavigationPanel/PToolbar/PToolbar';
 
@@ -55,23 +55,15 @@ class Layout extends Component {
         </>
         )
     }
-
     return (
       <>
         {menu}
         <main className={classes.join(' ')}>
             {this.props.children}
         </main>
-        <nav className={cl.LangDropdownNav}>
-          <ul className={cl.LangDropdownList}>
-           <li className={cl.LangDropdownListItem}><FormattedMessage id="language"/> ▼
-            <ul className={cl.Dropdown}>
-              <li><button type="button" onClick={() => this.onChangeLanguage('es')}>Español</button></li>
-              <li><button type="button" onClick={() => this.onChangeLanguage('tz')}>Tseltal</button></li>
-            </ul>
-           </li>
-         </ul>
-        </nav>
+        <div className={cl.LanguageSelector}>
+          <HoverButton title="language" items={['es', 'tz']} clicked={this.onChangeLanguage}/>
+        </div>
       </>
     )
   }

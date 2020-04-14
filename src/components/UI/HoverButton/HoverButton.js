@@ -5,7 +5,13 @@ import classes from './HoverButton.module.css'
 
 const hoverButton = (props) => {
 
-  const listItems = props.items.map(item => (<li key={item}><button type="button" onClick={() => props.clicked(item)}><FormattedMessage id={props.title +'.'+ item}/></button></li>))
+  const listItems = props.items.map(item =>
+    (<li key={item}>
+      <button type="button" onClick={() => props.clicked(item)}>
+        <FormattedMessage id={props.title +'.'+ item}/>
+      </button>
+    </li>)
+  )
 
   return (
     <>
