@@ -119,12 +119,6 @@ class Creditos extends Component {
         accessor: "tipo_credito"
       },
       {
-        Header: <FormattedMessage id="monto"/>,
-        accessor: 'monto',
-        Filter: SliderColumnFilter,
-        filter: filterGreaterThan
-      },
-      {
         Header: <FormattedMessage id="plazo"/>,
         accessor: 'plazo',
         Filter: SliderColumnFilter,
@@ -151,8 +145,26 @@ class Creditos extends Component {
         filter: 'includes',
       },
       {
+        Header: <FormattedMessage id="monto"/>,
+        accessor: 'monto',
+        Filter: SliderColumnFilter,
+        filter: filterGreaterThan
+      },
+      {
+        Header: <FormattedMessage id="creditos.interes_ordinario"/>,
+        accessor: 'deuda_al_dia.interes_ordinario',
+        Filter: SliderColumnFilter,
+        filter: filterGreaterThan
+      },
+      {
+        Header: <FormattedMessage id="creditos.interes_moratorio"/>,
+        accessor: 'deuda_al_dia.interes_moratorio',
+        Filter: SliderColumnFilter,
+        filter: filterGreaterThan
+      },
+      {
         Header: <FormattedMessage id="creditos.deuda_al_dia"/>,
-        accessor: 'deuda_al_dia',
+        accessor: 'deuda_al_dia.total',
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       }
