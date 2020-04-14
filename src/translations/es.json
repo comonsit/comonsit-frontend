@@ -233,7 +233,7 @@
   "plazo": "Plazo",
   "tasa": "Tasa",
   "estatus": "Estatus",
-  "creditos.estatus_ejecucion": "Estatus Ejecución",
+  "creditos.estatus_ejecucion": "Ejecución",
   "creditos.deuda_al_dia": "Deuda Total Hoy",
   "creditos.interes_ordinario": "Interés Ordinario",
   "creditos.interes_moratorio": "Interés Moratorio",
@@ -246,5 +246,12 @@
   "contratoDetail.especificaciones": "ESPECIFICACIONES DEL CRÉDITO",
   "contratoDetail.informacion": "INFORMACIÓN SOBRE EL PAGO DEL CRÉDITO",
   "contratoDetail.texto1": "(Firmando el presente PAGARÉ me comprometo a pagar en tiempo y forma el préstamo que COMON SIT CA'TELTIC me ha hecho).",
-  "contratoDetail.firma": "Nombre y firma del prestatario(a)"
+  "contratoDetail.firma": "Nombre y firma del prestatario(a)",
+  "creditos.condonacionButton": "Condonar Pago",
+  "creditos.prorrogaButton": "Prórroga",
+  "creditos.imprimirContratoButton": "Imprimir Contrato",
+  "creditos.iniciarContrato": "Activar Contrato",
+  "creditos.datosCobro": "Datos de Cobro",
+  "creditos.registrarPago": "Registrar Pago",
+  "creditos.fecha_vencimiento": "Vencimiento"
 }

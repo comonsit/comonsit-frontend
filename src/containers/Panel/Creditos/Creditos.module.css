@@ -31,3 +31,40 @@
 .DP {
   background-color: #868a86;
 }
+
+.ContentContainer {
+  display: flex;
+  align-items: center;
+}
+
+.StatusContainer {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.SubStatusContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.SubStatusContainer p {
+  margin: .4rem;
+}
+
+.StatusDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.ButtonGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.ButtonGroup button {
+  flex-grow: 1;
+}

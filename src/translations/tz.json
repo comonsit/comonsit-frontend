@@ -248,5 +248,12 @@
   "contratoDetail.especificaciones": "YA' QU'EL TA NA'EL MAJANBIL TAQU'IN",
   "contratoDetail.informacion": "SHUNAL YAQU'EL TA NA'EL TE STOJEL MAJAMBIL TAQU'IN",
   "contratoDetail.texto1": "Cac'oj  sme'  jc'ab ta shunal jchucaw hun majan taqu'in ya jc'uban jbah ta stojel ta  sc'ahc'alel bin ut'il chapal ay te majan taqu'in te ya'beyejon te COMON SIT CA'TELTIC",
-  "contratoDetail.firma": "Sme' sc'ab soc sbihil mach'a ya smajan te taqu'in"
+  "contratoDetail.firma": "Sme' sc'ab soc sbihil mach'a ya smajan te taqu'in",
+  "creditos.condonacionButton": "Condonar Taqu'in",
+  "creditos.prorrogaButton": "Prórroga",
+  "creditos.imprimirContratoButton": "Contrato Hun",
+  "creditos.iniciarContrato": "hahchel Contrato",
+  "creditos.datosCobro": "Taqu'in biluquetic",
+  "creditos.registrarPago": "Ts'ihbayel Pago",
+  "creditos.fecha_vencimiento": "Vencimiento"
 }

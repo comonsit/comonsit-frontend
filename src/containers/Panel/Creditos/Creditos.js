@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage, FormattedNumber, IntlProvider, FormattedDate} from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import ContratoDetail from './ContratoDetail/ContratoDetail';
 import Modal from '../../../components/UI/Modal/Modal';
+import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
@@ -56,16 +57,16 @@ class Creditos extends Component {
     });
   }
 
-  renderStatus = cellInfo => {
+  renderStatus = value => {
     const cellClasses= [classes.CellStatus]
-    cellClasses.push(classes[cellInfo.cell.value])
-    return (<div className={cellClasses.join(' ')}><FormattedMessage id={'creditos.status.'+cellInfo.cell.value}/></div>)
+    cellClasses.push(classes[value])
+    return (<div className={cellClasses.join(' ')}><FormattedMessage id={'creditos.status.'+value}/></div>)
  }
 
  renderStatusEj= cellInfo => {
    const colors = {
      "CO": "#2bc71b",
-     "PC": "#235ee4",
+     "PC": "#d1df2c",
      "CA": "#868a86"
    }
 
@@ -81,7 +82,7 @@ class Creditos extends Component {
   }
 
   render () {
-    let contrato = <Spinner/>
+    let contrato, contratoStatus = <Spinner/>
     const columns = [
       {
         Header: '#',
@@ -124,7 +125,7 @@ class Creditos extends Component {
       {
         Header: <FormattedMessage id="estatus"/>,
         accessor: 'estatus',
-        Cell: this.renderStatus,
+        Cell: (cellInfo) => this.renderStatus(cellInfo.cell.value),
         Filter: SelectColumnFilter,
         filter: 'equals'
       },
@@ -164,6 +165,23 @@ class Creditos extends Component {
     if (this.state.selectedContrato && !this.state.loading) {
       console.log(this.state.selectedContrato)
       contrato = <ContratoDetail contrato={this.state.selectedContrato}/>
+      const deuda = this.state.selectedContrato.deuda_al_dia ? (<p><FormattedMessage id="creditos.deuda_al_dia"/> <IntlProvider locale='en'><FormattedNumber value={this.state.selectedContrato.deuda_al_dia.total} style="currency" currency="USD"/></IntlProvider></p>) : null
+      contratoStatus = (<div className={classes.StatusContainer}>
+                          <div className={classes.SubStatusContainer}>
+                            {deuda}
+                            <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <IntlProvider locale='es'>
+                                <FormattedDate
+                                  value={this.state.selectedContrato.fecha_vencimiento}
+                                  day="numeric"
+                                  month="long"
+                                  year="numeric"/>
+                                </IntlProvider>
+                            </p>
+                          </div>
+                          <div className={classes.StatusDetail}>
+                           {this.renderStatus(this.state.selectedContrato.estatus_detail)}
+                         </div>
+                        </div>)
     }
 
     return (
@@ -172,9 +190,38 @@ class Creditos extends Component {
           show={this.state.showContratoModal}
           modalClosed={this.cancelSelected}>
           <div className={classes.Container}>
-            <div className={classes.InfoContainer}>
-              {contrato}
+            {contratoStatus}
+            <div className={classes.ContentContainer}>
+              <div className={classes.InfoContainer}>
+                {contrato}
+              </div>
+              <div className={classes.ButtonGroup}>
+                <Button
+                  clicked={() => {}}
+                  btnType="Success"
+                  ><FormattedMessage id="creditos.condonacionButton"/></Button>
+                <Button
+                  clicked={() => {}}
+                  btnType="Success"
+                  ><FormattedMessage id="creditos.prorrogaButton"/></Button>
+                <Button
+                  clicked={() => {}}
+                  btnType="Success"
+                  ><FormattedMessage id="creditos.imprimirContratoButton"/></Button>
+                <Button
+                  clicked={() => {}}
+                  btnType="Success"
+                  ><FormattedMessage id="creditos.iniciarContrato"/></Button>
+                <Button
+                  clicked={() => {}}
+                  btnType="Success"
+                  ><FormattedMessage id="creditos.datosCobro"/></Button>
+                <Button
+                  clicked={() => {}}
+                  btnType="Success"
+                  ><FormattedMessage id="creditos.registrarPago"/></Button>
             </div>
+          </div>
           </div>
         </Modal>
         <div className={classes.Container}>
