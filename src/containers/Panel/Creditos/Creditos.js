@@ -90,16 +90,20 @@ class Creditos extends Component {
         filter: ''
       },
       {
-        Header: <FormattedMessage id="creditos.fecha_inicio"/>,
-        accessor: 'fecha_inicio'
-      },
-      {
         Header: <FormattedMessage id="clave_socio"/>,
         accessor: 'clave_socio'
       },
       {
         Header: <FormattedMessage id="nombres"/>,
         accessor: 'nombres'
+      },
+      {
+        Header: <FormattedMessage id="region"/>,
+        accessor: 'region'
+      },
+      {
+        Header: <FormattedMessage id="creditos.fecha_inicio"/>,
+        accessor: 'fecha_inicio'
       },
       {
         Header: <FormattedMessage id="solicitudes.tipo_credito"/>,
