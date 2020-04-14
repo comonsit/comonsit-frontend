@@ -258,5 +258,19 @@
   "creditos.iniciarContrato": "Activar Contrato",
   "creditos.datosCobro": "Datos de Cobro",
   "creditos.registrarPago": "Registrar Pago",
-  "creditos.fecha_vencimiento": "Vencimiento"
+  "creditos.fecha_vencimiento": "Vencimiento",
+  "contratosXLSX": "Descargar contratos.xlsx",
+  "contratosXLSX.ALL": "Todos",
+  "contratosXLSX.FILTERED": "Con Deuda",
+  "contratosXLSX.1": "Región 1",
+  "contratosXLSX.2": "Región 2",
+  "contratosXLSX.3": "Región 3",
+  "contratosXLSX.4": "Región 4",
+  "contratosXLSX.5": "Región 5",
+  "contratosXLSX.6": "Región 6",
+  "contratosXLSX.7": "Región 7",
+  "contratosXLSX.8": "Región 8",
+  "contratosXLSX.9": "Región 9",
+  "contratosXLSX.10": "Región 10"
+
 }

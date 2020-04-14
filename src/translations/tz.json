@@ -260,5 +260,18 @@
   "creditos.iniciarContrato": "hahchel Contrato",
   "creditos.datosCobro": "Taqu'in biluquetic",
   "creditos.registrarPago": "Ts'ihbayel Pago",
-  "creditos.fecha_vencimiento": "Vencimiento"
+  "creditos.fecha_vencimiento": "Vencimiento",
+  "contratosXLSX": "Lehel contratos.xlsx",
+  "contratosXLSX.ALL": "sPisil",
+  "contratosXLSX.FILTERED": "soc sBet",
+  "contratosXLSX.1": "Region 1",
+  "contratosXLSX.2": "Region 2",
+  "contratosXLSX.3": "Region 3",
+  "contratosXLSX.4": "Region 4",
+  "contratosXLSX.5": "Region 5",
+  "contratosXLSX.6": "Region 6",
+  "contratosXLSX.7": "Region 7",
+  "contratosXLSX.8": "Region 8",
+  "contratosXLSX.9": "Region 9",
+  "contratosXLSX.10": "Region 10"
 }

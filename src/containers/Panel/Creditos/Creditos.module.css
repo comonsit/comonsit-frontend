@@ -10,6 +10,11 @@
   border: .1rem solid #243746;
 }
 
+.Table {
+  display: flex;
+  flex-direction: column;
+}
+
 .CellStatus {
   color: white;
   padding: .5rem .7rem;

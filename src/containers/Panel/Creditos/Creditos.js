@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FileSaver from 'file-saver';
 import {FormattedMessage, FormattedNumber, IntlProvider, FormattedDate} from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,6 +8,7 @@ import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import ContratoDetail from './ContratoDetail/ContratoDetail';
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
+import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/UI/RTable/RTable';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
@@ -15,6 +17,7 @@ import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreat
 import Title from '../../../components/UI/Title/Title';
 import classes from './Creditos.module.css'
 import * as actions from '../../../store/actions'
+import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'
 
 class Creditos extends Component {
@@ -26,6 +29,31 @@ class Creditos extends Component {
 
   componentDidMount () {
     this.props.onInitCreditos(this.props.token)
+  }
+
+  getXLSX = type => {
+    let query, name
+    if (type === 'ALL') {
+      query = '?all=true'
+      name = '_todos'
+    } else if (type === 'FILTERED') {
+      query = ''
+      name = '_ConDeuda'
+    } else {
+      query = '?region='+type
+      name = '_region_'+type
+    }
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+    axios.get('/contratosXLSX/' + query, authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, 'contratos'+name+'.xlsx')
+      })
+      .catch(error => {
+        // TODO:
+      })
   }
 
   showContrato = id => {
@@ -83,6 +111,7 @@ class Creditos extends Component {
 
   render () {
     let contrato, contratoStatus = <Spinner/>
+    let downloadXLSButton = null
     const columns = [
       {
         Header: '#',
@@ -184,6 +213,11 @@ class Creditos extends Component {
                         </div>)
     }
 
+    if (isGerencia(this.props.role)) {
+      const processList = ['FILTERED', 'ALL', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+      downloadXLSButton = <HoverButton title="contratosXLSX" items={processList} clicked={this.getXLSX}/>
+    }
+
     return (
       <>
         <Modal
@@ -228,11 +262,14 @@ class Creditos extends Component {
           <Title
             titleName="creditos.title">
           </Title>
-          <RTable
-            columns={columns}
-            data={this.props.listaCreditos}
-            onRowClick={(row) => this.showContrato(row.values.folio)}
-            />
+          <div className={classes.Table}>
+            {downloadXLSButton}
+            <RTable
+              columns={columns}
+              data={this.props.listaCreditos}
+              onRowClick={(row) => this.showContrato(row.values.folio)}
+              />
+        </div>
         </div>
       </>
     )
