@@ -1,0 +1,22 @@
+.Table {
+  min-width: 30rem;
+  font-family: 'Arquitecta';
+  color: #34495E;
+}
+
+.TableHead tr th {
+  border-top: 1px solid #34495E;
+  border-bottom: 1px solid #34495E;
+  padding: .5rem;
+}
+
+.Table td {
+  border-bottom: 1px solid #34495E;
+  padding: .5rem .8rem;
+  font-size: .9em;
+  text-align: center;
+}
+
+.Central {
+  background-color: #ccc;
+}
