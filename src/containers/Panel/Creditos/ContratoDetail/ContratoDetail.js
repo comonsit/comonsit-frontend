@@ -5,6 +5,7 @@ import { sayTseltal }from '@mauricioinaz/say-tseltal'
 
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import RTablePrint from '../../../../components/UI/RTablePrint/RTablePrint';
+import DebtGraph from '../../../../components/Graphs/DebtGraph/DebtGraph';
 
 const contratoDetail = props => {
 
@@ -106,9 +107,13 @@ const contratoDetail = props => {
           data={data}
           central={props.contrato.plazo-1}
         />
-        <p>----- gráfica -----</p>
-        <p>----- gráfica -----</p>
-        <p>----- gráfica -----</p>
+        <DebtGraph
+          labelTitle="contratoDetail.graphTitle"
+          labelIntereses="contratoDetail.interes"
+          labelPrestamo="contratoDetail.prestamo"
+          dataMonto={parseInt(props.contrato.monto)}
+          dataInteres={parseInt(props.contrato.intereses)}
+        />
       </div>
       <div className={classes.SubSection}>
         <p><FormattedMessage id="contratoDetail.texto1"/></p>
