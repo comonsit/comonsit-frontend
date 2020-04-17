@@ -1,9 +1,12 @@
 .Toolbar {
   position:fixed;
-  width: 60vw;
+  /* width: 60vw;
   max-width: 80%;
   height: 100%;
-  left: -60vw;
+  left: -60vw; */
+  width: 21rem;
+  height: 100vh;
+  left: -21rem;
   top: 0;
   z-index: 200;
   box-sizing: border-box;
@@ -28,7 +31,7 @@
 }
 
 .UserName a {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 .User h3 {
@@ -77,9 +80,21 @@
   padding:0 1rem;
 }
 
+.PLogo {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-left: .5rem;
+}
+
+.NavigationItemsContainer {
+  max-height: calc(100vh - 27rem);
+  overflow-y:scroll;
+}
+
 @media (min-width: 62em) {
   .Toolbar {
-    width: 20vw;
+    width: 21rem;
     left: 0;
   }
   .Border {
@@ -88,5 +103,8 @@
 
   .Burger {
     display: none;
+  }
+  .PLogo {
+    padding-left: 0;
   }
 }

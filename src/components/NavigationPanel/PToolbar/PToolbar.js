@@ -26,7 +26,7 @@ const ptoolbar = (props) =>{
           <NavLink onClick={props.closed} to="/logout"><FormattedMessage id="pmenu.logout"/></NavLink>
         </div>
 
-        <nav>
+        <nav className={classes.NavigationItemsContainer}>
           <PNavigationItems
             clicked={props.closed}
             />
