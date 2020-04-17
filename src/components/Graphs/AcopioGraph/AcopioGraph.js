@@ -19,7 +19,14 @@ const acopioGraph = (props) => {
     <div className={classes.Label}>
       <label><FormattedMessage id={props.label}/></label>
     </div>
-    <XYPlot yPadding={10} xType="ordinal"  width={400} height={200} className={classes.Graphs}>
+    <XYPlot
+      yPadding={10}
+      xType="ordinal"
+      width={400}
+      height={200}
+      className={classes.Graphs}
+      margin={{left: 75}}
+    >
       <VerticalGridLines />
       <HorizontalGridLines />
       <XAxis />
