@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classes from './ContratoDetail.module.css'
+import { sayTseltal }from '@mauricioinaz/say-tseltal'
 
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import RTablePrint from '../../../../components/UI/RTablePrint/RTablePrint';
-
 
 const contratoDetail = props => {
 
@@ -65,7 +65,7 @@ const contratoDetail = props => {
     element = {
       monto: props.contrato.monto,
       tasa: parseInt(props.contrato.tasa) + plazo_mor,
-      plazo: i,
+      plazo: i+' '+sayTseltal(i),
       interes: interes_ord,
       total: parseInt(props.contrato.monto) + interes_ord + interes_mor,
     }

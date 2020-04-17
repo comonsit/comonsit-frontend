@@ -1282,6 +1282,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@mauricioinaz/say-tseltal@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@mauricioinaz/say-tseltal/-/say-tseltal-1.2.2.tgz#e4378423c9a07900011e32c695f6f8c2257836a5"
+  integrity sha512-i+swBRsuA8VQWMWTX4QPLAMoGicRB0aehROqrT8UA4ybi9xhOhllJb0HxbtXd3Y0vdD/dQ5J9q0mBRPNsqdj2g==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
