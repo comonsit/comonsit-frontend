@@ -17,7 +17,24 @@ const pnavigationItems = props => (
         openedClassName={cl.AcordeonOpen}
         triggerClassName={cl.AcordeaonTrigger}
         triggerOpenedClassName={cl.AcordeaonTriggerOpen}
-        trigger="Cuentas">
+        trigger=<FormattedMessage id="pmenu.creditos"/>>
+        <div className={cl.NavigationItem} onClick={props.clicked}>
+          <NavLink to="/creditos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.creditos"/></NavLink>
+        </div>
+        <div className={cl.NavigationItem} onClick={props.clicked}>
+          <NavLink to="/pagos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.pagos"/></NavLink>
+        </div>
+        <div className={cl.NavigationItem} onClick={props.clicked}>
+          <NavLink to="/solicitudes" exact activeClassName={cl.active}><FormattedMessage id="pmenu.solicitudes"/></NavLink>
+        </div>
+      </Collapsible>
+      <Collapsible
+        transitionTime ={300}
+        className={cl.Acordeon}
+        openedClassName={cl.AcordeonOpen}
+        triggerClassName={cl.AcordeaonTrigger}
+        triggerOpenedClassName={cl.AcordeaonTriggerOpen}
+        trigger=<FormattedMessage id="pmenu.cuentas"/>>
         <div className={cl.NavigationItem} onClick={props.clicked}>
           <NavLink to="/bancos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.bancos"/></NavLink>
         </div>
@@ -34,22 +51,7 @@ const pnavigationItems = props => (
         openedClassName={cl.AcordeonOpen}
         triggerClassName={cl.AcordeaonTrigger}
         triggerOpenedClassName={cl.AcordeaonTriggerOpen}
-        trigger="Creditos">
-        <div className={cl.NavigationItem} onClick={props.clicked}>
-          <NavLink to="/creditos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.creditos"/></NavLink>
-        </div>
-
-        <div className={cl.NavigationItem} onClick={props.clicked}>
-          <NavLink to="/solicitudes" exact activeClassName={cl.active}><FormattedMessage id="pmenu.solicitudes"/></NavLink>
-        </div>
-      </Collapsible>
-      <Collapsible
-        transitionTime ={300}
-        className={cl.Acordeon}
-        openedClassName={cl.AcordeonOpen}
-        triggerClassName={cl.AcordeaonTrigger}
-        triggerOpenedClassName={cl.AcordeaonTriggerOpen}
-        trigger="Datos">
+        trigger=<FormattedMessage id="pmenu.datos"/>>
         <div className={cl.NavigationItem} onClick={props.clicked}>
           <NavLink to="/socios" exact activeClassName={cl.active}><FormattedMessage id="pmenu.socios"/></NavLink>
         </div>
@@ -62,7 +64,7 @@ const pnavigationItems = props => (
         className={cl.Acordeon}
         openedClassName={cl.AcordeonOpen}
         triggerClassName={cl.AcordeaonTrigger}
-        trigger="Reportes">
+        trigger=<FormattedMessage id="pmenu.reportes"/>>
         <div className={cl.NavigationItem} onClick={props.clicked}>
           <NavLink to="/reportes" exact activeClassName={cl.active}><FormattedMessage id="pmenu.reportes"/></NavLink>
         </div>
