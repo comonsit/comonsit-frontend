@@ -15,6 +15,7 @@ import Button from '../../../components/UI/Button/Button';
 import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import RTable from '../../../components/UI/RTable/RTable';
 import Title from '../../../components/UI/Title/Title';
+import Currency from '../../../components/UI/Formatting/Currency';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
@@ -189,6 +190,7 @@ class Acopios extends Component {
       {
         Header: <FormattedMessage id="ingreso"/>,
         accessor: 'ingreso',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },

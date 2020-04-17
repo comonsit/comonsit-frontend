@@ -15,6 +15,8 @@ import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColu
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
 import Title from '../../../components/UI/Title/Title';
+import Currency from '../../../components/UI/Formatting/Currency'
+import Percent from '../../../components/UI/Formatting/Percent'
 import classes from './Creditos.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
@@ -148,6 +150,7 @@ class Creditos extends Component {
       {
         Header: <FormattedMessage id="tasa"/>,
         accessor: 'tasa',
+        Cell: (cellInfo) => <Percent value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },
@@ -168,24 +171,28 @@ class Creditos extends Component {
       {
         Header: <FormattedMessage id="monto"/>,
         accessor: 'monto',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },
       {
         Header: <FormattedMessage id="creditos.interes_ordinario"/>,
         accessor: 'deuda_al_dia.interes_ordinario',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },
       {
         Header: <FormattedMessage id="creditos.interes_moratorio"/>,
         accessor: 'deuda_al_dia.interes_moratorio',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },
       {
         Header: <FormattedMessage id="creditos.deuda_al_dia"/>,
         accessor: 'deuda_al_dia.total',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       }

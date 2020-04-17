@@ -22,7 +22,8 @@ const contratoDetail = props => {
     return (<TextElement
               label={id}
               content={props.contrato[id]}
-              isNum={id === "monto" || id === "total"}
+              isNum={id === "monto" || id === "total" || id === "intereses"}
+              isPerc={id === "tasa"}
               />)
   })
 

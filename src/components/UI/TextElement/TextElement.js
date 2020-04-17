@@ -1,9 +1,17 @@
 import React from 'react'
 import classes from './TextElement.module.css'
-import {FormattedMessage, FormattedNumber, IntlProvider} from 'react-intl';
+import Currency from '../Formatting/Currency'
+import Percent from '../Formatting/Percent'
+import {FormattedMessage} from 'react-intl';
 
 const textElement = (props) => {
-  const cont = (props.isNum) ? (<IntlProvider locale='en'><FormattedNumber value={props.content} style="currency" currency="USD"/></IntlProvider>): props.content
+  let cont = props.content
+  if (props.isNum) {
+    cont = (<Currency value={props.content}/>)
+  } else if (props.isPerc) {
+    cont = (<Percent value={props.content}/>)
+  }
+
     return (
       <div key={props.label} className={classes.ContentContainer}>
         <div className={classes.Label}>

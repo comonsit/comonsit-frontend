@@ -9,6 +9,7 @@ import Input from '../../../components/UI/Input/Input';
 import RTable from '../../../components/UI/RTable/RTable';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
+import Currency from '../../../components/UI/Formatting/Currency';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
@@ -178,7 +179,8 @@ class Movimientos extends Component {
       },
       {
         Header: <FormattedMessage id="movimientos.monto"/>,
-        accessor: 'monto'
+        accessor: 'monto',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
       },
       {
         Header: <FormattedMessage id="movimientos.fecha_banco"/>,

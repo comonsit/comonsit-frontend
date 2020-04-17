@@ -14,6 +14,7 @@ import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColu
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
 import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
+import Currency from '../../../components/UI/Formatting/Currency';
 import classes from './Solicitudes.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
@@ -176,6 +177,7 @@ class Solicitudes extends Component {
       {
         Header: <FormattedMessage id="solicitudes.monto_solicitado"/>,
         accessor: 'monto_solicitado',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },
