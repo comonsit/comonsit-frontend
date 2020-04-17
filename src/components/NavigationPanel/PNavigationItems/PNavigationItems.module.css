@@ -22,6 +22,10 @@
   color: white;
 }
 
+.NavigationItemHome a {
+  padding: .4rem 1rem;
+}
+
 .NavigationItem a:hover {
   font-weight: bold;
 }
@@ -34,7 +38,6 @@
   background-color: gray;
   border-left: .8rem solid #BBC392;
 }
-
 
 @media (min-width: 62em) {
   .NavigationItems {
