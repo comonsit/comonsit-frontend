@@ -241,7 +241,7 @@
   "creditos.title": "Contratos de Crédito",
   "creditos.fecha_inicio": "Fecha Inicio",
   "monto": "Monto",
-  "plazo": "Plazo",
+  "plazo": "Plazo Meses",
   "tasa": "Tasa",
   "estatus": "Estatus",
   "creditos.estatus_ejecucion": "Ejecución",

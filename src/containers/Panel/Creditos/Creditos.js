@@ -138,10 +138,6 @@ class Creditos extends Component {
         accessor: 'fecha_inicio'
       },
       {
-        Header: <FormattedMessage id="solicitudes.tipo_credito"/>,
-        accessor: "tipo_credito"
-      },
-      {
         Header: <FormattedMessage id="plazo"/>,
         accessor: 'plazo',
         Filter: SliderColumnFilter,
