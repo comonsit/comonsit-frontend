@@ -120,8 +120,12 @@ class Creditos extends Component {
         accessor: 'fecha_inicio'
       },
       {
+        Header: <FormattedMessage id="creditos.fecha_vencimiento"/>,
+        accessor: 'fecha_vencimiento'
+      },
+      {
         Header: <FormattedMessage id="plazo"/>,
-        accessor: 'plazo',
+        accessor: 'plazo_disp',
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },
@@ -163,6 +167,13 @@ class Creditos extends Component {
       {
         Header: <FormattedMessage id="creditos.interes_moratorio"/>,
         accessor: 'deuda_al_dia.interes_moratorio',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+        Filter: SliderColumnFilter,
+        filter: filterGreaterThan
+      },
+      {
+        Header: <FormattedMessage id="creditos.pagado"/>,
+        accessor: 'pagado',
         Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
