@@ -93,24 +93,6 @@ class Creditos extends Component {
     return (<div className={cellClasses.join(' ')}><FormattedMessage id={'creditos.status.'+value}/></div>)
  }
 
- renderStatusEj= cellInfo => {
-   const colors = {
-     "CO": "#2bc71b",
-     "PC": "#d1df2c",
-     "CA": "#868a86"
-   }
-
-    return (
-      <div
-       style={{
-         borderRadius: "2rem",
-         width: "2rem",
-         height: "2rem",
-         backgroundColor: colors[cellInfo.cell.value] }}
-      />
-    )
-  }
-
   render () {
     let contrato, contratoStatus = <Spinner/>
     let downloadXLSButton = null
@@ -160,7 +142,7 @@ class Creditos extends Component {
       {
         Header: <FormattedMessage id="creditos.estatus_ejecucion"/>,
         accessor: 'estatus_ejecucion',
-        Cell: this.renderStatusEj,
+        Cell: (cellInfo) => this.renderStatus(cellInfo.cell.value),
         Filter: SelectColumnFilter,
         filter: 'includes',
       },

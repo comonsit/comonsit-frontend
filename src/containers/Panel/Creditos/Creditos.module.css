@@ -37,6 +37,18 @@
   background-color: #868a86;
 }
 
+.CO {
+  background-color: #2bc71b;
+}
+
+.PC {
+  background-color: #d1df2c;
+}
+
+.CA {
+  background-color: #868a86;
+}
+
 .ContentContainer {
   display: flex;
   align-items: center;
