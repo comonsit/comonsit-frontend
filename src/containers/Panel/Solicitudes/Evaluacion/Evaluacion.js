@@ -68,9 +68,28 @@ class Evaluacion extends Component {
             max: '100',
             min: '1',
             step: '.0001',
-            placeholder: '__%'
+            placeholder: '4.00%'
           },
           label:  (<><FormattedMessage id="evaluacion.tasa_aprobada"/>*</>),
+          value: null,
+          validation: {
+            required: true,
+            isDecimalExact: true
+          },
+          valid: false,
+          touched: false,
+          hide: false
+        },
+        tasa_mor_aprobada: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'number',
+            max: '100',
+            min: '1',
+            step: '.0001',
+            placeholder: '1.00%'
+          },
+          label:  (<><FormattedMessage id="evaluacion.tasa_mor_aprobada"/>*</>),
           value: null,
           validation: {
             required: true,
@@ -206,7 +225,7 @@ class Evaluacion extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const evaluacionFormOrder = ["monto_aprobado", "plazo_aprobado", "tasa_aprobada", "comentarios_gerente"]
+    const evaluacionFormOrder = ["monto_aprobado", "plazo_aprobado", "tasa_aprobada", "tasa_mor_aprobada", "comentarios_gerente"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements, solicitudInfo = <Spinner/>
