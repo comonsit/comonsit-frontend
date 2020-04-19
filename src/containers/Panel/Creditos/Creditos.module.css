@@ -85,3 +85,19 @@
 .ButtonGroup button {
   flex-grow: 1;
 }
+
+.XLSContainer {
+  display: inline-flex;
+  align-items: center;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  padding: 0 1rem;
+}
+
+.XLSContainer > * {
+  margin-right: 1rem;
+}
+
+.XLSContainer > p {
+  font-size: .7em;
+}

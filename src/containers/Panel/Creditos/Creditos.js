@@ -14,6 +14,7 @@ import RTable from '../../../components/UI/RTable/RTable';
 import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
+import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency'
 import Percent from '../../../components/UI/Formatting/Percent'
@@ -26,7 +27,8 @@ class Creditos extends Component {
   state = {
     showContratoModal: false,
     selectedContrato: null,
-    loading: false
+    loading: false,
+    oldCreditos: false
   }
 
   componentDidMount () {
@@ -34,24 +36,30 @@ class Creditos extends Component {
   }
 
   getXLSX = type => {
-    let query, name
-    if (type === 'ALL') {
+    let query, name, nameFilt
+    if (this.state.oldCreditos) {
       query = '?all=true'
-      name = '_todos'
-    } else if (type === 'FILTERED') {
-      query = ''
-      name = '_ConDeuda'
+      nameFilt = '_todos'
     } else {
-      query = '?region='+type
+      query = ''
+      nameFilt = '_conDeuda'
+    }
+
+    if (type === 'ALL') {
+      query = query + ''
+      name = ''
+    } else {
+      query = query +'&?region='+type
       name = '_region_'+type
     }
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` },
       responseType: 'blob',
     }
+
     axios.get('/contratosXLSX/' + query, authData)
       .then(response => {
-        FileSaver.saveAs(response.data, 'contratos'+name+'.xlsx')
+        FileSaver.saveAs(response.data, 'contratos'+name+nameFilt+'.xlsx')
       })
       .catch(error => {
         // TODO:
@@ -210,8 +218,17 @@ class Creditos extends Component {
     }
 
     if (isGerencia(this.props.role)) {
-      const processList = ['FILTERED', 'ALL', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-      downloadXLSButton = <HoverButton title="contratosXLSX" items={processList} clicked={this.getXLSX}/>
+      const processList = ['ALL', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+      const oldCreditsMessId = this.state.oldCreditos ? 'creditos.allCreditsTrue' : 'creditos.allCreditsFalse'
+      downloadXLSButton = (
+        <div>
+          <div className={classes.XLSContainer}>
+            <HoverButton title="contratosXLSX" items={processList} clicked={this.getXLSX}/>
+            <SwitchToggle clicked={() => this.setState(({oldCreditos: !this.state.oldCreditos}))}/>
+            <p><FormattedMessage id={oldCreditsMessId}/></p>
+          </div>
+        </div>
+      )
     }
 
     return (
