@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination } from 'react-table'
 import classes from './RTable.module.css'
+import SwitchToggle from '../SwitchToggle/SwitchToggle'
 import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
 import DefaultColumnFilter from './Filters/DefaultColumnFilter'
@@ -88,10 +89,7 @@ const RTable = ({ columns, data, onRowClick}) => {
               </th>
               <th
                 colSpan="0">
-                <label className={classes.Switch}>
-                  <input type="checkbox" onChange={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
-                  <span className={classes.RoundSlider}></span>
-                </label>
+                <SwitchToggle clicked={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
               </th>
             </tr>
             {headerGroups.map(headerGroup => (
