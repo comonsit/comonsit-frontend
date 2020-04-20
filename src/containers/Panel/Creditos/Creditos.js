@@ -18,6 +18,7 @@ import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency'
 import Percent from '../../../components/UI/Formatting/Percent'
+import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate'
 import classes from './Creditos.module.css'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
@@ -202,14 +203,7 @@ class Creditos extends Component {
       contratoStatus = (<div className={classes.StatusContainer}>
                           <div className={classes.SubStatusContainer}>
                             {deuda}
-                            <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <IntlProvider locale='es'>
-                                <FormattedDate
-                                  value={this.state.selectedContrato.fecha_vencimiento}
-                                  day="numeric"
-                                  month="long"
-                                  year="numeric"/>
-                                </IntlProvider>
-                            </p>
+                            <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <FrmtedDate value={this.state.selectedContrato.fecha_vencimiento}/></p>
                           </div>
                           <div className={classes.StatusDetail}>
                            {this.renderStatus(this.state.selectedContrato.estatus_detail)}
