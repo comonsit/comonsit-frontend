@@ -146,6 +146,13 @@ class Creditos extends Component {
         filter: filterGreaterThan
       },
       {
+        Header: <FormattedMessage id="tasa_moratoria"/>,
+        accessor: 'tasa_moratoria',
+        Cell: (cellInfo) => <Percent value={cellInfo.cell.value}/>,
+        Filter: SliderColumnFilter,
+        filter: filterGreaterThan
+      },
+      {
         Header: <FormattedMessage id="estatus"/>,
         accessor: 'estatus',
         Cell: (cellInfo) => this.renderStatus(cellInfo.cell.value),

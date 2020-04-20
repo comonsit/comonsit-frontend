@@ -245,6 +245,7 @@
   "monto": "Monto",
   "plazo": "Plazo Meses",
   "tasa": "Tasa",
+  "tasa_moratoria": "Tasa Moratoria",
   "estatus": "Estatus",
   "creditos.estatus_ejecucion": "Ejecución",
   "creditos.deuda_al_dia": "Deuda Total Hoy",
