@@ -29,7 +29,8 @@ class Creditos extends Component {
     showContratoModal: false,
     selectedContrato: null,
     loading: false,
-    oldCreditos: false
+    oldCreditos: false,
+    selectedContratoPagos: null
   }
 
   componentDidMount () {
@@ -87,12 +88,22 @@ class Creditos extends Component {
       .catch(error => {
         // alert('ALGO FALLÓ!')
       })
+    axios.get('/contratos/' + id + '/pagos/', authData)
+      .then(response => {
+        this.setState({
+          selectedContratoPagos: response.data
+        });
+      })
+      .catch(error => {
+        // alert('ALGO FALLÓ!')
+      })
   }
 
   cancelSelected =() => {
     this.setState({
       showContratoModal: false,
-      selectedContrato: null
+      selectedContrato: null,
+      selectedContratoPagos: null
     });
   }
 
@@ -103,12 +114,12 @@ class Creditos extends Component {
  }
 
   render () {
-    let contrato, contratoStatus = <Spinner/>
-    let downloadXLSButton, actionButtons, gerenteButtons = null
+    let contrato, contratoStatus, pagos = <Spinner/>
+    let downloadXLSButton, actionButtons, gerenteButtons, totalPago = null
     const columns = [
       {
         Header: '#',
-        accessor: 'folio',
+        accessor: 'id',
         Filter: '',
         filter: ''
       },
@@ -205,6 +216,7 @@ class Creditos extends Component {
 
     if (this.state.selectedContrato && !this.state.loading) {
       console.log(this.state.selectedContrato)
+      totalPago = <p><FormattedMessage id="creditos.pagado"/>: <Currency value={this.state.selectedContrato.pagado}/></p>
       contrato = <ContratoDetail contrato={this.state.selectedContrato}/>
       const deuda = this.state.selectedContrato.deuda_al_dia ? this.state.selectedContrato.deuda_al_dia.total : null
       const inicio = (isNaN(this.state.selectedContrato.fecha_inicio) && !isNaN(Date.parse(this.state.selectedContrato.fecha_inicio))) ? new Date(this.state.selectedContrato.fecha_inicio) : null
@@ -226,7 +238,6 @@ class Creditos extends Component {
                           <div className={classes.StatusDataContainer}>
                             <p><FormattedMessage id="creditos.deuda_al_dia"/>: <Currency value={deuda}/></p>
                             <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <FrmtedDate value={this.state.selectedContrato.fecha_vencimiento}/></p>
-                            <p><FormattedMessage id="creditos.pagado"/>: <Currency value={this.state.selectedContrato.pagado}/></p>
                           </div>
                           <div className={classes.StatusDataContainer}>
                             <p><FormattedMessage id="creditos.vida_credito"/>: {vida_credito}</p>
@@ -238,6 +249,17 @@ class Creditos extends Component {
                            {this.renderStatus(this.state.selectedContrato.estatus_ejecucion)}
                          </div>
                         </div>)
+    }
+
+    if (this.state.selectedContratoPagos) {
+      // TODO: cambiar por un PagosList
+      pagos = this.state.selectedContratoPagos.map(pago => {
+        return (
+          <div key={pago.id}>
+            <p>{pago.id} - fecha: {pago.fecha_pago} - cantidad: {pago.cantidad}</p>
+          </div>
+        )
+      })
     }
 
     if (isGerencia(this.props.role)) {
@@ -252,12 +274,10 @@ class Creditos extends Component {
           </div>
         </div>)
       actionButtons = (
-        <>
           <Button
             clicked={() => {}}
             btnType="Success"
             ><FormattedMessage id="creditos.iniciarContrato"/></Button>
-        </>
       )
     }
 
@@ -296,8 +316,10 @@ class Creditos extends Component {
                   ><FormattedMessage id="creditos.registrarPago"/></Button>
                 {actionButtons}
                 {gerenteButtons}
+              </div>
             </div>
-          </div>
+            {totalPago}
+            {pagos}
           </div>
         </Modal>
         <div className={classes.Container}>
@@ -309,7 +331,7 @@ class Creditos extends Component {
             <RTable
               columns={columns}
               data={this.props.listaCreditos}
-              onRowClick={(row) => this.showContrato(row.values.folio)}
+              onRowClick={(row) => this.showContrato(row.values.id)}
               />
         </div>
         </div>

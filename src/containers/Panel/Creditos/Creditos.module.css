@@ -5,7 +5,7 @@
 }
 
 .InfoContainer {
-  height: 70vh;
+  height: 50vh;
   overflow-y:scroll;
   border: .1rem solid #243746;
 }
