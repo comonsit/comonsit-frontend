@@ -1,0 +1,49 @@
+.Container {
+  background-color: #f6fcf9;
+  padding: 2rem;
+  border-radius: .5rem;
+}
+
+.InfoContainer {
+  height: 50vh;
+  overflow-y:scroll;
+  border: .1rem solid #243746;
+}
+
+.ContentContainer {
+  display: flex;
+  align-items: center;
+}
+
+.StatusContainer {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.StatusDataContainer {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.StatusDataContainer p {
+  margin: .4rem;
+}
+
+.StatusDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.ButtonGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.ButtonGroup button {
+  flex-grow: 1;
+}

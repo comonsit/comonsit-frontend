@@ -24,3 +24,32 @@ export const initCreditos = (token) => {
       })
   }
 }
+
+export const fetchSelContrato = (token, id) => {
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    axios.get(`/contratos/${id}.json`, authData)
+      .then(response => {
+        dispatch(setSelContrato(response.data))
+      })
+      .catch(error => {
+        // TODO: FALTA!!
+        //dispatch(fetchFailed())
+      })
+  }
+}
+
+export const setSelContrato = selectedContrato => {
+  return {
+    type: actionTypes.SET_SEL_CONTRATO,
+    selectedContrato: selectedContrato
+  }
+}
+
+export const unSelectContrato = () => {
+  return {
+    type: actionTypes.UNSELECT_CONTRATO
+  }
+}

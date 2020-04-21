@@ -26,7 +26,9 @@ export {
 } from './acopios'
 
 export {
-  initCreditos
+  initCreditos,
+  fetchSelContrato,
+  unSelectContrato
 } from './creditos'
 
 export {
