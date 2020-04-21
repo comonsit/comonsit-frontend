@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import classes from './ContratoDetail.module.css'
 import { sayTseltal }from '@mauricioinaz/say-tseltal'
 
+import Currency from '../../../../components/UI/Formatting/Currency'
+import Percent from '../../../../components/UI/Formatting/Percent'
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import RTablePrint from '../../../../components/UI/RTablePrint/RTablePrint';
 import DebtGraph from '../../../../components/Graphs/DebtGraph/DebtGraph';
@@ -17,13 +19,13 @@ const contratoDetail = props => {
               />)
   })
 
-  const items2 = ["monto", "tipo_credito", "plazo", "intereses", "tasa", "total"]
+  const items2 = ["monto", "tipo_credito", "plazo", "intereses", "tasa", "tasa_moratoria", "total"]
   const items2Array = items2.map(id => {
     return (<TextElement
               label={id}
               content={props.contrato[id]}
               isNum={id === "monto" || id === "total" || id === "intereses"}
-              isPerc={id === "tasa"}
+              isPerc={id === "tasa" || id === "tasa_moratoria"}
               />)
   })
 
@@ -35,18 +37,22 @@ const contratoDetail = props => {
           {
             Header: "Smajanel (Préstamo)",
             accessor: 'monto',
+            Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
           },
           {
             Header: "Bin sjol smajanel te taqu'in ta jun jun uh (Interés Mensual)",
             accessor: 'tasa',
+            Cell: (cellInfo) => <Percent value={cellInfo.cell.value}/>,
           },
           {
             Header: "Stojel sjol taqu'in (Intereses)",
             accessor: 'interes',
+            Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
           },
           {
             Header: "Stojel spisil majanbil taqu'in (Total a Pagar)",
             accessor: 'total',
+            Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
           },
         ]
 
@@ -57,18 +63,17 @@ const contratoDetail = props => {
   for (let i=1; i<= props.contrato.plazo*2; i++) {
     interes_ord = props.contrato.monto*(props.contrato.tasa/100)*i
     if (i>props.contrato.plazo) {
-      plazo_mor = 1
-      interes_mor = props.contrato.monto*(props.contrato.tasa/100)*i
+      plazo_mor = parseInt(props.contrato.tasa_moratoria)
+      interes_mor = props.contrato.monto*(plazo_mor/100)*(i-props.contrato.plazo)
     } else {
       plazo_mor = 0
       interes_mor = 0
     }
-    interes_mor = i>props.contrato.plazo ?  props.contrato.monto*(props.contrato.tasa/100)*i : 0
     element = {
       monto: props.contrato.monto,
       tasa: parseInt(props.contrato.tasa) + plazo_mor,
       plazo: i+' '+sayTseltal(i),
-      interes: interes_ord,
+      interes: interes_ord + interes_mor,
       total: parseInt(props.contrato.monto) + interes_ord + interes_mor,
     }
     data.push(element)
