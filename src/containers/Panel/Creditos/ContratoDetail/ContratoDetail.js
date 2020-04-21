@@ -11,7 +11,7 @@ import DebtGraph from '../../../../components/Graphs/DebtGraph/DebtGraph';
 
 const contratoDetail = props => {
 
-  const items1 = ["folio", "fecha_inicio", "clave_socio", "nombres", "comunidad", "region", "proceso"]
+  const items1 = ["id", "fecha_inicio", "clave_socio", "nombres", "comunidad", "region", "proceso"]
   const items1Array = items1.map(id => {
     return (<TextElement
               label={id}
