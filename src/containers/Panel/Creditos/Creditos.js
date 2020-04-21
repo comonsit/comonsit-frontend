@@ -206,11 +206,32 @@ class Creditos extends Component {
     if (this.state.selectedContrato && !this.state.loading) {
       console.log(this.state.selectedContrato)
       contrato = <ContratoDetail contrato={this.state.selectedContrato}/>
-      const deuda = this.state.selectedContrato.deuda_al_dia ? (<p><FormattedMessage id="creditos.deuda_al_dia"/> <IntlProvider locale='en'><FormattedNumber value={this.state.selectedContrato.deuda_al_dia.total} style="currency" currency="USD"/></IntlProvider></p>) : null
+      const deuda = this.state.selectedContrato.deuda_al_dia ? this.state.selectedContrato.deuda_al_dia.total : null
+      const inicio = (isNaN(this.state.selectedContrato.fecha_inicio) && !isNaN(Date.parse(this.state.selectedContrato.fecha_inicio))) ? new Date(this.state.selectedContrato.fecha_inicio) : null
+      const vencimiento = (isNaN(this.state.selectedContrato.fecha_vencimiento) && !isNaN(Date.parse(this.state.selectedContrato.fecha_vencimiento))) ? new Date(this.state.selectedContrato.fecha_vencimiento) : null
+      let cartera_vigente, cartera_vencida, vida_credito
+      if (inicio && vencimiento) {
+        const today = new Date()
+        const oneDay = 24 * 60 * 60 * 1000;
+        vida_credito = Math.round(Math.abs((today - inicio) / oneDay));
+        if (today > vencimiento) {
+          cartera_vencida = Math.round(Math.abs((vencimiento - today) / oneDay));
+          cartera_vigente = vida_credito - cartera_vencida
+        } else {
+          cartera_vencida = vida_credito
+          cartera_vigente = 0
+        }
+      }
       contratoStatus = (<div className={classes.StatusContainer}>
-                          <div className={classes.SubStatusContainer}>
-                            {deuda}
+                          <div className={classes.StatusDataContainer}>
+                            <p><FormattedMessage id="creditos.deuda_al_dia"/>: <Currency value={deuda}/></p>
                             <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <FrmtedDate value={this.state.selectedContrato.fecha_vencimiento}/></p>
+                            <p><FormattedMessage id="creditos.pagado"/>: <Currency value={this.state.selectedContrato.pagado}/></p>
+                          </div>
+                          <div className={classes.StatusDataContainer}>
+                            <p><FormattedMessage id="creditos.vida_credito"/>: {vida_credito}</p>
+                            <p><FormattedMessage id="creditos.cartera_vigente"/>: {cartera_vigente}</p>
+                            <p><FormattedMessage id="creditos.cartera_vencida"/>: {cartera_vencida}</p>
                           </div>
                           <div className={classes.StatusDetail}>
                            {this.renderStatus(this.state.selectedContrato.estatus_detail)}
