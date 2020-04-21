@@ -235,6 +235,7 @@ class Creditos extends Component {
                           </div>
                           <div className={classes.StatusDetail}>
                            {this.renderStatus(this.state.selectedContrato.estatus_detail)}
+                           {this.renderStatus(this.state.selectedContrato.estatus_ejecucion)}
                          </div>
                         </div>)
     }
