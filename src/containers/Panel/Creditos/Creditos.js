@@ -104,7 +104,7 @@ class Creditos extends Component {
 
   render () {
     let contrato, contratoStatus = <Spinner/>
-    let downloadXLSButton = null
+    let downloadXLSButton, actionButtons, gerenteButtons = null
     const columns = [
       {
         Header: '#',
@@ -249,7 +249,31 @@ class Creditos extends Component {
             <SwitchToggle clicked={() => this.setState(({oldCreditos: !this.state.oldCreditos}))}/>
             <p><FormattedMessage id={oldCreditsMessId}/></p>
           </div>
-        </div>
+        </div>)
+      actionButtons = (
+        <>
+          <Button
+            clicked={() => {}}
+            btnType="Success"
+            ><FormattedMessage id="creditos.iniciarContrato"/></Button>
+        </>
+      )
+    }
+
+    if (this.props.role === 'Gerente') {
+      gerenteButtons = (
+        <>
+          <Button
+            disabled
+            clicked={() => {}}
+            btnType="Success"
+            ><FormattedMessage id="creditos.condonacionButton"/></Button>
+          <Button
+            disabled
+            clicked={() => {}}
+            btnType="Success"
+            ><FormattedMessage id="creditos.prorrogaButton"/></Button>
+        </>
       )
     }
 
@@ -268,27 +292,9 @@ class Creditos extends Component {
                 <Button
                   clicked={() => {}}
                   btnType="Success"
-                  ><FormattedMessage id="creditos.condonacionButton"/></Button>
-                <Button
-                  clicked={() => {}}
-                  btnType="Success"
-                  ><FormattedMessage id="creditos.prorrogaButton"/></Button>
-                <Button
-                  clicked={() => {}}
-                  btnType="Success"
-                  ><FormattedMessage id="creditos.imprimirContratoButton"/></Button>
-                <Button
-                  clicked={() => {}}
-                  btnType="Success"
-                  ><FormattedMessage id="creditos.iniciarContrato"/></Button>
-                <Button
-                  clicked={() => {}}
-                  btnType="Success"
-                  ><FormattedMessage id="creditos.datosCobro"/></Button>
-                <Button
-                  clicked={() => {}}
-                  btnType="Success"
                   ><FormattedMessage id="creditos.registrarPago"/></Button>
+                {actionButtons}
+                {gerenteButtons}
             </div>
           </div>
           </div>
