@@ -13,12 +13,12 @@ import AcopioGraph from '../../../components/Graphs/AcopioGraph/AcopioGraph';
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import HoverButton from '../../../components/UI/HoverButton/HoverButton';
-import RTable from '../../../components/UI/RTable/RTable';
+import RTable from '../../../components/Tables/RTable/RTable';
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency';
-import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
-import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
-import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
+import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
+import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
+import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterGreaterThan';
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'

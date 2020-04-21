@@ -1,7 +1,7 @@
 import React from 'react'
 import {FormattedMessage} from 'react-intl';
-import RTable from '../../../../components/UI/RTable/RTable';
-import SelectColumnFilter from '../../../../components/UI/RTable/Filters/SelectColumnFilter';
+import RTable from '../../../../components/Tables/RTable/RTable';
+import SelectColumnFilter from '../../../../components/Tables/RTable/Filters/SelectColumnFilter';
 
 const sociosList = (props) => {
 

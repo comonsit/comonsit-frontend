@@ -6,14 +6,14 @@ import { connect } from 'react-redux';
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
-import RTable from '../../../components/UI/RTable/RTable';
+import RTable from '../../../components/Tables/RTable/RTable';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
-import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
+import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 

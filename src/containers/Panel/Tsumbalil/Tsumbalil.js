@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import ComunidadForm from './ComunidadForm/ComunidadForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import RTable from '../../../components/UI/RTable/RTable';
-import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
+import RTable from '../../../components/Tables/RTable/RTable';
+import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
 import classes from './Tsumbalil.module.css'

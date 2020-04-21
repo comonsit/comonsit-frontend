@@ -1,13 +1,13 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
 
-import RTable from '../../../../components/UI/RTable/RTable';
+import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
 import Percent from '../../../../components/UI/Formatting/Percent'
 import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus';
-import SelectColumnFilter from '../../../../components/UI/RTable/Filters/SelectColumnFilter';
-import SliderColumnFilter from '../../../../components/UI/RTable/Filters/SliderColumnFilter';
-import filterGreaterThan from '../../../../components/UI/RTable/Filters/FilterGreaterThan';
+import SelectColumnFilter from '../../../../components/Tables/RTable/Filters/SelectColumnFilter';
+import SliderColumnFilter from '../../../../components/Tables/RTable/Filters/SliderColumnFilter';
+import filterGreaterThan from '../../../../components/Tables/RTable/Filters/FilterGreaterThan';
 
 
 const creditoList = (props) => {

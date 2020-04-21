@@ -7,11 +7,11 @@ import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import SolicitudDetail from './SolicitudDetail/SolicitudDetail';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import RTable from '../../../components/UI/RTable/RTable';
+import RTable from '../../../components/Tables/RTable/RTable';
 import Input from '../../../components/UI/Input/Input';
-import SelectColumnFilter from '../../../components/UI/RTable/Filters/SelectColumnFilter';
-import SliderColumnFilter from '../../../components/UI/RTable/Filters/SliderColumnFilter';
-import filterGreaterThan from '../../../components/UI/RTable/Filters/FilterGreaterThan';
+import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
+import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
+import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterGreaterThan';
 import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency';

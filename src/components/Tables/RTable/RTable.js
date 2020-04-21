@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination } from 'react-table'
 import classes from './RTable.module.css'
-import SwitchToggle from '../SwitchToggle/SwitchToggle'
+import SwitchToggle from '../../UI/SwitchToggle/SwitchToggle'
 import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
 import DefaultColumnFilter from './Filters/DefaultColumnFilter'

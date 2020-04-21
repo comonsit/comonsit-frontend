@@ -6,7 +6,7 @@ import { sayTseltal }from '@mauricioinaz/say-tseltal'
 import Currency from '../../../../components/UI/Formatting/Currency'
 import Percent from '../../../../components/UI/Formatting/Percent'
 import TextElement from '../../../../components/UI/TextElement/TextElement';
-import RTablePrint from '../../../../components/UI/RTablePrint/RTablePrint';
+import RTablePrint from '../../../../components/Tables/RTablePrint/RTablePrint';
 import DebtGraph from '../../../../components/Graphs/DebtGraph/DebtGraph';
 
 const contratoDetail = props => {
