@@ -4,6 +4,7 @@ import classes from './ContratoActions.module.css'
 
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
 import Button from '../../../../components/UI/Button/Button'
+import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus'
 import Currency from '../../../../components/UI/Formatting/Currency'
 import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate'
 import { isGerencia } from '../../../../store/roles'
@@ -78,8 +79,8 @@ const contratoActions = props => {
         <p><FormattedMessage id="creditos.cartera_vencida"/>: {cartera_vencida}</p>
       </div>
       <div className={classes.StatusDetail}>
-      {props.statusDetail}
-      {props.statusEx}
+        <RenderStatus value={props.selContrato.estatus_detail} idLabel={"creditos.status."}/>
+        <RenderStatus value={props.selContrato.estatus_ejecucion} idLabel={"creditos.status."}/>
      </div>
     </div>
     <div className={classes.ContentContainer}>

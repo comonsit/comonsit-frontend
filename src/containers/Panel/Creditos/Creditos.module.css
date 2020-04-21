@@ -9,40 +9,6 @@
   flex-direction: column;
 }
 
-.CellStatus {
-  color: white;
-  padding: .5rem .7rem;
-  border-radius: .3rem;
-}
-
-.PA {
-  background-color: #235ee4;
-}
-
-.VE {
-  background-color: #c23f3f;
-}
-
-.VI {
-  background-color: #2bc71b;
-}
-
-.DP {
-  background-color: #868a86;
-}
-
-.CO {
-  background-color: #2bc71b;
-}
-
-.PC {
-  background-color: #d1df2c;
-}
-
-.CA {
-  background-color: #868a86;
-}
-
 .XLSContainer {
   display: inline-flex;
   align-items: center;
