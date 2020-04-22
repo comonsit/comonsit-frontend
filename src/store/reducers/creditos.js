@@ -21,7 +21,24 @@ const setSelContrato = (state, action) => {
 const unSelContrato = (state) => {
   return updateObject(state, {
     selectedContrato: null,
+    loading: false,
+    updated: false,
   })
+}
+
+const updateCreditoStart = (state) => {
+  return updateObject(state, {loading: true})
+}
+
+const updateCreditoSuccess = (state) => {
+  return updateObject(state, {
+    loading: false,
+    updated: true
+  })
+}
+
+const updateCreditoFailed = (state) => {
+  return updateObject(state, {loading: false})
 }
 
 const reducer = (state=initialState, action) => {
@@ -29,6 +46,9 @@ const reducer = (state=initialState, action) => {
     case actionTypes.SET_CREDITOS: return setCreditos(state, action)
     case actionTypes.SET_SEL_CONTRATO: return setSelContrato(state, action)
     case actionTypes.UNSELECT_CONTRATO: return unSelContrato(state)
+    case actionTypes.UPDATE_CREDITO_START: return updateCreditoStart(state)
+    case actionTypes.UPDATE_CREDITO_SUCCESS: return updateCreditoSuccess(state)
+    case actionTypes.UPDATE_CREDITO_FAILED: return updateCreditoFailed(state)
     default:
       return state
   }

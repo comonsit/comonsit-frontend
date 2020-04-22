@@ -53,3 +53,43 @@ export const unSelectContrato = () => {
     type: actionTypes.UNSELECT_CONTRATO
   }
 }
+
+export const updateCredito = (creditoData, id, token) => {
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    console.log('EL TOKEN ES--->>>>')
+    console.log(token)
+    dispatch(updateCreditoStart())
+    axios.patch(`/contratos/${id}.json`, creditoData, authData)
+      .then(response => {
+        dispatch(updateCreditoSuccess(response.data.name, creditoData ))
+        alert('Credito ' + response.data.id + ' actualizado correctamente')
+      })
+      .catch(error => {
+        dispatch(updateCreditoFailed(error))
+        console.log('update crédito ERROR')
+        console.log(error)
+      })
+  }
+}
+
+export const updateCreditoSuccess = () => {
+  return {
+    type: actionTypes.UPDATE_CREDITO_SUCCESS
+  }
+}
+
+export const updateCreditoFailed = (error) => {
+  return {
+    type: actionTypes.UPDATE_CREDITO_FAILED,
+    error: error
+  }
+}
+
+export const updateCreditoStart = () => {
+  return {
+    type: actionTypes.UPDATE_CREDITO_START
+  }
+}

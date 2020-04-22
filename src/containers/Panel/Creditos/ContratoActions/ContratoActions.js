@@ -1,5 +1,6 @@
 import React from 'react'
 import {FormattedMessage} from 'react-intl';
+import { Route } from 'react-router-dom';
 import classes from './ContratoActions.module.css'
 
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
@@ -50,10 +51,13 @@ const contratoActions = props => {
 
   if (isGerencia(props.role)) {
     actionButtons = (
-      <Button
-        clicked={() => {}}
-        btnType="Success"
-        ><FormattedMessage id="creditos.iniciarContrato"/></Button>
+      <Route render={({ history}) => (
+        <Button
+          clicked={() => history.push('/credito-activar')}
+          btnType="Success"
+          ><FormattedMessage id="creditos.iniciarContrato"/></Button>
+      )} />
+
     )
   }
 

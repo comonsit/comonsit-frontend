@@ -28,7 +28,8 @@ export {
 export {
   initCreditos,
   fetchSelContrato,
-  unSelectContrato
+  unSelectContrato,
+  updateCredito
 } from './creditos'
 
 export {

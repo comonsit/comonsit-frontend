@@ -26,6 +26,8 @@ class Creditos extends Component {
 
   componentDidMount () {
     this.props.onInitCreditos(this.props.token)
+    // to cleanup previous selections
+    this.props.unSelContrato()
   }
 
   getXLSX = type => {

@@ -290,6 +290,13 @@
   "contratosXLSX.7": "Región 7",
   "contratosXLSX.8": "Región 8",
   "contratosXLSX.9": "Región 9",
-  "contratosXLSX.10": "Región 10"
-
+  "contratosXLSX.10": "Región 10",
+  "contratoUpdateForm.title": "Activar Crédito",
+  "contratoUpdateForm.supportText": "Registra la fecha de inicio para activar el crédito, y los datos de la entrega de dinero",
+  "contratoActivate.fechaFirma": "Fecha de la firma del Crédito",
+  "contratoActivate.tipo_tasa": "Tipo de Tasa",
+  "contratoActivate.estatus_ejecucion": "Estatus ejecución (entrega del capital)",
+  "contratoActivate.referencia_banco": "Referencia Bancaria",
+  "contratoActivate.fecha_banco": "Fecha del cheque/Transferencia",
+  "contratoActivate.actualizar": "Actualizar datos del Crédito"
 }
