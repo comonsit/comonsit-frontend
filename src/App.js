@@ -19,6 +19,7 @@ import mesaControl from './containers/Panel/Solicitudes/MesaControl/MesaControl'
 import evaluacion from './containers/Panel/Solicitudes/Evaluacion/Evaluacion';
 import acopios from './containers/Panel/Acopios/Acopios';
 import creditos from './containers/Panel/Creditos/Creditos';
+import pagos from './containers/Panel/Pagos/Pagos';
 import contratoActivate from './containers/Panel/Creditos/ContratoActivate/ContratoActivate';
 import contratoImprimir from './containers/Panel/Creditos/ContratoImprimir/ContratoImprimir';
 import movimientos from './containers/Panel/Movimientos/Movimientos';
@@ -68,6 +69,7 @@ class App extends Component {
           <Route path="/perfil" exact component={perfil}/>
           <Route path="/acopios" exact component={acopios}/>
           <Route path="/creditos" exact component={creditos}/>
+          <Route path="/pagos" exact component={pagos}/>
           <Route path="/credito-activar" exact component={contratoActivate}/>
           <Route path="/credito-imprimir" exact component={contratoImprimir}/>
           <Route path="/acopio-formato" exact component={acopioForm}/>

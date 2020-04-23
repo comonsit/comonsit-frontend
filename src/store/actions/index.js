@@ -33,6 +33,10 @@ export {
 } from './creditos'
 
 export {
+  initPagos
+} from './pagos'
+
+export {
     initMovimientos,
     unSetMovimientos,
     newMovimiento,

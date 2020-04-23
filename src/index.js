@@ -7,6 +7,7 @@ import sociosReducer from './store/reducers/socios'
 import generalDataReducer from './store/reducers/generalData'
 import solicitudReducer from './store/reducers/solicitudes'
 import creditosReducer from './store/reducers/creditos'
+import pagosReducer from './store/reducers/pagos'
 import acopioReducer from './store/reducers/acopios'
 import movimientoReducer from './store/reducers/movimientos'
 import authReducer from './store/reducers/auth'
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     acopios: acopioReducer,
     movimientos: movimientoReducer,
     generalData: generalDataReducer,
-    creditos: creditosReducer
+    creditos: creditosReducer,
+    pagos: pagosReducer
 })
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;

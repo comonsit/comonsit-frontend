@@ -311,5 +311,7 @@
   "contratoPrint.imprimir": "Imprimir",
   "contratoPrint.vistaPrevia": "Vista previa de la impresión",
   "puesto": "Puesto",
-  "fuente": "Fuente de Ingresos"
+  "fuente": "Fuente de Ingresos",
+  "pagos.title": "Pagos",
+  "credito": "Crédito"
 }
