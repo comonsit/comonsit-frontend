@@ -313,5 +313,22 @@
   "puesto": "Puesto",
   "fuente": "Fuente de Ingresos",
   "pagos.title": "Pagos",
-  "credito": "Crédito"
+  "pagos.selectedPago": "Detalles del Pago",
+  "pagos.folio": "Folio",
+  "pagos.credito": "Crédito",
+  "pagos.fecha_pago": "Fecha de Pago",
+  "pagos.autor": "Usario que registró el pago",
+  "pagos.cantidad": "Cantidad",
+  "pagos.fecha_banco": "Fecha en Banco",
+  "pagos.referencia_banco": "Referenca Bancaria",
+  "pagos.interes_ord": "Amortización a Intereses Ordinarios",
+  "pagos.interes_mor": "Amortización a Intereses Moratorios",
+  "pagos.abono_capital": "Amortización a Capital",
+  "pagos.estatus_actual": "Cobranza / Estatus del crédito al momento de Pago",
+  "pagos.deuda_prev_total": "Deuda total al momento de Pago",
+  "pagos.deuda_prev_int_ord": "Interés Ordinario al momento de Pago",
+  "pagos.deuda_prev_int_mor": "Interés Moratorio al momento de Pago",
+  "credito": "Crédito",
+  "cantidad": "Cantidad",
+  "pagos.fecha_pago": "Fecha de pago"
 }

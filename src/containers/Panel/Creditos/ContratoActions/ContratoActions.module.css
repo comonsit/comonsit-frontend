@@ -2,7 +2,7 @@
   background-color: #f6fcf9;
   padding: 2rem;
   border-radius: .5rem;
-  C: 90vh;
+  max-height: 90vh;
   overflow-y:scroll;
 }
 

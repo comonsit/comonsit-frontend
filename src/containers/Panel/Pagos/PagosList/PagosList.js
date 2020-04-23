@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
+import SelectColumnFilter from '../../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../../components/Tables/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../../components/Tables/RTable/Filters/FilterGreaterThan';
 
@@ -26,7 +27,13 @@ const pagosList = (props) => {
     },
     {
       Header: <FormattedMessage id="region"/>,
-      accessor: 'region'
+      accessor: 'region',
+      Filter: SelectColumnFilter,
+    },
+    {
+      Header: <FormattedMessage id="pagos.fecha_pago"/>,
+      accessor: 'fecha_pago',
+      Filter: SelectColumnFilter,
     },
     {
       Header: <FormattedMessage id="cantidad"/>,

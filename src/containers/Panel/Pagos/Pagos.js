@@ -96,7 +96,7 @@ class Pagos extends Component {
                     "deuda_prev_total", "deuda_prev_int_ord", "deuda_prev_int_mor"]
       pago = items.map(id => {
         return (<TextElement
-                  label={id}
+                  label={"pagos."+id}
                   content={this.state.selectedPago[id]}
                   isNum={id === "cantidad" || id === "interes_ord" || id === "interes_mor" || id === "abono_capital" || id === "deuda_prev_total" || id === "deuda_prev_int_ord" || id === "deuda_prev_int_mor" }
                   />)
@@ -108,13 +108,15 @@ class Pagos extends Component {
         <Modal
           show={this.state.showPagoModal}
           modalClosed={this.cancelSelected}>
-          <div className={classes.SubSection}>
+          <div className={classes.Container}>
             <div className={classes.SubTitle}>
               <h3>
-                <FormattedMessage id={"pagos.selectedPago"}/>{this.state.selectedPago ? this.state.selectedPago.folio : ''}
+                <FormattedMessage id={"pagos.selectedPago"}/> #{this.state.selectedPago ? this.state.selectedPago.folio : ''}
               </h3>
             </div>
+            <div className={classes.ContentContainer}>
             {pago}
+            </div>
           </div>
         </Modal>
         <div className={classes.Container}>
