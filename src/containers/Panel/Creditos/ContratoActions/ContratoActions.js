@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import classes from './ContratoActions.module.css'
 
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
+import PagosList from '../..//Pagos/PagosList/PagosList'
 import Button from '../../../../components/UI/Button/Button'
 import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus'
 import Currency from '../../../../components/UI/Formatting/Currency'
@@ -66,15 +67,6 @@ const contratoActions = props => {
     )
   }
 
-  // TODO: cambiar por un PagosList
-  const pagos = props.pagos.map(pago => {
-    return (
-      <div key={pago.id}>
-        <p>{pago.id} - fecha: {pago.fecha_pago} - cantidad: {pago.cantidad}</p>
-      </div>
-    )
-  })
-
   return (
   <div className={classes.Container}>
     <div className={classes.StatusContainer}>
@@ -99,7 +91,10 @@ const contratoActions = props => {
         </div>
         <div className={classes.PaymentContainer}>
           <p><FormattedMessage id="creditos.pagado"/>: <Currency value={props.selContrato.pagado}/></p>
-          {pagos}
+          {props.pagos.length > 0 ? (<PagosList
+            data={props.pagos}
+            onClick={() => {}}
+          />): ''}
         </div>
       </div>
       <div className={classes.ButtonGroup}>
