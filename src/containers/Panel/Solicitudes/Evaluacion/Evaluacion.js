@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
-import {FormattedMessage, FormattedNumber, IntlProvider, FormattedDate} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
 
@@ -8,11 +8,12 @@ import SolicitudDetail from '../SolicitudDetail/SolicitudDetail';
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
+import Currency from '../../../../components/UI/Formatting/Currency';
+import Percent from '../../../../components/UI/Formatting/Percent';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import Title from '../../../../components/UI/Title/Title';
 import classes from './Evaluacion.module.css'
-import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
@@ -182,8 +183,7 @@ class Evaluacion extends Component {
       .then(response => {
         // this.setState({loading: false})
         // this.props.updateUser(response.data)
-        console.log('CAMBIAR STATUS === AP POR:')
-        console.log(response.data.estatus_solicitud)
+        // console.log('CAMBIAR STATUS === AP POR:')
         if (status === 'AP') {
           alert('Solicitud de Crédito aprobado correctamente. Contrato: ' + response.data.contrato + ' creado.')
         } else if (status === 'NE') {
@@ -297,8 +297,8 @@ class Evaluacion extends Component {
     // TODO: permanent spinner if socio has no aportaciones
     if (this.state.saldoAportaciones) {
         sugerido = (<div>
-          <p><FormattedMessage id="evaluacion.30saldo"/><IntlProvider locale='en'><FormattedNumber value={this.state.saldoAportaciones*.3} style="currency" currency="USD"/></IntlProvider></p>
-          <p><FormattedMessage id="evaluacion.50saldo"/><IntlProvider locale='en'><FormattedNumber value={this.state.saldoAportaciones*.5} style="currency" currency="USD"/></IntlProvider></p>
+          <p><FormattedMessage id="evaluacion.30saldo"/><Currency value={this.state.saldoAportaciones*.3}/></p>
+          <p><FormattedMessage id="evaluacion.50saldo"/><Currency value={this.state.saldoAportaciones*.5}/></p>
         </div>)
     }
 
@@ -317,15 +317,15 @@ class Evaluacion extends Component {
               </div>
               <TextElement
                 label={"evaluacion.volumenIngresosPresente"}
-                content={<IntlProvider locale='en'><FormattedNumber value={thisYearTotBal} style="currency" currency="USD"/></IntlProvider>}
+                content={<Currency value={thisYearTotBal}/>}
               />
               <TextElement
                 label={"evaluacion.volumenIngresosAnterior"}
-                content={<IntlProvider locale='en'><FormattedNumber value={lastYearTotBal} style="currency" currency="USD"/></IntlProvider>}
+                content={<Currency value={lastYearTotBal}/>}
               />
               <TextElement
                 label={"evaluacion.nivelSolvencia"}
-                content={<IntlProvider locale='en'><FormattedNumber value={solvencia} style="percent" maximumFractionDigits="2" /></IntlProvider>}
+                content={<Percent value={solvencia}/>}
               />
             </div>
             <div className={classes.SubSection}>

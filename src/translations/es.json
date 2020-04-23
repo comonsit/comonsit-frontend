@@ -80,6 +80,7 @@
   "socioForm.doc_act_nac": "Copia de Acta Nacimiento",
   "socioForm.doc_curp": "Copia de CURP",
   "socioForm.doc_domicilio": "Copia Comprobante Domicilio",
+  "movimientos.empresa": "Empresa",
   "empresa": "Empresa",
   "solicitudes.title": "Solicitudes",
   "solicitudes.new": "Nueva Solicitud",
@@ -250,6 +251,7 @@
   "estatus": "Estatus",
   "fecha_inicio": "Fecha de Inicio",
   "id": "Folio",
+  "total": "Total",
   "creditos.estatus_ejecucion": "Ejecución",
   "creditos.deuda_al_dia": "Deuda Total Hoy",
   "creditos.interes_ordinario": "Interés Ordinario",
@@ -268,7 +270,7 @@
   "contratoDetail.texto1": "Firmando el presente PAGARÉ me comprometo a pagar en tiempo y forma el préstamo que COMON SIT CA'TELTIC me ha hecho.",
   "contratoDetail.firma": "Nombre y firma del prestatario(a)",
   "contratoDetail.graphTitle": "Deuda",
-  "contratoDetail.interes": "Intereses",
+  "intereses": "Intereses",
   "contratoDetail.prestamo": "Préstamo",
   "creditos.condonacionButton": "Condonar Pago",
   "creditos.prorrogaButton": "Prórroga",
@@ -307,5 +309,7 @@
   "contratoPrint.title": "Imprimir Contrato",
   "contratoPrint.supportText": "Elige los detalles para la impresión de tu contrato",
   "contratoPrint.imprimir": "Imprimir",
-  "contratoPrint.vistaPrevia": "Vista previa de la impresión"
+  "contratoPrint.vistaPrevia": "Vista previa de la impresión",
+  "puesto": "Puesto",
+  "fuente": "Fuente de Ingresos"
 }

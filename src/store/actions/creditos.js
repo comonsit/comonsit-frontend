@@ -59,8 +59,6 @@ export const updateCredito = (creditoData, id, token) => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }
     }
-    console.log('EL TOKEN ES--->>>>')
-    console.log(token)
     dispatch(updateCreditoStart())
     axios.patch(`/contratos/${id}.json`, creditoData, authData)
       .then(response => {

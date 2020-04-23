@@ -520,7 +520,6 @@ class SolicitudForm extends Component {
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
-    let supportFunction
     let formElements = <Spinner/>
 
     solicitudFormOrder.forEach(key => {

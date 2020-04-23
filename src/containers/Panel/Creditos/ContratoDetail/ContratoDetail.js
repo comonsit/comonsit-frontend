@@ -148,7 +148,7 @@ const contratoDetail = props => {
           />
           <DebtGraph
             labelTitle="contratoDetail.graphTitle"
-            labelIntereses="contratoDetail.interes"
+            labelIntereses="intereses"
             labelPrestamo="contratoDetail.prestamo"
             dataMonto={parseInt(props.contrato.monto)}
             dataInteres={parseInt(props.contrato.intereses)}

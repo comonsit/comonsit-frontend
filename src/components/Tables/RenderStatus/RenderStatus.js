@@ -5,9 +5,10 @@ import classes from './RenderStatus.module.css';
 const renderStatus = props => {
   const cellClasses= [classes.CellStatus]
   cellClasses.push(classes[props.value])
+  const text = props.value ? <FormattedMessage id={props.idLabel+props.value}/> : ''
   return (
     <div className={cellClasses.join(' ')}>
-      <FormattedMessage id={props.idLabel+props.value}/>
+      {text}
     </div>
   )
 }

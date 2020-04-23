@@ -4,7 +4,6 @@ import {
   XYPlot,
   XAxis,
   YAxis,
-  DiscreteColorLegend,
   VerticalGridLines,
   HorizontalGridLines,
   VerticalBarSeries,

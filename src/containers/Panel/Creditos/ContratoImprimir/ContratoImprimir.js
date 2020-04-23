@@ -54,7 +54,7 @@ class ContratoImprimir extends Component {
         </div>
         <div className={classes.PrintButton}>
             <ReactToPrint
-              trigger={() => <button className={buttonClasses.Button} btnType="Success"><FormattedMessage id="contratoPrint.imprimir"/></button>}
+              trigger={() => <button className={buttonClasses.Button}><FormattedMessage id="contratoPrint.imprimir"/></button>}
               content={() => this.componentRef}
             />
         </div>

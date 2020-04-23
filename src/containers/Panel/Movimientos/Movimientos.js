@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormattedMessage, FormattedNumber, IntlProvider, FormattedDate} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classes from './Movimientos.module.css'
 import { connect } from 'react-redux';
 
@@ -10,6 +10,7 @@ import RTable from '../../../components/Tables/RTable/RTable';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency';
+import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
@@ -210,19 +211,13 @@ class Movimientos extends Component {
     }
 
     if (this.props.listaMovimientos && this.state.saldo) {
+      const today = new Date()
       movimientosResults = (
         <>
           <div className={classes.SocioName}>
             <p><strong>{this.state.selSocio}</strong></p>
-
-            <p><FormattedMessage id="movimientos.saldo"/><IntlProvider locale='es'>
-                            <FormattedDate
-                              value={new Date()}
-                              day="numeric"
-                              month="long"
-                              year="numeric"/>
-                          </IntlProvider>:</p>
-                          <p><IntlProvider locale='en'><FormattedNumber value={this.state.saldo} style="currency" currency="USD"/></IntlProvider></p>
+            <p><FormattedMessage id="movimientos.saldo"/><FrmtedDate value={today.toString()}/></p>
+            <p><Currency value={this.state.saldo}/></p>
           </div>
           <RTable
             columns={columns}
