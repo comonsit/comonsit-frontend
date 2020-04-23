@@ -281,6 +281,7 @@
   "creditos.vida_credito": "spisil C'ahc'al yu'un Credito",
   "creditos.cartera_vigente": "Jayeb c'ahc'al ta Cartera Vigente",
   "creditos.cartera_vencida": "Jayeb c'ahc'al ta Cartera Vencida",
+  "creditos.imprimirContrato": "Imprimir te hun",
   "contratosXLSX": "Lehel contratos.xlsx",
   "contratosXLSX.ALL": "sPisil",
   "contratosXLSX.1": "Region 1",
@@ -298,5 +299,10 @@
   "contratoActivate.estatus_ejecucion": "Estatus yu'un taqu'in",
   "contratoActivate.referencia_banco": "Hun yu'un Banco",
   "contratoActivate.fecha_banco": "Bin ora hul te cheque/Transferencia",
-  "contratoActivate.actualizar": "Lecubtesel te biluquetic yu'un Credito"
+  "contratoActivate.actualizar": "Lecubtesel te biluquetic yu'un Credito",
+  "contratoPrint.gerente": "Gerente ",
+  "contratoPrint.title": "Imprimir Contrato",
+  "contratoPrint.supportText": "Leha te biluquetic yu'un hun",
+  "contratoPrint.imprimir": "Imprimir",
+  "contratoPrint.vistaPrevia": "Yilel te hun"
 }

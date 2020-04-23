@@ -1,0 +1,38 @@
+.PrintContainer {
+  margin: 1cm;
+  color: #000;
+}
+
+@media print {
+  .PrintContainer {
+    margin: 0;
+  }
+  @page {
+    margin: 1cm;
+    size: 8.5in 11in;
+  }
+}
+
+
+.SignBox {
+  border-top: 1px solid #000;
+  margin-top: 8rem;
+}
+
+.PreviewContainer {
+  border: 1px solid;
+  margin: 2rem;
+}
+
+.SupportText {
+  padding-top: 2rem;
+}
+
+.PrintButton {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.SubSection{
+  display: inline-block;
+}

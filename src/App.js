@@ -20,6 +20,7 @@ import evaluacion from './containers/Panel/Solicitudes/Evaluacion/Evaluacion';
 import acopios from './containers/Panel/Acopios/Acopios';
 import creditos from './containers/Panel/Creditos/Creditos';
 import contratoActivate from './containers/Panel/Creditos/ContratoActivate/ContratoActivate';
+import contratoImprimir from './containers/Panel/Creditos/ContratoImprimir/ContratoImprimir';
 import movimientos from './containers/Panel/Movimientos/Movimientos';
 import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
 import acopioForm from './containers/Panel/Acopios/AcopioForm/AcopioForm';
@@ -68,6 +69,7 @@ class App extends Component {
           <Route path="/acopios" exact component={acopios}/>
           <Route path="/creditos" exact component={creditos}/>
           <Route path="/credito-activar" exact component={contratoActivate}/>
+          <Route path="/credito-imprimir" exact component={contratoImprimir}/>
           <Route path="/acopio-formato" exact component={acopioForm}/>
           <Route path="/tsumbalil" exact component={tsumbalil}/>
           <Route path="/movimientos" exact component={movimientos}/>

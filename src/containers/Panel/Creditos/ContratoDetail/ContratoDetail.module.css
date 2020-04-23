@@ -17,3 +17,14 @@
 .SubTitle h3 {
   margin-left: 2rem;
 }
+
+.TableGraph {
+  display: flex;
+  flex-direction: column;
+}
+
+@media print {
+  .TableGraph {
+    flex-direction: row;
+  }
+}

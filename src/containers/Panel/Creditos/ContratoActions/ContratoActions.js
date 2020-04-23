@@ -52,12 +52,17 @@ const contratoActions = props => {
   if (isGerencia(props.role)) {
     actionButtons = (
       <Route render={({ history}) => (
+        <>
         <Button
           clicked={() => history.push('/credito-activar')}
           btnType="Success"
           ><FormattedMessage id="creditos.iniciarContrato"/></Button>
+        <Button
+          clicked={() => history.push('/credito-imprimir')}
+          btnType="Success"
+          ><FormattedMessage id="creditos.imprimirContrato"/></Button>
+        </>
       )} />
-
     )
   }
 
@@ -88,8 +93,14 @@ const contratoActions = props => {
      </div>
     </div>
     <div className={classes.ContentContainer}>
-      <div className={classes.InfoContainer}>
-        <ContratoDetail contrato={props.selContrato}/>
+      <div className={classes.ContratoContainer}>
+        <div className={classes.ContratoDetail}>
+          <ContratoDetail contrato={props.selContrato}/>
+        </div>
+        <div className={classes.PaymentContainer}>
+          <p><FormattedMessage id="creditos.pagado"/>: <Currency value={props.selContrato.pagado}/></p>
+          {pagos}
+        </div>
       </div>
       <div className={classes.ButtonGroup}>
         <Button
@@ -100,8 +111,6 @@ const contratoActions = props => {
         {gerenteButtons}
       </div>
     </div>
-    <p><FormattedMessage id="creditos.pagado"/>: <Currency value={props.selContrato.pagado}/></p>
-    {pagos}
   </div>)
 }
 

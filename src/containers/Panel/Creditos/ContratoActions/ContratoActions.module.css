@@ -2,17 +2,35 @@
   background-color: #f6fcf9;
   padding: 2rem;
   border-radius: .5rem;
-}
-
-.InfoContainer {
-  height: 50vh;
+  C: 90vh;
   overflow-y:scroll;
-  border: .1rem solid #243746;
 }
 
 .ContentContainer {
   display: flex;
   align-items: center;
+  flex-direction: column;
+}
+
+.ContratoContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.ContratoDetail {
+  min-height: 15rem;
+  height: 50vh;
+  overflow-y:scroll;
+  border: .1rem solid #243746;
+}
+
+.PaymentContainer {
+  margin-top: 1rem;
+  max-height: 20vh;
+  overflow-y:scroll;
+  border: .1rem solid #243746;
+  background-color: #fff;
 }
 
 .StatusContainer {
@@ -29,13 +47,18 @@
 
 .StatusDataContainer p {
   margin: .4rem;
+  font-size: .8em;
 }
 
 .StatusDetail {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  justify-content: space-between;
+  font-size: .7em;
+}
+
+.StatusDetail div {
+  margin-bottom: .3rem;
 }
 
 .ButtonGroup {
@@ -47,4 +70,26 @@
 
 .ButtonGroup button {
   flex-grow: 1;
+}
+
+@media (min-width: 42em) {
+  .ContentContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  .ContratoContainer {
+
+    max-width: 77%;
+  }
+  .ContratoDetail {
+    height: 40vh;
+    overflow-y:scroll;
+    border: .1rem solid #243746;
+  }
+  .Container {
+    background-color: #f6fcf9;
+    padding: 2rem;
+    border-radius: .5rem;
+  }
 }

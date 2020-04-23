@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlProvider } from 'react-intl';
 import classes from './ContratoDetail.module.css'
 import { sayTseltal }from '@mauricioinaz/say-tseltal'
 
@@ -8,6 +8,13 @@ import Percent from '../../../../components/UI/Formatting/Percent'
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import RTablePrint from '../../../../components/Tables/RTablePrint/RTablePrint';
 import DebtGraph from '../../../../components/Graphs/DebtGraph/DebtGraph';
+import messages_es from '../../../../translations/es.json'
+import messages_tz from '../../../../translations/tz.json'
+
+const messages = {
+  'es': messages_es,
+  'tz': messages_tz
+}
 
 const contratoDetail = props => {
 
@@ -16,6 +23,7 @@ const contratoDetail = props => {
     return (<TextElement
               label={id}
               content={props.contrato[id]}
+              twoLanguages={props.twoLanguages}
               />)
   })
 
@@ -26,6 +34,7 @@ const contratoDetail = props => {
               content={props.contrato[id]}
               isNum={id === "monto" || id === "total" || id === "intereses"}
               isPerc={id === "tasa" || id === "tasa_moratoria"}
+              twoLanguages={props.twoLanguages}
               />)
   })
 
@@ -79,17 +88,40 @@ const contratoDetail = props => {
     data.push(element)
   }
 
+  const titles = ["contratoDetail.title", "contratoDetail.datos", "contratoDetail.especificaciones", "contratoDetail.informacion", "contratoDetail.texto1"]
+  const titlesArray = titles.map(id => {
+    if (props.twoLanguages) {
+      return (<label>
+              <IntlProvider
+                locale={'es'}
+                messages={messages.es}
+              >
+                <FormattedMessage id={id}/>
+              </IntlProvider>
+              /
+              <IntlProvider
+                locale='tz'
+                messages={messages.tz}
+              >
+                <FormattedMessage id={id}/>
+              </IntlProvider>
+            </label>)
+    } else {
+      return <FormattedMessage id={id}/>
+    }
+  })
+
   return (
     <div className={classes.Container}>
       <div className={classes.Title}>
         <h2>
-          <FormattedMessage id="contratoDetail.title"/>
+          {props.twoLanguages ? titlesArray[1] : ''}
         </h2>
       </div>
       <div className={classes.SubSection}>
         <div className={classes.SubTitle}>
           <h3>
-            <FormattedMessage id="contratoDetail.datos"/>
+            {titlesArray[1]}
           </h3>
         </div>
         {items1Array}
@@ -97,7 +129,7 @@ const contratoDetail = props => {
       <div className={classes.SubSection}>
         <div className={classes.SubTitle}>
           <h3>
-            <FormattedMessage id="contratoDetail.especificaciones"/>
+            {titlesArray[2]}
           </h3>
         </div>
         {items2Array}
@@ -105,31 +137,25 @@ const contratoDetail = props => {
       <div className={classes.SubSection}>
         <div className={classes.SubTitle}>
           <h3>
-            <FormattedMessage id="contratoDetail.informacion"/>
+            {titlesArray[3]}
           </h3>
         </div>
-        <RTablePrint
-          columns={columns}
-          data={data}
-          central={props.contrato.plazo-1}
-        />
-        <DebtGraph
-          labelTitle="contratoDetail.graphTitle"
-          labelIntereses="contratoDetail.interes"
-          labelPrestamo="contratoDetail.prestamo"
-          dataMonto={parseInt(props.contrato.monto)}
-          dataInteres={parseInt(props.contrato.intereses)}
-        />
+        <div className={classes.TableGraph}>
+          <RTablePrint
+            columns={columns}
+            data={data}
+            central={props.contrato.plazo-1}
+          />
+          <DebtGraph
+            labelTitle="contratoDetail.graphTitle"
+            labelIntereses="contratoDetail.interes"
+            labelPrestamo="contratoDetail.prestamo"
+            dataMonto={parseInt(props.contrato.monto)}
+            dataInteres={parseInt(props.contrato.intereses)}
+          />
+        </div>
       </div>
-      <div className={classes.SubSection}>
-        <p><FormattedMessage id="contratoDetail.texto1"/></p>
-        <p>___________________________________________</p>
-        <p>{props.nombres}</p>
-        <p><FormattedMessage id="contratoDetail.firma"/></p>
-        <p>___________________________________________</p>
-        <p>{props.gerente}</p>
-        <p><FormattedMessage id="contratoDetail.firma"/></p>
-      </div>
+      <p>{props.twoLanguages ? titlesArray[4] : ''}</p>
     </div>
   )
 }

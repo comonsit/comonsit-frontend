@@ -15,6 +15,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-table": "^7.0.0-rc.15",
+    "react-to-print": "^2.6.3",
     "react-vis": "^1.11.7",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
