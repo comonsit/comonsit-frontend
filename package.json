@@ -43,6 +43,10 @@
     ]
   },
   "devDependencies": {
-    "@svgr/cli": "^5.2.0"
+    "@svgr/cli": "^5.2.0",
+    "@babel/compat-data": "~7.8.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "^7.8.7"
   }
 }
