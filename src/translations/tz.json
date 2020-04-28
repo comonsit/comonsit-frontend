@@ -329,5 +329,6 @@
   "pagos.deuda_prev_int_mor": "Interés Moratorio al momento de Pago",
   "credito": "Credito",
   "cantidad": "Cantidad",
-  "pagos.fecha_pago": "Ora yu'un pago"
+  "pagos.fecha_pago": "Ora yu'un pago",
+  "pagoForm.title": "Yachil Pago"
 }

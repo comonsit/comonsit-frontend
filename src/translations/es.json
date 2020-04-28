@@ -330,5 +330,6 @@
   "pagos.deuda_prev_int_mor": "Interés Moratorio al momento de Pago",
   "credito": "Crédito",
   "cantidad": "Cantidad",
-  "pagos.fecha_pago": "Fecha de pago"
+  "pagos.fecha_pago": "Fecha de pago",
+  "pagoForm.title": "Forma de Pago"
 }

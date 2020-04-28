@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 // import FileSaver from 'file-saver';
-import { withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
 import TextElement from '../../../components/UI/TextElement/TextElement';
 // import HoverButton from '../../../components/UI/HoverButton/HoverButton';
+import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
 // import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
@@ -122,6 +123,14 @@ class Pagos extends Component {
         <div className={classes.Container}>
           <Title
             titleName="pagos.title">
+            <Route render={({ history }) => (
+              <>
+              <Button
+                clicked={() => history.push('/pago-formato')}
+              >
+                <FormattedMessage id="pagoForm.title"/></Button>
+              </>
+            )} />
           </Title>
           <div className={classes.Table}>
             <PagosList
@@ -149,4 +158,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Pagos, axios)))
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Pagos, axios))
