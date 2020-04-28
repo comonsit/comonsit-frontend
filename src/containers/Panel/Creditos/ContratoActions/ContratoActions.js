@@ -16,7 +16,7 @@ const contratoActions = props => {
 
   let gerenteButtons, actionButtons = null
 
-  const deuda = props.selContrato.deuda_al_dia ? props.selContrato.deuda_al_dia.total : null
+  const deuda = props.selContrato.deuda_al_dia ? props.selContrato.deuda_al_dia.total_deuda : null
   const inicio = (isNaN(props.selContrato.fecha_inicio) && !isNaN(Date.parse(props.selContrato.fecha_inicio))) ? new Date(props.selContrato.fecha_inicio) : null
   const vencimiento = (isNaN(props.selContrato.fecha_vencimiento) && !isNaN(Date.parse(props.selContrato.fecha_vencimiento))) ? new Date(props.selContrato.fecha_vencimiento) : null
   let cartera_vigente, cartera_vencida, vida_credito
