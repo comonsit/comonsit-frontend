@@ -52,9 +52,10 @@ class MovimientosForm extends Component {
           valid: false,
           touched: false,
           hide: false,
-          socioSupport: {
+          supportActions: {
             supportButton: (event) => this.onSearchSocio(event),
-            loseFocus: () => this.searchByFocus('clave_socio')
+            loseFocus: () => this.searchByFocus('clave_socio'),
+            suppButtLabelID: "searchSocio"
           }
         },
         fecha_entrega: {
@@ -388,7 +389,7 @@ class MovimientosForm extends Component {
                   hide={formElement.config.hide}
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
                   supportData={formElement.config.supportData}
-                  socioSupport={formElement.config.socioSupport}
+                  supportActions={formElement.config.supportActions}
                   />
               </div>
             </div>

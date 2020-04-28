@@ -43,7 +43,7 @@ const input = (props) => {
                  {...props.elementConfig}
                  value={props.value}
                  disabled={props.disabled}
-                 onBlur={props.socioSupport ? props.socioSupport.loseFocus : null}
+                 onBlur={props.supportActions ? props.supportActions.loseFocus : null}
                  onChange={props.changed} />
             break
         case ( 'checkbox' ):
@@ -106,8 +106,8 @@ const input = (props) => {
                     <p>{props.supportData}</p>
                 </div>)
     }
-    if (props.socioSupport) {
-      button = (<Button btnType="Short" clicked={props.socioSupport.supportButton}><FormattedMessage id="searchSocio"/></Button>)
+    if (props.supportActions) {
+      button = (<Button btnType="Short" clicked={props.supportActions.supportButton}><FormattedMessage id={props.supportActions.suppButtLabelID}/></Button>)
     }
 
 

@@ -183,7 +183,6 @@ class ContratoActivate extends Component {
                   hide={formElement.config.hide}
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
                   supportData={formElement.config.supportData}
-                  socioSupport={formElement.config.socioSupport}
                   />
               </div>
             </div>

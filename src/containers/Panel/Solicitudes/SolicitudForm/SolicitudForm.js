@@ -53,9 +53,10 @@ class SolicitudForm extends Component {
           touched: false,
           hide: false,
           supportData: null,
-          socioSupport: {
+          supportActions: {
             supportButton: (event) => this.onSearchSocio(event, 'clave_socio'),
-            loseFocus: () => this.searchByFocus('clave_socio')
+            loseFocus: () => this.searchByFocus('clave_socio'),
+            suppButtLabelID: "searchSocio"
           }
         },
         fecha_solicitud: {
@@ -273,9 +274,10 @@ class SolicitudForm extends Component {
           touched: false,
           hide: false,
           supportData: null,
-          socioSupport: {
+          supportActions: {
             supportButton: (event) => this.onSearchSocio(event, 'aval'),
-            loseFocus: () => this.searchByFocus('aval')
+            loseFocus: () => this.searchByFocus('aval'),
+            suppButtLabelID: "searchSocioAval"
           }
         },
         familiar_responsable: {
@@ -559,7 +561,7 @@ class SolicitudForm extends Component {
                   hide={formElement.config.hide}
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
                   supportData={formElement.config.supportData}
-                  socioSupport={formElement.config.socioSupport}
+                  supportActions={formElement.config.supportActions}
                 />
               </div>
               )

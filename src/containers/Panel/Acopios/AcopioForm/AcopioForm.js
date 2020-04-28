@@ -52,9 +52,10 @@ class AcopioForm extends Component {
           valid: false,
           touched: false,
           hide: false,
-          socioSupport: {
+          supportActions: {
             supportButton: (event) => this.onSearchSocio(event),
-            loseFocus: () => this.searchByFocus('clave_socio')
+            loseFocus: () => this.searchByFocus('clave_socio'),
+            suppButtLabelID: "searchSocio"
           }
         },
         fecha: {
@@ -276,7 +277,7 @@ class AcopioForm extends Component {
     const acopioFormOrder = ["clave_socio", "fecha",  "tipo_de_producto", "kilos_de_producto", "ingreso"]
     const formElementsArray = []
     const formClasses = [classes.Form]
-    let supportData, supportButton
+    let supportData
     let formElements, sociosLista = <Spinner/>
 
     acopioFormOrder.forEach(key => {
@@ -302,7 +303,6 @@ class AcopioForm extends Component {
               </div>)
           } else {
             supportData = null
-            supportButton = null
           }
           return (
             <div
@@ -322,9 +322,8 @@ class AcopioForm extends Component {
                   hide={formElement.config.hide}
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
                   supportData={formElement.config.supportData}
-                  socioSupport={formElement.config.socioSupport}
+                  supportActions={formElement.config.supportActions}
                   />
-                {supportButton}
               </div>
               {supportData}
             </div>

@@ -40,9 +40,10 @@ class PagosForm extends Component {
           valid: this.props.selContrato !== null,
           touched: this.props.selContrato !== null,
           hide: false
-          // socioSupport: {
+          // supportActions: {
           //   supportButton: (event) => this.onSearchCredito(event),
-          //   loseFocus: () => this.searchByFocus()
+          //   loseFocus: () => this.searchByFocus(),
+          //   suppButtLabelID: "searchCredito"
           // }
         },
         fecha_pago: {
@@ -303,7 +304,7 @@ class PagosForm extends Component {
                   hide={formElement.config.hide}
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
                   supportData={formElement.config.supportData}
-                  socioSupport={formElement.config.socioSupport}
+                  supportActions={formElement.config.supportActions}
                   />
               </div>
             </div>
