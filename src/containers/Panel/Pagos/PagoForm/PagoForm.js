@@ -10,6 +10,7 @@ import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
 import CreditoList from '../../Creditos/CreditoList/CreditoList';
+import ContratoDetail from '../../Creditos/ContratoDetail/ContratoDetail';
 import classes from './PagoForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -258,16 +259,16 @@ class PagosForm extends Component {
       searchingOpen: false,
       pagoForm: updatedForm
     });
-    // // TODO:
-    // this.props.onFetchSelContrato(this.props.token, id)
+    this.props.onFetchSelContrato(this.props.token, id)
+    // TODO: fetch deuda on date
   }
 
   searchByFocus = () => {
     const value = this.state.pagoForm.credito.value
     // TODO: validation of credito to search
     if (value && !isNaN(value)) {
-      // // TODO:
-      // this.props.onFetchSelContrato(this.props.token, value)
+      this.props.onFetchSelContrato(this.props.token, value)
+      // TODO: fetch deuda on date
     }
   }
 
@@ -278,6 +279,7 @@ class PagosForm extends Component {
     const formClasses = [classes.Form]
     let creditosBusqueda = <Spinner/>
     let formElements = <Spinner/>
+    let creditDetail = null
 
     pagoFormOrder.forEach(key => {
       formElementsArray.push({
@@ -327,6 +329,9 @@ class PagosForm extends Component {
       )
     }
 
+    if (this.props.selContrato) {
+      creditDetail = (<ContratoDetail contrato={this.props.selContrato}/>)
+    }
 
     return (
       <>
@@ -352,6 +357,7 @@ class PagosForm extends Component {
           </Button>
           {updatedRedirect}
         </form>
+        {creditDetail}
       </>
     )
   }
