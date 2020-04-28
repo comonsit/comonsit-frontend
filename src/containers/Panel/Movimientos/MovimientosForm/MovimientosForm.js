@@ -428,7 +428,7 @@ class MovimientosForm extends Component {
         <Modal
           show={this.state.searchingOpen}
           modalClosed={this.cancelSearch}>
-          <h3>Búsqueda de Socios...pendiente</h3>
+          <h3><FormattedMessage id="solicitudForm.elige"/></h3>
           <div
             className={classes.TableContainer}>
             {sociosBusqueda}

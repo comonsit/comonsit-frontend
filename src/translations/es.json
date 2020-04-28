@@ -97,6 +97,7 @@
   "solicitudForm.title": "Solicitud Nueva",
   "searchSocio": "Buscar Socio",
   "searchSocioAval": "Buscar Aval",
+  "searchCredito": "Buscar Crédito",
   "solicitudForm.fecha_solicitud": "Fecha de Solicitud",
   "solicitudForm.tipo_credito": "Tipo de Crédito",
   "solicitudForm.act_productiva": "Actividad Productiva",
@@ -332,5 +333,6 @@
   "credito": "Crédito",
   "cantidad": "Cantidad",
   "pagos.fecha_pago": "Fecha de pago",
-  "pagoForm.title": "Forma de Pago"
+  "pagoForm.title": "Forma de Pago",
+  "pagos.elige": "Elige un crédito a pagar"
 }

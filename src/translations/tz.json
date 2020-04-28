@@ -95,6 +95,7 @@
   "solicitudForm.title": "Yachil Yasc'an",
   "searchSocio": "Bin Socio",
   "searchSocioAval": "Bin Aval",
+  "searchCredito": "Bin Credito",
   "solicitudForm.fecha_solicitud": "Ora yu'un Solicitud",
   "solicitudForm.tipo_credito": "Bin Crédito",
   "solicitudForm.act_productiva": "Bin ya spas",
@@ -331,5 +332,6 @@
   "credito": "Credito",
   "cantidad": "Cantidad",
   "pagos.fecha_pago": "Ora yu'un pago",
-  "pagoForm.title": "Yachil Pago"
+  "pagoForm.title": "Yachil Pago",
+  "pagos.elige": "Leha te te credito"
 }

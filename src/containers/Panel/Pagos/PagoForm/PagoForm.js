@@ -39,12 +39,12 @@ class PagosForm extends Component {
           },
           valid: this.props.selContrato !== null,
           touched: this.props.selContrato !== null,
-          hide: false
-          // supportActions: {
-          //   supportButton: (event) => this.onSearchCredito(event),
-          //   loseFocus: () => this.searchByFocus(),
-          //   suppButtLabelID: "searchCredito"
-          // }
+          hide: false,
+          supportActions: {
+            supportButton: (event) => this.onSearchCredito(event),
+            loseFocus: () => this.searchByFocus(),
+            suppButtLabelID: "searchCredito"
+          }
         },
         fecha_pago: {
           elementType: 'input',
@@ -236,38 +236,40 @@ class PagosForm extends Component {
     return formIsValid
   }
 
-  // onSearchCredito = (event) => {
-  //   event.preventDefault();
-  //   this.setState({searchingOpen: true})
-  // }
-  //
-  // cancelSearch = () => {
-  //   this.setState({searchingOpen: false})
-  //   this.props.unselContrato()
-  // }
-  //
-  // selectContrato =(id) => {
-  //   const updatedForm = updateObject(this.state.pagoForm, {
-  //       credito: updateObject(this.state.pagoForm.credito, {
-  //           value: id,
-  //           valid: true,
-  //           touched: true
-  //       })
-  //   })
-  //   this.setState({
-  //     searchingOpen: false,
-  //     pagoForm: updatedForm
-  //   });
-  //   this.props.onFetchSelContrato(this.props.token, id)
-  // }
-  //
-  // searchByFocus = () => {
-  //   const value = this.state.pagoForm.credito.value
-  //   // TODO: validation of socio to search
-  //   if (value && !isNaN(value)) {
-  //     this.props.onFetchSelContrato(this.props.token, value)
-  //   }
-  // }
+  onSearchCredito = (event) => {
+    event.preventDefault();
+    this.setState({searchingOpen: true})
+  }
+
+  cancelSearch = () => {
+    this.setState({searchingOpen: false})
+    this.props.unselContrato()
+  }
+
+  selectContrato = (id) => {
+    const updatedForm = updateObject(this.state.pagoForm, {
+        credito: updateObject(this.state.pagoForm.credito, {
+            value: id,
+            valid: true,
+            touched: true
+        })
+    })
+    this.setState({
+      searchingOpen: false,
+      pagoForm: updatedForm
+    });
+    // // TODO:
+    // this.props.onFetchSelContrato(this.props.token, id)
+  }
+
+  searchByFocus = () => {
+    const value = this.state.pagoForm.credito.value
+    // TODO: validation of credito to search
+    if (value && !isNaN(value)) {
+      // // TODO:
+      // this.props.onFetchSelContrato(this.props.token, value)
+    }
+  }
 
 
   render () {
@@ -319,8 +321,8 @@ class PagosForm extends Component {
     if (this.state.searchingOpen && this.props.listaCreditos) {
       creditosBusqueda = (
         <CreditoList
-          listaSocios={this.props.listaCreditos}
-          onClick={row => this.selectContrato(row.values.id)}
+          data={this.props.listaCreditos}
+          onClick={(row) => this.selectContrato(row.values.id)}
           />
       )
     }
@@ -331,7 +333,7 @@ class PagosForm extends Component {
         <Modal
           show={this.state.searchingOpen}
           modalClosed={this.cancelSearch}>
-          <h3>Búsqueda de Socios...pendiente</h3>
+          <h3><FormattedMessage id="pagos.elige"/></h3>
           <div
             className={classes.TableContainer}>
             {creditosBusqueda}
