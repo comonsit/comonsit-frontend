@@ -98,7 +98,7 @@
   "searchSocio": "Buscar Socio",
   "searchSocioAval": "Buscar Aval",
   "searchCredito": "Buscar Crédito",
-  "searchDeuda": "Obtener Deuda",
+  "searchDeuda": "Calcular Deuda en esta Fecha",
   "solicitudForm.fecha_solicitud": "Fecha de Solicitud",
   "solicitudForm.tipo_credito": "Tipo de Crédito",
   "solicitudForm.act_productiva": "Actividad Productiva",

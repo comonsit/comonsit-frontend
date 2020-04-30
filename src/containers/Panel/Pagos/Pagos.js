@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 // import FileSaver from 'file-saver';
-import { Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
@@ -72,6 +72,11 @@ class Pagos extends Component {
     });
   }
 
+  newPago = () => {
+    this.props.unSelContrato()
+    this.props.history.push('/pago-formato')
+  }
+
   render () {
     // let downloadXLSButton = null
     //
@@ -123,14 +128,11 @@ class Pagos extends Component {
         <div className={classes.Container}>
           <Title
             titleName="pagos.title">
-            <Route render={({ history }) => (
-              <>
               <Button
-                clicked={() => history.push('/pago-formato')}
+                clicked={this.newPago}
               >
-                <FormattedMessage id="pagoForm.title"/></Button>
-              </>
-            )} />
+                <FormattedMessage id="pagoForm.title"/>
+              </Button>
           </Title>
           <div className={classes.Table}>
             <PagosList
@@ -155,7 +157,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onInitPagos: (token) => dispatch(actions.initPagos(token)),
+      unSelContrato: () => dispatch(actions.unSelectContrato())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Pagos, axios))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Pagos, axios)))

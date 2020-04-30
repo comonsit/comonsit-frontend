@@ -98,10 +98,14 @@ const contratoActions = props => {
         </div>
       </div>
       <div className={classes.ButtonGroup}>
-        <Button
-          clicked={() => {}}
-          btnType="Success"
-          ><FormattedMessage id="creditos.registrarPago"/></Button>
+        <Route render={({ history}) => (
+          <>
+          <Button
+            clicked={() => history.push('/pago-formato')}
+            btnType="Success"
+            ><FormattedMessage id="creditos.registrarPago"/></Button>
+          </>
+        )} />
         {actionButtons}
         {gerenteButtons}
       </div>
