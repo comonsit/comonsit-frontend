@@ -106,7 +106,7 @@ const input = (props) => {
                     <p>{props.supportData}</p>
                 </div>)
     }
-    if (props.supportActions) {
+    if (props.supportActions && props.supportActions.supportButton) {
       button = (<Button btnType="Short" clicked={props.supportActions.supportButton}><FormattedMessage id={props.supportActions.suppButtLabelID}/></Button>)
     }
 

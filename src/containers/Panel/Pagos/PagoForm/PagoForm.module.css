@@ -1,0 +1,9 @@
+.Inputs {
+  border: 1px solid #ccc;
+  padding: 0;
+  display: flex;
+}
+
+.SupportData {
+  width: 40%;
+}

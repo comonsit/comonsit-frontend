@@ -98,6 +98,7 @@
   "searchSocio": "Buscar Socio",
   "searchSocioAval": "Buscar Aval",
   "searchCredito": "Buscar Crédito",
+  "searchDeuda": "Obtener Deuda",
   "solicitudForm.fecha_solicitud": "Fecha de Solicitud",
   "solicitudForm.tipo_credito": "Tipo de Crédito",
   "solicitudForm.act_productiva": "Actividad Productiva",
@@ -334,5 +335,9 @@
   "cantidad": "Cantidad",
   "pagos.fecha_pago": "Fecha de pago",
   "pagoForm.title": "Forma de Pago",
-  "pagos.elige": "Elige un crédito a pagar"
+  "pagos.elige": "Elige un crédito a pagar",
+  "pagos.deuda_pend": "deuda pendiente",
+  "pagos.cap_pend": "capital pendiente",
+  "pagos.intOrd_pend": "interés ordinario pendiente",
+  "pagos.intMor_pend": "interés moratorio pendiente"
 }

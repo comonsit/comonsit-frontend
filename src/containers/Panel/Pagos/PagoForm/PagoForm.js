@@ -9,6 +9,8 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
+import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus'
+import Currency from '../../../../components/UI/Formatting/Currency'
 import CreditoList from '../../Creditos/CreditoList/CreditoList';
 import ContratoDetail from '../../Creditos/ContratoDetail/ContratoDetail';
 import classes from './PagoForm.module.css'
@@ -45,7 +47,8 @@ class PagosForm extends Component {
             supportButton: (event) => this.onSearchCredito(event),
             loseFocus: () => this.searchByFocus(),
             suppButtLabelID: "searchCredito"
-          }
+          },
+          supportData: null
         },
         fecha_pago: {
           elementType: 'input',
@@ -60,7 +63,11 @@ class PagosForm extends Component {
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportActions: {
+            supportButton: (event) => this.onSearchDeuda(event),
+            suppButtLabelID: "searchDeuda"
+          }
         },
         cantidad: {
           elementType: 'input',
@@ -71,14 +78,15 @@ class PagosForm extends Component {
             step: '.01'
           },
           label:  (<><FormattedMessage id="cantidad"/>*</>),
-          value: '',
+          value: 0,
           validation: {
             required: true,
             isDecimal: true
           },
           valid: false,
           touched: false,
-          hide: false
+          hide: false,
+          supportData: 'Deuda pendiente: '
         },
         fecha_banco: {
           elementType: 'input',
@@ -126,7 +134,8 @@ class PagosForm extends Component {
           },
           valid: true,
           touched: true,
-          hide: false
+          hide: false,
+          supportData: 'Capital pendiente: '
         },
         interes_ord: {
           elementType: 'input',
@@ -144,7 +153,8 @@ class PagosForm extends Component {
           },
           valid: true,
           touched: true,
-          hide: false
+          hide: false,
+          supportData: 'Interés ordinario pendiente: '
         },
         interes_mor: {
           elementType: 'input',
@@ -162,7 +172,8 @@ class PagosForm extends Component {
           },
           valid: true,
           touched: true,
-          hide: false
+          hide: false,
+          supportData: 'Interés moratorio pendiente: '
         },
       }
     }
@@ -216,8 +227,10 @@ class PagosForm extends Component {
         touched: true
     })
 
+    const clearData = inputIdentifier === 'fecha_pago' ? this.clearSupportData() : null
     let updatedForm = updateObject(this.state.pagoForm, {
-        [inputIdentifier]: updatedFormElement
+        [inputIdentifier]: updatedFormElement,
+        ...clearData
     })
 
     this.setState({pagoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
@@ -247,28 +260,97 @@ class PagosForm extends Component {
     this.props.unselContrato()
   }
 
+  clearSupportData = () => {
+    return {
+      credito: updateObject(this.state.pagoForm.credito, {
+        supportData: null
+      }),
+      cantidad: updateObject(this.state.pagoForm.cantidad, {
+        supportData: <><FormattedMessage id="pagos.deuda_pend"/>:</>
+      }),
+      abono_capital: updateObject(this.state.pagoForm.abono_capital, {
+        supportData:<><FormattedMessage id="pagos.cap_pend"/>:</>
+      }),
+      interes_ord: updateObject(this.state.pagoForm.interes_ord, {
+        supportData: <><FormattedMessage id="pagos.intOrd_pend"/>:</>
+      }),
+      interes_mor: updateObject(this.state.pagoForm.interes_mor, {
+        supportData: <><FormattedMessage id="pagos.intMor_pend"/>:</>
+      })
+    }
+  }
+
   selectContrato = (id) => {
     const updatedForm = updateObject(this.state.pagoForm, {
         credito: updateObject(this.state.pagoForm.credito, {
             value: id,
             valid: true,
             touched: true
-        })
+        }),
+        ...this.clearSupportData()
     })
     this.setState({
       searchingOpen: false,
       pagoForm: updatedForm
     });
     this.props.onFetchSelContrato(this.props.token, id)
-    // TODO: fetch deuda on date
+    // TODO: CLEAR SUPPORT DATA
   }
 
   searchByFocus = () => {
-    const value = this.state.pagoForm.credito.value
+    const contratoID = this.state.pagoForm.credito.value
     // TODO: validation of credito to search
-    if (value && !isNaN(value)) {
-      this.props.onFetchSelContrato(this.props.token, value)
-      // TODO: fetch deuda on date
+    if (contratoID && !isNaN(contratoID)) {
+      this.props.onFetchSelContrato(this.props.token, contratoID)
+      const updatedForm = updateObject(this.state.pagoForm, {
+          ...this.clearSupportData()
+      })
+      this.setState({
+        pagoForm: updatedForm
+      });
+    }
+  }
+
+  onSearchDeuda = event => {
+    event.preventDefault();
+    const contratoID = this.state.pagoForm.credito.value
+    const fecha_pago = this.state.pagoForm.fecha_pago.value
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+    if (contratoID && !isNaN(contratoID) && isNaN(fecha_pago) && !isNaN(Date.parse(fecha_pago))) {
+      axios.get('/contratos/'+contratoID+'/deuda/?fecha='+fecha_pago, authData)
+        .then(response => {
+
+          if ('total_deuda' in response.data) {
+            console.log('TENEMOS DEUDA')
+            console.log(response.data)
+
+            const updatedForm = updateObject(this.state.pagoForm, {
+              credito: updateObject(this.state.pagoForm.credito, {
+                supportData: <RenderStatus value={response.data.estatus_detail} idLabel={"creditos.status."}/>
+              }),
+              cantidad: updateObject(this.state.pagoForm.cantidad, {
+                supportData: <><FormattedMessage id="pagos.deuda_pend"/>: <strong><Currency value={response.data.total_deuda}/> </strong></>
+              }),
+              abono_capital: updateObject(this.state.pagoForm.abono_capital, {
+                supportData:<><FormattedMessage id="pagos.cap_pend"/>: <strong><Currency value={response.data.capital_por_pagar}/> </strong></>
+              }),
+              interes_ord: updateObject(this.state.pagoForm.interes_ord, {
+                supportData: <><FormattedMessage id="pagos.intOrd_pend"/>: <strong><Currency value={response.data.interes_ordinario_deuda}/> </strong></>
+              }),
+              interes_mor: updateObject(this.state.pagoForm.interes_mor, {
+                supportData: <><FormattedMessage id="pagos.intMor_pend"/>: <strong><Currency value={response.data.interes_moratorio_deuda}/> </strong></>
+              })
+            })
+            this.setState({pagoForm: updatedForm})
+          }
+        })
+        .catch(error => {
+          alert('ALGO FALLÓ!')
+        })
+    } else {
+      alert ('Incluye crédito y fecha válida para buscar datos de deuda')
     }
   }
 
@@ -375,8 +457,7 @@ const mapDispatchToProps = dispatch => {
     return {
       onInitCreditos: (token) => dispatch(actions.initCreditos(token)),
       onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
-      unselContrato: () => dispatch(actions.unSelectContrato()),
-      // onCreateNewPago: (form, token) => dispatch(actions.newPago(form, token)),
+      unselContrato: () => dispatch(actions.unSelectContrato())
     }
 }
 

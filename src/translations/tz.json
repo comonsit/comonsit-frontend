@@ -96,6 +96,7 @@
   "searchSocio": "Bin Socio",
   "searchSocioAval": "Bin Aval",
   "searchCredito": "Bin Credito",
+  "searchDeuda": "Obtener Deuda",
   "solicitudForm.fecha_solicitud": "Ora yu'un Solicitud",
   "solicitudForm.tipo_credito": "Bin Crédito",
   "solicitudForm.act_productiva": "Bin ya spas",
@@ -333,5 +334,9 @@
   "cantidad": "Cantidad",
   "pagos.fecha_pago": "Ora yu'un pago",
   "pagoForm.title": "Yachil Pago",
-  "pagos.elige": "Leha te te credito"
+  "pagos.elige": "Leha te te credito",
+  "pagos.deuda_pend": "deuda pendiente",
+  "pagos.cap_pend": "capital pendiente",
+  "pagos.intOrd_pend": "interés ordinario pendiente",
+  "pagos.intMor_pend": "interés moratorio pendiente"
 }
