@@ -9,12 +9,13 @@ export const setCreditos = creditos => {
   }
 }
 
-export const initCreditos = (token) => {
+export const initCreditos = (token, fetchAll) => {
   return dispatch => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }
     }
-    axios.get('/contratos.json', authData)
+    const all = fetchAll ? '/all/' : '.json'
+    axios.get('/contratos' + all, authData)
       .then(response => {
         dispatch(setCreditos(response.data))
       })

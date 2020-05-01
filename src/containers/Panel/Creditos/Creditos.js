@@ -25,7 +25,7 @@ class Creditos extends Component {
   }
 
   componentDidMount () {
-    this.props.onInitCreditos(this.props.token)
+    this.props.onInitCreditos(this.props.token, this.state.oldCreditos)
     // to cleanup previous selections
     this.props.unSelContrato()
   }
@@ -91,6 +91,11 @@ class Creditos extends Component {
     this.props.unSelContrato()
   }
 
+  onToggleFilter = () => {
+    this.props.onInitCreditos(this.props.token, !this.state.oldCreditos)
+    this.setState(({oldCreditos: !this.state.oldCreditos}))
+  }
+
   render () {
     let actions = <Spinner/>
     let downloadXLSButton = null
@@ -103,7 +108,7 @@ class Creditos extends Component {
         <div>
           <div className={classes.XLSContainer}>
             <HoverButton title="contratosXLSX" items={processList} clicked={this.getXLSX}/>
-            <SwitchToggle clicked={() => this.setState(({oldCreditos: !this.state.oldCreditos}))}/>
+            <SwitchToggle clicked={this.onToggleFilter}/>
             <p><FormattedMessage id={oldCreditsMessId}/></p>
           </div>
         </div>)
@@ -153,7 +158,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      onInitCreditos: (token) => dispatch(actions.initCreditos(token)),
+      onInitCreditos: (token, all) => dispatch(actions.initCreditos(token, all)),
       onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
       unSelContrato: () => dispatch(actions.unSelectContrato())
     }
