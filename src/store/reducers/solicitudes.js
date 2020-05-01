@@ -51,6 +51,8 @@ const setSelSolicitud = (state, action) => {
 const unSetSelSolicitud = (state) => {
   return updateObject(state, {
     selectedSolicitud: null,
+    loading: false,
+    updated: false
   })
 }
 

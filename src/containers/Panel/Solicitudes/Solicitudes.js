@@ -49,6 +49,7 @@ class Solicitudes extends Component {
   }
 
   componentDidMount () {
+    this.props.unSelSol()
     this.props.onInitSolicitudes(this.props.token)
   }
 
