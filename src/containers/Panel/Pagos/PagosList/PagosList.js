@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
+import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus';
 import SelectColumnFilter from '../../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../../components/Tables/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../../components/Tables/RTable/Filters/FilterGreaterThan';
@@ -39,6 +40,13 @@ const pagosList = (props) => {
       Header: <FormattedMessage id="cantidad"/>,
       accessor: 'cantidad',
       Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+      Filter: SliderColumnFilter,
+      filter: filterGreaterThan
+    },
+    {
+      Header: <FormattedMessage id="cartera"/>,
+      accessor: 'estatus_previo',
+      Cell: (cellInfo) => <RenderStatus value={cellInfo.cell.value} idLabel={"creditos.status."}/>,
       Filter: SliderColumnFilter,
       filter: filterGreaterThan
     },

@@ -98,7 +98,7 @@ class Pagos extends Component {
     let pago = <Spinner/>
     if (this.state.selectedPago) {
       const items = ["id", "credito", "fecha_pago", "cantidad", "fecha_banco", "referencia_banco",
-                     "autor", "interes_ord", "interes_mor", "abono_capital", "estatus_actual",
+                     "autor", "interes_ord", "interes_mor", "abono_capital", "estatus_previo",
                     "deuda_prev_total", "deuda_prev_int_ord", "deuda_prev_int_mor"]
       pago = items.map(id => {
         return (<TextElement
