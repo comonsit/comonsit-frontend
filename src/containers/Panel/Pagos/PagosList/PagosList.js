@@ -13,7 +13,7 @@ const pagosList = (props) => {
   const columns = [
     {
       Header: '#',
-      accessor: 'folio',
+      accessor: 'id',
       Filter: '',
       filter: ''
     },

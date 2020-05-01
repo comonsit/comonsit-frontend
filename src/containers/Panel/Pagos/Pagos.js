@@ -97,7 +97,7 @@ class Pagos extends Component {
     // RENDER ACTIONS
     let pago = <Spinner/>
     if (this.state.selectedPago) {
-      const items = ["folio", "credito", "fecha_pago", "cantidad", "fecha_banco", "referencia_banco",
+      const items = ["id", "credito", "fecha_pago", "cantidad", "fecha_banco", "referencia_banco",
                      "autor", "interes_ord", "interes_mor", "abono_capital", "estatus_actual",
                     "deuda_prev_total", "deuda_prev_int_ord", "deuda_prev_int_mor"]
       pago = items.map(id => {
@@ -117,7 +117,7 @@ class Pagos extends Component {
           <div className={classes.Container}>
             <div className={classes.SubTitle}>
               <h3>
-                <FormattedMessage id={"pagos.selectedPago"}/> #{this.state.selectedPago ? this.state.selectedPago.folio : ''}
+                <FormattedMessage id={"pagos.selectedPago"}/> #{this.state.selectedPago ? this.state.selectedPago.id : ''}
               </h3>
             </div>
             <div className={classes.ContentContainer}>
@@ -137,7 +137,7 @@ class Pagos extends Component {
           <div className={classes.Table}>
             <PagosList
               data={this.props.listaPagos}
-              onClick={(row) => this.showPago(row.values.folio)}
+              onClick={(row) => this.showPago(row.values.id)}
             />
           </div>
         </div>

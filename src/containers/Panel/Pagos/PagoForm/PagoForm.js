@@ -205,7 +205,10 @@ class PagosForm extends Component {
 
     axios.post('/pagos/', formData, authData)
       .then(response => {
-        alert('Se creó el pago ' + response.data.folio + ' con éxito')
+        alert('Se creó el pago ' + response.data.id + ' con éxito')
+        if (response.data.estatus_nuevo === 'PA') {
+          alert('¡El crédito ' + response.data.id + ' ya quedó totalmente pagado! :D')
+        }
         this.setState({
           loading: false,
           updated: true
