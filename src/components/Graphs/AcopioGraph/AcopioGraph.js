@@ -29,7 +29,9 @@ const acopioGraph = (props) => {
       <VerticalGridLines />
       <HorizontalGridLines />
       <XAxis />
-      <YAxis tickPadding={0} />
+      <YAxis
+        title="$MXN"
+        tickPadding={0} />
       <VerticalBarSeries
         data={props.data}
         color={props.color}
