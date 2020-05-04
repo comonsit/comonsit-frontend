@@ -10,7 +10,7 @@ class ContratoImprCont extends React.Component {
       <div className={classes.PrintContainer}>
         <ContratoDetail
           contrato={this.props.selCon}
-          twoLanguages
+          forPrinting
         />
         <div className={classes.SubSection}>
           <div className={classes.SignBox}>

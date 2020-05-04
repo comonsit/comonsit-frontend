@@ -23,7 +23,7 @@ const contratoDetail = props => {
     return (<TextElement
               label={id}
               content={props.contrato[id]}
-              twoLanguages={props.twoLanguages}
+              twoLanguages={props.forPrinting}
               />)
   })
 
@@ -34,7 +34,7 @@ const contratoDetail = props => {
               content={props.contrato[id]}
               isNum={id === "monto" || id === "total" || id === "intereses"}
               isPerc={id === "tasa" || id === "tasa_moratoria"}
-              twoLanguages={props.twoLanguages}
+              twoLanguages={props.forPrinting}
               />)
   })
 
@@ -65,32 +65,10 @@ const contratoDetail = props => {
           },
         ]
 
-  // CREATE TABLE DATA
-  const data = []
-  let element = {}
-  let  interes_ord, interes_mor, plazo_mor
-  for (let i=1; i<= props.contrato.plazo*2; i++) {
-    interes_ord = props.contrato.monto*(props.contrato.tasa/100)*i
-    if (i>props.contrato.plazo) {
-      plazo_mor = parseInt(props.contrato.tasa_moratoria)
-      interes_mor = props.contrato.monto*(plazo_mor/100)*(i-props.contrato.plazo)
-    } else {
-      plazo_mor = 0
-      interes_mor = 0
-    }
-    element = {
-      monto: props.contrato.monto,
-      tasa: parseInt(props.contrato.tasa) + plazo_mor,
-      plazo: i+' '+sayTseltal(i),
-      interes: interes_ord + interes_mor,
-      total: parseInt(props.contrato.monto) + interes_ord + interes_mor,
-    }
-    data.push(element)
-  }
 
   const titles = ["contratoDetail.title", "contratoDetail.datos", "contratoDetail.especificaciones", "contratoDetail.informacion", "contratoDetail.texto1"]
   const titlesArray = titles.map(id => {
-    if (props.twoLanguages) {
+    if (props.forPrinting) {
       return (<label>
               <IntlProvider
                 locale={'es'}
@@ -111,29 +89,32 @@ const contratoDetail = props => {
     }
   })
 
-  return (
-    <div className={classes.Container}>
-      <div className={classes.Title}>
-        <h2>
-          {props.twoLanguages ? titlesArray[1] : ''}
-        </h2>
-      </div>
-      <div className={classes.SubSection}>
-        <div className={classes.SubTitle}>
-          <h3>
-            {titlesArray[1]}
-          </h3>
-        </div>
-        {items1Array}
-      </div>
-      <div className={classes.SubSection}>
-        <div className={classes.SubTitle}>
-          <h3>
-            {titlesArray[2]}
-          </h3>
-        </div>
-        {items2Array}
-      </div>
+  // CREATE TABLE and GRAPH
+  let tableAndGraph = null
+  if (props.forPrinting) {
+    const data = []
+    let element = {}
+    let  interes_ord, interes_mor, plazo_mor
+    for (let i=1; i<= props.contrato.plazo*2; i++) {
+      interes_ord = props.contrato.monto*(props.contrato.tasa/100)*i
+      if (i>props.contrato.plazo) {
+        plazo_mor = parseInt(props.contrato.tasa_moratoria)
+        interes_mor = props.contrato.monto*(plazo_mor/100)*(i-props.contrato.plazo)
+      } else {
+        plazo_mor = 0
+        interes_mor = 0
+      }
+      element = {
+        monto: props.contrato.monto,
+        tasa: parseInt(props.contrato.tasa) + plazo_mor,
+        plazo: i+' '+sayTseltal(i),
+        interes: interes_ord + interes_mor,
+        total: parseInt(props.contrato.monto) + interes_ord + interes_mor,
+      }
+      data.push(element)
+    }
+
+    tableAndGraph = (
       <div className={classes.SubSection}>
         <div className={classes.SubTitle}>
           <h3>
@@ -155,7 +136,34 @@ const contratoDetail = props => {
           />
         </div>
       </div>
-      <p>{props.twoLanguages ? titlesArray[4] : ''}</p>
+      )
+  }
+
+  return (
+    <div className={classes.Container}>
+      <div className={classes.Title}>
+        <h2>
+          {props.forPrinting ? titlesArray[1] : ''}
+        </h2>
+      </div>
+      <div className={classes.SubSection}>
+        <div className={classes.SubTitle}>
+          <h3>
+            {titlesArray[1]}
+          </h3>
+        </div>
+        {items1Array}
+      </div>
+      <div className={classes.SubSection}>
+        <div className={classes.SubTitle}>
+          <h3>
+            {titlesArray[2]}
+          </h3>
+        </div>
+        {items2Array}
+      </div>
+      {tableAndGraph}
+      <p>{props.forPrinting ? titlesArray[4] : ''}</p>
     </div>
   )
 }
