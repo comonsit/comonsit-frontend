@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import classes from './Movimientos.module.css'
 import { connect } from 'react-redux';
 
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
@@ -25,7 +26,9 @@ class Movimientos extends Component {
     searchingOpen: false,
     selSocio: '',
     saldo: null,
+    emptyMessage: false,
     formIsValid: false,
+    loading: false,
     form: {
       clave_socio: {
         elementType: 'input',
@@ -73,9 +76,9 @@ class Movimientos extends Component {
   }
 
   updateData = id => {
-    this.props.onFetchSelSocios(this.props.token, id)
     this.props.onInitMovimientos(this.props.token, id)
     this.getSaldo(id)
+    this.props.onFetchSelSocios(this.props.token, id)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -102,12 +105,17 @@ class Movimientos extends Component {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
+    this.setState({
+      loading: true
+    })
     axios.get('/movimientos/saldo/?clave_socio='+id, authData)
       .then(response => {
-        this.setState({saldo: response.data.saldo})
-      })
-      .catch(error => {
-        // TODO:
+        if ("saldo" in response.data) {
+          this.setState({saldo: response.data.saldo, emptyMessage: false, loading: false})
+        } else if ("message" in response.data && response.data.message === "No hay información disponible") {
+          this.setState({emptyMessage: true, saldo: null, loading: false})
+        }
+
       })
   }
 
@@ -210,7 +218,9 @@ class Movimientos extends Component {
       )
     }
 
-    if (this.props.listaMovimientos && this.state.saldo) {
+    if (this.state.loading) {
+      movimientosResults = <Spinner/>
+    } else if (this.props.listaMovimientos && this.state.saldo) {
       const today = new Date()
       movimientosResults = (
         <>
@@ -226,6 +236,13 @@ class Movimientos extends Component {
             />
         </>
       )
+    } else if (this.state.emptyMessage && this.state.selSocio) {
+      movimientosResults = (
+        <div className={classes.SocioName}>
+          <p><strong>{this.state.selSocio}</strong></p>
+          <p><FormattedMessage id="movimientos.vacio"/></p>
+        </div>
+        )
     } else {
       movimientosResults = null
     }
@@ -329,4 +346,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default  connect(mapStateToProps, mapDispatchToProps)(Movimientos)
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Movimientos, axios))
