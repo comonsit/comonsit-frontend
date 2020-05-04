@@ -39,12 +39,12 @@ const contratoActions = props => {
         <Button
           disabled
           clicked={() => {}}
-          btnType="Success"
+          btnType="Medium"
           ><FormattedMessage id="creditos.condonacionButton"/></Button>
         <Button
           disabled
           clicked={() => {}}
-          btnType="Success"
+          btnType="Medium"
           ><FormattedMessage id="creditos.prorrogaButton"/></Button>
       </>
     )
@@ -56,11 +56,11 @@ const contratoActions = props => {
         <>
         <Button
           clicked={() => history.push('/credito-activar')}
-          btnType="Success"
+          btnType="Medium"
           ><FormattedMessage id="creditos.iniciarContrato"/></Button>
         <Button
           clicked={() => history.push('/credito-imprimir')}
-          btnType="Success"
+          btnType="Medium"
           ><FormattedMessage id="creditos.imprimirContrato"/></Button>
         </>
       )} />
@@ -102,7 +102,7 @@ const contratoActions = props => {
           <>
           <Button
             clicked={() => history.push('/pago-formato')}
-            btnType="Success"
+            btnType="Medium"
             ><FormattedMessage id="creditos.registrarPago"/></Button>
           </>
         )} />
