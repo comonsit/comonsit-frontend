@@ -14,6 +14,7 @@ import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSe
 import SociosList from '../../Socios/SociosList/SociosList';
 import classes from './MovimientosForm.module.css'
 import * as actions from '../../../../store/actions'
+import { isGerencia } from '../../../../store/roles'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
@@ -423,6 +424,11 @@ class MovimientosForm extends Component {
       retiroClasses.push(classes.RetiroActive)
     }
 
+    // overwrite so only Gerencia can make withdrawals.
+    if (!isGerencia(this.props.role)) {
+      retiroClasses = [classes.RetiroDisabled]
+    }
+
     return (
       <>
         <Modal
@@ -467,6 +473,7 @@ class MovimientosForm extends Component {
 const mapStateToProps = state => {
     return {
       token: state.auth.token,
+      role: state.generalData.role,
       empresas: state.generalData.empresas,
       loading: state.movimientos.loading,
       updated: state.movimientos.updated,

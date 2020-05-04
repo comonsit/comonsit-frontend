@@ -96,3 +96,7 @@
   color: white;
   text-decoration: underline;
 }
+
+.RetiroDisabled {
+  display: none;
+}
