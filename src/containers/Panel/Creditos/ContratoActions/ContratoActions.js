@@ -25,11 +25,11 @@ const contratoActions = props => {
     const oneDay = 24 * 60 * 60 * 1000;
     vida_credito = Math.round(Math.abs((today - inicio) / oneDay));
     if (today > vencimiento) {
-      cartera_vencida = Math.round(Math.abs((vencimiento - today) / oneDay));
+      cartera_vencida = Math.round(Math.abs((today - vencimiento) / oneDay));
       cartera_vigente = vida_credito - cartera_vencida
     } else {
-      cartera_vencida = vida_credito
-      cartera_vigente = 0
+      cartera_vencida = 0
+      cartera_vigente = vida_credito
     }
   }
 

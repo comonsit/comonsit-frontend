@@ -79,8 +79,7 @@
     flex-direction: row;
   }
   .ContratoContainer {
-
-    max-width: 77%;
+    width: 95%;
   }
   .ContratoDetail {
     height: 40vh;
