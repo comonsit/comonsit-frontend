@@ -309,6 +309,7 @@
   "contratoActivate.referencia_banco": "Referencia Bancaria",
   "contratoActivate.fecha_banco": "Fecha del cheque/Transferencia",
   "contratoActivate.actualizar": "Actualizar datos del Crédito",
+  "contratoActivate.iva": "Desglosar IVA",
   "contratoPrint.gerente": "Gerente que firmará",
   "contratoPrint.title": "Imprimir Contrato",
   "contratoPrint.supportText": "Elige los detalles para la impresión de tu contrato",

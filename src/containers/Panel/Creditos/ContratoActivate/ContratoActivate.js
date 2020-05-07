@@ -54,6 +54,19 @@ class ContratoActivate extends Component {
           touched: true,
           disabled: this.props.selContrato.fecha_inicio !== null,
         },
+        iva: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: (<FormattedMessage id="contratoActivate.iva"/>),
+          value: this.props.selContrato.iva,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
         estatus_ejecucion: {
           elementType: 'select',
           elementConfig: {
@@ -151,7 +164,7 @@ class ContratoActivate extends Component {
   }
 
   render () {
-    const contratoUpdateFormOrder = ["fecha_inicio", "tipo_tasa",  "estatus_ejecucion", "referencia_banco", "fecha_salida_banco"]
+    const contratoUpdateFormOrder = ["fecha_inicio", "tipo_tasa", "iva", "estatus_ejecucion", "referencia_banco", "fecha_salida_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements = <Spinner/>
