@@ -285,12 +285,14 @@ class PagosForm extends Component {
 
   selectContrato = (id) => {
     const updatedForm = updateObject(this.state.pagoForm, {
+        ...this.clearSupportData(),
         credito: updateObject(this.state.pagoForm.credito, {
             value: id,
             valid: true,
-            touched: true
+            touched: true,
+            supportData: null
         }),
-        ...this.clearSupportData()
+
     })
     this.setState({
       searchingOpen: false,
