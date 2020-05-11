@@ -24,6 +24,7 @@ const creditoHistorial = (props) => {
       abono_capital: 0,
       deuda_prev_int_ord: 0,
       deuda_prev_int_mor: 0,
+      deuda_prev_capital: 0,
       deuda_prev_total: props.credito.monto
     })
     const today = new Date()
@@ -36,6 +37,7 @@ const creditoHistorial = (props) => {
       abono_capital: 0,
       deuda_prev_int_ord: props.credito.deuda_al_dia.interes_ordinario_deuda,
       deuda_prev_int_mor: props.credito.deuda_al_dia.interes_moratorio_deuda,
+      deuda_prev_capital: props.credito.deuda_al_dia.capital_por_pagar,
       deuda_prev_total: props.credito.deuda_al_dia.total_deuda
     })
   }
@@ -112,12 +114,12 @@ const creditoHistorial = (props) => {
       // Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
       Cell: (cellInfo) => substract(cellInfo.cell.value, cellInfo.row.original.interes_mor)
     },
-    // {
-    //   Header: <FormattedMessage id="creditoHistorial.pendienteCapital"/>,
-    //   accessor: 'deuda_prev_capital',
-    //   // Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
-    //   Cell: (cellInfo) => substract(cellInfo.cell.value, cellInfo.row.original.abono_capital)
-    // },
+    {
+      Header: <FormattedMessage id="creditoHistorial.pendienteCapital"/>,
+      accessor: 'deuda_prev_capital',
+      // Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+      Cell: (cellInfo) => substract(cellInfo.cell.value, cellInfo.row.original.abono_capital)
+    },
     {
       Header: <FormattedMessage id="creditoHistorial.saldoInsoluto"/>,
       accessor: 'deuda_prev_total',
