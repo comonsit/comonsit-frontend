@@ -289,6 +289,7 @@
   "creditos.cartera_vigente": "Días en Cartera Vigente",
   "creditos.cartera_vencida": "Días en Cartera Vencida",
   "creditos.imprimirContrato": "Imprimir Contrato",
+  "creditos.historialCredito": "Historial",
   "contratosXLSX": "Descargar contratos.xlsx",
   "contratosXLSX.ALL": "Todas",
   "contratosXLSX.1": "Región 1",
@@ -342,5 +343,14 @@
   "pagos.cap_pend": "capital pendiente",
   "pagos.intOrd_pend": "interés ordinario pendiente",
   "pagos.intMor_pend": "interés moratorio pendiente",
-  "cartera": "Cartera"
+  "cartera": "Cartera",
+  "creditoHistorial.diasTranscurridos": "Días",
+  "creditoHistorial.pago": "Pago",
+  "creditoHistorial.pago_interes_ord": "Abono Int Ord",
+  "creditoHistorial.pago_interes_mor": "Abono Int Mor",
+  "creditoHistorial.abono_capital": "Abono Capital",
+  "creditoHistorial.saldoInsoluto": "Pendiente Deuda Total",
+  "creditoHistorial.pendienteIntOrd": "Pendiente Interés Ordinario",
+  "creditoHistorial.pendienteIntMor": "Pendiente Interés Moratorio",
+  "creditoHistorial.pendienteCapital": "Pendiente Capital"
 }

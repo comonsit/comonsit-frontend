@@ -33,6 +33,7 @@ body {
 	display: block;
 	text-decoration: none;
 	position: relative;
+  cursor: pointer;
 }
 .Collapsible__trigger:after {
   content: '∨';

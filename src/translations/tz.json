@@ -290,6 +290,7 @@
   "creditos.cartera_vigente": "Jayeb c'ahc'al ta Cartera Vigente",
   "creditos.cartera_vencida": "Jayeb c'ahc'al ta Cartera Vencida",
   "creditos.imprimirContrato": "Imprimir te hun",
+  "creditos.historialCredito": "Bin C'oht ta Pasel",
   "contratosXLSX": "Lehel contratos.xlsx",
   "contratosXLSX.ALL": "sPisil",
   "contratosXLSX.1": "Region 1",
@@ -341,5 +342,14 @@
   "pagos.cap_pend": "capital pendiente",
   "pagos.intOrd_pend": "interés ordinario pendiente",
   "pagos.intMor_pend": "interés moratorio pendiente",
-  "cartera": "Cartera"
+  "cartera": "Cartera",
+  "creditoHistorial.diasTranscurridos": "Días Transcurridos",
+  "creditoHistorial.pago": "Pago",
+  "creditoHistorial.pago_interes_ord": "Abono Int Ord",
+  "creditoHistorial.pago_interes_mor": "Abono Int Mor",
+  "creditoHistorial.abono_capital": "Abono Capital",
+  "creditoHistorial.saldoInsoluto": "Saldo Insoluto",
+  "creditoHistorial.pendienteIntOrd": "Pendiente Int Ord",
+  "creditoHistorial.pendienteIntMor": "Pendiente Int Mor",
+  "creditoHistorial.pendienteCapital": "Pendiente Capital"
 }

@@ -20,14 +20,13 @@
 
 .ContratoDetail {
   min-height: 15rem;
-  height: 50vh;
+  height: 30vh;
   overflow-y:scroll;
   border: .1rem solid #243746;
 }
 
 .PaymentContainer {
-  margin-top: 1rem;
-  max-height: 20vh;
+  max-height: 35vh;
   overflow-y:scroll;
   border: .1rem solid #243746;
   background-color: #fff;
@@ -37,6 +36,7 @@
   display: flex;
   align-items: stretch;
   justify-content: space-between;
+  margin-top: 1.5rem;
 }
 
 .StatusDataContainer {
@@ -53,7 +53,7 @@
 .StatusDetail {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   font-size: .7em;
 }
 
@@ -72,14 +72,20 @@
   flex-grow: 1;
 }
 
+.SubTitle h3,
+.SubTitle h3 p {
+  margin-bottom: 1rem;
+  margin-left: .8rem;
+}
+
 @media (min-width: 42em) {
   .ContentContainer {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
   }
   .ContratoContainer {
-    width: 95%;
+    width: 85%;
   }
   .ContratoDetail {
     height: 40vh;
@@ -90,5 +96,9 @@
     background-color: #f6fcf9;
     padding: 2rem;
     border-radius: .5rem;
+  }
+  .ButtonGroup button {
+    margin-right: 0;
+    margin-left: 2rem;
   }
 }
