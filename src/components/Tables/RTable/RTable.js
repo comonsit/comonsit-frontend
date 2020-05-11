@@ -6,7 +6,7 @@ import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
 import DefaultColumnFilter from './Filters/DefaultColumnFilter'
 
-const RTable = ({ columns, data, onRowClick}) => {
+const RTable = ({ columns, data, onRowClick, hideSearch}) => {
 
   const [advancedSearch, setAdvancedSearch] = useState(false);
 
@@ -72,6 +72,70 @@ const RTable = ({ columns, data, onRowClick}) => {
       usePagination
   )
 
+  const globFilter = !hideSearch ? (
+    <tr>
+
+      <th className={classes.SearchHeader} colSpan="4">
+        <GlobalFilter
+            preGlobalFilteredRows={preGlobalFilteredRows}
+            globalFilter={state.globalFilter}
+            setGlobalFilter={setGlobalFilter}
+          />
+      </th>
+      <th
+        colSpan="0">
+        <SwitchToggle clicked={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
+      </th>
+
+    </tr>
+  ) : null
+
+  const paginationButtons = !hideSearch ? (
+    <div className={classes.Pagination}>
+      <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+        {'<<'}
+      </button>{' '}
+      <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        {'<'}
+      </button>{' '}
+      <button onClick={() => nextPage()} disabled={!canNextPage}>
+        {'>'}
+      </button>{' '}
+      <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+        {'>>'}
+      </button>{' '}
+      <span>
+        {' '}
+        <strong>
+          {pageIndex + 1} de {pageOptions.length}
+        </strong>{' '}
+      </span>
+      <span>
+        | Ir a:{' '}
+        <input
+          type="number"
+          defaultValue={pageIndex + 1}
+          onChange={e => {
+            const page = e.target.value ? Number(e.target.value) - 1 : 0
+            gotoPage(page)
+          }}
+          style={{ width: '100px' }}
+        />
+      </span>{' '}
+      <select
+        value={pageSize}
+        onChange={e => {
+          setPageSize(Number(e.target.value))
+        }}
+      >
+        {[10, 20, 30, 40, 50].map(pageSize => (
+          <option key={pageSize} value={pageSize}>
+            Mostrar {pageSize}
+          </option>
+        ))}
+      </select>
+    </div>
+  ) : null
 
   // Render the UI for your table
   return (
@@ -79,19 +143,7 @@ const RTable = ({ columns, data, onRowClick}) => {
       <div className={classes.TableContainer}>
         <table className={classes.TablaSocios} {...getTableProps()}>
           <thead>
-            <tr>
-              <th className={classes.SearchHeader} colSpan="4">
-                <GlobalFilter
-                    preGlobalFilteredRows={preGlobalFilteredRows}
-                    globalFilter={state.globalFilter}
-                    setGlobalFilter={setGlobalFilter}
-                  />
-              </th>
-              <th
-                colSpan="0">
-                <SwitchToggle clicked={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
-              </th>
-            </tr>
+            {globFilter}
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
@@ -129,50 +181,7 @@ const RTable = ({ columns, data, onRowClick}) => {
           </tbody>
         </table>
       </div>
-      <div className={classes.Pagination}>
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-        <span>
-          {' '}
-          <strong>
-            {pageIndex + 1} de {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Ir a:{' '}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              gotoPage(page)
-            }}
-            style={{ width: '100px' }}
-          />
-        </span>{' '}
-        <select
-          value={pageSize}
-          onChange={e => {
-            setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Mostrar {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
+      {paginationButtons}
     </>
 
   )
