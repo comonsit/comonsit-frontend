@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FileSaver from 'file-saver';
 import { FormattedMessage } from 'react-intl';
 // import FileSaver from 'file-saver';
 import { withRouter } from 'react-router-dom';
@@ -29,20 +30,20 @@ class Pagos extends Component {
     // to cleanup previous selections
   }
 
-  // getXLSX = type => {
-  //   const authData = {
-  //     headers: { 'Authorization': `Bearer ${this.props.token}` },
-  //     responseType: 'blob',
-  //   }
-  //
-  //   axios.get('/pagosXLSX/' + query, authData)
-  //     .then(response => {
-  //       FileSaver.saveAs(response.data, 'pagos.xlsx')
-  //     })
-  //     .catch(error => {
-  //       // TODO:
-  //     })
-  // }
+  getXLSX = type => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+
+    axios.get('/pagosXLSX/', authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, 'pagos.xlsx')
+      })
+      .catch(error => {
+        // TODO:
+      })
+  }
 
   showPago = id => {
     this.setState({
@@ -135,6 +136,11 @@ class Pagos extends Component {
               </Button>
           </Title>
           <div className={classes.Table}>
+            <div className={classes.XLSButton}>
+              <button onClick={this.getXLSX}>
+                <FormattedMessage id="pagosXLSX"/>
+              </button>
+            </div>
             <PagosList
               data={this.props.listaPagos}
               onClick={(row) => this.showPago(row.values.id)}

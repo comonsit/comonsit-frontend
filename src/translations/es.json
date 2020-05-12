@@ -352,5 +352,6 @@
   "creditoHistorial.saldoInsoluto": "Pendiente Deuda Total",
   "creditoHistorial.pendienteIntOrd": "Pendiente Interés Ordinario",
   "creditoHistorial.pendienteIntMor": "Pendiente Interés Moratorio",
-  "creditoHistorial.pendienteCapital": "Pendiente Capital"
+  "creditoHistorial.pendienteCapital": "Pendiente Capital",
+  "pagosXLSX": "Descargar pagos.xlsx"
 }
