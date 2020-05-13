@@ -9,6 +9,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
+import FormConfirmation from '../../../../components/UI/FormConfirmation/FormConfirmation';
 import Title from '../../../../components/UI/Title/Title';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
@@ -30,7 +31,9 @@ class AcopioForm extends Component {
     super(props);
     this.state = {
       formIsValid: false,
-      searchingOpen: false,
+      modalOpen: false,
+      searchSocio: false,
+      confirmFormOpen: false,
       processOptions: {
             CF: 'NP',
             MI: 'NP',
@@ -75,6 +78,10 @@ class AcopioForm extends Component {
         },
         tipo_de_producto: {
           elementType: 'icons',
+          elementConfig: {
+            type: 'icons'
+          },
+          label: (<><FormattedMessage id="producto"/>*</>),
           value: null,
           validation: {
             required: true
@@ -203,11 +210,11 @@ class AcopioForm extends Component {
 
   onSearchSocio = (event, element) => {
     event.preventDefault();
-    this.setState({searchingOpen: true})
+    this.setState({modalOpen: true, searchSocio: true})
   }
 
   cancelSearch =() => {
-    this.setState({searchingOpen: false})
+    this.setState({modalOpen: false, searchSocio: false, confirmFormOpen: false})
     this.props.unSelSocio()
   }
 
@@ -221,7 +228,8 @@ class AcopioForm extends Component {
         })
     })
     this.setState({
-      searchingOpen: false,
+      modalOpen: false,
+      searchSocio: false,
       acopioForm: updatedForm
     });
     this.props.onFetchSelSocios(this.props.token, id)
@@ -271,14 +279,18 @@ class AcopioForm extends Component {
     }
   }
 
+  onShowConfirmation = event => {
+    event.preventDefault();
+    this.setState({modalOpen: true, confirmFormOpen: true})
+  }
+
   render () {
     // SINGLE SOCIO
-    // TODO: done to keep order in Safari. improvement?
     const acopioFormOrder = ["clave_socio", "fecha",  "tipo_de_producto", "kilos_de_producto", "ingreso"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let supportData
-    let formElements, sociosLista = <Spinner/>
+    let formElements, modalInfo = <Spinner/>
 
     acopioFormOrder.forEach(key => {
       formElementsArray.push({
@@ -334,31 +346,42 @@ class AcopioForm extends Component {
 
      formClasses.push(classes.noScroll)
 
-     // TODO: SHOULD NOT RE-RENDER all list each time
-     if (this.state.searchingOpen && this.props.listaSocios) {
-       sociosLista = (<SociosList
-                       listaSocios={this.props.listaSocios}
-                       onClick={row => this.selectSocio(row.values.clave_socio)}
-                       />)
+     if (this.state.modalOpen) {
+       if (this.props.listaSocios && this.state.searchSocio) {
+         modalInfo = (<>
+                        <h3><FormattedMessage id="selectSocio"/></h3>
+                        <div
+                          className={classes.TableContainer}>
+                          <SociosList
+                            listaSocios={this.props.listaSocios}
+                            onClick={row => this.selectSocio(row.values.clave_socio)}
+                          />
+                        </div>
+                      </>)
+       } else if (this.state.confirmFormOpen) {
+         modalInfo = (<FormConfirmation
+                        formOrder={acopioFormOrder}
+                        formData={this.state.acopioForm}
+                        onSubmitAction={this.onSubmitForm}
+                        onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
+                      />)
+       }
      }
 
-
     const updatedRedirect = (this.props.updated) ? <Redirect to="/acopios"/> : null
+
 
     return (
       <>
         <Modal
-          show={this.state.searchingOpen}
-          modalClosed={this.cancelSearch}>
-          <h3><FormattedMessage id="selectSocio"/></h3>
-          <div
-            className={classes.TableContainer}>
-            {sociosLista}
-          </div>
+          show={this.state.modalOpen}
+          modalClosed={this.cancelSearch}
+        >
+          {modalInfo}
         </Modal>
         <Title
           titleName="acopioForm.title"/>
-        <form onSubmit={this.onSubmitForm}>
+        <form onSubmit={this.onShowConfirmation}>
           <div className={formClasses.join(' ')}>
           {formElements}
           </div>
@@ -382,7 +405,6 @@ const mapStateToProps = state => {
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
       comunidades: state.generalData.comunidades
-      // new: state.acopios.newAcopio
     }
 }
 

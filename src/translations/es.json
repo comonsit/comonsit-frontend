@@ -353,5 +353,7 @@
   "creditoHistorial.pendienteIntOrd": "Pendiente Interés Ordinario",
   "creditoHistorial.pendienteIntMor": "Pendiente Interés Moratorio",
   "creditoHistorial.pendienteCapital": "Pendiente Capital",
-  "pagosXLSX": "Descargar pagos.xlsx"
+  "pagosXLSX": "Descargar pagos.xlsx",
+  "confirmacionInfo": "Confirma que los datos sean correctos",
+  "enviar": "Enviar"
 }
