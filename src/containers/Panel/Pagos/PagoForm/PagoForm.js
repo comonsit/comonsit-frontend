@@ -86,7 +86,8 @@ class PagosForm extends Component {
           valid: false,
           touched: false,
           hide: false,
-          supportData: 'Deuda pendiente: '
+          supportData: 'Deuda pendiente: ',
+          disabled: true
         },
         fecha_banco: {
           elementType: 'input',
@@ -236,13 +237,11 @@ class PagosForm extends Component {
         ...clearData
     })
 
-    this.setState({pagoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+    if (inputIdentifier === "abono_capital" || inputIdentifier === "interes_ord" || inputIdentifier === "interes_mor") {
+      updatedForm = this.updateCantidad(updatedForm)
+    }
 
-    // TODO: update HELP formIsValid
-    // credito data
-    // old payment data
-    // status and debt at given date
-    // possible debt payment (int_ord, int_mor, abono capital)
+    this.setState({pagoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
   }
 
   checkIfFormIsValid = (form) => {
@@ -251,6 +250,25 @@ class PagosForm extends Component {
         formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
+  }
+
+  updateCantidad = previousForm => {
+    const cap = parseInt(previousForm.abono_capital.value)
+    const int_ord = parseInt(previousForm.interes_ord.value)
+    const int_mor = parseInt(previousForm.interes_mor.value)
+
+    let total = 0
+    if (!isNaN(cap) && !isNaN(int_ord) && !isNaN(int_mor)) {
+      total = cap + int_ord + int_mor
+    }
+
+    return updateObject(previousForm, {
+        cantidad: updateObject(previousForm.cantidad, {
+          value: total,
+          valid: total !== 0,
+          touched: true,
+        })
+    })
   }
 
   onSearchCredito = (event) => {
@@ -361,7 +379,7 @@ class PagosForm extends Component {
 
 
   render () {
-    const pagoFormOrder = ["credito", "fecha_pago", "cantidad", "abono_capital", "interes_ord", "interes_mor", "fecha_banco", "referencia_banco"]
+    const pagoFormOrder = ["credito", "fecha_pago", "abono_capital", "interes_ord", "interes_mor",  "cantidad", "fecha_banco", "referencia_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let creditosBusqueda = <Spinner/>
@@ -391,7 +409,7 @@ class PagosForm extends Component {
                   shouldValidate={formElement.config.validation}
                   invalid={!formElement.config.valid}
                   touched={formElement.config.touched}
-                  disabled={this.props.loading}
+                  disabled={this.props.loading || formElement.config.disabled}
                   hide={formElement.config.hide}
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
                   supportData={formElement.config.supportData}
