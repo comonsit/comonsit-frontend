@@ -16,15 +16,16 @@ const pnavigationItems = props => (
       openedClassName={cl.AcordeonOpen}
       triggerClassName={cl.AcordeaonTrigger}
       triggerOpenedClassName={cl.AcordeaonTriggerOpen}
-      trigger=<FormattedMessage id="pmenu.creditos"/>>
+      trigger=<FormattedMessage id="pmenu.creditos"/>
+    >
+      <div className={cl.NavigationItem} onClick={props.clicked}>
+        <NavLink to="/solicitudes" exact activeClassName={cl.active}><FormattedMessage id="pmenu.solicitudes"/></NavLink>
+      </div>
       <div className={cl.NavigationItem} onClick={props.clicked}>
         <NavLink to="/creditos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.creditos"/></NavLink>
       </div>
       <div className={cl.NavigationItem} onClick={props.clicked}>
         <NavLink to="/pagos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.pagos"/></NavLink>
-      </div>
-      <div className={cl.NavigationItem} onClick={props.clicked}>
-        <NavLink to="/solicitudes" exact activeClassName={cl.active}><FormattedMessage id="pmenu.solicitudes"/></NavLink>
       </div>
     </Collapsible>
     <Collapsible
