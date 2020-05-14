@@ -50,6 +50,11 @@ const pagosList = (props) => {
       Filter: SliderColumnFilter,
       filter: filterGreaterThan
     },
+    {
+      Header: <FormattedMessage id="pagos.fecha_banco"/>,
+      accessor: 'fecha_banco',
+      Filter: SelectColumnFilter,
+    },
   ]
 
   return (<RTable
