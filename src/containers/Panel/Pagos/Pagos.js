@@ -8,26 +8,28 @@ import { connect } from 'react-redux';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
 import TextElement from '../../../components/UI/TextElement/TextElement';
-// import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
-// import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
 import Title from '../../../components/UI/Title/Title';
 import classes from './Pagos.module.css'
 import * as actions from '../../../store/actions'
-// import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'
 
 class Pagos extends Component {
   state = {
     showPagoModal: false,
-    selectedPago: null
+    editPago: false
   }
 
   componentDidMount () {
     this.props.onInitPagos(this.props.token)
-    // to cleanup previous selections
+  }
+
+  componentWillUnmount () {
+    if (!this.state.editPago) {
+      this.props.unSelPago()
+    }
   }
 
   getXLSX = type => {
@@ -50,27 +52,14 @@ class Pagos extends Component {
       showPagoModal: true,
     })
 
-    const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
-    }
-
-    // TODO: move to PAGOS reducer!!
-    axios.get('/pagos/' + id + '.json', authData)
-      .then(response => {
-        this.setState({
-          selectedPago: response.data
-        });
-      })
-      .catch(error => {
-        // alert('ALGO FALLÓ!')
-      })
+    this.props.onFetchSelPago(this.props.token, id)
   }
 
   cancelSelected =() => {
     this.setState({
       showPagoModal: false,
-      selectedPago: null
     });
+    this.props.unSelPago()
   }
 
   newPago = () => {
@@ -79,35 +68,32 @@ class Pagos extends Component {
   }
 
   render () {
-    // let downloadXLSButton = null
-    //
-    // // RENDER XLS DOWNLOAD BUTTON
-    // if (isGerencia(this.props.role)) {
-    //   const processList = ['ALL', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-    //   const oldCreditsMessId = this.state.oldCreditos ? 'creditos.allCreditsTrue' : 'creditos.allCreditsFalse'
-    //   downloadXLSButton = (
-    //     <div>
-    //       <div className={classes.XLSContainer}>
-    //         <HoverButton title="contratosXLSX" items={processList} clicked={this.getXLSX}/>
-    //         <SwitchToggle clicked={() => this.setState(({oldCreditos: !this.state.oldCreditos}))}/>
-    //         <p><FormattedMessage id={oldCreditsMessId}/></p>
-    //       </div>
-    //     </div>)
-    // }
 
-    // RENDER ACTIONS
     let pago = <Spinner/>
-    if (this.state.selectedPago) {
+    if (this.props.selPago) {
       const items = ["id", "credito", "fecha_pago", "cantidad", "fecha_banco", "referencia_banco",
                      "autor", "interes_ord", "interes_mor", "abono_capital", "estatus_previo",
                     "deuda_prev_total", "deuda_prev_int_ord", "deuda_prev_int_mor"]
       pago = items.map(id => {
         return (<TextElement
                   label={"pagos."+id}
-                  content={this.state.selectedPago[id]}
+                  content={this.props.selPago[id]}
                   isNum={id === "cantidad" || id === "interes_ord" || id === "interes_mor" || id === "abono_capital" || id === "deuda_prev_total" || id === "deuda_prev_int_ord" || id === "deuda_prev_int_mor" }
                   />)
       })
+    }
+
+    if (this.state.editPago) {
+      this.props.history.push('/pago-formato')
+    }
+
+    let editPaymentButton = null
+    if (this.props.selPago && this.props.selPago.fecha_banco === null) {
+      editPaymentButton = (<Button
+                             clicked={() => this.setState({editPago: true})}
+                           >
+                             <FormattedMessage id="pagoForm.editBankInfo"/>
+                           </Button>)
     }
 
     return (
@@ -118,8 +104,9 @@ class Pagos extends Component {
           <div className={classes.Container}>
             <div className={classes.SubTitle}>
               <h3>
-                <FormattedMessage id={"pagos.selectedPago"}/> #{this.state.selectedPago ? this.state.selectedPago.id : ''}
+                <FormattedMessage id={"pagos.selectedPago"}/> #{this.props.selPago ? this.props.selPago.id : ''}
               </h3>
+              {editPaymentButton}
             </div>
             <div className={classes.ContentContainer}>
             {pago}
@@ -155,6 +142,7 @@ class Pagos extends Component {
 const mapStateToProps = state => {
     return {
       listaPagos: state.pagos.pagos,
+      selPago: state.pagos.selectedPago,
       token: state.auth.token,
       role: state.generalData.role,
     }
@@ -163,7 +151,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onInitPagos: (token) => dispatch(actions.initPagos(token)),
-      unSelContrato: () => dispatch(actions.unSelectContrato())
+      unSelContrato: () => dispatch(actions.unSelectContrato()),
+      onFetchSelPago: (token, pagoId) => dispatch(actions.fetchSelPago(token, pagoId)),
+      unSelPago: () => dispatch(actions.unSelectPago())
     }
 }
 

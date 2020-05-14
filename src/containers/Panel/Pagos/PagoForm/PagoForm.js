@@ -28,6 +28,7 @@ class PagosForm extends Component {
       searchingOpen: false,
       loading: false,
       updated: false,
+      editing: this.props.selPago !== null,
       pagoForm: {
         credito: {
           elementType: 'input',
@@ -36,19 +37,20 @@ class PagosForm extends Component {
             placeholder: '..folio del crédito'
           },
           label: (<><FormattedMessage id="credito"/>*</>),
-          value: this.props.selContrato ? this.props.selContrato.id : null,
+          value: this.props.selContrato ? this.props.selContrato.id : this.props.selPago ? this.props.selPago.credito : null,
           validation: {
             required: true
           },
-          valid: this.props.selContrato !== null,
-          touched: this.props.selContrato !== null,
+          valid: this.props.selContrato !== null || this.props.selPago !== null,
+          touched: this.props.selContrato !== null || this.props.selPago !== null,
           hide: false,
-          supportActions: {
+          supportActions: !this.props.selPago ?  {
             supportButton: (event) => this.onSearchCredito(event),
             loseFocus: () => this.searchByFocus(),
             suppButtLabelID: "searchCredito"
-          },
-          supportData: null
+          } : null,
+          supportData: null,
+          disabled: this.props.selPago !== null
         },
         fecha_pago: {
           elementType: 'input',
@@ -56,18 +58,19 @@ class PagosForm extends Component {
             type: 'date'
           },
           label: (<><FormattedMessage id="pagos.fecha_pago"/>*</>),
-          value: '',
+          value: this.props.selPago ? this.props.selPago.fecha_pago : null,
           validation: {
             required: true,
             todayOrOlder: true
           },
-          valid: false,
-          touched: false,
+          valid: this.props.selPago !== null,
+          touched: this.props.selPago !== null,
           hide: false,
-          supportActions: {
+          supportActions: !this.props.selPago ? {
             supportButton: (event) => this.onSearchDeuda(event),
             suppButtLabelID: "searchDeuda"
-          }
+          } : null,
+          disabled: this.props.selPago !== null
         },
         cantidad: {
           elementType: 'input',
@@ -78,15 +81,15 @@ class PagosForm extends Component {
             step: '.01'
           },
           label:  (<><FormattedMessage id="cantidad"/>*</>),
-          value: 0,
+          value: this.props.selPago ? this.props.selPago.cantidad : 0,
           validation: {
             required: true,
             isDecimal: true
           },
-          valid: false,
-          touched: false,
+          valid: this.props.selPago !== null,
+          touched: this.props.selPago !== null,
           hide: false,
-          supportData: 'Deuda pendiente: ',
+          supportData: !this.props.selPago ? 'Deuda pendiente: ' : null,
           disabled: true
         },
         fecha_banco: {
@@ -95,14 +98,15 @@ class PagosForm extends Component {
             type: 'date'
           },
           label: (<><FormattedMessage id="pagos.fecha_banco"/></>),
-          value: null,
+          value: this.props.selPago ? this.props.selPago.fecha_banco : null,
           validation: {
             required: false,
             todayOrOlder: true
           },
           valid: true,
-          touched: true,
-          hide: false
+          touched: this.props.selPago !== null,
+          hide: false,
+          disabled: this.props.selPago !== null && this.props.selPago.fecha_banco !== null
         },
         referencia_banco: {
           elementType: 'input',
@@ -111,13 +115,14 @@ class PagosForm extends Component {
             placeholder: '..'
           },
           label: (<><FormattedMessage id="pagos.referencia_banco"/></>),
-          value: null,
+          value: this.props.selPago ? this.props.selPago.referencia_banco : null,
           validation: {
             required: false
           },
           valid: true,
-          touched: true,
-          hide: false
+          touched: this.props.selPago !== null,
+          hide: false,
+          disabled: this.props.selPago !== null && this.props.selPago.referencia_banco !== null
         },
         abono_capital: {
           elementType: 'input',
@@ -128,15 +133,16 @@ class PagosForm extends Component {
             step: '.01'
           },
           label:  (<><FormattedMessage id="pagos.abono_capital"/>*</>),
-          value: 0,
+          value: this.props.selPago ? this.props.selPago.abono_capital : 0,
           validation: {
             required: true,
             isDecimal: true
           },
           valid: true,
-          touched: true,
+          touched: this.props.selPago !== null,
           hide: false,
-          supportData: 'Capital pendiente: '
+          supportData: !this.props.selPago ?  'Capital pendiente: ' : null,
+          disabled: this.props.selPago !== null
         },
         interes_ord: {
           elementType: 'input',
@@ -147,15 +153,16 @@ class PagosForm extends Component {
             step: '.01'
           },
           label:  (<><FormattedMessage id="pagos.interes_ord"/>*</>),
-          value: 0,
+          value: this.props.selPago ? this.props.selPago.interes_ord : 0,
           validation: {
             required: true,
             isDecimal: true
           },
           valid: true,
-          touched: true,
+          touched: this.props.selPago !== null,
           hide: false,
-          supportData: 'Interés ordinario pendiente: '
+          supportData: !this.props.selPago ?  'Interés ordinario pendiente: ': null,
+          disabled: this.props.selPago !== null
         },
         interes_mor: {
           elementType: 'input',
@@ -166,15 +173,16 @@ class PagosForm extends Component {
             step: '.01'
           },
           label:  (<><FormattedMessage id="pagos.interes_mor"/>*</>),
-          value: 0,
+          value: this.props.selPago ? this.props.selPago.interes_mor : 0,
           validation: {
             required: true,
             isDecimal: true
           },
           valid: true,
-          touched: true,
+          touched: this.props.selPago !== null,
           hide: false,
-          supportData: 'Interés moratorio pendiente: '
+          supportData: !this.props.selPago ?  'Interés moratorio pendiente: ': null,
+          disabled: this.props.selPago !== null
         },
       }
     }
@@ -182,10 +190,14 @@ class PagosForm extends Component {
 
   componentDidMount () {
     this.props.onInitCreditos(this.props.token)
+    if (this.props.selPago && this.props.selPago.credito) {
+      this.props.onFetchSelContrato(this.props.token, this.props.selPago.credito)
+    }
   }
 
   componentWillUnmount() {
     this.props.unselContrato()
+    this.props.unSelPago()
   }
 
   onSubmitForm = (event) => {
@@ -204,24 +216,49 @@ class PagosForm extends Component {
       loading: true
     })
 
-    axios.post('/pagos/', formData, authData)
-      .then(response => {
-        alert('Se creó el pago ' + response.data.id + ' con éxito')
-        if (response.data.estatus_nuevo === 'PA') {
-          alert('¡El crédito ' + response.data.id + ' ya quedó totalmente pagado! :D')
-        }
-        this.setState({
-          loading: false,
-          updated: true
+    if (this.props.selPago) {
+    // if (this.state.editing) {
+      const data = {
+        referencia_banco: formData['referencia_banco'],
+        fecha_banco: formData['fecha_banco'],
+      }
+      axios.patch('/pagos/'+this.props.selPago.id+'.json', data, authData)
+        .then(response => {
+          alert('Se editó el pago ' + response.data.id + ' con éxito')
+          this.setState({
+            loading: false,
+            updated: true
+          })
         })
-      })
-      .catch(error => {
-        this.setState({
-          loading: false,
-          updated: false
+        .catch(error => {
+          this.setState({
+            loading: false,
+            updated: false
+          })
+          alert('ALGO FALLÓ!')
         })
-        alert('ALGO FALLÓ!')
-      })
+    } else {
+      axios.post('/pagos/', formData, authData)
+        .then(response => {
+          alert('Se creó el pago ' + response.data.id + ' con éxito')
+          if (response.data.estatus_nuevo === 'PA') {
+            alert('¡El crédito ' + response.data.id + ' ya quedó totalmente pagado! :D')
+          }
+          this.setState({
+            loading: false,
+            updated: true
+          })
+        })
+        .catch(error => {
+          this.setState({
+            loading: false,
+            updated: false
+          })
+          alert('ALGO FALLÓ!')
+        })
+    }
+
+
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -450,7 +487,9 @@ class PagosForm extends Component {
           </div>
         </Modal>
         <Title
-          titleName="pagoForm.title"/>
+          titleName="pagoForm.title">
+          <h1>{this.props.selPago ? this.props.selPago.id : null}</h1>
+        </Title>
         <div className={classes.FormDetailContainer}>
           <form onSubmit={this.onSubmitForm}>
             <div className={formClasses.join(' ')}>
@@ -476,7 +515,8 @@ const mapStateToProps = state => {
   return {
     listaCreditos: state.creditos.creditos,
     selContrato: state.creditos.selectedContrato,
-    token: state.auth.token
+    token: state.auth.token,
+    selPago: state.pagos.selectedPago,
   }
 }
 
@@ -484,7 +524,8 @@ const mapDispatchToProps = dispatch => {
     return {
       onInitCreditos: (token) => dispatch(actions.initCreditos(token)),
       onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
-      unselContrato: () => dispatch(actions.unSelectContrato())
+      unselContrato: () => dispatch(actions.unSelectContrato()),
+      unSelPago: () => dispatch(actions.unSelectPago())
     }
 }
 

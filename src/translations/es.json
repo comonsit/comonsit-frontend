@@ -345,6 +345,7 @@
   "pagos.cap_pend": "capital pendiente",
   "pagos.intOrd_pend": "interés ordinario pendiente",
   "pagos.intMor_pend": "interés moratorio pendiente",
+  "pagoForm.editBankInfo": "Editar Datos Bancarios",
   "cartera": "Cartera",
   "creditoHistorial.diasTranscurridos": "Días",
   "creditoHistorial.pago": "Pago",

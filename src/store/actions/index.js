@@ -33,7 +33,9 @@ export {
 } from './creditos'
 
 export {
-  initPagos
+  initPagos,
+  fetchSelPago,
+  unSelectPago
 } from './pagos'
 
 export {
