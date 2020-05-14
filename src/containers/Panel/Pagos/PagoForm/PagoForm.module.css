@@ -7,3 +7,23 @@
 .SupportData {
   width: 40%;
 }
+
+.FormDetailContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.DetailContainer {
+  border: 1px solid #ccc;
+}
+
+@media (min-width: 62em) {
+  .FormDetailContainer {
+    flex-direction: row;
+  }
+  .DetailContainer {
+    width: 50%;
+    overflow-x:scroll;
+    margin-left:1rem;
+  }
+}

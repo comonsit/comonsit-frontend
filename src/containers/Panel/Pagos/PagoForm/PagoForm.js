@@ -451,18 +451,22 @@ class PagosForm extends Component {
         </Modal>
         <Title
           titleName="pagoForm.title"/>
-        <form onSubmit={this.onSubmitForm}>
-          <div className={formClasses.join(' ')}>
-          {formElements}
+        <div className={classes.FormDetailContainer}>
+          <form onSubmit={this.onSubmitForm}>
+            <div className={formClasses.join(' ')}>
+            {formElements}
+            </div>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}>
+              <FormattedMessage id="saveButton"/>
+            </Button>
+            {updatedRedirect}
+          </form>
+          <div className={classes.DetailContainer}>
+            {creditDetail}
           </div>
-          <Button
-            btnType="Success"
-            disabled={!this.state.formIsValid}>
-            <FormattedMessage id="saveButton"/>
-          </Button>
-          {updatedRedirect}
-        </form>
-        {creditDetail}
+        </div>
       </>
     )
   }
