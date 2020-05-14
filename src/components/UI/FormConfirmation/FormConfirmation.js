@@ -34,6 +34,7 @@ const formConfirmation = props => {
   return (
     <div className={classes.Container}>
       <h3><FormattedMessage id='confirmacionInfo'/></h3>
+      {props.children}
       <div className={classes.data}>
         {data}
       </div>

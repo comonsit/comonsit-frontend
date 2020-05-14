@@ -151,6 +151,8 @@
   "movimientos.newMovimiento": "Yachil Aportación",
   "movimientos.actualizar": "lehel",
   "movimientos.aportacion_retiro": "Aportación o Retiro",
+  "movimientos.aportacion": "APORTACION",
+  "movimientos.retiro": "RETIRO",
   "movimientos.monto": "Jayeb",
   "movimientos.fecha_banco": "Bin ora Bancos",
   "movimientos.tipo": "Bin aportacion",

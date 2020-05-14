@@ -10,6 +10,7 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
+import FormConfirmation from '../../../../components/UI/FormConfirmation/FormConfirmation';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
 import classes from './MovimientosForm.module.css'
@@ -31,7 +32,9 @@ class MovimientosForm extends Component {
     super(props);
     this.state = {
       formIsValid: false,
-      searchingOpen: false,
+      modalOpen: false,
+      confirmFormOpen: false,
+      searchSocio: false,
       processOptions: {
             CF: 'NP',
             MI: 'NP',
@@ -94,6 +97,10 @@ class MovimientosForm extends Component {
         },
         proceso: {
           elementType: 'icons',
+          elementConfig: {
+            type: 'icons'
+          },
+          label: (<><FormattedMessage id="producto"/>*</>),
           value: null,
           validation: {
             required: true
@@ -290,11 +297,11 @@ class MovimientosForm extends Component {
 
   onSearchSocio = (event) => {
     event.preventDefault();
-    this.setState({searchingOpen: true})
+    this.setState({modalOpen: true, searchSocio: true})
   }
 
   cancelSearch =() => {
-    this.setState({searchingOpen: false})
+    this.setState({modalOpen: false, searchSocio: false})
     this.props.unSelSocio()
   }
 
@@ -307,7 +314,8 @@ class MovimientosForm extends Component {
         })
     })
     this.setState({
-      searchingOpen: false,
+      searchSocio: false,
+      modalOpen: false,
       movimientoForm: updatedForm
     });
     this.props.onFetchSelSocios(this.props.token, id)
@@ -349,11 +357,16 @@ class MovimientosForm extends Component {
     }
   }
 
+  onShowConfirmation = event => {
+    event.preventDefault();
+    this.setState({modalOpen: true, confirmFormOpen: true})
+  }
+
   render () {
     const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]
-    let sociosBusqueda = <Spinner/>
+    let modalInfo = <Spinner/>
     let formElements = <Spinner/>
 
     movimientoFormOrder.forEach(key => {
@@ -405,13 +418,31 @@ class MovimientosForm extends Component {
 
     const updatedRedirect = (this.props.updated) ? <Redirect to="/movimientos"/> : null
 
-    if (this.state.searchingOpen && this.props.listaSocios) {
-      sociosBusqueda = (
-        <SociosList
-          listaSocios={this.props.listaSocios}
-          onClick={row => this.selectSocio(row.values.clave_socio)}
-          />
-      )
+
+    if (this.state.modalOpen) {
+      if (this.props.listaSocios && this.state.searchSocio) {
+        modalInfo = (<>
+                      <h3><FormattedMessage id="solicitudForm.elige"/></h3>
+                      <div
+                        className={classes.TableContainer}>
+                        <SociosList
+                          listaSocios={this.props.listaSocios}
+                          onClick={row => this.selectSocio(row.values.clave_socio)}
+                          />
+                      </div>
+                     </>)
+      } else if (this.state.confirmFormOpen) {
+        const title = this.state.movimientoForm.aportacion.value ? <h3><FormattedMessage id="movimientos.aportacion"/></h3> : <h3><FormattedMessage id="movimientos.retiro"/></h3>
+        modalInfo = (<FormConfirmation
+                       formOrder={movimientoFormOrder}
+                       formData={this.state.movimientoForm}
+                       onSubmitAction={this.onSubmitForm}
+                       onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
+                      >
+                      {title}
+                    </FormConfirmation>
+                    )
+      }
     }
 
     let aportacionClasses = [classes.Aportacion]
@@ -432,13 +463,9 @@ class MovimientosForm extends Component {
     return (
       <>
         <Modal
-          show={this.state.searchingOpen}
+          show={this.state.modalOpen}
           modalClosed={this.cancelSearch}>
-          <h3><FormattedMessage id="solicitudForm.elige"/></h3>
-          <div
-            className={classes.TableContainer}>
-            {sociosBusqueda}
-          </div>
+          {modalInfo}
         </Modal>
         <Title
           titleName="movimientosForm.title"/>
@@ -446,15 +473,15 @@ class MovimientosForm extends Component {
           <div
             onClick={() => this.onToggleType(true)}
             className={aportacionClasses.join(' ')}>
-            <p>APORTACIÓN</p>
+            <p><FormattedMessage id="movimientos.aportacion"/></p>
           </div>
           <div
             onClick={() => this.onToggleType(false)}
             className={retiroClasses.join(' ')}>
-            <p>RETIRO</p>
+            <p><FormattedMessage id="movimientos.retiro"/></p>
           </div>
         </div>
-        <form onSubmit={this.onSubmitForm}>
+        <form onSubmit={this.onShowConfirmation}>
           <div className={formClasses.join(' ')}>
           {formElements}
           </div>
