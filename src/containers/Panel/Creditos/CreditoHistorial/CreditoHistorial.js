@@ -27,19 +27,21 @@ const creditoHistorial = (props) => {
       deuda_prev_capital: 0,
       deuda_prev_total: props.credito.monto
     })
-    const today = new Date()
-    modifiedData.push({
-      id: 'HOY',
-      fecha_pago: today.toISOString().substring(0, 10),
-      cantidad: 0,
-      interes_ord: 0,
-      interes_mor: 0,
-      abono_capital: 0,
-      deuda_prev_int_ord: props.credito.deuda_al_dia.interes_ordinario_deuda,
-      deuda_prev_int_mor: props.credito.deuda_al_dia.interes_moratorio_deuda,
-      deuda_prev_capital: props.credito.deuda_al_dia.capital_por_pagar,
-      deuda_prev_total: props.credito.deuda_al_dia.total_deuda
-    })
+    if (!props.payed) {
+      const today = new Date()
+      modifiedData.push({
+        id: 'HOY',
+        fecha_pago: today.toISOString().substring(0, 10),
+        cantidad: 0,
+        interes_ord: 0,
+        interes_mor: 0,
+        abono_capital: 0,
+        deuda_prev_int_ord: props.credito.deuda_al_dia.interes_ordinario_deuda,
+        deuda_prev_int_mor: props.credito.deuda_al_dia.interes_moratorio_deuda,
+        deuda_prev_capital: props.credito.deuda_al_dia.capital_por_pagar,
+        deuda_prev_total: props.credito.deuda_al_dia.total_deuda
+      })
+    }
   }
 
   const countDays = date => {

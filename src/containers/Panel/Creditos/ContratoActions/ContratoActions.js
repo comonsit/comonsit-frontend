@@ -69,7 +69,15 @@ const contratoActions = props => {
     )
   }
 
-  const paymentHistory = (inicio && !_.isEmpty(props.selContrato.deuda_al_dia)) ? (<CreditoHistorial data={props.pagos} credito={props.selContrato}/>) : null
+  let paymentHistory = null
+  if (inicio){
+    if(!_.isEmpty(props.selContrato.deuda_al_dia)){
+      paymentHistory = (<CreditoHistorial data={props.pagos} credito={props.selContrato}/>)
+    } else if (props.selContrato.estatus_detail === 'PA') {
+      paymentHistory = (<CreditoHistorial data={props.pagos} credito={props.selContrato} payed/>)
+    }
+  }
+
 
   return (
   <div className={classes.Container}>
