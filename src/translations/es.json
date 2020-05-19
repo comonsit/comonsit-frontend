@@ -358,5 +358,10 @@
   "creditoHistorial.pendienteCapital": "Pendiente Capital",
   "pagosXLSX": "Descargar pagos.xlsx",
   "confirmacionInfo": "Confirma que los datos sean correctos",
-  "enviar": "Enviar"
+  "enviar": "Enviar",
+  "formatos.title": "Formatos",
+  "formatos.comprobantePago": "Comprobante de Pago",
+  "formatos.formActReg": "Formato de Actas Regionales",
+  "formatos.formActReg1": "Formato de Actas Regionales 2",
+  "formatos.formSol": "Formato de Solicitud"
 }

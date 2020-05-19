@@ -26,6 +26,7 @@ import contratoImprimir from './containers/Panel/Creditos/ContratoImprimir/Contr
 import movimientos from './containers/Panel/Movimientos/Movimientos';
 import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
 import acopioForm from './containers/Panel/Acopios/AcopioForm/AcopioForm';
+import formatos from './containers/Panel/Formatos/Formatos';
 import perfil from './containers/Panel/Perfil/Perfil';
 import logout from './containers/Panel/Logout/Logout';
 
@@ -82,6 +83,7 @@ class App extends Component {
           <Route path="/solicitud-formato" exact component={solicitudForm}/>
           <Route path="/mesa-control" exact component={mesaControl}/>
           <Route path="/evaluacion" exact component={evaluacion}/>
+          <Route path="/formatos" exact component={formatos}/>
         </>
       )
     }
