@@ -320,6 +320,7 @@
   "contratoPrint.vistaPrevia": "Vista previa de la impresión",
   "puesto": "Puesto",
   "fuente": "Fuente de Ingresos",
+  "pagos.id": "# Pago",
   "pagos.title": "Pagos",
   "pagos.selectedPago": "Detalles del Pago",
   "pagos.folio": "Folio",

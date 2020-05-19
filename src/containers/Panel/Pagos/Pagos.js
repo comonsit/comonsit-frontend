@@ -5,9 +5,9 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import PagoDetail from './PagoDetail/PagoDetail'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
-import TextElement from '../../../components/UI/TextElement/TextElement';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
@@ -69,19 +69,7 @@ class Pagos extends Component {
 
   render () {
 
-    let pago = <Spinner/>
-    if (this.props.selPago) {
-      const items = ["id", "credito", "fecha_pago", "cantidad", "fecha_banco", "referencia_banco",
-                     "autor", "interes_ord", "interes_mor", "abono_capital", "estatus_previo",
-                    "deuda_prev_total", "deuda_prev_int_ord", "deuda_prev_int_mor"]
-      pago = items.map(id => {
-        return (<TextElement
-                  label={"pagos."+id}
-                  content={this.props.selPago[id]}
-                  isNum={id === "cantidad" || id === "interes_ord" || id === "interes_mor" || id === "abono_capital" || id === "deuda_prev_total" || id === "deuda_prev_int_ord" || id === "deuda_prev_int_mor" }
-                  />)
-      })
-    }
+    const pago = (this.props.selPago) ? <PagoDetail pago={this.props.selPago}/> : <Spinner/>
 
     if (this.state.editPago) {
       this.props.history.push('/pago-formato')

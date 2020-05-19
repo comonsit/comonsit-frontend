@@ -1,0 +1,10 @@
+.Container {
+  background-color: #fff;
+  padding: .7rem;
+  margin: 0;
+  min-width: 50rem;
+}
+
+.SubSection {
+  border-bottom: 1px solid #ccc;
+}
