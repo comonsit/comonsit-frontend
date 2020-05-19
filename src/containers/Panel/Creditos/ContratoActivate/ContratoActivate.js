@@ -98,7 +98,7 @@ class ContratoActivate extends Component {
           valid: true,
           touched: true,
           hide: false,
-          disabled: false
+          disabled: this.props.selContrato.fecha_salida_banco !== null,
         },
         referencia_banco: {
           elementType: 'input',
@@ -114,7 +114,7 @@ class ContratoActivate extends Component {
           valid: true,
           touched: true,
           hide: false,
-          disabled: false
+          disabled: this.props.selContrato.referencia_banco !== null,
         }
       }
     }
