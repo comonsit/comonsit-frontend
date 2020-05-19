@@ -27,11 +27,13 @@ const contratoDetail = props => {
               />)
   })
 
-  const items2 = ["monto", "tipo_credito", "plazo", "intereses", "tasa", "tasa_moratoria", "total"]
+  const tipoTasa = {'FI': 'Fija', 'VA': 'Variable'}
+
+  const items2 = ["monto", "tipo_credito", "plazo", "intereses", "tasa", "tasa_moratoria", "tipo_tasa", "total"]
   const items2Array = items2.map(id => {
     return (<TextElement
               label={id}
-              content={props.contrato[id]}
+              content={id === "tipo_tasa" ? tipoTasa[props.contrato[id]] : props.contrato[id]}
               isNum={id === "monto" || id === "total" || id === "intereses"}
               isPerc={id === "tasa" || id === "tasa_moratoria"}
               twoLanguages={props.forPrinting}
