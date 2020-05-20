@@ -8,3 +8,9 @@
 .SubSection {
   border-bottom: 1px solid #ccc;
 }
+
+.StatusContainer {
+  width: 5em;
+  font-size: .7em;
+  margin: 2rem;
+}
