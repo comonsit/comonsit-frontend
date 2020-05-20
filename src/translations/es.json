@@ -94,6 +94,8 @@
   "solicitudes.estatus_evaluacion": "Estatus Evaluación",
   "solicitudes.disapprove": "Rechazar",
   "solicitudes.goToMesaControl": "Mesa de Control",
+  "solicitudes.allCreditsTrue": "Todos",
+  "solicitudes.allCreditsFalse": "en Revisión",
   "solicitudForm.title": "Solicitud Nueva",
   "searchSocio": "Buscar Socio",
   "searchSocioAval": "Buscar Aval",

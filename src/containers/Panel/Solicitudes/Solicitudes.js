@@ -9,6 +9,7 @@ import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/Tables/RTable/RTable';
 import Input from '../../../components/UI/Input/Input';
+import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
 import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterGreaterThan';
@@ -28,6 +29,7 @@ class Solicitudes extends Component {
     selectedSol: null,
     saldos: null,
     formIsValid: false,
+    oldSolicitudes: false,
     negociacionForm: {
       comentarios_promotor: {
         elementType: 'textarea',
@@ -50,7 +52,7 @@ class Solicitudes extends Component {
 
   componentDidMount () {
     this.props.unSelSol()
-    this.props.onInitSolicitudes(this.props.token)
+    this.props.onInitSolicitudes(this.props.token, this.state.oldSolicitudes)
   }
 
   componentDidUpdate(prevProps) {
@@ -152,6 +154,13 @@ class Solicitudes extends Component {
 
    this.setState({negociacionForm: updatedForm, formIsValid: formIsValid})
  }
+
+  onToggleFilter = () => {
+    this.props.onInitSolicitudes(this.props.token, !this.state.oldSolicitudes)
+    this.setState(prevState => ({
+      oldSolicitudes: !prevState.oldSolicitudes
+    }));
+  }
 
   render () {
     const columns = [
@@ -261,6 +270,15 @@ class Solicitudes extends Component {
       }
     }
 
+    const oldSolMessId = this.state.oldSolicitudes ? 'solicitudes.allCreditsTrue' : 'solicitudes.allCreditsFalse'
+    const toggleButton = (
+      <div>
+        <div className={classes.ToggleContainer}>
+          <SwitchToggle clicked={this.onToggleFilter}/>
+          <p><FormattedMessage id={oldSolMessId}/></p>
+        </div>
+      </div>)
+
     return (
       <>
         <Modal
@@ -282,6 +300,7 @@ class Solicitudes extends Component {
               clicked={this.onNewSolicitud}
               ><FormattedMessage id="solicitudes.new"/></Button>
           </Title>
+          {toggleButton}
           <RTable
             columns={columns}
             data={this.props.listaSolicitudes}
@@ -305,7 +324,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      onInitSolicitudes: (token) => dispatch(actions.initSolicitudes(token)),
+      onInitSolicitudes: (token, all) => dispatch(actions.initSolicitudes(token, all)),
       onNewSol: () => dispatch(actions.newSolicitud()),
       onFetchSelSol: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
       unSelSol: () => dispatch(actions.unSelectSolicitud()),

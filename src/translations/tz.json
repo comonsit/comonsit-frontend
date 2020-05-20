@@ -92,6 +92,8 @@
   "solicitudes.estatus_evaluacion": "bin spas ta evaluación",
   "solicitudes.disapprove": "Ma' lec",
   "solicitudes.goToMesaControl": "Mesa yu'un Control",
+  "solicitudes.allCreditsTrue": "sPisil",
+  "solicitudes.allCreditsFalse": "en Revision",
   "solicitudForm.title": "Yachil Yasc'an",
   "searchSocio": "Bin Socio",
   "searchSocioAval": "Bin Aval",

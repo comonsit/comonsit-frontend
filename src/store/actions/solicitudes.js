@@ -9,12 +9,13 @@ export const setSolicitudes = (solicitudes) => {
   }
 }
 
-export const initSolicitudes = (token) => {
+export const initSolicitudes = (token, fetchAll) => {
   return dispatch => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }
     }
-    axios.get('/solic-creditos.json', authData)
+    const all = fetchAll ? '/all/' : '.json'
+    axios.get('/solic-creditos' + all, authData)
       .then(response => {
         dispatch(setSolicitudes(response.data))
       })
