@@ -1,0 +1,41 @@
+.FormContainer {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  padding-left:1.5rem;
+}
+
+.Inputs {
+  display: grid;
+  grid-template-columns: auto;
+  justify-items: end;
+  align-items: start;
+  justify-content: center;
+  width: 80%;
+  column-gap: 3rem;
+}
+
+.Inputs > div {
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 1rem;
+}
+
+.InputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 62em) {
+  .Inputs {
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+  }
+  .Form {
+    flex-direction: row;
+  }
+}

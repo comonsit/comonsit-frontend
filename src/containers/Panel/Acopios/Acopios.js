@@ -8,9 +8,8 @@ import Money from '../../../Icons/Money.js';
 import Soap from '../../../Icons/Soap.js';
 import Coffee from '../../../Icons/Coffee.js';
 
-import AcopioGraph from '../../../components/Graphs/AcopioGraph/AcopioGraph';
+import AcopiosGraphs from './AcopiosGraphs/AcopiosGraphs';
 
-import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import RTable from '../../../components/Tables/RTable/RTable';
@@ -26,20 +25,14 @@ import axios from '../../../store/axios-be.js'
 
 class Acopios extends Component {
   state = {
-    acopioSelected: false,
     coffeeData: [],
     honeyData: [],
     soapData: [],
-    salarioData: [],
-    hintCF: null,
-    hintMI: null,
-    hintJA: null,
-    hintSA: null
+    salarioData: []
   }
 
   componentDidMount () {
     this.props.onInitAcopios(this.props.token)
-    this.getYearSum()
   }
 
   componentDidUpdate(prevProps) {
@@ -48,42 +41,8 @@ class Acopios extends Component {
     }
   }
 
-  getYearSum = () => {
-    const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
-    }
-    axios.get('/acopios/year_sum/', authData)
-      .then(response => {
-        this.populateYearSum(response.data)
-      })
-      .catch(error => {
-        // TODO:
-      })
-  }
-
-  populateYearSum = data => {
-    const cData = []
-    const hData = []
-    const soData = []
-    const saData = []
-
-    for (let yearData of data) {
-      cData.push({x: yearData.fecha__year, y: yearData.year_sum_cf})
-      hData.push({x: yearData.fecha__year, y: yearData.year_sum_mi})
-      soData.push({x: yearData.fecha__year, y: yearData.year_sum_ja})
-      saData.push({x: yearData.fecha__year, y: yearData.year_sum_sl})
-    }
-
-    this.setState({
-      coffeeData: cData,
-      honeyData: hData,
-      soapData: soData,
-      salarioData: saData,
-    })
-  }
-
   showAcopio =(id) => {
-    this.setState({acopioSelected: true});
+    // this.setState({acopioSelected: true});
     // this.props.selectAcopio(id)
   }
 
@@ -113,31 +72,6 @@ class Acopios extends Component {
         // TODO:
       })
   }
-
-  _forgetValues = () => {
-    this.setState({
-      hintCF: null,
-      hintMI: null,
-      hintJA: null,
-      hintSA: null
-    });
-  };
-
-  _rememberValueCF = value => {
-    this.setState({hintCF: value});
-  };
-
-  _rememberValueMI = value => {
-    this.setState({hintMI: value});
-  };
-
-  _rememberValueJA = value => {
-    this.setState({hintJA: value});
-  };
-
-  _rememberValueSA = value => {
-    this.setState({hintSA: value});
-  };
 
   renderStatus = cellInfo => {
     switch(cellInfo.cell.value) {
@@ -218,10 +152,6 @@ class Acopios extends Component {
 
     return (
       <>
-        <Modal
-          show={this.state.acopioSelected}
-          modalClosed={this.cancelSelected}>
-        </Modal>
         <div>
           <Title
             titleName="acopios.title">
@@ -230,38 +160,7 @@ class Acopios extends Component {
               ><FormattedMessage id="acopios.newAcopio"/></Button>
           </Title>
           <div className={classes.AllGraphs}>
-            <AcopioGraph
-              data={this.state.coffeeData}
-              label="cafe"
-              color="#92c3c0"
-              mouseOver={this._rememberValueCF}
-              mouseOut={this._forgetValues}
-              hint={this.state.hintCF}
-              />
-            <AcopioGraph
-              data={this.state.honeyData}
-              label="miel"
-              color="#D5B49E"
-              mouseOver={this._rememberValueMI}
-              mouseOut={this._forgetValues}
-              hint={this.state.hintMI}
-              />
-            <AcopioGraph
-              data={this.state.soapData}
-              label="jabon"
-              color="#ac92c3"
-              mouseOver={this._rememberValueJA}
-              mouseOut={this._forgetValues}
-              hint={this.state.hintJA}
-              />
-            <AcopioGraph
-              data={this.state.salarioData}
-              label="salarios"
-              color="#BBC392"
-              mouseOver={this._rememberValueSA}
-              mouseOut={this._forgetValues}
-              hint={this.state.hintSA}
-              />
+            <AcopiosGraphs/>
           </div>
           <div className={classes.Table}>
             {downloadXLSButton}

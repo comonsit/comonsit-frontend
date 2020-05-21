@@ -367,5 +367,6 @@
   "formatos.comprobantePago": "Comprobante de Pago",
   "formatos.formActReg": "Formato de Actas Regionales",
   "formatos.formActReg1": "Formato de Actas Regionales 2",
-  "formatos.formSol": "Formato de Solicitud"
+  "formatos.formSol": "Formato de Solicitud",
+  "acopiosGraphs.actualizar": "Actualizar Datos"
 }

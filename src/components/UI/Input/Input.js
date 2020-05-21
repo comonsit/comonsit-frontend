@@ -64,12 +64,14 @@ const input = (props) => {
                 onChange={props.changed} />
             break
         case ( 'select' ):
+            const blankOption = props.elementConfig.optionBlank ? (<option key={props.elementConfig.options.length+1} value={""}>--</option>) : null
             inputElement = (
                 <select
                     className={inputClasses.join(' ')}
                     value={props.value}
                     disabled={props.disabled}
                     onChange={props.changed} >
+                    {blankOption}
                     {props.elementConfig.options.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.displayValue}
