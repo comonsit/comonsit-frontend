@@ -12,6 +12,7 @@ import publicaciones from './containers/General/Publicaciones/Publicaciones';
 import contacto from './containers/General/Contacto/Contacto';
 import acceso from './containers/General/Acceso/Acceso';
 import socios from './containers/Panel/Socios/Socios';
+import evalSocios from './containers/Panel/Socios/EvalSocio/EvalSocio';
 import tsumbalil from './containers/Panel/Tsumbalil/Tsumbalil';
 import solicitudes from './containers/Panel/Solicitudes/Solicitudes';
 import solicitudForm from './containers/Panel/Solicitudes/SolicitudForm/SolicitudForm';
@@ -68,6 +69,7 @@ class App extends Component {
         <>
           <Route path="/d" exact component={socios}/>
           <Route path="/socios" exact component={socios}/>
+          <Route path="/evaluacion-socio" exact component={evalSocios}/>
           <Route path="/perfil" exact component={perfil}/>
           <Route path="/acopios" exact component={acopios}/>
           <Route path="/creditos" exact component={creditos}/>

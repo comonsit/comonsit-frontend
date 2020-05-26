@@ -1,0 +1,13 @@
+.BoxContainer  {
+  padding: 2rem;
+  border: 1px solid #dddedf;
+  border-radius: .5rem;
+  background-color: #f6fcf9;
+  margin: 2rem;
+}
+
+.DataContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

@@ -52,6 +52,7 @@
   "socios.trabajador": "Trbjr",
   "socios.general": "CmSC",
   "socios.newSocioButton": "Nuevo Socio",
+  "socios.evaluacionSocio": "Evaluación de Crédito",
   "approveButton": "Aprobar",
   "disapproveButton": "Rechazar",
   "saveButton": "Guardar",
@@ -368,5 +369,8 @@
   "formatos.formActReg": "Formato de Actas Regionales",
   "formatos.formActReg1": "Formato de Actas Regionales 2",
   "formatos.formSol": "Formato de Solicitud",
-  "acopiosGraphs.actualizar": "Actualizar Datos"
+  "acopiosGraphs.actualizar": "Actualizar Datos",
+  "evalSocio.title": "Evaluación",
+  "evalSocio.Datos": "Datos",
+  "evalSocio.Acopios": "Acopios"
 }

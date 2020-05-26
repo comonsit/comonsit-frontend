@@ -52,6 +52,7 @@
   "socios.trabajador": "Trabjr",
   "socios.general": "ComSC",
   "socios.newSocioButton": "Yachil Socio",
+  "socios.evaluacionSocio": "Bin Yilel sCredito",
   "approveButton": "Lecubtesel",
   "saveButton": "Ochanel",
   "editButton": "Yantesel",
@@ -367,5 +368,8 @@
   "formatos.formActReg": "Formato Regionaletic",
   "formatos.formActReg1": "Formato Regionaletic 2",
   "formatos.formSol": "Formato Solicitud",
-  "acopiosGraphs.actualizar": "Actualizar Datos"
+  "acopiosGraphs.actualizar": "Actualizar Datos",
+  "evalSocio.title": "Evaluación",
+  "evalSocio.Datos": "Datos",
+  "evalSocio.Acopios": "Acopios"
 }
