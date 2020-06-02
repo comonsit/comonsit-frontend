@@ -525,7 +525,7 @@ class SociosForm extends Component {
       <div className={classes.Container}>
         <Title
           titleName="socioForm.title"
-          titleNameEx={this.props.selSocio.clave_socio}
+          titleNameEx={": " + this.props.selSocio.clave_socio}
           >
           {editButton}
         </Title>

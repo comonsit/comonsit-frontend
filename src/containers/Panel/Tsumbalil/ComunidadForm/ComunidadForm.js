@@ -151,7 +151,7 @@ class ComunidadForm extends Component {
       <>
         <Title
           titleName="comunidadForm.title"
-          titleNameEx={this.state.comunidadForm.nombre_de_comunidad.value}
+          titleNameEx={": " + this.state.comunidadForm.nombre_de_comunidad.value}
           >
           {editButton}
         </Title>
