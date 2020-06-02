@@ -8,7 +8,7 @@ import cl from './PNavigationItems.module.css';
 const pnavigationItems = props => (
   <div className={cl.NavigationItems}>
     <div className={[cl.NavigationItem, cl.NavigationItemHome].join(' ')} onClick={props.clicked}>
-      <NavLink to="/dashboard" exact activeClassName={cl.active}><FormattedMessage id="pmenu.inicio"/></NavLink>
+      <NavLink to="/inicio" exact activeClassName={cl.active}><FormattedMessage id="pmenu.inicio"/></NavLink>
     </div>
     <Collapsible
       transitionTime ={300}

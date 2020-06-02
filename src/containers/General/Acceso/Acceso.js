@@ -116,7 +116,7 @@ class Auth extends Component {
 
         let authRedirect = null  // TODO: usar: this.props.authRedirectPath
         if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to={"/socios"}/>
+            authRedirect = <Redirect to={"/inicio"}/>
         }
 
         // TODO: hacer Olvidé mi contraseña NavLink GENÉRICO!

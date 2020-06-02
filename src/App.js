@@ -29,6 +29,7 @@ import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/Movi
 import acopioForm from './containers/Panel/Acopios/AcopioForm/AcopioForm';
 import formatos from './containers/Panel/Formatos/Formatos';
 import perfil from './containers/Panel/Perfil/Perfil';
+import inicio from './containers/Panel/Inicio/Inicio';
 import logout from './containers/Panel/Logout/Logout';
 
 // import languageObject from './translations/messages'
@@ -67,7 +68,7 @@ class App extends Component {
     if (this.props.isAuthenticated) {
       authenticatedRoutes = (
         <>
-          <Route path="/d" exact component={socios}/>
+          <Route path="/inicio" exact component={inicio}/>
           <Route path="/socios" exact component={socios}/>
           <Route path="/evaluacion-socio" exact component={evalSocios}/>
           <Route path="/perfil" exact component={perfil}/>
@@ -89,6 +90,9 @@ class App extends Component {
         </>
       )
     }
+
+    const redir = this.props.isAuthenticated ? <Redirect to="/inicio"/> : <Redirect to="/"/>
+
     return (
       <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
         <Layout>
@@ -102,7 +106,7 @@ class App extends Component {
             {authenticatedRoutes}
             <Route path="/" exact component={homeContainer}/>
             {/* TODO: make 404 in redirect */}
-            <Redirect to="/"/>
+            {redir}
           </Switch>
         </Layout>
       </IntlProvider>
