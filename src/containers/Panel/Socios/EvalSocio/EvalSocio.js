@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import SolicSaldosGraph from '../../../../components/Graphs/SolicSaldosGraph/SolicSaldosGraph';
 import Title from '../../../../components/UI/Title/Title';
+import Card from '../../../../components/UI/Card/Card';
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import * as actions from '../../../../store/actions'
@@ -65,16 +66,14 @@ class EvalSocio extends Component {
           {socioName}
         </Title>
         <div className={classes.BlocksContainer}>
-          <div className={classes.BoxContainer}>
-            <h3><FormattedMessage id={"evalSocio.Datos"}/></h3>
+          <Card title={"evalSocio.Datos"}>
             <div className={classes.DataContainer}>
               {items1Array}
             </div>
-          </div>
-          <div className={classes.BoxContainer}>
-            <h3><FormattedMessage id={"evalSocio.Acopios"}/></h3>
+          </Card>
+          <Card title={"evalSocio.Acopios"}>
             {saldoGraph}
-          </div>
+          </Card>
         </div>
       </div>)
   }
