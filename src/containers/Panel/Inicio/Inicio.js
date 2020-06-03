@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classes from './Inicio.module.css'
 import { connect } from 'react-redux';
 
+import Weather from './Weather/Weather'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Title from '../../../components/UI/Title/Title';
 import Card from '../../../components/UI/Card/Card';
@@ -29,6 +30,7 @@ class Inicio extends Component {
         />
         <div className={classes.CardsContainer}>
           <Card title={"Clima..."}>
+            <Weather/>
           </Card>
           <Card title={"Mapa..."}>
           </Card>
