@@ -1,11 +1,13 @@
 .ForecastContainer {
   display: flex;
+  justify-content: space-around;
 }
 
 .CardContainer {
-  border: 1px solid #fff;
-  border-radius: .1rem;
-  font-size: .3em;
+  font-size: .5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .CardBody {

@@ -15,7 +15,7 @@ class Weather extends React.Component {
   }
 
   componentDidMount = () => {
-    const weatherURL = `http://api.openweathermap.org/data/2.5/forecast?lat=17.07&lon=-91.62&units=metric&lang=es&APPID=${key}`
+    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=17.07&lon=-91.62&units=metric&lang=es&APPID=${key}`
     fetch(weatherURL)
         .then(res => res.json())
         .then(data => {
@@ -32,8 +32,6 @@ class Weather extends React.Component {
     const formatDayCards = (this.state.dailyData) ?
       this.state.dailyData.map((reading, index) => <DayCard reading={reading} key={index} />) :
       <Spinner/>
-
-    console.log(key)
 
     return (
       <div>
