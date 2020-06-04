@@ -4,6 +4,7 @@ import classes from './Inicio.module.css'
 import { connect } from 'react-redux';
 
 import Weather from './Weather/Weather'
+import Numbers from './Numbers/Numbers'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Title from '../../../components/UI/Title/Title';
 import Card from '../../../components/UI/Card/Card';
@@ -32,12 +33,6 @@ class Inicio extends Component {
           <Card title={"Clima..."}>
             <Weather/>
           </Card>
-          <Card title={"Mapa..."}>
-          </Card>
-          <Card title={"Saldos..."}>
-          </Card>
-          <Card title={"Números..."}>
-          </Card>
           <Card title={"Calendario..."}>
             <div className={classes.CalContainer}>
               <iframe
@@ -49,6 +44,13 @@ class Inicio extends Component {
                 frameborder="0"
                 scrolling="no"></iframe>
             </div>
+          </Card>
+          <Card title={"Mapa..."}>
+          </Card>
+          <Card title={"Saldos..."}>
+          </Card>
+          <Card title={"Números..."}>
+            <Numbers/>
           </Card>
         </div>
       </div>

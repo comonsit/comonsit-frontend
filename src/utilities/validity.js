@@ -26,6 +26,14 @@ export const checkValidity = (value, rules, additional=false) => {
         isValid = pattern.test(value) && isValid
     }
 
+    if (rules.minNumValue) {
+        isValid = value >=  rules.minNumValue && isValid
+    }
+
+    if (rules.maxNumValue) {
+        isValid = value <=  rules.maxNumValue && isValid
+    }
+
     if (rules.isDecimal) {
         const pattern = /^[0-9]+([.,][0-9]{1,2})?$/;
         isValid = pattern.test(value) && isValid

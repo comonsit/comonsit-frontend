@@ -23,6 +23,6 @@
 
 @media (min-width: 42em) {
   .CardsContainer {
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
   }
 }
