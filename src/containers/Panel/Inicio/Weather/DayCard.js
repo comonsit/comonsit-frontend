@@ -1,22 +1,22 @@
 import React from 'react';
 import classes from './Weather.module.css'
-// import { useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
+import translations from './WeatherTranslations';
 import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate';
 
 const DayCard = props => {
 
-  // console.log(useIntl().locale)
-
   const imgURL = `owf owf-${props.reading.icon} owf-5x`
+
+  // include Tseltal descriptions
+  const description = (useIntl().locale === 'tz') ? translations[props.reading.icon] : props.reading.description
 
   return (
     <div className={classes.CardContainer}>
-        <h3><FrmtedDate value={props.day+" 00:00:00"} noYear/></h3>
+        <h3 className={classes.Text}><FrmtedDate value={props.day+" 00:00:00"} noYear/></h3>
         <i className={imgURL}></i>
-        <h2>{Math.round(props.reading.maxTemp)}/{Math.round(props.reading.minTemp)} °C</h2>
-        <div className={classes.CardBody}>
-          <p className="card-text">{props.reading.description}</p>
-        </div>
+        <h3 className={classes.Text}>{Math.round(props.reading.maxTemp)} / {Math.round(props.reading.minTemp)} °C</h3>
+        <p className={classes.Text}>{description}</p>
     </div>
   )
 }

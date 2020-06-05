@@ -371,5 +371,12 @@
   "evalSocio.title": "Yocliyel",
   "evalSocio.Datos": "Bintic ay yu'un",
   "evalSocio.Acopios": "Stsobel a'telil",
-  "inicio.title": "Bin awilel"
+  "inicio.title": "Bin awilel",
+  "inicio.calendario": "Calendario",
+  "inicio.pronostico": "Pronóstico Clima",
+  "inicio.mapa": "Mapa",
+  "inicio.saldos": "Saldos",
+  "inicio.numeros": "Números Tseltales",
+  "inicio.numero": "Número",
+  "inicio.numeroTradcurir": "Traducir Número"
 }

@@ -20,7 +20,7 @@ class Weather extends React.Component {
             type: 'text',
             placeholder: '..'
           },
-          label: (<><FormattedMessage id="numero..."/></>),
+          label: (<><FormattedMessage id="inicio.numero"/></>),
           value: '',
           validation: {
             required: true,
@@ -87,7 +87,7 @@ class Weather extends React.Component {
             <Button
               btnType="Short"
               disabled={!this.state.formIsValid}>
-              <FormattedMessage id="traducir numero..."/>
+              <FormattedMessage id="inicio.numeroTradcurir"/>
             </Button>
           </form>
         </div>

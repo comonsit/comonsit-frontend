@@ -33,10 +33,10 @@ class Inicio extends Component {
       <div className={classes.Container}>
         {title}
         <div className={classes.CardsContainer}>
-          <Card title={"Clima..."}>
+          <Card title={"inicio.pronostico"}>
             <Weather/>
           </Card>
-          <Card title={"Calendario..."}>
+          <Card title={"inicio.calendario"}>
             <div className={classes.CalContainer}>
               <iframe
                 className={classes.Calendario}
@@ -44,15 +44,15 @@ class Inicio extends Component {
                 src="https://calendar.google.com/calendar/b/1/embed?height=600&amp;wkst=2&amp;bgcolor=%23bbc392&amp;ctz=America%2FDetroit&amp;src=ZzcyZ3ZvYWszOGozbWY3dmZtcG9jaWFwN2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%236633CC&amp;color=%23227F63&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0"
                 width="300"
                 height="250"
-                frameborder="0"
+                frameBorder="0"
                 scrolling="no"></iframe>
             </div>
           </Card>
-          <Card title={"Mapa..."}>
+          <Card title={"inicio.mapa"}>
           </Card>
-          <Card title={"Saldos..."}>
+          <Card title={"inicio.saldos"}>
           </Card>
-          <Card title={"Números..."}>
+          <Card title={"inicio.numeros"}>
             <Numbers/>
           </Card>
         </div>
