@@ -8,6 +8,7 @@ import Numbers from './Numbers/Numbers'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Title from '../../../components/UI/Title/Title';
 import Card from '../../../components/UI/Card/Card';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import axios from '../../../store/axios-be.js';
 import * as actions from '../../../store/actions'
 
@@ -22,13 +23,15 @@ class Inicio extends Component {
 
   render () {
 
+    const title = (this.props.user) ? <Title
+      titleName="inicio.title"
+      titleNameEx={" " + this.props.user.first_name}
+    /> : <Spinner/>
+
     return (
       <>
       <div className={classes.Container}>
-        <Title
-          titleName="inicio.title"
-          titleNameEx={" " + this.props.user.first_name}
-        />
+        {title}
         <div className={classes.CardsContainer}>
           <Card title={"Clima..."}>
             <Weather/>
