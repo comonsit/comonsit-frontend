@@ -8,7 +8,7 @@ const formtedDate = props => {
                 value={props.value}
                 day="numeric"
                 month="long"
-                year="numeric"/>
+                year={(props.noYear) ? undefined : "numeric"}/>
               </IntlProvider>)
   } else {
     return ''

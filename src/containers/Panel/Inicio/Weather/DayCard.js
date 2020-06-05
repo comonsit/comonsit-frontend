@@ -1,21 +1,21 @@
 import React from 'react';
 import classes from './Weather.module.css'
+// import { useIntl } from 'react-intl';
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate';
 
-const DayCard = ({ reading }) => {
+const DayCard = props => {
 
-  let newDate = new Date();
-  const weekday = reading.dt * 1000
-  newDate.setTime(weekday)
+  // console.log(useIntl().locale)
 
-  const imgURL = `owf owf-${reading.weather[0].id} owf-5x`
+  const imgURL = `owf owf-${props.reading.icon} owf-5x`
 
   return (
     <div className={classes.CardContainer}>
-        <h3>{newDate.getUTCDate()}</h3>
+        <h3><FrmtedDate value={props.day+" 00:00:00"} noYear/></h3>
         <i className={imgURL}></i>
-        <h2>{Math.round(reading.main.temp)} °C</h2>
+        <h2>{Math.round(props.reading.maxTemp)}/{Math.round(props.reading.minTemp)} °C</h2>
         <div className={classes.CardBody}>
-          <p className="card-text">{reading.weather[0].description}</p>
+          <p className="card-text">{props.reading.description}</p>
         </div>
     </div>
   )
