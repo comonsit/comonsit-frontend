@@ -11,7 +11,18 @@ import PToolbar from '../../components/NavigationPanel/PToolbar/PToolbar';
 class Layout extends Component {
 
   state = {
-    showSideDrawer: false
+    showSideDrawer: false,
+    auth: this.props.isAuthenticated,
+    usr: this.props.user
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.isAuthenticated !== prevProps.isAuthenticated) {
+      this.setState({auth: this.props.isAuthenticated})
+    }
+    if(this.props.user !== prevProps.user) {
+      this.setState({usr: this.props.user})
+    }
   }
 
   sideDrawerOpenHandler = () => {
@@ -30,15 +41,15 @@ class Layout extends Component {
 
   render() {
     let classes, menu
-    if (this.props.isAuthenticated && this.props.user){
+    if (this.state.auth && this.state.usr){
       classes = [cl.PContent]
       menu = (
         <>
           <PToolbar
             showMenu={this.sideDrawerOpenHandler}
-            isAuth={this.props.isAuthenticated}
+            isAuth={this.state.auth}
             open={this.state.showSideDrawer}
-            user={this.props.user}
+            user={this.state.usr}
             closed={this.sideDrawerClosedHandler}/>
         </>
       )
@@ -47,7 +58,6 @@ class Layout extends Component {
       menu = (
         <>
           <SideDrawer
-            isAuth={this.props.isAuthenticated}
             open={this.state.showSideDrawer}
             closed={this.sideDrawerClosedHandler}/>
           <Toolbar

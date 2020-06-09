@@ -91,8 +91,6 @@ class App extends Component {
       )
     }
 
-    const redir = this.props.isAuthenticated ? <Redirect to="/inicio"/> : <Redirect to="/"/>
-
     return (
       <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
         <Layout>
@@ -106,7 +104,7 @@ class App extends Component {
             {authenticatedRoutes}
             <Route path="/" exact component={homeContainer}/>
             {/* TODO: make 404 in redirect */}
-            {redir}
+            <Redirect to={(this.props.isAuthenticated) ? "/inicio" : "/"}/> : <Redirect to="/"/>
           </Switch>
         </Layout>
       </IntlProvider>
