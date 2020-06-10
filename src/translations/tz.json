@@ -378,5 +378,14 @@
   "inicio.saldos": "Saldos",
   "inicio.numeros": "Números Tseltales",
   "inicio.numero": "Número",
-  "inicio.numeroTradcurir": "Traducir Número"
+  "inicio.numeroTradcurir": "Traducir Número",
+  "bancos.title": "Conciliacion Bancos",
+  "bancos.fecha": "Sc'ahc'alel",
+  "bancos.subcuenta": "Ahtalel",
+  "bancos.subcuenta_nombre": "sBihil",
+  "bancos.referencia": "Referencia",
+  "bancos.ingreso": "Ingreso",
+  "bancos.egreso": "Egreso",
+  "bancos.saldo_bancos": "Saldo",
+  "bancos.newMovimiento": "Yach'il Movimiento"
 }

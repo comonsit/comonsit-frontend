@@ -378,5 +378,14 @@
   "inicio.saldos": "Saldos",
   "inicio.numeros": "Números Tseltales",
   "inicio.numero": "Número",
-  "inicio.numeroTradcurir": "Traducir Número"
+  "inicio.numeroTradcurir": "Traducir Número",
+  "bancos.title": "Conciliación Bancos",
+  "bancos.fecha": "Fecha",
+  "bancos.subcuenta": "Subcuenta",
+  "bancos.subcuenta_nombre": "Concepto",
+  "bancos.referencia": "Referencia",
+  "bancos.ingreso": "Ingreso",
+  "bancos.egreso": "Egreso",
+  "bancos.saldo_bancos": "Saldo",
+  "bancos.newMovimiento": "Nuevo Movimiento"
 }
