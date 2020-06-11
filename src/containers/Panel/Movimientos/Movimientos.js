@@ -10,6 +10,7 @@ import Input from '../../../components/UI/Input/Input';
 import RTable from '../../../components/Tables/RTable/RTable';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
+import Tabs from '../../../components/UI/Tabs/Tabs';
 import Currency from '../../../components/UI/Formatting/Currency';
 import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
 import SociosList from '../Socios/SociosList/SociosList';
@@ -276,43 +277,38 @@ class Movimientos extends Component {
               clicked={this.onNewMovimiento}
               ><FormattedMessage id="movimientos.newMovimiento"/></Button>
           </Title>
-          <div className={classes.FormContainer}>
-            <div className={classes.ToggleContainer}>
-              <div
-                onClick={() => ({})}
-                className={socioClasses.join(' ')}>
-                <p><FormattedMessage id="movimientos.buscarSocio"/></p>
+          <div className={classes.FormsContainer}>
+            <Tabs>
+              <div label="movimientos.buscarSocio">
+                <form className={classes.Form} onSubmit={this.onSubmitForm}>
+                  <div className={classes.Inputs}>
+                    <Input
+                      label={this.state.form.clave_socio.label}
+                      key= {'movimientoSocio1'}
+                      elementType={this.state.form.clave_socio.elementType}
+                      elementConfig={this.state.form.clave_socio.elementConfig}
+                      value={this.state.form.clave_socio.value}
+                      shouldValidate={this.state.form.clave_socio.validation}
+                      invalid={!this.state.form.clave_socio.valid}
+                      touched={this.state.form.clave_socio.touched}
+                      disabled={this.props.loading}
+                      hide={this.state.form.clave_socio.hide}
+                      changed={(event) => this.inputChangedHandler(event, 'clave_socio')}
+                      focused
+                      />
+                  </div>
+                  <Button
+                    btnType="Success"
+                    disabled={!this.state.formIsValid}>
+                    <FormattedMessage id="movimientos.actualizar"/>
+                  </Button>
+                </form>
+                <Button btnType="Short" clicked={(event) => this.onSearchSocio(event)}><FormattedMessage id="searchSocio"/></Button>
               </div>
-              <div
-                onClick={() => ({})}
-                className={comunidadClasses.join(' ')}>
-                <p><FormattedMessage id="movimientos.buscarComunidad"/></p>
+              <div label="movimientos.buscarComunidad">
+                <p>...en construcción...</p>
               </div>
-            </div>
-            <form className={classes.Form} onSubmit={this.onSubmitForm}>
-              <div className={classes.Inputs}>
-                <Input
-                  label={this.state.form.clave_socio.label}
-                  key= {'movimientoSocio1'}
-                  elementType={this.state.form.clave_socio.elementType}
-                  elementConfig={this.state.form.clave_socio.elementConfig}
-                  value={this.state.form.clave_socio.value}
-                  shouldValidate={this.state.form.clave_socio.validation}
-                  invalid={!this.state.form.clave_socio.valid}
-                  touched={this.state.form.clave_socio.touched}
-                  disabled={this.props.loading}
-                  hide={this.state.form.clave_socio.hide}
-                  changed={(event) => this.inputChangedHandler(event, 'clave_socio')}
-                  focused
-                  />
-              </div>
-              <Button
-                btnType="Success"
-                disabled={!this.state.formIsValid}>
-                <FormattedMessage id="movimientos.actualizar"/>
-              </Button>
-            </form>
-            <Button btnType="Short" clicked={(event) => this.onSearchSocio(event)}><FormattedMessage id="searchSocio"/></Button>
+            </Tabs>
           </div>
           <div className={classes.ResultsContainer}>
             {movimientosResults}

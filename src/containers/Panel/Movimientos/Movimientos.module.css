@@ -1,20 +1,13 @@
-.FormContainer {
-  padding: 0rem;
-  max-width: 60rem;
-  border: 1px solid #dddedf;
-  border-radius: .5rem;
-  background-color: #f6fcf9;
-  margin: 0 auto;
-}
-
-.FormContainer h3 {
-  text-align: center;
-  font-family: 'Arquitecta';
+.FormsContainer {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Form {
   align-items: center;
   display: flex;
+  flex-direction: column;
 }
 
 .Form div {
@@ -51,52 +44,8 @@
   border-radius: .5rem;
 }
 
-.ToggleContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.porSocio {
-  width: 50%;
-  padding: .7rem 4rem;
-  border-radius: .5rem 0 0 0;
-  text-align: center;
-}
-.porSocio p {
-  font-family: 'Arquitecta';
-  font-size: 1.5em;
-  margin: 0;
-}
-
-.porSocioActive {
-  background-color: #f6fcf9;
-  text-decoration: underline;
-}
-
-.porComunidad {
-  width: 50%;
-  padding: .7rem 4rem;
-  border-radius: 0 .5rem 0 0;
-  text-align: center;
-}
-
-.porComunidad p {
-  font-family: 'Arquitecta';
-  font-size: 1.5em;
-  margin: 0;
-}
-
-.porComunidadInactive {
-  border-bottom: 1px solid #dddedf;
-  border-left: 1px solid #dddedf;
-  /* border-bottom: 2px solid #243746; */
-  background-color: #ffffff;
-  color: gray;
-  cursor: not-allowed;
-}
-
-.porComunidadInactive:hover {
-  /* color: #243746; */
-  text-decoration: underline;
+@media (min-width: 42em) {
+  .Form {
+    flex-direction: row;
+  }
 }
