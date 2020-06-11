@@ -1,0 +1,40 @@
+.TabsList {
+  border-bottom: 1px solid #dddedf;
+  padding-left: 0;
+  margin-bottom: 0;
+  font-family: 'Arquitecta';
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+.TabListItem {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5em;
+  cursor: pointer;
+  flex-grow: 1;
+  border: solid #ccc;
+  border-width: 1px 1px 0 1px;
+  text-align: center;
+  padding: .8rem;
+}
+
+.TabListItemActive {
+  border-style: solid;
+  border-width: 1px 1px 0 1px;
+  text-decoration: underline;
+  background-color: white;
+  background-color: #f6fcf9;
+  padding: .9rem;
+}
+
+.TabsContent {
+  overflow-x: auto;
+  background-color: #f6fcf9;
+  border-bottom: 1px solid #dddedf;
+  border-left: 1px solid #dddedf;
+  border-right: 1px solid #dddedf;
+}

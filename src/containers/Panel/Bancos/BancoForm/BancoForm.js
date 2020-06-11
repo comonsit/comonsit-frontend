@@ -8,6 +8,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
+import Tabs from '../../../../components/UI/Tabs/Tabs';
 import classes from './BancoForm.module.css'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -179,6 +180,17 @@ class BancoForm extends Component {
         </form>
         <div className={classes.ContainerBoxes}>
           <div className={classes.SearchBox}>
+            <Tabs>
+             <div label="bancoForm.Movimientos">
+               <p>...movimientos...</p>
+             </div>
+             <div label="bancoForm.Pagos">
+               <p>...pagos...</p>
+             </div>
+             <div label="bancoForm.Otros">
+               <p>...otros...</p>
+             </div>
+           </Tabs>
           </div>
           <div className={classes.ButtonsBox}>
             <Button

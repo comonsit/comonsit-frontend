@@ -392,5 +392,8 @@
   "bancoForm.cuenta_banco": "Ahtalel",
   "bancoForm.referencia_banco": "Schicnaji'bal yahtalul ta snahul taqu'in",
   "bancoForm.fecha": "Sc'ahc'alel",
-  "bancoForm.cantidad": "Jaye'b"
+  "bancoForm.cantidad": "Jaye'b",
+  "bancoForm.Movimientos": "Yaqu'el tso'bil taqu'inetic",
+  "bancoForm.Pagos": "Stojel",
+  "bancoForm.Otros": "Yan"
 }
