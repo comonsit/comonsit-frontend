@@ -387,5 +387,10 @@
   "bancos.ingreso": "Ingreso",
   "bancos.egreso": "Egreso",
   "bancos.saldo_bancos": "Saldo",
-  "bancos.newMovimiento": "Nuevo Movimiento"
+  "bancos.newMovimiento": "Nuevo Movimiento",
+  "bancoForm.title": "Nuevo Movimiento",
+  "bancoForm.cuenta_banco": "Cuenta Banco",
+  "bancoForm.referencia_banco": "Referencia Bancaria",
+  "bancoForm.fecha": "Fecha de Movimiento",
+  "bancoForm.cantidad": "Cantidad"
 }

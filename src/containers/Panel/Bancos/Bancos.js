@@ -70,7 +70,7 @@ class Tsumbalil extends Component {
           <Title
             titleName="bancos.title">
             <Button
-              clicked={() => this.props.history.push('solicitud-formato')}
+              clicked={() => this.props.history.push('banco-form')}
             >
               <FormattedMessage id="bancos.newMovimiento"/>
             </Button>

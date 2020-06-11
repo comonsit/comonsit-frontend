@@ -1,0 +1,21 @@
+.ContainerBoxes {
+  display: grid;
+  grid-template-columns: auto 5rem auto;
+  justify-items: center;
+  align-items: center;
+}
+
+.ButtonsBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.SearchBox {
+  background-color: #ccc;
+  width: 90%;
+}
+
+.SelectedBox {
+  background-color: #ccc;
+  width: 90%;
+}
