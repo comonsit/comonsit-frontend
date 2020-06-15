@@ -72,3 +72,8 @@ export {
   createNewComunidad,
   setUser
 } from './generalData'
+
+export {
+  setSelList,
+  clearSelList
+} from './selectList'

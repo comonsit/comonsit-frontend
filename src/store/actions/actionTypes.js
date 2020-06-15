@@ -70,6 +70,9 @@ export const NEW_COMUNIDAD_START = 'NEW_COMUNIDAD_START'
 
 export const CHANGE_LOCALE = 'CHANGE_LOCALE'
 
+export const SET_SEL_LIST = 'SET_SEL_LIST'
+export const CLEAR_SEL_LIST = 'CLEAR_SEL_LIST'
+
 export const AUTH_START = 'AUTH_START'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_FAIL = 'AUTH_FAIL'

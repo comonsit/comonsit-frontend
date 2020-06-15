@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination } from 'react-table'
+import React, { useState, useEffect } from 'react'
+import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination, useRowSelect } from 'react-table'
+import IndeterminateCheckbox from './IndeterminateCheckbox'
 import classes from './RTable.module.css'
 import SwitchToggle from '../../UI/SwitchToggle/SwitchToggle'
 import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
 import DefaultColumnFilter from './Filters/DefaultColumnFilter'
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from '../../../store/actions'
 
-const RTable = ({ columns, data, onRowClick, hideSearch}) => {
+const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
 
   const [advancedSearch, setAdvancedSearch] = useState(false);
 
@@ -38,6 +41,9 @@ const RTable = ({ columns, data, onRowClick, hideSearch}) => {
     []
   )
 
+  const dispatch = useDispatch();
+
+
   // Use the state and functions returned from useTable to build your UI
     const {
       getTableProps,
@@ -56,7 +62,8 @@ const RTable = ({ columns, data, onRowClick, hideSearch}) => {
       nextPage,
       previousPage,
       setPageSize,
-      state: { pageIndex, pageSize },
+      selectedFlatRows,
+      state: { pageIndex, pageSize, selectedRowIds },
 
     } = useTable(
       {
@@ -69,8 +76,40 @@ const RTable = ({ columns, data, onRowClick, hideSearch}) => {
       useFilters,
       useGlobalFilter,
       useSortBy,
-      usePagination
+      usePagination,
+      useRowSelect,
+      hooks => {
+        if (selectableRow) {
+        hooks.visibleColumns.push(columns => [
+            {
+                    id: 'selection',
+                    // The header can use the table's getToggleAllRowsSelectedProps method
+                    // to render a checkbox
+                    Header: ({ getToggleAllRowsSelectedProps }) => (
+                      <div>
+                        <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+                      </div>
+                    ),
+                    // The cell can use the individual row's getToggleRowSelectedProps method
+                    // to the render a checkbox
+                    Cell: ({ row }) => (
+                      <div>
+                        <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+                      </div>
+                    ),
+                  },
+            ...columns,
+          ])
+        }
+    }
   )
+
+  useEffect(() => {
+    if (selectableRow) {
+      dispatch(actions.setSelList(selectedFlatRows.map(d => d.original)));
+    }
+  });
+
 
   const globFilter = !hideSearch ? (
     <tr>
@@ -186,5 +225,6 @@ const RTable = ({ columns, data, onRowClick, hideSearch}) => {
 
   )
 }
+
 
 export default RTable

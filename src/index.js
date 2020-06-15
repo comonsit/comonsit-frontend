@@ -12,6 +12,7 @@ import acopioReducer from './store/reducers/acopios'
 import movimientoReducer from './store/reducers/movimientos'
 import authReducer from './store/reducers/auth'
 import localeReducer from './store/reducers/locale'
+import listSelReducer from './store/reducers/selectList'
 import thunk from 'redux-thunk';
 import './index.css';
 import './assets/fonts/Arquitecta.otf'
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
     movimientos: movimientoReducer,
     generalData: generalDataReducer,
     creditos: creditosReducer,
-    pagos: pagosReducer
+    pagos: pagosReducer,
+    selList: listSelReducer
 })
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
