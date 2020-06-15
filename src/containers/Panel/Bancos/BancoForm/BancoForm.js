@@ -9,8 +9,9 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
 import Tabs from '../../../../components/UI/Tabs/Tabs';
+import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import classes from './BancoForm.module.css'
-import * as actions from '../../../../store/actions'
+// import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
@@ -20,6 +21,7 @@ class BancoForm extends Component {
     super(props);
     this.state = {
       formIsValid: false,
+      movs: null,
       bankForm: {
         banco: {
           elementType: 'select',
@@ -86,6 +88,20 @@ class BancoForm extends Component {
     }
   }
 
+  componentDidMount () {
+    this.onGetMovimientos()
+  }
+
+  onGetMovimientos () {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+
+    axios.get('/movimientos-conc/', authData)
+      .then(response => {
+        this.setState({movs: response.data})
+      })
+  }
 
   onSubmitForm = (event) => {
     event.preventDefault();
@@ -161,6 +177,12 @@ class BancoForm extends Component {
       })
     }
 
+    let movsList = <Spinner/>
+
+    if (this.state.movs) {
+      movsList = <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
+    }
+
     return (
       <div>
         <Title
@@ -182,7 +204,7 @@ class BancoForm extends Component {
           <div className={classes.SearchBox}>
             <Tabs>
              <div label="bancoForm.Movimientos">
-               <p>...movimientos...</p>
+               {movsList}
              </div>
              <div label="bancoForm.Pagos">
                <p>...pagos...</p>
