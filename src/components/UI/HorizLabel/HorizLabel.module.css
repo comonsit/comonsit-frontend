@@ -1,0 +1,36 @@
+.Container {
+  position: relative;
+}
+
+.Container h5 {
+    background: #435e73;
+    color: #fff;
+    padding: .5rem 0 1rem 0;
+    margin: 0;
+    width: 20rem;
+}
+
+/* Class name via Modernizr */
+.Container {
+    border-left: 32px solid #435e73;
+}
+
+.Container h5 {
+
+    text-align: center;
+    /* Abs positioning makes it not take up vert space */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* Rotate from top left corner (not default) */
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin:    0 0;
+    -ms-transform-origin:     0 0;
+    -o-transform-origin:      0 0;
+
+    -webkit-transform: rotate(90deg);
+    -moz-transform:    rotate(90deg);
+    -ms-transform:     rotate(90deg);
+    -o-transform:      rotate(90deg);
+}
