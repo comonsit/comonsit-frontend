@@ -1,20 +1,40 @@
 .ContainerBoxes {
+  display: flex;
+  flex-direction: column;
+}
+
+.SelContainer {
   display: grid;
-  grid-template-columns: auto 5rem auto;
+  grid-template-columns: 5rem auto;
   justify-items: center;
   align-items: center;
+  column-gap: 2rem;
 }
 
 .ButtonsBox {
   display: flex;
   flex-direction: column;
 }
+.ButtonsBox button {
+  width: 4rem;
+}
 
 .SearchBox {
-  width: 90%;
+  display: grid;
+  grid-template-columns: 5rem auto;
+  justify-items: center;
+  align-items: center;
+  column-gap: 2rem;
+}
+
+.SearchBox h4 {
+  text-align: center;
 }
 
 .SelectedBox {
-  background-color: #ccc;
-  width: 90%;
+
+}
+
+.SelectedBox h4 {
+  text-align: center;
 }

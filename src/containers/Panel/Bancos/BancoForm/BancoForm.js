@@ -9,8 +9,10 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
 import Tabs from '../../../../components/UI/Tabs/Tabs';
+import Card from '../../../../components/UI/Card/Card';
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import classes from './BancoForm.module.css'
+import BFSelItems from './BFSelItems/BFSelItems';
 // import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
@@ -200,37 +202,49 @@ class BancoForm extends Component {
             <FormattedMessage id="saveButton"/>
           </Button>
         </form>
-        <div className={classes.ContainerBoxes}>
-          <div className={classes.SearchBox}>
-            <Tabs>
-             <div label="bancoForm.Movimientos">
-               {movsList}
-             </div>
-             <div label="bancoForm.Pagos">
-               <p>...pagos...</p>
-             </div>
-             <div label="bancoForm.Otros">
-               <p>...otros...</p>
-             </div>
-           </Tabs>
+
+          <div className={classes.ContainerBoxes}>
+            <Card title={"Buscar"}>
+              <div className={classes.SearchBox}>
+                <div className={classes.ButtonsBox}>
+                  <Button
+                    btnType="Short"
+                    disabled={false}
+                  >
+                    <FormattedMessage id="+"/>
+                  </Button>
+                </div>
+                <Tabs>
+                 <div label="bancoForm.Movimientos">
+                   {movsList}
+                 </div>
+                 <div label="bancoForm.Pagos">
+                   <p>...pagos...</p>
+                 </div>
+                 <div label="bancoForm.Otros">
+                   <p>...otros...</p>
+                 </div>
+               </Tabs>
+              </div>
+            </Card>
+            <Card title={"Selección"}>
+              <div className={classes.SelContainer}>
+                <div className={classes.ButtonsBox}>
+                  <Button
+                    btnType="Short"
+                    disabled={false}
+                  >
+                    <FormattedMessage id="-"/>
+                  </Button>
+                </div>
+                <div className={classes.SelectedBox}>
+                  <BFSelItems>
+                    {movsList}
+                  </BFSelItems>
+                </div>
+              </div>
+            </Card>
           </div>
-          <div className={classes.ButtonsBox}>
-            <Button
-              btnType="Success"
-              disabled={false}
-            >
-              <FormattedMessage id=">"/>
-            </Button>
-            <Button
-              btnType="Success"
-              disabled={false}
-            >
-              <FormattedMessage id="<"/>
-            </Button>
-          </div>
-          <div className={classes.SelectedBox}>
-          </div>
-        </div>
       </div>
     )
   }
