@@ -9,10 +9,8 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
 import Tabs from '../../../../components/UI/Tabs/Tabs';
-import Card from '../../../../components/UI/Card/Card';
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import classes from './BancoForm.module.css'
-import BFSelItems from './BFSelItems/BFSelItems';
 // import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
@@ -24,6 +22,7 @@ class BancoForm extends Component {
     this.state = {
       formIsValid: false,
       movs: null,
+      selTab: null,
       bankForm: {
         banco: {
           elementType: 'select',
@@ -32,7 +31,7 @@ class BancoForm extends Component {
             // options: this.props.ctasBanco.map(r => ({"value": r.id, "displayValue": r.nombre_cuenta}))
           },
           label: (<><FormattedMessage id="bancoForm.cuenta_banco"/>*</>),
-          value: null,
+          value: 0,
           validation: {
             required: true
           },
@@ -94,6 +93,12 @@ class BancoForm extends Component {
     this.onGetMovimientos()
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.selectedItems !== prevProps.selectedItems) {
+      this.setState({ formIsValid: this.checkIfFormIsValid(this.state.bankForm) })
+    }
+  }
+
   onGetMovimientos () {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
@@ -113,7 +118,19 @@ class BancoForm extends Component {
       formData[formElementIdentifier] = this.state.bankForm[formElementIdentifier].value
     }
 
-    // INCLUDE ADDITIONAL DATA
+    formData["dataType"] = this.state.selTab.split(".")[1]
+    formData["selectedItems"] = this.props.selectedItems
+
+    // console.log(formData)
+    //
+    // const authData = {
+    //   headers: { 'Authorization': `Bearer ${this.props.token}` }
+    // }
+    //
+    // axios.get('/banco/', authData, formData)
+    //   .then(response => {
+    //     // TODO:
+    //   })
 
     // this.props.onCreateNewMovimiento(formData, this.props.token)
   }
@@ -123,23 +140,25 @@ class BancoForm extends Component {
     let updatedFormElement
 
       updatedFormElement = updateObject(this.state.bankForm[inputIdentifier], {
-          value: event.target.value,
-          valid: checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation),
-          touched: true
+        value: event.target.value,
+        valid: checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation),
+        touched: true
       })
 
     const updatedForm = updateObject(this.state.bankForm, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
-    let formIsValid = true
-    for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
-    }
-
-    this.setState({bankForm: updatedForm, formIsValid: formIsValid})
+    this.setState({bankForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
   }
 
+  checkIfFormIsValid = (form) => {
+    let formIsValid = (this.props.selectedItems && this.props.selectedItems.length > 0) ? true : false
+    for (let inputIds in form) {
+        formIsValid = form[inputIds].valid && formIsValid
+    }
+    return formIsValid
+  }
 
   render () {
     // SINGLE SOCIO
@@ -185,6 +204,29 @@ class BancoForm extends Component {
       movsList = <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
     }
 
+    const selectableTabs = (
+      <div className={[classes.Inputs, classes.TabsInput].join(' ')} key="tabInput">
+        <Tabs
+          onSelectTab={(activeTab) => this.setState({selTab: activeTab})}
+        >
+         <div label="bancoForm.Movimientos">
+           {movsList}
+         </div>
+         <div label="bancoForm.Pagos">
+           <p>...pagos...</p>
+         </div>
+         <div label="bancoForm.EjCredito">
+           <p>...créditos...</p>
+         </div>
+         <div label="bancoForm.Otros">
+           <p>...otros...</p>
+         </div>
+       </Tabs>
+     </div>
+     )
+
+   formElements.push(selectableTabs)
+
     return (
       <div>
         <Title
@@ -202,49 +244,6 @@ class BancoForm extends Component {
             <FormattedMessage id="saveButton"/>
           </Button>
         </form>
-
-          <div className={classes.ContainerBoxes}>
-            <Card title={"Buscar"}>
-              <div className={classes.SearchBox}>
-                <div className={classes.ButtonsBox}>
-                  <Button
-                    btnType="Short"
-                    disabled={false}
-                  >
-                    <FormattedMessage id="+"/>
-                  </Button>
-                </div>
-                <Tabs>
-                 <div label="bancoForm.Movimientos">
-                   {movsList}
-                 </div>
-                 <div label="bancoForm.Pagos">
-                   <p>...pagos...</p>
-                 </div>
-                 <div label="bancoForm.Otros">
-                   <p>...otros...</p>
-                 </div>
-               </Tabs>
-              </div>
-            </Card>
-            <Card title={"Selección"}>
-              <div className={classes.SelContainer}>
-                <div className={classes.ButtonsBox}>
-                  <Button
-                    btnType="Short"
-                    disabled={false}
-                  >
-                    <FormattedMessage id="-"/>
-                  </Button>
-                </div>
-                <div className={classes.SelectedBox}>
-                  <BFSelItems>
-                    {movsList}
-                  </BFSelItems>
-                </div>
-              </div>
-            </Card>
-          </div>
       </div>
     )
   }
@@ -253,6 +252,7 @@ class BancoForm extends Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
+    selectedItems: state.selList.selList
     // ctasBanco: state.bancos.bancos,
     // subcuetnas: state.bancos.subcuentas
   }

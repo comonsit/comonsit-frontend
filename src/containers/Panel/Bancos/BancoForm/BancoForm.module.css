@@ -1,40 +1,21 @@
-.ContainerBoxes {
+.Inputs {
+  border: 1px solid #ccc;
+  padding: 0;
   display: flex;
-  flex-direction: column;
 }
 
-.SelContainer {
-  display: grid;
-  grid-template-columns: 5rem auto;
-  justify-items: center;
-  align-items: center;
-  column-gap: 2rem;
+.Form {
+
 }
 
-.ButtonsBox {
+.TabsInput {
+  overflow-y:scroll;
+  height: 50vh;
   display: flex;
-  flex-direction: column;
-}
-.ButtonsBox button {
-  width: 4rem;
-}
-
-.SearchBox {
-  display: grid;
-  grid-template-columns: 5rem auto;
-  justify-items: center;
   align-items: center;
-  column-gap: 2rem;
+  justify-content: center;
 }
 
-.SearchBox h4 {
-  text-align: center;
-}
-
-.SelectedBox {
-
-}
-
-.SelectedBox h4 {
-  text-align: center;
+.TabsInput ol {
+  margin: 0;
 }

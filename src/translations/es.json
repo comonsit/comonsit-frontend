@@ -395,5 +395,6 @@
   "bancoForm.cantidad": "Cantidad",
   "bancoForm.Movimientos": "Movimientos",
   "bancoForm.Pagos": "Pagos",
+  "bancoForm.EjCredito": "Crédito",
   "bancoForm.Otros": "Otros"
 }

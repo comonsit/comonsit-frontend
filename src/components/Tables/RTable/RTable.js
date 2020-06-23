@@ -6,7 +6,7 @@ import SwitchToggle from '../../UI/SwitchToggle/SwitchToggle'
 import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
 import DefaultColumnFilter from './Filters/DefaultColumnFilter'
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as actions from '../../../store/actions'
 
 const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
@@ -62,7 +62,6 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
       nextPage,
       previousPage,
       setPageSize,
-      selectedFlatRows,
       state: { pageIndex, pageSize, selectedRowIds },
 
     } = useTable(
@@ -105,10 +104,14 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
   )
 
   useEffect(() => {
-    if (selectableRow) {
-      dispatch(actions.setSelList(selectedFlatRows.map(d => d.original)));
-    }
-  });
+    const selectedIds = Object.keys(selectedRowIds);
+    const selectedRowsData = selectedIds
+        .map(x => data[x])
+        .filter(function(x) {
+            return x != null;
+        });
+    dispatch(actions.setSelList(selectedRowsData));
+}, [selectedRowIds, dispatch, data]);
 
 
   const globFilter = !hideSearch ? (

@@ -14,17 +14,23 @@ class Tabs extends Component {
     this.state = {
       activeTab: this.props.children[0].props.label,
     };
+    if (this.props.onSelectTab) {
+      this.props.onSelectTab(this.state.activeTab)
+    }
   }
 
   onClickTabItem = (tab) => {
     this.setState({ activeTab: tab });
+    if (this.props.onSelectTab) {
+      this.props.onSelectTab(tab)
+    }
   }
 
   render() {
     const {
       onClickTabItem,
       props: {
-        children,
+        children
       },
       state: {
         activeTab,

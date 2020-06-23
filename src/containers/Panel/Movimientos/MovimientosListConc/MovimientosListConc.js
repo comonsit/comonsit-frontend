@@ -69,7 +69,6 @@ const movimientosListConc = (props) => {
             data={props.data}
             onRowClick={props.onClick}
             selectableRow
-            hideSearch
           />)
 }
 
