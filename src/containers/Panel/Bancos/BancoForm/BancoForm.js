@@ -119,20 +119,18 @@ class BancoForm extends Component {
     }
 
     formData["dataType"] = this.state.selTab.split(".")[1]
-    formData["selectedItems"] = this.props.selectedItems
+    formData["selectedItems"] = this.props.selectedItems.map(it => it.id)
 
-    // console.log(formData)
-    //
+
+    console.log(formData)
     // const authData = {
     //   headers: { 'Authorization': `Bearer ${this.props.token}` }
     // }
     //
-    // axios.get('/banco/', authData, formData)
+    // axios.get('/mov-bancos/', authData, formData)
     //   .then(response => {
     //     // TODO:
     //   })
-
-    // this.props.onCreateNewMovimiento(formData, this.props.token)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {

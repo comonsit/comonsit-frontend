@@ -84,13 +84,13 @@ class ContratoActivate extends Component {
           touched: true,
           disabled: this.props.selContrato.estatus_ejecucion !== 'PC'
         },
-        fecha_salida_banco: {
+        fecha_banco: {
           elementType: 'input',
           elementConfig: {
             type: 'date'
           },
           label: (<><FormattedMessage id="contratoActivate.fecha_banco"/></>),
-          value: this.props.selContrato.fecha_salida_banco,
+          value: this.props.selContrato.fecha_banco,
           validation: {
             required: false,
             todayOrOlder: true
@@ -98,7 +98,7 @@ class ContratoActivate extends Component {
           valid: true,
           touched: true,
           hide: false,
-          disabled: this.props.selContrato.fecha_salida_banco !== null,
+          disabled: this.props.selContrato.fecha_banco !== null,
         },
         referencia_banco: {
           elementType: 'input',
@@ -164,7 +164,7 @@ class ContratoActivate extends Component {
   }
 
   render () {
-    const contratoUpdateFormOrder = ["fecha_inicio", "tipo_tasa", "iva", "estatus_ejecucion", "referencia_banco", "fecha_salida_banco"]
+    const contratoUpdateFormOrder = ["fecha_inicio", "tipo_tasa", "iva", "estatus_ejecucion", "referencia_banco", "fecha_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements = <Spinner/>
