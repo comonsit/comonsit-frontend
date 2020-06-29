@@ -38,7 +38,7 @@ class BancoForm extends Component {
           valid: true,
           touched: false,
         },
-        referencia: {
+        referencia_banco: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
@@ -123,14 +123,14 @@ class BancoForm extends Component {
 
 
     console.log(formData)
-    // const authData = {
-    //   headers: { 'Authorization': `Bearer ${this.props.token}` }
-    // }
-    //
-    // axios.get('/mov-bancos/', authData, formData)
-    //   .then(response => {
-    //     // TODO:
-    //   })
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+    }
+
+    axios.post('/mov-bancos/', formData, authData)
+      .then(response => {
+        // TODO:
+      })
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -161,7 +161,7 @@ class BancoForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const formOrder = ["banco", "referencia", "fecha", "cantidad"]
+    const formOrder = ["banco", "referencia_banco", "fecha", "cantidad"]
     const formElementsArray = []
     let formElements = <Spinner/>
 
