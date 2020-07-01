@@ -9,6 +9,7 @@ import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
 import Tabs from '../../../../components/UI/Tabs/Tabs';
+import Currency from '../../../../components/UI/Formatting/Currency';
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import classes from './BancoForm.module.css'
 // import * as actions from '../../../../store/actions'
@@ -23,6 +24,7 @@ class BancoForm extends Component {
       formIsValid: false,
       movs: null,
       selTab: null,
+      cantidadCheck: null,
       bankForm: {
         banco: {
           elementType: 'select',
@@ -95,8 +97,28 @@ class BancoForm extends Component {
 
   componentDidUpdate(prevProps) {
     if(this.props.selectedItems !== prevProps.selectedItems) {
-      this.setState({ formIsValid: this.checkIfFormIsValid(this.state.bankForm) })
+      this.setState({
+        formIsValid: this.checkIfFormIsValid(this.state.bankForm),
+        cantidadCheck: this.onValidateCantidad(this.state.bankForm.cantidad.value)
+      })
     }
+  }
+
+  onValidateCantidad (currVal) {
+    if (!currVal) return null
+
+    let cant = null
+    if (this.props.selectedItems.length > 0) {
+      const total = this.props.selectedItems.reduce((acc, item) => acc + +item.monto, 0)
+      const cl = total !== +currVal ? classes.inValid : null
+      cant = (<h3 className={cl}>
+                <Currency
+                  value={total}
+                  hideZero
+                />
+              </h3>)
+    }
+    return cant
   }
 
   onGetMovimientos () {
@@ -137,9 +159,11 @@ class BancoForm extends Component {
 
     let updatedFormElement
 
+      const currValid = checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation)
+
       updatedFormElement = updateObject(this.state.bankForm[inputIdentifier], {
         value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation),
+        valid: currValid,
         touched: true
       })
 
@@ -147,7 +171,11 @@ class BancoForm extends Component {
       [inputIdentifier]: updatedFormElement
     })
 
-    this.setState({bankForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+    this.setState({
+      bankForm: updatedForm,
+      formIsValid: this.checkIfFormIsValid(updatedForm),
+      cantidadCheck: this.onValidateCantidad(inputIdentifier === "cantidad" && currValid ? event.target.value : null)
+    })
   }
 
   checkIfFormIsValid = (form) => {
@@ -190,6 +218,7 @@ class BancoForm extends Component {
                 invalid={!formElement.config.valid}
                 touched={formElement.config.touched}
                 disabled={formElement.config.disabled}
+                supportData={formElement.id === "cantidad" ? this.state.cantidadCheck : null}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
             </div>
             )

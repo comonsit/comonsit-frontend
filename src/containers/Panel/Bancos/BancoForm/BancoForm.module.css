@@ -19,3 +19,7 @@
 .TabsInput ol {
   margin: 0;
 }
+
+.inValid {
+  color: red;
+}
