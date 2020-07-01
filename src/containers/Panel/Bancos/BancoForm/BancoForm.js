@@ -11,11 +11,17 @@ import Title from '../../../../components/UI/Title/Title';
 import Tabs from '../../../../components/UI/Tabs/Tabs';
 import Currency from '../../../../components/UI/Formatting/Currency';
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
+import PagosList from '../../Pagos/PagosList/PagosList';
 import classes from './BancoForm.module.css'
 // import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
+
+const ammountFields = {
+  "bancoForm.Movimientos": "monto",
+  "bancoForm.Pagos": "cantidad"
+}
 
 class BancoForm extends Component {
   constructor(props) {
@@ -23,6 +29,7 @@ class BancoForm extends Component {
     this.state = {
       formIsValid: false,
       movs: null,
+      pagos: null,
       selTab: null,
       cantidadCheck: null,
       bankForm: {
@@ -92,7 +99,7 @@ class BancoForm extends Component {
   }
 
   componentDidMount () {
-    this.onGetMovimientos()
+    this.onGetData()
   }
 
   componentDidUpdate(prevProps) {
@@ -109,19 +116,19 @@ class BancoForm extends Component {
 
     let cant = null
     if (this.props.selectedItems.length > 0) {
-      const total = this.props.selectedItems.reduce((acc, item) => acc + +item.monto, 0)
+      const total = this.props.selectedItems.reduce((acc, item) => acc + +item[ammountFields[this.state.selTab]], 0)
       const cl = total !== +currVal ? classes.inValid : null
-      cant = (<h3 className={cl}>
+      cant = (<strong className={cl}>
                 <Currency
                   value={total}
                   hideZero
                 />
-              </h3>)
+            </strong>)
     }
     return cant
   }
 
-  onGetMovimientos () {
+  onGetData () {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -129,6 +136,11 @@ class BancoForm extends Component {
     axios.get('/movimientos-conc/', authData)
       .then(response => {
         this.setState({movs: response.data})
+      })
+
+    axios.get('/pagos/no-link/', authData)
+      .then(response => {
+        this.setState({pagos: response.data})
       })
   }
 
@@ -226,9 +238,13 @@ class BancoForm extends Component {
     }
 
     let movsList = <Spinner/>
+    let pagosList = <Spinner/>
 
     if (this.state.movs) {
       movsList = <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
+    }
+    if (this.state.pagos) {
+      pagosList = <PagosList data={this.state.pagos} onClick={() => {}} selectable/>
     }
 
     const selectableTabs = (
@@ -240,7 +256,7 @@ class BancoForm extends Component {
            {movsList}
          </div>
          <div label="bancoForm.Pagos">
-           <p>...pagos...</p>
+           {pagosList}
          </div>
          <div label="bancoForm.EjCredito">
            <p>...créditos...</p>
