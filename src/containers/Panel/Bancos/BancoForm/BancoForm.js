@@ -12,7 +12,7 @@ import Tabs from '../../../../components/UI/Tabs/Tabs';
 import Currency from '../../../../components/UI/Formatting/Currency';
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import PagosList from '../../Pagos/PagosList/PagosList';
-import CreditoList from '../../Creditos/CreditoList/CreditoList';
+import CreditoListCont from '../../Creditos/CreditoListCont/CreditoListCont';
 import classes from './BancoForm.module.css'
 // import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -256,7 +256,7 @@ class BancoForm extends Component {
       pagosList = <PagosList data={this.state.pagos} onClick={() => {}} selectable/>
     }
     if (this.state.creditos) {
-      creditosList = <CreditoList data={this.state.creditos} onClick={() => {}} selectable/>
+      creditosList = <CreditoListCont data={this.state.creditos} selectable/>
     }
 
     const selectableTabs = (

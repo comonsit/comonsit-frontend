@@ -396,5 +396,7 @@
   "bancoForm.Movimientos": "Movimientos",
   "bancoForm.Pagos": "Pagos",
   "bancoForm.EjCredito": "Crédito",
-  "bancoForm.Otros": "Otros"
+  "bancoForm.Otros": "Otros",
+  "creditos.fecha_banco": "Fecha en Banco",
+  "creditos.referencia_banco": "Referencia Bancaria"
 }

@@ -114,7 +114,6 @@ const creditoList = (props) => {
             columns={columns}
             data={props.data}
             onRowClick={props.onClick}
-            selectableRow={props.selectable}
           />)
 }
 
