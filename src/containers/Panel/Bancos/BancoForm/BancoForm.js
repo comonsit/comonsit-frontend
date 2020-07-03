@@ -12,6 +12,7 @@ import Tabs from '../../../../components/UI/Tabs/Tabs';
 import Currency from '../../../../components/UI/Formatting/Currency';
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import PagosList from '../../Pagos/PagosList/PagosList';
+import CreditoList from '../../Creditos/CreditoList/CreditoList';
 import classes from './BancoForm.module.css'
 // import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -20,7 +21,8 @@ import { checkValidity } from '../../../../utilities/validity'
 
 const ammountFields = {
   "bancoForm.Movimientos": "monto",
-  "bancoForm.Pagos": "cantidad"
+  "bancoForm.Pagos": "cantidad",
+  "bancoForm.EjCredito": "monto"
 }
 
 class BancoForm extends Component {
@@ -30,6 +32,7 @@ class BancoForm extends Component {
       formIsValid: false,
       movs: null,
       pagos: null,
+      creditos: null,
       selTab: null,
       cantidadCheck: null,
       bankForm: {
@@ -142,6 +145,11 @@ class BancoForm extends Component {
       .then(response => {
         this.setState({pagos: response.data})
       })
+
+    axios.get('/contratos/no-link/', authData)
+      .then(response => {
+        this.setState({creditos: response.data})
+      })
   }
 
   onSubmitForm = (event) => {
@@ -239,12 +247,16 @@ class BancoForm extends Component {
 
     let movsList = <Spinner/>
     let pagosList = <Spinner/>
+    let creditosList = <Spinner/>
 
     if (this.state.movs) {
       movsList = <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
     }
     if (this.state.pagos) {
       pagosList = <PagosList data={this.state.pagos} onClick={() => {}} selectable/>
+    }
+    if (this.state.creditos) {
+      creditosList = <CreditoList data={this.state.creditos} onClick={() => {}} selectable/>
     }
 
     const selectableTabs = (
@@ -259,7 +271,7 @@ class BancoForm extends Component {
            {pagosList}
          </div>
          <div label="bancoForm.EjCredito">
-           <p>...créditos...</p>
+           {creditosList}
          </div>
          <div label="bancoForm.Otros">
            <p>...otros...</p>

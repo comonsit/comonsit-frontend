@@ -37,4 +37,5 @@
   border-bottom: 1px solid #dddedf;
   border-left: 1px solid #dddedf;
   border-right: 1px solid #dddedf;
+  max-width: 75vw;
 }
