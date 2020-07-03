@@ -50,13 +50,13 @@ const movimientosListConc = (props) => {
       accessor: 'fecha_banco',
     },
     {
-      Header: <FormattedMessage id="movimientosForm.referencia_banco"/>,
-      accessor: 'referencia_banco',
-    },
-    {
       Header: <FormattedMessage id="proceso_nombre"/>,
       accessor: 'proceso',
       Cell: renderStatus
+    },
+    {
+      Header: <FormattedMessage id="movimientosForm.referencia_banco"/>,
+      accessor: 'referencia_banco',
     }
   ]
 

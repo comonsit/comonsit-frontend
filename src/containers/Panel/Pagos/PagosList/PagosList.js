@@ -57,6 +57,14 @@ const pagosList = (props) => {
     },
   ]
 
+  if (props.selectable) {
+    columns.push({
+      Header: <FormattedMessage id="pagos.referencia_banco"/>,
+      accessor: 'referencia_banco',
+      Filter: SelectColumnFilter,
+    })
+  }
+
   return (<RTable
             columns={columns}
             data={props.data}
