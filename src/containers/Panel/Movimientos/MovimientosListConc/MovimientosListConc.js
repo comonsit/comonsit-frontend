@@ -37,12 +37,8 @@ const movimientosListConc = (props) => {
       Cell: renderType
     },
     {
-      Header: <FormattedMessage id="credito"/>,
-      accessor: 'nombre_socio'
-    },
-    {
       Header: <FormattedMessage id="nombres"/>,
-      accessor: 'fecha_entrega'
+      accessor: 'nombre_socio'
     },
     {
       Header: <FormattedMessage id="monto"/>,
