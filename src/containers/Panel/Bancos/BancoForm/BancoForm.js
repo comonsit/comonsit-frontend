@@ -36,20 +36,6 @@ class BancoForm extends Component {
       selTab: null,
       cantidadCheck: null,
       bankForm: {
-        banco: {
-          elementType: 'select',
-          elementConfig: {
-            options: [{value: 0, displayValue: 'Banamex'}]
-            // options: this.props.ctasBanco.map(r => ({"value": r.id, "displayValue": r.nombre_cuenta}))
-          },
-          label: (<><FormattedMessage id="bancoForm.cuenta_banco"/>*</>),
-          value: 0,
-          validation: {
-            required: true
-          },
-          valid: true,
-          touched: false,
-        },
         referencia_banco: {
           elementType: 'input',
           elementConfig: {
@@ -94,6 +80,22 @@ class BancoForm extends Component {
             isDecimal: true
           },
           valid: false,
+          touched: false,
+          hide: false
+        },
+        nota: {
+          elementType: 'textarea',
+          elementConfig: {
+            type: 'text',
+            placeholder: '..',
+            maxLength: '100'
+          },
+          label:  (<FormattedMessage id="bancoForm.nota"/>),
+          value: '',
+          validation: {
+            required: false
+          },
+          valid: true,
           touched: false,
           hide: false
         },
@@ -209,7 +211,7 @@ class BancoForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const formOrder = ["banco", "referencia_banco", "fecha", "cantidad"]
+    const formOrder = ["referencia_banco", "fecha", "cantidad", "nota"]
     const formElementsArray = []
     let formElements = <Spinner/>
 
