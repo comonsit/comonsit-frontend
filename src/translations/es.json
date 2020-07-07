@@ -402,6 +402,10 @@
   "bancoForm.ingreso": "Ingreso",
   "bancoForm.egreso": "Egreso",
   "bancoForm.seleccionados": "seleccionados",
+  "bancoForm.respuesta1": "Se crearon ",
+  "bancoForm.respuesta2": "registros contables nuevos",
+  "bancoForm.terminar": "Regresar",
+  "bancoForm.nuevo": "Registrar Otro",
   "creditos.fecha_banco": "Fecha en Banco",
   "creditos.referencia_banco": "Referencia Bancaria"
 }

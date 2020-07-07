@@ -42,6 +42,7 @@ class BancoForm extends Component {
       cantidadCheck: null,
       subCtaIngrEgr: false,   // true=Ingreso & false=Egreso
       modalOpen: false,
+      successResponse: null,
       confirmFormOpen: false,
       bankForm: {
         referencia_banco: {
@@ -205,11 +206,15 @@ class BancoForm extends Component {
   }
 
   onCancelConfirmation =() => {
-    this.setState({modalOpen: false, confirmFormOpen: false})
+    if (!this.state.successResponse) {
+      this.setState({modalOpen: false, confirmFormOpen: false})
+    }
   }
 
   onSubmitForm = (event) => {
     event.preventDefault();
+
+    this.setState({confirmFormOpen: false})
 
     const formData = {}
     for (let formElementIdentifier in this.state.bankForm) {
@@ -235,7 +240,8 @@ class BancoForm extends Component {
 
     axios.post('/mov-bancos/', formData, authData)
       .then(response => {
-        // TODO:
+        this.setState({successResponse: response.data.registros_nvos})
+        // return axios.get(...) new registros created
       })
   }
 
@@ -361,31 +367,46 @@ class BancoForm extends Component {
 
    formElements.push(selectableTabs)
 
-   if (this.state.modalOpen && this.state.confirmFormOpen) {
-     let extras = (
-        <div className={classes.IngresoToggle}>
-          <p><FormattedMessage id={this.state.subCtaIngrEgr ? "bancoForm.ingreso" : "bancoForm.egreso"}/></p>
-        </div>
-      )
-     if (this.state.selTab !== 'bancoForm.Otros') {
-       formOrder.pop()
-       const selected = this.props.selectedItems.map((it, ind) =>(<span key={ind}>{ (ind ? ', ' : '') + '#'+it.id }</span>))
-       extras = (
-         <div className={classes.IngresoToggle}>
-          <p> {this.state.selTab.split(".")[1]} <FormattedMessage id="bancoForm.seleccionados"/>: {selected}</p>
-         </div>
-       )
-     }
-     modalInfo = (<FormConfirmation
-                    formOrder={formOrder}
-                    formData={this.state.bankForm}
-                    onSubmitAction={this.onSubmitForm}
-                    onCancelAction={this.onCancelConfirmation}
-                  >
-                  {extras}
-                  </FormConfirmation>
-                )
-   }
+    if (this.state.modalOpen) {
+      if (this.state.confirmFormOpen) {
+        let extras = (
+           <div className={classes.IngresoToggle}>
+             <p><FormattedMessage id={this.state.subCtaIngrEgr ? "bancoForm.ingreso" : "bancoForm.egreso"}/></p>
+           </div>
+         )
+        if (this.state.selTab !== 'bancoForm.Otros') {
+          formOrder.pop()
+          const selected = this.props.selectedItems.map((it, ind) =>(<span key={ind}>{ (ind ? ', ' : '') + '#'+it.id }</span>))
+          extras = (
+            <div className={classes.IngresoToggle}>
+             <p> {this.state.selTab.split(".")[1]} <FormattedMessage id="bancoForm.seleccionados"/>: {selected}</p>
+            </div>
+          )
+        }
+        modalInfo = (<FormConfirmation
+                       formOrder={formOrder}
+                       formData={this.state.bankForm}
+                       onSubmitAction={this.onSubmitForm}
+                       onCancelAction={this.onCancelConfirmation}
+                     >
+                     {extras}
+                     </FormConfirmation>
+                   )
+      } else if (this.state.successResponse) {
+        // TODO: Show TABLE with new REGISTROS instead of count
+        // TODO: Crear Guardar Nuevo
+        modalInfo = (
+          <div className={classes.SuccessResponse}>
+            <p><FormattedMessage id="bancoForm.respuesta1"/> {this.state.successResponse} <FormattedMessage id="bancoForm.respuesta2"/> </p>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}
+              clicked={() => this.props.history.replace('/bancos')}
+            ><FormattedMessage id="bancoForm.terminar"/></Button>
+          </div>
+                   )
+      }
+    }
 
     return (
       <div>

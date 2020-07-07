@@ -401,7 +401,11 @@
   "bancoForm.subcuenta": "Subcuenta",
   "bancoForm.ingreso": "Ochem talel",
   "bancoForm.egreso": "Loquem bahel",
+  "bancoForm.respuesta1": "Ay ",
+  "bancoForm.respuesta1": "yachil",
   "bancoForm.seleccionados": "seleccionados",
+  "bancoForm.terminar": "Terminar Captura",
+  "bancoForm.nuevo": "Registrar Otro",
   "creditos.fecha_banco": "Sc'ahc'alel snahul squ'ejohbil taqu'in",
   "creditos.referencia_banco": "Schicnaji'bal yahtalul ta snahul taqu'in"
 }
