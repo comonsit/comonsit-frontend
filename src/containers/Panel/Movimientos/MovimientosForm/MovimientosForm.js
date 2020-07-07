@@ -438,9 +438,8 @@ class MovimientosForm extends Component {
                        formData={this.state.movimientoForm}
                        onSubmitAction={this.onSubmitForm}
                        onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
-                      >
-                      {title}
-                    </FormConfirmation>
+                       extraTitle={title}
+                      />
                     )
       }
     }

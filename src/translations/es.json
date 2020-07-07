@@ -401,6 +401,7 @@
   "bancoForm.subcuenta": "Subcuenta",
   "bancoForm.ingreso": "Ingreso",
   "bancoForm.egreso": "Egreso",
+  "bancoForm.seleccionados": "seleccionados",
   "creditos.fecha_banco": "Fecha en Banco",
   "creditos.referencia_banco": "Referencia Bancaria"
 }

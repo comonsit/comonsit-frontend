@@ -7,7 +7,9 @@ import axios from '../../../../store/axios-be.js'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
+import FormConfirmation from '../../../../components/UI/FormConfirmation/FormConfirmation';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
 import Tabs from '../../../../components/UI/Tabs/Tabs';
 import Currency from '../../../../components/UI/Formatting/Currency';
@@ -39,6 +41,8 @@ class BancoForm extends Component {
       selTab: "bancoForm.Movimientos",
       cantidadCheck: null,
       subCtaIngrEgr: false,   // true=Ingreso & false=Egreso
+      modalOpen: false,
+      confirmFormOpen: false,
       bankForm: {
         referencia_banco: {
           elementType: 'input',
@@ -181,8 +185,9 @@ class BancoForm extends Component {
       .then(response => {
         const updatedFormElement = updateObject(this.state.bankForm.subcuenta, {
           elementConfig: {
-            options: response.data.map(r => ({"value": r.id, "displayValue": r.id_contable+' - '+r.nombre}))
-          }
+            options: response.data.map(r => ({"value": r.id, "displayValue": r.id_contable+' - '+r.nombre})),
+          },
+          value: 1,
         })
         const updatedForm = updateObject(this.state.bankForm, {
           subcuenta: updatedFormElement
@@ -192,6 +197,15 @@ class BancoForm extends Component {
           bankForm: updatedForm
         })
       })
+  }
+
+  onShowConfirmation = event => {
+    event.preventDefault();
+    this.setState({modalOpen: true, confirmFormOpen: true})
+  }
+
+  onCancelConfirmation =() => {
+    this.setState({modalOpen: false, confirmFormOpen: false})
   }
 
   onSubmitForm = (event) => {
@@ -267,7 +281,7 @@ class BancoForm extends Component {
     // TODO: done to keep order in Safari. improvement?
     const formOrder = ["referencia_banco", "fecha", "cantidad", "nota", "subcuenta"]
     const formElementsArray = []
-    let formElements = <Spinner/>
+    let formElements, modalInfo = <Spinner/>
 
     formOrder.forEach(key => {
       formElementsArray.push({
@@ -347,13 +361,45 @@ class BancoForm extends Component {
 
    formElements.push(selectableTabs)
 
+   if (this.state.modalOpen && this.state.confirmFormOpen) {
+     let extras = (
+        <div className={classes.IngresoToggle}>
+          <p><FormattedMessage id={this.state.subCtaIngrEgr ? "bancoForm.ingreso" : "bancoForm.egreso"}/></p>
+        </div>
+      )
+     if (this.state.selTab !== 'bancoForm.Otros') {
+       formOrder.pop()
+       const selected = this.props.selectedItems.map((it, ind) =>(<span key={ind}>{ (ind ? ', ' : '') + '#'+it.id }</span>))
+       extras = (
+         <div className={classes.IngresoToggle}>
+          <p> {this.state.selTab.split(".")[1]} <FormattedMessage id="bancoForm.seleccionados"/>: {selected}</p>
+         </div>
+       )
+     }
+     modalInfo = (<FormConfirmation
+                    formOrder={formOrder}
+                    formData={this.state.bankForm}
+                    onSubmitAction={this.onSubmitForm}
+                    onCancelAction={this.onCancelConfirmation}
+                  >
+                  {extras}
+                  </FormConfirmation>
+                )
+   }
+
     return (
       <div>
+        <Modal
+          show={this.state.modalOpen}
+          modalClosed={this.onCancelConfirmation}
+        >
+          {modalInfo}
+        </Modal>
         <Title
           titleName="bancoForm.title"
           >
         </Title>
-        <form onSubmit={this.onSubmitForm}>
+        <form onSubmit={this.onShowConfirmation}>
           <div className={classes.Form}>
           {formElements}
           </div>
