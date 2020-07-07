@@ -398,6 +398,9 @@
   "bancoForm.EjCredito": "Smajanel taqu'in",
   "bancoForm.Otros": "Yan",
   "bancoForm.nota": "Nota",
+  "bancoForm.subcuenta": "Subcuenta",
+  "bancoForm.ingreso": "Ochem talel",
+  "bancoForm.egreso": "Loquem bahel",
   "creditos.fecha_banco": "Sc'ahc'alel snahul squ'ejohbil taqu'in",
   "creditos.referencia_banco": "Schicnaji'bal yahtalul ta snahul taqu'in"
 }

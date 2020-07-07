@@ -23,3 +23,21 @@
 .inValid {
   color: red;
 }
+
+.SubcuentaContainer {
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.IngresoToggle {
+  border: 1px solid #ccc;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.IngresoToggle p {
+  padding-left: 2rem;
+}

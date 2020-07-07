@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
@@ -10,6 +11,7 @@ import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
 import Tabs from '../../../../components/UI/Tabs/Tabs';
 import Currency from '../../../../components/UI/Formatting/Currency';
+import SwitchToggle from '../../../../components/UI/SwitchToggle/SwitchToggle'
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import PagosList from '../../Pagos/PagosList/PagosList';
 import CreditoListCont from '../../Creditos/CreditoListCont/CreditoListCont';
@@ -33,8 +35,10 @@ class BancoForm extends Component {
       movs: null,
       pagos: null,
       creditos: null,
-      selTab: null,
+      subcuentas: null,
+      selTab: "bancoForm.Movimientos",
       cantidadCheck: null,
+      subCtaIngrEgr: false,   // true=Ingreso & false=Egreso
       bankForm: {
         referencia_banco: {
           elementType: 'input',
@@ -99,6 +103,21 @@ class BancoForm extends Component {
           touched: false,
           hide: false
         },
+        subcuenta: {
+          elementType: 'select',
+          elementConfig: {
+            options: [
+              {value: 99, displayValue: '...Loading...'}
+            ]
+          },
+          label: (<><FormattedMessage id="bancoForm.subcuenta"/>*</>),
+          value: 99,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
       }
     }
   }
@@ -107,11 +126,17 @@ class BancoForm extends Component {
     this.onGetData()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if(this.props.selectedItems !== prevProps.selectedItems) {
       this.setState({
         formIsValid: this.checkIfFormIsValid(this.state.bankForm),
         cantidadCheck: this.onValidateCantidad(this.state.bankForm.cantidad.value)
+      })
+    }
+    if(this.state.selTab !== prevState.selTab) {
+      this.setState({
+        formIsValid: this.checkIfFormIsValid(this.state.bankForm),
+        cantidadCheck: null
       })
     }
   }
@@ -152,6 +177,21 @@ class BancoForm extends Component {
       .then(response => {
         this.setState({creditos: response.data})
       })
+    axios.get('/subcuentas/', authData)
+      .then(response => {
+        const updatedFormElement = updateObject(this.state.bankForm.subcuenta, {
+          elementConfig: {
+            options: response.data.map(r => ({"value": r.id, "displayValue": r.id_contable+' - '+r.nombre}))
+          }
+        })
+        const updatedForm = updateObject(this.state.bankForm, {
+          subcuenta: updatedFormElement
+        })
+        this.setState({
+          subcuentas: response.data,
+          bankForm: updatedForm
+        })
+      })
   }
 
   onSubmitForm = (event) => {
@@ -159,11 +199,21 @@ class BancoForm extends Component {
 
     const formData = {}
     for (let formElementIdentifier in this.state.bankForm) {
-      formData[formElementIdentifier] = this.state.bankForm[formElementIdentifier].value
+      if (formElementIdentifier !== 'subcuenta') {
+        formData[formElementIdentifier] = this.state.bankForm[formElementIdentifier].value
+      }
     }
 
     formData["dataType"] = this.state.selTab.split(".")[1]
-    formData["selectedItems"] = this.props.selectedItems.map(it => it.id)
+    if (formData.dataType === "Otros") {
+      formData["selectedItems"] = [{
+        subcuenta: this.state.bankForm.subcuenta.value,
+        ingreso: this.state.subCtaIngrEgr
+      }]
+    } else {
+      formData["selectedItems"] = this.props.selectedItems.map(it => it.id)
+    }
+
 
 
     console.log(formData)
@@ -201,17 +251,23 @@ class BancoForm extends Component {
   }
 
   checkIfFormIsValid = (form) => {
-    let formIsValid = (this.props.selectedItems && this.props.selectedItems.length > 0) ? true : false
+    let formIsValid = (this.state.selTab === 'bancoForm.Otros' || (this.props.selectedItems && this.props.selectedItems.length > 0)) ? true : false
     for (let inputIds in form) {
         formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
   }
 
+  onToggleIngreso = () => {
+    this.setState(prevState => ({
+      subCtaIngrEgr: !prevState.subCtaIngrEgr
+    }));
+  }
+
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const formOrder = ["referencia_banco", "fecha", "cantidad", "nota"]
+    const formOrder = ["referencia_banco", "fecha", "cantidad", "nota", "subcuenta"]
     const formElementsArray = []
     let formElements = <Spinner/>
 
@@ -250,6 +306,7 @@ class BancoForm extends Component {
     let movsList = <Spinner/>
     let pagosList = <Spinner/>
     let creditosList = <Spinner/>
+    const subcuentaInput = _.remove(formElements, el => el.key === "subcuenta" )
 
     if (this.state.movs) {
       movsList = <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
@@ -260,6 +317,8 @@ class BancoForm extends Component {
     if (this.state.creditos) {
       creditosList = <CreditoListCont data={this.state.creditos} selectable/>
     }
+
+
 
     const selectableTabs = (
       <div className={[classes.Inputs, classes.TabsInput].join(' ')} key="tabInput">
@@ -276,7 +335,13 @@ class BancoForm extends Component {
            {creditosList}
          </div>
          <div label="bancoForm.Otros">
-           <p>...otros...</p>
+           <div className={classes.SubcuentaContainer}>
+             {subcuentaInput}
+             <div className={classes.IngresoToggle}>
+               <SwitchToggle clicked={this.onToggleIngreso}/>
+               <p><FormattedMessage id={this.state.subCtaIngrEgr ? "bancoForm.ingreso" : "bancoForm.egreso"}/></p>
+             </div>
+           </div>
          </div>
        </Tabs>
      </div>

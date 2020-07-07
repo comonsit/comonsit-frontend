@@ -398,6 +398,9 @@
   "bancoForm.EjCredito": "Crédito",
   "bancoForm.Otros": "Otros",
   "bancoForm.nota": "Nota",
+  "bancoForm.subcuenta": "Subcuenta",
+  "bancoForm.ingreso": "Ingreso",
+  "bancoForm.egreso": "Egreso",
   "creditos.fecha_banco": "Fecha en Banco",
   "creditos.referencia_banco": "Referencia Bancaria"
 }
