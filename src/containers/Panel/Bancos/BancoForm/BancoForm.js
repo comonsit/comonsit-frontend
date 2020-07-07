@@ -206,10 +206,8 @@ class BancoForm extends Component {
 
     formData["dataType"] = this.state.selTab.split(".")[1]
     if (formData.dataType === "Otros") {
-      formData["selectedItems"] = [{
-        subcuenta: this.state.bankForm.subcuenta.value,
-        ingreso: this.state.subCtaIngrEgr
-      }]
+      formData["selectedItems"] = [ this.state.bankForm.subcuenta.value]
+      formData["ingrEgr"] = this.state.subCtaIngrEgr
     } else {
       formData["selectedItems"] = this.props.selectedItems.map(it => it.id)
     }
