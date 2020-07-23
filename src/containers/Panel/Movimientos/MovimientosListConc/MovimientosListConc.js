@@ -33,7 +33,7 @@ const movimientosListConc = (props) => {
   const columns = [
     {
       Header: <FormattedMessage id="movimientos.aportacion_retiro"/>,
-      accessor: 'tipo_de_movimiento',
+      accessor: 'aportacion',
       Cell: renderType
     },
     {
