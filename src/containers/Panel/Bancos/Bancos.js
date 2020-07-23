@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import RTable from '../../../components/Tables/RTable/RTable';
 import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
+import Currency from '../../../components/UI/Formatting/Currency'
 import classes from './Bancos.module.css'
 // import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
@@ -32,6 +33,13 @@ class Tsumbalil extends Component {
       })
   }
 
+  selectColumn = (cantidad, type, column) => {
+    if (type === column) {
+      return (<Currency value={cantidad}/>)
+    }
+    return null
+  }
+
   render () {
     const columns = [
       {
@@ -40,7 +48,7 @@ class Tsumbalil extends Component {
       },
       {
         Header: <FormattedMessage id="bancos.subcuenta"/>,
-        accessor: 'subcuenta'
+      accessor: 'subcuenta_id_cont'
       },
       {
         Header: <FormattedMessage id="bancos.subcuenta_nombre"/>,
@@ -52,15 +60,18 @@ class Tsumbalil extends Component {
       },
       {
         Header: <FormattedMessage id="bancos.ingreso"/>,
-        accessor: 'ingreso'
+        accessor: 'cantidad',
+        Cell: (cellInfo) => this.selectColumn(cellInfo.cell.value, cellInfo.row.original.ingr_egr, true)
       },
       {
         Header: <FormattedMessage id="bancos.egreso"/>,
-        accessor: 'egreso'
+        accessor: 'ingr_egr',
+        Cell: (cellInfo) => this.selectColumn(cellInfo.row.original.cantidad, cellInfo.cell.value, false)
       },
       {
         Header: <FormattedMessage id="bancos.saldo_bancos"/>,
-        accessor: 'saldo_bancos'
+        accessor: 'saldo.total',
+        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
       }
     ]
 
