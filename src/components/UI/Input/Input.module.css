@@ -101,9 +101,10 @@
   justify-content: center;
 }
 
+
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
 	 .elCheckbox {
-		 --active: #1e4f75;
+		 --active: #235ee4;
 		 --active-inner: #fff;
 		 --focus: 2px rgba(39, 94, 254, .3);
 		 --border: #bbc1e1;
@@ -168,7 +169,7 @@
 	}
 	 .elCheckbox + label {
 		 font-size: 14px;
-		 line-height: 21px;
+		 line-height: 3.1rem;
 		 display: inline-block;
 		 vertical-align: top;
 		 cursor: pointer;

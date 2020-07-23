@@ -95,6 +95,23 @@ class MovimientosForm extends Component {
           touched: false,
           hide: false
         },
+        ordinario: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          labelCheckbox: {
+            checked: 'movimientosForm.ordinario',
+            unChecked: 'movimientosForm.extraordinario',
+          },
+          label: (<FormattedMessage id="movimientosForm.ordinario"/>),
+          value: true,
+          validation: {
+            required: false
+          },
+          valid: true,
+          touched: false,
+        },
         proceso: {
           elementType: 'icons',
           elementConfig: {
@@ -363,7 +380,7 @@ class MovimientosForm extends Component {
   }
 
   render () {
-    const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
+    const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "ordinario", "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let modalInfo = <Spinner/>
@@ -404,6 +421,7 @@ class MovimientosForm extends Component {
                   changed={(event) => this.inputChangedHandler(event, formElement.id)}
                   supportData={formElement.config.supportData}
                   supportActions={formElement.config.supportActions}
+                  labelCheckbox={formElement.config.labelCheckbox}
                   />
               </div>
             </div>

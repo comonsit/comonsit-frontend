@@ -47,6 +47,8 @@ const input = (props) => {
                  onChange={props.changed} />
             break
         case ( 'checkbox' ):
+            const labelCheckbox = (props.labelCheckbox) ? (
+                <label for="r1"><FormattedMessage id={props.value ? props.labelCheckbox.checked : props.labelCheckbox.unChecked}/></label>) : null
             inputElement = (
               <div className={classes.elCheckboxCont}>
                 <input
@@ -55,6 +57,7 @@ const input = (props) => {
                    checked={props.value}
                    disabled={props.disabled}
                    onChange={props.changed} />
+                 {labelCheckbox}
                </div>
              )
             break

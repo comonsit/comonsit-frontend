@@ -407,5 +407,7 @@
   "bancoForm.terminar": "Terminar Captura",
   "bancoForm.nuevo": "Registrar Otro",
   "creditos.fecha_banco": "Sc'ahc'alel snahul squ'ejohbil taqu'in",
-  "creditos.referencia_banco": "Schicnaji'bal yahtalul ta snahul taqu'in"
+  "creditos.referencia_banco": "Schicnaji'bal yahtalul ta snahul taqu'in",
+  "movimientosForm.ordinario": "Ordinario",
+  "movimientosForm.extraordinario": "Extraordinario"
 }
