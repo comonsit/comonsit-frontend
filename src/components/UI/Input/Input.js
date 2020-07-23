@@ -47,13 +47,16 @@ const input = (props) => {
                  onChange={props.changed} />
             break
         case ( 'checkbox' ):
-            inputElement = <input
-                 className={inputClasses.join(' ')}
-                 {...props.elementConfig}
-                value={props.value}
-                 checked={props.value}
-                 disabled={props.disabled}
-                 onChange={props.changed} />
+            inputElement = (
+              <div className={classes.elCheckboxCont}>
+                <input
+                   className={classes.elCheckbox}
+                   {...props.elementConfig}
+                   checked={props.value}
+                   disabled={props.disabled}
+                   onChange={props.changed} />
+               </div>
+             )
             break
         case ( 'textarea' ):
             inputElement = <textarea

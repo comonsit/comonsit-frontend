@@ -93,3 +93,135 @@
   font-family: 'Arquitecta';
   color: #243746;
 }
+
+
+.elCheckboxCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+	 .elCheckbox {
+		 --active: #1e4f75;
+		 --active-inner: #fff;
+		 --focus: 2px rgba(39, 94, 254, .3);
+		 --border: #bbc1e1;
+		 --border-hover: #1e4f75;
+		 --background: #fff;
+		 --disabled: #f6f8ff;
+		 --disabled-inner: #6a8fac;
+		 -webkit-appearance: none;
+		 -moz-appearance: none;
+		 height: 2.3rem;
+		 outline: none;
+		 display: inline-block;
+		 vertical-align: top;
+		 position: relative;
+		 margin: 0.4rem;
+		 cursor: pointer;
+		 border: 1px solid var(--bc, var(--border));
+		 background: var(--b, var(--background));
+		 transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+	}
+	 .elCheckbox:after {
+		 content: '';
+		 display: block;
+		 left: 0;
+		 top: 0;
+		 position: absolute;
+		 transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+	}
+	 .elCheckbox:checked {
+		 --b: var(--active);
+		 --bc: var(--active);
+		 --d-o: 0.3s;
+		 --d-t: 0.6s;
+		 --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+	}
+	 .elCheckbox:disabled {
+		 --b: var(--disabled);
+		 cursor: not-allowed;
+		 opacity: 0.5;
+	}
+	 .elCheckbox:disabled:checked {
+		 --b: var(--disabled-inner);
+		 --bc: var(--border);
+	}
+	 .elCheckbox:disabled + label {
+		 cursor: not-allowed;
+	}
+	 .elCheckbox:hover:not(:checked):not(:disabled) {
+		 --bc: var(--border-hover);
+	}
+	 .elCheckbox:focus {
+		 box-shadow: 0 0 0 var(--focus);
+	}
+	 .elCheckbox:not(.switch) {
+		 width: 2.4rem;
+	}
+	 .elCheckbox:not(.switch):after {
+		 opacity: var(--o, 0);
+	}
+	 .elCheckbox:not(.switch):checked {
+		 --o: 1;
+	}
+	 .elCheckbox + label {
+		 font-size: 14px;
+		 line-height: 21px;
+		 display: inline-block;
+		 vertical-align: top;
+		 cursor: pointer;
+		 margin-left: 4px;
+	}
+	 .elCheckbox:not(.switch) {
+		 border-radius: 7px;
+	}
+	 .elCheckbox:not(.switch):after {
+		 width: 5px;
+		 height: 9px;
+		 border: 2px solid var(--active-inner);
+		 border-top: 0;
+		 border-left: 0;
+		 left: 8px;
+		 top: 3px;
+		 transform: rotate(var(--r, 10deg));
+	}
+	 .elCheckbox:not(.switch):checked {
+		 --r: 43deg;
+	}
+	 .elCheckbox.switch {
+		 width: 38px;
+		 border-radius: 11px;
+	}
+	 .elCheckbox.switch:after {
+		 left: 2px;
+		 top: 2px;
+		 border-radius: 50%;
+		 width: 15px;
+		 height: 15px;
+		 background: var(--ab, var(--border));
+		 transform: translateX(var(--x, 0));
+	}
+	 .elCheckbox.switch:checked {
+		 --ab: var(--active-inner);
+		 --x: 17px;
+	}
+	 .elCheckbox.switch:disabled:not(:checked):after {
+		 opacity: 0.6;
+	}
+	 input[type='radio'] {
+		 border-radius: 50%;
+	}
+	 input[type='radio']:after {
+		 width: 19px;
+		 height: 19px;
+		 border-radius: 50%;
+		 background: var(--active-inner);
+		 opacity: 0;
+		 transform: scale(var(--s, 0.7));
+	}
+	 input[type='radio']:checked {
+		 --s: 0.5;
+	}
+}
