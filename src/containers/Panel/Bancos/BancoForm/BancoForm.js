@@ -49,15 +49,19 @@ class BancoForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..'
+            placeholder: '..',
           },
           label: (<><FormattedMessage id="bancoForm.referencia_banco"/>*</>),
           value: null,
           validation: {
-            required: true
+            required: true,
+            isAlphaNumeric: true
           },
           valid: false,
           touched: false,
+          supportActions: {
+            loseFocus: () => this.changeCase()
+          }
         },
         fecha: {
           elementType: 'input',
@@ -282,6 +286,16 @@ class BancoForm extends Component {
     }));
   }
 
+  changeCase = () => {
+    const updatedFormElement = updateObject(this.state.bankForm.referencia_banco, {
+      value: this.state.bankForm.referencia_banco.value.toUpperCase(),
+    })
+    const updatedForm = updateObject(this.state.bankForm, {
+      referencia_banco: updatedFormElement
+    })
+    this.setState({ bankForm: updatedForm })
+  }
+
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
@@ -315,7 +329,9 @@ class BancoForm extends Component {
                 touched={formElement.config.touched}
                 disabled={formElement.config.disabled}
                 supportData={formElement.id === "cantidad" ? this.state.cantidadCheck : null}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+                changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                supportActions={formElement.config.supportActions}
+              />
             </div>
             )
       })

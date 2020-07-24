@@ -26,6 +26,11 @@ export const checkValidity = (value, rules, additional=false) => {
         isValid = pattern.test(value) && isValid
     }
 
+    if (rules.isAlphaNumeric) {
+        const pattern = /^[0-9a-zA-Z]+$/;
+        isValid = pattern.test(value) && isValid
+    }
+
     if (rules.minNumValue) {
         isValid = value >=  rules.minNumValue && isValid
     }
