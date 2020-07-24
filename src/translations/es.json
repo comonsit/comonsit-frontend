@@ -397,7 +397,7 @@
   "bancoForm.Pagos": "Pagos",
   "bancoForm.EjCredito": "Crédito",
   "bancoForm.Otros": "Otros",
-  "bancoForm.nota": "Nota",
+  "bancoForm.referencia_alf": "Referencia Alfanumérica",
   "bancoForm.subcuenta": "Subcuenta",
   "bancoForm.ingreso": "Ingreso",
   "bancoForm.egreso": "Egreso",

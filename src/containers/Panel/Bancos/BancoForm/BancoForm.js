@@ -92,14 +92,14 @@ class BancoForm extends Component {
           touched: false,
           hide: false
         },
-        nota: {
-          elementType: 'textarea',
+        referencia_alf: {
+          elementType: 'input',
           elementConfig: {
             type: 'text',
             placeholder: '..',
-            maxLength: '100'
+            maxLength: '60'
           },
-          label:  (<FormattedMessage id="bancoForm.nota"/>),
+          label:  (<FormattedMessage id="bancoForm.referencia_alf"/>),
           value: '',
           validation: {
             required: false
@@ -285,7 +285,7 @@ class BancoForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const formOrder = ["referencia_banco", "fecha", "cantidad", "nota", "subcuenta"]
+    const formOrder = ["referencia_banco", "fecha", "cantidad", "referencia_alf", "subcuenta"]
     const formElementsArray = []
     let formElements, modalInfo = <Spinner/>
 

@@ -397,7 +397,7 @@
   "bancoForm.Pagos": "Stojel",
   "bancoForm.EjCredito": "Smajanel taqu'in",
   "bancoForm.Otros": "Yan",
-  "bancoForm.nota": "Nota",
+  "bancoForm.referencia_alf": "Referencia Alfanumérica",
   "bancoForm.subcuenta": "Subcuenta",
   "bancoForm.ingreso": "Ochem talel",
   "bancoForm.egreso": "Loquem bahel",
