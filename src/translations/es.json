@@ -409,5 +409,10 @@
   "creditos.fecha_banco": "Fecha en Banco",
   "creditos.referencia_banco": "Referencia Bancaria",
   "movimientosForm.ordinario": "Ordinaria",
-  "movimientosForm.extraordinario": "Excedentes"
+  "movimientosForm.extraordinario": "Excedentes",
+  "banco.totales": "Totales",
+  "banco.cuenta": "Cuenta",
+  "banco.tot_ingresos": "Ingresos",
+  "banco.tot_egresos": "Egresos",
+  "banco.registros": "Registros"
 }

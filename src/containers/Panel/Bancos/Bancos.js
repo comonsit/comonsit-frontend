@@ -3,17 +3,19 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import RTable from '../../../components/Tables/RTable/RTable';
+import BancosList from './BancosList/BancosList'
+import BancosSaldos from './BancosSaldos/BancosSaldos'
+import Card from '../../../components/UI/Card/Card';
 import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
-import Currency from '../../../components/UI/Formatting/Currency'
 import classes from './Bancos.module.css'
 // import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
 class Tsumbalil extends Component {
   state = {
-    registros: []
+    registros: [],
+    saldos: []
   }
 
   componentDidMount () {
@@ -31,49 +33,17 @@ class Tsumbalil extends Component {
       .catch(error => {
         // TODO: FALTA!!
       })
-  }
 
-  selectColumn = (cantidad, type, column) => {
-    if (type === column) {
-      return (<Currency value={cantidad}/>)
-    }
-    return null
+    axios.get('/banco/saldos/', authData)
+      .then(response => {
+        this.setState({ saldos: response.data})
+      })
+      .catch(error => {
+        // TODO: FALTA!!
+      })
   }
 
   render () {
-    const columns = [
-      {
-        Header: <FormattedMessage id="bancos.fecha"/>,
-        accessor: 'fecha'
-      },
-      {
-        Header: <FormattedMessage id="bancos.subcuenta"/>,
-      accessor: 'subcuenta_id_cont'
-      },
-      {
-        Header: <FormattedMessage id="bancos.subcuenta_nombre"/>,
-        accessor: 'subcuenta_nombre'
-      },
-      {
-        Header: <FormattedMessage id="bancos.referencia"/>,
-        accessor: 'referencia'
-      },
-      {
-        Header: <FormattedMessage id="bancos.ingreso"/>,
-        accessor: 'cantidad',
-        Cell: (cellInfo) => this.selectColumn(cellInfo.cell.value, cellInfo.row.original.ingr_egr, true)
-      },
-      {
-        Header: <FormattedMessage id="bancos.egreso"/>,
-        accessor: 'ingr_egr',
-        Cell: (cellInfo) => this.selectColumn(cellInfo.row.original.cantidad, cellInfo.cell.value, false)
-      },
-      {
-        Header: <FormattedMessage id="bancos.saldo_bancos"/>,
-        accessor: 'saldo.total',
-        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
-      }
-    ]
 
     return (
       <>
@@ -86,11 +56,20 @@ class Tsumbalil extends Component {
               <FormattedMessage id="bancos.newMovimiento"/>
             </Button>
           </Title>
-          <RTable
-            columns={columns}
-            data={this.state.registros}
-            onRowClick={() => {}}
-            />
+          <div className={classes.CardsContainer}>
+            <Card title={"banco.registros"}>
+              <BancosList
+                data={this.state.registros}
+                onClick={() => {}}
+              />
+            </Card>
+            <Card title={"banco.totales"}>
+              <BancosSaldos
+                data={this.state.saldos}
+                onClick={() => {}}
+              />
+            </Card>
+          </div>
         </div>
       </>
     )
