@@ -40,11 +40,6 @@ const bancosList = (props) => {
       Header: <FormattedMessage id="bancos.egreso"/>,
       accessor: 'ingr_egr',
       Cell: (cellInfo) => selectColumn(cellInfo.row.original.cantidad, cellInfo.cell.value, false)
-    },
-    {
-      Header: <FormattedMessage id="bancos.saldo_bancos"/>,
-      accessor: 'saldo.total',
-      Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
     }
   ]
 
