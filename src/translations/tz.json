@@ -414,5 +414,9 @@
   "banco.cuenta": "Cuenta",
   "banco.tot_ingresos": "Ingresos",
   "banco.tot_egresos": "Egresos",
-  "banco.registros": "Registros"
+  "banco.registros": "Registros",
+  "banco.initialDate": "Fecha Inicio",
+  "banco.finalDate": "Fecha Final",
+  "banco.fechas": "Buscar por Fecha",
+  "banco.buscar": "Buscar"
 }
