@@ -71,7 +71,7 @@ class Tsumbalil extends Component {
     let endDate = ''
     if (this.state.form.finalDate.value) {
       const tmpEndDate = new Date(this.state.form.finalDate.value)
-      endDate = `?finalDate=${tmpEndDate.toISOString().substring(0, 10)}`
+      endDate = `finalDate=${tmpEndDate.toISOString().substring(0, 10)}`
     }
 
     this.setState({
