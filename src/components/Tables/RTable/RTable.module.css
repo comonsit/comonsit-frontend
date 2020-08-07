@@ -17,7 +17,8 @@
   background: #dddedf;
 }
 
-.TablaSocios th {
+.TablaSocios th,
+.TableFooter {
   border-top: 1px solid #34495E;
   border-bottom: 1px solid #34495E;
   padding: .5rem;

@@ -9,7 +9,7 @@ import DefaultColumnFilter from './Filters/DefaultColumnFilter'
 import { useDispatch } from "react-redux";
 import * as actions from '../../../store/actions'
 
-const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
+const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFooter }) => {
 
   const [advancedSearch, setAdvancedSearch] = useState(false);
 
@@ -49,6 +49,7 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
       getTableProps,
       getTableBodyProps,
       headerGroups,
+      footerGroups,
       page,
       prepareRow,
       state,
@@ -179,6 +180,18 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
     </div>
   ) : null
 
+  const showFooter = hasFooter ? (
+    <tfoot>
+      {footerGroups.map(group => (
+        <tr{...group.getFooterGroupProps()}>
+          {group.headers.map(column => (
+            <td className={classes.TableFooter}  {...column.getFooterProps()}>{column.render('Footer')}</td>
+          ))}
+        </tr>
+      ))}
+    </tfoot>
+  ) : null
+
   // Render the UI for your table
   return (
     <>
@@ -221,6 +234,7 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow }) => {
                 )}
             )}
           </tbody>
+          {showFooter}
         </table>
       </div>
       {paginationButtons}
