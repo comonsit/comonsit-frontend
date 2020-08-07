@@ -87,6 +87,7 @@ class Tsumbalil extends Component {
       })
       .catch(error => {
         this.setState({
+          registros: [],
           loadingReg: false,
         })
         // TODO: FALTA!!
@@ -101,6 +102,7 @@ class Tsumbalil extends Component {
       })
       .catch(error => {
         this.setState({
+          saldos: [],
           loadingSaldos: false,
         })
         // TODO: FALTA!!

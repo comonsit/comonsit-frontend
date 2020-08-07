@@ -410,7 +410,8 @@
   "creditos.referencia_banco": "Schicnaji'bal yahtalul ta snahul taqu'in",
   "movimientosForm.ordinario": "Ordinario",
   "movimientosForm.extraordinario": "Excedentes",
-  "banco.totales": "Totales",
+  "banco.totales": "Total Acumulado",
+  "banco.total_periodo": "Total del Periodo",
   "banco.cuenta": "Cuenta",
   "banco.tot_ingresos": "Ingresos",
   "banco.tot_egresos": "Egresos",
@@ -418,5 +419,6 @@
   "banco.initialDate": "Fecha Inicio",
   "banco.finalDate": "Fecha Final",
   "banco.fechas": "Buscar por Fecha",
-  "banco.buscar": "Buscar"
+  "banco.buscar": "Buscar",
+  "banco.tot_prev": "Total Previo"
 }
