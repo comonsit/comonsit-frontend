@@ -10,19 +10,21 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
+import Notification from '../../../components/UI/Notification/Notification';
 import classes from './Bancos.module.css'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 // import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
-class Tsumbalil extends Component {
+class Bancos extends Component {
   state = {
     registros: [],
     saldos: [],
     formIsValid: false,
     loadingReg: true,
     loadingSaldos: true,
+    pendingConcils: 0,
     form: {
       initialDate: {
         elementType: 'input',
@@ -107,6 +109,29 @@ class Tsumbalil extends Component {
         })
         // TODO: FALTA!!
       })
+
+
+      axios.get('/movimientos-conc/', authData)
+        .then(response => {
+          this.setState(prevState => {
+              return {pendingConcils: prevState.pendingConcils + +response.data.count }
+          })
+        })
+
+      axios.get('/pagos/no-link/', authData)
+        .then(response => {
+          this.setState(prevState => {
+              return {pendingConcils: prevState.pendingConcils + +response.data.count }
+          })
+        })
+
+      axios.get('/contratos/no-link/', authData)
+        .then(response => {
+          this.setState(prevState => {
+              return {pendingConcils: prevState.pendingConcils + +response.data.count }
+          })
+        })
+
   }
 
   onSubmitForm = (event) => {
@@ -159,11 +184,13 @@ class Tsumbalil extends Component {
         <div className={classes.Container}>
           <Title
             titleName="bancos.title">
-            <Button
-              clicked={() => this.props.history.push('banco-form')}
-            >
-              <FormattedMessage id="bancos.newMovimiento"/>
-            </Button>
+            <Notification number={this.state.pendingConcils}>
+              <Button
+                clicked={() => this.props.history.push('banco-form')}
+              >
+                <FormattedMessage id="bancos.newMovimiento"/>
+              </Button>
+            </Notification>
           </Title>
           <div className={classes.CardsContainer}>
             <div>
@@ -236,4 +263,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Tsumbalil))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Bancos))
