@@ -174,17 +174,17 @@ class BancoForm extends Component {
 
     axios.get('/movimientos-conc/', authData)
       .then(response => {
-        this.setState({movs: response.data})
+        this.setState({movs: response.data.results})
       })
 
     axios.get('/pagos/no-link/', authData)
       .then(response => {
-        this.setState({pagos: response.data})
+        this.setState({pagos: response.data.results})
       })
 
     axios.get('/contratos/no-link/', authData)
       .then(response => {
-        this.setState({creditos: response.data})
+        this.setState({creditos: response.data.results})
       })
     axios.get('/subcuentas/', authData)
       .then(response => {
