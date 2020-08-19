@@ -1,0 +1,26 @@
+.CardsContainer {
+  display: grid;
+  grid-template-columns: auto;
+  justify-items: center;
+  align-items: stretch;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+.CardsContainer > div {
+  width: 95%;
+}
+
+.Inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 62em) {
+  .CardsContainer {
+    grid-template-columns: 40% 60%;
+  }
+  .longCard {
+    grid-column-end: span 2;
+  }
+}

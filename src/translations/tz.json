@@ -420,5 +420,14 @@
   "banco.finalDate": "Fecha Final",
   "banco.fechas": "Buscar por Fecha",
   "banco.buscar": "Buscar",
-  "banco.tot_prev": "Total Previo"
+  "banco.tot_prev": "Total Previo",
+  "pmenu.carteras": "Carteras",
+  "carteras.title": "Carteras",
+  "carteras.fechas": "Fecha",
+  "carteras.totales": "Total de Carteras",
+  "carteras.vigentes": "Créditos Vigentes",
+  "carteras.total_vigentes": "Deuda de Créditos Vigentes",
+  "carteras.total_vencidos": "Deuda deCréditos Vencidos",
+  "carteras.num_vigentes": "Número de Créditos Vigentes",
+  "carteras.num_vencidos": "Número de Créditos Vencidos"
 }

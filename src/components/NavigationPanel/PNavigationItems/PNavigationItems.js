@@ -27,6 +27,9 @@ const pnavigationItems = props => (
       <div className={cl.NavigationItem} onClick={props.clicked}>
         <NavLink to="/pagos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.pagos"/></NavLink>
       </div>
+      <div className={cl.NavigationItem} onClick={props.clicked}>
+        <NavLink to="/carteras" exact activeClassName={cl.active}><FormattedMessage id="pmenu.carteras"/></NavLink>
+      </div>
     </Collapsible>
     <Collapsible
       transitionTime ={300}

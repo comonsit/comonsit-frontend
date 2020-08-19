@@ -3,7 +3,7 @@ import {FormattedNumber, IntlProvider} from 'react-intl';
 
 const currency = props => {
   if (isNaN(props.value) || (props.hideZero && parseInt(props.value) === 0)) {
-    return ''
+    return props.returnString ? props.value : ''
   } else {
     // hide negative zeroes
     const val = (props.value === 0) ? Math.abs(props.value) : (props.value)
