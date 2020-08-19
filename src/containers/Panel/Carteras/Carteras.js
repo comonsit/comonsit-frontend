@@ -46,10 +46,10 @@ class Carteras extends Component {
   }
 
   componentDidMount () {
-    this.onGetRegistros()
+    this.onGetCarteras()
   }
 
-  onGetRegistros () {
+  onGetCarteras () {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }

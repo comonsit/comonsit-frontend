@@ -9,6 +9,7 @@ import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Title from '../../../components/UI/Title/Title';
 import Card from '../../../components/UI/Card/Card';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import TotalCarteras from '../Carteras/TotalCarteras/TotalCarteras'
 import axios from '../../../store/axios-be.js';
 import * as actions from '../../../store/actions'
 
@@ -17,16 +18,60 @@ class Inicio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      total_vigentes: null,
+      total_vencidos: null,
+      count_vigentes: null,
+      count_vencidos: null,
+      loading: false
     }
+    this.onGetCarteras()
+  }
+  onGetCarteras () {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+
+    axios.get('/contratos/carteras/' , authData)
+      .then(response => {
+        this.setState({
+          total_vigentes: response.data.vigentes_total,
+          total_vencidos: response.data.vencidos_total,
+          count_vigentes: response.data.vigentes_count,
+          count_vencidos: response.data.vencidos_count,
+          loading: false,
+        })
+      })
+      .catch(error => {
+        this.setState({
+          total_vigentes: 'N/D',
+          total_vencidos: 'N/D',
+          count_vigentes: 'N/D',
+          count_vencidos: 'N/D',
+          loading: false,
+        })
+        // TODO: FALTA!!
+      })
   }
 
   render () {
 
+    let carterasTotales = <Spinner/>
     const title = (this.props.user) ? <Title
       titleName="inicio.title"
       titleNameEx={" " + this.props.user.first_name}
     /> : <Spinner/>
+
+    if (!this.state.loading) {
+      carterasTotales = (
+        <TotalCarteras
+          vigentes={this.state.total_vigentes}
+          vencidos={this.state.total_vencidos}
+          vigentes_count={this.state.count_vigentes}
+          vencidos_count={this.state.count_vencidos}
+
+        />
+      )
+    }
 
     return (
       <>
@@ -50,7 +95,8 @@ class Inicio extends Component {
           </Card>
           <Card title={"inicio.mapa"}>
           </Card>
-          <Card title={"inicio.saldos"}>
+          <Card title={"inicio.carteras"}>
+            {carterasTotales}
           </Card>
           <Card title={"inicio.numeros"}>
             <Numbers/>
