@@ -88,7 +88,7 @@ class Carteras extends Component {
 
   onSubmitForm = (event) => {
     event.preventDefault();
-    this.onGetRegistros()
+    this.onGetCarteras()
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
