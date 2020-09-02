@@ -85,7 +85,8 @@ class Bancos extends Component {
 
     this.setState({
       loadingReg: true,
-      loadingSaldos: true
+      loadingSaldos: true,
+      pendingConcils: 0
     })
     axios.get('/registros-contables.json/?'+stDate+'&'+endDate , authData)
       .then(response => {
