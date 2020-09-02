@@ -388,6 +388,7 @@
   "bancos.egreso": "Egreso",
   "bancos.saldo_bancos": "Saldo",
   "bancos.newMovimiento": "Nuevo Movimiento",
+  "bancos.registrosXLSX": "Descargar registrosBanco.xlsx",
   "bancoForm.title": "Nuevo Movimiento",
   "bancoForm.cuenta_banco": "Cuenta Banco",
   "bancoForm.referencia_banco": "Referencia Bancaria",

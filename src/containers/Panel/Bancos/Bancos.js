@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FileSaver from 'file-saver';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -61,10 +62,7 @@ class Bancos extends Component {
     this.onGetRegistros()
   }
 
-  onGetRegistros () {
-    const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
-    }
+  getFormattedQueryDates () {
     let stDate = ''
     if (this.state.form.initialDate.value) {
       const tmpStartDate = new Date(this.state.form.initialDate.value)
@@ -75,6 +73,15 @@ class Bancos extends Component {
       const tmpEndDate = new Date(this.state.form.finalDate.value)
       endDate = `finalDate=${tmpEndDate.toISOString().substring(0, 10)}`
     }
+    return [stDate, endDate]
+  }
+
+  onGetRegistros () {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+
+    const [stDate, endDate] = this.getFormattedQueryDates()
 
     this.setState({
       loadingReg: true,
@@ -132,6 +139,23 @@ class Bancos extends Component {
           })
         })
 
+  }
+
+  getXLSX = type => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+
+    const [stDate, endDate] = this.getFormattedQueryDates()
+
+    axios.get('/registros-contables-xlsx/?'+stDate+'&'+endDate, authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, 'registrosBanco.xlsx')
+      })
+      .catch(error => {
+        // TODO:
+      })
   }
 
   onSubmitForm = (event) => {
@@ -241,6 +265,11 @@ class Bancos extends Component {
             </div>
             <div className={classes.longCard}>
               <Card title={"banco.registros"}>
+                <div className={classes.XLSButton}>
+                  <button onClick={this.getXLSX}>
+                    <FormattedMessage id="bancos.registrosXLSX"/>
+                  </button>
+                </div>
                 {registroTable}
               </Card>
             </div>
