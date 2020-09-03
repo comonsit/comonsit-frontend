@@ -40,6 +40,7 @@ class BancoForm extends Component {
       subcuentas: null,
       selTab: "bancoForm.Movimientos",
       cantidadCheck: null,
+      referenciaCheck: null,
       subCtaIngrEgr: false,   // true=Ingreso & false=Egreso
       modalOpen: false,
       successResponse: null,
@@ -139,13 +140,15 @@ class BancoForm extends Component {
     if(this.props.selectedItems !== prevProps.selectedItems) {
       this.setState({
         formIsValid: this.checkIfFormIsValid(this.state.bankForm),
-        cantidadCheck: this.onValidateCantidad(this.state.bankForm.cantidad.value)
+        cantidadCheck: this.onValidateCantidad(this.state.bankForm.cantidad.value),
+        referenciaCheck: this.onValidateReferencia(this.state.bankForm.referencia_banco.value)
       })
     }
     if(this.state.selTab !== prevState.selTab) {
       this.setState({
         formIsValid: this.checkIfFormIsValid(this.state.bankForm),
-        cantidadCheck: null
+        cantidadCheck: null,
+        referenciaCheck: null
       })
     }
   }
@@ -165,6 +168,23 @@ class BancoForm extends Component {
             </strong>)
     }
     return cant
+  }
+
+  onValidateReferencia (currVal) {
+    if (!currVal) return null
+
+    let resp = null
+    if (this.props.selectedItems.length > 0) {
+      const referencias = this.props.selectedItems.map(item => item["referencia_banco"])
+      if (referencias.length === 0) {
+        resp = <p><FormattedMessage id={"bancoForm.sinReferenciaAlert"}/></p>
+      } else if (referencias.length === 1 && referencias[0] !== currVal) {
+        resp = <p><FormattedMessage id={"bancoForm.noCoincideAlert1"}/>{currVal}<FormattedMessage id={"bancoForm.noCoincideAlert2"}/>{referencias[0]}</p>
+      } else if (referencias.length > 1) {
+        resp = <p><FormattedMessage id={"bancoForm.diferentesAlert"}/></p>
+      }
+    }
+    return resp
   }
 
   onGetData () {
@@ -265,10 +285,21 @@ class BancoForm extends Component {
       [inputIdentifier]: updatedFormElement
     })
 
+    let extras = {}
+    if (inputIdentifier === "cantidad" && currValid) {
+      extras = {
+        cantidadCheck: this.onValidateCantidad(event.target.value)
+      }
+    } else if (inputIdentifier === "referencia_banco" && currValid) {
+      extras = {
+        referenciaCheck: this.onValidateReferencia(event.target.value)
+      }
+    }
+
     this.setState({
       bankForm: updatedForm,
       formIsValid: this.checkIfFormIsValid(updatedForm),
-      cantidadCheck: this.onValidateCantidad(inputIdentifier === "cantidad" && currValid ? event.target.value : null)
+      ...extras
     })
   }
 
@@ -329,6 +360,7 @@ class BancoForm extends Component {
                 touched={formElement.config.touched}
                 disabled={formElement.config.disabled}
                 supportData={formElement.id === "cantidad" ? this.state.cantidadCheck : null}
+                alertMessage={formElement.id === "referencia_banco" ? this.state.referenciaCheck : null}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}
                 supportActions={formElement.config.supportActions}
               />

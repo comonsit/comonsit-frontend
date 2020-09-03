@@ -38,6 +38,12 @@
     color: #243746;
 }
 
+.inputBox {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+}
+
 .InputElement[multiple] {
   background: none;
   width:auto;
@@ -75,7 +81,27 @@
 }
 
 .InvalidMessage {
-    font-size: .5rem
+  font-size: .5rem;
+}
+
+.AlertMessage {
+  display: flex;
+}
+.AlertMessage p {
+  margin-left: 1rem;
+}
+
+.svgCont {
+  width: 2rem;
+  enable-background:new 0 0 507.425 507.425;
+}
+
+.svgContC1 {
+  fill: #FFC52F;
+}
+
+.svgContC2 {
+  fill: #F4EFEF;
 }
 
 .HideMe {

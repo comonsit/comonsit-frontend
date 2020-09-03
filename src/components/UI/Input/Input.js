@@ -2,6 +2,7 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl';
 import classes from './Input.module.css'
 import Button from '../Button/Button'
+import Alert from './Alert'
 
 
 const input = (props) => {
@@ -31,9 +32,11 @@ const input = (props) => {
     }
 
     if (props.invalid && props.shouldValidate && props.touched) {
-        inputClasses.push(classes.Invalid)
-        // aquí habría que tunear a partir del state
-        validationError = (<p className={classes.InvalidMessage}>&#60;&#8209;&#8209;</p>)
+      inputClasses.push(classes.Invalid)
+      // TODO:  aquí habría que tunear a partir del state, similar al AlertMessage
+      validationError = (<p className={classes.InvalidMessage}>&#60;&#8209;&#8209;</p>)
+    } else if (props.alertMessage) {
+      validationError = (<><div className={classes.AlertMessage}><Alert/>{props.alertMessage}</div></>)
     }
 
     switch (props.elementType ) {
@@ -118,13 +121,14 @@ const input = (props) => {
       button = (<Button btnType="Short" clicked={props.supportActions.supportButton}><FormattedMessage id={props.supportActions.suppButtLabelID}/></Button>)
     }
 
-
     return (
       <>
         <div className={containerClasses.join(' ')}>
             {label}
-            {inputElement}
-            {validationError}
+            <div className={classes.inputBox}>
+              {inputElement}
+              {validationError}
+            </div>
         </div>
         {support}
         {button}
