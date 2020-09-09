@@ -14,6 +14,25 @@ import { updateObject } from '../../../../store/reducers/utility'
 import axios from '../../../../store/axios-be.js'
 
 
+const procesos_values = [
+  {
+    "value": "CF",
+    "displayValue": "Café"
+  },
+  {
+    "value": "MI",
+    "displayValue": "Miel"
+  },
+  {
+    "value": "JA",
+    "displayValue": "Jabón"
+  },
+  {
+    "value": "SL",
+    "displayValue": "Sueldos"
+  }
+]
+
 class MovimientosSearch extends Component {
   state = {
     formIsValid: false,
@@ -42,6 +61,39 @@ class MovimientosSearch extends Component {
         valid: false,
         touched: false,
       },
+      empresa: {
+        elementType: 'select',
+        elementConfig: {
+          options: this.props.empresas.map(r => ({"value": r.id, "displayValue": r.id +': ' + r.nombre_empresa})),
+          optionBlank: true
+        },
+        label: (<><FormattedMessage id="empresa"/></>),
+        value: "",
+        valid: false,
+        touched: false,
+      },
+      fuente: {
+        elementType: 'select',
+        elementConfig: {
+          options: this.props.fuentes.map(r => ({"value": r.id, "displayValue": r.id +': ' + r.fuente})),
+          optionBlank: true
+        },
+        label: (<><FormattedMessage id="fuente"/></>),
+        value: "",
+        valid: false,
+        touched: false,
+      },
+      proceso: {
+        elementType: 'select',
+        elementConfig: {
+          options: procesos_values,
+          optionBlank: true
+        },
+        label: (<><FormattedMessage id="proceso"/></>),
+        value: "",
+        valid: false,
+        touched: false,
+      },
     }
   }
 
@@ -65,6 +117,12 @@ class MovimientosSearch extends Component {
       query = '?region='+this.state.form.region.value
     } else if (this.state.form.comunidad.value) {
       query = '?comunidad='+this.state.form.comunidad.value
+    } else if (this.state.form.empresa.value) {
+      query = '?empresa='+this.state.form.empresa.value
+    } else if (this.state.form.fuente.value) {
+      query = '?fuente='+this.state.form.fuente.value
+    }else if (this.state.form.proceso.value) {
+      query = '?proceso='+this.state.form.proceso.value
     }
 
     const authData = {
@@ -94,38 +152,38 @@ class MovimientosSearch extends Component {
 
   render () {
 
+    const movimientoFormOrder = ["comunidad", "region", "empresa", "fuente", "proceso"]
+    const formElementsArray = []
+
+    movimientoFormOrder.forEach(key => {
+      formElementsArray.push({
+        id: key,
+        config: this.state.form[key]
+      })
+    })
+
     let form = <Spinner/>
     if (this.props.comunidades.length > 0 && this.props.regiones.length > 0) {
+
       form = (<form className={classes.Form} onSubmit={this.updateData}>
         <div className={classes.Inputs}>
-          <Input
-            label={this.state.form.comunidad.label}
-            key= {'aportacionSearchFormComunidad2'}
-            elementType={this.state.form.comunidad.elementType}
-            elementConfig={this.state.form.comunidad.elementConfig}
-            value={this.state.form.comunidad.value}
-            shouldValidate={this.state.form.comunidad.validation}
-            invalid={!this.state.form.comunidad.valid}
-            touched={this.state.form.comunidad.touched}
-            disabled={this.props.loading}
-            hide={this.state.form.comunidad.hide}
-            changed={(event) => this.inputChangedHandler(event, 'comunidad')}
-            focused
-          />
-          <Input
-            label={this.state.form.region.label}
-            key= {'aportacionSearchFormRegion3'}
-            elementType={this.state.form.region.elementType}
-            elementConfig={this.state.form.region.elementConfig}
-            value={this.state.form.region.value}
-            shouldValidate={this.state.form.region.validation}
-            invalid={!this.state.form.region.valid}
-            touched={this.state.form.region.touched}
-            disabled={this.props.loading}
-            hide={this.state.form.region.hide}
-            changed={(event) => this.inputChangedHandler(event, 'region')}
-            focused
-          />
+          {formElementsArray.map(formElement => {
+              return (
+                    <Input
+                      label={formElement.config.label}
+                      key= {formElement.id}
+                      elementType={formElement.config.elementType }
+                      elementConfig={formElement.config.elementConfig }
+                      value={formElement.config.value}
+                      shouldValidate={formElement.config.validation}
+                      invalid={!formElement.config.valid}
+                      touched={formElement.config.touched}
+                      disabled={this.props.loading}
+                      hide={formElement.config.hide}
+                      changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                      />
+                  )
+          })}
         </div>
         <Button
           btnType="Success"
@@ -154,6 +212,8 @@ const mapStateToProps = state => {
       token: state.auth.token,
       regiones: state.generalData.regiones,
       comunidades: state.generalData.comunidades,
+      empresas: state.generalData.empresas,
+      fuentes: state.generalData.fuentes,
     }
 }
 
