@@ -434,5 +434,22 @@
   "carteras.total_vigentes": "Deuda de Créditos Vigentes",
   "carteras.total_vencidos": "Deuda deCréditos Vencidos",
   "carteras.num_vigentes": "Número de Créditos Vigentes",
-  "carteras.num_vencidos": "Número de Créditos Vencidos"
+  "carteras.num_vencidos": "Número de Créditos Vencidos",
+  "bancos.selectedRegistro": "Registro",
+  "registro.id": "#",
+  "registro.fecha": "Fecha",
+  "registro.referencia_banco": "Referencia Bancaria",
+  "registro.referencia_alf": "Referencia Alfanumérica",
+  "registro.fecha_captura": "Fecha de Captura",
+  "registro.usuario": "Usuario",
+  "registro.subcuenta_id": "Subcuenta",
+  "registro.subcuenta_nombre": "Subcuenta Nombre",
+  "registro.banco_cuenta": "Cuenta",
+  "registro.banco_nombre": "Banco",
+  "registro.relacion_sistema": "Datos Sistema",
+  "registro.cantidad": "Cantidad",
+  "registro.ingr_egr": "Ingreso/Egreso",
+  "registro.aport_retiro": "Aportación/Retiro",
+  "registro.pago": "#Pago",
+  "registro.ej_credito": "#Crédito"
 }

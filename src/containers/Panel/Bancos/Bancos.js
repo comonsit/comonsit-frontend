@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 
 import BancosList from './BancosList/BancosList'
 import BancosSaldos from './BancosSaldos/BancosSaldos'
+import BancoDetail from './BancoDetail/BancoDetail'
 import Card from '../../../components/UI/Card/Card';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Modal from '../../../components/UI/Modal/Modal';
 import Title from '../../../components/UI/Title/Title';
 import Notification from '../../../components/UI/Notification/Notification';
 import classes from './Bancos.module.css'
@@ -20,6 +22,8 @@ import axios from '../../../store/axios-be.js'
 
 class Bancos extends Component {
   state = {
+    showRegistroModal: false,
+    selectedRegistro: null,
     registros: [],
     saldos: [],
     formIsValid: false,
@@ -184,6 +188,35 @@ class Bancos extends Component {
     this.setState({form: updatedForm, formIsValid: formIsValid})
   }
 
+  showRegistro = (id, cantidad) => {
+    this.setState({
+      showRegistroModal: true,
+      selectedRegistro: null
+    })
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+    }
+
+    axios.get(`/registros-contables/${id}.json`, authData)
+      .then(response => {
+        this.setState({
+          selectedRegistro: response.data,
+        })
+      })
+      .catch(error => {
+        this.setState({
+          selectedRegistro: null
+        })
+      })
+  }
+
+  cancelSelected = () => {
+    this.setState({
+      showRegistroModal: false,
+      selectedRegistro: null,
+    });
+  }
+
   render () {
 
     let saldosTable, registroTable = <Spinner/>
@@ -191,7 +224,7 @@ class Bancos extends Component {
       registroTable = (
         <BancosList
           data={this.state.registros}
-          onClick={() => {}}
+          onClick={(row) => this.showRegistro(row.original.id)}
         />
       )
     }
@@ -204,8 +237,24 @@ class Bancos extends Component {
       )
     }
 
+    const registro = (this.state.selectedRegistro) ? <BancoDetail registro={this.state.selectedRegistro}/> : <Spinner/>
+
     return (
       <>
+        <Modal
+          show={this.state.showRegistroModal}
+          modalClosed={this.cancelSelected}>
+          <div className={classes.Container}>
+            <div className={classes.SubTitle}>
+              <h3>
+                <FormattedMessage id={"bancos.selectedRegistro"}/> #{this.state.selectedRegistro ? this.state.selectedRegistro.id : ''}
+              </h3>
+            </div>
+            <div className={classes.ContentContainer}>
+            {registro}
+            </div>
+          </div>
+        </Modal>
         <div className={classes.Container}>
           <Title
             titleName="bancos.title">

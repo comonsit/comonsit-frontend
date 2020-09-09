@@ -16,6 +16,22 @@
   flex-direction: column;
 }
 
+.Container {
+  background-color: #f6fcf9;
+  padding: 2rem;
+  border-radius: .5rem;
+}
+
+.ContentContainer {
+  background-color: #fff;
+  border: .1rem solid #243746;
+  padding: .7rem;
+  overflow-y:scroll;
+  height: 50vh;
+  min-height: 40rem;
+}
+
+
 .XLSButton button {
   font-family: 'Libre Baskerville';
   background-color: #243746;
