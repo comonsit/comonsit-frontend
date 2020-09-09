@@ -220,7 +220,7 @@ class AcopiosGraphs extends Component {
         <Button
           btnType="Success"
           disabled={!this.state.formIsValid}>
-          <FormattedMessage id="acopiosGraphs.actualizar"/>
+          <FormattedMessage id="actualizarDatos"/>
         </Button>
       </form>)
     }

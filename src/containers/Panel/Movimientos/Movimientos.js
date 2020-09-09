@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import classes from './Movimientos.module.css'
 import { connect } from 'react-redux';
 
+import MovimientosSearch from './MovimientosSearch/MovimientosSearch'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
@@ -26,6 +27,7 @@ class Movimientos extends Component {
     movimientoSelected: false,
     searchingOpen: false,
     selSocio: '',
+    selTab: "movimientos.buscarSocio",
     saldo: null,
     emptyMessage: false,
     formIsValid: false,
@@ -224,7 +226,7 @@ class Movimientos extends Component {
     } else if (this.props.listaMovimientos && this.state.saldo) {
       const today = new Date()
       movimientosResults = (
-        <>
+        <div className={classes.TabContainer}>
           <div className={classes.SocioName}>
             <p><strong>{this.state.selSocio}</strong></p>
             <p><FormattedMessage id="movimientos.saldo"/><FrmtedDate value={today.toString()}/></p>
@@ -235,7 +237,7 @@ class Movimientos extends Component {
             data={this.props.listaMovimientos}
             onRowClick={row => this.showMovimiento(row.values.id)}
             />
-        </>
+        </div>
       )
     } else if (this.state.emptyMessage && this.state.selSocio) {
       movimientosResults = (
@@ -278,7 +280,9 @@ class Movimientos extends Component {
               ><FormattedMessage id="movimientos.newMovimiento"/></Button>
           </Title>
           <div className={classes.FormsContainer}>
-            <Tabs>
+            <Tabs
+              onSelectTab={(activeTab) => this.setState({selTab: activeTab})}
+              >
               <div label="movimientos.buscarSocio">
                 <form className={classes.Form} onSubmit={this.onSubmitForm}>
                   <div className={classes.Inputs}>
@@ -303,15 +307,15 @@ class Movimientos extends Component {
                     <FormattedMessage id="movimientos.actualizar"/>
                   </Button>
                 </form>
-                <Button btnType="Short" clicked={(event) => this.onSearchSocio(event)}><FormattedMessage id="searchSocio"/></Button>
+                <div className={classes.supportButton}>
+                  <Button btnType="Short" clicked={(event) => this.onSearchSocio(event)}><FormattedMessage id="searchSocio"/></Button>
+                </div>
+                {movimientosResults}
               </div>
-              <div label="movimientos.buscarComunidad">
-                <p>...en construcción...</p>
+              <div label="movimientos.buscarGrupo">
+                <MovimientosSearch/>
               </div>
             </Tabs>
-          </div>
-          <div className={classes.ResultsContainer}>
-            {movimientosResults}
           </div>
         </div>
       </>
@@ -324,7 +328,7 @@ const mapStateToProps = state => {
       selSocio: state.socios.selectedSocio,
       listaMovimientos: state.movimientos.movimientos,
       listaSocios: state.socios.socios,
-      token: state.auth.token,
+      token: state.auth.token
     }
 }
 

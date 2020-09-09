@@ -375,7 +375,7 @@ class BancoForm extends Component {
     const subcuentaInput = _.remove(formElements, el => el.key === "subcuenta" )
 
     if (this.state.movs) {
-      movsList = <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
+      movsList = <MovimientosListConc data={this.state.movs} onClick={() => {}} selectable/>
     }
     if (this.state.pagos) {
       pagosList = <PagosList data={this.state.pagos} onClick={() => {}} selectable/>

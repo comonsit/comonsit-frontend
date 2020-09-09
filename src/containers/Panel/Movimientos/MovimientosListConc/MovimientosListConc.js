@@ -64,7 +64,7 @@ const movimientosListConc = (props) => {
             columns={columns}
             data={props.data}
             onRowClick={props.onClick}
-            selectableRow
+            selectableRow={props.selectable}
           />)
 }
 

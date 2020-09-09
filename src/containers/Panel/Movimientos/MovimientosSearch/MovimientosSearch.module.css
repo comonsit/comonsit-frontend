@@ -1,0 +1,12 @@
+.Container {
+  padding: 2rem;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Form button {
+  align-self: center;
+}
