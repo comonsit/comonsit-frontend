@@ -10,3 +10,8 @@
 .Form button {
   align-self: center;
 }
+
+.Table {
+  display: flex;
+  flex-direction: column;
+}

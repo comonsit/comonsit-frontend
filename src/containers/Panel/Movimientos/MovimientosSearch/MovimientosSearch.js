@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import FileSaver from 'file-saver';
 import classes from './MovimientosSearch.module.css'
 import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import MovimientosListConc from '../MovimientosListConc/MovimientosListConc'
 import Button from '../../../../components/UI/Button/Button';
+import XLSButton from '../../../../components/UI/XLSButton/XLSButton';
 import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import { updateObject } from '../../../../store/reducers/utility'
@@ -110,8 +112,7 @@ class MovimientosSearch extends Component {
     this.setState({form: updatedForm, formIsValid: true})
   }
 
-  updateData = event => {
-    event.preventDefault();
+  getQuery = () => {
     let query = ''
     if (this.state.form.region.value) {
       query = '?region='+this.state.form.region.value
@@ -124,10 +125,17 @@ class MovimientosSearch extends Component {
     }else if (this.state.form.proceso.value) {
       query = '?proceso='+this.state.form.proceso.value
     }
+    return query
+  }
+
+  updateData = event => {
+    event.preventDefault();
+
 
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
+    const query = this.getQuery()
     this.setState({
       loading: true
     })
@@ -148,7 +156,23 @@ class MovimientosSearch extends Component {
     } else {
       return (<p style={{color: "#ec573c"}}>R</p>)
     }
- }
+  }
+
+  getXLSX = type => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+    const query = this.getQuery()
+
+    axios.get('/movimientos-conc-xlsx/'+query, authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, `aportaciones_retiros${query}.xlsx`)
+      })
+      .catch(error => {
+        // TODO:
+      })
+  }
 
   render () {
 
@@ -195,7 +219,12 @@ class MovimientosSearch extends Component {
 
     let movList = this.state.loading ? <Spinner/> : null
     if (this.state.movs && !this.state.loading) {
-      movList = <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
+      movList = (
+        <div className={classes.Table}>
+          <XLSButton clicked={this.getXLSX} labelID={"aportacionesRetirosXLS"}/>
+          <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
+        </div>
+      )
     }
 
     return (

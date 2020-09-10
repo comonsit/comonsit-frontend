@@ -452,5 +452,6 @@
   "registro.ingr_egr": "Ingreso/Egreso",
   "registro.aport_retiro": "Aportación/Retiro",
   "registro.pago": "#Pago",
-  "registro.ej_credito": "#Crédito"
+  "registro.ej_credito": "#Crédito",
+  "aportacionesRetirosXLS": "Descargar aportacionesRetiros.xlsx"
 }
