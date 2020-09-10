@@ -31,24 +31,6 @@
   min-height: 40rem;
 }
 
-
-.XLSButton button {
-  font-family: 'Libre Baskerville';
-  background-color: #243746;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: .8em;
-  margin: 0rem 0rem;
-  cursor: pointer;
-  padding: .2rem 1rem;
-}
-
-.XLSButton button:hover {
-  background: #1e5785;
-}
-
 @media (min-width: 62em) {
   .CardsContainer {
     grid-template-columns: 40% 60%;

@@ -9,6 +9,7 @@ import BancosSaldos from './BancosSaldos/BancosSaldos'
 import BancoDetail from './BancoDetail/BancoDetail'
 import Card from '../../../components/UI/Card/Card';
 import Button from '../../../components/UI/Button/Button';
+import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Modal from '../../../components/UI/Modal/Modal';
@@ -315,11 +316,7 @@ class Bancos extends Component {
             </div>
             <div className={classes.longCard}>
               <Card title={"banco.registros"}>
-                <div className={classes.XLSButton}>
-                  <button onClick={this.getXLSX}>
-                    <FormattedMessage id="bancos.registrosXLSX"/>
-                  </button>
-                </div>
+                <XLSButton clicked={this.getXLSX} labelID={"bancos.registrosXLSX"}/>
                 {registroTable}
               </Card>
             </div>

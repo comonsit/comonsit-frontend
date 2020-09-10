@@ -9,6 +9,7 @@ import SociosList from './SociosList/SociosList';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
+import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Title from '../../../components/UI/Title/Title';
 import classes from './Socios.module.css'
 import * as actions from '../../../store/actions'
@@ -84,7 +85,7 @@ class Socios extends Component {
       }
 
       if (isGerencia(this.props.role)) {
-        downloadXLSButton = (<div className={classes.XLSButton}><button onClick={this.getXLSX}><FormattedMessage id="sociosXLSX"/></button></div>)
+        downloadXLSButton = (<XLSButton clicked={this.getXLSX} labelID={"sociosXLSX"}/>)
         newSocioButton = (<Button clicked={this.onNewSocio}><FormattedMessage id="socios.newSocioButton"/></Button>)
       }
 

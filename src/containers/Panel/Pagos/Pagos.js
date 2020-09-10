@@ -9,6 +9,7 @@ import PagoDetail from './PagoDetail/PagoDetail'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
+import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
 import Title from '../../../components/UI/Title/Title';
@@ -111,11 +112,7 @@ class Pagos extends Component {
               </Button>
           </Title>
           <div className={classes.Table}>
-            <div className={classes.XLSButton}>
-              <button onClick={this.getXLSX}>
-                <FormattedMessage id="pagosXLSX"/>
-              </button>
-            </div>
+            <XLSButton clicked={this.getXLSX} labelID={"pagosXLSX"}/>
             <PagosList
               data={this.props.listaPagos}
               onClick={(row) => this.showPago(row.values.id)}
