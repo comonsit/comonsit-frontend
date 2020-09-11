@@ -2,7 +2,7 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {NavLink} from "react-router-dom";
 
-import cl from './NavigationItems.module.css';
+import cl from './NavigationItems.module.scss';
 
 const navigationItems = (props) => (
     <div className={cl.Logo}>

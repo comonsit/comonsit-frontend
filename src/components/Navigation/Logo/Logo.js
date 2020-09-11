@@ -1,7 +1,7 @@
 import React from 'react';
 
 import csLogo from '../../../assets/images/cs-logo.png';
-import cl from './Logo.module.css';
+import cl from './Logo.module.scss';
 
 const logo = (props) => (
     <div className={cl.Logo}>
