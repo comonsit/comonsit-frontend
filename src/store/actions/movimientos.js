@@ -72,3 +72,32 @@ export const newMovimientoStart = () => {
         type: actionTypes.NEW_MOVIMIENTO_START
     }
 }
+
+export const fetchSelMov = (token, movId) => {
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    axios.get(`/movimientos/${movId}.json`, authData)
+      .then(response => {
+        dispatch(setSelMovimiento(response.data))
+      })
+      .catch(error => {
+        // TODO: FALTA!!
+        //dispatch(fetchPagosFailed())
+      })
+  }
+}
+
+export const setSelMovimiento = (selectedMov) => {
+  return {
+    type: actionTypes.SET_SEL_MOV,
+    selectedMov: selectedMov
+  }
+}
+
+export const unSelectMov = () => {
+  return {
+    type: actionTypes.UNSELECT_MOV
+  }
+}

@@ -453,5 +453,11 @@
   "registro.aport_retiro": "Aportación/Retiro",
   "registro.pago": "#Pago",
   "registro.ej_credito": "#Crédito",
-  "aportacionesRetirosXLS": "Descargar aportacionesRetiros.xlsx"
+  "aportacionesRetirosXLS": "Descargar aportacionesRetiros.xlsx",
+  "movimiento.nombre_socio": "Nombres",
+  "movimiento.fecha_entrega": "Fecha Entrega",
+  "movimiento.monto": "Monto",
+  "movimiento.aportacion": "Aportación/Retiro",
+  "movimiento.proceso": "Proceso",
+  "movimiento.tipo_de_movimiento": "Tipo de Movimiento"
 }

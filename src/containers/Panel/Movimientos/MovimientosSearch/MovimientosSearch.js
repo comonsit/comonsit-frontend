@@ -6,13 +6,15 @@ import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import MovimientosListConc from '../MovimientosListConc/MovimientosListConc'
+import MovimientoDetail from '../MovimientoDetail/MovimientoDetail'
 import Button from '../../../../components/UI/Button/Button';
+import Modal from '../../../../components/UI/Modal/Modal';
 import XLSButton from '../../../../components/UI/XLSButton/XLSButton';
 import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import { updateObject } from '../../../../store/reducers/utility'
 // import { checkValidity } from '../../../utilities/validity'
-// import * as actions from '../../../store/actions'
+import * as actions from '../../../../store/actions'
 import axios from '../../../../store/axios-be.js'
 
 
@@ -40,6 +42,7 @@ class MovimientosSearch extends Component {
     formIsValid: false,
     loading: false,
     movs: [],
+    showMovimientoModal: false,
     form: {
       comunidad: {
         elementType: 'select',
@@ -174,6 +177,21 @@ class MovimientosSearch extends Component {
       })
   }
 
+  showMovimiento = id => {
+    this.setState({
+      showMovimientoModal: true,
+    })
+
+    this.props.onFetchSelMovimiento(this.props.token, id)
+  }
+
+  cancelSelected =() => {
+    this.setState({
+      showMovimientoModal: false,
+    });
+    this.props.unSelMov()
+  }
+
   render () {
 
     const movimientoFormOrder = ["comunidad", "region", "empresa", "fuente", "proceso"]
@@ -222,16 +240,35 @@ class MovimientosSearch extends Component {
       movList = (
         <div className={classes.Table}>
           <XLSButton clicked={this.getXLSX} labelID={"aportacionesRetirosXLS"}/>
-          <MovimientosListConc data={this.state.movs} onClick={() => {}}/>
+          <MovimientosListConc data={this.state.movs} onClick={(row) => this.showMovimiento(row.original.id)}/>
         </div>
       )
     }
 
+    const movDetail = (this.props.selMov) ? <MovimientoDetail pago={this.props.selMov}/> : <Spinner/>
+
     return (
-      <div className={classes.Container}>
-        {form}
-        {movList}
-      </div>
+      <>
+        <Modal
+          show={this.state.showMovimientoModal}
+          modalClosed={this.cancelSelected}>
+          <div className={classes.Container}>
+            <div className={classes.SubTitle}>
+              <h3>
+                <FormattedMessage id={"movimientoSearch.selectedMov"}/> #{this.props.selMov ? this.props.selMov.id : ''}
+              </h3>
+              {"editMovButton"}
+            </div>
+            <div className={classes.ContentContainer}>
+            {movDetail}
+            </div>
+          </div>
+        </Modal>
+        <div className={classes.Container}>
+          {form}
+          {movList}
+        </div>
+      </>
     )
   }
 }
@@ -243,12 +280,14 @@ const mapStateToProps = state => {
       comunidades: state.generalData.comunidades,
       empresas: state.generalData.empresas,
       fuentes: state.generalData.fuentes,
+      selMov: state.movimientos.selectedMov
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-
+      onFetchSelMovimiento: (token, movId) => dispatch(actions.fetchSelMov(token, movId)),
+      unSelMov: () => dispatch(actions.unSelectMov())
     }
 }
 

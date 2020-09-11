@@ -42,11 +42,9 @@ export {
     initMovimientos,
     unSetMovimientos,
     newMovimiento,
-    createNewMovimiento
-    // unSelectAcopio,
-    // fetchSelAcopio,
-    // newAcopio,
-    // createNewAcopio
+    createNewMovimiento,
+    fetchSelMov,
+    unSelectMov
 } from './movimientos'
 
 
