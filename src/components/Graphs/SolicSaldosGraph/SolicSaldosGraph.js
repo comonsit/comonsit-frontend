@@ -9,7 +9,7 @@ import {
   VerticalBarSeries,
   Hint
 } from 'react-vis';
-import classes from './SolicSaldosGraph.module.css'
+import classes from './SolicSaldosGraph.module.scss'
 
 
 const solicSaldosGraph = (props) => {

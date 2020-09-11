@@ -14,7 +14,7 @@ import authReducer from './store/reducers/auth'
 import localeReducer from './store/reducers/locale'
 import listSelReducer from './store/reducers/selectList'
 import thunk from 'redux-thunk';
-import './index.css';
+import './index.scss';
 import './assets/fonts/Arquitecta.otf'
 import App from './App';
 import * as serviceWorker from './serviceWorker';

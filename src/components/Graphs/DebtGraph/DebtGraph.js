@@ -8,7 +8,7 @@ import {
   HorizontalGridLines,
   VerticalBarSeries
 } from 'react-vis';
-import classes from './DebtGraph.module.css'
+import classes from './DebtGraph.module.scss'
 
 
 const debtGraph = (props) => {

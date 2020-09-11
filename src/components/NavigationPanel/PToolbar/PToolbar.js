@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink} from "react-router-dom";
 import {FormattedMessage} from 'react-intl';
-import classes from './PToolbar.module.css';
+import classes from './PToolbar.module.scss';
 import PLogo from '../PLogo/PLogo'
 import Hamburguesa from '../../Navigation/SideDrawer/Hamburguesa/Hamburguesa';
 import PNavigationItems from '../PNavigationItems/PNavigationItems'

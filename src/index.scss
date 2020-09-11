@@ -1,7 +1,9 @@
+@import 'styles/variables';
+
 html {
   font-size: 62.5%;  /*if dflt 16px 1rem == 10px*/
   margin: 0;
-  color: #243746;
+  color: $pr-blue;
   font-family: 'Libre Baskerville', serif, 'Arquitecta', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

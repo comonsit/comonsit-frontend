@@ -9,7 +9,7 @@ import {
   VerticalBarSeries,
   Hint
 } from 'react-vis';
-import classes from './AcopioGraph.module.css'
+import classes from './AcopioGraph.module.scss'
 
 
 const acopioGraph = (props) => {
