@@ -101,3 +101,41 @@ export const unSelectMov = () => {
     type: actionTypes.UNSELECT_MOV
   }
 }
+
+export const updateMovimiento = (movData, id, token) => {
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }
+    dispatch(updateMovimientoStart())
+    axios.patch(`/movimientos/${id}.json`, movData, authData)
+      .then(response => {
+        dispatch(updateMovimientoSuccess(response.data.name, movData ))
+        alert('Movimiento ' + response.data.id + ' actualizado correctamente')
+      })
+      .catch(error => {
+        dispatch(updateMovimientoFailed(error))
+        console.log('update crédito ERROR')
+        console.log(error)
+      })
+  }
+}
+
+export const updateMovimientoSuccess = () => {
+  return {
+    type: actionTypes.UPDATE_MOVIMIENTO_SUCCESS
+  }
+}
+
+export const updateMovimientoFailed = (error) => {
+  return {
+    type: actionTypes.UPDATE_MOVIMIENTO_FAILED,
+    error: error
+  }
+}
+
+export const updateMovimientoStart = () => {
+  return {
+    type: actionTypes.UPDATE_MOVIMIENTO_START
+  }
+}

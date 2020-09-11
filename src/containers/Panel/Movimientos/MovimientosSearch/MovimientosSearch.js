@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import MovimientosListConc from '../MovimientosListConc/MovimientosListConc'
 import MovimientoDetail from '../MovimientoDetail/MovimientoDetail'
+import MovimientoBankForm from '../MovimientoBankForm/MovimientoBankForm'
 import Button from '../../../../components/UI/Button/Button';
 import Modal from '../../../../components/UI/Modal/Modal';
 import XLSButton from '../../../../components/UI/XLSButton/XLSButton';
@@ -43,6 +44,7 @@ class MovimientosSearch extends Component {
     loading: false,
     movs: [],
     showMovimientoModal: false,
+    editBankData: false,
     form: {
       comunidad: {
         elementType: 'select',
@@ -102,6 +104,17 @@ class MovimientosSearch extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.updatedPatch && this.props.updatedPatch !== prevProps.updatedPatch) {
+      this.updateData()
+      this.setState({
+        showMovimientoModal: false,
+        editBankData: false
+      });
+      this.props.unSelMov()
+    }
+  }
+
   inputChangedHandler = (event, inputIdentifier) => {
 
     const updatedForm = {}
@@ -132,8 +145,9 @@ class MovimientosSearch extends Component {
   }
 
   updateData = event => {
-    event.preventDefault();
-
+    if (event) {
+      event.preventDefault();
+    }
 
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
@@ -188,6 +202,7 @@ class MovimientosSearch extends Component {
   cancelSelected =() => {
     this.setState({
       showMovimientoModal: false,
+      editBankData: false
     });
     this.props.unSelMov()
   }
@@ -247,22 +262,34 @@ class MovimientosSearch extends Component {
 
     const movDetail = (this.props.selMov) ? <MovimientoDetail pago={this.props.selMov}/> : <Spinner/>
 
+    let editMovButton = null
+    if (!this.state.editBankData && this.props.selMov && this.props.selMov.fecha_banco === null) {
+      editMovButton =<Button btnType="Success" clicked={() => this.setState({editBankData: true})}><FormattedMessage id="editarDatosBancarios"/></Button>
+    }
+
+    const movEditBankData = this.state.editBankData ? <MovimientoBankForm  selectedMov={this.props.selMov ? this.props.selMov.id : ''} /> : null
+
+    const modalContent = this.props.loadingPatch ? <Spinner/> : (
+      <div className={classes.Container}>
+        <div className={classes.SubTitle}>
+          <h3>
+            <FormattedMessage id={"movimientoSearch.selectedMov"}/> #{this.props.selMov ? this.props.selMov.id : ''}
+          </h3>
+          {editMovButton}
+        </div>
+        <div className={classes.ContentContainer}>
+        {movDetail}
+        {movEditBankData}
+        </div>
+      </div>
+    )
+
     return (
       <>
         <Modal
           show={this.state.showMovimientoModal}
           modalClosed={this.cancelSelected}>
-          <div className={classes.Container}>
-            <div className={classes.SubTitle}>
-              <h3>
-                <FormattedMessage id={"movimientoSearch.selectedMov"}/> #{this.props.selMov ? this.props.selMov.id : ''}
-              </h3>
-              {"editMovButton"}
-            </div>
-            <div className={classes.ContentContainer}>
-            {movDetail}
-            </div>
-          </div>
+          {modalContent}
         </Modal>
         <div className={classes.Container}>
           {form}
@@ -280,7 +307,9 @@ const mapStateToProps = state => {
       comunidades: state.generalData.comunidades,
       empresas: state.generalData.empresas,
       fuentes: state.generalData.fuentes,
-      selMov: state.movimientos.selectedMov
+      selMov: state.movimientos.selectedMov,
+      loadingPatch: state.movimientos.loadingPatch,
+      updatedPatch: state.movimientos.updatedPatch
     }
 }
 

@@ -16,12 +16,12 @@ const movimientoDetail = props => {
   })
 
   const items2 = ["tipo_de_movimiento", "fecha_banco", "referencia_banco"]
-  const items2Array = items2.map(id => {
+  const items2Array = props.pago.fecha_banco ? items2.map(id => {
     return (<TextElement
               label={id}
               content={props.pago[id]}
               />)
-  })
+  }) : null
 
   return (
     <div className={classes.Container}>

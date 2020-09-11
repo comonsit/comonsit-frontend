@@ -44,7 +44,8 @@ export {
     newMovimiento,
     createNewMovimiento,
     fetchSelMov,
-    unSelectMov
+    unSelectMov,
+    updateMovimiento
 } from './movimientos'
 
 

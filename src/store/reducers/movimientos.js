@@ -5,7 +5,9 @@ const initialState = {
   movimientos: [],
   loading: false,
   updated: false,
-  selectedMov: null
+  selectedMov: null,
+  loadingPatch: false,
+  updatedPatch: false
 }
 
 const setMovimientos = (state, action) => {
@@ -57,8 +59,28 @@ const setSelMov = (state, action) => {
 const unSelMov = (state) => {
   return updateObject(state, {
     selectedMov: null,
+    loadingPatch: false,
+    updatedPatch: false,
+    loading: false,
+    updated: false
   })
 }
+
+const updateMovimientoStart = (state) => {
+  return updateObject(state, {loadingPatch: true})
+}
+
+const updateMovimientoSuccess = (state) => {
+  return updateObject(state, {
+    loadingPatch: false,
+    updatedPatch: true
+  })
+}
+
+const updateMovimientoFailed = (state) => {
+  return updateObject(state, {loadingPatch: false})
+}
+
 
 
 const reducer = (state=initialState, action) => {
@@ -71,6 +93,9 @@ const reducer = (state=initialState, action) => {
     case actionTypes.NEW_MOVIMIENTO_FAILED: return newMovimientoFailed(state)
     case actionTypes.SET_SEL_MOV: return setSelMov(state, action)
     case actionTypes.UNSELECT_MOV: return unSelMov(state)
+    case actionTypes.UPDATE_MOVIMIENTO_START: return updateMovimientoStart(state)
+    case actionTypes.UPDATE_MOVIMIENTO_SUCCESS: return updateMovimientoSuccess(state)
+    case actionTypes.UPDATE_MOVIMIENTO_FAILED: return updateMovimientoFailed(state)
     default:
       return state
   }
