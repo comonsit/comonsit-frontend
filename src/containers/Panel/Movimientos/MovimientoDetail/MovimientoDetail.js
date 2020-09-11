@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './MovimientoDetail.module.css'
+import classes from './MovimientoDetail.module.scss'
 
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 
@@ -25,10 +25,10 @@ const movimientoDetail = props => {
 
   return (
     <div className={classes.Container}>
-      <div className={classes.SubSection}>
+      <div className={classes.Container_Section}>
         {items1Array}
       </div>
-      <div className={classes.SubSection}>
+      <div className={classes.Container_Section}>
         {items2Array}
       </div>
     </div>
