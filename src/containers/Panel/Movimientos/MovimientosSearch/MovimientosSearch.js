@@ -269,11 +269,28 @@ class MovimientosSearch extends Component {
 
     const movEditBankData = this.state.editBankData ? <MovimientoBankForm  selectedMov={this.props.selMov ? this.props.selMov.id : ''} /> : null
 
+    let selectedMovTitle = null
+    if (this.props.selMov) {
+      if (this.props.selMov.aportacion) {
+        selectedMovTitle = (
+          <p style={{color: "#2bc71b"}}>
+            <FormattedMessage id={"movimientos.aportacion"}/> #{this.props.selMov ? this.props.selMov.id : ''}
+          </p>)
+      } else {
+        selectedMovTitle = (
+          <p style={{color: "#ec573c"}}>
+            <FormattedMessage id={"movimientos.retiro"}/> #{this.props.selMov ? this.props.selMov.id : ''}
+          </p>)
+      }
+
+
+    }
+
     const modalContent = this.props.loadingPatch ? <Spinner/> : (
       <div className={classes.Container}>
         <div className={classes.SubTitle}>
           <h3>
-            <FormattedMessage id={"movimientoSearch.selectedMov"}/> #{this.props.selMov ? this.props.selMov.id : ''}
+            {selectedMovTitle}
           </h3>
           {editMovButton}
         </div>

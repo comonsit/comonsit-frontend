@@ -6,7 +6,7 @@ import TextElement from '../../../../components/UI/TextElement/TextElement';
 
 const movimientoDetail = props => {
 
-  const items1 = ["nombre_socio", "fecha_entrega", "monto", "aportacion", "proceso"]
+  const items1 = ["nombre_socio", "fecha_entrega", "monto", "proceso"]
   const items1Array = items1.map(id => {
     return (<TextElement
               label={"movimiento."+id}

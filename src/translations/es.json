@@ -459,5 +459,8 @@
   "movimiento.monto": "Monto",
   "movimiento.aportacion": "Aportación/Retiro",
   "movimiento.proceso": "Proceso",
-  "movimiento.tipo_de_movimiento": "Tipo de Movimiento"
+  "movimiento.tipo_de_movimiento": "Tipo de Movimiento",
+  "tipo_de_movimiento": "Tipo de Aportacion/Retiro",
+  "fecha_banco": "Fecha en Banco",
+  "referencia_banco": "Referencia Bancaria"
 }
