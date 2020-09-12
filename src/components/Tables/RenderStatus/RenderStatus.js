@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './RenderStatus.module.css';
+import classes from './RenderStatus.module.scss';
 
 const renderStatus = props => {
   const cellClasses= [classes.CellStatus]

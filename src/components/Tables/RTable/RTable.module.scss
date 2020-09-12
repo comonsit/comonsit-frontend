@@ -1,0 +1,91 @@
+@import 'styles/variables';
+
+.TableContainer {
+  /* display: block; */
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border-bottom: 1px solid $sec-darkish-blue;
+}
+
+.TablaSocios {
+  min-width: 30rem;
+  font-family: 'Arquitecta';
+  color: $sec-darkish-blue;
+  td {
+    padding: .5rem .8rem;
+    font-size: .9em
+  }
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background: $sec-light-gray;
+      }
+      &:hover {
+        border: 2px solid $sec-green; /* TODO: ??? */
+        background-color: $pr-light-green;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.TablaSocios th,
+.TableFooter {
+  border-top: 1px solid $sec-darkish-blue;
+  border-bottom: 1px solid $sec-darkish-blue;
+  padding: .5rem;
+}
+
+.SearchHeader {
+  border-bottom: none;
+  span {
+    font-size: 1.4em;
+    font-weight: bold;
+    border: 1px solid $sec-darkish-blue;
+    border-radius: .5rem;
+    padding: 0 1rem;
+    display: flex;
+    input {
+      padding-left: 1rem;
+    }
+  }
+}
+
+.AC {
+  background-color: $intense-green;
+  border-radius: .4rem;
+  font-size: 0;
+}
+
+.BA {
+  background-color: $sec-light-red;
+  border-radius: .4rem;
+  font-size: 0;
+}
+
+.NP {
+  background-color: $gray;
+  border-radius: .4rem;
+  font-size: 0;
+}
+
+.Blue {
+  background-color: $blue;
+  border-radius: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.Yellow {
+  background-color: $intense-yellow;
+  border-radius: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.Pagination {
+  padding: 0.5rem;
+  font-family: 'Arquitecta';
+  color: $sec-darkish-blue;
+}

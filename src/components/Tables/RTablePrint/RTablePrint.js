@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './RTablePrint.module.css'
+import classes from './RTablePrint.module.scss'
 import { useTable } from 'react-table'
 
 const RTablePrint = ({ columns, data, central }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination, useRowSelect } from 'react-table'
 import IndeterminateCheckbox from './IndeterminateCheckbox'
-import classes from './RTable.module.css'
+import classes from './RTable.module.scss'
 import SwitchToggle from '../../UI/SwitchToggle/SwitchToggle'
 import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'

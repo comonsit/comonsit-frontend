@@ -1,0 +1,29 @@
+@import 'styles/variables';
+
+.Table {
+  min-width: 30rem;
+  font-family: 'Arquitecta';
+  color: $sec-darkish-blue;
+  td {
+    border-bottom: 1px solid $sec-darkish-blue;
+    padding: .5rem .8rem;
+    font-size: .9em;
+    text-align: center;
+  }
+}
+
+.TableHead tr th {
+  border-top: 1px solid $sec-darkish-blue;
+  border-bottom: 1px solid $sec-darkish-blue;
+  padding: .5rem;
+}
+
+.Central {
+  background-color: $sec-light-gray;
+}
+
+@media print {
+  .Table {
+    font-family: 'Arial';
+  }
+}

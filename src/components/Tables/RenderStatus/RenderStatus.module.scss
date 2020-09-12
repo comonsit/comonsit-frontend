@@ -1,0 +1,35 @@
+@import 'styles/variables';
+
+.CellStatus {
+  color: white;
+  padding: .5rem .7rem;
+  border-radius: .3rem;
+}
+
+.PA {
+  background-color: $intense-blue;
+}
+
+.VE {
+  background-color: $red;
+}
+
+.VI {
+  background-color: $intense-green;
+}
+
+.DP {
+  background-color: $gray;
+}
+
+.CO {
+  background-color: $intense-green;
+}
+
+.PC {
+  background-color: $intense-yellow;
+}
+
+.CA {
+  background-color: $gray;
+}
