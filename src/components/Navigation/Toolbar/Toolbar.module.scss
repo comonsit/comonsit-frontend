@@ -1,0 +1,37 @@
+@import 'styles/general';
+@import 'styles/variables';
+
+.Toolbar {
+  height: 7rem;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $pr-green;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  box-sizing: border-box;
+  &.Logo {
+    height: 100%;  /* sin este, se extiende el logo width:100%??*/
+  }
+}
+
+.HambDiv {
+  width: 6rem;
+  padding-right: 1rem;
+  @include desktop {
+    display: none;
+  }
+}
+
+.DesktopOnly {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 61.99em) {
+  .DesktopOnly {
+    display: none;
+  }
+}
