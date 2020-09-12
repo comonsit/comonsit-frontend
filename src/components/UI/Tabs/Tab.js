@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import classes from './Tabs.module.css'
+import classes from './Tabs.module.scss'
 
 class Tab extends Component {
   static propTypes = {

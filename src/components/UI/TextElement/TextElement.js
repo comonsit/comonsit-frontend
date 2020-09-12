@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './TextElement.module.css'
+import classes from './TextElement.module.scss'
 import Currency from '../Formatting/Currency'
 import Percent from '../Formatting/Percent'
 import { FormattedMessage, IntlProvider } from 'react-intl';
@@ -41,7 +41,7 @@ const textElement = (props) => {
 
   return (
     <div key={props.label} className={classes.ContentContainer}>
-      <div className={classes.Label}>
+      <div className={classes.TextLabel}>
         {label}
       </div>
       <div className={classes.Content}>

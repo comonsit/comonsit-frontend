@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './Title.module.css';
+import classes from './Title.module.scss';
 
 
 const title = (props) => {

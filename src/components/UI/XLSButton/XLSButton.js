@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './XLSButton.module.css';
+import classes from './XLSButton.module.scss';
 import { FormattedMessage } from 'react-intl';
 
 // le pasamos un arreglo de clases, que unimos con el join!! y cambiará según agreguemos btnType?

@@ -1,0 +1,20 @@
+@import 'styles/variables';
+@import 'styles/general';
+
+.HeaderContainer {
+  margin-top: 0rem;
+  h1 {
+    font-family: 'Arquitecta';
+    padding-left: 2rem;
+    margin-left: 5rem;
+    font-size: 3em;
+    @include desktop {
+      margin-left: 0rem;
+    }
+  }
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

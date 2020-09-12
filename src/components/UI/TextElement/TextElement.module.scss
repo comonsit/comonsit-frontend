@@ -1,3 +1,4 @@
+@import '../Input/Input.module';
 
 .ContentContainer {
   font-family: 'Arquitecta';
@@ -10,15 +11,8 @@
   margin: 1.2rem 0;
 }
 
-.Label {
-  display: flex;
-  justify-content: flex-end;
-  /* font-weight: bold; */
-  width: 30%;
-  max-width: 12rem;
-  text-align: right;
-  margin-right: 1rem;
-  padding:0 2rem;
+.TextLabel {
+  @extend .Label;
 }
 
 .Content {

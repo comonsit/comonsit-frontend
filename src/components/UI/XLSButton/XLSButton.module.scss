@@ -1,6 +1,8 @@
+@import 'styles/variables';
+
 .XLSButton button {
   font-family: 'Libre Baskerville';
-  background-color: #243746;
+  background-color: $pr-dark-blue;
   border: none;
   color: white;
   text-align: center;
@@ -12,5 +14,5 @@
 }
 
 .XLSButton button:hover {
-  background: #1e5785;
+  background: $sec-blue;
 }

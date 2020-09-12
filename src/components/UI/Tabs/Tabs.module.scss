@@ -1,5 +1,7 @@
+@import 'styles/variables';
+
 .TabsList {
-  border-bottom: 1px solid #dddedf;
+  border-bottom: 1px solid $sec-light-gray;
   padding-left: 0;
   margin-bottom: 0;
   font-family: 'Arquitecta';
@@ -16,7 +18,7 @@
   font-size: 1.5em;
   cursor: pointer;
   flex-grow: 1;
-  border: solid #ccc;
+  border: solid $borderGray;
   border-width: 1px 1px 0 1px;
   text-align: center;
   padding: .8rem;
@@ -27,15 +29,15 @@
   border-width: 1px 1px 0 1px;
   text-decoration: underline;
   background-color: white;
-  background-color: #f6fcf9;
+  background-color: $extra-light-gray;
   padding: .9rem;
 }
 
 .TabsContent {
   overflow-x: auto;
-  background-color: #f6fcf9;
-  border-bottom: 1px solid #dddedf;
-  border-left: 1px solid #dddedf;
-  border-right: 1px solid #dddedf;
+  background-color: $extra-light-gray;
+  border-bottom: 1px solid $sec-light-gray;
+  border-left: 1px solid $sec-light-gray;
+  border-right: 1px solid $sec-light-gray;
   max-width: 75vw;
 }
