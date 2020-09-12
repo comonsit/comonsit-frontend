@@ -24,6 +24,25 @@
     width: 21rem;
     left: 0;
   }
+  &.Open {
+      transform: translateX(100%);
+  }
+
+  &.Close {
+      /* transform: translateX(-100%); */
+  }
+
+  .Border {
+    position: absolute;
+    top: 0;
+    right: -1rem;
+    width: 1rem;
+    height: 100vh;
+    background-color: $pr-blue;
+    @include desktop {
+      display: none;
+    }
+  }
 }
 
 .User {
@@ -56,25 +75,6 @@
   margin: 2rem;
 }
 
-.Open {
-    transform: translateX(100%);
-}
-
-.Close {
-    /* transform: translateX(-100%); */
-}
-
-.Border {
-  position: absolute;
-  top: 0;
-  right: -1rem;
-  width: 1rem;
-  height: 100vh;
-  background-color: $pr-blue;
-  @include desktop {
-    display: none;
-  }
-}
 
 .Burger {
   position: absolute;

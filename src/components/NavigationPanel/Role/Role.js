@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Role.module.css';
+import classes from './Role.module.scss';
 import roles from '../../../store/roles'
 
 

@@ -3,7 +3,7 @@ import Collapsible from 'react-collapsible';
 import {NavLink} from "react-router-dom";
 import {FormattedMessage} from 'react-intl';
 
-import cl from './PNavigationItems.module.css';
+import cl from './PNavigationItems.module.scss';
 
 const pnavigationItems = props => (
   <div className={cl.NavigationItems}>

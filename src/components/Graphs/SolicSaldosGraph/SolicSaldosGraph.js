@@ -22,27 +22,27 @@ const solicSaldosGraph = (props) => {
   const allData = [
     {
       title: 'Monto Solicitado',
-      color: '#5056ac',
+      color: classes.strongPurple,
       data: [{x: 'Monto', y: parseInt(props.monto)}]
     },
     {
       title: 'Café',
-      color: '#92c3c0',
+      color: classes.prCyan,
       data: coffeeData
     },
     {
       title: 'Miel',
-      color: '#D5B49E',
+      color: classes.prLightPink,
       data: honeyData
     },
     {
       title: 'Jabones',
-      color: '#ac92c3',
+      color: classes.prLightPurple,
       data: soapData
     },
     {
       title: 'Salarios',
-      color: '#BBC392',
+      color: classes.prLightGreen,
       data: moneyData
     }
   ]

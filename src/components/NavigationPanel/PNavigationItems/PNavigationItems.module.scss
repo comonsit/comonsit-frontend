@@ -1,0 +1,45 @@
+@import 'styles/general';
+@import 'styles/variables';
+
+.NavigationItems {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.NavigationItem {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+  /* el center es por el flex */
+  align-items: center;
+  font-size: 1em;
+  color: white;
+  a {
+    height: 100%;
+    padding: .4rem 2rem;
+    margin: 0rem;
+    text-decoration: none;
+    color: white;
+    &:hover {
+      font-weight: bold;
+    }
+    &.active {
+      color: $pr-blue;
+      text-decoration: underline;
+      width: 100%;
+      font-weight: bold;
+      background-color: gray;
+      border-left: .8rem solid $pr-light-green;
+    }
+  }
+  &Home a {
+    padding: .4rem 1rem;
+  }
+}
+
+@media (max-width: 61.99em) {
+  .DesktopOnly {
+    display: none;
+  }
+}

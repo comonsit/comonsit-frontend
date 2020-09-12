@@ -1,3 +1,5 @@
+@import 'styles/variables';
+
 .Container {
   border-radius: .8rem;
   border: 1px solid white;
@@ -8,17 +10,17 @@
 }
 
 .GE {
-  background-color: #D5B49E;
+  background-color: $pr-light-pink;
 }
 
 .SO {
-  background-color: #ac92c3;
+  background-color: $pr-light-purple;
 }
 
 .PR {
-  background-color: #92c3c0;
+  background-color: $pr-cyan;
 }
 
 .CO {
-  background-color: #BBC392;
+  background-color: $pr-light-green;
 }
