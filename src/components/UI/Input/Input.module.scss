@@ -1,3 +1,6 @@
+@import 'styles/variables';
+@import 'styles/general';
+
 .Input {
   font-family: 'Arquitecta';
   width: 100%;
@@ -11,22 +14,27 @@
 .Label {
   display: flex;
   justify-content: flex-end;
-  width: 30%;
+  width: 6rem;
   max-width: 12rem;
   text-align: right;
   margin-right: 1rem;
   padding:0 2rem;
-}
-
-.LabelLong {
-  width: 70%;
-  max-width: none;
+  &.LabelLong {
+    width: 70%;
+    max-width: none;
+  }
+  @include tablet {
+    width: 8rem;
+  }
+  @include desktop {
+    width: 30%;
+  }
 }
 
 .InputElement {
     outline: none;
-    border: 2px solid #dddedf;
-    background-color: #dddedf;
+    border: 2px solid $sec-light-gray;
+    background-color: $sec-light-gray;
     font: inherit;
     padding: .5rem .5rem;
     display: block;
@@ -35,7 +43,30 @@
     margin: 1rem 0rem;
     margin-right: 1rem;
     font-size: 1.2em;
-    color: #243746;
+    color: $pr-dark-blue;
+    &[multiple] {
+      background: none;
+      width:auto;
+      min-height:18rem;
+      padding: .2rem 1rem;
+      border-width: 2px;
+      border-style: inset;
+      -moz-appearance: menulist;
+      -webkit-appearance: menulist;
+      appearance: menulist;
+      option {
+        padding: .2rem 1rem;
+      }
+    }
+    &:focus {
+      border: 2px solid $focusGray;
+      background-color: white;
+      box-shadow:0 0 10px $focusGrayShadow;
+    }
+    &:disabled {
+      border: none;
+      background-color: white;
+    }
 }
 
 .inputBox {
@@ -44,42 +75,15 @@
   flex-direction: column;
 }
 
-.InputElement[multiple] {
-  background: none;
-  width:auto;
-  min-height:18rem;
-  padding: .2rem 1rem;
-  border-width: 2px;
-  border-style: inset;
-  -moz-appearance: menulist;
-  -webkit-appearance: menulist;
-  appearance: menulist;
-}
-
-.InputElement[multiple] option {
-  padding: .2rem 1rem;
-}
-
 .InputElementFocused {
-  border: 2px solid #b3b6ba;
+  border: 2px solid $focusGray;
   background-color: white;
-  box-shadow:0 0 10px #d3d5d9;
-}
-
-.InputElement:focus {
-  border: 2px solid #c1c3c6;
-  background-color: white;
-  box-shadow:0 0 10px #d3d5d9;
-}
-
-.InputElement:disabled {
-  border: none;
-  background-color: white;
+  box-shadow:0 0 10px $focusGrayShadow;
 }
 
 .Invalid {
-    border: 1px solid red;
-    background-color: #FDA49A;
+  border: 1px solid $red;
+  background-color: $extra-light-red;
 }
 
 .InvalidMessage {
@@ -88,9 +92,9 @@
 
 .AlertMessage {
   display: flex;
-}
-.AlertMessage p {
-  margin-left: 1rem;
+  p {
+    margin-left: 1rem;
+  }
 }
 
 .svgCont {
@@ -99,11 +103,11 @@
 }
 
 .svgContC1 {
-  fill: #FFC52F;
+  fill: $intense-yellow;
 }
 
 .svgContC2 {
-  fill: #F4EFEF;
+  fill: $extra-light-gray-border;
 }
 
 .HideMe {

@@ -1,0 +1,15 @@
+@import 'styles/variables';
+
+.NotContainer {
+  position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+  &> span {
+    background-color: $strong-red;
+    border-radius: 1rem;
+    color: white;
+    padding: .3rem;
+    font-size: 1.1em;
+    position: absolute;
+    top: 0;
+    left: .3rem;
+  }
+}

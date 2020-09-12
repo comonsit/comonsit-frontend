@@ -1,3 +1,14 @@
+@import 'styles/variables';
+:export { prDarkBlue: $pr-dark-blue; }
+:export { extraLightRed: $extra-light-red; }
+/*
+:export { prCyan: $pr-cyan; }
+:export { prLightPink: $pr-light-pink; }
+:export { prLightPurple: $pr-light-purple; }
+:export { prLightGreen: $pr-light-green; }
+:export { strongPurple: $strong-purple; }
+*/
+
 .Container {
   font-family: 'Arquitecta';
   width: 100%;
@@ -23,7 +34,7 @@
   justify-content: space-around;
   align-items: center;
   outline: none;
-  border: 2px solid #dddedf;
+  border: 2px solid $sec-light-gray;
   padding: .5rem .5rem;
   width: 100%;
   margin: 1rem 0rem;
@@ -42,25 +53,23 @@
 }
 
 .IconDisabled {
-  background-color: #ccc;
+  background-color: $borderGray;
   cursor:not-allowed;
 }
 
 .IconSelected {
-  background-color: #235ee4;
-}
-
-.IconSelected:hover {
-  /* background-color: #5274a7; */
-  /* border: 1px solid #1f57ab; */
+  background-color: $intense-blue;
+  &:hover {
+    /* background-color: #5274a7; */
+    /* border: 1px solid #1f57ab; */
+  }
 }
 
 .IconAvailable {
-  border: 1px solid #243746;
-  background-color: #fff;
+  border: 1px solid $pr-dark-blue;
+  background-color: white;
   cursor: pointer;
-}
-
-.IconAvailable:hover {
-  background-color: #235ee4;
+  &:hover {
+    background-color: $intense-blue;
+  }
 }

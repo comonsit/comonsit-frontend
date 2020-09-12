@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './ProcessSelector.module.css';
+import classes from './ProcessSelector.module.scss';
 import Bee from '../../../Icons/Bee.js';
 import Money from '../../../Icons/Money.js';
 import Soap from '../../../Icons/Soap.js';
@@ -13,7 +13,7 @@ const processSelector = (props) => {
         'classes': [classes.Icon, classes.IconSelected]
       },
       'AC': {
-        'color': '#243746',
+        'color': classes.prDarkBlue,
         'classes': [classes.Icon, classes.IconAvailable]
       },
       'NP': {
@@ -21,7 +21,7 @@ const processSelector = (props) => {
         'classes': [classes.Icon, classes.IconDisabled]
       },
       'BA': {
-        'color': '#f99b9b',
+        'color': classes.extraLightRed,
         'classes': [classes.Icon, classes.IconDisabled]
       }
     }

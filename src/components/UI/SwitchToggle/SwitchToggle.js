@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './SwitchToggle.module.css'
+import classes from './SwitchToggle.module.scss'
 
 
 const switchButton = props => {
