@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './HorizLabel.module.css';
+import classes from './HorizLabel.module.scss';
 
 
 const horizLabel = (props) => {

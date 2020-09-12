@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
-import classes from './HoverButton.module.css'
+import classes from './HoverButton.module.scss'
 
 
 const hoverButton = (props) => {

@@ -8,7 +8,7 @@ import ContratoImprCont from './ContratoImprCont'
 import Input from '../../../../components/UI/Input/Input';
 import Title from '../../../../components/UI/Title/Title';
 import classes from './ContratoImprimir.module.css'
-import buttonClasses from '../../../../components/UI/Button/Button.module.css';
+import buttonClasses from '../../../../components/UI/Button/Button.module.scss';
 import * as actions from '../../../../store/actions'
 
 class ContratoImprimir extends Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Button.module.css';
+import classes from './Button.module.scss';
 
 // le pasamos un arreglo de clases, que unimos con el join!! y cambiará según agreguemos btnType?
 const button = (props) => (

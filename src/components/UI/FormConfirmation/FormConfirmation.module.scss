@@ -1,0 +1,13 @@
+@import 'styles/variables';
+
+.Container {
+  background-color: $extra-light-gray;
+  padding: 2rem;
+}
+
+.Inputs {
+  border: 1px solid $borderGray;
+  padding: 0;
+  display: flex;
+  background-color: white;
+}

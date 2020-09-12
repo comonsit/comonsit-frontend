@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
-import classes from './FormConfirmation.module.css'
+import classes from './FormConfirmation.module.scss'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
 

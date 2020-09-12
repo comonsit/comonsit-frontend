@@ -1,0 +1,70 @@
+@import 'styles/variables';
+
+.Button {
+  background-color: $pr-light-pink;
+  border: .2rem solid white;
+  border-radius: .4rem;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  font-weight: bold;
+  &:hover:enabled {
+    border: .2rem solid $pr-light-pink;
+    font-weight: normal;
+    color: $pr-light-pink;
+    background-color: white;
+    font-weight: bold;
+  }
+  &:focus {
+    border-color: $sec-pink;
+    box-shadow:0 0 10px $pr-light-pink;
+  }
+  &:disabled {
+    background-color: $borderGray;
+    cursor: not-allowed;
+  }
+}
+
+.Short {
+  height: 4rem;
+  font-size: .55em;
+  padding: .1rem;
+}
+
+.Medium {
+  height: 4.5rem;
+  font-size: .8em;
+  padding: .2rem .5rem;
+  background-color: $sec-light-blue;
+  &:hover:enabled {
+    border: .2rem solid $sec-light-blue;
+    color: $sec-light-blue;
+  }
+}
+
+.Success {
+  background-color: $sec-light-blue;
+  &:focus {
+    border-color: $blue;
+    box-shadow:0 0 10px $sec-light-blue;
+  }
+  &:hover:enabled {
+    border: .2rem solid $sec-light-blue;
+    color: $sec-light-blue;
+  }
+}
+
+.Danger {
+  background-color: $red;
+  &:hover {
+    border: .2rem solid $red;
+    color: $red;
+  }
+  &:focus {
+    border-color: $strong-red;
+    box-shadow:0 0 10px $shadow-red;
+  }
+}
