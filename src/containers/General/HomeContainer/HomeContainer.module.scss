@@ -1,0 +1,47 @@
+@import 'styles/general';
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 3.5rem;
+  @include tablet {
+    flex-direction: row;
+    padding: 9rem 5rem;
+  }
+}
+
+.Image {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  border-radius: 0.5rem;
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 2rem #000;
+  }
+  @include tablet {
+    width: 55%;
+  }
+}
+
+.Paragraph {
+  margin-top: 2rem;
+  width: 100%;
+  h3 {
+    text-align: center;
+  }
+  p {
+    text-align: justify;
+  }
+  @include tablet {
+    margin-top: 0;
+    width: 40%;
+    h3 {
+      margin: 0;
+    }
+  }
+}

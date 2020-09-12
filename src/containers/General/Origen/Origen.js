@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import cl from './Origen.module.css';
+import cl from './Origen.module.scss';
 
 function Origen() {
   return (

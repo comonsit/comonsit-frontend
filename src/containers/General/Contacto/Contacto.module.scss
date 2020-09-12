@@ -1,0 +1,13 @@
+@import '../Conocenos/Conocenos.module';
+
+.MailTo {
+  text-decoration: none;
+  color: #BBC392;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.MailTo:hover {
+  text-decoration: underline;
+  color: #99a268;
+}

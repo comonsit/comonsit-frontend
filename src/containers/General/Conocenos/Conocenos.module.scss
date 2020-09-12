@@ -1,0 +1,21 @@
+@import 'styles/general';
+
+.Paragraph {
+  padding: 4rem 4rem;
+  h3 {
+    text-align: center;
+  }
+  p {
+    margin-top: 5rem;
+    text-align: justify;
+  }
+  @include tablet {
+    padding: 7rem 15rem;
+  }
+}
+
+.Calendario {
+  border: 0;
+  width: 60vw;
+  height: 60vh;
+}

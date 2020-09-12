@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import cl from './Conocenos.module.css';
+import cl from './Conocenos.module.scss';
 
 function Conocenos() {
   return (

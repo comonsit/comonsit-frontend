@@ -1,0 +1,40 @@
+@import 'styles/variables';
+@import 'styles/general';
+
+.AccesoContainer {
+  width: 100%;
+  height: 90vh;  /* TODO: FIX */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Acceso {
+  display: flex;
+  max-width: 35rem;
+  flex-direction: column;
+  padding: 1rem;
+  padding-right: 2.3rem;
+  background-color: $pr-light-green;
+  border-radius: .5rem;
+  align-items: stretch;
+  text-align: center;
+  a {
+    padding-left: 1rem;
+    display: flex;
+    text-decoration: none;
+    color: $pr-dark-blue;
+    font-weight: bold;
+    font-size: .6em;
+    &:hover {
+      text-decoration: underline;
+      color: $sec-blue;
+    }
+  }
+}
+
+.ErrorMessage {
+  color: red;
+  font-size: .8em;
+}

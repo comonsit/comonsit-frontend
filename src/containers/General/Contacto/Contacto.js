@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import cl from './Contacto.module.css';
+import cl from './Contacto.module.scss';
 
 function Contacto() {
   return (

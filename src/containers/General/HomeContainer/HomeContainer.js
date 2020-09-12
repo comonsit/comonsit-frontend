@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import cl from './HomeContainer.module.css';
+import cl from './HomeContainer.module.scss';
 
 import HomeImage from '../../../assets/photos/homeImage.jpg'
 

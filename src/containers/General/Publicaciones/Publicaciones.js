@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import cl from './Publicaciones.module.css';
+import cl from './Publicaciones.module.scss';
 
 function Publicaciones() {
   return (
