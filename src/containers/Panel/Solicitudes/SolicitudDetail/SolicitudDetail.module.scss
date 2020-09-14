@@ -1,28 +1,10 @@
-.Container {
-  /* bottom: 60vh; */
-  background-color: #fff;
-  padding: .7rem;
-  margin: 0;
-}
-
-.Title h2 {
-  text-align: center;
-}
-
-.SubSection {
-  border-bottom: 1px solid #ccc;
-}
-
-.SubTitle h3 {
-  margin-left: 2rem;
-}
+@import 'styles/details';
 
 .Comment {
   display: flex;
-}
-
-.Comment p {
-  font-family: 'Arquitecta';
+  p {
+    font-family: 'Arquitecta';
+  }
 }
 
 .Label {
@@ -31,18 +13,18 @@
 }
 
 .ChatContainer {
-  background-color: #92c3c0;
+  background-color: $pr-cyan;
   border-radius: 1rem 1rem 1rem 0;
   padding: 1rem 1.5rem;
   color: white;
   margin-bottom: 3rem;
   min-width: 40%;
   margin-left: .5rem;
+  p {
+    margin: auto;
+  }
 }
 
-.ChatContainer p {
-  margin: auto;
-}
 
 .ChatDate p {
   font-size: .7em;
@@ -51,11 +33,11 @@
 }
 
 .Checkmark {
-  color: #92c3c0;
+  color: $pr-cyan;
 }
 
 .Cross {
-  color: #f73f2a;
+  color: $red;
 }
 
 
@@ -89,8 +71,7 @@
   border-radius: .3rem;
   margin-right: 1rem;
   font-size: 1.3em;
-}
-
-.Content p {
-  margin: 0;
+  p {
+    margin: 0;
+  }
 }

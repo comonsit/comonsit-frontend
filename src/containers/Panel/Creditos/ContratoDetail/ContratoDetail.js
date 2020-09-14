@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage, IntlProvider } from 'react-intl';
-import classes from './ContratoDetail.module.css'
+import classes from './ContratoDetail.module.scss'
 import { sayTseltal }from '@mauricioinaz/say-tseltal'
 
 import Currency from '../../../../components/UI/Formatting/Currency'

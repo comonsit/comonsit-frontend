@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './BancoDetail.module.css'
+import classes from './BancoDetail.module.scss'
 
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 

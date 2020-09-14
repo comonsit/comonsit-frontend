@@ -25,10 +25,10 @@ const movimientoDetail = props => {
 
   return (
     <div className={classes.Container}>
-      <div className={classes.Container_Section}>
+      <div className={classes.SubSection}>
         {items1Array}
       </div>
-      <div className={classes.Container_Section}>
+      <div className={classes.SubSection}>
         {items2Array}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage, FormattedDate, IntlProvider } from 'react-intl';
-import classes from './SolicitudDetail.module.css'
+import classes from './SolicitudDetail.module.scss'
 
 import SolicSaldosGraph from '../../../../components/Graphs/SolicSaldosGraph/SolicSaldosGraph';
 import TextElement from '../../../../components/UI/TextElement/TextElement';

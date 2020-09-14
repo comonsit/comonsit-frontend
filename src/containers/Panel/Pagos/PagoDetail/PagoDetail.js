@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './PagoDetail.module.css'
+import classes from './PagoDetail.module.scss'
 
 import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus'
 import TextElement from '../../../../components/UI/TextElement/TextElement';

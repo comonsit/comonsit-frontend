@@ -1,17 +1,24 @@
+@import './variables';
+
 .Container {
-  /* bottom: 60vh; */
-  background-color: #fff;
+  background-color: white;
   padding: .7rem;
   margin: 0;
   min-width: 50rem;
 }
 
-.Title h2 {
-  text-align: center;
+.SubSection {
+  border-bottom: 1px solid $borderGray;
 }
 
-.SubSection {
-  border-bottom: 1px solid #ccc;
+.StatusContainer {
+  width: 5em;
+  font-size: .7em;
+  margin: 2rem;
+}
+
+.Title h2 {
+  text-align: center;
 }
 
 .SubTitle h3 {
