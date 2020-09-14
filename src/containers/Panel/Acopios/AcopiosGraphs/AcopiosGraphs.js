@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './AcopiosGraphs.module.css'
+import classes from './AcopiosGraphs.module.scss'
 import { connect } from 'react-redux';
 
 import AcopioGraph from '../../../../components/Graphs/AcopioGraph/AcopioGraph';

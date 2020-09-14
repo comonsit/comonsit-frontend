@@ -1,11 +1,14 @@
+@import 'styles/variables';
+
+
 .AllGraphs {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 2rem;
-  border: 1px solid #dddedf;
+  border: 1px solid $sec-light-gray;
   border-radius: .5rem;
-  background-color: #f6fcf9;
+  background-color: $extra-light-gray;
   margin: 2rem;
 }
 
@@ -13,8 +16,8 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  border: 1px solid #dddedf;
+  border: 1px solid $sec-light-gray;
   border-radius: .5rem;
-  background-color: #f6fcf9;
+  background-color: $extra-light-gray;
   margin: 2rem;
 }

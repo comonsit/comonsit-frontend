@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FileSaver from 'file-saver';
-import classes from './MovimientosSearch.module.css'
+import classes from './MovimientosSearch.module.scss'
 import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
@@ -273,12 +273,14 @@ class MovimientosSearch extends Component {
     if (this.props.selMov) {
       if (this.props.selMov.aportacion) {
         selectedMovTitle = (
-          <p style={{color: "#2bc71b"}}>
+          <p>
+            <span style={{color: classes.intenseGreen}}>&#x25CF; </span>
             <FormattedMessage id={"movimientos.aportacion"}/> #{this.props.selMov ? this.props.selMov.id : ''}
           </p>)
       } else {
         selectedMovTitle = (
-          <p style={{color: "#ec573c"}}>
+          <p >
+            <span style={{color: classes.secLightRed}}>&#x25CF; </span>
             <FormattedMessage id={"movimientos.retiro"}/> #{this.props.selMov ? this.props.selMov.id : ''}
           </p>)
       }

@@ -1,3 +1,6 @@
+@import 'styles/variables';
+@import 'styles/general';
+
 .CardsContainer {
   display: grid;
   grid-template-columns: auto;
@@ -5,10 +8,12 @@
   align-items: stretch;
   justify-content: space-around;
   align-content: space-around;
-}
-
-.CardsContainer > div {
-  width: 95%;
+  @include desktop {
+    grid-template-columns: 40% 60%;
+  }
+  &> div {
+    width: 95%;
+  }
 }
 
 .Inputs {
@@ -17,24 +22,21 @@
 }
 
 .Container {
-  background-color: #f6fcf9;
+  background-color: $extra-light-gray;
   padding: 2rem;
   border-radius: .5rem;
 }
 
 .ContentContainer {
-  background-color: #fff;
-  border: .1rem solid #243746;
+  background-color: white;
+  border: .1rem solid $pr-dark-blue;
   padding: .7rem;
   overflow-y:scroll;
   height: 50vh;
   min-height: 40rem;
 }
 
-@media (min-width: 62em) {
-  .CardsContainer {
-    grid-template-columns: 40% 60%;
-  }
+@include desktop {
   .longCard {
     grid-column-end: span 2;
   }

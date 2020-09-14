@@ -9,7 +9,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
 import TotalCarteras from './TotalCarteras/TotalCarteras'
 import CreditoListCont from '../Creditos/CreditoListCont/CreditoListCont';
-import classes from './Carteras.module.css'
+import classes from './Carteras.module.scss'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 // import * as actions from '../../../store/actions'

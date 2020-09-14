@@ -1,3 +1,5 @@
+@import 'styles/general';
+
 .CardsContainer {
   display: grid;
   grid-template-columns: auto;
@@ -5,10 +7,13 @@
   align-items: stretch;
   justify-content: space-around;
   align-content: space-around;
-}
+  &> div {
+    width: 95%;
+  }
 
-.CardsContainer > div {
-  width: 95%;
+  @include desktop {
+    grid-template-columns: 40% 60%;
+  }
 }
 
 .Inputs {
@@ -16,10 +21,7 @@
   flex-direction: column;
 }
 
-@media (min-width: 62em) {
-  .CardsContainer {
-    grid-template-columns: 40% 60%;
-  }
+@include desktop {
   .longCard {
     grid-column-end: span 2;
   }

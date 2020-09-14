@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
 import {FormattedMessage} from 'react-intl';
-import classes from './Acopios.module.css'
+import classes from './Acopios.module.scss'
 import { connect } from 'react-redux';
 import Bee from '../../../Icons/Bee.js';
 import Money from '../../../Icons/Money.js';

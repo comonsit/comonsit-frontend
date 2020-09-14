@@ -1,3 +1,10 @@
+@import 'styles/variables';
+
+
+:export { intenseGreen: $intense-green; }
+:export { secLightRed: $sec-light-red; }
+
+
 .Container {
   padding: 2rem;
 }
@@ -5,10 +12,9 @@
 .Form {
   display: flex;
   flex-direction: column;
-}
-
-.Form button {
-  align-self: center;
+  button {
+    align-self: center;
+  }
 }
 
 .Table {
@@ -17,14 +23,14 @@
 }
 
 .Container {
-  background-color: #f6fcf9;
+  background-color: $extra-light-gray;
   padding: 2rem;
   border-radius: .5rem;
 }
 
 .ContentContainer {
-  background-color: #fff;
-  border: .1rem solid #243746;
+  background-color: white;
+  border: .1rem solid $pr-dark-blue;
   padding: .7rem;
   overflow-y:scroll;
   height: 50vh;

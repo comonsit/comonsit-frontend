@@ -15,7 +15,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Modal from '../../../components/UI/Modal/Modal';
 import Title from '../../../components/UI/Title/Title';
 import Notification from '../../../components/UI/Notification/Notification';
-import classes from './Bancos.module.css'
+import classes from './Bancos.module.scss'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 // import * as actions from '../../../store/actions'
