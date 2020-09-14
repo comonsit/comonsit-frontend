@@ -17,7 +17,7 @@ import SwitchToggle from '../../../../components/UI/SwitchToggle/SwitchToggle'
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import PagosList from '../../Pagos/PagosList/PagosList';
 import CreditoListCont from '../../Creditos/CreditoListCont/CreditoListCont';
-import classes from './BancoForm.module.css'
+import classes from './BancoForm.module.scss'
 // import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'

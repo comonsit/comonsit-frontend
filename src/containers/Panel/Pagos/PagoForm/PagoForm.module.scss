@@ -1,12 +1,4 @@
-.Inputs {
-  border: 1px solid #ccc;
-  padding: 0;
-  display: flex;
-}
-
-.SupportData {
-  width: 40%;
-}
+@import 'styles/form';
 
 .FormDetailContainer {
   display: flex;
@@ -14,7 +6,7 @@
 }
 
 .DetailContainer {
-  border: 1px solid #ccc;
+  border: 1px solid $borderGray;
 }
 
 @media (min-width: 62em) {

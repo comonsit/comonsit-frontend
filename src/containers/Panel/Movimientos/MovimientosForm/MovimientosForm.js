@@ -13,7 +13,7 @@ import Title from '../../../../components/UI/Title/Title';
 import FormConfirmation from '../../../../components/UI/FormConfirmation/FormConfirmation';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
-import classes from './MovimientosForm.module.css'
+import classes from './MovimientosForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { isGerencia } from '../../../../store/roles'
 import { updateObject } from '../../../../store/reducers/utility'

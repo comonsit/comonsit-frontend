@@ -13,7 +13,7 @@ import FormConfirmation from '../../../../components/UI/FormConfirmation/FormCon
 import Title from '../../../../components/UI/Title/Title';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
-import classes from './AcopioForm.module.css'
+import classes from './AcopioForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'

@@ -8,7 +8,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './ComunidadForm.module.css'
+import classes from './ComunidadForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'

@@ -13,7 +13,7 @@ import Percent from '../../../../components/UI/Formatting/Percent';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './Evaluacion.module.css'
+import classes from './Evaluacion.module.scss'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 

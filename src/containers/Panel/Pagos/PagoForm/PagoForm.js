@@ -13,7 +13,7 @@ import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatu
 import Currency from '../../../../components/UI/Formatting/Currency'
 import CreditoList from '../../Creditos/CreditoList/CreditoList';
 import ContratoDetail from '../../Creditos/ContratoDetail/ContratoDetail';
-import classes from './PagoForm.module.css'
+import classes from './PagoForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'

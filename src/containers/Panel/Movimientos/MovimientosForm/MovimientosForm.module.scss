@@ -1,0 +1,64 @@
+@import 'styles/form';
+
+.ToggleContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.Aportacion {
+  width: 20%;
+  padding: .7rem 4rem;
+  border-radius: 1rem 0 0 0;
+  text-align: center;
+  p {
+    font-family: 'Arquitecta';
+    font-size: 1.5em;
+    margin: 0;
+  }
+  &Active {
+    background-color: $pr-dark-blue;
+    color: white;
+    text-decoration: underline;
+  }
+  &Inactive {
+    border-top: 2px solid $pr-dark-blue;
+    border-left: 2px solid $pr-dark-blue;
+    color: gray;
+    cursor: pointer;
+    &:hover {
+      color: $pr-dark-blue;
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.Retiro {
+  width: 20%;
+  padding: .7rem 4rem;
+  border-radius: 0 1rem 0 0;
+  text-align: center;
+  p {
+    font-family: 'Arquitecta';
+    font-size: 1.5em;
+    margin: 0;
+  }
+  &Inactive {
+    border-top: 2px solid $red;
+    border-right: 2px solid $red;
+    color: gray;
+    cursor: pointer;
+    &:hover {
+      color: $red;
+      text-decoration: underline;
+    }
+  }
+  &Active {
+    background-color: $red;
+    color: white;
+    text-decoration: underline;
+  }
+  &Disabled {
+    display: none;
+  }
+}

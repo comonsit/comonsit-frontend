@@ -12,7 +12,7 @@ import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
-import classes from './SolicitudForm.module.css'
+import classes from './SolicitudForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'

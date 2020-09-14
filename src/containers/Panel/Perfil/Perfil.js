@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {FormattedMessage} from 'react-intl';
-import classes from './Perfil.module.css'
+import classes from './Perfil.module.scss'
 import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'

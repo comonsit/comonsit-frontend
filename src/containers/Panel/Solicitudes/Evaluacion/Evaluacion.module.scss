@@ -1,6 +1,4 @@
-.Container {
-  background-color: #f6fcf9;
-}
+@import 'styles/form';
 
 .InfoContainer {
   /* height: 40vh;
@@ -11,7 +9,7 @@
 }
 
 .SubSection {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $borderGray;
 }
 
 .SubTitle h3 {

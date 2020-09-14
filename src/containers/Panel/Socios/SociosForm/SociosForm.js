@@ -8,7 +8,7 @@ import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './SociosForm.module.css'
+import classes from './SociosForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { isGerencia } from '../../../../store/roles'
 import { updateObject } from '../../../../store/reducers/utility'

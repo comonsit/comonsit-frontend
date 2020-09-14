@@ -1,0 +1,51 @@
+@import './variables';
+
+.Container {
+  background-color: $extra-light-gray;
+  padding: 2rem;
+  border-radius: .5rem;
+}
+
+
+.Inputs {
+  border: 1px solid $borderGray;
+  padding: 0;
+  display: flex;
+}
+
+.SearchButton {
+  height: 4rem;
+}
+
+.TableContainer {
+  height: 60vh;
+  overflow-y:scroll;
+  border: .3rem solid $pr-dark-blue;
+  border-radius: .5rem;
+}
+
+.Form {
+  overflow-y:scroll;
+  min-height: 60vh;
+  max-height: 75vh;
+  border: .1rem solid $pr-dark-blue;
+  border-radius: .5rem;
+  background-color: white;
+}
+
+.noScroll {
+  /* overflow-y:scroll; */
+}
+
+.SupportData {
+  width: 30%;
+  font-family: 'Arquitecta';
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  p {
+    font-size: .8em;
+    padding: 0 6rem;
+    font-family: 'Arquitecta';
+  }
+}
