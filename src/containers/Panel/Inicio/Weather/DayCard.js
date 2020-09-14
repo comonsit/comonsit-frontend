@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Weather.module.css'
+import classes from './Weather.module.scss'
 import { useIntl } from 'react-intl';
 import translations from './WeatherTranslations';
 import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate';

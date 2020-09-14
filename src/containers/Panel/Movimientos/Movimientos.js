@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './Movimientos.module.css'
+import classes from './Movimientos.module.scss'
 import { connect } from 'react-redux';
 
 import MovimientosSearch from './MovimientosSearch/MovimientosSearch'

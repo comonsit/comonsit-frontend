@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './EvalSocio.module.css'
+import classes from './EvalSocio.module.scss'
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 

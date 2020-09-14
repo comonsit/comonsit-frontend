@@ -1,3 +1,5 @@
+@import 'styles/general';
+
 .Content {
   /* para tener un margen, más el espacio del toolbar */
   margin-top: 7rem;
@@ -5,10 +7,7 @@
 .PContent {
   /* para tener un margen, más el espacio del toolbar */
   margin-left: 1rem;
-}
-
-@media (min-width: 62em) {
-  .PContent {
+  @include desktop {
     /* para tener un margen, más el espacio del toolbar */
     margin-left: 20vw;
   }

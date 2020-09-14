@@ -1,6 +1,11 @@
+@import 'styles/general';
+
 .CardsContainer {
   display: grid;
   grid-template-columns: auto;
+  @include tablet {
+    grid-template-columns: 50% 50%;
+  }
 }
 
 .CalContainer {
@@ -19,10 +24,4 @@
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-@media (min-width: 42em) {
-  .CardsContainer {
-    grid-template-columns: 50% 50%;
-  }
 }

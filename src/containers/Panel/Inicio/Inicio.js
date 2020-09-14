@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import {FormattedMessage} from 'react-intl';
-import classes from './Inicio.module.css'
+import classes from './Inicio.module.scss'
 import { connect } from 'react-redux';
 
 import Weather from './Weather/Weather'

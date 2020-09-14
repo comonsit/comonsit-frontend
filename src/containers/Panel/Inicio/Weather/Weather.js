@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import key from './apiKey';
-import classes from './Weather.module.css'
+import classes from './Weather.module.scss'
 
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import DayCard from './DayCard';

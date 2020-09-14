@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { sayTseltal }from '@mauricioinaz/say-tseltal'
-import classes from './Numbers.module.css'
+import classes from './Numbers.module.scss'
 
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'

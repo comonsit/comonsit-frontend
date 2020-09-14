@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect } from 'react-redux'
 import * as actions from '../../store/actions'
-import cl from './Layout.module.css';
+import cl from './Layout.module.scss';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import HoverButton from '../../components/UI/HoverButton/HoverButton';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';

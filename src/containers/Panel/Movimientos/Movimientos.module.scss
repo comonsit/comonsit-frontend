@@ -1,8 +1,9 @@
+@import 'styles/general';
+
 .FormsContainer {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .TabContainer {
@@ -16,10 +17,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.Form div {
-  border: none;
+  div {
+    border: none;
+  }
+  @include tablet {
+    flex-direction: row;
+  }
 }
 
 .SocioName {
@@ -35,31 +38,15 @@
 .ResultsContainer {
   margin-top: 2rem;
   padding: 3rem;
-  border: 1px solid #dddedf;
+  border: 1px solid $sec-light-gray;
   border-radius: .5rem;
   border-radius: .5rem;
-  background-color: #f6fcf9;
-}
-
-.ResultsContainer p {
-  font-family: 'Arquitecta';
-}
-
-.Inputs {
-  border: 1px solid #ccc;
-  padding: 0;
-  display: flex;
+  background-color: $extra-light-gray;
+  p {
+    font-family: 'Arquitecta';
+  }
 }
 
 .TableContainer {
-  height: 60vh;
-  overflow-y:scroll;
-  border: .3rem solid #243746;
-  border-radius: .5rem;
-}
-
-@media (min-width: 42em) {
-  .Form {
-    flex-direction: row;
-  }
+  @extend .Container;
 }
