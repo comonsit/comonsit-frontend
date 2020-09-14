@@ -135,16 +135,28 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
 
   const paginationButtons = !hideSearch ? (
     <div className={classes.Pagination}>
-      <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+      <button onClick={e => {
+          e.preventDefault();
+          gotoPage(0)
+        }} disabled={!canPreviousPage}>
         {'<<'}
       </button>{' '}
-      <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+      <button onClick={e => {
+          e.preventDefault();
+          previousPage();
+        }} disabled={!canPreviousPage}>
         {'<'}
       </button>{' '}
-      <button onClick={() => nextPage()} disabled={!canNextPage}>
+      <button onClick={e => {
+          e.preventDefault();
+          nextPage();
+        }} disabled={!canNextPage}>
         {'>'}
       </button>{' '}
-      <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+      <button onClick={e => {
+          e.preventDefault();
+          gotoPage(pageCount - 1);
+        }} disabled={!canNextPage}>
         {'>>'}
       </button>{' '}
       <span>
