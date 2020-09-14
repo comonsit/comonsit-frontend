@@ -12,7 +12,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import CreditoList from './CreditoList/CreditoList';
 import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
 import Title from '../../../components/UI/Title/Title';
-import classes from './Creditos.module.css'
+import classes from './Creditos.module.scss'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'

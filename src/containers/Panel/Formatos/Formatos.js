@@ -6,7 +6,7 @@ import FormActReg1 from '../../../assets/pdf/FormatodeActasRegionales1.pdf';
 import FormSol from '../../../assets/pdf/FormatosDeSolicitud3.pdf';
 
 import Title from '../../../components/UI/Title/Title';
-import classes from './Formatos.module.css'
+import classes from './Formatos.module.scss'
 
 
 

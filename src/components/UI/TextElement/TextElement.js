@@ -40,7 +40,7 @@ const textElement = (props) => {
 
 
   return (
-    <div key={props.label} className={classes.ContentContainer}>
+    <div key={props.label} className={classes.TextElementContainer}>
       <div className={classes.TextLabel}>
         {label}
       </div>

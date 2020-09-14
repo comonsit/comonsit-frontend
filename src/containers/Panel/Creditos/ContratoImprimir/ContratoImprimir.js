@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import ContratoImprCont from './ContratoImprCont'
 import Input from '../../../../components/UI/Input/Input';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './ContratoImprimir.module.css'
+import classes from './ContratoImprimir.module.scss'
 import buttonClasses from '../../../../components/UI/Button/Button.module.scss';
 import * as actions from '../../../../store/actions'
 

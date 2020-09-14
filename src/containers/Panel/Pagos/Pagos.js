@@ -13,7 +13,7 @@ import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
 import Title from '../../../components/UI/Title/Title';
-import classes from './Pagos.module.css'
+import classes from './Pagos.module.scss'
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 

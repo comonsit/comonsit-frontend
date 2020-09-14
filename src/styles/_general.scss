@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin tablet {
   @media (min-width: 48em){
     @content;
@@ -19,5 +21,96 @@
 @mixin desktopXXL {
   @media (min-width: 90em) {
     @content;
+  }
+}
+
+/*
+MODAL CONTAINERS
+*/
+.Container {
+  background-color: $extra-light-gray;
+  padding: 2rem;
+  border-radius: .5rem;
+}
+
+.InfoContainer {
+  height: 70vh;
+  overflow-y:scroll;
+  border: .1rem solid $pr-dark-blue;
+}
+
+.ContentContainer {
+  background-color: white;
+  border: .1rem solid $pr-dark-blue;
+  padding: .7rem;
+  overflow-y: scroll;
+  height: 50vh;
+  min-height: 40rem;
+}
+
+.SubSection {
+  border-bottom: 1px solid $borderGray;
+}
+
+.SubTitle h3 {
+  margin-left: 2rem;
+}
+
+
+/*
+TOGGLE SWITCH LOCATION
+*/
+.ToggleContainer {
+  display: inline-flex;
+  align-items: center;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  padding: 0 1rem;
+  &> * {
+    margin-right: 1rem;
+  }
+  &> p {
+    font-size: .7em;
+  }
+}
+
+/*
+TABLE CONTAINER
+*/
+.Table {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+ANCHOR WITH BUTTON LOOK
+*/
+.ButtonLike {
+  display: flex;
+  width: auto;
+  font-size: 1.1em;
+  background-color: $pr-light-pink;
+  border: .3rem solid white;
+  border-radius: .4rem;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  margin: 1rem;
+  font-weight: bold;
+  text-align: center;
+  a {
+    padding: 1rem 2rem;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    &:hover {
+      font-weight: bold;
+      color: $pr-light-pink;
+    }
+  }
+  &:hover {
+    border: .3rem solid $pr-light-pink;
+    background-color: white;
   }
 }

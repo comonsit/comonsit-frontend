@@ -1,7 +1,7 @@
 import React from 'react'
 import {FormattedMessage} from 'react-intl';
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
-import classes from './ContratoImprimir.module.css'
+import classes from './ContratoImprimir.module.scss'
 
 class ContratoImprCont extends React.Component {
 

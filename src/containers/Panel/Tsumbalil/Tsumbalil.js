@@ -9,7 +9,7 @@ import RTable from '../../../components/Tables/RTable/RTable';
 import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
-import classes from './Tsumbalil.module.css'
+import classes from './Tsumbalil.module.scss'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
 

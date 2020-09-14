@@ -11,7 +11,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
 import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Title from '../../../components/UI/Title/Title';
-import classes from './Socios.module.css'
+import classes from './Socios.module.scss'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'

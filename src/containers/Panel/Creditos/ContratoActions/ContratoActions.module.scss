@@ -1,64 +1,88 @@
+@import 'styles/details';
+@import 'styles/general';
+
 .Container {
-  background-color: #f6fcf9;
+  background-color: $extra-light-gray;
   padding: 2rem;
   border-radius: .5rem;
   max-height: 90vh;
   overflow-y:scroll;
+  @include tablet {
+    background-color: #f6fcf9;
+    padding: 2rem;
+    border-radius: .5rem;
+  }
 }
 
 .ContentContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
+  @include tablet {
+    align-items: flex-start;
+    flex-direction: row;
+  }
 }
 
 .ContratoContainer {
   display: flex;
   flex-direction: column;
   max-width: 100%;
+  @include tablet {
+    width: 85%;
+  }
 }
 
 .ContratoDetail {
   min-height: 15rem;
   height: 30vh;
   overflow-y:scroll;
-  border: .1rem solid #243746;
+  border: .1rem solid $pr-dark-blue;
+  @include tablet {
+    height: 40vh;
+    overflow-y:scroll;
+    border: .1rem solid $pr-dark-blue;
+  }
 }
 
 .PaymentContainer {
   max-height: 35vh;
   overflow-y:scroll;
-  border: .1rem solid #243746;
-  background-color: #fff;
+  border: .1rem solid $pr-dark-blue;
+  background-color: white;
 }
 
 .StatusContainer {
+  width: 95%;
   display: flex;
   align-items: stretch;
   justify-content: space-between;
   margin-top: 1.5rem;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+  }
 }
 
 .StatusDataContainer {
   display: flex;
   flex-direction: column;
   width: 40%;
+  p {
+    margin: .4rem;
+    font-size: .9em;
+  }
 }
 
-.StatusDataContainer p {
-  margin: .4rem;
-  font-size: .8em;
-}
 
 .StatusDetail {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   font-size: .7em;
-}
-
-.StatusDetail div {
-  margin-bottom: .3rem;
+  div {
+    margin-bottom: .3rem;
+  }
 }
 
 .ButtonGroup {
@@ -66,39 +90,17 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: stretch;
-}
-
-.ButtonGroup button {
-  flex-grow: 1;
+  button {
+    flex-grow: 1;
+    @include tablet {
+      margin-right: 0;
+      margin-left: 2rem;
+    }
+  }
 }
 
 .SubTitle h3,
 .SubTitle h3 p {
   margin-bottom: 1rem;
   margin-left: .8rem;
-}
-
-@media (min-width: 42em) {
-  .ContentContainer {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-  }
-  .ContratoContainer {
-    width: 85%;
-  }
-  .ContratoDetail {
-    height: 40vh;
-    overflow-y:scroll;
-    border: .1rem solid #243746;
-  }
-  .Container {
-    background-color: #f6fcf9;
-    padding: 2rem;
-    border-radius: .5rem;
-  }
-  .ButtonGroup button {
-    margin-right: 0;
-    margin-left: 2rem;
-  }
 }

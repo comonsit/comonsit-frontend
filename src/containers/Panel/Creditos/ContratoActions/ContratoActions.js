@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash';
 import {FormattedMessage} from 'react-intl';
 import { Route } from 'react-router-dom';
-import classes from './ContratoActions.module.css'
+import classes from './ContratoActions.module.scss'
 
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
 // import PagosList from '../..//Pagos/PagosList/PagosList'
