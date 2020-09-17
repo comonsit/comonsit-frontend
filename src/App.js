@@ -7,6 +7,7 @@ import * as actions from './store/actions'
 import Layout from './hoc/Layout/Layout'
 import homeContainer from './containers/General/HomeContainer/HomeContainer';
 import bancos from './containers/Panel/Bancos/Bancos';
+import subcuentas from './containers/Panel/Bancos/Subcuentas/Subcuentas';
 import carteras from './containers/Panel/Carteras/Carteras';
 import bancoForm from './containers/Panel/Bancos/BancoForm/BancoForm';
 import conocenos from './containers/General/Conocenos/Conocenos';
@@ -77,6 +78,7 @@ class App extends Component {
           <Route path="/perfil" exact component={perfil}/>
           <Route path="/acopios" exact component={acopios}/>
           <Route path="/bancos" exact component={bancos}/>
+          <Route path="/subcuentas" exact component={subcuentas}/>
           <Route path="/banco-form" exact component={bancoForm}/>
           <Route path="/carteras" exact component={carteras}/>
           <Route path="/creditos" exact component={creditos}/>

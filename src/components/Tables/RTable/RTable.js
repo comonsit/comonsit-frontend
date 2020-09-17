@@ -71,7 +71,7 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
         data,
         defaultColumn,
         filterTypes,
-        initialState: { pageIndex: 0 },
+        initialState: { pageIndex: 0, pageSize: hideSearch? 40 : 20 },
       },
       useFilters,
       useGlobalFilter,
@@ -191,6 +191,7 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
       </select>
     </div>
   ) : null
+
 
   const showFooter = hasFooter ? (
     <tfoot>

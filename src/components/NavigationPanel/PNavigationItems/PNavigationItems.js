@@ -42,6 +42,9 @@ const pnavigationItems = props => (
         <NavLink to="/bancos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.bancos"/></NavLink>
       </div>
       <div className={cl.NavigationItem} onClick={props.clicked}>
+        <NavLink to="/subcuentas" exact activeClassName={cl.active}><FormattedMessage id="pmenu.subcuentas"/></NavLink>
+      </div>
+      <div className={cl.NavigationItem} onClick={props.clicked}>
         <NavLink to="/acopios" exact activeClassName={cl.active}><FormattedMessage id="pmenu.acopios"/></NavLink>
       </div>
       <div className={cl.NavigationItem} onClick={props.clicked}>
