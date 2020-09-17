@@ -90,6 +90,11 @@ class Inicio extends Component {
             </Card>
           </div>
           <div>
+            <Card title={"inicio.carteras"}>
+              {carterasTotales}
+            </Card>
+          </div>
+          <div>
             <Card title={"inicio.calendario"}>
               <div className={classes.CalContainer}>
                 <iframe
@@ -101,11 +106,6 @@ class Inicio extends Component {
                   frameBorder="0"
                   scrolling="no"></iframe>
               </div>
-            </Card>
-          </div>
-          <div>
-            <Card title={"inicio.carteras"}>
-              {carterasTotales}
             </Card>
           </div>
           <div>
