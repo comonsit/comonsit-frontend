@@ -35,6 +35,7 @@ import formatos from './containers/Panel/Formatos/Formatos';
 import perfil from './containers/Panel/Perfil/Perfil';
 import inicio from './containers/Panel/Inicio/Inicio';
 import logout from './containers/Panel/Logout/Logout';
+import mapaPrueba from './containers/Panel/Mapas/Sandbox/Sandbox';
 
 // import languageObject from './translations/messages'
 import messages_es from './translations/es.json'
@@ -82,6 +83,7 @@ class App extends Component {
           <Route path="/banco-form" exact component={bancoForm}/>
           <Route path="/carteras" exact component={carteras}/>
           <Route path="/creditos" exact component={creditos}/>
+          <Route path="/mapa-prueba" exact component={mapaPrueba}/>
           <Route path="/pagos" exact component={pagos}/>
           <Route path="/pago-formato" exact component={pagoForm}/>
           <Route path="/credito-activar" exact component={contratoActivate}/>

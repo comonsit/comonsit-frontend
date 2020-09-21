@@ -77,6 +77,9 @@ const pnavigationItems = props => (
       <div className={cl.NavigationItem} onClick={props.clicked}>
         <NavLink to="/formatos" exact activeClassName={cl.active}><FormattedMessage id="pmenu.formatos"/></NavLink>
       </div>
+      <div className={cl.NavigationItem} onClick={props.clicked}>
+        <NavLink to="/mapa-prueba" exact activeClassName={cl.active}><FormattedMessage id="pmenu.mapas"/></NavLink>
+      </div>
     </Collapsible>
   </div>
 )
