@@ -223,7 +223,7 @@ class Movimientos extends Component {
 
     if (this.state.loading) {
       movimientosResults = <Spinner/>
-    } else if (this.props.listaMovimientos && this.state.saldo) {
+    } else if (this.props.listaMovimientos && this.state.saldo !== null) {
       const today = new Date()
       movimientosResults = (
         <div className={classes.TabContainer}>
