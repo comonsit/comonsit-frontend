@@ -4,11 +4,11 @@ import classes from './Movimientos.module.scss'
 import { connect } from 'react-redux';
 
 import MovimientosSearch from './MovimientosSearch/MovimientosSearch'
+import MovimientosListConc from './MovimientosListConc/MovimientosListConc'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
-import RTable from '../../../components/Tables/RTable/RTable';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
 import Tabs from '../../../components/UI/Tabs/Tabs';
@@ -17,7 +17,6 @@ import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
-import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
@@ -165,52 +164,10 @@ class Movimientos extends Component {
     this.updateData(id)
   }
 
-  renderType = cellInfo => {
-    if (cellInfo.cell.value) {
-      return (<p style={{color: "#2bc71b"}}>A</p>)
-    } else {
-      return (<p style={{color: "#ec573c"}}>R</p>)
-    }
- }
-
   render () {
 
     let sociosBusqueda = <Spinner/>
     let movimientosResults = null
-    const columns = [
-      {
-        Header: <FormattedMessage id="movimientos.aportacion_retiro"/>,
-        accessor: 'aportacion',
-        Cell: this.renderType,
-        Filter: SelectColumnFilter,
-        filter: 'includes',
-      },
-      {
-        Header: <FormattedMessage id="fecha"/>,
-        accessor: 'fecha_entrega'
-      },
-      {
-        Header: <FormattedMessage id="movimientos.monto"/>,
-        accessor: 'monto',
-        Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
-      },
-      {
-        Header: <FormattedMessage id="movimientos.fecha_banco"/>,
-        accessor: 'fecha_banco'
-      },
-      {
-        Header: <FormattedMessage id="movimientos.tipo"/>,
-        accessor: 'tipo_de_movimiento',
-        // Filter: SelectColumnFilter,
-        // filter: 'includes',
-      },
-      {
-        Header: <FormattedMessage id="movimientos.empresa"/>,
-        accessor: 'empresa',
-        // Filter: SelectColumnFilter,
-        // filter: 'includes',
-      }
-    ]
 
     if (this.props.listaSocios && this.state.searchingOpen) {
       sociosBusqueda = (
@@ -232,11 +189,10 @@ class Movimientos extends Component {
             <p><FormattedMessage id="movimientos.saldo"/><FrmtedDate value={today.toString()}/></p>
             <p><Currency value={this.state.saldo}/></p>
           </div>
-          <RTable
-            columns={columns}
+          <MovimientosListConc
             data={this.props.listaMovimientos}
-            onRowClick={row => this.showMovimiento(row.values.id)}
-            />
+            onClick={(row) => this.showMovimiento(row.original.id)}
+          />
         </div>
       )
     } else if (this.state.emptyMessage && this.state.selSocio) {

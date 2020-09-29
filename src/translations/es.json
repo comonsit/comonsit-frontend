@@ -132,7 +132,7 @@
   "movimientos.title": "Aportaciones",
   "movimientos.newMovimiento": "Nueva Aportacion",
   "movimientos.actualizar": "Buscar Aportaciones",
-  "movimientos.aportacion_retiro": "Aportación o Retiro",
+  "movimientos.aportacion_retiro": "Tipo",
   "movimientos.monto": "monto",
   "movimientos.fecha_banco": "Fecha en Banco",
   "movimientos.tipo": "Tipo de Aportacion",

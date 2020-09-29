@@ -13,9 +13,9 @@ const movimientosListConc = (props) => {
 
   const renderType = cellInfo => {
     if (cellInfo.cell.value) {
-      return (<p style={{color: "#2bc71b"}}>A</p>)
+      return (<p style={{color: "#2bc71b"}}>AP</p>)
     } else {
-      return (<p style={{color: "#ec573c"}}>R</p>)
+      return (<p style={{color: "#ec573c"}}>RET</p>)
     }
   }
 
