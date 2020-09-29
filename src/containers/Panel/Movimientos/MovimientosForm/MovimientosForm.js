@@ -339,8 +339,26 @@ class MovimientosForm extends Component {
   }
 
   onToggleType = result => {
-    const updatedForm = updateObject(this.state.movimientoForm, {aportacion: {value: result, valid: true}})
-    this.setState({movimientoForm: updatedForm });
+    const updatedFormAp = updateObject(this.state.movimientoForm.aportacion,
+      {value: result, valid: true}
+    )
+    
+    // RETIROS DO NOT HAVE ORDINARIO VALUE.
+    const updatedFormOrd = updateObject(this.state.movimientoForm.ordinario,
+      {
+        value:  result ? result : null,
+        hide: !result
+      }
+    )
+
+    const updatedForm = updateObject(this.state.movimientoForm, {
+        aportacion: updatedFormAp,
+        ordinario: updatedFormOrd
+    })
+
+    this.setState({
+      movimientoForm: updatedForm
+    });
   }
 
   searchByFocus = inputIdentifier => {
