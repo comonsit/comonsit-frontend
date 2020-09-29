@@ -12,14 +12,6 @@ import regionData from '../poligons'
 
 const center = [17.10, -92.15]
 
-// const datosLimpios = datos.features.map(e => {
-//   return {
-//     name: e.properties.name,
-//     color: e.properties.fill,
-//     coordinates: e.geometry.coordinates[0].map(latLon => latLon.reverse())
-//   }
-// })
-
 
 class DeudasMap extends Component<{}, { clicked: number }> {
   constructor(props) {
