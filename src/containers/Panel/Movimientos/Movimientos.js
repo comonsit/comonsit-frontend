@@ -10,16 +10,25 @@ import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Title from '../../../components/UI/Title/Title';
+import Title from '../../../components/UI/Title/Title'
+import TextElement from '../../../components/UI/TextElement/TextElement';
 import Tabs from '../../../components/UI/Tabs/Tabs';
 import Currency from '../../../components/UI/Formatting/Currency';
 import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
+import ProcessSelector from '../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
+
+const status = {
+  'CF': 'estatus_cafe',
+  'MI': 'estatus_miel',
+  'JA': 'estatus_yip',
+  'SL': 'estatus_trabajador'
+}
 
 class Movimientos extends Component {
   state = {
@@ -31,6 +40,12 @@ class Movimientos extends Component {
     emptyMessage: false,
     formIsValid: false,
     loading: false,
+    processOptions: {
+          CF: 'NP',
+          MI: 'NP',
+          JA: 'NP',
+          SL: 'NP'
+    },
     form: {
       clave_socio: {
         elementType: 'input',
@@ -61,16 +76,33 @@ class Movimientos extends Component {
   }
 
 
-// TODO: CLEAN-UP or avoid this if null empties!
   componentDidUpdate(prevProps) {
-    if(this.props.selSocio !== prevProps.selSocio) {
-      if (this.props.selSocio) {
-        this.setState({selSocio: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno });
-      } else {
-        this.setState({selSocio: ''});
+    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
+
+      const newProcessValues = this.state.processOptions
+
+      for (let id in status) {
+        newProcessValues[id] = this.props.selSocio[status[id]] === 'AC' ? "SEL" : this.props.selSocio[status[id]]
       }
+
+      this.setState({
+        processOptions: newProcessValues,
+        selSocio: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno
+      });
     }
   }
+
+
+// // TODO: CLEAN-UP or avoid this if null empties!
+//   componentDidUpdate(prevProps) {
+//     if(this.props.selSocio !== prevProps.selSocio) {
+//       if (this.props.selSocio) {
+//         this.setState({selSocio: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno });
+//       } else {
+//         this.setState({selSocio: ''});
+//       }
+//     }
+//   }
 
   onSubmitForm = (event) => {
     event.preventDefault();
@@ -178,17 +210,33 @@ class Movimientos extends Component {
       )
     }
 
+    const today = new Date()
     if (this.state.loading) {
       movimientosResults = <Spinner/>
     } else if (this.props.listaMovimientos && this.state.saldo !== null) {
-      const today = new Date()
       movimientosResults = (
         <div className={classes.TabContainer}>
           <div className={classes.SocioName}>
-            <p><strong>{this.state.selSocio}</strong></p>
-            <p><FormattedMessage id="movimientos.saldo"/><FrmtedDate value={today.toString()}/></p>
-            <p><Currency value={this.state.saldo}/></p>
+            <TextElement
+              label="nombres"
+              content={this.state.selSocio}
+            />
+            <TextElement
+              label="fecha"
+              content={<FrmtedDate value={today.toString()}/>}
+            />
+            <TextElement
+              label="movimientos.saldo"
+              content={this.state.saldo}
+              isNum
+            />
+            <ProcessSelector
+              label={'procesos'}
+              processes={this.state.processOptions}
+              clicked={() => {}}
+            />
           </div>
+          <h4><FormattedMessage id="detalle.aportaciones"/></h4>
           <MovimientosListConc
             data={this.props.listaMovimientos}
             onClick={(row) => this.showMovimiento(row.original.id)}
@@ -198,7 +246,19 @@ class Movimientos extends Component {
     } else if (this.state.emptyMessage && this.state.selSocio) {
       movimientosResults = (
         <div className={classes.SocioName}>
-          <p><strong>{this.state.selSocio}</strong></p>
+          <TextElement
+            label="nombres"
+            content={this.state.selSocio}
+            />
+          <TextElement
+            label="fecha"
+            content={<FrmtedDate value={today.toString()}/>}
+          />
+          <ProcessSelector
+            label={'proceso'}
+            processes={this.state.processOptions}
+            clicked={() => {}}
+          />
           <p><FormattedMessage id="movimientos.vacio"/></p>
         </div>
         )
