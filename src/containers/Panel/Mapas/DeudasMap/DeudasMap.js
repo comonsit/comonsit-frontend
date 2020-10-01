@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import {
   Map,
   Polygon,
@@ -68,16 +69,41 @@ class DeudasMap extends Component {
     if (this.state.regiones) {
       regionPoligons = regionData.map(r => {
         const selReg = this.state.regiones.find(el => el.region === r.id)
+        let vencidos
+        if (selReg.vencidos_count === 0) {
+          vencidos = <p>{selReg.vencidos_count} vencidos ${selReg.vencidos_total}</p>
+        } else {
 
+          const lt30 = (selReg.vencidosLT30_count > 0) ? <div className={classes.BubVenLT30}>{selReg.vencidosLT30_count} - ${selReg.vencidosLT30_total}</div> : null
+          const bt30to6M = (selReg.vencidos30to6M_count > 0) ? <div className={classes.BubVen30to6M}>{selReg.vencidos30to6M_count} - ${selReg.vencidos30to6M_total}</div> : null
+          const gt6M = (selReg.vencidosGT6M_count > 0) ? <div className={classes.BubVenGT6M}>{selReg.vencidosGT6M_count} -  ${selReg.vencidosGT6M_total}</div> : null
+
+
+          vencidos = (
+            <>
+              <p> {lt30} {bt30to6M} {gt6M}</p>
+            </>
+          )
+        }
+
+        // 2nd option to use Tooltip
+        //  <Tooltip
+        //    permanent={(selReg.vigentes_total > 0 || selReg.vencidos_total)}
+        //    direction={r.toolDirection}
+        //  >
         return (
               <Polygon
                 color={this.getColor(selReg.vigentes_count, selReg.vencidos_count)}
                 positions={r.coordinates}
               >
-                <Popup autoClose={false}>
-                  <p>{r.name}</p>
-                  <p>{selReg.vigentes_count} vigentes por ${selReg.vigentes_total}</p>
-                  <p>{selReg.vencidos_count} vencidos por ${selReg.vencidos_total}</p>
+                <Popup
+                  autoClose={false}
+                >
+                  <p><strong>{r.name}</strong></p>
+                  <p>Vigentes:</p>
+                  <p><div className={classes.BubVig}>{selReg.vigentes_count} - ${selReg.vigentes_total}</div></p>
+                  <p>Vencidos:</p>
+                  {vencidos}
                 </Popup>
               </Polygon>
             )
@@ -86,13 +112,29 @@ class DeudasMap extends Component {
 
     return (
       <div className={classes.Container}>
-        <Map center={center} zoom={10} closePopupOnClick={false}>
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {regionPoligons}
-        </Map>
+        <div className={classes.MapContainer}>
+          <Map center={center} zoom={10} closePopupOnClick={false}>
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {regionPoligons}
+          </Map>
+        </div>
+        <div className={classes.Footer}>
+          <div>
+            <p><div className={classes.regionVerde}>&nbsp;</div> <FormattedMessage id="mapa.regionVerde"/></p>
+            <p><div className={classes.regionAmarilla}>&nbsp;</div> <FormattedMessage id="mapa.regionAmarilla"/></p>
+            <p><div className={classes.regionRoja}>&nbsp;</div> <FormattedMessage id="mapa.regionRoja"/></p>
+            <p><div className={classes.regionGris}>&nbsp;</div> <FormattedMessage id="mapa.regionGris"/></p>
+          </div>
+          <div>
+            <p><div className={classes.BubVig}>-</div> <FormattedMessage id="mapa.vigentes"/></p>
+            <p><div className={classes.BubVenLT30}>-</div> <FormattedMessage id="mapa.lt30"/></p>
+            <p><div className={classes.BubVen30to6M}>-</div> <FormattedMessage id="mapa.bt30to6M"/></p>
+            <p><div className={classes.BubVenGT6M}>-</div> <FormattedMessage id="mapa.gt6M"/></p>
+          </div>
+        </div>
       </div>
     )
   }

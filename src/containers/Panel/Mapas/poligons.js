@@ -11,8 +11,9 @@
 export const regionData = [
   {
     "id": 2,
-    "name": "chilon",
+    "name": "Chilon",
     "color": "#00ff00",
+    "toolDirection": "top",
     "coordinates": [
       [
         17.16277001941679,
@@ -68,6 +69,7 @@ export const regionData = [
     "id": 4,
     "name": "Nuevo Progreso",
     "color": "#1315a1ff",
+    "toolDirection": "left",
     "coordinates": [
       [
         17.15686530091215,
@@ -107,6 +109,7 @@ export const regionData = [
     "id": 7,
     "name": "Tsubute'el",
     "color": "#aa0000",
+    "toolDirection": "bottom",
     "coordinates": [
       [
         17.09485442464107,
@@ -146,6 +149,7 @@ export const regionData = [
     "id": 5,
     "name": "Paraiso Chicotanil",
     "color": "#555555",
+    "toolDirection": "left",
     "coordinates": [
       [
         17.064989968112084,
@@ -177,6 +181,7 @@ export const regionData = [
     "id": 8,
     "name": "Yaxwinic",
     "color": "#999900",
+    "toolDirection": "bottom",
     "coordinates": [
       [
         17.163754120898137,
@@ -228,6 +233,7 @@ export const regionData = [
     "id": 3,
     "name": "Coquilte'el",
     "color": "#04bbcc",
+    "toolDirection": "top",
     "coordinates": [
       [
         17.171626744788,
@@ -263,6 +269,7 @@ export const regionData = [
     "id": 9,
     "name": "Ye'tal Ts'ahc",
     "color": "#aa5533",
+    "toolDirection": "bottom",
     "coordinates": [
       [
         17.096167038235993,
@@ -298,6 +305,7 @@ export const regionData = [
     "id": 6,
     "name": "San Jose Veracruz",
     "color": "#079977",
+    "toolDirection": "bottom",
     "coordinates": [
       [
         17.096823341565187,
@@ -337,6 +345,7 @@ export const regionData = [
     "id": 1,
     "name": "Agua Dulce Tehuacan",
     "color": "#c014f0",
+    "toolDirection": "top",
     "coordinates": [
       [
         17.05235356660383,
@@ -372,6 +381,7 @@ export const regionData = [
     "id": 10,
     "name": "Yochibha",
     "color": "#cee713",
+    "toolDirection": "top",
     "coordinates": [
       [
         17.220823065957614,

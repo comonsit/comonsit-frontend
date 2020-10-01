@@ -9,7 +9,9 @@
 }
 
 .Mapa {
-  grid-column-end: span 2;
+  @include tablet {
+    grid-column-end: span 2;
+  }
 }
 
 .CalContainer {

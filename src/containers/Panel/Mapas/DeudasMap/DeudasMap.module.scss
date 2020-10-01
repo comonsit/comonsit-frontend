@@ -1,3 +1,57 @@
-.Container {
-  height: 400px;
+@import 'styles/variables';
+
+.MapContainer {
+  height: 500px;
+}
+
+@mixin bubble($color, $txtColor) {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
+  background-color: $color;
+  display: inline;
+  padding: .2rem .4rem;
+  color: $txtColor;
+}
+
+.BubVig {
+  @include bubble($sec-green, white);
+}
+
+.BubVenLT30 {
+  @include bubble($yellow, black);
+}
+
+.BubVen30to6M {
+  @include bubble($orange, black);
+}
+
+.BubVenGT6M {
+  @include bubble($red, black);
+}
+
+.Footer {
+  font-size: .6em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.regionVerde {
+  @include bubble(rgba(#47cb15, 0.29), black);
+  border: 2px solid $sec-green;
+}
+
+.regionAmarilla {
+  @include bubble(rgba(#e1e42a, 0.29), black);
+  border: 2px solid $yellow;
+}
+
+.regionRoja {
+  @include bubble(rgba(#d42e11, 0.29), black);
+  border: 2px solid $red;
+}
+
+.regionGris {
+  @include bubble(rgba(#a1a2a1, 0.29), black);
+  border: 2px solid #a1a2a1;
 }

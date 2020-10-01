@@ -466,5 +466,13 @@
   "referencia_banco": "Referencia Bancaria",
   "pmenu.subcuentas": "Subcuentas",
   "pmenu.mapas": "Mapa",
-  "procesos": "Procesos"
+  "procesos": "Procesos",
+  "mapa.vigentes": "Vigentes",
+  "mapa.lt30": "Vencidos por menos de 30 días",
+  "mapa.bt30to6M": "Vencidos por más de 30 días y menos de 6 meses",
+  "mapa.gt6M": "Vencidos por más de 6 meses",
+  "mapa.regionVerde": "Región con sólo créditos vigentes",
+  "mapa.regionAmarilla": "Región con mayoría vigentes",
+  "mapa.regionRoja": "Región mayoría de vencidos",
+  "mapa.regionGris": "Región sin créditos activos"
 }
