@@ -459,8 +459,11 @@
   "movimiento.monto": "Monto",
   "movimiento.aportacion": "Aportación/Retiro",
   "movimiento.proceso": "Proceso",
-  "movimiento.tipo_de_movimiento": "Tipo de Movimiento",
+  "movimiento.tipo_de_movimiento": "Transacción",
   "tipo_de_movimiento": "Tipo de Aportacion/Retiro",
+  "movimiento.clase": "Clase",
   "fecha_banco": "Fecha en Banco",
-  "referencia_banco": "Referencia Bancaria"
+  "referencia_banco": "Referencia Bancaria",
+  "pmenu.subcuentas": "Subcuentas",
+  "pmenu.mapas": "Mapa"
 }

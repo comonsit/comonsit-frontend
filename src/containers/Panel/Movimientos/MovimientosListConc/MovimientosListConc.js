@@ -13,9 +13,9 @@ const movimientosListConc = (props) => {
 
   const renderType = cellInfo => {
     if (cellInfo.cell.value) {
-      return (<p style={{color: "#2bc71b"}}>AP</p>)
+      return (<p style={{color: "#2bc71b"}}>APORT</p>)
     } else {
-      return (<p style={{color: "#ec573c"}}>RET</p>)
+      return (<p style={{color: "#ec573c"}}>RETIR</p>)
     }
   }
 
@@ -28,7 +28,7 @@ const movimientosListConc = (props) => {
       default:
         return (<p>?{cellInfo.cell.value}</p>)
     }
- };
+  }
 
   const columns = [
     {
@@ -46,8 +46,9 @@ const movimientosListConc = (props) => {
       Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>
     },
     {
-      Header: <FormattedMessage id="movimientos.fecha_banco"/>,
-      accessor: 'fecha_banco',
+      Header: <FormattedMessage id="movimiento.clase"/>,
+      accessor: 'ordinario',
+      Cell: cellInfo => cellInfo.cell.value ? "ORDIN" : "Extra"
     },
     {
       Header: <FormattedMessage id="proceso_nombre"/>,
@@ -55,8 +56,12 @@ const movimientosListConc = (props) => {
       Cell: renderStatus
     },
     {
-      Header: <FormattedMessage id="movimientosForm.referencia_banco"/>,
-      accessor: 'referencia_banco',
+      Header: <FormattedMessage id="movimientos.fecha_banco"/>,
+      accessor: 'fecha_banco',
+    },
+    {
+      Header: <FormattedMessage id="movimiento.tipo_de_movimiento"/>,
+      accessor: 'tipo_de_movimiento',
     }
   ]
 
