@@ -12,6 +12,7 @@ import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatu
 import Currency from '../../../../components/UI/Formatting/Currency'
 import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate'
 import { isGerencia } from '../../../../store/roles'
+import vidaCartera from '../../Carteras/VidaCartera'
 
 
 const contratoActions = props => {
@@ -19,21 +20,8 @@ const contratoActions = props => {
   let gerenteButtons, actionButtons = null
 
   const deuda = props.selContrato.deuda_al_dia ? props.selContrato.deuda_al_dia.total_deuda : null
-  const inicio = (isNaN(props.selContrato.fecha_inicio) && !isNaN(Date.parse(props.selContrato.fecha_inicio))) ? new Date(props.selContrato.fecha_inicio) : null
-  const vencimiento = (isNaN(props.selContrato.fecha_vencimiento) && !isNaN(Date.parse(props.selContrato.fecha_vencimiento))) ? new Date(props.selContrato.fecha_vencimiento) : null
-  let cartera_vigente, cartera_vencida, vida_credito
-  if (inicio && vencimiento) {
-    const today = new Date()
-    const oneDay = 24 * 60 * 60 * 1000;
-    vida_credito = Math.round(Math.abs((today - inicio) / oneDay));
-    if (today > vencimiento) {
-      cartera_vencida = Math.round(Math.abs((today - vencimiento) / oneDay));
-      cartera_vigente = vida_credito - cartera_vencida
-    } else {
-      cartera_vencida = 0
-      cartera_vigente = vida_credito
-    }
-  }
+
+  const vida = vidaCartera(props.selContrato.fecha_inicio, props.selContrato.fecha_vencimiento)
 
   if (props.role === 'Gerente') {
     gerenteButtons = (
@@ -70,7 +58,7 @@ const contratoActions = props => {
   }
 
   let paymentHistory = null
-  if (inicio){
+  if (vida.inicio){
     if(!_.isEmpty(props.selContrato.deuda_al_dia)){
       paymentHistory = (<CreditoHistorial data={props.pagos} credito={props.selContrato}/>)
     } else if (props.selContrato.estatus_detail === 'PA') {
@@ -111,13 +99,13 @@ const contratoActions = props => {
     <div className={classes.StatusContainer}>
       <div className={classes.StatusDataContainer}>
         <p><FormattedMessage id="creditos.deuda_al_dia"/>: <Currency value={deuda}/></p>
-        <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <FrmtedDate value={props.selContrato.fecha_vencimiento}/></p>
+        <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <FrmtedDate value={vida.vencimiento.toString()}/></p>
         <p><FormattedMessage id="creditos.pagado"/>: <Currency value={props.selContrato.pagado}/></p>
       </div>
       <div className={classes.StatusDataContainer}>
-        <p><FormattedMessage id="creditos.vida_credito"/>: {vida_credito}</p>
-        <p><FormattedMessage id="creditos.cartera_vigente"/>: {cartera_vigente}</p>
-        <p><FormattedMessage id="creditos.cartera_vencida"/>: {cartera_vencida}</p>
+        <p><FormattedMessage id="creditos.vida_credito"/>: {vida.vida_credito}</p>
+        <p><FormattedMessage id="creditos.cartera_vigente"/>: {vida.cartera_vigente}</p>
+        <p><FormattedMessage id="creditos.cartera_vencida"/>: {vida.cartera_vencida}</p>
       </div>
       <div className={classes.StatusDetail}>
         <RenderStatus value={props.selContrato.estatus_detail} idLabel={"creditos.status."}/>
