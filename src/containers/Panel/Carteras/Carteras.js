@@ -8,7 +8,7 @@ import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
 import TotalCarteras from './TotalCarteras/TotalCarteras'
-import CreditoListCont from '../Creditos/CreditoListCont/CreditoListCont';
+import CreditoListCarteras from '../Creditos/CreditoListCarteras/CreditoListCarteras';
 import classes from './Carteras.module.scss'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
@@ -124,8 +124,8 @@ class Carteras extends Component {
 
         />
       )
-      creditosVigentesTable = <CreditoListCont data={this.state.creditos_vigentes}/>
-      creditosVencidosTable = <CreditoListCont data={this.state.creditos_vencidos}/>
+      creditosVigentesTable = <CreditoListCarteras data={this.state.creditos_vigentes}/>
+      creditosVencidosTable = <CreditoListCarteras data={this.state.creditos_vencidos}/>
     }
 
     return (
@@ -169,12 +169,16 @@ class Carteras extends Component {
             </div>
             <div className={classes.longCard}>
               <Card title={"carteras.vigentes"}>
-                {creditosVigentesTable}
+                <div className={classes.TableContainer}>
+                  {creditosVigentesTable}
+                </div>
               </Card>
             </div>
             <div className={classes.longCard}>
               <Card title={"carteras.vencidos"}>
-                {creditosVencidosTable}
+                <div className={classes.TableContainer}>
+                  {creditosVencidosTable}
+                </div>
               </Card>
             </div>
           </div>

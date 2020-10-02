@@ -2,11 +2,9 @@
 
 .CardsContainer {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 100%;
   justify-items: center;
   align-items: stretch;
-  justify-content: space-around;
-  align-content: space-around;
   &> div {
     width: 95%;
   }
@@ -25,4 +23,9 @@
   .longCard {
     grid-column-end: span 2;
   }
+}
+
+.TableContainer {
+  width: 100%;
+  overflow-y: scroll;
 }

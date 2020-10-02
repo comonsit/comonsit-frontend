@@ -130,8 +130,6 @@ const creditoHistorial = (props) => {
     }
   ]
 
-  console.log(modifiedData)
-
   return (<RTable
             columns={columns}
             data={modifiedData}

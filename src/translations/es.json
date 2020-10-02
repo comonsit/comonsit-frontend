@@ -474,5 +474,6 @@
   "mapa.regionVerde": "Región con sólo créditos vigentes",
   "mapa.regionAmarilla": "Región con mayoría vigentes",
   "mapa.regionRoja": "Región mayoría de vencidos",
-  "mapa.regionGris": "Región sin créditos activos"
+  "mapa.regionGris": "Región sin créditos activos",
+  "subcuentas.title": "Subcuentas Contables"
 }
