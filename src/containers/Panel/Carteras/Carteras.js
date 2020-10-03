@@ -3,16 +3,18 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 import Card from '../../../components/UI/Card/Card';
+import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title';
 import TotalCarteras from './TotalCarteras/TotalCarteras'
 import CreditoListCarteras from '../Creditos/CreditoListCarteras/CreditoListCarteras';
+import CreditoHistorial from '../Creditos/CreditoHistorial/CreditoHistorial'
 import classes from './Carteras.module.scss'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
-// import * as actions from '../../../store/actions'
+import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
 class Carteras extends Component {
@@ -27,6 +29,8 @@ class Carteras extends Component {
     loading: true,
     loadingSaldos: true,
     pendingConcils: 0,
+    showContratoModal: false,
+    selectedContratoPagos: null,
     form: {
       initialDate: {
         elementType: 'input',
@@ -47,6 +51,7 @@ class Carteras extends Component {
 
   componentDidMount () {
     this.onGetCarteras()
+    this.props.unSelContrato()
   }
 
   onGetCarteras () {
@@ -111,6 +116,36 @@ class Carteras extends Component {
     this.setState({form: updatedForm, formIsValid: formIsValid})
   }
 
+  showContrato = id => {
+    this.setState({
+      showContratoModal: true
+    })
+    this.props.onFetchSelContrato(this.props.token, id)
+
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
+
+    // TODO: move to PAGOS reducer!!
+    axios.get('/contratos/' + id + '/pagos/', authData)
+      .then(response => {
+        this.setState({
+          selectedContratoPagos: response.data
+        });
+      })
+      .catch(error => {
+        // alert('ALGO FALLÓ!')
+      })
+  }
+
+  cancelSelected =() => {
+    this.setState({
+      showContratoModal: false,
+      selectedContratoPagos: null
+    });
+    this.props.unSelContrato()
+  }
+
   render () {
 
     let carterasTotales, creditosVigentesTable, creditosVencidosTable = <Spinner/>
@@ -124,12 +159,36 @@ class Carteras extends Component {
 
         />
       )
-      creditosVigentesTable = <CreditoListCarteras data={this.state.creditos_vigentes}/>
-      creditosVencidosTable = <CreditoListCarteras data={this.state.creditos_vencidos}/>
+      creditosVigentesTable = (<CreditoListCarteras
+                                onClick={(row) => this.showContrato(row.values.id)}
+                                data={this.state.creditos_vigentes}/>
+                              )
+      creditosVencidosTable = (<CreditoListCarteras
+                                onClick={(row) => this.showContrato(row.values.id)}
+                                data={this.state.creditos_vencidos}/>
+                              )
+    }
+
+    let historial = null
+
+    if (this.state.selectedContratoPagos && this.props.selContrato) {
+      historial = (
+        <div className={classes.Container}>
+          <h3><FormattedMessage id="creditos.historialCredito"/> Credito # {this.props.selContrato.id}</h3>
+          <div className={classes.ContentContainer}>
+            <CreditoHistorial data={this.state.selectedContratoPagos} credito={this.props.selContrato}/>
+          </div>
+        </div>
+      )
     }
 
     return (
       <>
+        <Modal
+          show={this.state.showContratoModal}
+          modalClosed={this.cancelSelected}>
+          {historial}
+        </Modal>
         <div className={classes.Container}>
           <Title
             titleName="carteras.title"/>
@@ -191,12 +250,15 @@ class Carteras extends Component {
 const mapStateToProps = state => {
     return {
       token: state.auth.token,
-      role: state.generalData.role
+      role: state.generalData.role,
+      selContrato: state.creditos.selectedContrato,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+      onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
+      unSelContrato: () => dispatch(actions.unSelectContrato())
     }
 }
 

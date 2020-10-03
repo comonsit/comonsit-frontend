@@ -123,7 +123,7 @@ const creditoList = (props) => {
   return (<RTable
             columns={columns}
             data={modData}
-            onRowClick={() => {}}
+            onRowClick={props.onClick}
           />)
 }
 
