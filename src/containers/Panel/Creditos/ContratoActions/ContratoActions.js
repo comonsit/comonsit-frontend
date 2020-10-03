@@ -99,7 +99,7 @@ const contratoActions = props => {
     <div className={classes.StatusContainer}>
       <div className={classes.StatusDataContainer}>
         <p><FormattedMessage id="creditos.deuda_al_dia"/>: <Currency value={deuda}/></p>
-        <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <FrmtedDate value={vida.vencimiento.toString()}/></p>
+        <p><FormattedMessage id="creditos.fecha_vencimiento"/>: <FrmtedDate value={vida.vencimiento ? vida.vencimiento.toString() : null}/></p>
         <p><FormattedMessage id="creditos.pagado"/>: <Currency value={props.selContrato.pagado}/></p>
       </div>
       <div className={classes.StatusDataContainer}>
