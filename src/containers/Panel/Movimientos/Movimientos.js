@@ -13,7 +13,6 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Title from '../../../components/UI/Title/Title'
 import TextElement from '../../../components/UI/TextElement/TextElement';
 import Tabs from '../../../components/UI/Tabs/Tabs';
-import Currency from '../../../components/UI/Formatting/Currency';
 import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
 import ProcessSelector from '../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../Socios/SociosList/SociosList';

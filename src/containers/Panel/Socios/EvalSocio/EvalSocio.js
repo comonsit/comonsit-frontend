@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './EvalSocio.module.scss'
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 
 import SolicSaldosGraph from '../../../../components/Graphs/SolicSaldosGraph/SolicSaldosGraph';
 import Title from '../../../../components/UI/Title/Title';

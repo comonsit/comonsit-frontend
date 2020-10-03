@@ -10,7 +10,6 @@ import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
-import { checkValidity } from '../../../../utilities/validity'
 import axios from '../../../../store/axios-be.js'
 
 
