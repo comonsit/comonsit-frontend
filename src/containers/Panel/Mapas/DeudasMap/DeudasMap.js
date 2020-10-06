@@ -15,12 +15,12 @@ const center = [17.10, -92.05]
 
 
 class DeudasMap extends Component {
-  constructor(props) {
-    super(props);
-    this.state =  {
-      regiones: null,
-      loading: false,
-    }
+  state =  {
+    regiones: null,
+    loading: false,
+  }
+
+  componentDidMount () {
     this.onGetCarteras()
   }
 
@@ -81,7 +81,7 @@ class DeudasMap extends Component {
 
           vencidos = (
             <>
-              <p> {lt30} {bt30to6M} {gt6M}</p>
+              <div className={classes.Parr}> {lt30} {bt30to6M} {gt6M}</div>
             </>
           )
         }
@@ -93,16 +93,17 @@ class DeudasMap extends Component {
         //  >
         return (
               <Polygon
+                key={r.id}
                 color={this.getColor(selReg.vigentes_count, selReg.vencidos_count)}
                 positions={r.coordinates}
               >
                 <Popup
                   autoClose={false}
                 >
-                  <p><strong>{r.name}</strong></p>
-                  <p>Vigentes:</p>
-                  <p><div className={classes.BubVig}>{selReg.vigentes_count} - ${selReg.vigentes_total}</div></p>
-                  <p>Vencidos:</p>
+                  <div className={classes.Parr}><strong>{r.name}</strong></div>
+                  <div className={classes.Parr}>Vigentes:</div>
+                  <div className={classes.Parr}><div className={classes.BubVig}>{selReg.vigentes_count} - ${selReg.vigentes_total}</div></div>
+                  <div className={classes.Parr}>Vencidos:</div>
                   {vencidos}
                 </Popup>
               </Polygon>
@@ -122,17 +123,17 @@ class DeudasMap extends Component {
           </Map>
         </div>
         <div className={classes.Footer}>
-          <div>
-            <p><div className={classes.regionVerde}>&nbsp;</div> <FormattedMessage id="mapa.regionVerde"/></p>
-            <p><div className={classes.regionAmarilla}>&nbsp;</div> <FormattedMessage id="mapa.regionAmarilla"/></p>
-            <p><div className={classes.regionRoja}>&nbsp;</div> <FormattedMessage id="mapa.regionRoja"/></p>
-            <p><div className={classes.regionGris}>&nbsp;</div> <FormattedMessage id="mapa.regionGris"/></p>
+          <div className={classes.region}>
+            <div className={classes.Parr}><div className={classes.regionVerde}>&nbsp;</div> <FormattedMessage id="mapa.regionVerde"/></div>
+            <div className={classes.Parr}><div className={classes.regionAmarilla}>&nbsp;</div> <FormattedMessage id="mapa.regionAmarilla"/></div>
+            <div className={classes.Parr}><div className={classes.regionRoja}>&nbsp;</div> <FormattedMessage id="mapa.regionRoja"/></div>
+            <div className={classes.Parr}><div className={classes.regionGris}>&nbsp;</div> <FormattedMessage id="mapa.regionGris"/></div>
           </div>
           <div>
-            <p><div className={classes.BubVig}>-</div> <FormattedMessage id="mapa.vigentes"/></p>
-            <p><div className={classes.BubVenLT30}>-</div> <FormattedMessage id="mapa.lt30"/></p>
-            <p><div className={classes.BubVen30to6M}>-</div> <FormattedMessage id="mapa.bt30to6M"/></p>
-            <p><div className={classes.BubVenGT6M}>-</div> <FormattedMessage id="mapa.gt6M"/></p>
+            <div className={classes.Parr}><div className={classes.BubVig}>-</div> <FormattedMessage id="mapa.vigentes"/></div>
+            <div className={classes.Parr}><div className={classes.BubVenLT30}>-</div> <FormattedMessage id="mapa.lt30"/></div>
+            <div className={classes.Parr}><div className={classes.BubVen30to6M}>-</div> <FormattedMessage id="mapa.bt30to6M"/></div>
+            <div className={classes.Parr}><div className={classes.BubVenGT6M}>-</div> <FormattedMessage id="mapa.gt6M"/></div>
           </div>
         </div>
       </div>

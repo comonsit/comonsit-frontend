@@ -14,6 +14,10 @@
   color: $txtColor;
 }
 
+.Parr {
+  margin-top: .8rem;
+}
+
 .BubVig {
   @include bubble($sec-green, white);
 }
@@ -36,22 +40,25 @@
   justify-content: space-between;
 }
 
-.regionVerde {
-  @include bubble(rgba(#47cb15, 0.29), black);
-  border: 2px solid $sec-green;
-}
-
-.regionAmarilla {
-  @include bubble(rgba(#e1e42a, 0.29), black);
-  border: 2px solid $yellow;
-}
-
-.regionRoja {
-  @include bubble(rgba(#d42e11, 0.29), black);
-  border: 2px solid $red;
-}
-
-.regionGris {
-  @include bubble(rgba(#a1a2a1, 0.29), black);
-  border: 2px solid #a1a2a1;
+.region {
+  &Verde {
+    @include bubble(rgba(#47cb15, 0.29), black);
+    border: 2px solid $sec-green;
+    padding: 0 .4rem;
+  }
+  &Amarilla {
+    @include bubble(rgba(#e1e42a, 0.29), black);
+    border: 2px solid $yellow;
+    padding: 0 .4rem;
+  }
+  &Roja {
+    @include bubble(rgba(#d42e11, 0.29), black);
+    border: 2px solid $red;
+    padding: 0 .4rem;
+  }
+  &Gris {
+    @include bubble(rgba(#a1a2a1, 0.29), black);
+    border: 2px solid #a1a2a1;
+    padding: 0 .4rem;
+  }
 }
