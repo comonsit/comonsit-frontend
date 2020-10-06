@@ -17,6 +17,7 @@ const bancoDetail = props => {
       content = props.registro[id] ? "Ingreso" : "Egreso"
     }
     return (<TextElement
+              key={id}
               label={"registro."+id}
               content={content}
               isNum={id === "cantidad"}
@@ -26,6 +27,7 @@ const bancoDetail = props => {
   const items2 = ["aport_retiro", "pago", "ej_credito"]
   const items2Array = items2.map(id => {
     return (<TextElement
+              key={id}
               label={"registro."+id}
               content={props.registro[id]}
               />)

@@ -68,7 +68,7 @@ const Sandbox = (props) => {
       const localidadesNOGeo = props.comunidades.filter(it => it.ermita !== null && it.ubicacion === null).map(it => {
         if (it.ubicacion === null) {
           return (
-            <div className={classes.DataContainer}>
+            <div key={it.id} className={classes.DataContainer}>
               <h5>Comunidad {it.nombre_de_comunidad} - Región {it.nombre_region} - Ermita  {it.ermita}</h5>
             </div>
           )
@@ -78,7 +78,7 @@ const Sandbox = (props) => {
       const localidadesNOErmita = props.comunidades.filter(it => it.ermita === null).map(it => {
         if (it.ubicacion === null) {
           return (
-            <div className={classes.DataContainer}>
+            <div key={it.id} className={classes.DataContainer}>
               <h5>Comunidad {it.nombre_de_comunidad} - Región {it.nombre_region}</h5>
             </div>
           )

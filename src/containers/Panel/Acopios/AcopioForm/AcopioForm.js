@@ -303,7 +303,10 @@ class AcopioForm extends Component {
       formElements = formElementsArray.map(formElement => {
         if (formElement.id === "tipo_de_producto" ) {
           return (
-            <div className={classes.Inputs}>
+            <div
+              key= {formElement.id}
+              className={classes.Inputs}
+            >
               <ProcessSelector label={formElement.id} processes={this.state.processOptions} clicked={this.OnChooseProcess}/>
             </div>
               )

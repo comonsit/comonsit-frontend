@@ -24,6 +24,7 @@ const contratoDetail = props => {
               label={id}
               content={props.contrato[id]}
               twoLanguages={props.forPrinting}
+              key={id}
               />)
   })
 
@@ -37,6 +38,7 @@ const contratoDetail = props => {
               isNum={id === "monto" || id === "total" || id === "intereses"}
               isPerc={id === "tasa" || id === "tasa_moratoria"}
               twoLanguages={props.forPrinting}
+              key={id}
               />)
   })
 
@@ -71,7 +73,7 @@ const contratoDetail = props => {
   const titles = ["contratoDetail.title", "contratoDetail.datos", "contratoDetail.especificaciones", "contratoDetail.informacion", "contratoDetail.texto1"]
   const titlesArray = titles.map(id => {
     if (props.forPrinting) {
-      return (<label>
+      return (<label key={id}>
               <IntlProvider
                 locale={'es'}
                 messages={messages.es}
@@ -87,7 +89,7 @@ const contratoDetail = props => {
               </IntlProvider>
             </label>)
     } else {
-      return <FormattedMessage id={id}/>
+      return <FormattedMessage key={id} id={id}/>
     }
   })
 

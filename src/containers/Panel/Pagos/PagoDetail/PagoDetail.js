@@ -10,6 +10,7 @@ const pagoDetail = props => {
   const items1 = ["id", "credito", "fecha_pago", "cantidad", "autor", "interes_ord", "interes_mor", "abono_capital", "iva"]
   const items1Array = items1.map(id => {
     return (<TextElement
+              key={id}
               label={"pagos."+id}
               content={props.pago[id]}
               isNum={id === "cantidad" || id === "interes_ord" || id === "interes_mor" || id === "abono_capital" }
@@ -19,6 +20,7 @@ const pagoDetail = props => {
   const items2 = ["fecha_banco", "referencia_banco"]
   const items2Array = items2.map(id => {
     return (<TextElement
+              key={id}
               label={"pagos."+id}
               content={props.pago[id]}
               />)
@@ -28,6 +30,7 @@ const pagoDetail = props => {
   const items3 = ["deuda_prev_total", "deuda_prev_int_ord", "deuda_prev_int_mor"]
   const items3Array = items3.map(id => {
     return (<TextElement
+              key={id}
               label={"pagos."+id}
               content={props.pago[id]}
               isNum

@@ -535,7 +535,10 @@ class SolicitudForm extends Component {
       formElements = formElementsArray.map(formElement => {
         if (formElement.id === "proceso" ) {
           return (
-            <div className={classes.Inputs}>
+            <div
+              key= {formElement.id}
+              className={classes.Inputs}
+            >
               <ProcessSelector
                 label={formElement.id+'_nombre'}
                 processes={this.state.processOptions}

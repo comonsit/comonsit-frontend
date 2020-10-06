@@ -174,8 +174,6 @@ class MesaControl extends Component {
       .then(response => {
         // this.setState({loading: false})
         // this.props.updateUser(response.data)
-        console.log('CAMBIAR STATUS === AP POR:')
-        console.log(response.data.estatus_solicitud)
         if (status === 'AP') {
           alert('Solicitud de Crédito aprobado correctamente')
         } else {

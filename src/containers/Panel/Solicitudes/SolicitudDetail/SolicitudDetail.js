@@ -10,6 +10,7 @@ const solicitudDetail = (props) => {
   const items1 = ["nombre_productor", "clave_socio", "comunidad", "region", "area_proceso", "cargo", "cargo_coop", "fecha_ingr_yomol_atel"]
   const items1Array = items1.map(id => {
     return (<TextElement
+              key={id}
               label={id}
               content={props.solicitud[id]}
               />)
@@ -28,6 +29,7 @@ const solicitudDetail = (props) => {
       content = props.solicitud[id]
     }
     return (<TextElement
+              key={id}
               label={id}
               content={content}
               isNum={id === "monto_solicitado"}
@@ -47,6 +49,7 @@ const solicitudDetail = (props) => {
   const items3 = ["aval_nombre", "familiar_responsable", "justificacion_credito", "promotor", "irregularidades"]
   const items3Array = items3.map(id => {
     return (<TextElement
+              key={id}
               label={id}
               content={props.solicitud[id]}
               />)
@@ -55,15 +58,15 @@ const solicitudDetail = (props) => {
   const preguntas_mesa = ["pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4"]
   const preguntas_mesaArray = preguntas_mesa.map((id, index) => {
     if (props.solicitud[id] === null) {
-      return(<span key={index} className={classes.Question}>{index+1}. &nbsp;&nbsp;&nbsp; </span>)
+      return(<span key={id} className={classes.Question}>{index+1}. &nbsp;&nbsp;&nbsp; </span>)
     } else if (props.solicitud[id] === true) {
-      return(<span key={index} className={classes.Question}>{index+1}. <span className={classes.Checkmark}>&#10004;</span>&nbsp;&nbsp; </span>)
+      return(<span key={id} className={classes.Question}>{index+1}. <span className={classes.Checkmark}>&#10004;</span>&nbsp;&nbsp; </span>)
     } else {
-      return(<span key={index} className={classes.Question}>{index+1}. <span className={classes.Cross}>&#10006;</span>&nbsp;&nbsp; </span>)
+      return(<span key={id} className={classes.Question}>{index+1}. <span className={classes.Cross}>&#10006;</span>&nbsp;&nbsp; </span>)
     }
   })
 
-  items3Array.push(<TextElement label={'preguntas_mesa'} content={preguntas_mesaArray}/>)
+  items3Array.push(<TextElement key={'preguntas_mesa'} label={'preguntas_mesa'} content={preguntas_mesaArray}/>)
 
 
   return (

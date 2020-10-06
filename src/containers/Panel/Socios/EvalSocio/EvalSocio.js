@@ -44,6 +44,7 @@ class EvalSocio extends Component {
     const items1 = ["clave_socio", "nombre_productor",  "nombre_region", "nombre_comunidad", "fecha_ingr_yomol_atel"]
     const items1Array = items1.map(id => {
       return (<TextElement
+                key={id}
                 label={id}
                 content={this.props.selSocio[id]}
                 />)
