@@ -9,6 +9,7 @@ import {
   VerticalBarSeries,
   Hint
 } from 'react-vis';
+
 import classes from './SolicSaldosGraph.module.scss'
 
 
@@ -57,14 +58,16 @@ const solicSaldosGraph = (props) => {
 
   const labels = allData.filter(item => !item.data.every(element => element.y === null))
   const series = labels.map(item => {
-    return (<VerticalBarSeries
-              key={item.title}
-              data={item.data}
-              color={item.color}
-              style={{}}
-              onValueMouseOver={props.mouseOver}
-              onValueMouseOut={props.mouseOut}
-              />)
+    return (
+      <VerticalBarSeries
+        key={item.title}
+        data={item.data}
+        color={item.color}
+        style={{}}
+        onValueMouseOver={props.mouseOver}
+        onValueMouseOut={props.mouseOut}
+        />
+    )
   })
 
   return (
@@ -81,13 +84,16 @@ const solicSaldosGraph = (props) => {
         <XAxis yPadding={10} />
         <YAxis tickPadding={0} />
         {series}
-        {props.hint ? (<Hint value={props.hint}>
-                            <div style={{background: '#656564', padding: '.5rem', borderRadius: "1rem"}}>
-                              <p style={{fontSize: ".8em"}}>${props.hint.y} en {props.hint.x}</p>
-                            </div>
-                          </Hint> ): null}
+        {props.hint ? (
+                        <Hint value={props.hint}>
+                          <div style={{background: '#656564', padding: '.5rem', borderRadius: "1rem"}}>
+                            <p style={{fontSize: ".8em"}}>${props.hint.y} en {props.hint.x}</p>
+                          </div>
+                        </Hint>
+                      ): null
+        }
       </XYPlot>
-</div>
+    </div>
   )
 }
 

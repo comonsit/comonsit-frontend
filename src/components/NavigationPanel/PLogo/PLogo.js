@@ -1,10 +1,11 @@
 import React from 'react';
 
+import classes from './PLogo.module.scss';
 import csLogoV from '../../../assets/images/cs-logoV.png';
-import cl from './PLogo.module.scss';
+
 
 const plogo = (props) => (
-    <div className={cl.Logo}>
+    <div className={classes.Logo}>
       <img src={csLogoV} alt="Logo Comon Sit Ca'teltic"/>
     </div>
 );

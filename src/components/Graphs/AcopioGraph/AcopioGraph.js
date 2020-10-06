@@ -9,6 +9,7 @@ import {
   VerticalBarSeries,
   Hint
 } from 'react-vis';
+
 import classes from './AcopioGraph.module.scss'
 
 
@@ -38,7 +39,14 @@ const acopioGraph = (props) => {
         onValueMouseOver={props.mouseOver}
         onValueMouseOut={props.mouseOut}/>
       {props.hint ? (<Hint value={props.hint}>
-                          <div style={{background: '#656564', padding: '.5rem', borderRadius: "1rem"}}>
+                          <div
+                            style={
+                              {
+                                background: '#656564',
+                                padding: '.5rem',
+                                borderRadius: "1rem"}
+                              }
+                          >
                             <p style={{fontSize: ".8em"}}>${props.hint.y} en {props.hint.x}</p>
                           </div>
                         </Hint> ): null}

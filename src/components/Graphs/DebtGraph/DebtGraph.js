@@ -8,6 +8,7 @@ import {
   HorizontalGridLines,
   VerticalBarSeries
 } from 'react-vis';
+
 import classes from './DebtGraph.module.scss'
 
 
@@ -26,22 +27,23 @@ const debtGraph = (props) => {
       className={classes.Graphs}
     >
     <DiscreteColorLegend
-           style={{position: 'absolute', right: '-100px', top: '10px'}}
-           orientation="vertical"
-           items={[
-             {
-               title: <FormattedMessage id={props.labelIntereses}/> ,
-               color: "#cba031"
-             },
-             {
-               title: <FormattedMessage id={props.labelPrestamo}/> ,
-               color: "#4074cc"
-             }
-           ]}
-         />
+      style={{position: 'absolute', right: '-100px', top: '10px'}}
+      orientation="vertical"
+      items={
+        [
+         {
+           title: <FormattedMessage id={props.labelIntereses}/> ,
+           color: "#cba031"
+         },
+         {
+           title: <FormattedMessage id={props.labelPrestamo}/> ,
+           color: "#4074cc"
+         }
+       ]}
+    />
       <VerticalGridLines />
       <HorizontalGridLines />
-      <YAxis/>
+      <YAxis />
       <VerticalBarSeries
         data={[{x: 1, y: props.dataMonto}]}
         color="#4074cc"/>

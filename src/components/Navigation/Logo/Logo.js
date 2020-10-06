@@ -1,10 +1,11 @@
 import React from 'react';
 
+import classes from './Logo.module.scss';
 import csLogo from '../../../assets/images/cs-logo.png';
-import cl from './Logo.module.scss';
+
 
 const logo = (props) => (
-    <div className={cl.Logo}>
+    <div className={classes.Logo}>
         <img src={csLogo} alt="Logo Comon Sit Ca'teltic"/>
     </div>
 );
