@@ -37,7 +37,7 @@ class PagosForm extends Component {
             placeholder: '..folio del crédito'
           },
           label: (<><FormattedMessage id="credito"/>*</>),
-          value: this.props.selContrato ? this.props.selContrato.id : this.props.selPago ? this.props.selPago.credito : null,
+          value: this.props.selContrato ? this.props.selContrato.id : this.props.selPago ? this.props.selPago.credito : "",
           validation: {
             required: true
           },
@@ -58,7 +58,7 @@ class PagosForm extends Component {
             type: 'date'
           },
           label: (<><FormattedMessage id="pagos.fecha_pago"/>*</>),
-          value: this.props.selPago ? this.props.selPago.fecha_pago : null,
+          value: this.props.selPago ? this.props.selPago.fecha_pago : "",
           validation: {
             required: true,
             todayOrOlder: true
@@ -115,7 +115,7 @@ class PagosForm extends Component {
             placeholder: '..'
           },
           label: (<><FormattedMessage id="pagos.referencia_banco"/></>),
-          value: this.props.selPago ? this.props.selPago.referencia_banco : null,
+          value: this.props.selPago ? this.props.selPago.referencia_banco : "",
           validation: {
             required: false
           },

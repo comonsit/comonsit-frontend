@@ -37,7 +37,7 @@ class Evaluacion extends Component {
             placeholder: '$__.__'
           },
           label:  (<><FormattedMessage id="evaluacion.montoAprobado"/>*</>),
-          value: null,
+          value: "",
           validation: {
             required: true,
             isDecimal: true
@@ -53,7 +53,7 @@ class Evaluacion extends Component {
             placeholder: '# meses'
           },
           label:  (<><FormattedMessage id="evaluacion.plazoPagoAprobado"/>*</>),
-          value: null,
+          value: "",
           validation: {
             required: true,
             isNumeric: true
@@ -72,7 +72,7 @@ class Evaluacion extends Component {
             placeholder: '4.00%'
           },
           label:  (<><FormattedMessage id="evaluacion.tasa_aprobada"/>*</>),
-          value: null,
+          value: "",
           validation: {
             required: true,
             isDecimalExact: true
@@ -91,7 +91,7 @@ class Evaluacion extends Component {
             placeholder: '1.00%'
           },
           label:  (<><FormattedMessage id="evaluacion.tasa_mor_aprobada"/>*</>),
-          value: null,
+          value: "",
           validation: {
             required: true,
             isDecimalExact: true

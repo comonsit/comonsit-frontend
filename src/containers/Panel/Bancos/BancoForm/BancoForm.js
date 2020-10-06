@@ -53,7 +53,7 @@ class BancoForm extends Component {
             placeholder: '..',
           },
           label: (<><FormattedMessage id="bancoForm.referencia_banco"/>*</>),
-          value: null,
+          value: "",
           validation: {
             required: true,
             isAlphaNumeric: true
@@ -256,8 +256,6 @@ class BancoForm extends Component {
     }
 
 
-
-    console.log(formData)
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` },
     }
