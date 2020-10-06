@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination, useRowSelect } from 'react-table'
 import IndeterminateCheckbox from './IndeterminateCheckbox'
+import { useDispatch } from "react-redux";
+
 import classes from './RTable.module.scss'
-import SwitchToggle from '../../UI/SwitchToggle/SwitchToggle'
 import GlobalFilter from './Filters/GlobalFilter'
 import fuzzyTextFilterFn from './Filters/FuzzyTextFilterFn'
 import DefaultColumnFilter from './Filters/DefaultColumnFilter'
-import { useDispatch } from "react-redux";
+import SwitchToggle from '../../UI/SwitchToggle/SwitchToggle'
 import * as actions from '../../../store/actions'
 
 const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFooter }) => {
@@ -44,63 +45,62 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
   const dispatch = useDispatch();
 
 
-  // Use the state and functions returned from useTable to build your UI
-    const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      footerGroups,
-      page,
-      prepareRow,
-      state,
-      preGlobalFilteredRows,
-      setGlobalFilter,
-      canPreviousPage,
-      canNextPage,
-      pageOptions,
-      pageCount,
-      gotoPage,
-      nextPage,
-      previousPage,
-      setPageSize,
-      state: { pageIndex, pageSize, selectedRowIds },
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    footerGroups,
+    page,
+    prepareRow,
+    state,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize, selectedRowIds },
 
-    } = useTable(
-      {
-        columns,
-        data,
-        defaultColumn,
-        filterTypes,
-        initialState: { pageIndex: 0, pageSize: hideSearch? 40 : 20 },
-      },
-      useFilters,
-      useGlobalFilter,
-      useSortBy,
-      usePagination,
-      useRowSelect,
-      hooks => {
-        if (selectableRow) {
-        hooks.visibleColumns.push(columns => [
-            {
-                    id: 'selection',
-                    // The header can use the table's getToggleAllRowsSelectedProps method
-                    // to render a checkbox
-                    Header: ({ getToggleAllRowsSelectedProps }) => (
-                      <div>
-                        <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-                      </div>
-                    ),
-                    // The cell can use the individual row's getToggleRowSelectedProps method
-                    // to the render a checkbox
-                    Cell: ({ row }) => (
-                      <div>
-                        <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-                      </div>
-                    ),
-                  },
-            ...columns,
-          ])
-        }
+  } = useTable(
+    {
+      columns,
+      data,
+      defaultColumn,
+      filterTypes,
+      initialState: { pageIndex: 0, pageSize: hideSearch? 40 : 20 },
+    },
+    useFilters,
+    useGlobalFilter,
+    useSortBy,
+    usePagination,
+    useRowSelect,
+    hooks => {
+      if (selectableRow) {
+      hooks.visibleColumns.push(columns => [
+          {
+            id: 'selection',
+            // The header can use the table's getToggleAllRowsSelectedProps method
+            // to render a checkbox
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <div>
+                <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+              </div>
+            ),
+            // The cell can use the individual row's getToggleRowSelectedProps method
+            // to the render a checkbox
+            Cell: ({ row }) => (
+              <div>
+                <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+              </div>
+            ),
+          },
+          ...columns,
+        ])
+      }
     }
   )
 
@@ -112,12 +112,11 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
             return x != null;
         });
     dispatch(actions.setSelList(selectedRowsData));
-}, [selectedRowIds, dispatch, data]);
+  }, [selectedRowIds, dispatch, data]);
 
 
   const globFilter = !hideSearch ? (
     <tr>
-
       <th className={classes.SearchHeader} colSpan="4">
         <GlobalFilter
             preGlobalFilteredRows={preGlobalFilteredRows}
@@ -252,7 +251,6 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
       </div>
       {paginationButtons}
     </>
-
   )
 }
 

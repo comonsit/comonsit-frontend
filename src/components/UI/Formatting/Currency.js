@@ -7,16 +7,18 @@ const currency = ({value, hideZero, returnString, style="currency"}) => {
   } else {
     // hide negative zeroes
     const val = (value === 0) ? Math.abs(value) : (value)
-    return (<IntlProvider locale='en'>
-              <FormattedNumber
-                value={val}
-                style={style}
-                currency="USD"
-              />
-            </IntlProvider>)
+
+    return (
+      <IntlProvider locale='en'>
+        <FormattedNumber
+          value={val}
+          style={style}
+          currency="USD"
+        />
+      </IntlProvider>
+    )
   }
-
-
 }
+
 
 export default currency

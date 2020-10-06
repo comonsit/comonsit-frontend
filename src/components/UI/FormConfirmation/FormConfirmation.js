@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
+
 import classes from './FormConfirmation.module.scss'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
@@ -8,9 +9,7 @@ import Input from '../Input/Input'
 const formConfirmation = props => {
   const data = props.formOrder.map(id => {
     return (
-      (<div
-        key= {id}
-        >
+      <div key={id}>
         <div className={classes.Inputs}>
           <Input
             label={props.formData[id].label}
@@ -27,7 +26,7 @@ const formConfirmation = props => {
             supportData={props.formData[id].supportData}
             />
         </div>
-      </div>)
+      </div>
     )
   })
 
@@ -39,23 +38,20 @@ const formConfirmation = props => {
         {data}
         {props.children}
       </div>
-      <div
-        className={classes.ButtonsGroup}
-        >
+      <div className={classes.ButtonsGroup}>
         <Button
           clicked={props.onSubmitAction}
           btnType="Success"
-          >
+        >
           <FormattedMessage id='enviar'/>
         </Button>
-        <Button
-          clicked={props.onCancelAction}
-          >
+        <Button clicked={props.onCancelAction}>
           <FormattedMessage id='cancelButton'/>
         </Button>
       </div>
     </div>
   )
 }
+
 
 export default formConfirmation

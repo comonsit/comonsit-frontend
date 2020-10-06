@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
+
 import classes from './Input.module.scss'
 import Button from '../Button/Button'
 import Alert from './Alert'
