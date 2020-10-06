@@ -1,8 +1,8 @@
 export const vidaCartera = (fecha_inicio, fecha_vencimiento) => {
 
   // regex used so that time zone doesn not affect and hour is ignored
-  const inicio = (isNaN(fecha_inicio) && !isNaN(Date.parse(fecha_inicio))) ? new Date(fecha_inicio.replace(/-/g, '\/')) : null
-  const vencimiento = (isNaN(fecha_vencimiento) && !isNaN(Date.parse(fecha_vencimiento))) ? new Date(fecha_vencimiento.replace(/-/g, '\/')) : null
+  const inicio = (isNaN(fecha_inicio) && !isNaN(Date.parse(fecha_inicio))) ? new Date(fecha_inicio.replace(/-/g, '/')) : null
+  const vencimiento = (isNaN(fecha_vencimiento) && !isNaN(Date.parse(fecha_vencimiento))) ? new Date(fecha_vencimiento.replace(/-/g, '/')) : null
   let cartera_vigente, cartera_vencida, vida_credito
   if (inicio && vencimiento) {
     const today = new Date()

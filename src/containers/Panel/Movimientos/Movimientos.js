@@ -235,7 +235,7 @@ class Movimientos extends Component {
               clicked={() => {}}
             />
           </div>
-          <h4><FormattedMessage id="detalle.aportaciones"/></h4>
+          <h4><FormattedMessage id="movimientos.detalle"/></h4>
           <MovimientosListConc
             data={this.props.listaMovimientos}
             onClick={(row) => this.showMovimiento(row.original.id)}

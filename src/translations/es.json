@@ -339,6 +339,7 @@
   "pagos.deuda_prev_total": "Deuda total al momento de Pago",
   "pagos.deuda_prev_int_ord": "Interés Ordinario al momento de Pago",
   "pagos.deuda_prev_int_mor": "Interés Moratorio al momento de Pago",
+  "pagos.iva": "Iva",
   "credito": "Crédito",
   "cantidad": "Cantidad",
   "tipo_tasa": "Tipo de Tasa",
@@ -459,6 +460,7 @@
   "movimiento.monto": "Monto",
   "movimiento.aportacion": "Aportación/Retiro",
   "movimiento.proceso": "Proceso",
+  "movimientos.detalle": "Detalle de Movimientos",
   "movimiento.tipo_de_movimiento": "Transacción",
   "tipo_de_movimiento": "Tipo de Aportacion/Retiro",
   "movimiento.clase": "Clase",
@@ -475,5 +477,8 @@
   "mapa.regionAmarilla": "Región con mayoría vigentes",
   "mapa.regionRoja": "Región mayoría de vencidos",
   "mapa.regionGris": "Región sin créditos activos",
-  "subcuentas.title": "Subcuentas Contables"
+  "subcuentas.title": "Subcuentas Contables",
+  "editarDatosBancarios": "Editar datos Bancarios",
+  "nombre_region": "Región",
+  "nombre_comunidad": "Comunidad"
 }
