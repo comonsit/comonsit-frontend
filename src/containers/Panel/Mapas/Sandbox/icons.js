@@ -22,8 +22,8 @@ export const icons = {
     shadowAnchor: [20, 92],
   }),
   '2': new L.Icon({
-    iconUrl:  r2,
-    iconRetinaUrl: r2,
+    iconUrl:  r6,
+    iconRetinaUrl: r6,
     iconAnchor: [5, 55],
     popupAnchor: [10, -44],
     iconSize: [25, 55],
@@ -58,8 +58,8 @@ export const icons = {
     shadowAnchor: [20, 92],
   }),
   '6': new L.Icon({
-    iconUrl:  r6,
-    iconRetinaUrl: r6,
+    iconUrl:  r2,
+    iconRetinaUrl: r2,
     iconAnchor: [5, 55],
     popupAnchor: [10, -44],
     iconSize: [25, 55],
