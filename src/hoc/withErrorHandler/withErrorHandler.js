@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import classes from './withErrorHandler.module.scss';
@@ -6,92 +6,85 @@ import Modal from '../../components/UI/Modal/Modal';
 import Alert from '../../components/UI/Input/Alert';
 import Collapsible from '../../components/UI/Collapsible/Collapsible';
 
+
 const withErrorHandler = (WrappedComponent, axios) => {
-  return class extends Component {
+  return props => {
+    const [error, setError] = useState(null)
 
-    state = {
-      error: null
-    }
+    const reqInterceptor = axios.interceptors.request.use(req => {
+      setError(null);
+      return req
+    })
 
-    componentWillMount () {
-      this.requestInterceptor = axios.interceptors.request.use(req => {
-        this.setState({error: 0})
-        return req
-      })
-      this.reqonseInterceptor = axios.interceptors.response.use(res => res, error => {
+    const resInterceptor = axios.interceptors.response.use(
+      res => res,
+      err => {
         if (
-          typeof error.response.data === "string" ||
-          "non_field_errors" in error.response.data ||
-          "detail" in error.response.data
+          typeof err.response.data === "string" ||
+          "non_field_errors" in err.response.data ||
+          "detail" in err.response.data
         ) {
-          this.setState({error: error.response})
+          setError(err.response)
         }
-        return Promise.reject(error)
-      })
-    }
+        return Promise.reject(err)
+      }
+    )
 
-    componentWillUnmount () {
-      axios.interceptors.request.eject(this.requestInterceptor)
-      axios.interceptors.response.eject(this.reqonseInterceptor)
-    }
+    useEffect(() => {
+      return () => {
+        axios.interceptors.request.eject(reqInterceptor)
+        axios.interceptors.response.eject(resInterceptor)
+      };
+    }, [reqInterceptor, resInterceptor])
 
-    errorConfirmedHandler = () => {
-      this.setState({error: null})
-    }
+    const errorConfirmedHandler = () => setError(null)
 
-    render() {
-      let errorInfo = []
-      let errorTitleId = "error.message"
-      if (this.state.error) {
-        if (typeof this.state.error.data === "string") {
-          errorInfo = (
-            <Collapsible labelId="error.mensajeServidor">
-              <p>{this.state.error.data}</p>
-            </Collapsible>
-          )
-        } else {
-          for (let key in this.state.error.data) {
-            errorInfo.push(<h2 key={key}><Alert />&nbsp;&nbsp; {this.state.error.data[key]}</h2>)
-          }
-        }
+    let errorTitleId = "error.message"
+    let errorInfo = []
+    if (error) {
 
-        if (this.state.error.status === 500) {
-          errorTitleId = "error.message500"
-        } else if (this.state.error.status === 400) {
-          if (this.state.error.config.method === "post") {
-            errorTitleId = "error.messagePost"
-          } else {
-            errorTitleId = "error.message400"
-          }
-        } else if (this.state.error.status === 401 || this.state.error.status === 401 ) {
-          errorTitleId = "error.messageForbidden"
+      if (typeof error.data === "string") {
+        errorInfo = (
+          <Collapsible labelId="error.mensajeServidor">
+            <p>{error.data}</p>
+          </Collapsible>
+        )
+      } else {
+        for (let key in error.data) {
+          errorInfo.push(<h2 key={key}><Alert />&nbsp;&nbsp; {error.data[key]}</h2>)
         }
       }
 
-
-      return (
-        <>
-          <Modal
-            show={this.state.error}
-            modalClosed={this.errorConfirmedHandler}
-            errorModal
-          >
-            <div className={classes.Container}>
-              <h2> <FormattedMessage id={errorTitleId}/></h2>
-              <div>
-                {errorInfo}
-              </div>
-              <Collapsible labelId="error.extraInfo">
-                <pre>{JSON.stringify(this.state.error, null, 4)}</pre>
-              </Collapsible>
-            </div>
-          </Modal>
-          <WrappedComponent {...this.props}/>
-        </>
-      )
+      if (error.status === 500) {
+        errorTitleId = "error.message500"
+      } else if (error.status === 400) {
+        if (error.config.method === "post") {
+          errorTitleId = "error.messagePost"
+        } else {
+          errorTitleId = "error.message400"
+        }
+      } else if (error.status === 401 || error.status === 401 ) {
+        errorTitleId = "error.messageForbidden"
+      }
     }
-  }
-}
 
+    return (
+      <>
+        <Modal show={error} modalClosed={errorConfirmedHandler}>
+          <div className={classes.Container}>
+            <h2> <FormattedMessage id={errorTitleId}/></h2>
+            <div>
+              {errorInfo}
+            </div>
+            <Collapsible labelId="error.extraInfo">
+              <pre>{error ? JSON.stringify(error, null, 4) : null}</pre>
+            </Collapsible>
+          </div>
+        </Modal>
+        <WrappedComponent {...props} />
+      </>
+    );
+  };
+};
 
-export default withErrorHandler
+export default withErrorHandler;
