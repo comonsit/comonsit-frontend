@@ -56,7 +56,7 @@ class DeudasMap extends Component {
       return '#47cb15'
     }
     // RED Mode due than valid
-    if (vencidos > vigentes && vencidos > 2) {
+    if (vencidos > vigentes) {
       return '#d42e11'
     }
     // YELLOW other cases

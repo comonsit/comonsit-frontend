@@ -1,4 +1,5 @@
 import React from 'react';
+
 import classes from './Notification.module.scss';
 
 
@@ -16,5 +17,3 @@ const notification = (props) =>  {
 }
 
 export default notification;
-
-//

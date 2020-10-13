@@ -1,17 +1,20 @@
 import React from 'react'
+import { FormattedMessage, IntlProvider } from 'react-intl';
+
 import classes from './TextElement.module.scss'
 import Currency from '../Formatting/Currency'
 import Percent from '../Formatting/Percent'
-import { FormattedMessage, IntlProvider } from 'react-intl';
 import messages_es from '../../../translations/es.json'
 import messages_tz from '../../../translations/tz.json'
+
 
 const messages = {
   'es': messages_es,
   'tz': messages_tz
 }
 
-const textElement = (props) => {
+
+const textElement = props => {
   let cont = props.content
   if (props.isNum) {
     cont = (<Currency value={props.content}/>)

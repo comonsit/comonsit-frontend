@@ -51,8 +51,13 @@ const input = (props) => {
                  onChange={props.changed} />
             break
         case ( 'checkbox' ):
-            const labelCheckbox = (props.labelCheckbox) ? (
-                <label><FormattedMessage id={props.value ? props.labelCheckbox.checked : props.labelCheckbox.unChecked}/></label>) : null
+            const labelCheckbox = (props.labelCheckbox)
+                ? (
+                    <label>
+                      <FormattedMessage id={props.value ? props.labelCheckbox.checked : props.labelCheckbox.unChecked}/>
+                    </label>
+                  )
+                : null
             inputElement = (
               <div className={classes.elCheckboxCont}>
                 <input
@@ -74,52 +79,67 @@ const input = (props) => {
                 onChange={props.changed} />
             break
         case ( 'select' ):
-            const blankOption = props.elementConfig.optionBlank ? (<option key={props.elementConfig.options.length+1} value={""}>--</option>) : null
+            const blankOption = props.elementConfig.optionBlank
+                ? (<option key={props.elementConfig.options.length+1} value={""}>--</option>)
+                : null
             inputElement = (
-                <select
-                    className={inputClasses.join(' ')}
-                    value={props.value}
-                    disabled={props.disabled}
-                    onChange={props.changed} >
-                    {blankOption}
-                    {props.elementConfig.options.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.displayValue}
-                        </option>
-                    ))}
-                </select>)
+              <select
+                  className={inputClasses.join(' ')}
+                  value={props.value}
+                  disabled={props.disabled}
+                  onChange={props.changed} >
+                  {blankOption}
+                  {props.elementConfig.options.map(option => (
+                      <option key={option.value} value={option.value}>
+                          {option.displayValue}
+                      </option>
+                  ))}
+              </select>
+            )
             break
         case ( 'select_mult' ):
             inputElement = (
                 <select
-                    className={inputClasses.join(' ')}
-                    disabled={props.disabled}
-                    onChange={props.changed}
-                    multiple
+                  className={inputClasses.join(' ')}
+                  disabled={props.disabled}
+                  onChange={props.changed}
+                  multiple
+                >
+                  {props.elementConfig.options.map(option => (
+                    <option
+                      key={option.value}
+                      value={option.value}
+                      selected={props.value.includes(option.value)}
                     >
-                    {props.elementConfig.options.map(option => (
-                        <option key={option.value} value={option.value} selected={props.value.includes(option.value)}>
-                            {option.displayValue}
-                        </option>
-                    ))}
+                      {option.displayValue}
+                    </option>
+                  ))}
                 </select>)
             break
         default:
-            inputElement = <input
+            inputElement = (
+              <input
                 className={inputClasses.join(' ')}
                 {...props}
                 value={props.value}
                 onChange={props.changed}
-                 />
+              />
+            )
     }
 
     if (props.supportData) {
-      support = ( <div className={classes.SupportData}>
-                    <p>{props.supportData}</p>
-                </div>)
+      support = (
+        <div className={classes.SupportData}>
+          <p>{props.supportData}</p>
+        </div>
+      )
     }
     if (props.supportActions && props.supportActions.supportButton) {
-      button = (<Button btnType="Short" clicked={props.supportActions.supportButton}><FormattedMessage id={props.supportActions.suppButtLabelID}/></Button>)
+      button = (
+        <Button btnType="Short" clicked={props.supportActions.supportButton}>
+          <FormattedMessage id={props.supportActions.suppButtLabelID}/>
+        </Button>
+      )
     }
 
     return (

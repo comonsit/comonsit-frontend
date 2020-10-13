@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Tab from './Tab';
+
 import classes from './Tabs.module.scss'
+
 
 class Tabs extends Component {
   static propTypes = {
@@ -9,18 +11,19 @@ class Tabs extends Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       activeTab: this.props.children[0].props.label,
-    };
+    }
+
     if (this.props.onSelectTab) {
       this.props.onSelectTab(this.state.activeTab)
     }
   }
 
   onClickTabItem = (tab) => {
-    this.setState({ activeTab: tab });
+    this.setState({ activeTab: tab })
     if (this.props.onSelectTab) {
       this.props.onSelectTab(tab)
     }
