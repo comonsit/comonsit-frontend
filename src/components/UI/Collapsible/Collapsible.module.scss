@@ -1,11 +1,11 @@
 @import 'styles/variables';
 
-input[type='checkbox'] {
-  display: none;
-}
-
 .wrap_collabsible {
   margin: 1.2rem 0;
+
+  & input[type='checkbox'] {
+    display: none;
+  }
 }
 
 .lbl_toggle {

@@ -41,13 +41,30 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
     render() {
       let errorInfo = []
+      let errorTitleId = "error.message"
       if (this.state.error) {
         if (typeof this.state.error.data === "string") {
-          errorInfo = this.state.error.data
+          errorInfo = (
+            <Collapsible labelId="error.mensajeServidor">
+              <p>{this.state.error.data}</p>
+            </Collapsible>
+          )
         } else {
           for (let key in this.state.error.data) {
             errorInfo.push(<h2 key={key}><Alert />&nbsp;&nbsp; {this.state.error.data[key]}</h2>)
           }
+        }
+
+        if (this.state.error.status === 500) {
+          errorTitleId = "error.message500"
+        } else if (this.state.error.status === 400) {
+          if (this.state.error.config.method === "post") {
+            errorTitleId = "error.messagePost"
+          } else {
+            errorTitleId = "error.message400"
+          }
+        } else if (this.state.error.status === 401 || this.state.error.status === 401 ) {
+          errorTitleId = "error.messageForbidden"
         }
       }
 
@@ -60,7 +77,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             errorModal
           >
             <div className={classes.Container}>
-              <h2> <FormattedMessage id="error.message1"/></h2>
+              <h2> <FormattedMessage id={errorTitleId}/></h2>
               <div>
                 {errorInfo}
               </div>
