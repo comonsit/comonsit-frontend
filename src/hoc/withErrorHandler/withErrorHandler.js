@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import classes from './withErrorHandler.module.scss';
 import Modal from '../../components/UI/Modal/Modal';
+import Alert from '../../components/UI/Input/Alert';
 
 const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
@@ -22,9 +24,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
           "detail" in error.response.data
         ) {
           this.setState({error: error.response.data})
-        } else {
-          return Promise.reject(error)
         }
+        return Promise.reject(error)
       })
     }
 
@@ -43,7 +44,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
         errorInfo = this.state.error
       } else {
         for (let key in this.state.error) {
-          errorInfo.push(<p key={key}>{this.state.error[key]} -- {key}</p>)
+          errorInfo.push(<h2 key={key}><Alert />&nbsp;&nbsp; {this.state.error[key]}</h2>)
         }
       }
 
@@ -54,9 +55,12 @@ const withErrorHandler = (WrappedComponent, axios) => {
             modalClosed={this.errorConfirmedHandler}
             errorModal
           >
-            <FormattedMessage id="error.title"/>
-            {errorInfo}
-            <FormattedMessage id="error.message1"/>
+            <div className={classes.Container}>
+              <h2> <FormattedMessage id="error.message1"/></h2>
+              <div>
+                {errorInfo}
+              </div>
+            </div>
           </Modal>
           <WrappedComponent {...this.props}/>
         </>

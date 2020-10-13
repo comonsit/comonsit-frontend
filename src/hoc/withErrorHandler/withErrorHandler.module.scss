@@ -1,0 +1,9 @@
+@import 'styles/general';
+
+
+.Container {
+  font-family: 'Arquitecta';
+  &> div {
+    font-family: 'Libre Baskerville';
+  }
+}

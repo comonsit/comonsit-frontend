@@ -350,6 +350,7 @@ class SolicitudForm extends Component {
 
   componentWillUnmount() {
     this.props.unSelSocio()
+    this.props.onClearError()
   }
 
   onSubmitForm = (event) => {
@@ -548,9 +549,6 @@ class SolicitudForm extends Component {
         config: this.state.solicitudForm[key]
       })
     })
-
-    console.log(`El Componente error es: ${this.props.formError}`);
-    console.log(this.props.formError)
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
