@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import classes from './withErrorHandler.module.scss';
 import Modal from '../../components/UI/Modal/Modal';
 import Alert from '../../components/UI/Input/Alert';
+import Collapsible from '../../components/UI/Collapsible/Collapsible';
 
 const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
@@ -23,7 +24,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
           "non_field_errors" in error.response.data ||
           "detail" in error.response.data
         ) {
-          this.setState({error: error.response.data})
+          this.setState({error: error.response})
         }
         return Promise.reject(error)
       })
@@ -40,13 +41,16 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
     render() {
       let errorInfo = []
-      if (typeof this.state.error === "string") {
-        errorInfo = this.state.error
-      } else {
-        for (let key in this.state.error) {
-          errorInfo.push(<h2 key={key}><Alert />&nbsp;&nbsp; {this.state.error[key]}</h2>)
+      if (this.state.error) {
+        if (typeof this.state.error.data === "string") {
+          errorInfo = this.state.error.data
+        } else {
+          for (let key in this.state.error.data) {
+            errorInfo.push(<h2 key={key}><Alert />&nbsp;&nbsp; {this.state.error.data[key]}</h2>)
+          }
         }
       }
+
 
       return (
         <>
@@ -60,6 +64,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
               <div>
                 {errorInfo}
               </div>
+              <Collapsible labelId="error.extraInfo">
+                <pre>{JSON.stringify(this.state.error, null, 4)}</pre>
+              </Collapsible>
             </div>
           </Modal>
           <WrappedComponent {...this.props}/>

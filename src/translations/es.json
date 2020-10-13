@@ -148,6 +148,7 @@
   "movimientosForm.referencia_banco": "Referencia Bancaria",
   "error.title": "Error de Servidor",
   "error.message1": "Los cambios no se guardaron correctamente.",
+  "error.extraInfo": "Información Adicional Completa",
   "mesaControl.title": "Mesa de Control",
   "mesaControl.solicitud": "Solicitud",
   "mesaControl.datos": "Datos del Solicitante",
