@@ -10,6 +10,10 @@ class Modal extends Component {
   }
 
   render () {
+    let priorityModal = {}
+    if (this.props.errorModal) {
+      priorityModal = {zIndex : 1000}
+    }
     return (
       <>
         <Backdrop
@@ -20,7 +24,8 @@ class Modal extends Component {
           className={classes.Modal}
           style={{
             transform: this.props.show ?  'translateY(0)' : 'translateY(-100vh)',
-            opacity: this.props.show ? '1' : '0'
+            opacity: this.props.show ? '1' : '0',
+            ...priorityModal
           }}>
           {this.props.children}
         </div>

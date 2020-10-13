@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
+import _ from 'lodash';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
@@ -47,9 +48,11 @@ class SolicitudForm extends Component {
           label: (<><FormattedMessage id="clave_socio"/>*</>),
           value: '',
           validation: {
-            required: true
+            required: true,
+            isNumeric: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false,
           supportData: null,
@@ -71,6 +74,7 @@ class SolicitudForm extends Component {
             todayOrOlder: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -81,6 +85,7 @@ class SolicitudForm extends Component {
             required: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -209,13 +214,14 @@ class SolicitudForm extends Component {
             isDecimal: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         plazo_de_pago_solicitado: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
+            type: 'text',
             placeholder: '..# meses'
           },
           label:  (<><FormattedMessage id="solicitudForm.plazo_de_pago_solicitado"/>*</>),
@@ -225,6 +231,7 @@ class SolicitudForm extends Component {
             isNumeric: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -240,6 +247,7 @@ class SolicitudForm extends Component {
             required: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -268,9 +276,11 @@ class SolicitudForm extends Component {
           label: (<><FormattedMessage id="solicitudForm.aval"/>*</>),
           value: '',
           validation: {
-            required: true
+            required: true,
+            isNumeric: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false,
           supportData: null,
@@ -293,6 +303,7 @@ class SolicitudForm extends Component {
             required: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -313,6 +324,7 @@ class SolicitudForm extends Component {
         newProceso = updateObject(this.state.solicitudForm.proceso, {
             value: null,
             valid: false,
+            errorMessage: "",
             touched: false
         })
       }
@@ -373,10 +385,12 @@ class SolicitudForm extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
 
+    const validation = checkValidity(event.target.value, this.state.solicitudForm[inputIdentifier].validation, true)
 
     const updatedFormElement = updateObject(this.state.solicitudForm[inputIdentifier], {
         value: this.state.solicitudForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-        valid: checkValidity(event.target.value, this.state.solicitudForm[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -448,6 +462,10 @@ class SolicitudForm extends Component {
     }
 
     this.setState({solicitudForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError(inputIdentifier)
+    }
   }
 
   checkIfFormIsValid = (form) => {
@@ -531,8 +549,12 @@ class SolicitudForm extends Component {
       })
     })
 
+    console.log(`El Componente error es: ${this.props.formError}`);
+    console.log(this.props.formError)
+
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         if (formElement.id === "proceso" ) {
           return (
             <div
@@ -558,7 +580,8 @@ class SolicitudForm extends Component {
                   elementConfig={formElement.config.elementConfig }
                   value={formElement.config.value}
                   shouldValidate={formElement.config.validation}
-                  invalid={!formElement.config.valid}
+                  invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
                   touched={formElement.config.touched}
                   disabled={this.props.loading}
                   hide={formElement.config.hide}
@@ -622,6 +645,7 @@ const mapStateToProps = state => {
       token: state.auth.token,
       loading: state.solicitudes.loading,
       updated: state.solicitudes.updated,
+      formError: state.errors.errors,
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
       comunidades: state.generalData.comunidades
@@ -635,7 +659,8 @@ const mapDispatchToProps = dispatch => {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onCreateNewSolicitud: (solData, token) => dispatch(actions.createNewSolicitud(solData, token)),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio())
+      unSelSocio: () => dispatch(actions.unSelectSocio()),
+      onClearError: (field) => dispatch(actions.clearError(field))
     }
 }
 

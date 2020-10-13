@@ -76,3 +76,8 @@ export {
   setSelList,
   clearSelList
 } from './selectList'
+
+export {
+  // setError,
+  clearError
+} from './errors'

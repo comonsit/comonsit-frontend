@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {FormattedMessage} from 'react-intl';
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Modal from '../../components/UI/Modal/Modal';
 
@@ -13,12 +13,18 @@ const withErrorHandler = (WrappedComponent, axios) => {
     componentWillMount () {
       this.requestInterceptor = axios.interceptors.request.use(req => {
         this.setState({error: 0})
-        // console.log(req);
         return req
       })
       this.reqonseInterceptor = axios.interceptors.response.use(res => res, error => {
-        console.log('HANDLER error');
-        this.setState({error: error.response.data})
+        if (
+          typeof error.response.data === "string" ||
+          "non_field_errors" in error.response.data ||
+          "detail" in error.response.data
+        ) {
+          this.setState({error: error.response.data})
+        } else {
+          return Promise.reject(error)
+        }
       })
     }
 
@@ -45,7 +51,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
         <>
           <Modal
             show={this.state.error}
-            modalClosed={this.errorConfirmedHandler}>
+            modalClosed={this.errorConfirmedHandler}
+            errorModal
+          >
             <FormattedMessage id="error.title"/>
             {errorInfo}
             <FormattedMessage id="error.message1"/>
@@ -56,5 +64,6 @@ const withErrorHandler = (WrappedComponent, axios) => {
     }
   }
 }
+
 
 export default withErrorHandler

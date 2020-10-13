@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
+import { setError } from './errors'
 
 
 export const setSolicitudes = (solicitudes) => {
@@ -39,6 +40,7 @@ export const createNewSolicitud = (solData, token) => {
           })
           .catch(error => {
             dispatch(newSolicitudFailed())
+            dispatch(setError(error.response.data))
           })
     }
 }
@@ -55,10 +57,9 @@ export const newSolicitudSuccess = (id) => {
     }
 }
 
-export const newSolicitudFailed = (error) => {
+export const newSolicitudFailed = () => {
     return {
         type: actionTypes.NEW_SOLICITUD_FAILED,
-        error: error
     }
 }
 

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import sociosReducer from './store/reducers/socios'
+import errorsReducer from './store/reducers/errors'
 import generalDataReducer from './store/reducers/generalData'
 import solicitudReducer from './store/reducers/solicitudes'
 import creditosReducer from './store/reducers/creditos'
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
     generalData: generalDataReducer,
     creditos: creditosReducer,
     pagos: pagosReducer,
-    selList: listSelReducer
+    selList: listSelReducer,
+    errors: errorsReducer
 })
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
