@@ -23,12 +23,13 @@ class Weather extends React.Component {
           label: (<><FormattedMessage id="inicio.numero"/></>),
           value: '',
           validation: {
-            required: true,
+            required: false,
             isNumeric: true,
             minNumValue: 0,
             maxNumValue: 60800000
           },
           valid: true,
+          errorMessage: "",
           touched: true,
           hide: false
         }
@@ -43,9 +44,12 @@ class Weather extends React.Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
 
+    const validation = checkValidity(event.target.value, this.state.form[inputIdentifier].validation, true)
+
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
         value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -76,7 +80,8 @@ class Weather extends React.Component {
                 elementConfig={this.state.form.number.elementConfig}
                 value={this.state.form.number.value}
                 shouldValidate={this.state.form.number.validation}
-                invalid={!this.state.form.number.valid}
+                invalid={!this.state.form.number.valid && this.state.form.number.value}
+                errorMessage={this.state.form.number.errorMessage}
                 touched={this.state.form.number.touched}
                 disabled={this.props.loading}
                 hide={this.state.form.number.hide}
