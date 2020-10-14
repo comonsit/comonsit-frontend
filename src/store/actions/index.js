@@ -78,6 +78,6 @@ export {
 } from './selectList'
 
 export {
-  // setError,
+  setError,
   clearError
 } from './errors'

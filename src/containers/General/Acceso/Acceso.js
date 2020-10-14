@@ -116,7 +116,7 @@ class Auth extends Component {
                  elementConfig={formElement.config.elementConfig }
                  value={formElement.config.value }
                  shouldValidate={formElement.config.validation}
-                 invalid={!formElement.config.valid}
+                 invalid={!formElement.config.valid || serverErrorMessage !== ""}
                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
                  touched={formElement.config.touched}
                  changed={(event) => this.inputChangedHandler(event, formElement.id)}

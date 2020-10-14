@@ -34,7 +34,6 @@ const input = (props) => {
 
     if (props.invalid && props.shouldValidate && props.touched) {
       inputClasses.push(classes.Invalid)
-      // TODO:  aquí habría que tunear a partir del state, similar al AlertMessage
       validationError = (<p className={classes.InvalidMessage}>{props.errorMessage}</p>)
     } else if (props.alertMessage) {
       validationError = (<><div className={classes.AlertMessage}><Alert/>{props.alertMessage}</div></>)

@@ -179,9 +179,9 @@ class AcopioForm extends Component {
     for (let formElementIdentifier in this.state.acopioForm) {
       if (
         this.state.acopioForm[formElementIdentifier].validation.required ||
-        this.state.acopioForm[formElementIdentifier].value != ''
+        this.state.acopioForm[formElementIdentifier].value !== ''
       ) {
-        formData[formElementIdentifier] = this.state.acopioForm[formElementIdentifier].value  
+        formData[formElementIdentifier] = this.state.acopioForm[formElementIdentifier].value
       }
     }
 
@@ -351,7 +351,7 @@ class AcopioForm extends Component {
                   elementConfig={formElement.config.elementConfig }
                   value={formElement.config.value}
                   shouldValidate={formElement.config.validation}
-                  invalid={!formElement.config.valid}
+                  invalid={!formElement.config.valid || serverErrorMessage !== ""}
                   errorMessage={formElement.config.errorMessage + serverErrorMessage}
                   touched={formElement.config.touched}
                   disabled={this.props.loading}
