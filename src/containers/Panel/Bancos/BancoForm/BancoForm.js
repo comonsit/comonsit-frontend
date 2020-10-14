@@ -18,7 +18,7 @@ import MovimientosListConc from '../../Movimientos/MovimientosListConc/Movimient
 import PagosList from '../../Pagos/PagosList/PagosList';
 import CreditoListCont from '../../Creditos/CreditoListCont/CreditoListCont';
 import classes from './BancoForm.module.scss'
-// import * as actions from '../../../../store/actions'
+import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 
@@ -59,6 +59,7 @@ class BancoForm extends Component {
             isAlphaNumeric: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           supportActions: {
             loseFocus: () => this.changeCase()
@@ -76,24 +77,28 @@ class BancoForm extends Component {
             todayOrOlder: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         cantidad: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text',
+            // max: '9999999',
+            // min: '0',
+            // step: '.01'
           },
           label:  (<><FormattedMessage id="bancoForm.cantidad"/>*</>),
           value: '',
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: .01,
+            maxNumValue: 9999999,
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -110,6 +115,7 @@ class BancoForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -126,6 +132,7 @@ class BancoForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
       }
@@ -134,6 +141,10 @@ class BancoForm extends Component {
 
   componentDidMount () {
     this.onGetData()
+  }
+
+  componentWillUnmount() {
+    this.props.onClearError()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -264,6 +275,11 @@ class BancoForm extends Component {
       .then(response => {
         this.setState({successResponse: response.data.registros_nvos})
         // return axios.get(...) new registros created
+        this.props.onClearError()
+      })
+      .catch(error => {
+        this.setState({modalOpen: false, confirmFormOpen: false})
+        this.props.onSetError(error.response.data)
       })
   }
 
@@ -271,11 +287,12 @@ class BancoForm extends Component {
 
     let updatedFormElement
 
-      const currValid = checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation)
+      const currValid = checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation, true)
 
       updatedFormElement = updateObject(this.state.bankForm[inputIdentifier], {
         value: event.target.value,
-        valid: currValid,
+        valid: currValid.valid,
+        errorMessage: currValid.errorMessage,
         touched: true
       })
 
@@ -284,11 +301,11 @@ class BancoForm extends Component {
     })
 
     let extras = {}
-    if (inputIdentifier === "cantidad" && currValid) {
+    if (inputIdentifier === "cantidad" && currValid.valid) {
       extras = {
         cantidadCheck: this.onValidateCantidad(event.target.value)
       }
-    } else if (inputIdentifier === "referencia_banco" && currValid) {
+    } else if (inputIdentifier === "referencia_banco" && currValid.valid) {
       extras = {
         referenciaCheck: this.onValidateReferencia(event.target.value)
       }
@@ -299,6 +316,9 @@ class BancoForm extends Component {
       formIsValid: this.checkIfFormIsValid(updatedForm),
       ...extras
     })
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError()
+    }
   }
 
   checkIfFormIsValid = (form) => {
@@ -342,7 +362,7 @@ class BancoForm extends Component {
     if (true) {
     // if (this.props.ctasBanco) {
       formElements = formElementsArray.map(formElement => {
-
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         return (
             <div
               className={classes.Inputs}
@@ -354,7 +374,8 @@ class BancoForm extends Component {
                 elementConfig={formElement.config.elementConfig }
                 value={formElement.config.value}
                 shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
+                invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                errorMessage={formElement.config.errorMessage + serverErrorMessage}
                 touched={formElement.config.touched}
                 disabled={formElement.config.disabled}
                 supportData={formElement.id === "cantidad" ? this.state.cantidadCheck : null}
@@ -492,7 +513,8 @@ class BancoForm extends Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    selectedItems: state.selList.selList
+    selectedItems: state.selList.selList,
+    formError: state.errors.errors,
     // ctasBanco: state.bancos.bancos,
     // subcuetnas: state.bancos.subcuentas
   }
@@ -500,7 +522,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+      onSetError: (err) => dispatch(actions.setError(err)),
+      onClearError: (field) => dispatch(actions.clearError(field))
     }
 }
 
