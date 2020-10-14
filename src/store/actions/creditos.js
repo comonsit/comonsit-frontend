@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
-
+import { setError, clearError } from './errors'
 
 export const setCreditos = creditos => {
   return {
@@ -65,11 +65,11 @@ export const updateCredito = (creditoData, id, token) => {
       .then(response => {
         dispatch(updateCreditoSuccess(response.data.name, creditoData ))
         alert('Credito ' + response.data.id + ' actualizado correctamente')
+        dispatch(clearError())
       })
       .catch(error => {
-        dispatch(updateCreditoFailed(error))
-        console.log('update crédito ERROR')
-        console.log(error)
+        dispatch(updateCreditoFailed())
+        dispatch(setError(error.response.data))
       })
   }
 }
@@ -80,10 +80,9 @@ export const updateCreditoSuccess = () => {
   }
 }
 
-export const updateCreditoFailed = (error) => {
+export const updateCreditoFailed = () => {
   return {
     type: actionTypes.UPDATE_CREDITO_FAILED,
-    error: error
   }
 }
 

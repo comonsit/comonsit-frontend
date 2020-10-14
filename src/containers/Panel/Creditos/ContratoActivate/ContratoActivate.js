@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
+import _ from 'lodash';
 
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
@@ -27,12 +28,13 @@ class ContratoActivate extends Component {
             type: 'date'
           },
           label: (<><FormattedMessage id="contratoActivate.fechaFirma"/>*</>),
-          value: this.props.selContrato.fecha_inicio,
+          value: this.props.selContrato.fecha_inicio || "",
           validation: {
             required: true,
             todayOrOlder: true
           },
           valid: this.props.selContrato.fecha_inicio !== null,
+          errorMessage: "",
           touched: false,
           hide: false,
           disabled: this.props.selContrato.fecha_inicio !== null,
@@ -46,11 +48,12 @@ class ContratoActivate extends Component {
             ]
           },
           label: (<><FormattedMessage id="contratoActivate.tipo_tasa"/>*</>),
-          value: this.props.selContrato.tipo_tasa ? this.props.selContrato.tipo_tasa : 'FI',
+          value: this.props.selContrato.tipo_tasa || 'FI',
           validation: {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
           disabled: this.props.selContrato.fecha_inicio !== null,
         },
@@ -60,12 +63,14 @@ class ContratoActivate extends Component {
             type: 'checkbox'
           },
           label: (<FormattedMessage id="contratoActivate.iva"/>),
-          value: this.props.selContrato.iva,
+          value: this.props.selContrato.iva  || false,
           validation: {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
+          disabled: this.props.selContrato.iva !== null,
         },
         estatus_ejecucion: {
           elementType: 'select',
@@ -76,11 +81,12 @@ class ContratoActivate extends Component {
             ]
           },
           label: (<><FormattedMessage id="contratoActivate.estatus_ejecucion"/>*</>),
-          value: this.props.selContrato.estatus_ejecucion,
+          value: this.props.selContrato.estatus_ejecucion || "PC",
           validation: {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
           disabled: this.props.selContrato.estatus_ejecucion !== 'PC'
         },
@@ -90,12 +96,13 @@ class ContratoActivate extends Component {
             type: 'date'
           },
           label: (<><FormattedMessage id="contratoActivate.fecha_banco"/></>),
-          value: this.props.selContrato.fecha_banco,
+          value: this.props.selContrato.fecha_banco || "",
           validation: {
             required: false,
             todayOrOlder: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
           hide: false,
           disabled: this.props.selContrato.fecha_banco !== null,
@@ -107,11 +114,12 @@ class ContratoActivate extends Component {
             placeholder: '..'
           },
           label: (<><FormattedMessage id="contratoActivate.referencia_banco"/></>),
-          value: this.props.selContrato.referencia_banco,
+          value: this.props.selContrato.referencia_banco || "",
           validation: {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: true,
           hide: false,
           disabled: this.props.selContrato.referencia_banco !== null,
@@ -122,6 +130,7 @@ class ContratoActivate extends Component {
 
   componentWillUnmount() {
     this.props.unSelContrato()
+    this.props.onClearError()
   }
 
   onSubmitForm = (event) => {
@@ -129,7 +138,12 @@ class ContratoActivate extends Component {
 
     const formData = {}
     for (let formElementIdentifier in this.state.contratoUpdateForm) {
-      formData[formElementIdentifier] = this.state.contratoUpdateForm[formElementIdentifier].value
+      if (
+        this.state.contratoUpdateForm[formElementIdentifier].validation.required ||
+        this.state.contratoUpdateForm[formElementIdentifier].value !== ''
+      ) {
+        formData[formElementIdentifier] = this.state.contratoUpdateForm[formElementIdentifier].value
+      }
     }
 
     if (this.props.selContrato.fecha_inicio) {
@@ -141,10 +155,14 @@ class ContratoActivate extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+
+    const validation = checkValidity(event.target.value, this.state.contratoUpdateForm[inputIdentifier].validation, true)
+
     // TODO: checkbox check unnecesary
     const updatedFormElement = updateObject(this.state.contratoUpdateForm[inputIdentifier], {
         value: this.state.contratoUpdateForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-        valid: checkValidity(event.target.value, this.state.contratoUpdateForm[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -153,6 +171,9 @@ class ContratoActivate extends Component {
     })
 
     this.setState({contratoUpdateForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError()
+    }
   }
 
   checkIfFormIsValid = (form) => {
@@ -178,6 +199,7 @@ class ContratoActivate extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
+          const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
           return (
             <div
               key= {formElement.id}
@@ -190,7 +212,8 @@ class ContratoActivate extends Component {
                   elementConfig={formElement.config.elementConfig }
                   value={formElement.config.value}
                   shouldValidate={formElement.config.validation}
-                  invalid={!formElement.config.valid}
+                  invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
                   touched={formElement.config.touched}
                   disabled={this.props.loading || formElement.config.disabled}
                   hide={formElement.config.hide}
@@ -238,13 +261,15 @@ const mapStateToProps = state => {
       loading: state.creditos.loading,
       token: state.auth.token,
       role: state.generalData.role,
+      formError: state.errors.errors,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
       onUpdateContrato: (contrato, id, token) => dispatch(actions.updateCredito(contrato, id, token)),
-      unSelContrato: () => dispatch(actions.unSelectContrato())
+      unSelContrato: () => dispatch(actions.unSelectContrato()),
+      onClearError: () => dispatch(actions.clearError())
     }
 }
 

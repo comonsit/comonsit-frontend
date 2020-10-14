@@ -85,8 +85,13 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
       if (someDate){
         const today = new Date();
         today.setHours(0,0,0,0)
-        isValid &= someDate <= today
-        message += ` -> La fecha debe ser hoy o anterior a hoy `
+        if (someDate > today) {
+          isValid &= false
+          message += ` -> La fecha debe ser hoy o anterior a hoy `
+        }
+      } else if(value) {
+        isValid &= false
+        message += ` -> Fecha inválida `
       }
     }
 
