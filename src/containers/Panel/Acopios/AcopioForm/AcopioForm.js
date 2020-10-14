@@ -209,6 +209,9 @@ class AcopioForm extends Component {
     })
 
     this.setState({acopioForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError(inputIdentifier)
+    }
   }
 
   checkIfFormIsValid = (form) => {

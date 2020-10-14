@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
+import _ from 'lodash';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
@@ -39,9 +40,11 @@ class PagosForm extends Component {
           label: (<><FormattedMessage id="credito"/>*</>),
           value: this.props.selContrato ? this.props.selContrato.id : this.props.selPago ? this.props.selPago.credito : "",
           validation: {
-            required: true
+            required: true,
+            isNumeric: true
           },
           valid: this.props.selContrato !== null || this.props.selPago !== null,
+          errorMessage: "",
           touched: this.props.selContrato !== null || this.props.selPago !== null,
           hide: false,
           supportActions: !this.props.selPago ?  {
@@ -64,6 +67,7 @@ class PagosForm extends Component {
             todayOrOlder: true
           },
           valid: this.props.selPago !== null,
+          errorMessage: "",
           touched: this.props.selPago !== null,
           hide: false,
           supportActions: !this.props.selPago ? {
@@ -75,18 +79,18 @@ class PagosForm extends Component {
         cantidad: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text'
           },
           label:  (<><FormattedMessage id="cantidad"/>*</>),
           value: this.props.selPago ? this.props.selPago.cantidad : 0,
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: .01,
+            maxNumValue: 9999999,
           },
           valid: this.props.selPago !== null,
+          errorMessage: "",
           touched: this.props.selPago !== null,
           hide: false,
           supportData: !this.props.selPago ? 'Deuda pendiente: ' : null,
@@ -98,12 +102,13 @@ class PagosForm extends Component {
             type: 'date'
           },
           label: (<><FormattedMessage id="pagos.fecha_banco"/></>),
-          value: this.props.selPago ? this.props.selPago.fecha_banco : null,
+          value: this.props.selPago ? this.props.selPago.fecha_banco : "",
           validation: {
             required: false,
             todayOrOlder: true
           },
           valid: true,
+          errorMessage: "",
           touched: this.props.selPago !== null,
           hide: false,
           disabled: this.props.selPago !== null && this.props.selPago.fecha_banco !== null
@@ -120,6 +125,7 @@ class PagosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: this.props.selPago !== null,
           hide: false,
           disabled: this.props.selPago !== null && this.props.selPago.referencia_banco !== null
@@ -127,18 +133,18 @@ class PagosForm extends Component {
         abono_capital: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text'
           },
           label:  (<><FormattedMessage id="pagos.abono_capital"/>*</>),
           value: this.props.selPago ? this.props.selPago.abono_capital : 0,
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: 0,
+            maxNumValue: 9999999,
           },
           valid: true,
+          errorMessage: "",
           touched: this.props.selPago !== null,
           hide: false,
           supportData: !this.props.selPago ?  'Capital pendiente: ' : null,
@@ -147,18 +153,18 @@ class PagosForm extends Component {
         interes_ord: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text'
           },
           label:  (<><FormattedMessage id="pagos.interes_ord"/>*</>),
           value: this.props.selPago ? this.props.selPago.interes_ord : 0,
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: 0,
+            maxNumValue: 9999999,
           },
           valid: true,
+          errorMessage: "",
           touched: this.props.selPago !== null,
           hide: false,
           supportData: !this.props.selPago ?  'Interés ordinario pendiente: ': null,
@@ -167,18 +173,18 @@ class PagosForm extends Component {
         interes_mor: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text'
           },
           label:  (<><FormattedMessage id="pagos.interes_mor"/>*</>),
           value: this.props.selPago ? this.props.selPago.interes_mor : 0,
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: 0,
+            maxNumValue: 9999999,
           },
           valid: true,
+          errorMessage: "",
           touched: this.props.selPago !== null,
           hide: false,
           supportData: !this.props.selPago ?  'Interés moratorio pendiente: ': null,
@@ -198,6 +204,7 @@ class PagosForm extends Component {
   componentWillUnmount() {
     this.props.unselContrato()
     this.props.unSelPago()
+    this.props.onClearError()
   }
 
   onSubmitForm = (event) => {
@@ -205,7 +212,12 @@ class PagosForm extends Component {
 
     let formData = {}
     for (let formElementIdentifier in this.state.pagoForm) {
-      formData[formElementIdentifier] = this.state.pagoForm[formElementIdentifier].value
+      if (
+        this.state.pagoForm[formElementIdentifier].validation.required ||
+        this.state.pagoForm[formElementIdentifier].value !== ''
+      ) {
+        formData[formElementIdentifier] = this.state.pagoForm[formElementIdentifier].value
+      }
     }
 
     const authData = {
@@ -229,13 +241,14 @@ class PagosForm extends Component {
             loading: false,
             updated: true
           })
+          this.props.onClearError()
         })
         .catch(error => {
           this.setState({
             loading: false,
             updated: false
           })
-          alert('ALGO FALLÓ!')
+          this.props.onSetError(error.response.data)
         })
     } else {
       axios.post('/pagos/', formData, authData)
@@ -248,23 +261,26 @@ class PagosForm extends Component {
             loading: false,
             updated: true
           })
+          this.props.onClearError()
         })
         .catch(error => {
           this.setState({
             loading: false,
             updated: false
           })
-          alert('ALGO FALLÓ!')
+          this.props.onSetError(error.response.data)
         })
     }
-
-
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+
+    const validation = checkValidity(event.target.value, this.state.pagoForm[inputIdentifier].validation, true)
+
     const updatedFormElement = updateObject(this.state.pagoForm[inputIdentifier], {
         value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.pagoForm[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -279,6 +295,9 @@ class PagosForm extends Component {
     }
 
     this.setState({pagoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError(inputIdentifier)
+    }
   }
 
   checkIfFormIsValid = (form) => {
@@ -290,9 +309,9 @@ class PagosForm extends Component {
   }
 
   updateCantidad = previousForm => {
-    const cap = parseInt(previousForm.abono_capital.value)
-    const int_ord = parseInt(previousForm.interes_ord.value)
-    const int_mor = parseInt(previousForm.interes_mor.value)
+    const cap = parseFloat(previousForm.abono_capital.value)
+    const int_ord = parseFloat(previousForm.interes_ord.value)
+    const int_mor = parseFloat(previousForm.interes_mor.value)
 
     let total = 0
     if (!isNaN(cap) && !isNaN(int_ord) && !isNaN(int_mor)) {
@@ -345,7 +364,8 @@ class PagosForm extends Component {
             value: id,
             valid: true,
             touched: true,
-            supportData: null
+            supportData: null,
+            errorMessage: ""
         }),
 
     })
@@ -383,8 +403,6 @@ class PagosForm extends Component {
         .then(response => {
 
           if ('total_deuda' in response.data) {
-            console.log('TENEMOS DEUDA')
-            console.log(response.data)
 
             const updatedForm = updateObject(this.state.pagoForm, {
               credito: updateObject(this.state.pagoForm.credito, {
@@ -432,6 +450,7 @@ class PagosForm extends Component {
 
     if (!this.state.loading) {
       formElements = formElementsArray.map(formElement => {
+          const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
           return (
             <div
               key= {formElement.id}
@@ -444,7 +463,8 @@ class PagosForm extends Component {
                   elementConfig={formElement.config.elementConfig }
                   value={formElement.config.value}
                   shouldValidate={formElement.config.validation}
-                  invalid={!formElement.config.valid}
+                  invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
                   touched={formElement.config.touched}
                   disabled={this.props.loading || formElement.config.disabled}
                   hide={formElement.config.hide}
@@ -517,6 +537,7 @@ const mapStateToProps = state => {
     selContrato: state.creditos.selectedContrato,
     token: state.auth.token,
     selPago: state.pagos.selectedPago,
+    formError: state.errors.errors,
   }
 }
 
@@ -525,7 +546,8 @@ const mapDispatchToProps = dispatch => {
       onInitCreditos: (token) => dispatch(actions.initCreditos(token)),
       onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
       unselContrato: () => dispatch(actions.unSelectContrato()),
-      unSelPago: () => dispatch(actions.unSelectPago())
+      unSelPago: () => dispatch(actions.unSelectPago()),
+      onClearError: (field) => dispatch(actions.clearError(field))
     }
 }
 
