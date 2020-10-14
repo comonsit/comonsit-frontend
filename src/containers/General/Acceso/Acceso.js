@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {NavLink, Redirect} from "react-router-dom";
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
+import _ from 'lodash';
 
 // import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
@@ -11,6 +12,7 @@ import classes from './Acceso.module.scss'
 import * as actions from '../../../store/actions'
 import { updateObject } from '../../../store/reducers/utility'
 import {checkValidity } from '../../../utilities/validity'
+
 
 class Auth extends Component {
     state = {
@@ -24,9 +26,11 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 4
+                    // minLength: 3,
+                    isAlphaNumeric: true
                 },
                 valid: false,
+                errorMessage: "",
                 touched: false
             },
             password: {
@@ -38,13 +42,18 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                    // minLength: 6
                 },
                 valid: false,
+                errorMessage: "",
                 touched: false
             }
         },
         isSignUp: true
+    }
+
+    componentWillUnmount() {
+      this.props.onClearError()
     }
 
     // componentDidMount() {
@@ -58,19 +67,27 @@ class Auth extends Component {
 
     // para estar revisando cada vez que el texto se modifica
     inputChangedHandler  = (event, controlName) => {
+
+        const validation = checkValidity(event.target.value, this.state.controls[controlName].validation, true)
+
         const updatedControls = updateObject(this.state.controls, {
             [controlName]: updateObject(this.state.controls[controlName], {
                 value: event.target.value,
-                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
+                valid: validation.valid,
+                errorMessage: validation.errorMessage,
                 touched: true
             })
         })
         this.setState({controls: updatedControls})
+        if (this.props.formError && controlName in this.props.formError) {
+          this.props.onClearError()
+        }
     }
 
     submitHandler = (event, ) => {
         event.preventDefault()
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp)
+        this.props.onClearError()
     }
 
     switchAuthModeHandler = () => {
@@ -90,17 +107,22 @@ class Auth extends Component {
         })
       })
 
-        let form = formElementsArray.map(formElement => (
-            <Input
-                key={formElement.id}
-                elementType={formElement.config.elementType }
-                elementConfig={formElement.config.elementConfig }
-                value={formElement.config.value }
-                shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
-                touched={formElement.config.touched}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
-        ))
+        let form = formElementsArray.map(formElement => {
+          const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
+          return (
+             <Input
+                 key={formElement.id}
+                 elementType={formElement.config.elementType }
+                 elementConfig={formElement.config.elementConfig }
+                 value={formElement.config.value }
+                 shouldValidate={formElement.config.validation}
+                 invalid={!formElement.config.valid}
+                 errorMessage={formElement.config.errorMessage + serverErrorMessage}
+                 touched={formElement.config.touched}
+                 changed={(event) => this.inputChangedHandler(event, formElement.id)}
+               />
+          )
+        })
 
         if (this.props.loading) {
             form = <Spinner />
@@ -141,7 +163,8 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
-        authRedirectPath: state.auth.authRedirectPath
+        authRedirectPath: state.auth.authRedirectPath,
+        formError: state.errors.errors,
     }
 }
 
@@ -149,7 +172,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
         // si venimos de aquí siempre reenviaremos a casa!!!
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/publicaciones'))  // TODO: CHECK!!
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/publicaciones')),  // TODO: CHECK!!
+        onClearError: (field) => dispatch(actions.clearError(field))
     }
 }
 
