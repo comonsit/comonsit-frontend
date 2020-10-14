@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
-import { setError } from './errors'
+import { setError, clearError } from './errors'
 
 
 export const setSolicitudes = (solicitudes) => {
@@ -37,6 +37,7 @@ export const createNewSolicitud = (solData, token) => {
           .then(response => {
             dispatch(newSolicitudSuccess(response.data.folio_solicitud, solData ))
             alert('Solicitud ' + response.data.folio_solicitud + ' creado correctamente')
+            dispatch(clearError())
           })
           .catch(error => {
             dispatch(newSolicitudFailed())

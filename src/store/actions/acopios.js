@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
-import { setError } from './errors'
+import { setError, clearError } from './errors'
 
 export const setAcopios = (acopios) => {
   return {
@@ -35,6 +35,7 @@ export const createNewAcopio = (acopioData, token) => {
           .then(response => {
             dispatch(newAcopioSuccess(response.data.id, acopioData ))
             alert('Acopio ' + response.data.id + ' creado correctamente')
+            dispatch(clearError())
           })
           .catch(error => {
             dispatch(newAcopioFailed())
