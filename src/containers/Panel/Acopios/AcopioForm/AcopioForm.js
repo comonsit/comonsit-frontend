@@ -177,7 +177,12 @@ class AcopioForm extends Component {
 
     const formData = {}
     for (let formElementIdentifier in this.state.acopioForm) {
-      formData[formElementIdentifier] = this.state.acopioForm[formElementIdentifier].value
+      if (
+        this.state.acopioForm[formElementIdentifier].validation.required ||
+        this.state.acopioForm[formElementIdentifier].value != ''
+      ) {
+        formData[formElementIdentifier] = this.state.acopioForm[formElementIdentifier].value  
+      }
     }
 
 
