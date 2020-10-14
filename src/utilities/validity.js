@@ -46,21 +46,21 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
     }
 
     if (rules.minNumValue) {
-      if (value < rules.minNumValue ) {
+      if (+value < rules.minNumValue ) {
         isValid &= false
         message += ` -> el número debe ser mayor a ${rules.minNumValue} `
       }
     }
 
     if (rules.maxNumValue) {
-      if (value >  rules.maxNumValue ) {
+      if (+value > rules.maxNumValue ) {
         isValid &= false
         message += ` -> el número debe ser menor a ${rules.maxNumValue} `
       }
     }
 
     if (rules.isDecimal) {
-        pattern = /^[0-9]+([.,][0-9]{1,2})?$/;
+        pattern = /^[0-9]+([,.][0-9][0-9]?)?$/g;   //  /^[0-9]+([.,][0-9]{1,2})?$/;
         if (!pattern.test(value) ) {
           isValid &= false
           message += ` -> Debe ser un número con 2 decimales `
@@ -68,7 +68,8 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
     }
 
     if (rules.isDecimalExact) {
-        pattern = /^[0-9]+([.,][0-9]{1,4})?$/;
+        pattern = /^[0-9]+([,.][0-9])?$/g;
+        // pattern = /^[0-9]+([.,][0-9]{1,4})?$/;
         if (!pattern.test(value) ) {
           isValid &= false
           message += ` -> Debe ser un número `
@@ -92,7 +93,7 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
     if (rules.required) {
       if (value === '' ) {
         isValid &= false
-        message = `-> Campo requerido ${value.trim()} `
+        message = `-> Campo requerido ${value} `
       }
     }
 

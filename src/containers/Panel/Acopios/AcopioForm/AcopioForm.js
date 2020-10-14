@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
-import { connect } from 'react-redux'
-import axios from '../../../../store/axios-be.js'
+import { connect } from 'react-redux';
+import axios from '../../../../store/axios-be.js';
+import _ from 'lodash';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
@@ -50,9 +51,11 @@ class AcopioForm extends Component {
           label: (<><FormattedMessage id="clave"/>*</>),
           value: '',
           validation: {
-            required: true
+            required: true,
+            isNumeric: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false,
           supportActions: {
@@ -73,6 +76,7 @@ class AcopioForm extends Component {
             todayOrOlder: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -87,16 +91,14 @@ class AcopioForm extends Component {
             required: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         kilos_de_producto: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text',
           },
           label:  (<><FormattedMessage id="acopioForm.kilos_de_producto"/>*</>),
           value: '',
@@ -105,24 +107,25 @@ class AcopioForm extends Component {
             isDecimal: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         ingreso: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text',
           },
           label:  (<><FormattedMessage id="acopioForm.ingreso"/>*</>),
           value: '',
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: .01,
+            maxNumValue: 9999999,
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         }
@@ -141,6 +144,7 @@ class AcopioForm extends Component {
       newProceso = updateObject(this.state.acopioForm.tipo_de_producto, {
           value: null,
           valid: false,
+          errorMessage: "",
           touched: false
       })
 
@@ -165,6 +169,7 @@ class AcopioForm extends Component {
 
   componentWillUnmount() {
     this.props.unSelSocio()
+    this.props.onClearError()
   }
 
   onSubmitForm = (event) => {
@@ -181,15 +186,18 @@ class AcopioForm extends Component {
     // } else {
     //   this.props.onEditAcopio(acopio, this.props.selAcopio.id, this.props.token)
     // }
+    this.props.onClearError()
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
 
+    const validation = checkValidity(event.target.value, this.state.acopioForm[inputIdentifier].validation, true)
 
     // TODO: checkbox check unnecesary
     const updatedFormElement = updateObject(this.state.acopioForm[inputIdentifier], {
         value: this.state.acopioForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-        valid: checkValidity(event.target.value, this.state.acopioForm[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -198,6 +206,10 @@ class AcopioForm extends Component {
     })
 
     this.setState({acopioForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError()
+    }
   }
 
   checkIfFormIsValid = (form) => {
@@ -263,11 +275,13 @@ class AcopioForm extends Component {
           }),
           kilos_de_producto: updateObject(this.state.acopioForm.kilos_de_producto, {
               hide: hideKilos,
-              valid: hideKilos,
-              value: null,
+              valid: true,
+              value: '',
               validation: {
-                required: hideKilos
-              }
+                required: !hideKilos,
+                isDecimal: true
+              },
+              touched: true
           })
       })
 
@@ -301,6 +315,7 @@ class AcopioForm extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         if (formElement.id === "tipo_de_producto" ) {
           return (
             <div
@@ -332,6 +347,7 @@ class AcopioForm extends Component {
                   value={formElement.config.value}
                   shouldValidate={formElement.config.validation}
                   invalid={!formElement.config.valid}
+                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
                   touched={formElement.config.touched}
                   disabled={this.props.loading}
                   hide={formElement.config.hide}
@@ -407,7 +423,8 @@ const mapStateToProps = state => {
       updated: state.acopios.updated,
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
-      comunidades: state.generalData.comunidades
+      comunidades: state.generalData.comunidades,
+      formError: state.errors.errors,
     }
 }
 
@@ -417,9 +434,9 @@ const mapDispatchToProps = dispatch => {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onCreateNewAcopio: (solData, token) => dispatch(actions.createNewAcopio(solData, token)),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio())
+      unSelSocio: () => dispatch(actions.unSelectSocio()),
+      onClearError: (field) => dispatch(actions.clearError(field))
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(AcopioForm, axios))
