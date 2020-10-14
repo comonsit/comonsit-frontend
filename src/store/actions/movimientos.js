@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
+import { setError, clearError } from './errors'
 
 
 export const setMovimientos = (movimientos) => {
@@ -41,9 +42,11 @@ export const createNewMovimiento = (movimientoData, token) => {
           .then(response => {
             dispatch(newMovimientoSuccess(response.data.id, movimientoData ))
             alert('Movimiento ' + response.data.id + ' creado correctamente')
+            dispatch(clearError())
           })
           .catch(error => {
             dispatch(newMovimientoFailed())
+            dispatch(setError(error.response.data))
           })
     }
 }

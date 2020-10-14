@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
+import _ from 'lodash';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
@@ -51,9 +52,11 @@ class MovimientosForm extends Component {
           label: (<><FormattedMessage id="clave_socio"/>*</>),
           value: '',
           validation: {
-            required: true
+            required: true,
+            isNumeric: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false,
           supportActions: {
@@ -74,24 +77,25 @@ class MovimientosForm extends Component {
             todayOrOlder: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         monto: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'text'
           },
           label:  (<><FormattedMessage id="movimientosForm.monto"/>*</>),
           value: '',
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: .01,
+            maxNumValue: 9999999,
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -110,6 +114,7 @@ class MovimientosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         proceso: {
@@ -117,18 +122,22 @@ class MovimientosForm extends Component {
           elementConfig: {
             type: 'icons'
           },
-          label: (<><FormattedMessage id="producto"/>*</>),
+          label: (<><FormattedMessage id="proceso"/>*</>),
           value: null,
           validation: {
             required: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         aportacion: {
           value: true,
-          valid: true
+          valid: true,
+          validation: {
+            required: true
+          }
         },
         tipo_de_movimiento: {
           elementType: 'select',
@@ -145,6 +154,7 @@ class MovimientosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         responsable_entrega: {
@@ -159,6 +169,7 @@ class MovimientosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -168,12 +179,13 @@ class MovimientosForm extends Component {
             type: 'date'
           },
           label: (<><FormattedMessage id="movimientosForm.fecha_banco"/>*</>),
-          value: null,
+          value: "",
           validation: {
             required: true,
             todayOrOlder: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -189,6 +201,7 @@ class MovimientosForm extends Component {
             required: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         }
@@ -207,6 +220,7 @@ class MovimientosForm extends Component {
       newProceso = updateObject(this.state.movimientoForm.proceso, {
           value: null,
           valid: false,
+          errorMessage: "",
           touched: false
       })
 
@@ -232,14 +246,21 @@ class MovimientosForm extends Component {
 
   componentWillUnmount() {
     this.props.unSelSocio()
+    this.props.onClearError()
   }
 
   onSubmitForm = (event) => {
     event.preventDefault();
+    this.setState({modalOpen: false, confirmFormOpen: false})
 
     let formData = {}
     for (let formElementIdentifier in this.state.movimientoForm) {
-      formData[formElementIdentifier] = this.state.movimientoForm[formElementIdentifier].value
+      if (
+        this.state.movimientoForm[formElementIdentifier].validation.required ||
+        this.state.movimientoForm[formElementIdentifier].value !== ''
+      ) {
+        formData[formElementIdentifier] = this.state.movimientoForm[formElementIdentifier].value
+      }
     }
 
     // If data was hidden, values will not be sent to avoid confusion.
@@ -259,10 +280,12 @@ class MovimientosForm extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
 
+    const validation = checkValidity(event.target.value, this.state.movimientoForm[inputIdentifier].validation, true)
 
     const updatedFormElement = updateObject(this.state.movimientoForm[inputIdentifier], {
         value: this.state.movimientoForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-        valid: checkValidity(event.target.value, this.state.movimientoForm[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -302,6 +325,9 @@ class MovimientosForm extends Component {
     }
 
     this.setState({movimientoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError(inputIdentifier)
+    }
   }
 
   checkIfFormIsValid = (form) => {
@@ -327,7 +353,8 @@ class MovimientosForm extends Component {
         clave_socio: updateObject(this.state.movimientoForm.clave_socio, {
             value: id,
             valid: true,
-            touched: true
+            touched: true,
+            errorMessage: ""
         })
     })
     this.setState({
@@ -340,9 +367,9 @@ class MovimientosForm extends Component {
 
   onToggleType = result => {
     const updatedFormAp = updateObject(this.state.movimientoForm.aportacion,
-      {value: result, valid: true}
+      {value: result, valid: true, validation: {required: true}}
     )
-    
+
     // RETIROS DO NOT HAVE ORDINARIO VALUE.
     const updatedFormOrd = updateObject(this.state.movimientoForm.ordinario,
       {
@@ -381,7 +408,8 @@ class MovimientosForm extends Component {
           proceso: updateObject(this.state.movimientoForm.proceso, {
               value: current,
               valid: true,
-              touched: true
+              touched: true,
+              errorMessage: ""
           })
       })
       this.setState({
@@ -413,6 +441,7 @@ class MovimientosForm extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         if (formElement.id === "proceso" ) {
           return (
             <div
@@ -434,7 +463,8 @@ class MovimientosForm extends Component {
                   elementConfig={formElement.config.elementConfig }
                   value={formElement.config.value}
                   shouldValidate={formElement.config.validation}
-                  invalid={!formElement.config.valid}
+                  invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
                   touched={formElement.config.touched}
                   disabled={this.props.loading}
                   hide={formElement.config.hide}
@@ -469,7 +499,7 @@ class MovimientosForm extends Component {
                           />
                       </div>
                      </>)
-      } else if (this.state.confirmFormOpen) {
+      } else if (this.state.confirmFormOpen && !this.props.loading) {
         const title = this.state.movimientoForm.aportacion.value ? <h3><FormattedMessage id="movimientos.aportacion"/></h3> : <h3><FormattedMessage id="movimientos.retiro"/></h3>
         modalInfo = (<FormConfirmation
                        formOrder={movimientoFormOrder}
@@ -543,7 +573,8 @@ const mapStateToProps = state => {
       updated: state.movimientos.updated,
       listaSocios: state.socios.socios,
       selSocio: state.socios.selectedSocio,
-      comunidades: state.generalData.comunidades
+      comunidades: state.generalData.comunidades,
+      formError: state.errors.errors,
     }
 }
 
@@ -553,7 +584,8 @@ const mapDispatchToProps = dispatch => {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onCreateNewMovimiento: (solData, token) => dispatch(actions.createNewMovimiento(solData, token)),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio())
+      unSelSocio: () => dispatch(actions.unSelectSocio()),
+      onClearError: (field) => dispatch(actions.clearError(field))
     }
 }
 

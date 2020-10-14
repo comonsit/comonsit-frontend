@@ -63,7 +63,7 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
         pattern = /^[0-9]+([,.][0-9][0-9]?)?$/g;   //  /^[0-9]+([.,][0-9]{1,2})?$/;
         if (!pattern.test(value) ) {
           isValid &= false
-          message += ` -> Debe ser un número con 2 decimales `
+          message += ` -> Debe ser un número con máximo 2 decimales `
         }
     }
 

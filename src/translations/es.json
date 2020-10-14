@@ -136,7 +136,7 @@
   "movimientos.monto": "monto",
   "movimientos.fecha_banco": "Fecha en Banco",
   "movimientos.tipo": "Tipo de Aportacion",
-  "movimientos.saldo": "Saldo al ",
+  "movimientos.saldo": "Saldo",
   "movimientos.buscarSocio": "Buscar por Socio",
   "movimientos.buscarGrupo": "Buscar por Grupo",
   "movimientosForm.proceso": "Proceso",

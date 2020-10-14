@@ -492,7 +492,8 @@ class SolicitudForm extends Component {
         [this.state.selectingFor]: updateObject(this.state.solicitudForm[this.state.selectingFor], {
             value: id,
             valid: true,
-            touched: true
+            touched: true,
+            errorMessage: ""
         })
     })
     this.setState({
@@ -523,7 +524,8 @@ class SolicitudForm extends Component {
           proceso: updateObject(this.state.solicitudForm.proceso, {
               value: current,
               valid: true,
-              touched: true
+              touched: true,
+              errorMessage: ""
           })
       })
       this.setState({
