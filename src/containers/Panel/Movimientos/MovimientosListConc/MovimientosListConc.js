@@ -65,6 +65,13 @@ const movimientosListConc = (props) => {
     }
   ]
 
+  if (props.bankDetail) {
+    columns.push(    {
+          Header: <FormattedMessage id="referencia_banco"/>,
+          accessor: 'referencia_banco',
+        })
+  }
+
   return (<RTable
             columns={columns}
             data={props.data}
