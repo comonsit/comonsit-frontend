@@ -326,7 +326,7 @@ class MovimientosForm extends Component {
 
     this.setState({movimientoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
     if (this.props.formError && inputIdentifier in this.props.formError) {
-      this.props.onClearError(inputIdentifier)
+      this.props.onClearError()
     }
   }
 
@@ -585,7 +585,7 @@ const mapDispatchToProps = dispatch => {
       onCreateNewMovimiento: (solData, token) => dispatch(actions.createNewMovimiento(solData, token)),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
       unSelSocio: () => dispatch(actions.unSelectSocio()),
-      onClearError: (field) => dispatch(actions.clearError(field))
+      onClearError: () => dispatch(actions.clearError())
     }
 }
 

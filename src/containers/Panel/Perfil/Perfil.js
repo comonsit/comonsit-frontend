@@ -123,7 +123,7 @@ class Perfil extends Component {
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
     if (this.props.formError && inputIdentifier in this.props.formError) {
-      this.props.onClearError(inputIdentifier)
+      this.props.onClearError()
     }
   }
 
@@ -206,7 +206,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       updateUser: (userData) => dispatch(actions.setUser(userData)),
-      onClearError: (field) => dispatch(actions.clearError(field)),
+      onClearError: () => dispatch(actions.clearError()),
       onSetError: (err) => dispatch(actions.setError(err)),
     }
 }

@@ -210,7 +210,7 @@ class AcopioForm extends Component {
 
     this.setState({acopioForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
     if (this.props.formError && inputIdentifier in this.props.formError) {
-      this.props.onClearError(inputIdentifier)
+      this.props.onClearError()
     }
   }
 
@@ -436,7 +436,8 @@ const mapDispatchToProps = dispatch => {
       onInitSocios: (token) => dispatch(actions.initSocios(token)),
       onCreateNewAcopio: (solData, token) => dispatch(actions.createNewAcopio(solData, token)),
       onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio())
+      unSelSocio: () => dispatch(actions.unSelectSocio()),
+      onClearError: () => dispatch(actions.clearError())
     }
 }
 

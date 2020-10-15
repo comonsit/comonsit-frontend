@@ -296,7 +296,7 @@ class PagosForm extends Component {
 
     this.setState({pagoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
     if (this.props.formError && inputIdentifier in this.props.formError) {
-      this.props.onClearError(inputIdentifier)
+      this.props.onClearError()
     }
   }
 
@@ -547,7 +547,7 @@ const mapDispatchToProps = dispatch => {
       onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
       unselContrato: () => dispatch(actions.unSelectContrato()),
       unSelPago: () => dispatch(actions.unSelectPago()),
-      onClearError: (field) => dispatch(actions.clearError(field)),
+      onClearError: () => dispatch(actions.clearError()),
       onSetError: (err) => dispatch(actions.setError(err)),
     }
 }

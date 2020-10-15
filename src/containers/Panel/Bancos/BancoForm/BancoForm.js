@@ -523,7 +523,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       onSetError: (err) => dispatch(actions.setError(err)),
-      onClearError: (field) => dispatch(actions.clearError(field))
+      onClearError: () => dispatch(actions.clearError())
     }
 }
 

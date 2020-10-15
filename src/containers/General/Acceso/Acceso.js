@@ -172,7 +172,7 @@ const mapDispatchToProps = dispatch => {
         onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
         // si venimos de aquí siempre reenviaremos a casa!!!
         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/publicaciones')),  // TODO: CHECK!!
-        onClearError: (field) => dispatch(actions.clearError(field))
+        onClearError: () => dispatch(actions.clearError())
     }
 }
 
