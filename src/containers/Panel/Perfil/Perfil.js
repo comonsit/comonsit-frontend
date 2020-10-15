@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {FormattedMessage} from 'react-intl';
 import classes from './Perfil.module.scss'
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../components/UI/Input/Input';
@@ -32,6 +33,7 @@ class Perfil extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -47,6 +49,7 @@ class Perfil extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -60,11 +63,10 @@ class Perfil extends Component {
           value: this.props.user.phone,
           validation: {
             required: false,
-            minLength: 10,
-            maxLength: 10,
-            isNumeric: true
+            minLength: 10
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
       }
@@ -90,19 +92,23 @@ class Perfil extends Component {
       .then(response => {
         this.setState({loading: false})
         this.props.updateUser(response.data)
+        this.props.onClearError()
         //dispatch update user data
       })
       .catch(error => {
         this.setState({loading: true})
+        this.props.onSetError(error.response.data)
       })
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
 
+    const validation = checkValidity(event.target.value, this.state.form[inputIdentifier].validation, true)
 
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
         value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -116,6 +122,9 @@ class Perfil extends Component {
     }
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError(inputIdentifier)
+    }
   }
 
   onStartEditing = () => {
@@ -135,6 +144,7 @@ class Perfil extends Component {
     })
 
     const formElements = formElementsArray.map(formElement => {
+      const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
       return (
         <div
           key= {formElement.id}
@@ -147,7 +157,8 @@ class Perfil extends Component {
               elementConfig={formElement.config.elementConfig }
               value={formElement.config.value}
               shouldValidate={formElement.config.validation}
-              invalid={!formElement.config.valid}
+              invalid={!formElement.config.valid || serverErrorMessage !== ""}
+              errorMessage={formElement.config.errorMessage + serverErrorMessage}
               touched={formElement.config.touched}
               disabled={!this.state.editing}
               hide={formElement.config.hide}
@@ -187,13 +198,16 @@ class Perfil extends Component {
 const mapStateToProps = state => {
     return {
       user: state.generalData.user,
-      token: state.auth.token
+      token: state.auth.token,
+      formError: state.errors.errors,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      updateUser: (userData) => dispatch(actions.setUser(userData))
+      updateUser: (userData) => dispatch(actions.setUser(userData)),
+      onClearError: (field) => dispatch(actions.clearError(field)),
+      onSetError: (err) => dispatch(actions.setError(err)),
     }
 }
 

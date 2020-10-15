@@ -8,16 +8,16 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
     }
 
     if (rules.minLength) {
-      if (value.length <= rules.minLength ) {
+      if (value.length < rules.minLength ) {
         isValid &= false
-        message += ` -> Deben ser al menos ${value.length} caracteres `
+        message += ` -> Deben ser al menos ${rules.minLength} caracteres `
       }
     }
 
     if (rules.maxLength) {
-      if (value.length >= rules.maxLength ) {
+      if (value.length > rules.maxLength ) {
         isValid &= false
-        message += ` -> Deben ser máximo ${value.length} caracteres `
+        message += ` -> Deben ser máximo ${value.maxLength} caracteres `
       }
     }
 
