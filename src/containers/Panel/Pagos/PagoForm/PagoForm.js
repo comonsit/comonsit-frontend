@@ -547,7 +547,8 @@ const mapDispatchToProps = dispatch => {
       onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
       unselContrato: () => dispatch(actions.unSelectContrato()),
       unSelPago: () => dispatch(actions.unSelectPago()),
-      onClearError: (field) => dispatch(actions.clearError(field))
+      onClearError: (field) => dispatch(actions.clearError(field)),
+      onSetError: (err) => dispatch(actions.setError(err)),
     }
 }
 
