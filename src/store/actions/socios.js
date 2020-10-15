@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
+import { setError, clearError } from './errors'
 
 
 export const setSocios = (socios) => {
@@ -66,10 +67,9 @@ export const updateSocioSuccess = (id, orderData) => {
   }
 }
 
-export const updateSocioFailed = (error) => {
+export const updateSocioFailed = () => {
   return {
     type: actionTypes.UPDATE_SOCIO_FAILED,
-    error: error
   }
 }
 
@@ -93,9 +93,11 @@ export const updateSocio = (socioData, socioId, token) => {
       .then(response => {
         dispatch(updateSocioSuccess(response.data.name, socioData ))
         alert('Socio ' + response.data.clave_socio + ' editado correctamente')
+        dispatch(clearError())
       })
       .catch(error => {
-        dispatch(updateSocioFailed(error))
+        dispatch(updateSocioFailed())
+        dispatch(setError(error.response.data))
       })
   }
 }
@@ -110,9 +112,11 @@ export const createNewSocio = (socioData, token) => {
       .then(response => {
         dispatch(newSocioSuccess(response.data.name, socioData ))
         alert('Socio ' + response.data.clave_socio + ' creado correctamente')
+        dispatch(clearError())
       })
       .catch(error => {
-        dispatch(newSocioFailed(error))
+        dispatch(newSocioFailed())
+        dispatch(setError(error.response.data))
       })
   }
 }
@@ -123,10 +127,9 @@ export const newSocioSuccess = (id, orderData) => {
   }
 }
 
-export const newSocioFailed = (error) => {
+export const newSocioFailed = () => {
   return {
-    type: actionTypes.NEW_SOCIO_FAILED,
-    error: error
+    type: actionTypes.NEW_SOCIO_FAILED
   }
 }
 

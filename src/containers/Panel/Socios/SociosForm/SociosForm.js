@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
+import _ from 'lodash';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
@@ -32,9 +33,10 @@ class SociosForm extends Component {
           label: (<><FormattedMessage id="nombres"/>*</>),
           value: this.props.selSocio.nombres,
           validation: {
-            required: true
+            required: true,
           },
           valid: !this.props.new,
+          errorMessage: "",
           touched: false,
         },
         apellido_paterno: {
@@ -46,9 +48,10 @@ class SociosForm extends Component {
           label: (<><FormattedMessage id="apellido_paterno"/>*</>),
           value: this.props.selSocio.apellido_paterno,
           validation: {
-            required: true
+            required: true,
           },
           valid: !this.props.new,
+          errorMessage: "",
           touched: false,
         },
         apellido_materno: {
@@ -60,9 +63,10 @@ class SociosForm extends Component {
           label: (<><FormattedMessage id="apellido_materno"/>*</>),
           value: this.props.selSocio.apellido_materno,
           validation: {
-            required: true
+            required: true,
           },
           valid: !this.props.new,
+          errorMessage: "",
           touched: false,
         },
         comunidad: {
@@ -76,6 +80,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         curp: {
@@ -87,9 +92,13 @@ class SociosForm extends Component {
           label: (<FormattedMessage id="socioForm.curp"/>),
           value: this.props.selSocio.curp,
           validation: {
-            required: false
+            required: false,
+            minLength: 18,
+            maxLength: 18,
+            isAlphaNumeric: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         telefono: {
@@ -103,10 +112,10 @@ class SociosForm extends Component {
           validation: {
             required: false,
             minLength: 10,
-            maxLength: 10,
             isNumeric: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         fecha_nacimiento: {
@@ -122,6 +131,7 @@ class SociosForm extends Component {
             todayOrOlder: true
           },
           valid: !this.props.new,
+          errorMessage: "",
           touched: false,
         },
         genero: {
@@ -138,6 +148,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         fecha_ingr_yomol_atel: {
@@ -153,6 +164,7 @@ class SociosForm extends Component {
             todayOrOlder: true
           },
           valid: !this.props.new,
+          errorMessage: "",
           touched: false,
         },
         fecha_ingr_programa: {
@@ -167,6 +179,7 @@ class SociosForm extends Component {
             isDate: true
           },
           valid: !this.props.new,
+          errorMessage: "",
           touched: false,
         },
         cargo: {
@@ -180,6 +193,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         cargo_coop: {
@@ -193,6 +207,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         empresa: {
@@ -206,6 +221,7 @@ class SociosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         puesto: {
@@ -219,6 +235,7 @@ class SociosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         fuente: {
@@ -232,6 +249,7 @@ class SociosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         clave_anterior: {
@@ -247,6 +265,7 @@ class SociosForm extends Component {
             maxLength: 11
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         estatus_cafe: {
@@ -264,6 +283,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         estatus_miel: {
@@ -281,6 +301,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         estatus_yip: {
@@ -298,6 +319,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         estatus_trabajador: {
@@ -315,6 +337,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         estatus_comonSit: {
@@ -332,6 +355,7 @@ class SociosForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         doc_curp: {
@@ -345,6 +369,7 @@ class SociosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         doc_domicilio: {
@@ -358,6 +383,7 @@ class SociosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         doc_act_nac: {
@@ -371,6 +397,7 @@ class SociosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
         doc_ine: {
@@ -384,6 +411,7 @@ class SociosForm extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         },
       }
@@ -412,17 +440,21 @@ class SociosForm extends Component {
   inputChangedHandler = (event, inputIdentifier) => {
     let updatedFormElement
 
+    const validation = checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation, true)
+
     // TODO: create a generic for checkboxes and multiples:
     if (inputIdentifier === 'cargo_coop') {
       updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
           value: Array.from(event.target.selectedOptions, option => option.value),
-          valid: checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation),
+          valid: validation.valid,
+          errorMessage: validation.errorMessage,
           touched: true
       })
     } else {
       updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
           value: this.state.socioForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-          valid: checkValidity(event.target.value, this.state.socioForm[inputIdentifier].validation),
+          valid: validation.valid,
+          errorMessage: validation.errorMessage,
           touched: true
       })
     }
@@ -438,6 +470,9 @@ class SociosForm extends Component {
     }
 
     this.setState({socioForm: updatedSocioForm, formIsValid: formIsValid })
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError()
+    }
   }
 
   onStartEditing = () => {
@@ -477,6 +512,7 @@ class SociosForm extends Component {
 
     if (this.props.selSocio && ! this.props.loading) {
       formElements = formElementsArray.map(formElement => {
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         if (formElement.id === "fecha_nacimiento" || formElement.id === "fecha_ingr_yomol_atel") {
           supportData = (
             <div className={classes.SupportData}>
@@ -496,7 +532,8 @@ class SociosForm extends Component {
                 elementConfig={formElement.config.elementConfig }
                 value={formElement.config.value}
                 shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
+                invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                errorMessage={formElement.config.errorMessage + serverErrorMessage}
                 touched={formElement.config.touched}
                 disabled={!this.state.editing}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
@@ -553,7 +590,8 @@ const mapStateToProps = state => {
       fuentes: state.generalData.fuentes,
       puestos: state.generalData.puestos,
       role: state.generalData.role,
-      new: state.socios.newSocio
+      new: state.socios.newSocio,
+      formError: state.errors.errors,
     }
 }
 
@@ -561,6 +599,7 @@ const mapDispatchToProps = dispatch => {
     return {
       onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
       onCreateNewSocio: (socioData, token) => dispatch(actions.createNewSocio(socioData, token)),
+      onClearError: () => dispatch(actions.clearError())
     }
 }
 
