@@ -241,7 +241,7 @@ class SolicitudForm extends Component {
             type: 'text',
             placeholder: '..'
           },
-          label:  (<FormattedMessage id="solicitudForm.justificacion_credito"/>),
+          label:  (<><FormattedMessage id="solicitudForm.justificacion_credito"/>*</>),
           value: '',
           validation: {
             required: true

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
+import _ from 'lodash';
 
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
@@ -34,6 +35,7 @@ class ComunidadForm extends Component {
             required: true
           },
           valid: !this.props.new,
+          errorMessage: "",
           touched: false,
         },
         region: {
@@ -47,6 +49,7 @@ class ComunidadForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: false,
         }
       }
@@ -79,11 +82,14 @@ class ComunidadForm extends Component {
 
     let updatedFormElement
 
-      updatedFormElement = updateObject(this.state.comunidadForm[inputIdentifier], {
-          value: event.target.value,
-          valid: checkValidity(event.target.value, this.state.comunidadForm[inputIdentifier].validation),
-          touched: true
-      })
+    const validation = checkValidity(event.target.value, this.state.comunidadForm[inputIdentifier].validation, true)
+
+    updatedFormElement = updateObject(this.state.comunidadForm[inputIdentifier], {
+        value: event.target.value,
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
+        touched: true
+    })
 
     const updatedForm = updateObject(this.state.comunidadForm, {
         [inputIdentifier]: updatedFormElement
@@ -95,6 +101,9 @@ class ComunidadForm extends Component {
     }
 
     this.setState({comunidadForm: updatedForm, formIsValid: formIsValid})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError()
+    }
   }
 
   onStartEditing = () => {
@@ -118,7 +127,7 @@ class ComunidadForm extends Component {
 
     if (this.props.selComunidad && ! this.props.loading) {
       formElements = formElementsArray.map(formElement => {
-
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         return (
             <div
               className={classes.Inputs}
@@ -130,7 +139,8 @@ class ComunidadForm extends Component {
                 elementConfig={formElement.config.elementConfig }
                 value={formElement.config.value}
                 shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
+                invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                errorMessage={formElement.config.errorMessage + serverErrorMessage}
                 touched={formElement.config.touched}
                 disabled={!this.state.editing}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
@@ -173,7 +183,8 @@ const mapStateToProps = state => {
     token: state.auth.token,
     regiones: state.generalData.regiones,
     comunidades: state.generalData.comunidades,
-    new: state.generalData.newComunidad
+    new: state.generalData.newComunidad,
+    formError: state.errors.errors,
   }
 }
 
@@ -181,6 +192,7 @@ const mapDispatchToProps = dispatch => {
     return {
       onEditComunidad: (comunidadData, id, token) => dispatch(actions.updateComunidad(comunidadData, id, token)),
       onCreateNewComunidad: (comunidadData, token) => dispatch(actions.createNewComunidad(comunidadData, token)),
+      onClearError: () => dispatch(actions.clearError())
     }
 }
 
