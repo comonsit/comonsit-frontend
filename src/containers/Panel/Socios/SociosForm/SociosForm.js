@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import {FormattedMessage} from 'react-intl';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import axios from '../../../../store/axios-be.js'
 import _ from 'lodash';
 
+import classes from './SociosForm.module.scss';
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './SociosForm.module.scss'
-import * as actions from '../../../../store/actions'
-import { isGerencia } from '../../../../store/roles'
-import { updateObject } from '../../../../store/reducers/utility'
-import { checkValidity } from '../../../../utilities/validity'
+import * as actions from '../../../../store/actions';
+import { isGerencia } from '../../../../store/roles';
+import { updateObject } from '../../../../store/reducers/utility';
+import { checkValidity } from '../../../../utilities/validity';
 
 
 class SociosForm extends Component {
@@ -72,7 +72,10 @@ class SociosForm extends Component {
         comunidad: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.comunidades.map(r => ({"value": r.id, "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region}))
+            options: this.props.comunidades.map(r => ({
+              "value": r.id,
+              "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region
+            }))
           },
           label: (<><FormattedMessage id="socioForm.comunidad"/>*</>),
           value: this.props.selSocio.comunidad,
@@ -185,7 +188,10 @@ class SociosForm extends Component {
         cargo: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.cargos.map(r => ({"value": r.id, "displayValue": r.nombre_de_cargo}))
+            options: this.props.cargos.map(r => ({
+              "value": r.id,
+              "displayValue": r.nombre_de_cargo
+            }))
           },
           label: (<><FormattedMessage id="socioForm.cargo"/>*</>),
           value: this.props.selSocio.cargo,
@@ -199,7 +205,10 @@ class SociosForm extends Component {
         cargo_coop: {
           elementType: 'select_mult',
           elementConfig: {
-            options: this.props.cargosCoop.map(r => ({"value": r.id, "displayValue": r.nombre_cargo_coop}))
+            options: this.props.cargosCoop.map(r => ({
+              "value": r.id,
+              "displayValue": r.nombre_cargo_coop
+            }))
           },
           label: (<><FormattedMessage id="socioForm.cargoCoop"/>*</>),
           value: this.props.selSocio.cargo_coop,
@@ -213,7 +222,10 @@ class SociosForm extends Component {
         empresa: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.empresas.map(r => ({"value": r.id, "displayValue": r.nombre_empresa}))
+            options: this.props.empresas.map(r => ({
+              "value": r.id,
+              "displayValue": r.nombre_empresa
+            }))
           },
           label: (<><FormattedMessage id="empresa"/>*</>),
           value: this.props.selSocio.empresa,
@@ -227,7 +239,10 @@ class SociosForm extends Component {
         puesto: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.puestos.map(r => ({"value": r.id, "displayValue": r.puesto}))
+            options: this.props.puestos.map(r => ({
+              "value": r.id,
+              "displayValue": r.puesto
+            }))
           },
           label: (<><FormattedMessage id="puesto"/>*</>),
           value: this.props.selSocio.puesto,
@@ -241,7 +256,10 @@ class SociosForm extends Component {
         fuente: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.fuentes.map(r => ({"value": r.id, "displayValue": r.fuente}))
+            options: this.props.fuentes.map(r => ({
+              "value": r.id,
+              "displayValue": r.fuente
+            }))
           },
           label: (<><FormattedMessage id="fuente"/>*</>),
           value: this.props.selSocio.fuente,
@@ -258,7 +276,7 @@ class SociosForm extends Component {
             type: 'text',
             placeholder: ''
           },
-          label: (<FormattedMessage id="socioForm.clave_anterior"/>),
+          label: <FormattedMessage id="socioForm.clave_anterior"/>,
           value: this.props.selSocio.clave_anterior,
           validation: {
             required: false,
@@ -418,7 +436,7 @@ class SociosForm extends Component {
     }
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
 
     const formData = {}
@@ -451,22 +469,25 @@ class SociosForm extends Component {
           touched: true
       })
     } else {
+      const value = this.state.socioForm[inputIdentifier].elementType === 'checkbox'
+        ? event.target.checked
+        : event.target.value
       updatedFormElement = updateObject(this.state.socioForm[inputIdentifier], {
-          value: this.state.socioForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-          valid: validation.valid,
-          errorMessage: validation.errorMessage,
-          touched: true
+        value: value,
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
+        touched: true
       })
     }
 
 
     const updatedSocioForm = updateObject(this.state.socioForm, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
     for (let inputIds in updatedSocioForm) {
-        formIsValid = updatedSocioForm[inputIds].valid && formIsValid
+      formIsValid = updatedSocioForm[inputIds].valid && formIsValid
     }
 
     this.setState({socioForm: updatedSocioForm, formIsValid: formIsValid })
@@ -480,7 +501,9 @@ class SociosForm extends Component {
   }
 
   calculateAge = (birthdayString) => { // birthday is a date
-    const birthday = new Date(birthdayString).toString() !== 'Invalid Date' ? new Date(birthdayString).getTime() : null
+    const birthday = new Date(birthdayString).toString() !== 'Invalid Date'
+      ? new Date(birthdayString).getTime()
+      : null
     if (birthday){
       const ageDate = new Date(Date.now() - birthday); // miliseconds from epoch
       return ageDate.getUTCFullYear() - 1970
@@ -493,10 +516,31 @@ class SociosForm extends Component {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const sociosFormOrder = [
-      "nombres", "apellido_paterno", "apellido_materno", "comunidad", "curp", "telefono", "fecha_nacimiento",
-      "fecha_ingr_yomol_atel", "fecha_ingr_programa", "cargo", "cargo_coop", "clave_anterior",
-      "genero", "estatus_cafe", "estatus_miel", "estatus_yip", "estatus_trabajador", "estatus_comonSit",
-      "empresa", "puesto", "fuente", "doc_curp", "doc_act_nac", "doc_ine", "doc_domicilio"
+      "nombres",
+      "apellido_paterno",
+      "apellido_materno",
+      "comunidad",
+      "curp",
+      "telefono",
+      "fecha_nacimiento",
+      "fecha_ingr_yomol_atel",
+      "fecha_ingr_programa",
+      "cargo",
+      "cargo_coop",
+      "clave_anterior",
+      "genero",
+      "estatus_cafe",
+      "estatus_miel",
+      "estatus_yip",
+      "estatus_trabajador",
+      "estatus_comonSit",
+      "empresa",
+      "puesto",
+      "fuente",
+      "doc_curp",
+      "doc_act_nac",
+      "doc_ine",
+      "doc_domicilio"
     ]
     const formElementsArray = []
     let supportData
@@ -522,53 +566,67 @@ class SociosForm extends Component {
           supportData = null
         }
         return (
-            <div
-              className={classes.Inputs}
-              key= {formElement.id}>
-              <Input
-                label={formElement.config.label}
-                key= {formElement.id}
-                elementType={formElement.config.elementType }
-                elementConfig={formElement.config.elementConfig }
-                value={formElement.config.value}
-                shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid || serverErrorMessage !== ""}
-                errorMessage={formElement.config.errorMessage + serverErrorMessage}
-                touched={formElement.config.touched}
-                disabled={!this.state.editing}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
-                {supportData}
-            </div>
-            )
+          <div
+            className={classes.Inputs}
+            key= {formElement.id}
+          >
+            <Input
+              label={formElement.config.label}
+              key= {formElement.id}
+              elementType={formElement.config.elementType }
+              elementConfig={formElement.config.elementConfig }
+              value={formElement.config.value}
+              shouldValidate={formElement.config.validation}
+              invalid={!formElement.config.valid || serverErrorMessage !== ""}
+              errorMessage={formElement.config.errorMessage + serverErrorMessage}
+              touched={formElement.config.touched}
+              disabled={!this.state.editing}
+              changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            />
+              {supportData}
+          </div>
+        )
       })
     }
 
-
     if (isGerencia(this.props.role)) {
       if (this.state.editing) {
-        submitButton = <Button btnType="Success" disabled={!this.state.formIsValid}><FormattedMessage id="saveButton"/></Button>
+        submitButton = (
+          <Button
+            btnType="Success"
+            disabled={!this.state.formIsValid}
+          >
+            <FormattedMessage id="saveButton"/>
+          </Button>
+        )
         editButton = null
       } else if (this.props.new) {
         submitButton = null
         editButton = null
       } else {
         submitButton = null
-        editButton = <Button clicked={this.onStartEditing} disabled={this.state.editing}><FormattedMessage id="editButton"/></Button>
+        editButton = (
+          <Button
+            clicked={this.onStartEditing}
+            disabled={this.state.editing}
+          >
+            <FormattedMessage id="editButton"/>
+          </Button>
+        )
       }
     }
-
 
     return (
       <div className={classes.Container}>
         <Title
           titleName="socioForm.title"
           titleNameEx={": " + this.props.selSocio.clave_socio}
-          >
+        >
           {editButton}
         </Title>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>
-          {formElements}
+            {formElements}
           </div>
           {submitButton}
         </form>
@@ -578,29 +636,29 @@ class SociosForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      selSocio: state.socios.selectedSocio,
-      loading: state.socios.loading,
-      updated: state.socios.updated,
-      token: state.auth.token,
-      comunidades: state.generalData.comunidades,
-      cargos: state.generalData.cargos,
-      cargosCoop: state.generalData.cargosCoop,
-      empresas: state.generalData.empresas,
-      fuentes: state.generalData.fuentes,
-      puestos: state.generalData.puestos,
-      role: state.generalData.role,
-      new: state.socios.newSocio,
-      formError: state.errors.errors,
-    }
+  return {
+    selSocio: state.socios.selectedSocio,
+    loading: state.socios.loading,
+    updated: state.socios.updated,
+    token: state.auth.token,
+    comunidades: state.generalData.comunidades,
+    cargos: state.generalData.cargos,
+    cargosCoop: state.generalData.cargosCoop,
+    empresas: state.generalData.empresas,
+    fuentes: state.generalData.fuentes,
+    puestos: state.generalData.puestos,
+    role: state.generalData.role,
+    new: state.socios.newSocio,
+    formError: state.errors.errors,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
-      onCreateNewSocio: (socioData, token) => dispatch(actions.createNewSocio(socioData, token)),
-      onClearError: () => dispatch(actions.clearError())
-    }
+  return {
+    onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
+    onCreateNewSocio: (socioData, token) => dispatch(actions.createNewSocio(socioData, token)),
+    onClearError: () => dispatch(actions.clearError())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(SociosForm, axios))

@@ -4,6 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
+import classes from './Socios.module.scss';
 import SociosForm from './SociosForm/SociosForm';
 import SociosList from './SociosList/SociosList';
 import Modal from '../../../components/UI/Modal/Modal';
@@ -11,10 +12,9 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
 import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Title from '../../../components/UI/Title/Title';
-import classes from './Socios.module.scss'
-import * as actions from '../../../store/actions'
-import { isGerencia } from '../../../store/roles'
-import axios from '../../../store/axios-be.js'
+import * as actions from '../../../store/actions';
+import { isGerencia } from '../../../store/roles';
+import axios from '../../../store/axios-be.js';
 
 
 
@@ -34,12 +34,12 @@ class Socios extends Component {
     }
   }
 
-  showSocio =(id) => {
+  showSocio = id => {
     this.setState({socioSeleccionado: true});
     this.props.onFetchSelSocios(this.props.token, id)
   }
 
-  cancelSelected =() => {
+  cancelSelected = () => {
     this.setState({ socioSeleccionado: false});
     this.props.unSelSocio()
   }
@@ -69,25 +69,34 @@ class Socios extends Component {
   }
 
   render () {
-      let downloadXLSButton, newSocioButton = null
-      let form, socioList = <Spinner/>
-      if (this.state.socioSeleccionado && this.props.selSocio) {
-        form = (
-          <SociosForm/>
-        )
-      }
+    let downloadXLSButton, newSocioButton = null
+    let form, socioList = <Spinner/>
+    if (this.state.socioSeleccionado && this.props.selSocio) {
+      form = <SociosForm/>
+    }
 
-      if (this.props.listaSocios) {
-        socioList = (<SociosList
-                      listaSocios={this.props.listaSocios}
-                      onClick={row => this.showSocio(row.values.clave_socio)}
-                      />)
-      }
+    if (this.props.listaSocios) {
+      socioList = (
+        <SociosList
+          listaSocios={this.props.listaSocios}
+          onClick={row => this.showSocio(row.values.clave_socio)}
+        />
+      )
+    }
 
-      if (isGerencia(this.props.role)) {
-        downloadXLSButton = (<XLSButton clicked={this.getXLSX} labelID={"sociosXLSX"}/>)
-        newSocioButton = (<Button clicked={this.onNewSocio}><FormattedMessage id="socios.newSocioButton"/></Button>)
-      }
+    if (isGerencia(this.props.role)) {
+      downloadXLSButton = (
+        <XLSButton
+          clicked={this.getXLSX}
+          labelID={"sociosXLSX"}
+          />
+      )
+      newSocioButton = (
+        <Button clicked={this.onNewSocio}>
+          <FormattedMessage id="socios.newSocioButton"/>
+        </Button>
+      )
+    }
 
 
     return (
@@ -96,16 +105,19 @@ class Socios extends Component {
           show={this.state.socioSeleccionado}
           modalClosed={this.cancelSelected}>
           {form}
-            <Route render={({ history}) => (
-              <Button
-                clicked={() => history.push('/evaluacion-socio')}
-                btnType="Medium"
-                ><FormattedMessage id="socios.evaluacionSocio"/></Button>
-            )} />
+            <Route
+              render={({ history}) => (
+                <Button
+                  clicked={() => history.push('/evaluacion-socio')}
+                  btnType="Medium"
+                >
+                  <FormattedMessage id="socios.evaluacionSocio"/>
+                </Button>
+              )}
+            />
         </Modal>
         <div className={classes.Container}>
-          <Title
-            titleName="socios.title">
+          <Title titleName="socios.title">
             {newSocioButton}
           </Title>
           <div className={classes.Table}>
@@ -119,23 +131,23 @@ class Socios extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      listaSocios: state.socios.socios,
-      selSocio: state.socios.selectedSocio,
-      updated: state.socios.updated,
-      token: state.auth.token,
-      comunidades: state.generalData.comunidades,
-      role: state.generalData.role
-    }
+  return {
+    listaSocios: state.socios.socios,
+    selSocio: state.socios.selectedSocio,
+    updated: state.socios.updated,
+    token: state.auth.token,
+    comunidades: state.generalData.comunidades,
+    role: state.generalData.role
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitSocios: (token) => dispatch(actions.initSocios(token)),
-      onNewSocios: () => dispatch(actions.newSocio()),
-      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio())
-    }
+  return {
+    onInitSocios: (token) => dispatch(actions.initSocios(token)),
+    onNewSocios: () => dispatch(actions.newSocio()),
+    onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
+    unSelSocio: () => dispatch(actions.unSelectSocio())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Socios)
