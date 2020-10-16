@@ -2,7 +2,7 @@ import React from 'react'
 import {FormattedNumber, IntlProvider} from 'react-intl';
 
 const currency = ({value, hideZero, returnString, style="currency"}) => {
-  if (isNaN(value) || (hideZero && parseInt(value) === 0)) {
+  if (isNaN(value) || (hideZero && parseFloat(value) === 0)) {
     return returnString ? value : ''
   } else {
     // hide negative zeroes
