@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import {FormattedMessage} from 'react-intl';
+
 import classes from './Inicio.module.scss'
 import { connect } from 'react-redux';
-
 import Weather from './Weather/Weather'
 import Numbers from './Numbers/Numbers'
 import DeudasMap from '../Mapas/DeudasMap/DeudasMap'
@@ -27,6 +26,7 @@ class Inicio extends Component {
     }
     this.onGetCarteras()
   }
+
   onGetCarteras () {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
@@ -55,12 +55,15 @@ class Inicio extends Component {
   }
 
   render () {
-
     let carterasTotales = <Spinner/>
-    const title = (this.props.user) ? <Title
-      titleName="inicio.title"
-      titleNameEx={" " + this.props.user.first_name}
-    /> : <Spinner/>
+    const title = (this.props.user)
+    ? (
+        <Title
+          titleName="inicio.title"
+          titleNameEx={" " + this.props.user.first_name}
+        />
+      )
+    : <Spinner/>
 
     if (!this.state.loading) {
       carterasTotales = (
@@ -69,69 +72,67 @@ class Inicio extends Component {
           vencidos={this.state.total_vencidos}
           vigentes_count={this.state.count_vigentes}
           vencidos_count={this.state.count_vencidos}
-
         />
       )
     }
 
     return (
       <>
-      <div className={classes.Container}>
-        {title}
-        <div className={classes.CardsContainer}>
-          <div className={classes.Mapa}>
-            <Card title={"inicio.mapa"}>
-              <DeudasMap/>
-            </Card>
-          </div>
-          <div>
-            <Card title={"inicio.pronostico"}>
-              <Weather/>
-            </Card>
-          </div>
-          <div>
-            <Card title={"inicio.carteras"}>
-              {carterasTotales}
-            </Card>
-          </div>
-          <div>
-            <Card title={"inicio.calendario"}>
-              <div className={classes.CalContainer}>
-                <iframe
-                  className={classes.Calendario}
-                  title='Calendario'
-                  src="https://calendar.google.com/calendar/b/1/embed?height=600&amp;wkst=2&amp;bgcolor=%23bbc392&amp;ctz=America%2FDetroit&amp;src=ZzcyZ3ZvYWszOGozbWY3dmZtcG9jaWFwN2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%236633CC&amp;color=%23227F63&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0"
-                  width="300"
-                  height="250"
-                  frameBorder="0"
-                  scrolling="no"></iframe>
-              </div>
-            </Card>
-          </div>
-          <div>
-            <Card title={"inicio.numeros"}>
-              <Numbers/>
-            </Card>
+        <div className={classes.Container}>
+          {title}
+          <div className={classes.CardsContainer}>
+            <div className={classes.Mapa}>
+              <Card title={"inicio.mapa"}>
+                <DeudasMap/>
+              </Card>
+            </div>
+            <div>
+              <Card title={"inicio.pronostico"}>
+                <Weather/>
+              </Card>
+            </div>
+            <div>
+              <Card title={"inicio.carteras"}>
+                {carterasTotales}
+              </Card>
+            </div>
+            <div>
+              <Card title={"inicio.calendario"}>
+                <div className={classes.CalContainer}>
+                  <iframe
+                    className={classes.Calendario}
+                    title='Calendario'
+                    src="https://calendar.google.com/calendar/b/1/embed?height=600&amp;wkst=2&amp;bgcolor=%23bbc392&amp;ctz=America%2FDetroit&amp;src=ZzcyZ3ZvYWszOGozbWY3dmZtcG9jaWFwN2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%236633CC&amp;color=%23227F63&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0"
+                    width="300"
+                    height="250"
+                    frameBorder="0"
+                    scrolling="no"></iframe>
+                </div>
+              </Card>
+            </div>
+            <div>
+              <Card title={"inicio.numeros"}>
+                <Numbers/>
+              </Card>
+            </div>
           </div>
         </div>
-      </div>
       </>
     )
   }
 }
 
 const mapStateToProps = state => {
-    return {
-      user: state.generalData.user,
-      token: state.auth.token
-    }
+  return {
+    user: state.generalData.user,
+    token: state.auth.token
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      updateUser: (userData) => dispatch(actions.setUser(userData))
-    }
+  return {
+    updateUser: (userData) => dispatch(actions.setUser(userData))
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Inicio, axios))

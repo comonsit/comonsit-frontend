@@ -1,15 +1,17 @@
 import React from 'react';
-import classes from './Weather.module.scss'
 import { useIntl } from 'react-intl';
 import translations from './WeatherTranslations';
+
+import classes from './Weather.module.scss'
 import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate';
 
 const DayCard = props => {
-
   const imgURL = `owf owf-${props.reading.icon} owf-5x`
 
   // include Tseltal descriptions
-  const description = (useIntl().locale === 'tz') ? translations[props.reading.icon] : props.reading.description
+  const description = (useIntl().locale === 'tz')
+    ? translations[props.reading.icon]
+    : props.reading.description
 
   return (
     <div className={classes.CardContainer}>

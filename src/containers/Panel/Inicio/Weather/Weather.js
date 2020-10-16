@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import key from './apiKey';
 import classes from './Weather.module.scss'
-
+import key from './apiKey';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import DayCard from './DayCard';
 
@@ -19,47 +18,42 @@ class Weather extends React.Component {
   componentDidMount = () => {
     const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=17.07&lon=-91.62&units=metric&lang=es&APPID=${key}`
     fetch(weatherURL)
-        .then(res => res.json())
-        .then(data => {
-          const daysData = data.list
-          const dates = new Set(daysData.map(i => i.dt_txt.slice(0, 10)))
+      .then(res => res.json())
+      .then(data => {
+        const daysData = data.list
+        const dates = new Set(daysData.map(i => i.dt_txt.slice(0, 10)))
+        const maxTemps = {}
+        const minTemps = {}
+        const icons = {}
+        const descriptions = {}
+        const dailyData = {}
 
-          const maxTemps = {}
-          const minTemps = {}
-          const icons = {}
-          const descriptions = {}
-          const dailyData = {}
+        dates.forEach(i => maxTemps[i] = [])
+        dates.forEach(i => minTemps[i] = [])
+        dates.forEach(i => icons[i] = [])
+        dates.forEach(i => descriptions[i] = [])
 
-          dates.forEach(i => maxTemps[i] = [])
-          dates.forEach(i => minTemps[i] = [])
-          dates.forEach(i => icons[i] = [])
-          dates.forEach(i => descriptions[i] = [])
-
-          daysData.forEach(i => {
-            maxTemps[i.dt_txt.slice(0, 10)].push(i.main.temp_max)
-            minTemps[i.dt_txt.slice(0, 10)].push(i.main.temp_min)
-            icons[i.dt_txt.slice(0, 10)].push(i.weather[0].id)
-            descriptions[i.dt_txt.slice(0, 10)].push(i.weather[0].description)
-
-          })
-
-          dates.forEach(i => {
-            dailyData[i] = {
-              maxTemp: Math.max(...maxTemps[i]),
-              minTemp: Math.min(...minTemps[i]),
-              icon: _.head(_(icons[i]).countBy().entries().maxBy(_.last)),
-              description: _.head(_(descriptions[i]).countBy().entries().maxBy(_.last))
-            }
-          })
-
-          this.setState({ dailyData: dailyData})
+        daysData.forEach(i => {
+          maxTemps[i.dt_txt.slice(0, 10)].push(i.main.temp_max)
+          minTemps[i.dt_txt.slice(0, 10)].push(i.main.temp_min)
+          icons[i.dt_txt.slice(0, 10)].push(i.weather[0].id)
+          descriptions[i.dt_txt.slice(0, 10)].push(i.weather[0].description)
         })
+
+        dates.forEach(i => {
+          dailyData[i] = {
+            maxTemp: Math.max(...maxTemps[i]),
+            minTemp: Math.min(...minTemps[i]),
+            icon: _.head(_(icons[i]).countBy().entries().maxBy(_.last)),
+            description: _.head(_(descriptions[i]).countBy().entries().maxBy(_.last))
+          }
+        })
+
+        this.setState({ dailyData: dailyData})
+      })
   }
 
-
-
   render() {
-
     let formatDayCards = <Spinner/>
     const tmp = []
     if (this.state.dailyData) {
@@ -69,7 +63,6 @@ class Weather extends React.Component {
       }
       formatDayCards = tmp
     }
-
 
     return (
       <div>

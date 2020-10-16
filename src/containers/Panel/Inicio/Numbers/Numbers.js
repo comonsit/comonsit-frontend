@@ -1,12 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { sayTseltal }from '@mauricioinaz/say-tseltal'
-import classes from './Numbers.module.scss'
 
+import classes from './Numbers.module.scss'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
+
 
 class Weather extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Weather extends React.Component {
             type: 'text',
             placeholder: '..'
           },
-          label: (<><FormattedMessage id="inicio.numero"/></>),
+          label: <FormattedMessage id="inicio.numero"/>,
           value: '',
           validation: {
             required: false,
@@ -37,37 +38,34 @@ class Weather extends React.Component {
     }
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
     this.setState({tseltalNumber: sayTseltal(this.state.form.number.value)})
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const validation = checkValidity(event.target.value, this.state.form[inputIdentifier].validation, true)
 
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
-        value: event.target.value,
-        valid: validation.valid,
-        errorMessage: validation.errorMessage,
-        touched: true
+      value: event.target.value,
+      valid: validation.valid,
+      errorMessage: validation.errorMessage,
+      touched: true
     })
 
     let updatedForm = updateObject(this.state.form, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
     for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
+      formIsValid = updatedForm[inputIds].valid && formIsValid
     }
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
   }
 
   render() {
-
-
     return (
       <div className={classes.Container}>
         <div>
@@ -91,7 +89,8 @@ class Weather extends React.Component {
             </div>
             <Button
               btnType="Short"
-              disabled={!this.state.formIsValid}>
+              disabled={!this.state.formIsValid}
+            >
               <FormattedMessage id="inicio.numeroTradcurir"/>
             </Button>
           </form>
