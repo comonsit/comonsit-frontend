@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
+import classes from './Carteras.module.scss'
 import Card from '../../../components/UI/Card/Card';
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
@@ -11,7 +12,6 @@ import Title from '../../../components/UI/Title/Title';
 import TotalCarteras from './TotalCarteras/TotalCarteras'
 import CreditoListCarteras from '../Creditos/CreditoListCarteras/CreditoListCarteras';
 import CreditoHistorial from '../Creditos/CreditoHistorial/CreditoHistorial'
-import classes from './Carteras.module.scss'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 import * as actions from '../../../store/actions'
@@ -97,20 +97,19 @@ class Carteras extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
-        value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
-        touched: true
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
+      touched: true
     })
 
     let updatedForm = updateObject(this.state.form, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
     for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
+      formIsValid = updatedForm[inputIds].valid && formIsValid
     }
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
@@ -147,7 +146,6 @@ class Carteras extends Component {
   }
 
   render () {
-
     let carterasTotales, creditosVigentesTable, creditosVencidosTable = <Spinner/>
     if (!this.state.loading) {
       carterasTotales = (
@@ -159,14 +157,18 @@ class Carteras extends Component {
 
         />
       )
-      creditosVigentesTable = (<CreditoListCarteras
-                                onClick={(row) => this.showContrato(row.values.id)}
-                                data={this.state.creditos_vigentes}/>
-                              )
-      creditosVencidosTable = (<CreditoListCarteras
-                                onClick={(row) => this.showContrato(row.values.id)}
-                                data={this.state.creditos_vencidos}/>
-                              )
+      creditosVigentesTable = (
+        <CreditoListCarteras
+          onClick={(row) => this.showContrato(row.values.id)}
+          data={this.state.creditos_vigentes}
+        />
+      )
+      creditosVencidosTable = (
+        <CreditoListCarteras
+          onClick={(row) => this.showContrato(row.values.id)}
+          data={this.state.creditos_vencidos}
+        />
+      )
     }
 
     let historial = null
@@ -174,9 +176,15 @@ class Carteras extends Component {
     if (this.state.selectedContratoPagos && this.props.selContrato) {
       historial = (
         <div className={classes.Container}>
-          <h3><FormattedMessage id="creditos.historialCredito"/> Credito # {this.props.selContrato.id}</h3>
+          <h3>
+            <FormattedMessage id="creditos.historialCredito"/>
+            Credito # {this.props.selContrato.id}
+          </h3>
           <div className={classes.ContentContainer}>
-            <CreditoHistorial data={this.state.selectedContratoPagos} credito={this.props.selContrato}/>
+            <CreditoHistorial
+              data={this.state.selectedContratoPagos}
+              credito={this.props.selContrato}
+            />
           </div>
         </div>
       )
@@ -248,18 +256,18 @@ class Carteras extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      role: state.generalData.role,
-      selContrato: state.creditos.selectedContrato,
-    }
+  return {
+    token: state.auth.token,
+    role: state.generalData.role,
+    selContrato: state.creditos.selectedContrato,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
-      unSelContrato: () => dispatch(actions.unSelectContrato())
-    }
+  return {
+    onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
+    unSelContrato: () => dispatch(actions.unSelectContrato())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Carteras)
