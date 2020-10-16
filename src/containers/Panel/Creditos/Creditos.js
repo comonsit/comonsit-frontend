@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import classes from './Creditos.module.scss'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import ContratoActions from './ContratoActions/ContratoActions';
 import Modal from '../../../components/UI/Modal/Modal';
@@ -12,7 +13,6 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import CreditoList from './CreditoList/CreditoList';
 import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
 import Title from '../../../components/UI/Title/Title';
-import classes from './Creditos.module.scss'
 import * as actions from '../../../store/actions'
 import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'
@@ -83,7 +83,7 @@ class Creditos extends Component {
       })
   }
 
-  cancelSelected =() => {
+  cancelSelected = () => {
     this.setState({
       showContratoModal: false,
       selectedContratoPagos: null
@@ -103,7 +103,9 @@ class Creditos extends Component {
     // RENDER XLS DOWNLOAD BUTTON
     if (isGerencia(this.props.role)) {
       const processList = ['ALL', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-      const oldCreditsMessId = this.state.oldCreditos ? 'creditos.allCreditsTrue' : 'creditos.allCreditsFalse'
+      const oldCreditsMessId = this.state.oldCreditos
+        ? 'creditos.allCreditsTrue'
+        : 'creditos.allCreditsFalse'
       downloadXLSButton = (
         <div>
           <div className={classes.XLSContainer}>
@@ -111,16 +113,19 @@ class Creditos extends Component {
             <SwitchToggle clicked={this.onToggleFilter}/>
             <p><FormattedMessage id={oldCreditsMessId}/></p>
           </div>
-        </div>)
+        </div>
+      )
     }
 
     // RENDER ACTIONS
     if (this.props.selContrato && this.state.selectedContratoPagos) {
-      actions = (<ContratoActions
-                  selContrato={this.props.selContrato}
-                  pagos={this.state.selectedContratoPagos}
-                  role={this.props.role}
-                />)
+      actions = (
+        <ContratoActions
+          selContrato={this.props.selContrato}
+          pagos={this.state.selectedContratoPagos}
+          role={this.props.role}
+        />
+      )
     }
 
     return (
@@ -148,20 +153,20 @@ class Creditos extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      listaCreditos: state.creditos.creditos,
-      selContrato: state.creditos.selectedContrato,
-      token: state.auth.token,
-      role: state.generalData.role,
-    }
+  return {
+    listaCreditos: state.creditos.creditos,
+    selContrato: state.creditos.selectedContrato,
+    token: state.auth.token,
+    role: state.generalData.role,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitCreditos: (token, all) => dispatch(actions.initCreditos(token, all)),
-      onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
-      unSelContrato: () => dispatch(actions.unSelectContrato())
-    }
+  return {
+    onInitCreditos: (token, all) => dispatch(actions.initCreditos(token, all)),
+    onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
+    unSelContrato: () => dispatch(actions.unSelectContrato())
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Creditos, axios)))

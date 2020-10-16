@@ -6,13 +6,14 @@ import Currency from '../../../../components/UI/Formatting/Currency'
 
 
 const creditoHistorial = (props) => {
-
   // TODO: is this required here?
   if (!props.credito){
     return 'Error al buscar información del crédito'
   }
 
-  const inicio = (isNaN(props.credito.fecha_inicio) && !isNaN(Date.parse(props.credito.fecha_inicio))) ? new Date(props.credito.fecha_inicio) : null
+  const inicio = (isNaN(props.credito.fecha_inicio) && !isNaN(Date.parse(props.credito.fecha_inicio)))
+    ? new Date(props.credito.fecha_inicio)
+    : null
   const modifiedData = props.data.reverse()
   if (!modifiedData.find(item => item.id === 'INICIO')) {
     modifiedData.unshift({
@@ -130,12 +131,14 @@ const creditoHistorial = (props) => {
     }
   ]
 
-  return (<RTable
-            columns={columns}
-            data={modifiedData}
-            onRowClick={() => {}}
-            hideSearch
-          />)
+  return (
+    <RTable
+      columns={columns}
+      data={modifiedData}
+      onRowClick={() => {}}
+      hideSearch
+    />
+  )
 }
 
 export default creditoHistorial

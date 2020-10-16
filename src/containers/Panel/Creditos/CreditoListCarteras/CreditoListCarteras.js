@@ -9,6 +9,7 @@ import SliderColumnFilter from '../../../../components/Tables/RTable/Filters/Sli
 import filterGreaterThan from '../../../../components/Tables/RTable/Filters/FilterGreaterThan';
 import vidaCartera from '../../Carteras/VidaCartera'
 
+
 const creditoList = (props) => {
   // Add detailed days of credit data
   const modData = props.data.map(row => {
@@ -120,11 +121,13 @@ const creditoList = (props) => {
     }
   ]
 
-  return (<RTable
-            columns={columns}
-            data={modData}
-            onRowClick={props.onClick}
-          />)
+  return (
+    <RTable
+      columns={columns}
+      data={modData}
+      onRowClick={props.onClick}
+    />
+  )
 }
 
 export default creditoList

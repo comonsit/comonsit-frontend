@@ -1,10 +1,11 @@
 import React from 'react'
 import {FormattedMessage} from 'react-intl';
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
+
 import classes from './ContratoImprimir.module.scss'
 
-class ContratoImprCont extends React.Component {
 
+class ContratoImprCont extends React.Component {
   render () {
     return (
       <div className={classes.PrintContainer}>

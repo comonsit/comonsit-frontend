@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import ReactToPrint from "react-to-print";
 import { Redirect } from 'react-router-dom';
-import {FormattedMessage} from 'react-intl';
-import { connect } from 'react-redux'
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 
-import ContratoImprCont from './ContratoImprCont'
+import classes from './ContratoImprimir.module.scss';
+import ContratoImprCont from './ContratoImprCont';
 import Input from '../../../../components/UI/Input/Input';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './ContratoImprimir.module.scss'
 import buttonClasses from '../../../../components/UI/Button/Button.module.scss';
-import * as actions from '../../../../store/actions'
+import * as actions from '../../../../store/actions';
+
 
 class ContratoImprimir extends Component {
   constructor(props) {
@@ -50,13 +51,17 @@ class ContratoImprimir extends Component {
             shouldValidate={{required: true}}
             touched={true}
             changed={(event) => this.setState({gerente: event.target.value})}
-            />
+          />
         </div>
         <div className={classes.PrintButton}>
-            <ReactToPrint
-              trigger={() => <button className={buttonClasses.Button}><FormattedMessage id="contratoPrint.imprimir"/></button>}
-              content={() => this.componentRef}
-            />
+          <ReactToPrint
+            trigger={() => (
+              <button className={buttonClasses.Button}>
+                <FormattedMessage id="contratoPrint.imprimir"/>
+              </button>
+            )}
+            content={() => this.componentRef}
+          />
         </div>
         <div className={classes.SupportText}>
           <FormattedMessage id="contratoPrint.vistaPrevia"/>
@@ -75,15 +80,15 @@ class ContratoImprimir extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      selContrato: state.creditos.selectedContrato,
-    }
+  return {
+    selContrato: state.creditos.selectedContrato,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      unSelContrato: () => dispatch(actions.unSelectContrato())
-    }
+  return {
+    unSelContrato: () => dispatch(actions.unSelectContrato())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContratoImprimir)

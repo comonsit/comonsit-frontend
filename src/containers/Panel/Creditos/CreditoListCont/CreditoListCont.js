@@ -10,7 +10,6 @@ import filterGreaterThan from '../../../../components/Tables/RTable/Filters/Filt
 
 
 const creditoListCont = (props) => {
-
   const columns = [
     {
       Header: '#',
@@ -61,12 +60,14 @@ const creditoListCont = (props) => {
     },
   ]
 
-  return (<RTable
-            columns={columns}
-            data={props.data}
-            onRowClick={() => {}}
-            selectableRow={props.selectable}
-          />)
+  return (
+    <RTable
+      columns={columns}
+      data={props.data}
+      onRowClick={() => {}}
+      selectableRow={props.selectable}
+    />
+  )
 }
 
 export default creditoListCont

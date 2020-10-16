@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormattedMessage, IntlProvider } from 'react-intl';
-import classes from './ContratoDetail.module.scss'
 import { sayTseltal }from '@mauricioinaz/say-tseltal'
 
+import classes from './ContratoDetail.module.scss'
 import Currency from '../../../../components/UI/Formatting/Currency'
 import Percent from '../../../../components/UI/Formatting/Percent'
 import TextElement from '../../../../components/UI/TextElement/TextElement';
@@ -11,83 +11,113 @@ import DebtGraph from '../../../../components/Graphs/DebtGraph/DebtGraph';
 import messages_es from '../../../../translations/es.json'
 import messages_tz from '../../../../translations/tz.json'
 
+
 const messages = {
   'es': messages_es,
   'tz': messages_tz
 }
 
-const contratoDetail = props => {
 
-  const items1 = ["id", "fecha_inicio", "clave_socio", "nombres", "comunidad", "region", "proceso"]
+const contratoDetail = props => {
+  const items1 = [
+    "id",
+    "fecha_inicio",
+    "clave_socio",
+    "nombres",
+    "comunidad",
+    "region",
+    "proceso"
+  ]
   const items1Array = items1.map(id => {
-    return (<TextElement
-              label={id}
-              content={props.contrato[id]}
-              twoLanguages={props.forPrinting}
-              key={id}
-              />)
+    return (
+      <TextElement
+        label={id}
+        content={props.contrato[id]}
+        twoLanguages={props.forPrinting}
+        key={id}
+      />
+    )
   })
 
   const tipoTasa = {'FI': 'Fija', 'VA': 'Variable'}
 
-  const items2 = ["monto", "tipo_credito", "plazo", "intereses", "tasa", "tasa_moratoria", "tipo_tasa", "total"]
+  const items2 = [
+    "monto",
+    "tipo_credito",
+    "plazo",
+    "intereses",
+    "tasa",
+    "tasa_moratoria",
+    "tipo_tasa",
+    "total"
+  ]
   const items2Array = items2.map(id => {
-    return (<TextElement
-              label={id}
-              content={id === "tipo_tasa" ? tipoTasa[props.contrato[id]] : props.contrato[id]}
-              isNum={id === "monto" || id === "total" || id === "intereses"}
-              isPerc={id === "tasa" || id === "tasa_moratoria"}
-              twoLanguages={props.forPrinting}
-              key={id}
-              />)
+    return (
+      <TextElement
+        label={id}
+        content={id === "tipo_tasa" ? tipoTasa[props.contrato[id]] : props.contrato[id]}
+        isNum={id === "monto" || id === "total" || id === "intereses"}
+        isPerc={id === "tasa" || id === "tasa_moratoria"}
+        twoLanguages={props.forPrinting}
+        key={id}
+      />
+    )
   })
 
   const columns = [
-          {
-            Header: "Jayeb Sc'ahc'alel (Plazo)",
-            accessor: 'plazo',
-          },
-          {
-            Header: "Smajanel (Préstamo)",
-            accessor: 'monto',
-            Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
-          },
-          {
-            Header: "Bin sjol smajanel te taqu'in ta jun jun uh (Interés Mensual)",
-            accessor: 'tasa',
-            Cell: (cellInfo) => <Percent value={cellInfo.cell.value}/>,
-          },
-          {
-            Header: "Stojel sjol taqu'in (Intereses)",
-            accessor: 'interes',
-            Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
-          },
-          {
-            Header: "Stojel spisil majanbil taqu'in (Total a Pagar)",
-            accessor: 'total',
-            Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
-          },
-        ]
+    {
+      Header: "Jayeb Sc'ahc'alel (Plazo)",
+      accessor: 'plazo',
+    },
+    {
+      Header: "Smajanel (Préstamo)",
+      accessor: 'monto',
+      Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+    },
+    {
+      Header: "Bin sjol smajanel te taqu'in ta jun jun uh (Interés Mensual)",
+      accessor: 'tasa',
+      Cell: (cellInfo) => <Percent value={cellInfo.cell.value}/>,
+    },
+    {
+      Header: "Stojel sjol taqu'in (Intereses)",
+      accessor: 'interes',
+      Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+    },
+    {
+      Header: "Stojel spisil majanbil taqu'in (Total a Pagar)",
+      accessor: 'total',
+      Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+    },
+  ]
 
 
-  const titles = ["contratoDetail.title", "contratoDetail.datos", "contratoDetail.especificaciones", "contratoDetail.informacion", "contratoDetail.texto1"]
+  const titles = [
+    "contratoDetail.title",
+    "contratoDetail.datos",
+    "contratoDetail.especificaciones",
+    "contratoDetail.informacion",
+    "contratoDetail.texto1"
+  ]
   const titlesArray = titles.map(id => {
     if (props.forPrinting) {
-      return (<label key={id}>
-              <IntlProvider
-                locale={'es'}
-                messages={messages.es}
-              >
-                <FormattedMessage id={id}/>
-              </IntlProvider>
-              /
-              <IntlProvider
-                locale='tz'
-                messages={messages.tz}
-              >
-                <FormattedMessage id={id}/>
-              </IntlProvider>
-            </label>)
+      return (
+        <label key={id}>
+          <IntlProvider
+            locale={'es'}
+            messages={messages.es}
+          >
+            <FormattedMessage id={id}/>
+          </IntlProvider>
+          /
+          <IntlProvider
+            locale='tz'
+            messages={messages.tz}
+          >
+            <FormattedMessage id={id}/>
+          </IntlProvider>
+        </label>
+      )
     } else {
       return <FormattedMessage key={id} id={id}/>
     }
@@ -98,10 +128,10 @@ const contratoDetail = props => {
   if (props.forPrinting) {
     const data = []
     let element = {}
-    let  interes_ord, interes_mor, plazo_mor
+    let interes_ord, interes_mor, plazo_mor
     for (let i=1; i<= props.contrato.plazo*2; i++) {
       interes_ord = props.contrato.monto*(props.contrato.tasa/100)*i
-      if (i>props.contrato.plazo) {
+      if (i > props.contrato.plazo) {
         plazo_mor = parseInt(props.contrato.tasa_moratoria)
         interes_mor = props.contrato.monto*(plazo_mor/100)*(i-props.contrato.plazo)
       } else {
@@ -140,7 +170,7 @@ const contratoDetail = props => {
           />
         </div>
       </div>
-      )
+    )
   }
 
   return (
@@ -171,6 +201,5 @@ const contratoDetail = props => {
     </div>
   )
 }
-
 
 export default contratoDetail;
