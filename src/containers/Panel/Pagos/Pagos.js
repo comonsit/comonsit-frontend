@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import classes from './Pagos.module.scss'
 import PagoDetail from './PagoDetail/PagoDetail'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
@@ -13,7 +14,6 @@ import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
 import Title from '../../../components/UI/Title/Title';
-import classes from './Pagos.module.scss'
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
@@ -69,8 +69,9 @@ class Pagos extends Component {
   }
 
   render () {
-
-    const pago = (this.props.selPago) ? <PagoDetail pago={this.props.selPago}/> : <Spinner/>
+    const pago = (this.props.selPago)
+      ? <PagoDetail pago={this.props.selPago}/>
+      : <Spinner/>
 
     if (this.state.editPago) {
       this.props.history.push('/pago-formato')
@@ -78,22 +79,23 @@ class Pagos extends Component {
 
     let editPaymentButton = null
     if (this.props.selPago && this.props.selPago.fecha_banco === null) {
-      editPaymentButton = (<Button
-                             clicked={() => this.setState({editPago: true})}
-                           >
-                             <FormattedMessage id="pagoForm.editBankInfo"/>
-                           </Button>)
+      editPaymentButton = (
+        <Button clicked={() => this.setState({editPago: true})}>
+          <FormattedMessage id="pagoForm.editBankInfo"/>
+        </Button>)
     }
 
     return (
       <>
         <Modal
           show={this.state.showPagoModal}
-          modalClosed={this.cancelSelected}>
+          modalClosed={this.cancelSelected}
+        >
           <div className={classes.Container}>
             <div className={classes.SubTitle}>
               <h3>
-                <FormattedMessage id={"pagos.selectedPago"}/> #{this.props.selPago ? this.props.selPago.id : ''}
+                <FormattedMessage id={"pagos.selectedPago"}/>
+                &nbsp;#{this.props.selPago ? this.props.selPago.id : ''}
               </h3>
               {editPaymentButton}
             </div>
@@ -103,13 +105,10 @@ class Pagos extends Component {
           </div>
         </Modal>
         <div className={classes.Container}>
-          <Title
-            titleName="pagos.title">
-              <Button
-                clicked={this.newPago}
-              >
-                <FormattedMessage id="pagoForm.title"/>
-              </Button>
+          <Title titleName="pagos.title">
+            <Button clicked={this.newPago}>
+              <FormattedMessage id="pagoForm.title"/>
+            </Button>
           </Title>
           <div className={classes.Table}>
             <XLSButton clicked={this.getXLSX} labelID={"pagosXLSX"}/>
@@ -125,21 +124,21 @@ class Pagos extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      listaPagos: state.pagos.pagos,
-      selPago: state.pagos.selectedPago,
-      token: state.auth.token,
-      role: state.generalData.role,
-    }
+  return {
+    listaPagos: state.pagos.pagos,
+    selPago: state.pagos.selectedPago,
+    token: state.auth.token,
+    role: state.generalData.role,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitPagos: (token) => dispatch(actions.initPagos(token)),
-      unSelContrato: () => dispatch(actions.unSelectContrato()),
-      onFetchSelPago: (token, pagoId) => dispatch(actions.fetchSelPago(token, pagoId)),
-      unSelPago: () => dispatch(actions.unSelectPago())
-    }
+  return {
+    onInitPagos: (token) => dispatch(actions.initPagos(token)),
+    unSelContrato: () => dispatch(actions.unSelectContrato()),
+    onFetchSelPago: (token, pagoId) => dispatch(actions.fetchSelPago(token, pagoId)),
+    unSelPago: () => dispatch(actions.unSelectPago())
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Pagos, axios)))

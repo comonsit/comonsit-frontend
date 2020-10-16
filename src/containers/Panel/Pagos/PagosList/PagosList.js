@@ -65,12 +65,14 @@ const pagosList = (props) => {
     })
   }
 
-  return (<RTable
-            columns={columns}
-            data={props.data}
-            onRowClick={props.onClick}
-            selectableRow={props.selectable}
-          />)
+  return (
+    <RTable
+      columns={columns}
+      data={props.data}
+      onRowClick={props.onClick}
+      selectableRow={props.selectable}
+    />
+  )
 }
 
 export default pagosList

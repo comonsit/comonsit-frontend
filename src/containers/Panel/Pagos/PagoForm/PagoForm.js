@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import _ from 'lodash';
 
+import classes from './PagoForm.module.scss'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
@@ -14,7 +15,6 @@ import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatu
 import Currency from '../../../../components/UI/Formatting/Currency'
 import CreditoList from '../../Creditos/CreditoList/CreditoList';
 import ContratoDetail from '../../Creditos/ContratoDetail/ContratoDetail';
-import classes from './PagoForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
@@ -38,7 +38,9 @@ class PagosForm extends Component {
             placeholder: '..folio del crédito'
           },
           label: (<><FormattedMessage id="credito"/>*</>),
-          value: this.props.selContrato ? this.props.selContrato.id : this.props.selPago ? this.props.selPago.credito : "",
+          value: this.props.selContrato
+            ? this.props.selContrato.id : this.props.selPago ? this.props.selPago.credito
+            : "",
           validation: {
             required: true,
             isNumeric: true
@@ -47,11 +49,13 @@ class PagosForm extends Component {
           errorMessage: "",
           touched: this.props.selContrato !== null || this.props.selPago !== null,
           hide: false,
-          supportActions: !this.props.selPago ?  {
-            supportButton: (event) => this.onSearchCredito(event),
-            loseFocus: () => this.searchByFocus(),
-            suppButtLabelID: "searchCredito"
-          } : null,
+          supportActions: !this.props.selPago
+            ?  {
+                supportButton: (event) => this.onSearchCredito(event),
+                loseFocus: () => this.searchByFocus(),
+                suppButtLabelID: "searchCredito"
+              }
+            : null,
           supportData: null,
           disabled: this.props.selPago !== null
         },
@@ -207,26 +211,24 @@ class PagosForm extends Component {
     this.props.onClearError()
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
 
     let formData = {}
     for (let formElementIdentifier in this.state.pagoForm) {
       if (
-        this.state.pagoForm[formElementIdentifier].validation.required ||
-        this.state.pagoForm[formElementIdentifier].value !== ''
+        this.state.pagoForm[formElementIdentifier].validation.required
+        || this.state.pagoForm[formElementIdentifier].value !== ''
       ) {
         formData[formElementIdentifier] = this.state.pagoForm[formElementIdentifier].value
       }
     }
 
     const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
+      headers: {'Authorization': `Bearer ${this.props.token}`}
     }
 
-    this.setState({
-      loading: true
-    })
+    this.setState({loading: true})
 
     if (this.props.selPago) {
     // if (this.state.editing) {
@@ -274,7 +276,6 @@ class PagosForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const validation = checkValidity(event.target.value, this.state.pagoForm[inputIdentifier].validation, true)
 
     const updatedFormElement = updateObject(this.state.pagoForm[inputIdentifier], {
@@ -290,7 +291,11 @@ class PagosForm extends Component {
         ...clearData
     })
 
-    if (inputIdentifier === "abono_capital" || inputIdentifier === "interes_ord" || inputIdentifier === "interes_mor") {
+    if (
+      inputIdentifier === "abono_capital"
+      || inputIdentifier === "interes_ord"
+      || inputIdentifier === "interes_mor"
+    ) {
       updatedForm = this.updateCantidad(updatedForm)
     }
 
@@ -300,10 +305,10 @@ class PagosForm extends Component {
     }
   }
 
-  checkIfFormIsValid = (form) => {
+  checkIfFormIsValid = form => {
     let formIsValid = true
     for (let inputIds in form) {
-        formIsValid = form[inputIds].valid && formIsValid
+      formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
   }
@@ -319,15 +324,15 @@ class PagosForm extends Component {
     }
 
     return updateObject(previousForm, {
-        cantidad: updateObject(previousForm.cantidad, {
-          value: total,
-          valid: total !== 0,
-          touched: true,
-        })
+      cantidad: updateObject(previousForm.cantidad, {
+        value: total,
+        valid: total !== 0,
+        touched: true,
+      })
     })
   }
 
-  onSearchCredito = (event) => {
+  onSearchCredito = event => {
     event.preventDefault();
     this.setState({searchingOpen: true})
   }
@@ -357,17 +362,16 @@ class PagosForm extends Component {
     }
   }
 
-  selectContrato = (id) => {
+  selectContrato = id => {
     const updatedForm = updateObject(this.state.pagoForm, {
-        ...this.clearSupportData(),
-        credito: updateObject(this.state.pagoForm.credito, {
-            value: id,
-            valid: true,
-            touched: true,
-            supportData: null,
-            errorMessage: ""
-        }),
-
+      ...this.clearSupportData(),
+      credito: updateObject(this.state.pagoForm.credito, {
+        value: id,
+        valid: true,
+        touched: true,
+        supportData: null,
+        errorMessage: ""
+      }),
     })
     this.setState({
       searchingOpen: false,
@@ -383,7 +387,7 @@ class PagosForm extends Component {
     if (contratoID && !isNaN(contratoID)) {
       this.props.onFetchSelContrato(this.props.token, contratoID)
       const updatedForm = updateObject(this.state.pagoForm, {
-          ...this.clearSupportData()
+        ...this.clearSupportData()
       })
       this.setState({
         pagoForm: updatedForm
@@ -401,9 +405,7 @@ class PagosForm extends Component {
     if (contratoID && !isNaN(contratoID) && isNaN(fecha_pago) && !isNaN(Date.parse(fecha_pago))) {
       axios.get('/contratos/'+contratoID+'/deuda/?fecha='+fecha_pago, authData)
         .then(response => {
-
           if ('total_deuda' in response.data) {
-
             const updatedForm = updateObject(this.state.pagoForm, {
               credito: updateObject(this.state.pagoForm.credito, {
                 supportData: <RenderStatus value={response.data.estatus_detail} idLabel={"creditos.status."}/>
@@ -434,12 +436,22 @@ class PagosForm extends Component {
 
 
   render () {
-    const pagoFormOrder = ["credito", "fecha_pago", "abono_capital", "interes_ord", "interes_mor",  "cantidad", "fecha_banco", "referencia_banco"]
+    const pagoFormOrder = [
+      "credito",
+      "fecha_pago",
+      "abono_capital",
+      "interes_ord",
+      "interes_mor",
+      "cantidad",
+      "fecha_banco",
+      "referencia_banco"
+    ]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let creditosBusqueda = <Spinner/>
     let formElements = <Spinner/>
     let creditDetail = null
+    const updatedRedirect = (this.state.updated) ? <Redirect to="/pagos"/> : null
 
     pagoFormOrder.forEach(key => {
       formElementsArray.push({
@@ -450,59 +462,55 @@ class PagosForm extends Component {
 
     if (!this.state.loading) {
       formElements = formElementsArray.map(formElement => {
-          const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
-          return (
-            <div
-              key= {formElement.id}
-              >
-              <div className={classes.Inputs}>
-                <Input
-                  label={formElement.config.label}
-                  key= {formElement.id}
-                  elementType={formElement.config.elementType }
-                  elementConfig={formElement.config.elementConfig }
-                  value={formElement.config.value}
-                  shouldValidate={formElement.config.validation}
-                  invalid={!formElement.config.valid || serverErrorMessage !== ""}
-                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
-                  touched={formElement.config.touched}
-                  disabled={this.props.loading || formElement.config.disabled}
-                  hide={formElement.config.hide}
-                  changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                  supportData={formElement.config.supportData}
-                  supportActions={formElement.config.supportActions}
-                  />
-              </div>
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
+        return (
+          <div key= {formElement.id}>
+            <div className={classes.Inputs}>
+              <Input
+                label={formElement.config.label}
+                key= {formElement.id}
+                elementType={formElement.config.elementType }
+                elementConfig={formElement.config.elementConfig }
+                value={formElement.config.value}
+                shouldValidate={formElement.config.validation}
+                invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                errorMessage={formElement.config.errorMessage + serverErrorMessage}
+                touched={formElement.config.touched}
+                disabled={this.props.loading || formElement.config.disabled}
+                hide={formElement.config.hide}
+                changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                supportData={formElement.config.supportData}
+                supportActions={formElement.config.supportActions}
+              />
             </div>
-              )
+          </div>
+        )
       })
     }
 
     formClasses.push(classes.noScroll)
-
-    const updatedRedirect = (this.state.updated) ? <Redirect to="/pagos"/> : null
 
     if (this.state.searchingOpen && this.props.listaCreditos) {
       creditosBusqueda = (
         <CreditoList
           data={this.props.listaCreditos}
           onClick={(row) => this.selectContrato(row.values.id)}
-          />
+        />
       )
     }
 
     if (this.props.selContrato) {
-      creditDetail = (<ContratoDetail contrato={this.props.selContrato}/>)
+      creditDetail = <ContratoDetail contrato={this.props.selContrato}/>
     }
 
     return (
       <>
         <Modal
           show={this.state.searchingOpen}
-          modalClosed={this.cancelSearch}>
+          modalClosed={this.cancelSearch}
+        >
           <h3><FormattedMessage id="pagos.elige"/></h3>
-          <div
-            className={classes.TableContainer}>
+          <div className={classes.TableContainer}>
             {creditosBusqueda}
           </div>
         </Modal>
@@ -517,7 +525,8 @@ class PagosForm extends Component {
             </div>
             <Button
               btnType="Success"
-              disabled={!this.state.formIsValid}>
+              disabled={!this.state.formIsValid}
+            >
               <FormattedMessage id="saveButton"/>
             </Button>
             {updatedRedirect}
@@ -542,14 +551,14 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitCreditos: (token) => dispatch(actions.initCreditos(token)),
-      onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
-      unselContrato: () => dispatch(actions.unSelectContrato()),
-      unSelPago: () => dispatch(actions.unSelectPago()),
-      onClearError: () => dispatch(actions.clearError()),
-      onSetError: (err) => dispatch(actions.setError(err)),
-    }
+  return {
+    onInitCreditos: (token) => dispatch(actions.initCreditos(token)),
+    onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
+    unselContrato: () => dispatch(actions.unSelectContrato()),
+    unSelPago: () => dispatch(actions.unSelectPago()),
+    onClearError: () => dispatch(actions.clearError()),
+    onSetError: (err) => dispatch(actions.setError(err)),
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(PagosForm, axios))
