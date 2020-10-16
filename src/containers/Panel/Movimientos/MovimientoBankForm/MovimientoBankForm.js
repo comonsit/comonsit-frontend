@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
 
+import classes from './MovimientoBankForm.module.scss'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
-import classes from './MovimientoBankForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
@@ -90,16 +90,18 @@ class MovimientoBankForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
+    const value = this.state.movimientoForm[inputIdentifier].elementType === 'checkbox'
+      ? event.target.checked
+      : event.target.value
 
     const updatedFormElement = updateObject(this.state.movimientoForm[inputIdentifier], {
-        value: this.state.movimientoForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
+        value: value,
         valid: checkValidity(event.target.value, this.state.movimientoForm[inputIdentifier].validation),
         touched: true
     })
 
     let updatedForm = updateObject(this.state.movimientoForm, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     this.setState({movimientoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
@@ -108,7 +110,7 @@ class MovimientoBankForm extends Component {
   checkIfFormIsValid = (form) => {
     let formIsValid = true
     for (let inputIds in form) {
-        formIsValid = form[inputIds].valid && formIsValid
+      formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
   }
@@ -148,10 +150,10 @@ class MovimientoBankForm extends Component {
                 supportData={formElement.config.supportData}
                 supportActions={formElement.config.supportActions}
                 labelCheckbox={formElement.config.labelCheckbox}
-                />
+              />
             </div>
           </div>
-            )
+        )
       })
     }
 
@@ -165,7 +167,8 @@ class MovimientoBankForm extends Component {
           </div>
           <Button
             btnType="Success"
-            disabled={!this.state.formIsValid}>
+            disabled={!this.state.formIsValid}
+          >
             <FormattedMessage id="saveButton"/>
           </Button>
         </form>
@@ -175,21 +178,20 @@ class MovimientoBankForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      role: state.generalData.role,
-      loading: state.movimientos.loading,
-      updated: state.movimientos.updated,
-    }
+  return {
+    token: state.auth.token,
+    role: state.generalData.role,
+    loading: state.movimientos.loading,
+    updated: state.movimientos.updated,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitSocios: (token) => dispatch(actions.initSocios(token)),
-      onEditMovimiento: (movData, id, token) => dispatch(actions.updateMovimiento(movData, id, token)),
-      unSelMov: () => dispatch(actions.unSelectMov())
-    }
+  return {
+    onInitSocios: (token) => dispatch(actions.initSocios(token)),
+    onEditMovimiento: (movData, id, token) => dispatch(actions.updateMovimiento(movData, id, token)),
+    unSelMov: () => dispatch(actions.unSelectMov())
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(MovimientoBankForm, axios))

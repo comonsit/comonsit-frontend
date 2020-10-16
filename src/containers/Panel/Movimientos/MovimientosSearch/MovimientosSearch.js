@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import FileSaver from 'file-saver';
-import classes from './MovimientosSearch.module.scss'
 import { connect } from 'react-redux';
 
-import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
-import MovimientosListConc from '../MovimientosListConc/MovimientosListConc'
-import MovimientoDetail from '../MovimientoDetail/MovimientoDetail'
-import MovimientoBankForm from '../MovimientoBankForm/MovimientoBankForm'
+import classes from './MovimientosSearch.module.scss';
+import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler';
+import MovimientosListConc from '../MovimientosListConc/MovimientosListConc';
+import MovimientoDetail from '../MovimientoDetail/MovimientoDetail';
+import MovimientoBankForm from '../MovimientoBankForm/MovimientoBankForm';
 import Button from '../../../../components/UI/Button/Button';
 import Modal from '../../../../components/UI/Modal/Modal';
 import XLSButton from '../../../../components/UI/XLSButton/XLSButton';
@@ -15,8 +15,8 @@ import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import { updateObject } from '../../../../store/reducers/utility'
 // import { checkValidity } from '../../../utilities/validity'
-import * as actions from '../../../../store/actions'
-import axios from '../../../../store/axios-be.js'
+import * as actions from '../../../../store/actions';
+import axios from '../../../../store/axios-be.js';
 
 
 const procesos_values = [
@@ -49,7 +49,10 @@ class MovimientosSearch extends Component {
       comunidad: {
         elementType: 'select',
         elementConfig: {
-          options: this.props.comunidades.map(r => ({"value": r.id, "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region})),
+          options: this.props.comunidades.map(r => ({
+            "value": r.id,
+            "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region
+          })),
           optionBlank: true
         },
         label: (<><FormattedMessage id="comunidad"/></>),
@@ -60,7 +63,10 @@ class MovimientosSearch extends Component {
       region: {
         elementType: 'select',
         elementConfig: {
-          options: this.props.regiones.map(r => ({"value": r.id, "displayValue": r.id +': ' + r.nombre_de_region})),
+          options: this.props.regiones.map(r => ({
+            "value": r.id,
+            "displayValue": r.id +': ' + r.nombre_de_region
+          })),
           optionBlank: true
         },
         label: (<><FormattedMessage id="region"/></>),
@@ -71,7 +77,10 @@ class MovimientosSearch extends Component {
       empresa: {
         elementType: 'select',
         elementConfig: {
-          options: this.props.empresas.map(r => ({"value": r.id, "displayValue": r.id +': ' + r.nombre_empresa})),
+          options: this.props.empresas.map(r => ({
+            "value": r.id,
+            "displayValue": r.id +': ' + r.nombre_empresa
+          })),
           optionBlank: true
         },
         label: (<><FormattedMessage id="empresa"/></>),
@@ -82,7 +91,10 @@ class MovimientosSearch extends Component {
       fuente: {
         elementType: 'select',
         elementConfig: {
-          options: this.props.fuentes.map(r => ({"value": r.id, "displayValue": r.id +': ' + r.fuente})),
+          options: this.props.fuentes.map(r => ({
+            "value": r.id,
+            "displayValue": r.id +': ' + r.fuente
+          })),
           optionBlank: true
         },
         label: (<><FormattedMessage id="fuente"/></>),
@@ -105,7 +117,10 @@ class MovimientosSearch extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.updatedPatch && this.props.updatedPatch !== prevProps.updatedPatch) {
+    if (
+      this.props.updatedPatch
+      && this.props.updatedPatch !== prevProps.updatedPatch
+    ) {
       this.updateData()
       this.setState({
         showMovimientoModal: false,
@@ -116,12 +131,11 @@ class MovimientosSearch extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const updatedForm = {}
 
     for (const key in this.state.form) {
       updatedForm[key] = updateObject(this.state.form[key], {
-          value: (key === inputIdentifier) ? event.target.value : "",
+        value: (key === inputIdentifier) ? event.target.value : "",
       })
     }
 
@@ -162,16 +176,15 @@ class MovimientosSearch extends Component {
           movs: response.data,
           loading: false
         })
-
       })
   }
 
   // TODO: duplicated code. create separate component
   renderType = cellInfo => {
     if (cellInfo.cell.value) {
-      return (<p style={{color: "#2bc71b"}}>A</p>)
+      return <p style={{color: "#2bc71b"}}>A</p>
     } else {
-      return (<p style={{color: "#ec573c"}}>R</p>)
+      return <p style={{color: "#ec573c"}}>R</p>
     }
   }
 
@@ -208,8 +221,13 @@ class MovimientosSearch extends Component {
   }
 
   render () {
-
-    const movimientoFormOrder = ["comunidad", "region", "empresa", "fuente", "proceso"]
+    const movimientoFormOrder = [
+      "comunidad",
+      "region",
+      "empresa",
+      "fuente",
+      "proceso"
+    ]
     const formElementsArray = []
 
     movimientoFormOrder.forEach(key => {
@@ -221,53 +239,80 @@ class MovimientosSearch extends Component {
 
     let form = <Spinner/>
     if (this.props.comunidades.length > 0 && this.props.regiones.length > 0) {
-
-      form = (<form className={classes.Form} onSubmit={this.updateData}>
-        <div className={classes.Inputs}>
-          {formElementsArray.map(formElement => {
+      form = (
+        <form className={classes.Form} onSubmit={this.updateData}>
+          <div className={classes.Inputs}>
+            {formElementsArray.map(formElement => {
               return (
-                    <Input
-                      label={formElement.config.label}
-                      key= {formElement.id}
-                      elementType={formElement.config.elementType }
-                      elementConfig={formElement.config.elementConfig }
-                      value={formElement.config.value}
-                      shouldValidate={formElement.config.validation}
-                      invalid={!formElement.config.valid}
-                      touched={formElement.config.touched}
-                      disabled={this.props.loading}
-                      hide={formElement.config.hide}
-                      changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                      />
-                  )
-          })}
-        </div>
-        <Button
-          btnType="Success"
-          disabled={!this.state.formIsValid}>
-          <FormattedMessage id="actualizarDatos"/>
-        </Button>
-      </form>)
+                <Input
+                  label={formElement.config.label}
+                  key= {formElement.id}
+                  elementType={formElement.config.elementType }
+                  elementConfig={formElement.config.elementConfig }
+                  value={formElement.config.value}
+                  shouldValidate={formElement.config.validation}
+                  invalid={!formElement.config.valid}
+                  touched={formElement.config.touched}
+                  disabled={this.props.loading}
+                  hide={formElement.config.hide}
+                  changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                />
+              )
+            })}
+          </div>
+          <Button
+            btnType="Success"
+            disabled={!this.state.formIsValid}
+          >
+            <FormattedMessage id="actualizarDatos"/>
+          </Button>
+        </form>
+      )
     }
 
     let movList = this.state.loading ? <Spinner/> : null
     if (this.state.movs && !this.state.loading) {
       movList = (
         <div className={classes.Table}>
-          <XLSButton clicked={this.getXLSX} labelID={"aportacionesRetirosXLS"}/>
-          <MovimientosListConc data={this.state.movs} onClick={(row) => this.showMovimiento(row.original.id)}/>
+          <XLSButton
+            clicked={this.getXLSX}
+            labelID={"aportacionesRetirosXLS"}
+          />
+          <MovimientosListConc
+            data={this.state.movs}
+            onClick={(row) => this.showMovimiento(row.original.id)}
+          />
         </div>
       )
     }
 
-    const movDetail = (this.props.selMov) ? <MovimientoDetail pago={this.props.selMov}/> : <Spinner/>
+    const movDetail = (this.props.selMov)
+      ? <MovimientoDetail pago={this.props.selMov}/>
+      : <Spinner/>
 
     let editMovButton = null
-    if (!this.state.editBankData && this.props.selMov && this.props.selMov.fecha_banco === null) {
-      editMovButton =<Button btnType="Success" clicked={() => this.setState({editBankData: true})}><FormattedMessage id="editarDatosBancarios"/></Button>
+    if (
+      !this.state.editBankData
+      && this.props.selMov
+      && this.props.selMov.fecha_banco === null
+    ) {
+      editMovButton = (
+        <Button
+          btnType="Success"
+          clicked={() => this.setState({editBankData: true})}
+        >
+          <FormattedMessage id="editarDatosBancarios"/>
+        </Button>
+      )
     }
 
-    const movEditBankData = this.state.editBankData ? <MovimientoBankForm  selectedMov={this.props.selMov ? this.props.selMov.id : ''} /> : null
+    const movEditBankData = this.state.editBankData
+      ? (
+          <MovimientoBankForm
+            selectedMov={this.props.selMov ? this.props.selMov.id : ''}
+          />
+        )
+      : null
 
     let selectedMovTitle = null
     if (this.props.selMov) {
@@ -275,39 +320,44 @@ class MovimientosSearch extends Component {
         selectedMovTitle = (
           <p>
             <span style={{color: classes.intenseGreen}}>&#x25CF; </span>
-            <FormattedMessage id={"movimientos.aportacion"}/> #{this.props.selMov ? this.props.selMov.id : ''}
-          </p>)
+            <FormattedMessage id={"movimientos.aportacion"}/>
+            &nbsp;#{this.props.selMov ? this.props.selMov.id : ''}
+          </p>
+        )
       } else {
         selectedMovTitle = (
-          <p >
+          <p>
             <span style={{color: classes.secLightRed}}>&#x25CF; </span>
-            <FormattedMessage id={"movimientos.retiro"}/> #{this.props.selMov ? this.props.selMov.id : ''}
-          </p>)
+            <FormattedMessage id={"movimientos.retiro"}/>
+            &nbsp;#{this.props.selMov ? this.props.selMov.id : ''}
+          </p>
+        )
       }
 
 
     }
 
-    const modalContent = this.props.loadingPatch ? <Spinner/> : (
-      <div className={classes.Container}>
-        <div className={classes.SubTitle}>
-          <h3>
-            {selectedMovTitle}
-          </h3>
-          {editMovButton}
-        </div>
-        <div className={classes.ContentContainer}>
-        {movDetail}
-        {movEditBankData}
-        </div>
-      </div>
-    )
+    const modalContent = this.props.loadingPatch
+      ? <Spinner/>
+      : (
+          <div className={classes.Container}>
+            <div className={classes.SubTitle}>
+              <h3>{selectedMovTitle}</h3>
+              {editMovButton}
+            </div>
+            <div className={classes.ContentContainer}>
+              {movDetail}
+              {movEditBankData}
+            </div>
+          </div>
+        )
 
     return (
       <>
         <Modal
           show={this.state.showMovimientoModal}
-          modalClosed={this.cancelSelected}>
+          modalClosed={this.cancelSelected}
+        >
           {modalContent}
         </Modal>
         <div className={classes.Container}>
@@ -320,24 +370,23 @@ class MovimientosSearch extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      regiones: state.generalData.regiones,
-      comunidades: state.generalData.comunidades,
-      empresas: state.generalData.empresas,
-      fuentes: state.generalData.fuentes,
-      selMov: state.movimientos.selectedMov,
-      loadingPatch: state.movimientos.loadingPatch,
-      updatedPatch: state.movimientos.updatedPatch
-    }
+  return {
+    token: state.auth.token,
+    regiones: state.generalData.regiones,
+    comunidades: state.generalData.comunidades,
+    empresas: state.generalData.empresas,
+    fuentes: state.generalData.fuentes,
+    selMov: state.movimientos.selectedMov,
+    loadingPatch: state.movimientos.loadingPatch,
+    updatedPatch: state.movimientos.updatedPatch
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onFetchSelMovimiento: (token, movId) => dispatch(actions.fetchSelMov(token, movId)),
-      unSelMov: () => dispatch(actions.unSelectMov())
-    }
+  return {
+    onFetchSelMovimiento: (token, movId) => dispatch(actions.fetchSelMov(token, movId)),
+    unSelMov: () => dispatch(actions.unSelectMov())
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(MovimientosSearch, axios))

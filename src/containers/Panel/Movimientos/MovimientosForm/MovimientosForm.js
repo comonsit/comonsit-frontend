@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
 import _ from 'lodash';
 
+import classes from './MovimientosForm.module.scss'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
@@ -14,7 +15,6 @@ import Title from '../../../../components/UI/Title/Title';
 import FormConfirmation from '../../../../components/UI/FormConfirmation/FormConfirmation';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
-import classes from './MovimientosForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { isGerencia } from '../../../../store/roles'
 import { updateObject } from '../../../../store/reducers/utility'
@@ -27,6 +27,7 @@ const status = {
   'JA': 'estatus_yip',
   'SL': 'estatus_trabajador'
 }
+
 
 class MovimientosForm extends Component {
   constructor(props) {
@@ -210,7 +211,11 @@ class MovimientosForm extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
+    if (
+      this.props.selSocio
+      && (!prevProps.selSocio
+         || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)
+    ) {
       let newProceso = this.state.movimientoForm.proceso
       const newProcessValues = this.state.processOptions
 
@@ -218,16 +223,19 @@ class MovimientosForm extends Component {
         newProcessValues[id] = this.props.selSocio[status[id]]
       }
       newProceso = updateObject(this.state.movimientoForm.proceso, {
-          value: null,
-          valid: false,
-          errorMessage: "",
-          touched: false
+        value: null,
+        valid: false,
+        errorMessage: "",
+        touched: false
       })
+
+      const names = this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno
+      const comunidadName = this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
 
       const updatedForm = updateObject(this.state.movimientoForm, {
         proceso: newProceso,
         clave_socio: updateObject(this.state.movimientoForm.clave_socio, {
-          supportData: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno + ' de ' + this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
+          supportData: names + ' de ' + comunidadName
         })
       })
 
@@ -238,7 +246,6 @@ class MovimientosForm extends Component {
       });
     }
   }
-
 
   componentDidMount () {
     this.props.onInitSocios(this.props.token)
@@ -256,8 +263,8 @@ class MovimientosForm extends Component {
     let formData = {}
     for (let formElementIdentifier in this.state.movimientoForm) {
       if (
-        this.state.movimientoForm[formElementIdentifier].validation.required ||
-        this.state.movimientoForm[formElementIdentifier].value !== ''
+        this.state.movimientoForm[formElementIdentifier].validation.required
+        || this.state.movimientoForm[formElementIdentifier].value !== ''
       ) {
         formData[formElementIdentifier] = this.state.movimientoForm[formElementIdentifier].value
       }
@@ -279,47 +286,49 @@ class MovimientosForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const validation = checkValidity(event.target.value, this.state.movimientoForm[inputIdentifier].validation, true)
+    const value = this.state.movimientoForm[inputIdentifier].elementType === 'checkbox'
+      ? event.target.checked
+      : event.target.value
 
     const updatedFormElement = updateObject(this.state.movimientoForm[inputIdentifier], {
-        value: this.state.movimientoForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
+        value: value,
         valid: validation.valid,
         errorMessage: validation.errorMessage,
         touched: true
     })
 
     let updatedForm = updateObject(this.state.movimientoForm, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     // TODO: Improve
     // Logic to hide or show Bank information
     const hide = {
-        hide: true,
-        valid: true,
-        validation: {
-          required: false
-        }
+      hide: true,
+      valid: true,
+      validation: {
+        required: false
+      }
     }
 
     const show = {
-        hide: false,
-        validation: {
-          required: true
-        }
+      hide: false,
+      validation: {
+        required: true
+      }
     }
 
     if (inputIdentifier === 'tipo_de_movimiento') {
       if(event.target.value === 'EF') {
         updatedForm = updateObject(updatedForm, {
-            fecha_banco: updateObject(updatedForm.fecha_banco, hide),
-            referencia_banco: updateObject(updatedForm.referencia_banco, hide),
+          fecha_banco: updateObject(updatedForm.fecha_banco, hide),
+          referencia_banco: updateObject(updatedForm.referencia_banco, hide),
         })
       } else {
         updatedForm = updateObject(updatedForm, {
-            fecha_banco: updateObject(updatedForm.fecha_banco, show),
-            referencia_banco: updateObject(updatedForm.referencia_banco, show),
+          fecha_banco: updateObject(updatedForm.fecha_banco, show),
+          referencia_banco: updateObject(updatedForm.referencia_banco, show),
         })
       }
     }
@@ -333,7 +342,7 @@ class MovimientosForm extends Component {
   checkIfFormIsValid = (form) => {
     let formIsValid = true
     for (let inputIds in form) {
-        formIsValid = form[inputIds].valid && formIsValid
+      formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
   }
@@ -350,12 +359,12 @@ class MovimientosForm extends Component {
 
   selectSocio =(id) => {
     const updatedForm = updateObject(this.state.movimientoForm, {
-        clave_socio: updateObject(this.state.movimientoForm.clave_socio, {
-            value: id,
-            valid: true,
-            touched: true,
-            errorMessage: ""
-        })
+      clave_socio: updateObject(this.state.movimientoForm.clave_socio, {
+        value: id,
+        valid: true,
+        touched: true,
+        errorMessage: ""
+      })
     })
     this.setState({
       searchSocio: false,
@@ -373,14 +382,14 @@ class MovimientosForm extends Component {
     // RETIROS DO NOT HAVE ORDINARIO VALUE.
     const updatedFormOrd = updateObject(this.state.movimientoForm.ordinario,
       {
-        value:  result ? result : null,
+        value: result || null,
         hide: !result
       }
     )
 
     const updatedForm = updateObject(this.state.movimientoForm, {
-        aportacion: updatedFormAp,
-        ordinario: updatedFormOrd
+      aportacion: updatedFormAp,
+      ordinario: updatedFormOrd
     })
 
     this.setState({
@@ -399,18 +408,22 @@ class MovimientosForm extends Component {
   OnChooseProcess = current => {
     // event.preventDefault();
     const previous = this.state.movimientoForm.proceso.value
-    if (previous !== current && this.props.selSocio && this.props.selSocio[status[current]] === 'AC') {
+    if (
+      previous !== current
+      && this.props.selSocio
+      && this.props.selSocio[status[current]] === 'AC'
+    ) {
       const newProcesses = updateObject(this.state.processOptions, {
         [previous]: this.props.selSocio[status[previous]],
         [current]: 'SEL'
       })
       const updatedForm = updateObject(this.state.movimientoForm, {
-          proceso: updateObject(this.state.movimientoForm.proceso, {
-              value: current,
-              valid: true,
-              touched: true,
-              errorMessage: ""
-          })
+        proceso: updateObject(this.state.movimientoForm.proceso, {
+          value: current,
+          valid: true,
+          touched: true,
+          errorMessage: ""
+        })
       })
       this.setState({
         processOptions: newProcesses,
@@ -426,11 +439,22 @@ class MovimientosForm extends Component {
   }
 
   render () {
-    const movimientoFormOrder = ["clave_socio", "fecha_entrega", "monto", "proceso", "ordinario", "responsable_entrega", "tipo_de_movimiento", "fecha_banco", "referencia_banco"]
+    const movimientoFormOrder = [
+      "clave_socio",
+      "fecha_entrega",
+      "monto",
+      "proceso",
+      "ordinario",
+      "responsable_entrega",
+      "tipo_de_movimiento",
+      "fecha_banco",
+      "referencia_banco"
+    ]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let modalInfo = <Spinner/>
     let formElements = <Spinner/>
+    const updatedRedirect = (this.props.updated) ? <Redirect to="/movimientos"/> : null
 
     movimientoFormOrder.forEach(key => {
       formElementsArray.push({
@@ -447,14 +471,16 @@ class MovimientosForm extends Component {
             <div
               key={formElement.id}
               className={classes.Inputs}>
-              <ProcessSelector label={formElement.id+'_nombre'} processes={this.state.processOptions} clicked={this.OnChooseProcess}/>
+              <ProcessSelector
+                label={formElement.id+'_nombre'}
+                processes={this.state.processOptions}
+                clicked={this.OnChooseProcess}
+              />
             </div>
               )
         } else {
           return (
-            <div
-              key= {formElement.id}
-              >
+            <div key= {formElement.id}>
               <div className={classes.Inputs}>
                 <Input
                   label={formElement.config.label}
@@ -472,43 +498,45 @@ class MovimientosForm extends Component {
                   supportData={formElement.config.supportData}
                   supportActions={formElement.config.supportActions}
                   labelCheckbox={formElement.config.labelCheckbox}
-                  />
+                />
               </div>
             </div>
-              )
+          )
         }
       })
     }
 
-     formClasses.push(classes.noScroll)
-
-
-
-    const updatedRedirect = (this.props.updated) ? <Redirect to="/movimientos"/> : null
-
+    formClasses.push(classes.noScroll)
 
     if (this.state.modalOpen) {
       if (this.props.listaSocios && this.state.searchSocio) {
-        modalInfo = (<>
-                      <h3><FormattedMessage id="solicitudForm.elige"/></h3>
-                      <div
-                        className={classes.TableContainer}>
-                        <SociosList
-                          listaSocios={this.props.listaSocios}
-                          onClick={row => this.selectSocio(row.values.clave_socio)}
-                          />
-                      </div>
-                     </>)
+        modalInfo = (
+          <>
+            <h3><FormattedMessage id="solicitudForm.elige"/></h3>
+            <div
+              className={classes.TableContainer}>
+              <SociosList
+                listaSocios={this.props.listaSocios}
+                onClick={row => this.selectSocio(row.values.clave_socio)}
+                />
+            </div>
+         </>
+        )
       } else if (this.state.confirmFormOpen && !this.props.loading) {
-        const title = this.state.movimientoForm.aportacion.value ? <h3><FormattedMessage id="movimientos.aportacion"/></h3> : <h3><FormattedMessage id="movimientos.retiro"/></h3>
-        modalInfo = (<FormConfirmation
-                       formOrder={movimientoFormOrder}
-                       formData={this.state.movimientoForm}
-                       onSubmitAction={this.onSubmitForm}
-                       onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
-                       extraTitle={title}
-                      />
-                    )
+
+        const title = this.state.movimientoForm.aportacion.value
+          ? <h3><FormattedMessage id="movimientos.aportacion"/></h3>
+          : <h3><FormattedMessage id="movimientos.retiro"/></h3>
+
+        modalInfo = (
+          <FormConfirmation
+            formOrder={movimientoFormOrder}
+            formData={this.state.movimientoForm}
+            onSubmitAction={this.onSubmitForm}
+            onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
+            extraTitle={title}
+          />
+        )
       }
     }
 
@@ -531,30 +559,33 @@ class MovimientosForm extends Component {
       <>
         <Modal
           show={this.state.modalOpen}
-          modalClosed={this.cancelSearch}>
+          modalClosed={this.cancelSearch}
+        >
           {modalInfo}
         </Modal>
-        <Title
-          titleName="movimientosForm.title"/>
+        <Title titleName="movimientosForm.title"/>
         <div className={classes.ToggleContainer}>
           <div
             onClick={() => this.onToggleType(true)}
-            className={aportacionClasses.join(' ')}>
+            className={aportacionClasses.join(' ')}
+          >
             <p><FormattedMessage id="movimientos.aportacion"/></p>
           </div>
           <div
             onClick={() => this.onToggleType(false)}
-            className={retiroClasses.join(' ')}>
+            className={retiroClasses.join(' ')}
+          >
             <p><FormattedMessage id="movimientos.retiro"/></p>
           </div>
         </div>
         <form onSubmit={this.onShowConfirmation}>
           <div className={formClasses.join(' ')}>
-          {formElements}
+            {formElements}
           </div>
           <Button
             btnType="Success"
-            disabled={!this.state.formIsValid}>
+            disabled={!this.state.formIsValid}
+          >
             <FormattedMessage id="saveButton"/>
           </Button>
           {updatedRedirect}
@@ -565,29 +596,27 @@ class MovimientosForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      role: state.generalData.role,
-      empresas: state.generalData.empresas,
-      loading: state.movimientos.loading,
-      updated: state.movimientos.updated,
-      listaSocios: state.socios.socios,
-      selSocio: state.socios.selectedSocio,
-      comunidades: state.generalData.comunidades,
-      formError: state.errors.errors,
-    }
+  return {
+    token: state.auth.token,
+    role: state.generalData.role,
+    empresas: state.generalData.empresas,
+    loading: state.movimientos.loading,
+    updated: state.movimientos.updated,
+    listaSocios: state.socios.socios,
+    selSocio: state.socios.selectedSocio,
+    comunidades: state.generalData.comunidades,
+    formError: state.errors.errors,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
-      onInitSocios: (token) => dispatch(actions.initSocios(token)),
-      onCreateNewMovimiento: (solData, token) => dispatch(actions.createNewMovimiento(solData, token)),
-      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio()),
-      onClearError: () => dispatch(actions.clearError())
-    }
+  return {
+    onInitSocios: (token) => dispatch(actions.initSocios(token)),
+    onCreateNewMovimiento: (solData, token) => dispatch(actions.createNewMovimiento(solData, token)),
+    onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
+    unSelSocio: () => dispatch(actions.unSelectSocio()),
+    onClearError: () => dispatch(actions.clearError())
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(MovimientosForm, axios))

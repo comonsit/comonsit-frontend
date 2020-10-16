@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './Movimientos.module.scss'
 import { connect } from 'react-redux';
 
+import classes from './Movimientos.module.scss'
 import MovimientosSearch from './MovimientosSearch/MovimientosSearch'
 import MovimientosListConc from './MovimientosListConc/MovimientosListConc'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
@@ -29,6 +29,7 @@ const status = {
   'SL': 'estatus_trabajador'
 }
 
+
 class Movimientos extends Component {
   state = {
     movimientoSelected: false,
@@ -40,10 +41,10 @@ class Movimientos extends Component {
     formIsValid: false,
     loading: false,
     processOptions: {
-          CF: 'NP',
-          MI: 'NP',
-          JA: 'NP',
-          SL: 'NP'
+      CF: 'NP',
+      MI: 'NP',
+      JA: 'NP',
+      SL: 'NP'
     },
     form: {
       clave_socio: {
@@ -69,14 +70,18 @@ class Movimientos extends Component {
     this.props.onInitSocios(this.props.token)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.props.unSelSocio()
     this.props.unSetMov()
   }
 
 
-  componentDidUpdate(prevProps) {
-    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
+  componentDidUpdate (prevProps) {
+    if (
+      this.props.selSocio
+      && (!prevProps.selSocio
+        || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)
+    ) {
 
       const newProcessValues = this.state.processOptions
 
@@ -84,9 +89,10 @@ class Movimientos extends Component {
         newProcessValues[id] = this.props.selSocio[status[id]] === 'AC' ? "SEL" : this.props.selSocio[status[id]]
       }
 
+      const nombres = this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno
       this.setState({
         processOptions: newProcessValues,
-        selSocio: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno
+        selSocio: nombres
       });
     }
   }
@@ -117,18 +123,18 @@ class Movimientos extends Component {
   inputChangedHandler = (event, inputIdentifier) => {
 
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
-        value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
-        touched: true
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
+      touched: true
     })
 
     let updatedForm = updateObject(this.state.form, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
     for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
+      formIsValid = updatedForm[inputIds].valid && formIsValid
     }
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
@@ -144,9 +150,20 @@ class Movimientos extends Component {
     axios.get('/movimientos/saldo/?clave_socio='+id, authData)
       .then(response => {
         if ("saldo" in response.data) {
-          this.setState({saldo: response.data.saldo, emptyMessage: false, loading: false})
-        } else if ("message" in response.data && response.data.message === "No hay información disponible") {
-          this.setState({emptyMessage: true, saldo: null, loading: false})
+          this.setState({
+            saldo: response.data.saldo,
+            emptyMessage: false,
+            loading: false
+          })
+        } else if (
+          "message" in response.data
+          && response.data.message === "No hay información disponible"
+        ) {
+          this.setState({
+            emptyMessage: true,
+            saldo: null,
+            loading: false
+          })
         }
 
       })
@@ -162,30 +179,29 @@ class Movimientos extends Component {
   //   // this.props.unSelMovimiento()
   // }
 
-  onSearchSocio = (event) => {
+  onSearchSocio = event => {
     event.preventDefault();
     this.setState({searchingOpen: true})
   }
 
-  cancelSearch =() => {
+  cancelSearch = () => {
     this.setState({searchingOpen: false, socioSeleccionado: null})
     this.props.unSelSocio()
   }
 
   onNewMovimiento = () => {
-    this.setState({ acopioSelected: true});
+    this.setState({acopioSelected: true});
     this.props.history.push('movimiento-formato');
     this.props.onNewMov()
   }
 
-  selectSocio =(id) => {
-
+  selectSocio = id => {
     const updatedForm = updateObject(this.state.form, {
-        clave_socio: updateObject(this.state.form.clave_socio, {
-            value: id,
-            valid: true,
-            touched: true
-        })
+      clave_socio: updateObject(this.state.form.clave_socio, {
+        value: id,
+        valid: true,
+        touched: true
+      })
     })
     this.setState({
       searchingOpen: false,
@@ -196,20 +212,21 @@ class Movimientos extends Component {
   }
 
   render () {
-
     let sociosBusqueda = <Spinner/>
     let movimientosResults = null
+    const today = new Date()
+    let socioClasses = [classes.porSocio]
+    let comunidadClasses = [classes.porComunidad]
 
     if (this.props.listaSocios && this.state.searchingOpen) {
       sociosBusqueda = (
         <SociosList
-            listaSocios={this.props.listaSocios}
-            onClick={row => this.selectSocio(row.values.clave_socio)}
-            />
+          listaSocios={this.props.listaSocios}
+          onClick={row => this.selectSocio(row.values.clave_socio)}
+        />
       )
     }
 
-    const today = new Date()
     if (this.state.loading) {
       movimientosResults = <Spinner/>
     } else if (this.props.listaMovimientos && this.state.saldo !== null) {
@@ -265,8 +282,7 @@ class Movimientos extends Component {
       movimientosResults = null
     }
 
-    let socioClasses = [classes.porSocio]
-    let comunidadClasses = [classes.porComunidad]
+    // TODO: FIX!!
     if (true) {
       socioClasses.push(classes.porSocioActive)
       comunidadClasses.push(classes.porComunidadInactive)
@@ -277,27 +293,28 @@ class Movimientos extends Component {
 
     return (
       <>
-          <Modal
-            show={this.state.searchingOpen}
-            modalClosed={this.cancelSearch}>
-            <h3><FormattedMessage id="selectSocio"/></h3>
-            <div
-              className={classes.TableContainer}>
-            {sociosBusqueda}
-            </div>
-          </Modal>
+        <Modal
+          show={this.state.searchingOpen}
+          modalClosed={this.cancelSearch}
+        >
+          <h3><FormattedMessage id="selectSocio"/></h3>
+          <div
+            className={classes.TableContainer}>
+          {sociosBusqueda}
+          </div>
+        </Modal>
 
         <div className={classes.Container}>
           <Title
             titleName="movimientos.title">
-            <Button
-              clicked={this.onNewMovimiento}
-              ><FormattedMessage id="movimientos.newMovimiento"/></Button>
+            <Button clicked={this.onNewMovimiento}>
+              <FormattedMessage id="movimientos.newMovimiento"/>
+            </Button>
           </Title>
           <div className={classes.FormsContainer}>
             <Tabs
               onSelectTab={(activeTab) => this.setState({selTab: activeTab})}
-              >
+            >
               <div label="movimientos.buscarSocio">
                 <form className={classes.Form} onSubmit={this.onSubmitForm}>
                   <div className={classes.Inputs}>
@@ -314,16 +331,22 @@ class Movimientos extends Component {
                       hide={this.state.form.clave_socio.hide}
                       changed={(event) => this.inputChangedHandler(event, 'clave_socio')}
                       focused
-                      />
+                    />
                   </div>
                   <Button
                     btnType="Success"
-                    disabled={!this.state.formIsValid}>
+                    disabled={!this.state.formIsValid}
+                  >
                     <FormattedMessage id="movimientos.actualizar"/>
                   </Button>
                 </form>
                 <div className={classes.supportButton}>
-                  <Button btnType="Short" clicked={(event) => this.onSearchSocio(event)}><FormattedMessage id="searchSocio"/></Button>
+                  <Button
+                    btnType="Short"
+                    clicked={(event) => this.onSearchSocio(event)}
+                  >
+                    <FormattedMessage id="searchSocio"/>
+                  </Button>
                 </div>
                 {movimientosResults}
               </div>
@@ -339,26 +362,25 @@ class Movimientos extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      selSocio: state.socios.selectedSocio,
-      listaMovimientos: state.movimientos.movimientos,
-      listaSocios: state.socios.socios,
-      token: state.auth.token
-    }
+  return {
+    selSocio: state.socios.selectedSocio,
+    listaMovimientos: state.movimientos.movimientos,
+    listaSocios: state.socios.socios,
+    token: state.auth.token
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitSocios: (token) => dispatch(actions.initSocios(token)),
-      onInitMovimientos: (token, socioId) => dispatch(actions.initMovimientos(token, socioId)),
-      onNewMov: () => dispatch(actions.newMovimiento()),
-      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio()),
-      unSetMov: () => dispatch(actions.unSetMovimientos())
-      // onFetchSelMovimiento: (token, solId) => dispatch(actions.fetchSelMovimiento(token, movimientoId)),
-      // unSelMovimiento: () => dispatch(actions.unSelectMovimiento())
-    }
+  return {
+    onInitSocios: (token) => dispatch(actions.initSocios(token)),
+    onInitMovimientos: (token, socioId) => dispatch(actions.initMovimientos(token, socioId)),
+    onNewMov: () => dispatch(actions.newMovimiento()),
+    onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
+    unSelSocio: () => dispatch(actions.unSelectSocio()),
+    unSetMov: () => dispatch(actions.unSetMovimientos())
+    // onFetchSelMovimiento: (token, solId) => dispatch(actions.fetchSelMovimiento(token, movimientoId)),
+    // unSelMovimiento: () => dispatch(actions.unSelectMovimiento())
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Movimientos, axios))

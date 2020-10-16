@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl';
 
+import classes from './MovimientosListConc.module.scss'
 import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
 import Bee from '../../../../Icons/Bee.js';
@@ -10,21 +11,20 @@ import Coffee from '../../../../Icons/Coffee.js';
 
 
 const movimientosListConc = (props) => {
-
   const renderType = cellInfo => {
     if (cellInfo.cell.value) {
-      return (<p style={{color: "#2bc71b"}}>APORT</p>)
+      return (<p style={{color: classes.intenseGreen}}>APORT</p>)
     } else {
-      return (<p style={{color: "#ec573c"}}>RETIR</p>)
+      return (<p style={{color: classes.secLightRred}}>RETIR</p>)
     }
   }
 
   const renderStatus = cellInfo => {
     switch(cellInfo.cell.value) {
-      case "CF": return (<Coffee fill="#243746" width="18px" height="18px"/>)
-      case "MI": return (<Bee fill="#243746" width="20px" height="20px"/>)
-      case "JA": return (<Soap fill="#243746" width="20px" height="20px"/>)
-      case "SL": return (<Money fill="#243746" width="20px" height="20px" />)
+      case "CF": return (<Coffee fill={classes.prDarkBlue} width="18px" height="18px"/>)
+      case "MI": return (<Bee fill={classes.prDarkBlue} width="20px" height="20px"/>)
+      case "JA": return (<Soap fill={classes.prDarkBlue} width="20px" height="20px"/>)
+      case "SL": return (<Money fill={classes.prDarkBlue} width="20px" height="20px" />)
       default:
         return (<p>?{cellInfo.cell.value}</p>)
     }
@@ -66,18 +66,20 @@ const movimientosListConc = (props) => {
   ]
 
   if (props.bankDetail) {
-    columns.push(    {
-          Header: <FormattedMessage id="referencia_banco"/>,
-          accessor: 'referencia_banco',
-        })
+    columns.push({
+      Header: <FormattedMessage id="referencia_banco"/>,
+      accessor: 'referencia_banco',
+    })
   }
 
-  return (<RTable
-            columns={columns}
-            data={props.data}
-            onRowClick={props.onClick}
-            selectableRow={props.selectable}
-          />)
+  return (
+    <RTable
+      columns={columns}
+      data={props.data}
+      onRowClick={props.onClick}
+      selectableRow={props.selectable}
+    />
+  )
 }
 
 export default movimientosListConc
