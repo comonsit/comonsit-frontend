@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axios from '../../../../store/axios-be.js';
 import _ from 'lodash';
 
+import classes from './AcopioForm.module.scss'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
@@ -14,7 +15,6 @@ import FormConfirmation from '../../../../components/UI/FormConfirmation/FormCon
 import Title from '../../../../components/UI/Title/Title';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
-import classes from './AcopioForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
@@ -26,6 +26,7 @@ const status = {
   'JA': 'estatus_yip',
   'SL': 'estatus_trabajador'
 }
+
 
 class AcopioForm extends Component {
   constructor(props) {
@@ -134,7 +135,11 @@ class AcopioForm extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
+    if (
+      this.props.selSocio &&
+      (!prevProps.selSocio ||
+      this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)
+    ) {
       let newProceso = this.state.acopioForm.tipo_de_producto
       const newProcessValues = this.state.processOptions
 
@@ -148,10 +153,13 @@ class AcopioForm extends Component {
           touched: false
       })
 
+
+      const socioName = this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno
+      const socioComunidad = this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
       const updatedForm = updateObject(this.state.acopioForm, {
         tipo_de_producto: newProceso,
         clave_socio: updateObject(this.state.acopioForm.clave_socio, {
-          supportData: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno + ' de ' + this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
+          supportData: socioName + ' de ' + socioComunidad
         })
       })
 
@@ -184,16 +192,10 @@ class AcopioForm extends Component {
       }
     }
 
-
-    // if (this.props.new) {
-      this.props.onCreateNewAcopio(formData, this.props.token)
-    // } else {
-    //   this.props.onEditAcopio(acopio, this.props.selAcopio.id, this.props.token)
-    // }
+    this.props.onCreateNewAcopio(formData, this.props.token)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const validation = checkValidity(event.target.value, this.state.acopioForm[inputIdentifier].validation, true)
 
     // TODO: checkbox check unnecesary
@@ -217,7 +219,7 @@ class AcopioForm extends Component {
   checkIfFormIsValid = (form) => {
     let formIsValid = true
     for (let inputIds in form) {
-        formIsValid = form[inputIds].valid && formIsValid
+      formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
   }
@@ -233,13 +235,12 @@ class AcopioForm extends Component {
   }
 
   selectSocio =(id) => {
-
     const updatedForm = updateObject(this.state.acopioForm, {
-        clave_socio: updateObject(this.state.acopioForm.clave_socio, {
-            value: id,
-            valid: true,
-            touched: true
-        })
+      clave_socio: updateObject(this.state.acopioForm.clave_socio, {
+        value: id,
+        valid: true,
+        touched: true
+      })
     })
     this.setState({
       modalOpen: false,
@@ -260,7 +261,10 @@ class AcopioForm extends Component {
   OnChooseProcess = current => {
     // event.preventDefault();
     const previous = this.state.acopioForm.tipo_de_producto.value
-    if (previous !== current && this.props.selSocio && this.props.selSocio[status[current]] === 'AC') {
+    if (
+      previous !== current && this.props.selSocio &&
+      this.props.selSocio[status[current]] === 'AC'
+    ) {
       const newProcesses = updateObject(this.state.processOptions, {
         [previous]: this.props.selSocio[status[previous]],
         [current]: 'SEL'
@@ -270,28 +274,28 @@ class AcopioForm extends Component {
       const hideKilos = !(current === 'CF' || current === 'MI')
 
       const updatedForm = updateObject(this.state.acopioForm, {
-          tipo_de_producto: updateObject(this.state.acopioForm.tipo_de_producto, {
-              value: current,
-              valid: true,
-              touched: true
-          }),
-          kilos_de_producto: updateObject(this.state.acopioForm.kilos_de_producto, {
-              hide: hideKilos,
-              valid: true,
-              value: '',
-              validation: {
-                required: !hideKilos,
-                isDecimal: true
-              },
-              touched: true
-          })
+        tipo_de_producto: updateObject(this.state.acopioForm.tipo_de_producto, {
+          value: current,
+          valid: true,
+          touched: true
+        }),
+        kilos_de_producto: updateObject(this.state.acopioForm.kilos_de_producto, {
+          hide: hideKilos,
+          valid: true,
+          value: '',
+          validation: {
+            required: !hideKilos,
+            isDecimal: true
+          },
+          touched: true
+        })
       })
 
       this.setState({
         processOptions: newProcesses,
         acopioForm: updatedForm,
         formIsValid: this.checkIfFormIsValid(updatedForm)
-      });
+      })
     }
   }
 
@@ -302,7 +306,13 @@ class AcopioForm extends Component {
 
   render () {
     // SINGLE SOCIO
-    const acopioFormOrder = ["clave_socio", "fecha",  "tipo_de_producto", "kilos_de_producto", "ingreso"]
+    const acopioFormOrder = [
+      "clave_socio",
+      "fecha",
+      "tipo_de_producto",
+      "kilos_de_producto",
+      "ingreso"
+    ]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let supportData
@@ -324,14 +334,25 @@ class AcopioForm extends Component {
               key= {formElement.id}
               className={classes.Inputs}
             >
-              <ProcessSelector label={formElement.id} processes={this.state.processOptions} clicked={this.OnChooseProcess}/>
+              <ProcessSelector
+                label={formElement.id}
+                processes={this.state.processOptions}
+                clicked={this.OnChooseProcess}
+              />
             </div>
               )
         } else {
-          if (formElement.id === "kilos_de_producto" && this.state.acopioForm.kilos_de_producto.value > 0 && this.state.acopioForm.ingreso.value > 0) {
+          if (
+            formElement.id === "kilos_de_producto" &&
+            this.state.acopioForm.kilos_de_producto.value > 0 &&
+            this.state.acopioForm.ingreso.value > 0
+          ) {
             supportData = (
               <div className={classes.SupportData}>
-                <p><FormattedMessage id="acopioForm.avg_price"/>: {Math.round(this.state.acopioForm.ingreso.value / this.state.acopioForm.kilos_de_producto.value)}</p>
+                <p>
+                  <FormattedMessage id="acopioForm.avg_price"/>
+                  : {Math.round(this.state.acopioForm.ingreso.value / this.state.acopioForm.kilos_de_producto.value)}
+                </p>
               </div>)
           } else {
             supportData = null
@@ -339,7 +360,7 @@ class AcopioForm extends Component {
           return (
             <div
               key= {formElement.id}
-              >
+            >
               <div className={classes.Inputs}>
                 <Input
                   label={formElement.config.label}
@@ -360,32 +381,35 @@ class AcopioForm extends Component {
               </div>
               {supportData}
             </div>
-              )
+          )
         }
       })
     }
 
-     formClasses.push(classes.noScroll)
+    formClasses.push(classes.noScroll)
 
-     if (this.state.modalOpen) {
-       if (this.props.listaSocios && this.state.searchSocio) {
-         modalInfo = (<>
-                        <h3><FormattedMessage id="selectSocio"/></h3>
-                        <div
-                          className={classes.TableContainer}>
-                          <SociosList
-                            listaSocios={this.props.listaSocios}
-                            onClick={row => this.selectSocio(row.values.clave_socio)}
-                          />
-                        </div>
-                      </>)
+    if (this.state.modalOpen) {
+      if (this.props.listaSocios && this.state.searchSocio) {
+        modalInfo = (
+          <>
+            <h3><FormattedMessage id="selectSocio"/></h3>
+            <div className={classes.TableContainer}>
+              <SociosList
+                listaSocios={this.props.listaSocios}
+                onClick={row => this.selectSocio(row.values.clave_socio)}
+              />
+            </div>
+          </>
+        )
        } else if (this.state.confirmFormOpen) {
-         modalInfo = (<FormConfirmation
-                        formOrder={acopioFormOrder}
-                        formData={this.state.acopioForm}
-                        onSubmitAction={this.onSubmitForm}
-                        onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
-                      />)
+        modalInfo = (
+          <FormConfirmation
+            formOrder={acopioFormOrder}
+            formData={this.state.acopioForm}
+            onSubmitAction={this.onSubmitForm}
+            onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
+          />
+          )
        }
      }
 
@@ -419,26 +443,25 @@ class AcopioForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      loading: state.acopios.loading,
-      updated: state.acopios.updated,
-      listaSocios: state.socios.socios,
-      selSocio: state.socios.selectedSocio,
-      comunidades: state.generalData.comunidades,
-      formError: state.errors.errors,
-    }
+  return {
+    token: state.auth.token,
+    loading: state.acopios.loading,
+    updated: state.acopios.updated,
+    listaSocios: state.socios.socios,
+    selSocio: state.socios.selectedSocio,
+    comunidades: state.generalData.comunidades,
+    formError: state.errors.errors,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
-      onInitSocios: (token) => dispatch(actions.initSocios(token)),
-      onCreateNewAcopio: (solData, token) => dispatch(actions.createNewAcopio(solData, token)),
-      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio()),
-      onClearError: () => dispatch(actions.clearError())
-    }
+  return {
+    onInitSocios: (token) => dispatch(actions.initSocios(token)),
+    onCreateNewAcopio: (solData, token) => dispatch(actions.createNewAcopio(solData, token)),
+    onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
+    unSelSocio: () => dispatch(actions.unSelectSocio()),
+    onClearError: () => dispatch(actions.clearError())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(AcopioForm, axios))

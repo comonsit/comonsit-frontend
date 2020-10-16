@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
-import {FormattedMessage} from 'react-intl';
-import classes from './Acopios.module.scss'
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+
+import classes from './Acopios.module.scss'
 import Bee from '../../../Icons/Bee.js';
 import Money from '../../../Icons/Money.js';
 import Soap from '../../../Icons/Soap.js';
 import Coffee from '../../../Icons/Coffee.js';
-
 import AcopiosGraphs from './AcopiosGraphs/AcopiosGraphs';
-
 import Button from '../../../components/UI/Button/Button';
 import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import RTable from '../../../components/Tables/RTable/RTable';
@@ -41,12 +40,13 @@ class Acopios extends Component {
     }
   }
 
+  // TODO: delete?
   showAcopio =(id) => {
     // this.setState({acopioSelected: true});
     // this.props.selectAcopio(id)
   }
 
-  cancelSelected =() => {
+  cancelSelected = () => {
     this.setState({ acopioSelected: false});
     // this.props.unSelAcopio()
   }
@@ -59,7 +59,7 @@ class Acopios extends Component {
 
   getXLSX = type => {
     type = type === 'ALL' ? '' : type
-    const url = (type) ? '/acopiosXLSX/?tipo_de_producto='+type : '/acopiosXLSX/'
+    const url = type ? '/acopiosXLSX/?tipo_de_producto='+type : '/acopiosXLSX/'
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` },
       responseType: 'blob',
@@ -85,7 +85,6 @@ class Acopios extends Component {
  };
 
   render () {
-
     const columns = [
       {
         Header: '#',
@@ -147,7 +146,13 @@ class Acopios extends Component {
 
     if (isGerencia(this.props.role)) {
       const processList = ['ALL', 'CF', 'MI', 'JA', 'SL']
-      downloadXLSButton = <HoverButton title="acopiosXLSX" items={processList} clicked={this.getXLSX}/>
+      downloadXLSButton = (
+        <HoverButton
+          title="acopiosXLSX"
+          items={processList}
+          clicked={this.getXLSX}
+        />
+      )
     }
 
     return (
@@ -155,9 +160,9 @@ class Acopios extends Component {
         <div>
           <Title
             titleName="acopios.title">
-            <Button
-              clicked={this.onNewAcopio}
-              ><FormattedMessage id="acopios.newAcopio"/></Button>
+            <Button clicked={this.onNewAcopio}>
+              <FormattedMessage id="acopios.newAcopio"/>
+            </Button>
           </Title>
           <div className={classes.AllGraphs}>
             <AcopiosGraphs/>
@@ -168,7 +173,7 @@ class Acopios extends Component {
               columns={columns}
               data={this.props.listaAcopios}
               onRowClick={row => this.showAcopio(row.values.id)}
-              />
+            />
           </div>
         </div>
       </>
@@ -177,22 +182,18 @@ class Acopios extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      // selectedAcopio: state.acopios.selectedAcopio,
-      listaAcopios: state.acopios.acopios,
-      token: state.auth.token,
-      role: state.generalData.role
-    }
+  return {
+    listaAcopios: state.acopios.acopios,
+    token: state.auth.token,
+    role: state.generalData.role
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitAcopios: (token) => dispatch(actions.initAcopios(token)),
-      onNewAcop: () => dispatch(actions.newAcopio()),
-      // onFetchSelAcopio: (token, solId) => dispatch(actions.fetchSelAcopio(token, acopioId)),
-      // unSelAcopio: () => dispatch(actions.unSelectAcopio())
-    }
+  return {
+    onInitAcopios: (token) => dispatch(actions.initAcopios(token)),
+    onNewAcop: () => dispatch(actions.newAcopio()),
+  }
 }
 
-
-export default  connect(mapStateToProps, mapDispatchToProps)(Acopios)
+export default connect(mapStateToProps, mapDispatchToProps)(Acopios)

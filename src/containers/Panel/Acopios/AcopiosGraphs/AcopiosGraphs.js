@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import classes from './AcopiosGraphs.module.scss'
 import { connect } from 'react-redux';
 
+import classes from './AcopiosGraphs.module.scss'
 import AcopioGraph from '../../../../components/Graphs/AcopioGraph/AcopioGraph';
-
 import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
@@ -27,10 +26,13 @@ class AcopiosGraphs extends Component {
         clave_socio: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.listaSocios.map(r => ({"value": r.clave_socio, "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno})),
+            options: this.props.listaSocios.map(r => ({
+              "value": r.clave_socio,
+              "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno
+            })),
             optionBlank: true
           },
-          label: (<><FormattedMessage id="clave"/></>),
+          label: <FormattedMessage id="clave"/>,
           value: "",
           valid: false,
           touched: false,
@@ -38,10 +40,13 @@ class AcopiosGraphs extends Component {
         comunidad: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.comunidades.map(r => ({"value": r.id, "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region})),
+            options: this.props.comunidades.map(r => ({
+              "value": r.id,
+              "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region
+            })),
             optionBlank: true
           },
-          label: (<><FormattedMessage id="comunidad"/></>),
+          label: <FormattedMessage id="comunidad"/>,
           value: "",
           valid: true,
           touched: false,
@@ -49,17 +54,19 @@ class AcopiosGraphs extends Component {
         region: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.regiones.map(r => ({"value": r.id, "displayValue": r.id +': ' + r.nombre_de_region})),
+            options: this.props.regiones.map(r => ({
+              "value": r.id,
+              "displayValue": r.id +': ' + r.nombre_de_region
+            })),
             optionBlank: true
           },
-          label: (<><FormattedMessage id="region"/></>),
+          label: <FormattedMessage id="region"/>,
           value: "",
           valid: false,
           touched: false,
         },
       }
     }
-
   }
 
   componentDidMount () {
@@ -73,12 +80,15 @@ class AcopiosGraphs extends Component {
       const updatedForm = updateObject(this.state.form, {
           clave_socio: updateObject(this.state.form.clave_socio, {
             elementConfig: {
-              options: this.props.listaSocios.map(r => ({"value": r.clave_socio, "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno})),
+              options: this.props.listaSocios.map(r => ({
+                "value": r.clave_socio,
+                "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno
+              })),
               optionBlank: true
             },
           })
       })
-      this.setState({ form: updatedForm});
+      this.setState({form: updatedForm});
     }
   }
 
@@ -142,12 +152,11 @@ class AcopiosGraphs extends Component {
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const updatedForm = {}
 
     for (const key in this.state.form) {
       updatedForm[key] = updateObject(this.state.form[key], {
-          value: (key === inputIdentifier) ? event.target.value : "",
+        value: (key === inputIdentifier) ? event.target.value : "",
       })
     }
 
@@ -170,7 +179,11 @@ class AcopiosGraphs extends Component {
   render () {
 
     let form = <Spinner/>
-    if (this.props.comunidades.length > 0 && this.props.listaSocios.length > 0 && this.props.regiones.length > 0) {
+    if (
+      this.props.comunidades.length > 0 &&
+      this.props.listaSocios.length > 0 &&
+      this.props.regiones.length > 0
+    ) {
       form = (<form className={classes.Form} onSubmit={this.onRefreshData}>
         <div className={classes.Inputs}>
           <Input
@@ -236,7 +249,7 @@ class AcopiosGraphs extends Component {
           mouseOver={this._rememberValueCF}
           mouseOut={this._forgetValues}
           hint={this.state.hintCF}
-          />
+        />
         <AcopioGraph
           data={this.state.honeyData}
           label="miel"
@@ -244,7 +257,7 @@ class AcopiosGraphs extends Component {
           mouseOver={this._rememberValueMI}
           mouseOut={this._forgetValues}
           hint={this.state.hintMI}
-          />
+        />
         <AcopioGraph
           data={this.state.soapData}
           label="jabon"
@@ -252,7 +265,7 @@ class AcopiosGraphs extends Component {
           mouseOver={this._rememberValueJA}
           mouseOut={this._forgetValues}
           hint={this.state.hintJA}
-          />
+        />
         <AcopioGraph
           data={this.state.salarioData}
           label="salarios"
@@ -260,7 +273,7 @@ class AcopiosGraphs extends Component {
           mouseOver={this._rememberValueSA}
           mouseOut={this._forgetValues}
           hint={this.state.hintSA}
-          />
+        />
       </>
     )
   }
@@ -280,6 +293,5 @@ const mapDispatchToProps = dispatch => {
     onInitSocios: (token) => dispatch(actions.initSocios(token))
   }
 }
-
 
 export default  connect(mapStateToProps, mapDispatchToProps)(AcopiosGraphs)
