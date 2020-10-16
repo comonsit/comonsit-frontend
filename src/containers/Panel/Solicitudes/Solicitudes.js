@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import classes from './Solicitudes.module.scss';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import SolicitudDetail from './SolicitudDetail/SolicitudDetail';
 import Modal from '../../../components/UI/Modal/Modal';
@@ -16,12 +17,12 @@ import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterG
 import Button from '../../../components/UI/Button/Button';
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency';
-import classes from './Solicitudes.module.scss'
-import * as actions from '../../../store/actions'
-import { isGerencia } from '../../../store/roles'
-import { updateObject } from '../../../store/reducers/utility'
-import { checkValidity } from '../../../utilities/validity'
-import axios from '../../../store/axios-be.js'
+import * as actions from '../../../store/actions';
+import { isGerencia } from '../../../store/roles';
+import { updateObject } from '../../../store/reducers/utility';
+import { checkValidity } from '../../../utilities/validity';
+import axios from '../../../store/axios-be.js';
+
 
 class Solicitudes extends Component {
   state = {
@@ -86,11 +87,11 @@ class Solicitudes extends Component {
 
   renderStatus = cellInfo => {
     const colors = {
-      "AP": "#2bc71b",
-      "RV": "#d1df2c",
-      "RE": "#c23f3f",
-      "NE": "#235ee4",
-      "CA": "#868a86"
+      "AP": classes.intenseGreen,
+      "RV": classes.intenseYellow,
+      "RE": classes.red,
+      "NE": classes.intenseBlue,
+      "CA": classes.gray
     }
 
      return (
@@ -99,9 +100,10 @@ class Solicitudes extends Component {
           borderRadius: "2rem",
           width: "2rem",
           height: "2rem",
-          backgroundColor: colors[cellInfo.cell.value] }}
-       />
-     )
+          backgroundColor: colors[cellInfo.cell.value]
+        }}
+      />
+    )
  }
 
  onSubmitForm = event => {
@@ -137,23 +139,23 @@ class Solicitudes extends Component {
 
  inputChangedHandler = (event, inputIdentifier) => {
 
-   const updatedFormElement = updateObject(this.state.negociacionForm[inputIdentifier], {
-       value: event.target.value,
-       valid: checkValidity(event.target.value, this.state.negociacionForm[inputIdentifier].validation),
-       touched: true
-   })
+    const updatedFormElement = updateObject(this.state.negociacionForm[inputIdentifier], {
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.negociacionForm[inputIdentifier].validation),
+      touched: true
+    })
 
-   let updatedForm = updateObject(this.state.negociacionForm, {
-       [inputIdentifier]: updatedFormElement
-   })
+    let updatedForm = updateObject(this.state.negociacionForm, {
+      [inputIdentifier]: updatedFormElement
+    })
 
-   let formIsValid = true
-   for (let inputIds in updatedForm) {
-     formIsValid = updatedForm[inputIds].valid && formIsValid
-   }
+    let formIsValid = true
+    for (let inputIds in updatedForm) {
+      formIsValid = updatedForm[inputIds].valid && formIsValid
+    }
 
-   this.setState({negociacionForm: updatedForm, formIsValid: formIsValid})
- }
+    this.setState({negociacionForm: updatedForm, formIsValid: formIsValid})
+  }
 
   onToggleFilter = () => {
     this.props.onInitSolicitudes(this.props.token, !this.state.oldSolicitudes)
@@ -206,7 +208,7 @@ class Solicitudes extends Component {
       },
       {
         Header: <FormattedMessage id="solicitudes.estatus_evaluacion"/>,
-      accessor: 'estatus_evaluacion',
+        accessor: 'estatus_evaluacion',
         Cell: this.renderStatus,
         Filter: SelectColumnFilter,
         filter: 'includes',
@@ -231,12 +233,21 @@ class Solicitudes extends Component {
           clicked={() => this.props.history.push('mesa-control')}
           btnType="Success"
           ><FormattedMessage id="solicitudes.goToMesaControl"/></Button>
-      } else if (this.state.selectedSol.estatus_solicitud === 'AP' && this.state.selectedSol.estatus_evaluacion === 'RV' && this.props.role === 'Gerente') {
-        evaluacionButton = <Button
-          clicked={() => this.props.history.push('evaluacion')}
-          btnType="Success"
-          ><FormattedMessage id="solicitudes.goToEvaluacion"/></Button>
-      } else if (this.state.selectedSol.estatus_solicitud === 'AP' && this.state.selectedSol.estatus_evaluacion === 'NE') {
+      } else if (
+        this.state.selectedSol.estatus_solicitud === 'AP'
+        && this.state.selectedSol.estatus_evaluacion === 'RV' && this.props.role === 'Gerente'
+      ) {
+        evaluacionButton = (
+          <Button
+            clicked={() => this.props.history.push('evaluacion')}
+            btnType="Success"
+            ><FormattedMessage id="solicitudes.goToEvaluacion"/>
+          </Button>
+        )
+      } else if (
+        this.state.selectedSol.estatus_solicitud === 'AP'
+        && this.state.selectedSol.estatus_evaluacion === 'NE'
+      ) {
         form = (
           <form onSubmit={this.onSubmitForm}>
             <div className={classes.Form}>
@@ -256,13 +267,15 @@ class Solicitudes extends Component {
                     touched={this.state.negociacionForm.comentarios_promotor.touched}
                     disabled={this.props.loading}
                     hide={this.state.negociacionForm.comentarios_promotor.hide}
-                    changed={(event) => this.inputChangedHandler(event, "comentarios_promotor")}/>
+                    changed={(event) => this.inputChangedHandler(event, "comentarios_promotor")}
+                  />
                 </div>
               </div>
             </div>
             <Button
               btnType="Success"
-              disabled={!this.state.formIsValid}>
+              disabled={!this.state.formIsValid}
+            >
               <FormattedMessage id="reNegotiateButton"/>
             </Button>
           </form>
@@ -277,13 +290,15 @@ class Solicitudes extends Component {
           <SwitchToggle clicked={this.onToggleFilter}/>
           <p><FormattedMessage id={oldSolMessId}/></p>
         </div>
-      </div>)
+      </div>
+    )
 
     return (
       <>
         <Modal
           show={this.state.showSolicitudModal}
-          modalClosed={this.cancelSelected}>
+          modalClosed={this.cancelSelected}
+        >
           <div className={classes.Container}>
             <div className={classes.InfoContainer}>
               {solicitudInfo}
@@ -296,16 +311,16 @@ class Solicitudes extends Component {
         <div className={classes.Container}>
           <Title
             titleName="solicitudes.title">
-            <Button
-              clicked={this.onNewSolicitud}
-              ><FormattedMessage id="solicitudes.new"/></Button>
+            <Button clicked={this.onNewSolicitud}>
+              <FormattedMessage id="solicitudes.new"/>
+            </Button>
           </Title>
           {toggleButton}
           <RTable
             columns={columns}
             data={this.props.listaSolicitudes}
             onRowClick={(row, socio) => this.showSolicitud(row.values.folio_solicitud, row.values.clave_socio)}
-            />
+          />
         </div>
       </>
     )
@@ -313,23 +328,23 @@ class Solicitudes extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      listaSolicitudes: state.solicitudes.solicitudes,
-      selectedSol: state.solicitudes.selectedSolicitud,
-      token: state.auth.token,
-      role: state.generalData.role,
-      saldo: state.acopios.socioSaldo
-    }
+  return {
+    listaSolicitudes: state.solicitudes.solicitudes,
+    selectedSol: state.solicitudes.selectedSolicitud,
+    token: state.auth.token,
+    role: state.generalData.role,
+    saldo: state.acopios.socioSaldo
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onInitSolicitudes: (token, all) => dispatch(actions.initSolicitudes(token, all)),
-      onNewSol: () => dispatch(actions.newSolicitud()),
-      onFetchSelSol: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
-      unSelSol: () => dispatch(actions.unSelectSolicitud()),
-      onGetSocioSaldo: (token, socioId) => dispatch(actions.getSocioSaldo(token, socioId))
-    }
+  return {
+    onInitSolicitudes: (token, all) => dispatch(actions.initSolicitudes(token, all)),
+    onNewSol: () => dispatch(actions.newSolicitud()),
+    onFetchSelSol: (token, solId) => dispatch(actions.fetchSelSolicitud(token, solId)),
+    unSelSol: () => dispatch(actions.unSelectSolicitud()),
+    onGetSocioSaldo: (token, socioId) => dispatch(actions.getSocioSaldo(token, socioId))
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Solicitudes, axios)))

@@ -1,1 +1,7 @@
 @import 'styles/general';
+@import 'styles/variables';
+:export { intenseGreen: $intense-green; }
+:export { red: $red; }
+:export { gray: $gray; }
+:export { intenseYellow: $intense-yellow; }
+:export { intenseBlue: $intense-blue; }

@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
 
+import classes from './Evaluacion.module.scss';
 import SolicitudDetail from '../SolicitudDetail/SolicitudDetail';
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
@@ -13,9 +14,8 @@ import Percent from '../../../../components/UI/Formatting/Percent';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './Evaluacion.module.scss'
-import { updateObject } from '../../../../store/reducers/utility'
-import { checkValidity } from '../../../../utilities/validity'
+import { updateObject } from '../../../../store/reducers/utility';
+import { checkValidity } from '../../../../utilities/validity';
 
 
 class Evaluacion extends Component {
@@ -173,7 +173,7 @@ class Evaluacion extends Component {
 
 
     const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
+      headers: {'Authorization': `Bearer ${this.props.token}`}
     }
     // TODO: implement loading view
     // this.setState({loading: true})
@@ -202,16 +202,14 @@ class Evaluacion extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
-
     const updatedFormElement = updateObject(this.state.evaluacionForm[inputIdentifier], {
-        value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.evaluacionForm[inputIdentifier].validation),
-        touched: true
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.evaluacionForm[inputIdentifier].validation),
+      touched: true
     })
 
     let updatedForm = updateObject(this.state.evaluacionForm, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
@@ -225,7 +223,13 @@ class Evaluacion extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const evaluacionFormOrder = ["monto_aprobado", "plazo_aprobado", "tasa_aprobada", "tasa_mor_aprobada", "comentarios_gerente"]
+    const evaluacionFormOrder = [
+      "monto_aprobado",
+      "plazo_aprobado",
+      "tasa_aprobada",
+      "tasa_mor_aprobada",
+      "comentarios_gerente"
+    ]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements, solicitudInfo = <Spinner/>
@@ -240,9 +244,7 @@ class Evaluacion extends Component {
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
         return (
-          <div
-            key= {formElement.id}
-            >
+          <div key= {formElement.id}>
             <div className={classes.Inputs}>
               <Input
                 label={formElement.config.label}
@@ -256,16 +258,15 @@ class Evaluacion extends Component {
                 touched={formElement.config.touched}
                 disabled={this.props.loading}
                 hide={formElement.config.hide}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+                changed={(event) => this.inputChangedHandler(event, formElement.id)}
+              />
             </div>
           </div>
-            )
+        )
       })
     }
 
     formClasses.push(classes.noScroll)
-
-
 
     const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
@@ -277,7 +278,12 @@ class Evaluacion extends Component {
 
     if (this.state.selectedSol && this.state.saldosAcopios) {
       if  (this.state.selectedSol.clave_socio === this.props.selSocioSaldo) {
-        solicitudInfo = <SolicitudDetail saldos={this.state.saldosAcopios} solicitud={this.props.selectedSol} />
+        solicitudInfo = (
+          <SolicitudDetail
+            saldos={this.state.saldosAcopios}
+            solicitud={this.props.selectedSol}
+          />
+        )
         const currentYear = new Date().getFullYear()
         const thisYear = this.state.saldosAcopios.find(bal => bal.fecha__year === currentYear)
         const lastYear = this.state.saldosAcopios.find(bal => bal.fecha__year === (currentYear-1))
@@ -296,16 +302,17 @@ class Evaluacion extends Component {
     let sugerido = <Spinner/>
     // TODO: permanent spinner if socio has no aportaciones
     if (this.state.saldoAportaciones) {
-        sugerido = (<div>
+      sugerido = (
+        <div>
           <p><FormattedMessage id="evaluacion.30saldo"/><Currency value={this.state.saldoAportaciones*.3}/></p>
           <p><FormattedMessage id="evaluacion.50saldo"/><Currency value={this.state.saldoAportaciones*.5}/></p>
-        </div>)
+        </div>
+      )
     }
 
     return (
       <>
-        <Title
-          titleName="mesaControl.title"/>
+        <Title titleName="mesaControl.title"/>
         <div className={classes.Container}>
           <div className={classes.InfoContainer}>
             {solicitudInfo}
@@ -414,21 +421,20 @@ class Evaluacion extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      loading: state.solicitudes.loading,
-      updated: state.solicitudes.updated,
-      selectedSol: state.solicitudes.selectedSolicitud,
-      saldosAcopios: state.acopios.socioSaldo,
-      selSocioSaldo: state.acopios.selSocio,
-    }
+  return {
+    token: state.auth.token,
+    loading: state.solicitudes.loading,
+    updated: state.solicitudes.updated,
+    selectedSol: state.solicitudes.selectedSolicitud,
+    saldosAcopios: state.acopios.socioSaldo,
+    selSocioSaldo: state.acopios.selSocio,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      // onApproveSolForm: (token) => dispatch(actions.approveSolForm(token))
-    }
+  return {
+    // onApproveSolForm: (token) => dispatch(actions.approveSolForm(token))
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Evaluacion, axios))

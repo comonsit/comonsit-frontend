@@ -4,15 +4,15 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import axios from '../../../../store/axios-be.js'
 
+import classes from './MesaControl.module.scss';
 import SolicitudDetail from '../SolicitudDetail/SolicitudDetail';
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './MesaControl.module.scss'
-import { updateObject } from '../../../../store/reducers/utility'
-import { checkValidity } from '../../../../utilities/validity'
+import { updateObject } from '../../../../store/reducers/utility';
+import { checkValidity } from '../../../../utilities/validity';
 
 
 class MesaControl extends Component {
@@ -130,12 +130,6 @@ class MesaControl extends Component {
   //   }
   // }
 
-  componentDidMount () {
-  }
-
-  componentWillUnmount() {
-  }
-
   onApproveForm = event => {
     event.preventDefault();
     this.onSubmitForm('AP')
@@ -164,7 +158,7 @@ class MesaControl extends Component {
 
 
     const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
+      headers: {'Authorization': `Bearer ${this.props.token}`}
     }
     // TODO: implement loading view
     // this.setState({loading: true})
@@ -190,16 +184,18 @@ class MesaControl extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
+    const value = this.state.mesaControlForm[inputIdentifier].elementType === 'checkbox'
+      ? event.target.checked
+      : event.target.value
 
     const updatedFormElement = updateObject(this.state.mesaControlForm[inputIdentifier], {
-        value: this.state.mesaControlForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
+        value: value,
         valid: checkValidity(event.target.value, this.state.mesaControlForm[inputIdentifier].validation),
         touched: true
     })
 
     let updatedForm = updateObject(this.state.mesaControlForm, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
@@ -217,10 +213,18 @@ class MesaControl extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const mesaControlFormOrder = ["pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4", "irregularidades", "comentarios_coordinador"]
+    const mesaControlFormOrder = [
+      "pregunta_1",
+      "pregunta_2",
+      "pregunta_3",
+      "pregunta_4",
+      "irregularidades",
+      "comentarios_coordinador"
+    ]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let formElements, solicitudInfo = <Spinner/>
+    const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
     mesaControlFormOrder.forEach(key => {
       formElementsArray.push({
@@ -232,9 +236,7 @@ class MesaControl extends Component {
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
         return (
-          <div
-            key= {formElement.id}
-            >
+          <div key= {formElement.id}>
             <div className={classes.Inputs}>
               <Input
                 label={formElement.config.label}
@@ -248,21 +250,18 @@ class MesaControl extends Component {
                 touched={formElement.config.touched}
                 disabled={this.props.loading}
                 hide={formElement.config.hide}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+                changed={(event) => this.inputChangedHandler(event, formElement.id)}
+              />
             </div>
           </div>
-            )
+        )
       })
     }
 
     formClasses.push(classes.noScroll)
 
-
-
-    const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
-
     if (this.state.selectedSol && this.state.saldos) {
-      if  (this.state.selectedSol.clave_socio === this.props.selSocioSaldo) {
+      if (this.state.selectedSol.clave_socio === this.props.selSocioSaldo) {
         solicitudInfo = <SolicitudDetail saldos={this.state.saldos} solicitud={this.props.selectedSol} />
       } else {
         // TODO: Un-needed alert?
@@ -277,29 +276,29 @@ class MesaControl extends Component {
 
     return (
       <>
-        <Title
-          titleName="mesaControl.title"/>
+        <Title titleName="mesaControl.title"/>
         <div className={classes.Container}>
         <div className={classes.InfoContainer}>
           {solicitudInfo}
-          </div>
+        </div>
         <form
           onSubmit={this.onApproveForm.bind(this)}
           className={classes.FormDiv}
-          >
+        >
           <h2><FormattedMessage id="mesaControl.revisionCoord"/></h2>
           <div className={formClasses.join(' ')}>
-          {formElements}
+            {formElements}
           </div>
           <Button
             btnType="Success"
-            disabled={!this.state.formIsValid}>
+            disabled={!this.state.formIsValid}
+          >
             <FormattedMessage id="approveButton"/>
           </Button>
           <Button
             btnType="Danger"
             clicked={this.onDisapproveForm.bind(this)}
-            >
+          >
             <FormattedMessage id="disapproveButton"/>
           </Button>
           {updatedRedirect}
@@ -311,21 +310,20 @@ class MesaControl extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      loading: state.solicitudes.loading,
-      updated: state.solicitudes.updated,
-      selectedSol: state.solicitudes.selectedSolicitud,
-      saldo: state.acopios.socioSaldo,
-      selSocioSaldo: state.acopios.selSocio,
-    }
+  return {
+    token: state.auth.token,
+    loading: state.solicitudes.loading,
+    updated: state.solicitudes.updated,
+    selectedSol: state.solicitudes.selectedSolicitud,
+    saldo: state.acopios.socioSaldo,
+    selSocioSaldo: state.acopios.selSocio,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      // onApproveSolForm: (token) => dispatch(actions.approveSolForm(token))
-    }
+  return {
+    // onApproveSolForm: (token) => dispatch(actions.approveSolForm(token))
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(MesaControl, axios))

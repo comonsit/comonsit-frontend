@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import axios from '../../../../store/axios-be.js'
 import _ from 'lodash';
 
+import classes from './SolicitudForm.module.scss';
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
@@ -13,10 +14,10 @@ import Modal from '../../../../components/UI/Modal/Modal';
 import Title from '../../../../components/UI/Title/Title';
 import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import SociosList from '../../Socios/SociosList/SociosList';
-import classes from './SolicitudForm.module.scss'
-import * as actions from '../../../../store/actions'
-import { updateObject } from '../../../../store/reducers/utility'
-import { checkValidity } from '../../../../utilities/validity'
+import * as actions from '../../../../store/actions';
+import { updateObject } from '../../../../store/reducers/utility';
+import { checkValidity } from '../../../../utilities/validity';
+
 
 const status = {
   'CF': 'estatus_cafe',
@@ -24,6 +25,7 @@ const status = {
   'JA': 'estatus_yip',
   'SL': 'estatus_trabajador'
 }
+
 
 class SolicitudForm extends Component {
   constructor(props) {
@@ -313,7 +315,11 @@ class SolicitudForm extends Component {
 
   componentDidUpdate(prevProps) {
     // update if previous was null or clave_socio changed
-    if(this.props.selSocio && (!prevProps.selSocio || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)) {
+    if(
+      this.props.selSocio
+      && (!prevProps.selSocio
+        || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)
+    ) {
       let newProceso = this.state.solicitudForm.proceso
       const newProcessValues = this.state.processOptions
 
@@ -322,17 +328,19 @@ class SolicitudForm extends Component {
           newProcessValues[id] = this.props.selSocio[status[id]]
         }
         newProceso = updateObject(this.state.solicitudForm.proceso, {
-            value: null,
-            valid: false,
-            errorMessage: "",
-            touched: false
+          value: null,
+          valid: false,
+          errorMessage: "",
+          touched: false
         })
       }
 
+      const nombres = this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno
+      const comunidadNombre = this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
       const updatedForm = updateObject(this.state.solicitudForm, {
           proceso: newProceso,
           [this.state.selectingFor]: updateObject(this.state.solicitudForm[this.state.selectingFor], {
-            supportData: this.props.selSocio.nombres + ' ' + this.props.selSocio.apellido_paterno + ' ' + this.props.selSocio.apellido_materno + ' de ' + this.props.comunidades.find(x => x.id === this.props.selSocio.comunidad).nombre_de_comunidad
+            supportData: nombres + ' de ' + comunidadNombre
           })
       })
 
@@ -374,7 +382,9 @@ class SolicitudForm extends Component {
     const currentComment = solicitud.comentarios_promotor
     solicitud = updateObject(solicitud, {
       chat: [{'comentario': currentComment}],
-      emergencia_medica: (solicitud.mot_credito === 'SA') ? this.state.solicitudForm.emergencia_medica.value : false
+      emergencia_medica: (solicitud.mot_credito === 'SA')
+        ? this.state.solicitudForm.emergencia_medica.value
+        : false
     })
 
     // if (this.props.new) {
@@ -387,78 +397,81 @@ class SolicitudForm extends Component {
   inputChangedHandler = (event, inputIdentifier) => {
 
     const validation = checkValidity(event.target.value, this.state.solicitudForm[inputIdentifier].validation, true)
+    const value = this.state.solicitudForm[inputIdentifier].elementType === 'checkbox'
+      ? event.target.checked
+      : event.target.value
 
     const updatedFormElement = updateObject(this.state.solicitudForm[inputIdentifier], {
-        value: this.state.solicitudForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
-        valid: validation.valid,
-        errorMessage: validation.errorMessage,
-        touched: true
+      value: value,
+      valid: validation.valid,
+      errorMessage: validation.errorMessage,
+      touched: true
     })
 
     let updatedForm = updateObject(this.state.solicitudForm, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     // TODO: Improve process
     if (inputIdentifier === 'tipo_credito') {
       const hideIfTR = event.target.value === 'CP'
-      updatedForm = updateObject(updatedForm, {
-          mot_credito: updateObject(updatedForm.mot_credito, {
-              hide: hideIfTR
-          }),
-          mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
-              hide: hideIfTR || this.state.solicitudForm.mot_credito.value !== 'OT'
-          }),
-          emergencia_medica: updateObject(updatedForm.emergencia_medica, {
-              hide: hideIfTR || this.state.solicitudForm.mot_credito.value !== 'SA'
-          }),
-          act_productiva: updateObject(updatedForm.act_productiva, {
-              hide: !hideIfTR && this.state.solicitudForm.mot_credito.value !== 'TR'
-          }),
-          act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
-              hide: (!hideIfTR && this.state.solicitudForm.mot_credito.value !== 'TR') || this.state.solicitudForm.act_productiva.value !== 'OT'
-          }),
+    updatedForm = updateObject(updatedForm, {
+        mot_credito: updateObject(updatedForm.mot_credito, {
+          hide: hideIfTR
+        }),
+        mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
+          hide: hideIfTR || this.state.solicitudForm.mot_credito.value !== 'OT'
+        }),
+        emergencia_medica: updateObject(updatedForm.emergencia_medica, {
+          hide: hideIfTR || this.state.solicitudForm.mot_credito.value !== 'SA'
+        }),
+        act_productiva: updateObject(updatedForm.act_productiva, {
+          hide: !hideIfTR && this.state.solicitudForm.mot_credito.value !== 'TR'
+        }),
+        act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
+          hide: (!hideIfTR && this.state.solicitudForm.mot_credito.value !== 'TR') || this.state.solicitudForm.act_productiva.value !== 'OT'
+        }),
       })
     } else if (inputIdentifier === 'mot_credito') {
       const hideOther = event.target.value !== 'OT'
       const hideSalud = event.target.value !== 'SA'
       const hideActProd = event.target.value !== 'TR'
       updatedForm = updateObject(updatedForm, {
-          mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
-              hide: hideOther,
-              valid: hideOther,
-              validation: {
-                required: !hideOther
-              }
-          }),
-          emergencia_medica: updateObject(updatedForm.emergencia_medica, {
-              hide: hideSalud
-          }),
-          act_productiva: updateObject(updatedForm.act_productiva, {
-              hide: hideActProd,
-              valid: hideActProd,
-              validation: {
-                required: !hideActProd
-              }
-          }),
-          act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
-              hide: hideActProd || this.state.solicitudForm.act_productiva.value !== 'OT',
-              valid: hideActProd,
-              validation: {
-                required: !hideActProd
-              }
-          })
+        mot_credito_otro: updateObject(updatedForm.mot_credito_otro, {
+          hide: hideOther,
+          valid: hideOther,
+          validation: {
+            required: !hideOther
+          }
+        }),
+        emergencia_medica: updateObject(updatedForm.emergencia_medica, {
+          hide: hideSalud
+        }),
+        act_productiva: updateObject(updatedForm.act_productiva, {
+          hide: hideActProd,
+          valid: hideActProd,
+          validation: {
+            required: !hideActProd
+          }
+        }),
+        act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
+          hide: hideActProd || this.state.solicitudForm.act_productiva.value !== 'OT',
+          valid: hideActProd,
+          validation: {
+            required: !hideActProd
+          }
+        })
       })
     } else if (inputIdentifier === 'act_productiva'  ) {
       const hideOther = event.target.value !== 'OT'
       updatedForm = updateObject(updatedForm, {
-          act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
-              hide: hideOther,
-              valid: hideOther,
-              validation: {
-                required: !hideOther
-              }
-          })
+        act_productiva_otro: updateObject(updatedForm.act_productiva_otro, {
+          hide: hideOther,
+          valid: hideOther,
+          validation: {
+            required: !hideOther
+          }
+        })
       })
     }
 
@@ -469,10 +482,10 @@ class SolicitudForm extends Component {
     }
   }
 
-  checkIfFormIsValid = (form) => {
+  checkIfFormIsValid = form => {
     let formIsValid = true
     for (let inputIds in form) {
-        formIsValid = form[inputIds].valid && formIsValid
+      formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
   }
@@ -487,14 +500,14 @@ class SolicitudForm extends Component {
     this.props.unSelSocio()
   }
 
-  selectSocio =(id) => {
+  selectSocio = id => {
     const updatedForm = updateObject(this.state.solicitudForm, {
-        [this.state.selectingFor]: updateObject(this.state.solicitudForm[this.state.selectingFor], {
-            value: id,
-            valid: true,
-            touched: true,
-            errorMessage: ""
-        })
+      [this.state.selectingFor]: updateObject(this.state.solicitudForm[this.state.selectingFor], {
+        value: id,
+        valid: true,
+        touched: true,
+        errorMessage: ""
+      })
     })
     this.setState({
       searchingOpen: false,
@@ -515,18 +528,22 @@ class SolicitudForm extends Component {
   OnChooseProcess = current => {
     // event.preventDefault();
     const previous = this.state.solicitudForm.proceso.value
-    if (previous !== current && this.props.selSocio && this.props.selSocio[status[current]] === 'AC') {
+    if (
+      previous !== current
+      && this.props.selSocio
+      && this.props.selSocio[status[current]] === 'AC'
+    ) {
       const newProcesses = updateObject(this.state.processOptions, {
         [previous]: this.props.selSocio[status[previous]],
         [current]: 'SEL'
       })
       const updatedForm = updateObject(this.state.solicitudForm, {
-          proceso: updateObject(this.state.solicitudForm.proceso, {
-              value: current,
-              valid: true,
-              touched: true,
-              errorMessage: ""
-          })
+        proceso: updateObject(this.state.solicitudForm.proceso, {
+            value: current,
+            valid: true,
+            touched: true,
+            errorMessage: ""
+        })
       })
       this.setState({
         processOptions: newProcesses,
@@ -539,11 +556,28 @@ class SolicitudForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const solicitudFormOrder = ["clave_socio", "fecha_solicitud", "proceso", "tipo_credito", "mot_credito", "mot_credito_otro", "act_productiva", "act_productiva_otro", "emergencia_medica", "monto_solicitado", "plazo_de_pago_solicitado", "justificacion_credito", "aval", "familiar_responsable", "comentarios_promotor"]
+    const solicitudFormOrder = [
+      "clave_socio",
+      "fecha_solicitud",
+      "proceso",
+      "tipo_credito",
+      "mot_credito",
+      "mot_credito_otro",
+      "act_productiva",
+      "act_productiva_otro",
+      "emergencia_medica",
+      "monto_solicitado",
+      "plazo_de_pago_solicitado",
+      "justificacion_credito",
+      "aval",
+      "familiar_responsable",
+      "comentarios_promotor"
+    ]
     const formElementsArray = []
     const formClasses = [classes.Form]
     let sociosBusqueda = <Spinner/>
     let formElements = <Spinner/>
+    const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
     solicitudFormOrder.forEach(key => {
       formElementsArray.push({
@@ -567,49 +601,46 @@ class SolicitudForm extends Component {
                 clicked={this.OnChooseProcess}
               />
             </div>
-              )
+          )
         } else {
           return (
-              <div
+            <div
+              key= {formElement.id}
+              className={classes.Inputs}
+            >
+              <Input
+                label={formElement.config.label}
                 key= {formElement.id}
-                className={classes.Inputs}>
-                <Input
-                  label={formElement.config.label}
-                  key= {formElement.id}
-                  elementType={formElement.config.elementType }
-                  elementConfig={formElement.config.elementConfig }
-                  value={formElement.config.value}
-                  shouldValidate={formElement.config.validation}
-                  invalid={!formElement.config.valid || serverErrorMessage !== ""}
-                  errorMessage={formElement.config.errorMessage + serverErrorMessage}
-                  touched={formElement.config.touched}
-                  disabled={this.props.loading}
-                  hide={formElement.config.hide}
-                  changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                  supportData={formElement.config.supportData}
-                  supportActions={formElement.config.supportActions}
-                />
-              </div>
-              )
+                elementType={formElement.config.elementType }
+                elementConfig={formElement.config.elementConfig }
+                value={formElement.config.value}
+                shouldValidate={formElement.config.validation}
+                invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                errorMessage={formElement.config.errorMessage + serverErrorMessage}
+                touched={formElement.config.touched}
+                disabled={this.props.loading}
+                hide={formElement.config.hide}
+                changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                supportData={formElement.config.supportData}
+                supportActions={formElement.config.supportActions}
+              />
+            </div>
+          )
         }
       })
     }
 
-     formClasses.push(classes.noScroll)
+    formClasses.push(classes.noScroll)
 
-
-
-    const updatedRedirect = (this.props.updated) ? <Redirect to="/solicitudes"/> : null
 
     if (this.state.searchingOpen && this.props.listaSocios) {
       sociosBusqueda = (
         <SociosList
           listaSocios={this.props.listaSocios}
           onClick={row => this.selectSocio(row.values.clave_socio)}
-          />
+        />
       )
     }
-
 
     return (
       <>
@@ -617,13 +648,11 @@ class SolicitudForm extends Component {
           show={this.state.searchingOpen}
           modalClosed={this.cancelSearch}>
           <h3><FormattedMessage id="solicitudForm.elige"/></h3>
-          <div
-            className={classes.TableContainer}>
+          <div className={classes.TableContainer}>
             {sociosBusqueda}
           </div>
         </Modal>
-        <Title
-          titleName="solicitudForm.title"/>
+        <Title titleName="solicitudForm.title"/>
         <form onSubmit={this.onSubmitForm}>
           <div className={formClasses.join(' ')}>
           {formElements}
@@ -641,28 +670,27 @@ class SolicitudForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      loading: state.solicitudes.loading,
-      updated: state.solicitudes.updated,
-      formError: state.errors.errors,
-      listaSocios: state.socios.socios,
-      selSocio: state.socios.selectedSocio,
-      comunidades: state.generalData.comunidades
-      // new: state.solicitudes.newSolicitud
-    }
+  return {
+    token: state.auth.token,
+    loading: state.solicitudes.loading,
+    updated: state.solicitudes.updated,
+    formError: state.errors.errors,
+    listaSocios: state.socios.socios,
+    selSocio: state.socios.selectedSocio,
+    comunidades: state.generalData.comunidades
+    // new: state.solicitudes.newSolicitud
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
-      onInitSocios: (token) => dispatch(actions.initSocios(token)),
-      onCreateNewSolicitud: (solData, token) => dispatch(actions.createNewSolicitud(solData, token)),
-      onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
-      unSelSocio: () => dispatch(actions.unSelectSocio()),
-      onClearError: () => dispatch(actions.clearError())
-    }
+  return {
+    //onEditSocio: (socioData, id, token) => dispatch(actions.updateSocio(socioData, id, token)),
+    onInitSocios: (token) => dispatch(actions.initSocios(token)),
+    onCreateNewSolicitud: (solData, token) => dispatch(actions.createNewSolicitud(solData, token)),
+    onFetchSelSocios: (token, socioId) => dispatch(actions.fetchSelSocio(token, socioId)),
+    unSelSocio: () => dispatch(actions.unSelectSocio()),
+    onClearError: () => dispatch(actions.clearError())
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(SolicitudForm, axios))

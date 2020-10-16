@@ -1,25 +1,47 @@
 import React from 'react';
 import { FormattedMessage, FormattedDate, IntlProvider } from 'react-intl';
-import classes from './SolicitudDetail.module.scss'
 
+import classes from './SolicitudDetail.module.scss'
 import SolicSaldosGraph from '../../../../components/Graphs/SolicSaldosGraph/SolicSaldosGraph';
 import TextElement from '../../../../components/UI/TextElement/TextElement';
 
 
 const solicitudDetail = (props) => {
-  const items1 = ["nombre_productor", "clave_socio", "comunidad", "region", "area_proceso", "cargo", "cargo_coop", "fecha_ingr_yomol_atel"]
+  const items1 = [
+    "nombre_productor",
+    "clave_socio",
+    "comunidad",
+    "region",
+    "area_proceso",
+    "cargo",
+    "cargo_coop",
+    "fecha_ingr_yomol_atel"
+  ]
   const items1Array = items1.map(id => {
-    return (<TextElement
-              key={id}
-              label={id}
-              content={props.solicitud[id]}
-              />)
+    return (
+      <TextElement
+        key={id}
+        label={id}
+        content={props.solicitud[id]}
+      />
+    )
   })
 
-  const items2 = ["monto_solicitado", "proceso_nombre", "tipo_credito_nombre", "act_productiva_nombre", "mot_credito_nombre", "plazo_de_pago_solicitado", "fecha_solicitud"]
+  const items2 = [
+    "monto_solicitado",
+    "proceso_nombre",
+    "tipo_credito_nombre",
+    "act_productiva_nombre",
+    "mot_credito_nombre",
+    "plazo_de_pago_solicitado",
+    "fecha_solicitud"
+  ]
   let content
   const items2Array = items2.map(id => {
-    if ((id === "act_productiva_nombre" || id === "mot_credito_nombre") && props.solicitud[id] === 'Otro') {
+    if (
+      (id === "act_productiva_nombre" || id === "mot_credito_nombre")
+      && props.solicitud[id] === 'Otro'
+    ) {
       // slice to covert: "act_productiva_nombre" into "act_productiva_otro"
       content = props.solicitud[id]+': '+props.solicitud[id.slice(0,-7)+"_otro"]
     } else if (id === "mot_credito_nombre" && props.solicitud[id] === 'Salud') {
@@ -37,22 +59,32 @@ const solicitudDetail = (props) => {
   })
   // TODO: FIX!!
   // code duplicated with TextElement... just to avoid <p><div></div></p>
-  items2Array.push(<div key={'graph_montoVsacopios'} className={classes.ContentContainer}>
-                    <div className={classes.Label}>
-                      <label><FormattedMessage id={'graph_montoVsacopios'}/></label>
-                    </div>
-                    <div className={classes.Content}>
-                      <SolicSaldosGraph data={props.saldos} monto={props.solicitud.monto_solicitado}/>
-                    </div>
-                  </div>)
+  items2Array.push((
+    <div key={'graph_montoVsacopios'} className={classes.ContentContainer}>
+      <div className={classes.Label}>
+        <label><FormattedMessage id={'graph_montoVsacopios'}/></label>
+      </div>
+      <div className={classes.Content}>
+        <SolicSaldosGraph data={props.saldos} monto={props.solicitud.monto_solicitado}/>
+      </div>
+    </div>
+  ))
 
-  const items3 = ["aval_nombre", "familiar_responsable", "justificacion_credito", "promotor", "irregularidades"]
+  const items3 = [
+    "aval_nombre",
+    "familiar_responsable",
+    "justificacion_credito",
+    "promotor",
+    "irregularidades"
+  ]
   const items3Array = items3.map(id => {
-    return (<TextElement
-              key={id}
-              label={id}
-              content={props.solicitud[id]}
-              />)
+    return (
+      <TextElement
+        key={id}
+        label={id}
+        content={props.solicitud[id]}
+      />
+    )
   })
 
   const preguntas_mesa = ["pregunta_1", "pregunta_2", "pregunta_3", "pregunta_4"]
@@ -94,31 +126,31 @@ const solicitudDetail = (props) => {
       </div>
       <h3>Comentarios</h3>
       {props.solicitud.chat.map(comment => (
-          <div
-            className={classes.Comment}
-            key={comment.id}>
-            <div className={classes.Label}>
-              <p>{comment.user}:</p>
-            </div>
-            <div className={classes.ChatContainer}>
-              <div className={classes.ChatDate}>
-                <p>
-                  <IntlProvider locale='es'>
-                    <FormattedDate
-                      value={new Date(comment.fecha)}
-                      day="numeric"
-                      month="long"
-                      year="numeric"/>
-                  </IntlProvider>
-                </p>
-              </div>
-              <p>{comment.comentario}</p>
-            </div>
+        <div
+          className={classes.Comment}
+          key={comment.id}
+        >
+          <div className={classes.Label}>
+            <p>{comment.user}:</p>
           </div>
+          <div className={classes.ChatContainer}>
+            <div className={classes.ChatDate}>
+              <p>
+                <IntlProvider locale='es'>
+                  <FormattedDate
+                    value={new Date(comment.fecha)}
+                    day="numeric"
+                    month="long"
+                    year="numeric"/>
+                </IntlProvider>
+              </p>
+            </div>
+            <p>{comment.comentario}</p>
+          </div>
+        </div>
       ))}
     </div>
   )
 }
-
 
 export default solicitudDetail;
