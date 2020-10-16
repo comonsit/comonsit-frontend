@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import classes from './Bancos.module.scss'
 import BancosList from './BancosList/BancosList'
 import BancosSaldos from './BancosSaldos/BancosSaldos'
 import BancoDetail from './BancoDetail/BancoDetail'
@@ -15,11 +16,11 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Modal from '../../../components/UI/Modal/Modal';
 import Title from '../../../components/UI/Title/Title';
 import Notification from '../../../components/UI/Notification/Notification';
-import classes from './Bancos.module.scss'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 // import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
+
 
 class Bancos extends Component {
   state = {
@@ -170,20 +171,19 @@ class Bancos extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
-        value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
-        touched: true
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
+      touched: true
     })
 
     let updatedForm = updateObject(this.state.form, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
     for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
+      formIsValid = updatedForm[inputIds].valid && formIsValid
     }
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
@@ -219,7 +219,6 @@ class Bancos extends Component {
   }
 
   render () {
-
     let saldosTable, registroTable = <Spinner/>
     if (!this.state.loadingReg) {
       registroTable = (
@@ -238,7 +237,9 @@ class Bancos extends Component {
       )
     }
 
-    const registro = (this.state.selectedRegistro) ? <BancoDetail registro={this.state.selectedRegistro}/> : <Spinner/>
+    const registro = (this.state.selectedRegistro)
+      ? <BancoDetail registro={this.state.selectedRegistro}/>
+      : <Spinner/>
 
     return (
       <>
@@ -248,7 +249,8 @@ class Bancos extends Component {
           <div className={classes.Container}>
             <div className={classes.SubTitle}>
               <h3>
-                <FormattedMessage id={"bancos.selectedRegistro"}/> #{this.state.selectedRegistro ? this.state.selectedRegistro.id : ''}
+                <FormattedMessage id={"bancos.selectedRegistro"}/>
+                # {this.state.selectedRegistro ? this.state.selectedRegistro.id : ''}
               </h3>
             </div>
             <div className={classes.ContentContainer}>
@@ -260,9 +262,7 @@ class Bancos extends Component {
           <Title
             titleName="bancos.title">
             <Notification number={this.state.pendingConcils}>
-              <Button
-                clicked={() => this.props.history.push('banco-form')}
-              >
+              <Button clicked={() => this.props.history.push('banco-form')}>
                 <FormattedMessage id="bancos.newMovimiento"/>
               </Button>
             </Notification>
@@ -328,15 +328,15 @@ class Bancos extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      role: state.generalData.role
-    }
+  return {
+    token: state.auth.token,
+    role: state.generalData.role
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-    }
+  return {
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Bancos))

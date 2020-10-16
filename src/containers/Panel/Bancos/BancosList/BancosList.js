@@ -6,10 +6,9 @@ import Currency from '../../../../components/UI/Formatting/Currency'
 
 
 const bancosList = (props) => {
-
   const selectColumn = (cantidad, type, column) => {
     if (type === column) {
-      return (<Currency value={cantidad}/>)
+      return <Currency value={cantidad}/>
     }
     return null
   }
@@ -43,11 +42,13 @@ const bancosList = (props) => {
     }
   ]
 
-  return (<RTable
-            columns={columns}
-            data={props.data}
-            onRowClick={props.onClick}
-          />)
+  return (
+    <RTable
+      columns={columns}
+      data={props.data}
+      onRowClick={props.onClick}
+    />
+  )
 }
 
 export default bancosList

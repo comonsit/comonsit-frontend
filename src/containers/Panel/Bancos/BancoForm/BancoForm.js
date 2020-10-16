@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import _ from 'lodash';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
-import axios from '../../../../store/axios-be.js'
 
+import classes from './BancoForm.module.scss'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
@@ -17,10 +17,10 @@ import SwitchToggle from '../../../../components/UI/SwitchToggle/SwitchToggle'
 import MovimientosListConc from '../../Movimientos/MovimientosListConc/MovimientosListConc';
 import PagosList from '../../Pagos/PagosList/PagosList';
 import CreditoListCont from '../../Creditos/CreditoListCont/CreditoListCont';
-import classes from './BancoForm.module.scss'
 import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
+import axios from '../../../../store/axios-be.js'
 
 
 const ammountFields = {
@@ -28,6 +28,7 @@ const ammountFields = {
   "bancoForm.Pagos": "cantidad",
   "bancoForm.EjCredito": "monto"
 }
+
 
 class BancoForm extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class BancoForm extends Component {
             type: 'text',
             placeholder: '..',
           },
-          label: (<><FormattedMessage id="bancoForm.referencia_banco"/>*</>),
+          label: <><FormattedMessage id="bancoForm.referencia_banco"/>*</>,
           value: "",
           validation: {
             required: true,
@@ -70,7 +71,7 @@ class BancoForm extends Component {
           elementConfig: {
             type: 'date'
           },
-          label: (<><FormattedMessage id="bancoForm.fecha"/>*</>),
+          label: <><FormattedMessage id="bancoForm.fecha"/>*</>,
           value: '',
           validation: {
             required: true,
@@ -85,9 +86,6 @@ class BancoForm extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            // max: '9999999',
-            // min: '0',
-            // step: '.01'
           },
           label:  (<><FormattedMessage id="bancoForm.cantidad"/>*</>),
           value: '',
@@ -171,20 +169,22 @@ class BancoForm extends Component {
     if (this.props.selectedItems.length > 0) {
       const total = this.props.selectedItems.reduce((acc, item) => acc + +item[ammountFields[this.state.selTab]], 0)
       const cl = total !== +currVal ? classes.inValid : null
-      cant = (<strong className={cl}>
-                <Currency
-                  value={total}
-                  hideZero
-                />
-            </strong>)
+      cant = (
+        <strong className={cl}>
+          <Currency
+            value={total}
+            hideZero
+          />
+        </strong>
+      )
     }
     return cant
   }
 
   onValidateReferencia (currVal) {
     if (!currVal) return null
-
     let resp = null
+
     if (this.props.selectedItems.length > 0) {
       const referencias = this.props.selectedItems.map(item => item["referencia_banco"])
       if (referencias.length === 0) {
@@ -217,11 +217,15 @@ class BancoForm extends Component {
       .then(response => {
         this.setState({creditos: response.data.results})
       })
+
     axios.get('/subcuentas/', authData)
       .then(response => {
         const updatedFormElement = updateObject(this.state.bankForm.subcuenta, {
           elementConfig: {
-            options: response.data.map(r => ({"value": r.id, "displayValue": r.id_contable+' - '+r.nombre})),
+            options: response.data.map(r => ({
+              "value": r.id,
+              "displayValue": r.id_contable+' - '+r.nombre
+            })),
           },
           value: 1,
         })
@@ -235,18 +239,18 @@ class BancoForm extends Component {
       })
   }
 
-  onShowConfirmation = event => {
+  onShowConfirmation (event) {
     event.preventDefault();
     this.setState({modalOpen: true, confirmFormOpen: true})
   }
 
-  onCancelConfirmation =() => {
+  onCancelConfirmation () {
     if (!this.state.successResponse) {
       this.setState({modalOpen: false, confirmFormOpen: false})
     }
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm (event) {
     event.preventDefault();
 
     this.setState({confirmFormOpen: false})
@@ -266,7 +270,6 @@ class BancoForm extends Component {
       formData["selectedItems"] = this.props.selectedItems.map(it => it.id)
     }
 
-
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` },
     }
@@ -274,7 +277,6 @@ class BancoForm extends Component {
     axios.post('/mov-bancos/', formData, authData)
       .then(response => {
         this.setState({successResponse: response.data.registros_nvos})
-        // return axios.get(...) new registros created
         this.props.onClearError()
       })
       .catch(error => {
@@ -284,23 +286,21 @@ class BancoForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     let updatedFormElement
+    const currValid = checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation, true)
+    let extras = {}
 
-      const currValid = checkValidity(event.target.value, this.state.bankForm[inputIdentifier].validation, true)
-
-      updatedFormElement = updateObject(this.state.bankForm[inputIdentifier], {
-        value: event.target.value,
-        valid: currValid.valid,
-        errorMessage: currValid.errorMessage,
-        touched: true
-      })
+    updatedFormElement = updateObject(this.state.bankForm[inputIdentifier], {
+      value: event.target.value,
+      valid: currValid.valid,
+      errorMessage: currValid.errorMessage,
+      touched: true
+    })
 
     const updatedForm = updateObject(this.state.bankForm, {
       [inputIdentifier]: updatedFormElement
     })
 
-    let extras = {}
     if (inputIdentifier === "cantidad" && currValid.valid) {
       extras = {
         cantidadCheck: this.onValidateCantidad(event.target.value)
@@ -321,21 +321,27 @@ class BancoForm extends Component {
     }
   }
 
-  checkIfFormIsValid = (form) => {
-    let formIsValid = (this.state.selTab === 'bancoForm.Otros' || (this.props.selectedItems && this.props.selectedItems.length > 0)) ? true : false
+  checkIfFormIsValid (form) {
+    let formIsValid = false
+    if (
+      this.state.selTab === 'bancoForm.Otros' ||
+      (this.props.selectedItems && this.props.selectedItems.length > 0)
+    ) {
+      formIsValid = true
+    }
     for (let inputIds in form) {
-        formIsValid = form[inputIds].valid && formIsValid
+      formIsValid = form[inputIds].valid && formIsValid
     }
     return formIsValid
   }
 
-  onToggleIngreso = () => {
+  onToggleIngreso () {
     this.setState(prevState => ({
       subCtaIngrEgr: !prevState.subCtaIngrEgr
     }));
   }
 
-  changeCase = () => {
+  changeCase () {
     const updatedFormElement = updateObject(this.state.bankForm.referencia_banco, {
       value: this.state.bankForm.referencia_banco.value.toUpperCase(),
     })
@@ -348,7 +354,13 @@ class BancoForm extends Component {
   render () {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const formOrder = ["referencia_banco", "fecha", "cantidad", "referencia_alf", "subcuenta"]
+    const formOrder = [
+      "referencia_banco",
+      "fecha",
+      "cantidad",
+      "referencia_alf",
+      "subcuenta"
+    ]
     const formElementsArray = []
     let formElements, modalInfo = <Spinner/>
 
@@ -364,27 +376,28 @@ class BancoForm extends Component {
       formElements = formElementsArray.map(formElement => {
         const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         return (
-            <div
-              className={classes.Inputs}
-              key= {formElement.id}>
-              <Input
-                label={formElement.config.label}
-                key= {formElement.id}
-                elementType={formElement.config.elementType }
-                elementConfig={formElement.config.elementConfig }
-                value={formElement.config.value}
-                shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid || serverErrorMessage !== ""}
-                errorMessage={formElement.config.errorMessage + serverErrorMessage}
-                touched={formElement.config.touched}
-                disabled={formElement.config.disabled}
-                supportData={formElement.id === "cantidad" ? this.state.cantidadCheck : null}
-                alertMessage={formElement.id === "referencia_banco" ? this.state.referenciaCheck : null}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                supportActions={formElement.config.supportActions}
-              />
-            </div>
-            )
+          <div
+            className={classes.Inputs}
+            key= {formElement.id}
+          >
+            <Input
+              label={formElement.config.label}
+              key= {formElement.id}
+              elementType={formElement.config.elementType }
+              elementConfig={formElement.config.elementConfig }
+              value={formElement.config.value}
+              shouldValidate={formElement.config.validation}
+              invalid={!formElement.config.valid || serverErrorMessage !== ""}
+              errorMessage={formElement.config.errorMessage + serverErrorMessage}
+              touched={formElement.config.touched}
+              disabled={formElement.config.disabled}
+              supportData={formElement.id === "cantidad" ? this.state.cantidadCheck : null}
+              alertMessage={formElement.id === "referencia_banco" ? this.state.referenciaCheck : null}
+              changed={(event) => this.inputChangedHandler(event, formElement.id)}
+              supportActions={formElement.config.supportActions}
+            />
+          </div>
+        )
       })
     }
 
@@ -409,8 +422,6 @@ class BancoForm extends Component {
     if (this.state.creditos) {
       creditosList = <CreditoListCont data={this.state.creditos} selectable/>
     }
-
-
 
     const selectableTabs = (
       <div className={[classes.Inputs, classes.TabsInput].join(' ')} key="tabInput">
@@ -457,15 +468,16 @@ class BancoForm extends Component {
             </div>
           )
         }
-        modalInfo = (<FormConfirmation
-                       formOrder={formOrder}
-                       formData={this.state.bankForm}
-                       onSubmitAction={this.onSubmitForm}
-                       onCancelAction={this.onCancelConfirmation}
-                     >
-                     {extras}
-                     </FormConfirmation>
-                   )
+        modalInfo = (
+          <FormConfirmation
+            formOrder={formOrder}
+            formData={this.state.bankForm}
+            onSubmitAction={this.onSubmitForm}
+            onCancelAction={this.onCancelConfirmation}
+          >
+            {extras}
+          </FormConfirmation>
+        )
       } else if (this.state.successResponse) {
         // TODO: Show TABLE with new REGISTROS instead of count
         // TODO: Crear Guardar Nuevo
@@ -476,9 +488,11 @@ class BancoForm extends Component {
               btnType="Success"
               disabled={!this.state.formIsValid}
               clicked={() => this.props.history.replace('/bancos')}
-            ><FormattedMessage id="bancoForm.terminar"/></Button>
+            >
+              <FormattedMessage id="bancoForm.terminar"/>
+            </Button>
           </div>
-                   )
+        )
       }
     }
 
@@ -514,17 +528,15 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     selectedItems: state.selList.selList,
-    formError: state.errors.errors,
-    // ctasBanco: state.bancos.bancos,
-    // subcuetnas: state.bancos.subcuentas
+    formError: state.errors.errors
   }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      onSetError: (err) => dispatch(actions.setError(err)),
-      onClearError: () => dispatch(actions.clearError())
-    }
+  return {
+    onSetError: (err) => dispatch(actions.setError(err)),
+    onClearError: () => dispatch(actions.clearError())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BancoForm, axios))

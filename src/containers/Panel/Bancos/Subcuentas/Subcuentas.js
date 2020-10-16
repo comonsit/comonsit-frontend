@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import classes from './Subcuentas.module.scss'
 import BancosSaldos from '../BancosSaldos/BancosSaldos'
 import Card from '../../../../components/UI/Card/Card';
 import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Title from '../../../../components/UI/Title/Title';
-import classes from './Subcuentas.module.scss'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 // import * as actions from '../../../store/actions'
@@ -102,27 +102,25 @@ class Subcuentas extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
-        value: event.target.value,
-        valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
-        touched: true
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.form[inputIdentifier].validation),
+      touched: true
     })
 
     let updatedForm = updateObject(this.state.form, {
-        [inputIdentifier]: updatedFormElement
+      [inputIdentifier]: updatedFormElement
     })
 
     let formIsValid = true
     for (let inputIds in updatedForm) {
-        formIsValid = updatedForm[inputIds].valid && formIsValid
+      formIsValid = updatedForm[inputIds].valid && formIsValid
     }
 
     this.setState({form: updatedForm, formIsValid: formIsValid})
   }
 
   render () {
-
     let saldosTable = <Spinner/>
 
     if (!this.state.loadingSaldos) {
@@ -195,15 +193,15 @@ class Subcuentas extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token,
-      role: state.generalData.role
-    }
+  return {
+    token: state.auth.token,
+    role: state.generalData.role
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-    }
+  return {
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Subcuentas))
