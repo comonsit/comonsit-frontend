@@ -1,4 +1,8 @@
 @import 'styles/variables';
+:export { gray: $gray; }
+:export { green: $sec-green; }
+:export { red: $red; }
+:export { yellow: $yellow; }
 
 .MapContainer {
   height: 500px;

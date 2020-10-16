@@ -136,9 +136,9 @@ class AcopioForm extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.selSocio &&
-      (!prevProps.selSocio ||
-      this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)
+      this.props.selSocio
+      && (!prevProps.selSocio
+      || this.props.selSocio.clave_socio !== prevProps.selSocio.clave_socio)
     ) {
       let newProceso = this.state.acopioForm.tipo_de_producto
       const newProcessValues = this.state.processOptions
@@ -185,8 +185,8 @@ class AcopioForm extends Component {
     const formData = {}
     for (let formElementIdentifier in this.state.acopioForm) {
       if (
-        this.state.acopioForm[formElementIdentifier].validation.required ||
-        this.state.acopioForm[formElementIdentifier].value !== ''
+        this.state.acopioForm[formElementIdentifier].validation.required
+        || this.state.acopioForm[formElementIdentifier].value !== ''
       ) {
         formData[formElementIdentifier] = this.state.acopioForm[formElementIdentifier].value
       }
@@ -197,10 +197,13 @@ class AcopioForm extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
     const validation = checkValidity(event.target.value, this.state.acopioForm[inputIdentifier].validation, true)
-
     // TODO: checkbox check unnecesary
+    const value = this.state.acopioForm[inputIdentifier].elementType === 'checkbox'
+      ? event.target.checked
+      : event.target.value
+
     const updatedFormElement = updateObject(this.state.acopioForm[inputIdentifier], {
-        value: this.state.acopioForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
+        value: value,
         valid: validation.valid,
         errorMessage: validation.errorMessage,
         touched: true

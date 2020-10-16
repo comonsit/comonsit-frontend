@@ -7,9 +7,11 @@ import {
   TileLayer,
   Popup
 } from 'react-leaflet';
-import axios from '../../../../store/axios-be.js';
+
 import classes from './DeudasMap.module.scss'
-import regionData from '../poligons'
+import axios from '../../../../store/axios-be.js';
+import regionData from '../poligons';
+
 
 const center = [17.10, -92.05]
 
@@ -49,22 +51,21 @@ class DeudasMap extends Component {
   getColor = (vigentes, vencidos) => {
     // GRAY No credits in execution
     if (vigentes + vencidos === 0) {
-      return '#a1a2a1'
+      return classes.gray
     }
     // GREEN Only valid credits
     if (vencidos === 0 && vigentes > 0) {
-      return '#47cb15'
+      return classes.green
     }
     // RED Mode due than valid
     if (vencidos > vigentes) {
-      return '#d42e11'
+      return classes.red
     }
     // YELLOW other cases
-    return '#e1e42a'
+    return classes.yellow
   }
 
   render() {
-
     let regionPoligons = null
     if (this.state.regiones) {
       regionPoligons = regionData.map(r => {
@@ -74,16 +75,30 @@ class DeudasMap extends Component {
           vencidos = <p>{selReg.vencidos_count} vencidos ${selReg.vencidos_total}</p>
         } else {
 
-          const lt30 = (selReg.vencidosLT30_count > 0) ? <div className={classes.BubVenLT30}>{selReg.vencidosLT30_count} - ${selReg.vencidosLT30_total}</div> : null
-          const bt30to6M = (selReg.vencidos30to6M_count > 0) ? <div className={classes.BubVen30to6M}>{selReg.vencidos30to6M_count} - ${selReg.vencidos30to6M_total}</div> : null
-          const gt6M = (selReg.vencidosGT6M_count > 0) ? <div className={classes.BubVenGT6M}>{selReg.vencidosGT6M_count} -  ${selReg.vencidosGT6M_total}</div> : null
+          const lt30 = (selReg.vencidosLT30_count > 0)
+            ? (
+                <div className={classes.BubVenLT30}>
+                  {selReg.vencidosLT30_count} - ${selReg.vencidosLT30_total}
+                </div>
+              )
+            : null
+          const bt30to6M = (selReg.vencidos30to6M_count > 0)
+            ? (
+                <div className={classes.BubVen30to6M}>
+                  {selReg.vencidos30to6M_count} - ${selReg.vencidos30to6M_total}
+                </div>
+              )
+            : null
+          const gt6M = (selReg.vencidosGT6M_count > 0)
+            ? (
+                <div className={classes.BubVenGT6M}>
+                  {selReg.vencidosGT6M_count} -  ${selReg.vencidosGT6M_total}
+                </div>
+              )
+            : null
 
 
-          vencidos = (
-            <>
-              <div className={classes.Parr}> {lt30} {bt30to6M} {gt6M}</div>
-            </>
-          )
+          vencidos = <div className={classes.Parr}> {lt30} {bt30to6M} {gt6M}</div>
         }
 
         // 2nd option to use Tooltip
@@ -92,22 +107,32 @@ class DeudasMap extends Component {
         //    direction={r.toolDirection}
         //  >
         return (
-              <Polygon
-                key={r.id}
-                color={this.getColor(selReg.vigentes_count, selReg.vencidos_count)}
-                positions={r.coordinates}
-              >
-                <Popup
-                  autoClose={false}
-                >
-                  <div className={classes.Parr}><strong>{r.name}</strong></div>
-                  <div className={classes.Parr}>Vigentes:</div>
-                  <div className={classes.Parr}><div className={classes.BubVig}>{selReg.vigentes_count} - ${selReg.vigentes_total}</div></div>
-                  <div className={classes.Parr}>Vencidos:</div>
-                  {vencidos}
-                </Popup>
-              </Polygon>
-            )
+          <Polygon
+            key={r.id}
+            color={this.getColor(selReg.vigentes_count, selReg.vencidos_count)}
+            positions={r.coordinates}
+          >
+            <Popup
+              autoClose={false}
+            >
+              <div className={classes.Parr}>
+                <strong>{r.name}</strong>
+              </div>
+              <div className={classes.Parr}>
+                Vigentes:
+              </div>
+              <div className={classes.Parr}>
+                <div className={classes.BubVig}>
+                  {selReg.vigentes_count} - ${selReg.vigentes_total}
+                </div>
+              </div>
+              <div className={classes.Parr}>
+                Vencidos:
+              </div>
+              {vencidos}
+            </Popup>
+          </Polygon>
+        )
      })
     }
 
@@ -124,16 +149,48 @@ class DeudasMap extends Component {
         </div>
         <div className={classes.Footer}>
           <div className={classes.region}>
-            <div className={classes.Parr}><div className={classes.regionVerde}>&nbsp;</div> <FormattedMessage id="mapa.regionVerde"/></div>
-            <div className={classes.Parr}><div className={classes.regionAmarilla}>&nbsp;</div> <FormattedMessage id="mapa.regionAmarilla"/></div>
-            <div className={classes.Parr}><div className={classes.regionRoja}>&nbsp;</div> <FormattedMessage id="mapa.regionRoja"/></div>
-            <div className={classes.Parr}><div className={classes.regionGris}>&nbsp;</div> <FormattedMessage id="mapa.regionGris"/></div>
+            <div className={classes.Parr}>
+              <div className={classes.regionVerde}>
+                &nbsp;
+              </div>
+              &nbsp;<FormattedMessage id="mapa.regionVerde"/>
+            </div>
+            <div className={classes.Parr}>
+              <div className={classes.regionAmarilla}>
+                &nbsp;
+              </div>
+              &nbsp;<FormattedMessage id="mapa.regionAmarilla"/>
+            </div>
+            <div className={classes.Parr}>
+              <div className={classes.regionRoja}>
+                &nbsp;
+              </div>
+              &nbsp;<FormattedMessage id="mapa.regionRoja"/>
+            </div>
+            <div className={classes.Parr}>
+              <div className={classes.regionGris}>
+                &nbsp;
+              </div>
+              &nbsp;<FormattedMessage id="mapa.regionGris"/>
+            </div>
           </div>
           <div>
-            <div className={classes.Parr}><div className={classes.BubVig}>-</div> <FormattedMessage id="mapa.vigentes"/></div>
-            <div className={classes.Parr}><div className={classes.BubVenLT30}>-</div> <FormattedMessage id="mapa.lt30"/></div>
-            <div className={classes.Parr}><div className={classes.BubVen30to6M}>-</div> <FormattedMessage id="mapa.bt30to6M"/></div>
-            <div className={classes.Parr}><div className={classes.BubVenGT6M}>-</div> <FormattedMessage id="mapa.gt6M"/></div>
+            <div className={classes.Parr}>
+              <div className={classes.BubVig}>-</div>
+              &nbsp;<FormattedMessage id="mapa.vigentes"/>
+            </div>
+            <div className={classes.Parr}>
+              <div className={classes.BubVenLT30}>-</div>
+              &nbsp;<FormattedMessage id="mapa.lt30"/>
+            </div>
+            <div className={classes.Parr}>
+              <div className={classes.BubVen30to6M}>-</div>
+              &nbsp;<FormattedMessage id="mapa.bt30to6M"/>
+            </div>
+            <div className={classes.Parr}>
+              <div className={classes.BubVenGT6M}>-</div>
+              &nbsp;<FormattedMessage id="mapa.gt6M"/>
+            </div>
           </div>
         </div>
       </div>
@@ -142,16 +199,14 @@ class DeudasMap extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-      token: state.auth.token
-    }
+  return {
+    token: state.auth.token
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-
-    }
+  return {
+  }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeudasMap, axios)

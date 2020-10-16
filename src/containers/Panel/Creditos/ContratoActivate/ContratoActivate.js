@@ -140,8 +140,8 @@ class ContratoActivate extends Component {
     const formData = {}
     for (let formElementIdentifier in this.state.contratoUpdateForm) {
       if (
-        this.state.contratoUpdateForm[formElementIdentifier].validation.required ||
-        this.state.contratoUpdateForm[formElementIdentifier].value !== ''
+        this.state.contratoUpdateForm[formElementIdentifier].validation.required
+        || this.state.contratoUpdateForm[formElementIdentifier].value !== ''
       ) {
         formData[formElementIdentifier] = this.state.contratoUpdateForm[formElementIdentifier].value
       }
@@ -157,10 +157,13 @@ class ContratoActivate extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
     const validation = checkValidity(event.target.value, this.state.contratoUpdateForm[inputIdentifier].validation, true)
-
     // TODO: checkbox check unnecesary
+    const value = this.state.contratoUpdateForm[inputIdentifier].elementType === 'checkbox'
+      ? event.target.checked
+      : event.target.value
+
     const updatedFormElement = updateObject(this.state.contratoUpdateForm[inputIdentifier], {
-      value: this.state.contratoUpdateForm[inputIdentifier].elementType === 'checkbox' ? event.target.checked : event.target.value,
+      value: value,
       valid: validation.valid,
       errorMessage: validation.errorMessage,
       touched: true
