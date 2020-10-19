@@ -153,9 +153,11 @@ class ComunidadForm extends Component {
 
     if (this.state.editing || this.props.new) {
       submitButton = (
-        <Button btnType="Success" disabled={!this.state.formIsValid}>
-          <FormattedMessage id="saveButton"/>
-        </Button>
+        <div className={classes.Form_Submit}>
+          <Button btnType="Success" disabled={!this.state.formIsValid}>
+            <FormattedMessage id="saveButton"/>
+          </Button>
+        </div>
       )
       editButton = null
     }else {
@@ -177,7 +179,7 @@ class ComunidadForm extends Component {
         </Title>
         <form onSubmit={this.onSubmitForm}>
           <div className={classes.Form}>
-          {formElements}
+            {formElements}
           </div>
           {submitButton}
         </form>

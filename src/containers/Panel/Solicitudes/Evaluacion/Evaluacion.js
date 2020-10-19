@@ -393,25 +393,27 @@ class Evaluacion extends Component {
             >
             <h2><FormattedMessage id="mesaControl.evaluacion"/></h2>
             <div className={formClasses.join(' ')}>
-            {formElements}
+              {formElements}
             </div>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}>
-              <FormattedMessage id="approveButton"/>
-            </Button>
-            <Button
-              btnType="Success"
-              clicked={this.onNegotiateForm.bind(this)}
-            >
-              <FormattedMessage id="negotiateButton"/>
-            </Button>
-            <Button
-              btnType="Danger"
-              clicked={this.onDisapproveForm.bind(this)}
+            <div className={classes.Form_Submit}>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}>
+                <FormattedMessage id="approveButton"/>
+              </Button>
+              <Button
+                btnType="Success"
+                clicked={this.onNegotiateForm.bind(this)}
               >
-              <FormattedMessage id="disapproveButton"/>
-            </Button>
+                <FormattedMessage id="negotiateButton"/>
+              </Button>
+              <Button
+                btnType="Danger"
+                clicked={this.onDisapproveForm.bind(this)}
+                >
+                <FormattedMessage id="disapproveButton"/>
+              </Button>
+            </div>
             {updatedRedirect}
           </form>
         </div>

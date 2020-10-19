@@ -582,12 +582,14 @@ class MovimientosForm extends Component {
           <div className={formClasses.join(' ')}>
             {formElements}
           </div>
-          <Button
-            btnType="Success"
-            disabled={!this.state.formIsValid}
-          >
-            <FormattedMessage id="saveButton"/>
-          </Button>
+          <div className={classes.Form_Submit}>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}
+            >
+              <FormattedMessage id="saveButton"/>
+            </Button>
+          </div>
           {updatedRedirect}
         </form>
       </>

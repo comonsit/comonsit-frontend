@@ -521,14 +521,16 @@ class PagosForm extends Component {
         <div className={classes.FormDetailContainer}>
           <form onSubmit={this.onSubmitForm}>
             <div className={formClasses.join(' ')}>
-            {formElements}
+              {formElements}
             </div>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}
-            >
-              <FormattedMessage id="saveButton"/>
-            </Button>
+            <div className={classes.Form_Submit}>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}
+              >
+                <FormattedMessage id="saveButton"/>
+              </Button>
+            </div>
             {updatedRedirect}
           </form>
           <div className={classes.DetailContainer}>

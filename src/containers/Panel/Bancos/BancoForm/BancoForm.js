@@ -512,12 +512,14 @@ class BancoForm extends Component {
           <div className={classes.Form}>
           {formElements}
           </div>
-          <Button
-            btnType="Success"
-            disabled={!this.state.formIsValid}
-          >
-            <FormattedMessage id="saveButton"/>
-          </Button>
+          <div className={classes.Form_Submit}>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}
+            >
+              <FormattedMessage id="saveButton"/>
+            </Button>
+          </div>
         </form>
       </div>
     )

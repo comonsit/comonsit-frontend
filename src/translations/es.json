@@ -318,7 +318,7 @@
   "contratoActivate.tipo_tasa": "Tipo de Tasa",
   "contratoActivate.estatus_ejecucion": "Estatus ejecución (entrega del capital)",
   "contratoActivate.referencia_banco": "Referencia Bancaria",
-  "contratoActivate.fecha_banco": "Fecha del cheque/Transferencia",
+  "contratoActivate.fecha_banco": "Fecha del Cheque / Transferencia",
   "contratoActivate.actualizar": "Actualizar datos del Crédito",
   "contratoActivate.iva": "Desglosar IVA",
   "contratoPrint.gerente": "Gerente que firmará",

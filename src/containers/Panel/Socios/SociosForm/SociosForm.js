@@ -592,12 +592,14 @@ class SociosForm extends Component {
     if (isGerencia(this.props.role)) {
       if (this.state.editing) {
         submitButton = (
-          <Button
-            btnType="Success"
-            disabled={!this.state.formIsValid}
-          >
-            <FormattedMessage id="saveButton"/>
-          </Button>
+          <div className={classes.Form_Submit}>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}
+            >
+              <FormattedMessage id="saveButton"/>
+            </Button>
+          </div>
         )
         editButton = null
       } else if (this.props.new) {
@@ -625,7 +627,7 @@ class SociosForm extends Component {
           {editButton}
         </Title>
         <form onSubmit={this.onSubmitForm}>
-          <div className={classes.Form}>
+          <div className={[classes.Form, classes.ModalForm].join(' ')}>
             {formElements}
           </div>
           {submitButton}

@@ -431,13 +431,16 @@ class AcopioForm extends Component {
           titleName="acopioForm.title"/>
         <form onSubmit={this.onShowConfirmation}>
           <div className={formClasses.join(' ')}>
-          {formElements}
+            {formElements}
           </div>
-          <Button
-            btnType="Success"
-            disabled={!this.state.formIsValid}>
-            <FormattedMessage id="saveButton"/>
-          </Button>
+          <div className={classes.Form_Submit}>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}
+            >
+              <FormattedMessage id="saveButton"/>
+            </Button>
+          </div>
           {updatedRedirect}
         </form>
       </>
