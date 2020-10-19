@@ -1,10 +1,11 @@
 @import './variables';
 @import './queries';
 
-.Container {
+.FormContainer {
   background-color: $extra-light-gray;
   padding: 2rem;
   border-radius: .5rem;
+  height: 100%;
 }
 
 .Inputs {

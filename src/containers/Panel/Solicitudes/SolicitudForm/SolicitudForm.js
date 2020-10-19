@@ -652,21 +652,23 @@ class SolicitudForm extends Component {
             {sociosBusqueda}
           </div>
         </Modal>
-        <Title titleName="solicitudForm.title"/>
-        <form onSubmit={this.onSubmitForm}>
-          <div className={formClasses.join(' ')}>
-            {formElements}
-          </div>
-          <div className={classes.Form_Submit}>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}
-            >
-              <FormattedMessage id="saveButton"/>
-            </Button>
-          </div>
-          {updatedRedirect}
-        </form>
+        <div className={classes.FormContainer}>
+          <Title titleName="solicitudForm.title"/>
+          <form onSubmit={this.onSubmitForm}>
+            <div className={formClasses.join(' ')}>
+              {formElements}
+            </div>
+            <div className={classes.Form_Submit}>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}
+              >
+                <FormattedMessage id="saveButton"/>
+              </Button>
+            </div>
+            {updatedRedirect}
+          </form>
+        </div>
       </>
     )
   }

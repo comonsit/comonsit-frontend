@@ -239,7 +239,7 @@ class ContratoActivate extends Component {
     const updatedRedirect = (this.props.updated) ? <Redirect to="/creditos"/> : null
 
     return (
-      <>
+      <div className={classes.FormContainer}>
         <Title titleName="contratoUpdateForm.title"/>
         <div className={classes.SupportText}>
           <FormattedMessage id="contratoUpdateForm.supportText"/>
@@ -259,7 +259,7 @@ class ContratoActivate extends Component {
           {updatedRedirect}
         </form>
         <ContratoDetail contrato={this.props.selContrato}/>
-      </>
+      </div>
     )
   }
 }

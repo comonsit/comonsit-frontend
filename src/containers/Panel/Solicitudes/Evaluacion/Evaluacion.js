@@ -311,113 +311,111 @@ class Evaluacion extends Component {
     }
 
     return (
-      <>
+      <div className={classes.FormContainer}>
         <Title titleName="mesaControl.title"/>
-        <div className={classes.Container}>
-          <div className={classes.InfoContainer}>
-            {solicitudInfo}
-          </div>
-          <div className={classes.InfoContainer}>
-            <div className={classes.SubSection}>
-              <div className={classes.SubTitle}>
-                <h3><FormattedMessage id="evaluacion.solvencia"/></h3>
-              </div>
-              <TextElement
-                label={"evaluacion.volumenIngresosPresente"}
-                content={<Currency value={thisYearTotBal}/>}
-              />
-              <TextElement
-                label={"evaluacion.volumenIngresosAnterior"}
-                content={<Currency value={lastYearTotBal}/>}
-              />
-              <TextElement
-                label={"evaluacion.nivelSolvencia"}
-                content={<Percent value={solvencia}/>}
-              />
-            </div>
-            <div className={classes.SubSection}>
-              <div className={classes.SubTitle}>
-                <h3><FormattedMessage id="evaluacion.ultimoCredito"/></h3>
-              </div>
-              <TextElement
-                label={"evaluacion.UltimoCreditoMonto"}
-                content={"-------"}
-              />
-              <TextElement
-                label={"evaluacion.UltimoCreditoEstatus"}
-                content={"-------"}
-              />
-              <TextElement
-                label={"evaluacion.UltimoCreditoVida"}
-                content={"-------"}
-              />
-              <TextElement
-                label={"evaluacion.UltimoCreditoTotal"}
-                content={"-------"}
-              />
-            </div>
-            <div className={classes.SubSection}>
-              <div className={classes.SubTitle}>
-                <h3><FormattedMessage id="evaluacion.morosidad"/></h3>
-              </div>
-              <TextElement
-                label={"evaluacion.morosidadSocio"}
-                content={"-------"}
-              />
-              <TextElement
-                label={"evaluacion.morosidadComunidad"}
-                content={"-------"}
-              />
-              <TextElement
-                label={"evaluacion.morosidadRegion"}
-                content={"-------"}
-              />
-            </div>
-            <div className={classes.SubSection}>
-              <div className={classes.SubTitle}>
-                <h3><FormattedMessage id="evaluacion.posibleCredito"/></h3>
-              </div>
-              <TextElement
-                label={"evaluacion.nivelRiesgo"}
-                content={"-------"}
-              />
-              <TextElement
-                label={"evaluacion.montoSugerido"}
-                content={sugerido}
-              />
-            </div>
-          </div>
-          <form
-            onSubmit={this.onApproveForm.bind(this)}
-            className={classes.FormDiv}
-            >
-            <h2><FormattedMessage id="mesaControl.evaluacion"/></h2>
-            <div className={formClasses.join(' ')}>
-              {formElements}
-            </div>
-            <div className={classes.Form_Submit}>
-              <Button
-                btnType="Success"
-                disabled={!this.state.formIsValid}>
-                <FormattedMessage id="approveButton"/>
-              </Button>
-              <Button
-                btnType="Success"
-                clicked={this.onNegotiateForm.bind(this)}
-              >
-                <FormattedMessage id="negotiateButton"/>
-              </Button>
-              <Button
-                btnType="Danger"
-                clicked={this.onDisapproveForm.bind(this)}
-                >
-                <FormattedMessage id="disapproveButton"/>
-              </Button>
-            </div>
-            {updatedRedirect}
-          </form>
+        <div className={classes.InfoContainer}>
+          {solicitudInfo}
         </div>
-      </>
+        <div className={classes.InfoContainer}>
+          <div className={classes.SubSection}>
+            <div className={classes.SubTitle}>
+              <h3><FormattedMessage id="evaluacion.solvencia"/></h3>
+            </div>
+            <TextElement
+              label={"evaluacion.volumenIngresosPresente"}
+              content={<Currency value={thisYearTotBal}/>}
+            />
+            <TextElement
+              label={"evaluacion.volumenIngresosAnterior"}
+              content={<Currency value={lastYearTotBal}/>}
+            />
+            <TextElement
+              label={"evaluacion.nivelSolvencia"}
+              content={<Percent value={solvencia}/>}
+            />
+          </div>
+          <div className={classes.SubSection}>
+            <div className={classes.SubTitle}>
+              <h3><FormattedMessage id="evaluacion.ultimoCredito"/></h3>
+            </div>
+            <TextElement
+              label={"evaluacion.UltimoCreditoMonto"}
+              content={"-------"}
+            />
+            <TextElement
+              label={"evaluacion.UltimoCreditoEstatus"}
+              content={"-------"}
+            />
+            <TextElement
+              label={"evaluacion.UltimoCreditoVida"}
+              content={"-------"}
+            />
+            <TextElement
+              label={"evaluacion.UltimoCreditoTotal"}
+              content={"-------"}
+            />
+          </div>
+          <div className={classes.SubSection}>
+            <div className={classes.SubTitle}>
+              <h3><FormattedMessage id="evaluacion.morosidad"/></h3>
+            </div>
+            <TextElement
+              label={"evaluacion.morosidadSocio"}
+              content={"-------"}
+            />
+            <TextElement
+              label={"evaluacion.morosidadComunidad"}
+              content={"-------"}
+            />
+            <TextElement
+              label={"evaluacion.morosidadRegion"}
+              content={"-------"}
+            />
+          </div>
+          <div className={classes.SubSection}>
+            <div className={classes.SubTitle}>
+              <h3><FormattedMessage id="evaluacion.posibleCredito"/></h3>
+            </div>
+            <TextElement
+              label={"evaluacion.nivelRiesgo"}
+              content={"-------"}
+            />
+            <TextElement
+              label={"evaluacion.montoSugerido"}
+              content={sugerido}
+            />
+          </div>
+        </div>
+        <form
+          onSubmit={this.onApproveForm.bind(this)}
+          className={classes.FormDiv}
+          >
+          <h2><FormattedMessage id="mesaControl.evaluacion"/></h2>
+          <div className={formClasses.join(' ')}>
+            {formElements}
+          </div>
+          <div className={classes.Form_Submit}>
+            <Button
+              btnType="Success"
+              disabled={!this.state.formIsValid}>
+              <FormattedMessage id="approveButton"/>
+            </Button>
+            <Button
+              btnType="Success"
+              clicked={this.onNegotiateForm.bind(this)}
+            >
+              <FormattedMessage id="negotiateButton"/>
+            </Button>
+            <Button
+              btnType="Danger"
+              clicked={this.onDisapproveForm.bind(this)}
+              >
+              <FormattedMessage id="disapproveButton"/>
+            </Button>
+          </div>
+          {updatedRedirect}
+        </form>
+      </div>
     )
   }
 }

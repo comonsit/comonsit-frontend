@@ -170,7 +170,7 @@ class ComunidadForm extends Component {
     }
 
     return (
-      <>
+      <div classnName={classes.FormContainer}>
         <Title
           titleName="comunidadForm.title"
           titleNameEx={": " + this.state.comunidadForm.nombre_de_comunidad.value}
@@ -183,7 +183,7 @@ class ComunidadForm extends Component {
           </div>
           {submitButton}
         </form>
-      </>
+      </div>
     )
   }
 }

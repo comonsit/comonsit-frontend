@@ -275,9 +275,8 @@ class MesaControl extends Component {
 
 
     return (
-      <>
+      <div className={classes.FormContainer}>
         <Title titleName="mesaControl.title"/>
-        <div className={classes.Container}>
         <div className={classes.InfoContainer}>
           {solicitudInfo}
         </div>
@@ -306,7 +305,6 @@ class MesaControl extends Component {
           {updatedRedirect}
         </form>
       </div>
-      </>
     )
   }
 }

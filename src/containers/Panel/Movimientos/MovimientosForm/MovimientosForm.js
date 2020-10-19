@@ -563,35 +563,37 @@ class MovimientosForm extends Component {
         >
           {modalInfo}
         </Modal>
-        <Title titleName="movimientosForm.title"/>
-        <div className={classes.ToggleContainer}>
-          <div
-            onClick={() => this.onToggleType(true)}
-            className={aportacionClasses.join(' ')}
-          >
-            <p><FormattedMessage id="movimientos.aportacion"/></p>
-          </div>
-          <div
-            onClick={() => this.onToggleType(false)}
-            className={retiroClasses.join(' ')}
-          >
-            <p><FormattedMessage id="movimientos.retiro"/></p>
-          </div>
-        </div>
-        <form onSubmit={this.onShowConfirmation}>
-          <div className={formClasses.join(' ')}>
-            {formElements}
-          </div>
-          <div className={classes.Form_Submit}>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}
+        <div className={classes.FormContainer}>
+          <Title titleName="movimientosForm.title"/>
+          <div className={classes.ToggleContainer}>
+            <div
+              onClick={() => this.onToggleType(true)}
+              className={aportacionClasses.join(' ')}
             >
-              <FormattedMessage id="saveButton"/>
-            </Button>
+              <p><FormattedMessage id="movimientos.aportacion"/></p>
+            </div>
+            <div
+              onClick={() => this.onToggleType(false)}
+              className={retiroClasses.join(' ')}
+            >
+              <p><FormattedMessage id="movimientos.retiro"/></p>
+            </div>
           </div>
-          {updatedRedirect}
-        </form>
+          <form onSubmit={this.onShowConfirmation}>
+            <div className={formClasses.join(' ')}>
+              {formElements}
+            </div>
+            <div className={classes.Form_Submit}>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}
+              >
+                <FormattedMessage id="saveButton"/>
+              </Button>
+            </div>
+            {updatedRedirect}
+          </form>
+        </div>
       </>
     )
   }

@@ -191,8 +191,7 @@ class Perfil extends Component {
     }
 
     return (
-      <>
-      <div className={classes.Container}>
+      <div className={classes.FormContainer}>
         <Title titleName="perfil.title">
           {editButton}
         </Title>
@@ -203,7 +202,6 @@ class Perfil extends Component {
           {submitButton}
         </form>
       </div>
-      </>
     )
   }
 }

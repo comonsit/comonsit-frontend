@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import axios from '../../../../store/axios-be.js'
+import { Route } from 'react-router-dom';
 import _ from 'lodash';
 
 import classes from './SociosForm.module.scss';
@@ -619,7 +620,7 @@ class SociosForm extends Component {
     }
 
     return (
-      <div className={classes.Container}>
+      <div className={classes.FormContainer}>
         <Title
           titleName="socioForm.title"
           titleNameEx={": " + this.props.selSocio.clave_socio}

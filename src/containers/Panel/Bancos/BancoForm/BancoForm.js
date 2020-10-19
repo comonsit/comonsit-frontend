@@ -198,7 +198,7 @@ class BancoForm extends Component {
     return resp
   }
 
-  onGetData () {
+  onGetData = () => {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -239,18 +239,18 @@ class BancoForm extends Component {
       })
   }
 
-  onShowConfirmation (event) {
+  onShowConfirmation = event => {
     event.preventDefault();
     this.setState({modalOpen: true, confirmFormOpen: true})
   }
 
-  onCancelConfirmation () {
+  onCancelConfirmation = () => {
     if (!this.state.successResponse) {
       this.setState({modalOpen: false, confirmFormOpen: false})
     }
   }
 
-  onSubmitForm (event) {
+  onSubmitForm = event => {
     event.preventDefault();
 
     this.setState({confirmFormOpen: false})
@@ -497,7 +497,7 @@ class BancoForm extends Component {
     }
 
     return (
-      <div>
+      <div className={classes.FormContainer}>
         <Modal
           show={this.state.modalOpen}
           modalClosed={this.onCancelConfirmation}

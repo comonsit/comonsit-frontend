@@ -427,22 +427,24 @@ class AcopioForm extends Component {
         >
           {modalInfo}
         </Modal>
-        <Title
-          titleName="acopioForm.title"/>
-        <form onSubmit={this.onShowConfirmation}>
-          <div className={formClasses.join(' ')}>
-            {formElements}
-          </div>
-          <div className={classes.Form_Submit}>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}
-            >
-              <FormattedMessage id="saveButton"/>
-            </Button>
-          </div>
-          {updatedRedirect}
-        </form>
+        <div className={classes.FormContainer}>
+          <Title
+            titleName="acopioForm.title"/>
+          <form onSubmit={this.onShowConfirmation}>
+            <div className={formClasses.join(' ')}>
+              {formElements}
+            </div>
+            <div className={classes.Form_Submit}>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}
+              >
+                <FormattedMessage id="saveButton"/>
+              </Button>
+            </div>
+            {updatedRedirect}
+          </form>
+        </div>
       </>
     )
   }

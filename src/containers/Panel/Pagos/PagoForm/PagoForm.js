@@ -514,27 +514,29 @@ class PagosForm extends Component {
             {creditosBusqueda}
           </div>
         </Modal>
-        <Title
-          titleName="pagoForm.title">
-          <h1>{this.props.selPago ? this.props.selPago.id : null}</h1>
-        </Title>
-        <div className={classes.FormDetailContainer}>
-          <form onSubmit={this.onSubmitForm}>
-            <div className={formClasses.join(' ')}>
-              {formElements}
+        <div className={classes.FormContainer}>
+          <Title
+            titleName="pagoForm.title">
+            <h1>{this.props.selPago ? this.props.selPago.id : null}</h1>
+          </Title>
+          <div className={classes.FormDetailContainer}>
+            <form onSubmit={this.onSubmitForm}>
+              <div className={formClasses.join(' ')}>
+                {formElements}
+              </div>
+              <div className={classes.Form_Submit}>
+                <Button
+                  btnType="Success"
+                  disabled={!this.state.formIsValid}
+                >
+                  <FormattedMessage id="saveButton"/>
+                </Button>
+              </div>
+              {updatedRedirect}
+            </form>
+            <div className={classes.DetailContainer}>
+              {creditDetail}
             </div>
-            <div className={classes.Form_Submit}>
-              <Button
-                btnType="Success"
-                disabled={!this.state.formIsValid}
-              >
-                <FormattedMessage id="saveButton"/>
-              </Button>
-            </div>
-            {updatedRedirect}
-          </form>
-          <div className={classes.DetailContainer}>
-            {creditDetail}
           </div>
         </div>
       </>
