@@ -12,7 +12,7 @@ class Modal extends Component {
   render () {
     let priorityModal = {}
     if (this.props.errorModal) {
-      priorityModal = {zIndex : 1000}
+      priorityModal = {zIndex : 3000}
     }
     return (
       <>
