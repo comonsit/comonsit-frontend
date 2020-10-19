@@ -633,6 +633,16 @@ class SociosForm extends Component {
           </div>
           {submitButton}
         </form>
+        <Route
+          render={({ history}) => (
+            <Button
+              clicked={() => history.push('/evaluacion-socio')}
+              btnType="Medium"
+            >
+              <FormattedMessage id="socios.evaluacionSocio"/>
+            </Button>
+          )}
+        />
       </div>
     )
   }

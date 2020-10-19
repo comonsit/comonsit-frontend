@@ -2,7 +2,6 @@ import React, { Component} from 'react';
 import FileSaver from 'file-saver';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
 
 import classes from './Socios.module.scss';
 import SociosForm from './SociosForm/SociosForm';
@@ -105,16 +104,6 @@ class Socios extends Component {
           show={this.state.socioSeleccionado}
           modalClosed={this.cancelSelected}>
           {form}
-            <Route
-              render={({ history}) => (
-                <Button
-                  clicked={() => history.push('/evaluacion-socio')}
-                  btnType="Medium"
-                >
-                  <FormattedMessage id="socios.evaluacionSocio"/>
-                </Button>
-              )}
-            />
         </Modal>
         <div className={classes.Container}>
           <Title titleName="socios.title">
