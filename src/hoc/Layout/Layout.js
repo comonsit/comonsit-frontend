@@ -40,9 +40,9 @@ class Layout extends Component {
   }
 
   render() {
-    let classes, menu
+    let layoutClasses, menu
     if (this.state.auth && this.state.usr){
-      classes = [classes.PContent]
+      layoutClasses = [classes.PContent]
       menu = (
         <>
           <PToolbar
@@ -54,7 +54,7 @@ class Layout extends Component {
         </>
       )
     } else {
-      classes = [classes.Content]
+      layoutClasses = [classes.Content]
       menu = (
         <>
           <SideDrawer
@@ -69,7 +69,7 @@ class Layout extends Component {
     return (
       <>
         {menu}
-        <main className={classes.join(' ')}>
+        <main className={layoutClasses.join(' ')}>
           {this.props.children}
         </main>
         <div className={classes.LanguageSelector}>
