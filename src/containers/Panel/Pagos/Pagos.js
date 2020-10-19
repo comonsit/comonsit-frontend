@@ -10,6 +10,7 @@ import PagoDetail from './PagoDetail/PagoDetail'
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
+import Card from '../../../components/UI/Card/Card';
 import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
@@ -104,20 +105,18 @@ class Pagos extends Component {
             </div>
           </div>
         </Modal>
-        <div className={classes.Container}>
-          <Title titleName="pagos.title">
-            <Button clicked={this.newPago}>
-              <FormattedMessage id="pagoForm.title"/>
-            </Button>
-          </Title>
-          <div className={classes.Table}>
-            <XLSButton clicked={this.getXLSX} labelID={"pagosXLSX"}/>
-            <PagosList
-              data={this.props.listaPagos}
-              onClick={(row) => this.showPago(row.values.id)}
-            />
-          </div>
-        </div>
+        <Title titleName="pagos.title">
+          <Button clicked={this.newPago}>
+            <FormattedMessage id="pagoForm.title"/>
+          </Button>
+        </Title>
+        <Card table>
+          <XLSButton clicked={this.getXLSX} labelID={"pagosXLSX"}/>
+          <PagosList
+            data={this.props.listaPagos}
+            onClick={(row) => this.showPago(row.values.id)}
+          />
+      </Card>
       </>
     )
   }

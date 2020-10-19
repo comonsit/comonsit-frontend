@@ -10,6 +10,7 @@ import ContratoActions from './ContratoActions/ContratoActions';
 import Modal from '../../../components/UI/Modal/Modal';
 import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Card from '../../../components/UI/Card/Card';
 import CreditoList from './CreditoList/CreditoList';
 import SwitchToggle from '../../../components/UI/SwitchToggle/SwitchToggle'
 import Title from '../../../components/UI/Title/Title';
@@ -135,18 +136,16 @@ class Creditos extends Component {
           modalClosed={this.cancelSelected}>
           {actions}
         </Modal>
-        <div className={classes.Container}>
-          <Title
-            titleName="creditos.title">
-          </Title>
-          <div className={classes.Table}>
-            {downloadXLSButton}
-            <CreditoList
-              data={this.props.listaCreditos}
-              onClick={(row) => this.showContrato(row.values.id)}
-            />
-          </div>
-        </div>
+        <Title
+          titleName="creditos.title">
+        </Title>
+        <Card table>
+          {downloadXLSButton}
+          <CreditoList
+            data={this.props.listaCreditos}
+            onClick={(row) => this.showContrato(row.values.id)}
+          />
+        </Card>
       </>
     )
   }

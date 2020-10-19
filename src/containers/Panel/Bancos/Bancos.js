@@ -258,68 +258,66 @@ class Bancos extends Component {
             </div>
           </div>
         </Modal>
-        <div className={classes.Container}>
-          <Title
-            titleName="bancos.title">
-            <Notification number={this.state.pendingConcils}>
-              <Button clicked={() => this.props.history.push('banco-form')}>
-                <FormattedMessage id="bancos.newMovimiento"/>
-              </Button>
-            </Notification>
-          </Title>
-          <div className={classes.CardsContainer}>
-            <div>
-              <Card title={"banco.fechas"}>
-                <div label="movimientos.buscarSocio">
-                  <form className={classes.Form} onSubmit={this.onSubmitForm}>
-                    <div className={classes.Inputs}>
-                      <Input
-                        label={this.state.form.initialDate.label}
-                        key= {'bancoFormInput1'}
-                        elementType={this.state.form.initialDate.elementType}
-                        elementConfig={this.state.form.initialDate.elementConfig}
-                        value={this.state.form.initialDate.value}
-                        shouldValidate={this.state.form.initialDate.validation}
-                        invalid={!this.state.form.initialDate.valid}
-                        touched={this.state.form.initialDate.touched}
-                        disabled={this.props.loading}
-                        hide={this.state.form.initialDate.hide}
-                        changed={(event) => this.inputChangedHandler(event, 'initialDate')}
-                        focused
-                        />
-                      <Input
-                        label={this.state.form.finalDate.label}
-                        key= {'bancoFormInput2'}
-                        elementType={this.state.form.finalDate.elementType}
-                        elementConfig={this.state.form.finalDate.elementConfig}
-                        value={this.state.form.finalDate.value}
-                        shouldValidate={this.state.form.finalDate.validation}
-                        invalid={!this.state.form.finalDate.valid}
-                        touched={this.state.form.finalDate.touched}
-                        disabled={this.props.loading}
-                        hide={this.state.form.finalDate.hide}
-                        changed={(event) => this.inputChangedHandler(event, 'finalDate')}
-                        />
-                    </div>
-                    <Button
-                      btnType="Success">
-                      <FormattedMessage id="banco.buscar"/>
-                    </Button>
-                  </form>
-                </div>
-              </Card>
-            </div>
-            <div>
-              <Card title={"banco.totales"}>
-                {saldosTable}
-              </Card>
-            </div>
-            <div className={classes.longCard}>
-              <Card title={"banco.registros"}>
-                <XLSButton clicked={this.getXLSX} labelID={"bancos.registrosXLSX"}/>
-                {registroTable}
-              </Card>
-            </div>
+        <Title
+          titleName="bancos.title">
+          <Notification number={this.state.pendingConcils}>
+            <Button clicked={() => this.props.history.push('banco-form')}>
+              <FormattedMessage id="bancos.newMovimiento"/>
+            </Button>
+          </Notification>
+        </Title>
+        <div className={classes.CardsContainer}>
+          <div>
+            <Card title={"banco.fechas"}>
+              <div label="movimientos.buscarSocio">
+                <form className={classes.Form} onSubmit={this.onSubmitForm}>
+                  <div className={classes.Inputs}>
+                    <Input
+                      label={this.state.form.initialDate.label}
+                      key= {'bancoFormInput1'}
+                      elementType={this.state.form.initialDate.elementType}
+                      elementConfig={this.state.form.initialDate.elementConfig}
+                      value={this.state.form.initialDate.value}
+                      shouldValidate={this.state.form.initialDate.validation}
+                      invalid={!this.state.form.initialDate.valid}
+                      touched={this.state.form.initialDate.touched}
+                      disabled={this.props.loading}
+                      hide={this.state.form.initialDate.hide}
+                      changed={(event) => this.inputChangedHandler(event, 'initialDate')}
+                      focused
+                      />
+                    <Input
+                      label={this.state.form.finalDate.label}
+                      key= {'bancoFormInput2'}
+                      elementType={this.state.form.finalDate.elementType}
+                      elementConfig={this.state.form.finalDate.elementConfig}
+                      value={this.state.form.finalDate.value}
+                      shouldValidate={this.state.form.finalDate.validation}
+                      invalid={!this.state.form.finalDate.valid}
+                      touched={this.state.form.finalDate.touched}
+                      disabled={this.props.loading}
+                      hide={this.state.form.finalDate.hide}
+                      changed={(event) => this.inputChangedHandler(event, 'finalDate')}
+                      />
+                  </div>
+                  <Button
+                    btnType="Success">
+                    <FormattedMessage id="banco.buscar"/>
+                  </Button>
+                </form>
+              </div>
+            </Card>
+          </div>
+          <div>
+            <Card table title={"banco.totales"}>
+              {saldosTable}
+            </Card>
+          </div>
+          <div className={classes.longCard}>
+            <Card table title={"banco.registros"}>
+              <XLSButton clicked={this.getXLSX} labelID={"bancos.registrosXLSX"}/>
+              {registroTable}
+            </Card>
           </div>
         </div>
       </>

@@ -1,9 +1,16 @@
 @import 'styles/variables';
+@import 'styles/general';
 
 .BoxContainer  {
   padding: 2rem;
   border: 1px solid $extra-light-gray-border;
   border-radius: .5rem;
   background-color: $extra-light-gray;
-  margin: 2rem;
+  margin: .5rem;
+  @include tablet {
+    margin: 1rem;
+  }
+  @include desktop {
+    margin: 2rem;
+  }
 }

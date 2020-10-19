@@ -242,38 +242,40 @@ class AcopiosGraphs extends Component {
         <div className={classes.FormContainer}>
           {form}
         </div>
-        <AcopioGraph
-          data={this.state.coffeeData}
-          label="cafe"
-          color="#92c3c0"
-          mouseOver={this._rememberValueCF}
-          mouseOut={this._forgetValues}
-          hint={this.state.hintCF}
-        />
-        <AcopioGraph
-          data={this.state.honeyData}
-          label="miel"
-          color="#D5B49E"
-          mouseOver={this._rememberValueMI}
-          mouseOut={this._forgetValues}
-          hint={this.state.hintMI}
-        />
-        <AcopioGraph
-          data={this.state.soapData}
-          label="jabon"
-          color="#ac92c3"
-          mouseOver={this._rememberValueJA}
-          mouseOut={this._forgetValues}
-          hint={this.state.hintJA}
-        />
-        <AcopioGraph
-          data={this.state.salarioData}
-          label="salarios"
-          color="#BBC392"
-          mouseOver={this._rememberValueSA}
-          mouseOut={this._forgetValues}
-          hint={this.state.hintSA}
-        />
+        <div className={classes.AllGraphs}>
+          <AcopioGraph
+            data={this.state.coffeeData}
+            label="cafe"
+            color="#92c3c0"
+            mouseOver={this._rememberValueCF}
+            mouseOut={this._forgetValues}
+            hint={this.state.hintCF}
+          />
+          <AcopioGraph
+            data={this.state.honeyData}
+            label="miel"
+            color="#D5B49E"
+            mouseOver={this._rememberValueMI}
+            mouseOut={this._forgetValues}
+            hint={this.state.hintMI}
+          />
+          <AcopioGraph
+            data={this.state.soapData}
+            label="jabon"
+            color="#ac92c3"
+            mouseOver={this._rememberValueJA}
+            mouseOut={this._forgetValues}
+            hint={this.state.hintJA}
+          />
+          <AcopioGraph
+            data={this.state.salarioData}
+            label="salarios"
+            color="#BBC392"
+            mouseOver={this._rememberValueSA}
+            mouseOut={this._forgetValues}
+            hint={this.state.hintSA}
+          />
+        </div>
       </>
     )
   }

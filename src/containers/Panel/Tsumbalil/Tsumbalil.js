@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
-import classes from './Tsumbalil.module.scss';
+// import classes from './Tsumbalil.module.scss';
 import ComunidadForm from './ComunidadForm/ComunidadForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import RTable from '../../../components/Tables/RTable/RTable';
 import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
+import Card from '../../../components/UI/Card/Card';
 import Title from '../../../components/UI/Title/Title';
 import * as actions from '../../../store/actions';
 import { isGerencia } from '../../../store/roles';
@@ -92,16 +93,16 @@ class Tsumbalil extends Component {
         >
           {form}
         </Modal>
-        <div className={classes.Container}>
-          <Title titleName="tsumbalil.title">
-            {newComunidadButton}
-          </Title>
+        <Title titleName="tsumbalil.title">
+          {newComunidadButton}
+        </Title>
+        <Card table>
           <RTable
             columns={columns}
             data={this.props.comunidades}
             onRowClick={row => this.showComunidad(row.values.id)}
           />
-        </div>
+        </Card>
       </>
     )
   }

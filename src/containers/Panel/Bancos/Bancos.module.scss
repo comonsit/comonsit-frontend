@@ -3,7 +3,7 @@
 
 .CardsContainer {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 100%;
   justify-items: center;
   align-items: stretch;
   justify-content: space-around;
@@ -19,12 +19,6 @@
 .Inputs {
   display: flex;
   flex-direction: column;
-}
-
-.Container {
-  background-color: $extra-light-gray;
-  padding: 2rem;
-  border-radius: .5rem;
 }
 
 .ContentContainer {

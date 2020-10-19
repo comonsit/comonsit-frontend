@@ -181,7 +181,7 @@ class Subcuentas extends Component {
               </Card>
             </div>
             <div>
-              <Card title={"banco.totales"}>
+              <Card table title={"banco.totales"}>
                 {saldosTable}
               </Card>
             </div>

@@ -3,7 +3,7 @@ import FileSaver from 'file-saver';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
-import classes from './Acopios.module.scss'
+// import classes from './Acopios.module.scss'
 import Bee from '../../../Icons/Bee.js';
 import Money from '../../../Icons/Money.js';
 import Soap from '../../../Icons/Soap.js';
@@ -13,6 +13,7 @@ import Button from '../../../components/UI/Button/Button';
 import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import RTable from '../../../components/Tables/RTable/RTable';
 import Title from '../../../components/UI/Title/Title';
+import Card from '../../../components/UI/Card/Card';
 import Currency from '../../../components/UI/Formatting/Currency';
 import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
@@ -157,25 +158,23 @@ class Acopios extends Component {
 
     return (
       <>
-        <div>
-          <Title
-            titleName="acopios.title">
-            <Button clicked={this.onNewAcopio}>
-              <FormattedMessage id="acopios.newAcopio"/>
-            </Button>
-          </Title>
-          <div className={classes.AllGraphs}>
-            <AcopiosGraphs/>
-          </div>
-          <div className={classes.Table}>
-            {downloadXLSButton}
-            <RTable
-              columns={columns}
-              data={this.props.listaAcopios}
-              onRowClick={row => this.showAcopio(row.values.id)}
-            />
-          </div>
-        </div>
+        <Title
+          titleName="acopios.title">
+          <Button clicked={this.onNewAcopio}>
+            <FormattedMessage id="acopios.newAcopio"/>
+          </Button>
+        </Title>
+        <Card>
+          <AcopiosGraphs/>
+        </Card>
+        <Card table >
+          {downloadXLSButton}
+          <RTable
+            columns={columns}
+            data={this.props.listaAcopios}
+            onRowClick={row => this.showAcopio(row.values.id)}
+          />
+      </Card>
       </>
     )
   }

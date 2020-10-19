@@ -15,6 +15,7 @@ import SelectColumnFilter from '../../../components/Tables/RTable/Filters/Select
 import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterGreaterThan';
 import Button from '../../../components/UI/Button/Button';
+import Card from '../../../components/UI/Card/Card';
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency';
 import * as actions from '../../../store/actions';
@@ -308,20 +309,20 @@ class Solicitudes extends Component {
             {form}
           </div>
         </Modal>
-        <div className={classes.Container}>
           <Title
             titleName="solicitudes.title">
             <Button clicked={this.onNewSolicitud}>
               <FormattedMessage id="solicitudes.new"/>
             </Button>
           </Title>
-          {toggleButton}
-          <RTable
-            columns={columns}
-            data={this.props.listaSolicitudes}
-            onRowClick={(row, socio) => this.showSolicitud(row.values.folio_solicitud, row.values.clave_socio)}
-          />
-        </div>
+          <Card table>
+            {toggleButton}
+            <RTable
+              columns={columns}
+              data={this.props.listaSolicitudes}
+              onRowClick={(row, socio) => this.showSolicitud(row.values.folio_solicitud, row.values.clave_socio)}
+            />
+          </Card>
       </>
     )
   }

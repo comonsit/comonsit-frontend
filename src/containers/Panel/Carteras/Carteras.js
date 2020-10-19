@@ -197,57 +197,55 @@ class Carteras extends Component {
           modalClosed={this.cancelSelected}>
           {historial}
         </Modal>
-        <div className={classes.Container}>
-          <Title
-            titleName="carteras.title"/>
-          <div className={classes.CardsContainer}>
-            <div>
-              <Card title={"carteras.fechas"}>
-                <div label="movimientos.buscarSocio">
-                  <form className={classes.Form} onSubmit={this.onSubmitForm}>
-                    <div className={classes.Inputs}>
-                      <Input
-                        label={this.state.form.initialDate.label}
-                        key= {'bancoFormInput1'}
-                        elementType={this.state.form.initialDate.elementType}
-                        elementConfig={this.state.form.initialDate.elementConfig}
-                        value={this.state.form.initialDate.value}
-                        shouldValidate={this.state.form.initialDate.validation}
-                        invalid={!this.state.form.initialDate.valid}
-                        touched={this.state.form.initialDate.touched}
-                        disabled={this.props.loading}
-                        hide={this.state.form.initialDate.hide}
-                        changed={(event) => this.inputChangedHandler(event, 'initialDate')}
-                        focused
-                        />
-                    </div>
-                    <Button
-                      btnType="Success">
-                      <FormattedMessage id="buscar"/>
-                    </Button>
-                  </form>
-                </div>
-              </Card>
-            </div>
-            <div>
-              <Card title={"carteras.totales"}>
-                {carterasTotales}
-              </Card>
-            </div>
-            <div className={classes.longCard}>
-              <Card title={"carteras.vigentes"}>
-                <div className={classes.TableContainer}>
-                  {creditosVigentesTable}
-                </div>
-              </Card>
-            </div>
-            <div className={classes.longCard}>
-              <Card title={"carteras.vencidos"}>
-                <div className={classes.TableContainer}>
-                  {creditosVencidosTable}
-                </div>
-              </Card>
-            </div>
+        <Title
+          titleName="carteras.title"/>
+        <div className={classes.CardsContainer}>
+          <div>
+            <Card title={"carteras.fechas"}>
+              <div label="movimientos.buscarSocio">
+                <form className={classes.Form} onSubmit={this.onSubmitForm}>
+                  <div className={classes.Inputs}>
+                    <Input
+                      label={this.state.form.initialDate.label}
+                      key= {'bancoFormInput1'}
+                      elementType={this.state.form.initialDate.elementType}
+                      elementConfig={this.state.form.initialDate.elementConfig}
+                      value={this.state.form.initialDate.value}
+                      shouldValidate={this.state.form.initialDate.validation}
+                      invalid={!this.state.form.initialDate.valid}
+                      touched={this.state.form.initialDate.touched}
+                      disabled={this.props.loading}
+                      hide={this.state.form.initialDate.hide}
+                      changed={(event) => this.inputChangedHandler(event, 'initialDate')}
+                      focused
+                      />
+                  </div>
+                  <Button
+                    btnType="Success">
+                    <FormattedMessage id="buscar"/>
+                  </Button>
+                </form>
+              </div>
+            </Card>
+          </div>
+          <div>
+            <Card title={"carteras.totales"}>
+              {carterasTotales}
+            </Card>
+          </div>
+          <div className={classes.longCard}>
+            <Card title={"carteras.vigentes"}>
+              <div className={classes.TableContainer}>
+                {creditosVigentesTable}
+              </div>
+            </Card>
+          </div>
+          <div className={classes.longCard}>
+            <Card title={"carteras.vencidos"}>
+              <div className={classes.TableContainer}>
+                {creditosVencidosTable}
+              </div>
+            </Card>
           </div>
         </div>
       </>

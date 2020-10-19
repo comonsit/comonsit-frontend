@@ -3,12 +3,13 @@ import FileSaver from 'file-saver';
 import {FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
 
-import classes from './Socios.module.scss';
+// import classes from './Socios.module.scss';
 import SociosForm from './SociosForm/SociosForm';
 import SociosList from './SociosList/SociosList';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
+import Card from '../../../components/UI/Card/Card';
 import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Title from '../../../components/UI/Title/Title';
 import * as actions from '../../../store/actions';
@@ -105,15 +106,13 @@ class Socios extends Component {
           modalClosed={this.cancelSelected}>
           {form}
         </Modal>
-        <div className={classes.Container}>
-          <Title titleName="socios.title">
-            {newSocioButton}
-          </Title>
-          <div className={classes.Table}>
-            {downloadXLSButton}
-            {socioList}
-          </div>
-        </div>
+        <Title titleName="socios.title">
+          {newSocioButton}
+        </Title>
+        <Card table>
+          {downloadXLSButton}
+          {socioList}
+        </Card>
       </>
     )
   }
