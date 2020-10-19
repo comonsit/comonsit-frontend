@@ -6,16 +6,18 @@
 }
 .PContent {
   /* para tener un margen, más el espacio del toolbar */
-  width: 100%;
+  width: calc(100% - .3rem);
   height: 100%;
   overflow: scroll;
   position: absolute;
   margin-left: .3rem;
+  // @include tablet {
+  //   width: calc(100% - 1rem);
+  // }
   @include desktop {
     /* para tener un margen, más el espacio del toolbar */
     margin-left: 21rem;
     width: auto;
-    height: auto;
     overflow: auto;
     position: static;
   }
