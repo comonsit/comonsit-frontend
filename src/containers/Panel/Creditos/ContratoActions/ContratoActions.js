@@ -76,7 +76,7 @@ const contratoActions = props => {
 
   return (
     <div className={classes.Container}>
-      <div className={classes.ContentContainer}>
+      <div className={classes.ActionsContainer}>
         <div className={classes.ContratoContainer}>
           <div className={classes.ContratoDetail}>
             <ContratoDetail contrato={props.selContrato}/>

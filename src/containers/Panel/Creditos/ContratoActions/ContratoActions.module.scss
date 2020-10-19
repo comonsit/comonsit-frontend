@@ -14,10 +14,16 @@
   }
 }
 
-.ContentContainer {
+.ActionsContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  padding: .7rem;
+  overflow-y: scroll;
+  // height: 50vh;
+  min-height: 40rem;
+
   @include tablet {
     align-items: flex-start;
     flex-direction: row;
@@ -87,9 +93,13 @@
 
 .ButtonGroup {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: stretch;
+  flex-wrap: wrap;
+  @include tablet {
+    flex-direction: column;
+  }
   button {
     flex-grow: 1;
     @include tablet {
