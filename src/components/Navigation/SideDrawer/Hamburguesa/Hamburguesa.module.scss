@@ -7,14 +7,17 @@
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
   box-sizing: border-box;
   cursor: pointer;
   div {
       width: 90%;
-      height: .5rem;
+      height: .3rem;
       background-color: white;
       border-radius: .1rem;
+      @include tablet {
+        height: .5rem;
+      }
   }
   @include desktop {
     display: none;
