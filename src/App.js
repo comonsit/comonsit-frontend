@@ -120,8 +120,6 @@ class App extends Component {
       </IntlProvider>
     );
   }
-
-
 }
 
 // App.defaultProps = {
@@ -129,16 +127,16 @@ class App extends Component {
 // }
 
 const mapStateToProps = state => {
-    return {
-        isAuthenticated: state.auth.token !== null,
-        locale: state.locale.selectedLanguage
-    }
+  return {
+    isAuthenticated: state.auth.token !== null,
+    locale: state.locale.selectedLanguage
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onTryAutoSignup: () => dispatch (actions.authCheckState())
-    }
+  return {
+    onTryAutoSignup: () => dispatch (actions.authCheckState())
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

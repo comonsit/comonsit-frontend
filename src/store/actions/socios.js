@@ -3,14 +3,14 @@ import axios from '../axios-be.js';
 import { setError, clearError } from './errors'
 
 
-export const setSocios = (socios) => {
+export const setSocios = socios => {
   return {
     type: actionTypes.SET_SOCIOS,
     socios: socios
   }
 }
 
-export const setSelSocios = (selectedSocio) => {
+export const setSelSocios = selectedSocio => {
   return {
     type: actionTypes.SET_SEL_SOCIO,
     selectedSocio: selectedSocio
@@ -29,7 +29,7 @@ export const newSocio = () => {
   }
 }
 
-export const initSocios = (token) => {
+export const initSocios = token => {
   return dispatch => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }

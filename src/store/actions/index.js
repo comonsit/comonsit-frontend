@@ -1,28 +1,28 @@
 export {
-    initSocios,
-    fetchSelSocio,
-    unSelectSocio,
-    updateSocio,
-    newSocio,
-    createNewSocio
+  initSocios,
+  fetchSelSocio,
+  unSelectSocio,
+  updateSocio,
+  newSocio,
+  createNewSocio
 } from './socios'
 
 export {
-    initSolicitudes,
-    unSelectSolicitud,
-    fetchSelSolicitud,
-    newSolicitud,
-    createNewSolicitud
+  initSolicitudes,
+  unSelectSolicitud,
+  fetchSelSolicitud,
+  newSolicitud,
+  createNewSolicitud
 } from './solicitudes'
 
 export {
-    initAcopios,
-    // unSelectAcopio,
-    // fetchSelAcopio,
-    newAcopio,
-    createNewAcopio,
-    getSocioSaldo,
-    clearSocioSaldo
+  initAcopios,
+  // unSelectAcopio,
+  // fetchSelAcopio,
+  newAcopio,
+  createNewAcopio,
+  getSocioSaldo,
+  clearSocioSaldo
 } from './acopios'
 
 export {
@@ -39,13 +39,13 @@ export {
 } from './pagos'
 
 export {
-    initMovimientos,
-    unSetMovimientos,
-    newMovimiento,
-    createNewMovimiento,
-    fetchSelMov,
-    unSelectMov,
-    updateMovimiento
+  initMovimientos,
+  unSetMovimientos,
+  newMovimiento,
+  createNewMovimiento,
+  fetchSelMov,
+  unSelectMov,
+  updateMovimiento
 } from './movimientos'
 
 

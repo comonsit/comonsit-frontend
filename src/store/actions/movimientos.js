@@ -3,7 +3,7 @@ import axios from '../axios-be.js';
 import { setError, clearError } from './errors'
 
 
-export const setMovimientos = (movimientos) => {
+export const setMovimientos = movimientos => {
   return {
     type: actionTypes.SET_MOVIMIENTOS,
     movimientos: movimientos
@@ -33,47 +33,47 @@ export const initMovimientos = (token, socioId) => {
 }
 
 export const createNewMovimiento = (movimientoData, token) => {
-    return dispatch => {
-      const authData = {
-        headers: { 'Authorization': `Bearer ${token}` },
-      }
-      dispatch(newMovimientoStart())
-      axios.post(`/movimientos/`, movimientoData, authData)
-          .then(response => {
-            dispatch(newMovimientoSuccess(response.data.id, movimientoData ))
-            alert('Movimiento ' + response.data.id + ' creado correctamente')
-            dispatch(clearError())
-          })
-          .catch(error => {
-            dispatch(newMovimientoFailed())
-            dispatch(setError(error.response.data))
-          })
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` },
     }
+    dispatch(newMovimientoStart())
+    axios.post(`/movimientos/`, movimientoData, authData)
+      .then(response => {
+        dispatch(newMovimientoSuccess(response.data.id, movimientoData ))
+        alert('Movimiento ' + response.data.id + ' creado correctamente')
+        dispatch(clearError())
+      })
+      .catch(error => {
+        dispatch(newMovimientoFailed())
+        dispatch(setError(error.response.data))
+      })
+  }
 }
 
 export const newMovimiento = () => {
-    return {
-        type: actionTypes.NEW_MOVIMIENTO
-    }
+  return {
+    type: actionTypes.NEW_MOVIMIENTO
+  }
 }
 
 export const newMovimientoSuccess = (id) => {
-    return {
-        type: actionTypes.NEW_MOVIMIENTO_SUCCESS
-    }
+  return {
+    type: actionTypes.NEW_MOVIMIENTO_SUCCESS
+  }
 }
 
 export const newMovimientoFailed = (error) => {
-    return {
-        type: actionTypes.NEW_MOVIMIENTO_FAILED,
-        error: error
-    }
+  return {
+    type: actionTypes.NEW_MOVIMIENTO_FAILED,
+    error: error
+  }
 }
 
 export const newMovimientoStart = () => {
-    return {
-        type: actionTypes.NEW_MOVIMIENTO_START
-    }
+  return {
+    type: actionTypes.NEW_MOVIMIENTO_START
+  }
 }
 
 export const fetchSelMov = (token, movId) => {
@@ -92,7 +92,7 @@ export const fetchSelMov = (token, movId) => {
   }
 }
 
-export const setSelMovimiento = (selectedMov) => {
+export const setSelMovimiento = selectedMov => {
   return {
     type: actionTypes.SET_SEL_MOV,
     selectedMov: selectedMov

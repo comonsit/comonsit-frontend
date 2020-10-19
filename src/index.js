@@ -2,7 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  combineReducers
+} from 'redux';
+import thunk from 'redux-thunk';
+
+import './index.scss';
 import sociosReducer from './store/reducers/socios'
 import errorsReducer from './store/reducers/errors'
 import generalDataReducer from './store/reducers/generalData'
@@ -14,41 +22,45 @@ import movimientoReducer from './store/reducers/movimientos'
 import authReducer from './store/reducers/auth'
 import localeReducer from './store/reducers/locale'
 import listSelReducer from './store/reducers/selectList'
-import thunk from 'redux-thunk';
-import './index.scss';
 import './assets/fonts/Arquitecta.otf'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 
 const rootReducer = combineReducers({
-    socios: sociosReducer,
-    auth: authReducer,
-    locale: localeReducer,
-    solicitudes: solicitudReducer,
-    acopios: acopioReducer,
-    movimientos: movimientoReducer,
-    generalData: generalDataReducer,
-    creditos: creditosReducer,
-    pagos: pagosReducer,
-    selList: listSelReducer,
-    errors: errorsReducer
+  socios: sociosReducer,
+  auth: authReducer,
+  locale: localeReducer,
+  solicitudes: solicitudReducer,
+  acopios: acopioReducer,
+  movimientos: movimientoReducer,
+  generalData: generalDataReducer,
+  creditos: creditosReducer,
+  pagos: pagosReducer,
+  selList: listSelReducer,
+  errors: errorsReducer
 })
 
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+
+const composeEnhancers = process.env.NODE_ENV === 'development'
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  : null || compose;
+
+
 // Y para activar el thunk y poder hacer redux asíncrono:
 const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
+  applyMiddleware(thunk)
 ))
+
 
 // Si el archivo NO va a estar en el ROOT,
 // .. hay que definitlo aquí en el BrowserRouter
 const app = (
-    <Provider store={store}>
-        <BrowserRouter >
-            <App />
-        </BrowserRouter>
-    </Provider>
+  <Provider store={store}>
+    <BrowserRouter >
+      <App />
+    </BrowserRouter>
+  </Provider>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

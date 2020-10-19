@@ -45,27 +45,27 @@ export const createNewAcopio = (acopioData, token) => {
 }
 
 export const newAcopio = () => {
-    return {
-        type: actionTypes.NEW_ACOPIO
-    }
+  return {
+    type: actionTypes.NEW_ACOPIO
+  }
 }
 
 export const newAcopioSuccess = (id) => {
-    return {
-        type: actionTypes.NEW_ACOPIO_SUCCESS
-    }
+  return {
+    type: actionTypes.NEW_ACOPIO_SUCCESS
+  }
 }
 
 export const newAcopioFailed = () => {
-    return {
-        type: actionTypes.NEW_ACOPIO_FAILED
-    }
+  return {
+    type: actionTypes.NEW_ACOPIO_FAILED
+  }
 }
 
 export const newAcopioStart = () => {
-    return {
-        type: actionTypes.NEW_ACOPIO_START
-    }
+  return {
+    type: actionTypes.NEW_ACOPIO_START
+  }
 }
 
 export const getSocioSaldo = (token, socio) => {
@@ -92,11 +92,11 @@ export const setSocioSaldo = (saldo, socio) => {
   }
 }
 
-export const getSocioSaldoFailed = (error) => {
-    return {
-        type: actionTypes.GET_SOCIO_SALDO_FAILED,
-        error: error
-    }
+export const getSocioSaldoFailed = error => {
+  return {
+    type: actionTypes.GET_SOCIO_SALDO_FAILED,
+    error: error
+  }
 }
 
 export const clearSocioSaldo = () => {
@@ -104,33 +104,3 @@ export const clearSocioSaldo = () => {
     type: actionTypes.CLEAR_SOCIO_SALDO
   }
 }
-//
-// export const fetchSelAcopio = (token, acopioId) => {
-//   return dispatch => {
-//     const authData = {
-//       headers: { 'Authorization': `Bearer ${token}` }
-//     }
-//     axios.get(`/acopios/${acopioId}.json`, authData)
-//       .then(response => {
-//         dispatch(setSelAcopio(response.data))
-//       })
-//       .catch(error => {
-//         // TODO: FALTA!!
-//         //dispatch(fetchAcopiosFailed())
-//       })
-//   }
-// }
-//
-// export const setSelAcopio = (selectedAcopio) => {
-//     return {
-//         type: actionTypes.SET_SEL_ACOPIO,
-//         selectedAcopio: selectedAcopio
-//     }
-// }
-//
-//
-// export const unSelectAcopio = () => {
-//   return {
-//     type: actionTypes.UNSELECT_ACOPIO
-//   }
-// }

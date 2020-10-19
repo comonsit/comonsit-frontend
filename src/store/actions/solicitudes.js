@@ -3,7 +3,7 @@ import axios from '../axios-be.js';
 import { setError, clearError } from './errors'
 
 
-export const setSolicitudes = (solicitudes) => {
+export const setSolicitudes = solicitudes => {
   return {
     type: actionTypes.SET_SOLICITUDES,
     solicitudes: solicitudes
@@ -28,46 +28,46 @@ export const initSolicitudes = (token, fetchAll) => {
 }
 
 export const createNewSolicitud = (solData, token) => {
-    return dispatch => {
-      const authData = {
-        headers: { 'Authorization': `Bearer ${token}` },
-      }
-      dispatch(newSolicitudStart())
-      axios.post(`/solic-creditos/`, solData, authData)
-          .then(response => {
-            dispatch(newSolicitudSuccess(response.data.folio_solicitud, solData ))
-            alert('Solicitud ' + response.data.folio_solicitud + ' creado correctamente')
-            dispatch(clearError())
-          })
-          .catch(error => {
-            dispatch(newSolicitudFailed())
-            dispatch(setError(error.response.data))
-          })
+  return dispatch => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${token}` },
     }
+    dispatch(newSolicitudStart())
+    axios.post(`/solic-creditos/`, solData, authData)
+      .then(response => {
+        dispatch(newSolicitudSuccess(response.data.folio_solicitud, solData ))
+        alert('Solicitud ' + response.data.folio_solicitud + ' creado correctamente')
+        dispatch(clearError())
+      })
+      .catch(error => {
+        dispatch(newSolicitudFailed())
+        dispatch(setError(error.response.data))
+      })
+  }
 }
 
 export const newSolicitud = () => {
-    return {
-        type: actionTypes.NEW_SOLICITUD
-    }
+  return {
+    type: actionTypes.NEW_SOLICITUD
+  }
 }
 
-export const newSolicitudSuccess = (id) => {
-    return {
-        type: actionTypes.NEW_SOLICITUD_SUCCESS
-    }
+export const newSolicitudSuccess = id => {
+  return {
+    type: actionTypes.NEW_SOLICITUD_SUCCESS
+  }
 }
 
 export const newSolicitudFailed = () => {
-    return {
-        type: actionTypes.NEW_SOLICITUD_FAILED,
-    }
+  return {
+    type: actionTypes.NEW_SOLICITUD_FAILED,
+  }
 }
 
 export const newSolicitudStart = () => {
-    return {
-        type: actionTypes.NEW_SOLICITUD_START
-    }
+  return {
+    type: actionTypes.NEW_SOLICITUD_START
+  }
 }
 
 export const fetchSelSolicitud = (token, solId) => {
@@ -86,11 +86,11 @@ export const fetchSelSolicitud = (token, solId) => {
   }
 }
 
-export const setSelSolicitud = (selectedSolicitud) => {
-    return {
-        type: actionTypes.SET_SEL_SOLICITUD,
-        selectedSolicitud: selectedSolicitud
-    }
+export const setSelSolicitud = selectedSolicitud => {
+  return {
+    type: actionTypes.SET_SEL_SOLICITUD,
+    selectedSolicitud: selectedSolicitud
+  }
 }
 
 

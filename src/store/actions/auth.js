@@ -16,7 +16,7 @@ export const authSuccess = (token, userId) => {
   }
 }
 
-export const authFail = (error) => {
+export const authFail = error => {
   return {
     type: actionTypes.AUTH_FAIL,
     error: error
@@ -24,13 +24,13 @@ export const authFail = (error) => {
 }
 
 export const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('refreshToken')
-    localStorage.removeItem('refreshExpirationDate')
-    localStorage.removeItem('userId')
-    return {
-        type: actionTypes.AUTH_LOGOUT
-    }
+  localStorage.removeItem('token')
+  localStorage.removeItem('refreshToken')
+  localStorage.removeItem('refreshExpirationDate')
+  localStorage.removeItem('userId')
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  }
 }
 
 export const startTokenTimeout = (expirationTime) => {
@@ -52,40 +52,39 @@ export const startRefreshTokenTimeout = (expirationTime) => {
 
 export const auth = (username, password, isSignUp) => {
   return dispatch =>  {
-      dispatch (authStart())
-      const authData = {
-          username: username,
-          password: password,
-      }
+    dispatch (authStart())
+    const authData = {
+      username: username,
+      password: password,
+    }
 
-      let url = '/token/'
+    let url = '/token/'
 
-      axios.post(url , authData)
-          .then(response => {
-              localStorage.setItem('token', response.data.access)
-              localStorage.setItem('refreshToken', response.data.refresh)
-              // hacemos un cálculo de cuál será la fecha en la que expirará
-              const fiveMinutes = 5 * 60 * 1000
-              const twentyFourHours = 24 * 60 * 60 * 1000
-              const refreshExpirationDate = new Date(new Date().getTime() + twentyFourHours)
-              // TODO: CHANGE FOR USE REFRESH!? response.data.refresh
-              // const expirationRefreshDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-              localStorage.setItem('refreshExpirationDate', refreshExpirationDate)
-              localStorage.setItem('userId', response.data.localId)
-              dispatch(authSuccess(response.data.access, response.data.localId))
-              dispatch(fetchGralData(response.data.access))
-              dispatch(startTokenTimeout(fiveMinutes))
-              dispatch(startRefreshTokenTimeout(twentyFourHours))
-          })
-          .catch(error => {
-            if (error.response) {
-              dispatch(authFail("Usuario o Clave incorrectos."))
-            } else if (error.request) {
-              console.log(error.request);
-              dispatch(authFail('Servidor No Responde'))
-            }
-
-          })
+    axios.post(url , authData)
+      .then(response => {
+        localStorage.setItem('token', response.data.access)
+        localStorage.setItem('refreshToken', response.data.refresh)
+        // hacemos un cálculo de cuál será la fecha en la que expirará
+        const fiveMinutes = 5 * 60 * 1000
+        const twentyFourHours = 24 * 60 * 60 * 1000
+        const refreshExpirationDate = new Date(new Date().getTime() + twentyFourHours)
+        // TODO: CHANGE FOR USE REFRESH!? response.data.refresh
+        // const expirationRefreshDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+        localStorage.setItem('refreshExpirationDate', refreshExpirationDate)
+        localStorage.setItem('userId', response.data.localId)
+        dispatch(authSuccess(response.data.access, response.data.localId))
+        dispatch(fetchGralData(response.data.access))
+        dispatch(startTokenTimeout(fiveMinutes))
+        dispatch(startRefreshTokenTimeout(twentyFourHours))
+      })
+      .catch(error => {
+        if (error.response) {
+          dispatch(authFail("Usuario o Clave incorrectos."))
+        } else if (error.request) {
+          console.log(error.request);
+          dispatch(authFail('Servidor No Responde'))
+        }
+      })
   }
 }
 
@@ -115,10 +114,10 @@ export const refreshToken = () => {
 
 
 export const setAuthRedirectPath = (path) => {
-    return {
-        type: actionTypes.SET_AUTH_REDIRECT_PATH,
-        path: path
-    }
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path
+  }
 }
 
 

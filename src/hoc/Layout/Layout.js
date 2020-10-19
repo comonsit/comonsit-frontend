@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
+import classes from './Layout.module.scss';
 import * as actions from '../../store/actions'
-import cl from './Layout.module.scss';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import HoverButton from '../../components/UI/HoverButton/HoverButton';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
@@ -9,7 +10,6 @@ import PToolbar from '../../components/NavigationPanel/PToolbar/PToolbar';
 
 
 class Layout extends Component {
-
   state = {
     showSideDrawer: false,
     auth: this.props.isAuthenticated,
@@ -35,14 +35,14 @@ class Layout extends Component {
     this.setState({showSideDrawer: false});
   }
 
-  onChangeLanguage = (lang) => {
+  onChangeLanguage = lang => {
     this.props.onToggleLang(lang);
   }
 
   render() {
     let classes, menu
     if (this.state.auth && this.state.usr){
-      classes = [cl.PContent]
+      classes = [classes.PContent]
       menu = (
         <>
           <PToolbar
@@ -54,7 +54,7 @@ class Layout extends Component {
         </>
       )
     } else {
-      classes = [cl.Content]
+      classes = [classes.Content]
       menu = (
         <>
           <SideDrawer
@@ -63,15 +63,16 @@ class Layout extends Component {
           <Toolbar
             showMenu={this.sideDrawerOpenHandler}/>
         </>
-        )
+      )
     }
+
     return (
       <>
         {menu}
         <main className={classes.join(' ')}>
-            {this.props.children}
+          {this.props.children}
         </main>
-        <div className={cl.LanguageSelector}>
+        <div className={classes.LanguageSelector}>
           <HoverButton title="language" items={['es', 'tz']} clicked={this.onChangeLanguage}/>
         </div>
       </>
@@ -80,16 +81,16 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        isAuthenticated: state.auth.token !== null,
-        user: state.generalData.user
-    }
+  return {
+    isAuthenticated: state.auth.token !== null,
+    user: state.generalData.user
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onToggleLang: (lang) => dispatch(actions.onChangeLocale(lang))
-    }
+  return {
+    onToggleLang: (lang) => dispatch(actions.onChangeLocale(lang))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)
