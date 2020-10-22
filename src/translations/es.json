@@ -486,5 +486,7 @@
   "subcuentas.title": "Subcuentas Contables",
   "editarDatosBancarios": "Editar datos Bancarios",
   "nombre_region": "Región",
-  "nombre_comunidad": "Comunidad"
+  "nombre_comunidad": "Comunidad",
+  "mesaControl.infoDelCredito": "Info del Crédito",
+  "evaluacion.infoDeSoporte": "Información para Evaluar Solicitud"
 }

@@ -277,33 +277,38 @@ class MesaControl extends Component {
     return (
       <div className={classes.FormContainer}>
         <Title titleName="mesaControl.title"/>
-        <div className={classes.InfoContainer}>
-          {solicitudInfo}
+        <div className={classes.FormContainer_extra}>
+          <div className={classes.FormContainer_extraInfo}>
+            <h3><FormattedMessage id="mesaControl.infoDelCredito" /></h3>
+            <div className={classes.FormContainer_extraInfoData}>
+              {solicitudInfo}
+            </div>
+          </div>
+          <form
+            onSubmit={this.onApproveForm.bind(this)}
+            className={classes.FormDiv}
+          >
+            <h2><FormattedMessage id="mesaControl.revisionCoord"/></h2>
+            <div className={formClasses.join(' ')}>
+              {formElements}
+            </div>
+            <div className={classes.Form_Submit}>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}
+              >
+                <FormattedMessage id="approveButton"/>
+              </Button>
+              <Button
+                btnType="Danger"
+                clicked={this.onDisapproveForm.bind(this)}
+              >
+                <FormattedMessage id="disapproveButton"/>
+              </Button>
+            </div>
+            {updatedRedirect}
+          </form>
         </div>
-        <form
-          onSubmit={this.onApproveForm.bind(this)}
-          className={classes.FormDiv}
-        >
-          <h2><FormattedMessage id="mesaControl.revisionCoord"/></h2>
-          <div className={formClasses.join(' ')}>
-            {formElements}
-          </div>
-          <div className={classes.Form_Submit}>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}
-            >
-              <FormattedMessage id="approveButton"/>
-            </Button>
-            <Button
-              btnType="Danger"
-              clicked={this.onDisapproveForm.bind(this)}
-            >
-              <FormattedMessage id="disapproveButton"/>
-            </Button>
-          </div>
-          {updatedRedirect}
-        </form>
       </div>
     )
   }

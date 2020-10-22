@@ -241,24 +241,29 @@ class ContratoActivate extends Component {
     return (
       <div className={classes.FormContainer}>
         <Title titleName="contratoUpdateForm.title"/>
-        <div className={classes.SupportText}>
-          <FormattedMessage id="contratoUpdateForm.supportText"/>
+        <div className={classes.FormContainer_extra}>
+          <div className={classes.FormContainer_extraInfo}>
+            <h3><FormattedMessage id="mesaControl.infoDelCredito" /></h3>
+            <div className={classes.FormContainer_extraInfoData}>
+              <ContratoDetail contrato={this.props.selContrato}/>
+            </div>
+          </div>
+          <form onSubmit={this.onSubmitForm}>
+            <h2><FormattedMessage id="contratoUpdateForm.supportText"/></h2>
+            <div className={formClasses.join(' ')}>
+              {formElements}
+            </div>
+            <div className={classes.Form_Submit}>
+              <Button
+                btnType="Success"
+                disabled={!this.state.formIsValid}
+              >
+                <FormattedMessage id="contratoActivate.actualizar"/>
+              </Button>
+            </div>
+            {updatedRedirect}
+          </form>
         </div>
-        <form onSubmit={this.onSubmitForm}>
-          <div className={formClasses.join(' ')}>
-            {formElements}
-          </div>
-          <div className={classes.Form_Submit}>
-            <Button
-              btnType="Success"
-              disabled={!this.state.formIsValid}
-            >
-              <FormattedMessage id="contratoActivate.actualizar"/>
-            </Button>
-          </div>
-          {updatedRedirect}
-        </form>
-        <ContratoDetail contrato={this.props.selContrato}/>
       </div>
     )
   }

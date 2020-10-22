@@ -6,6 +6,45 @@
   padding: 2rem;
   border-radius: .5rem;
   height: 100%;
+
+  // Form with a block of support data
+  &_extra {
+    display: flex;
+    flex-direction: column;
+
+    &Info {
+      &Data {
+        border: .2rem dashed $pr-dark-blue;
+        border-radius: .5rem;
+        overflow: scroll;
+        max-height: 40vh;
+      }
+      &> h3,
+      &> h2 {
+        text-align: center
+      }
+      @include tablet {
+        width: 40%;
+        &Data {
+          max-height: 70vh;
+        }
+      }
+    }
+
+    form {
+      &> h3,
+      &> h2 {
+        text-align: center
+      }
+    }
+
+    @include tablet {
+      flex-direction: row-reverse;
+      form {
+        width: 100%;
+      }
+    }
+  }
 }
 
 .Inputs {
@@ -41,6 +80,7 @@
     justify-content: center;
     border-radius: 0 0 .8rem .8rem;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
     @include tablet {
       margin: 0 1.5rem;
       margin-bottom: 2rem;

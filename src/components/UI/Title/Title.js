@@ -6,8 +6,12 @@ import classes from './Title.module.scss';
 
 const title = (props) => (
   <div className={classes.HeaderContainer}>
-    <h1><FormattedMessage id={props.titleName}/>{props.titleNameEx}</h1>
-    {props.children}
+    <div className={classes.HeaderContainer_main}>
+      <h1><FormattedMessage id={props.titleName}/>{props.titleNameEx}</h1>
+    </div>
+    <div className={classes.HeaderContainer_extra}>
+      {props.children}
+    </div>
   </div>
 )
 

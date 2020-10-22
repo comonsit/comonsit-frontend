@@ -348,16 +348,16 @@ class PagosForm extends Component {
         supportData: null
       }),
       cantidad: updateObject(this.state.pagoForm.cantidad, {
-        supportData: <><FormattedMessage id="pagos.deuda_pend"/>:</>
+        supportData: <p><FormattedMessage id="pagos.deuda_pend"/>:</p>
       }),
       abono_capital: updateObject(this.state.pagoForm.abono_capital, {
-        supportData:<><FormattedMessage id="pagos.cap_pend"/>:</>
+        supportData:<p><FormattedMessage id="pagos.cap_pend"/>:</p>
       }),
       interes_ord: updateObject(this.state.pagoForm.interes_ord, {
-        supportData: <><FormattedMessage id="pagos.intOrd_pend"/>:</>
+        supportData: <p><FormattedMessage id="pagos.intOrd_pend"/>:</p>
       }),
       interes_mor: updateObject(this.state.pagoForm.interes_mor, {
-        supportData: <><FormattedMessage id="pagos.intMor_pend"/>:</>
+        supportData: <p><FormattedMessage id="pagos.intMor_pend"/>:</p>
       })
     }
   }
@@ -519,8 +519,15 @@ class PagosForm extends Component {
             titleName="pagoForm.title">
             <h1>{this.props.selPago ? this.props.selPago.id : null}</h1>
           </Title>
-          <div className={classes.FormDetailContainer}>
+          <div className={classes.FormContainer_extra}>
+            <div className={classes.FormContainer_extraInfo}>
+              <h3><FormattedMessage id="mesaControl.infoDelCredito" /></h3>
+              <div className={classes.FormContainer_extraInfoData}>
+                {creditDetail}
+              </div>
+            </div>
             <form onSubmit={this.onSubmitForm}>
+              <h2><FormattedMessage id="pagoForm.title"/></h2>
               <div className={formClasses.join(' ')}>
                 {formElements}
               </div>
@@ -534,9 +541,6 @@ class PagosForm extends Component {
               </div>
               {updatedRedirect}
             </form>
-            <div className={classes.DetailContainer}>
-              {creditDetail}
-            </div>
           </div>
         </div>
       </>

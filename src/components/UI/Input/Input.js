@@ -9,7 +9,6 @@ import Alert from './Alert'
 const input = (props) => {
   let label = null
   let inputElement = null
-  let support = null
   let button = null
   const containerClasses = [classes.Input]
   const inputClasses = [classes.InputElement]
@@ -40,13 +39,9 @@ const input = (props) => {
     )
   }
 
-  if (props.supportData) {
-    support = (
-      <div className={classes.SupportData}>
-        <p>{props.supportData}</p>
-      </div>
-    )
-  }
+  const support = props.supportData
+    ? <>{props.supportData}</>
+    : null
 
   if (props.supportActions && props.supportActions.supportButton) {
     button = (
@@ -55,6 +50,16 @@ const input = (props) => {
       </Button>
     )
   }
+
+  const supportInfo = (support || button)
+    ?
+      (
+        <div className={classes.SupportData}>
+          {support}
+          {button}
+        </div>
+      )
+    : null
 
   switch (props.elementType ) {
     case ( 'input' ):
@@ -167,8 +172,7 @@ const input = (props) => {
             {validationError}
           </div>
       </div>
-      {support}
-      {button}
+      {supportInfo}
     </>
   )
 }
