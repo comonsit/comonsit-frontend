@@ -433,6 +433,20 @@ class SociosForm extends Component {
           errorMessage: "",
           touched: false,
         },
+        doc_rfc: {
+          elementType: 'checkbox',
+          elementConfig: {
+            type: 'checkbox'
+          },
+          label: (<FormattedMessage id="socioForm.doc_rfc"/>),
+          value: this.props.selSocio.doc_rfc,
+          validation: {
+            required: false
+          },
+          valid: true,
+          errorMessage: "",
+          touched: false,
+        },
       }
     }
   }
@@ -541,6 +555,7 @@ class SociosForm extends Component {
       "doc_curp",
       "doc_act_nac",
       "doc_ine",
+      "doc_rfc",
       "doc_domicilio"
     ]
     const formElementsArray = []

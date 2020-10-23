@@ -70,6 +70,7 @@ const newSocio = (state) => {
     "doc_curp": false,
     "doc_act_nac": false,
     "doc_ine": false,
+    "doc_rfc": false,
     "doc_domicilio": false,
     "comunidad": 1,
     "cargo_coop": []

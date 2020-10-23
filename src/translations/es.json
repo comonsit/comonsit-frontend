@@ -488,5 +488,6 @@
   "nombre_region": "Región",
   "nombre_comunidad": "Comunidad",
   "mesaControl.infoDelCredito": "Info del Crédito",
-  "evaluacion.infoDeSoporte": "Información para Evaluar Solicitud"
+  "evaluacion.infoDeSoporte": "Información para Evaluar Solicitud",
+  "socioForm.doc_rfc": "Copia de RFC"
 }
