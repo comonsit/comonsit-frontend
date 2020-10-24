@@ -60,7 +60,7 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
     }
 
     if (rules.isDecimal) {
-        pattern = /^[0-9]+([,.][0-9][0-9]?)?$/g;   //  /^[0-9]+([.,][0-9]{1,2})?$/;
+        pattern = /^[0-9]+([.][0-9][0-9]?)?$/g;   //  /^[0-9]+([.,][0-9]{1,2})?$/;
         if (!pattern.test(value) ) {
           isValid &= false
           message += ` -> Debe ser un número con máximo 2 decimales `
@@ -68,11 +68,11 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
     }
 
     if (rules.isDecimalExact) {
-        pattern = /^[0-9]+([,.][0-9])?$/g;
-        // pattern = /^[0-9]+([.,][0-9]{1,4})?$/;
+        // pattern =  /^[0-9]+([,.][0-9])?$/g;
+        pattern = /^[0-9]+([.][0-9]{1,4})?$/g;
         if (!pattern.test(value) ) {
           isValid &= false
-          message += ` -> Debe ser un número `
+          message += ` -> Debe ser un número con máximo 4 decimales `
         }
     }
 

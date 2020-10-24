@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux'
-import axios from '../../../../store/axios-be.js'
+import { connect } from 'react-redux';
+import axios from '../../../../store/axios-be.js';
+import _ from 'lodash';
 
 import classes from './Evaluacion.module.scss';
 import SolicitudDetail from '../SolicitudDetail/SolicitudDetail';
-import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
+import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler';
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Currency from '../../../../components/UI/Formatting/Currency';
@@ -16,6 +17,7 @@ import TextElement from '../../../../components/UI/TextElement/TextElement';
 import Title from '../../../../components/UI/Title/Title';
 import { updateObject } from '../../../../store/reducers/utility';
 import { checkValidity } from '../../../../utilities/validity';
+import * as actions from '../../../../store/actions';
 
 
 class Evaluacion extends Component {
@@ -30,73 +32,76 @@ class Evaluacion extends Component {
         monto_aprobado: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01',
+            type: 'text',
             placeholder: '$__.__'
           },
           label:  (<><FormattedMessage id="evaluacion.montoAprobado"/>*</>),
           value: "",
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: .01,
+            maxNumValue: 9999999,
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         plazo_aprobado: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
+            type: 'text',
             placeholder: '# meses'
           },
           label:  (<><FormattedMessage id="evaluacion.plazoPagoAprobado"/>*</>),
           value: "",
           validation: {
             required: true,
-            isNumeric: true
+            isNumeric: true,
+            maxNumValue: 240,
+            minNumValue: 1,
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         tasa_aprobada: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '100',
-            min: '1',
-            step: '.0001',
-            placeholder: '4.00%'
+            type: 'text',
+            placeholder: '4.00%',
           },
           label:  (<><FormattedMessage id="evaluacion.tasa_aprobada"/>*</>),
           value: "",
           validation: {
             required: true,
-            isDecimalExact: true
+            isDecimalExact: true,
+            minNumValue: .01,
+            maxNumValue: 100,
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
         tasa_mor_aprobada: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '100',
-            min: '1',
-            step: '.0001',
+            type: 'text',
             placeholder: '1.00%'
           },
           label:  (<><FormattedMessage id="evaluacion.tasa_mor_aprobada"/>*</>),
           value: "",
           validation: {
             required: true,
-            isDecimalExact: true
+            isDecimalExact: true,
+            minNumValue: .01,
+            maxNumValue: 100,
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -113,6 +118,7 @@ class Evaluacion extends Component {
             required: false
           },
           valid: true,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -191,20 +197,25 @@ class Evaluacion extends Component {
         } else {
           alert('Solicitud de Crédito rechazada permanentemente')
         }
+        this.props.onClearError()
         // push or pop back to history?
         this.props.history.push('solicitudes');
         //dispatch update user data
       })
       .catch(error => {
         this.setState({loading: true})
+        this.props.onSetError(error.response.data)
       })
     // this.props.onApproveSolForm(this.props.token)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+    const validation = checkValidity(event.target.value, this.state.evaluacionForm[inputIdentifier].validation, true)
+
     const updatedFormElement = updateObject(this.state.evaluacionForm[inputIdentifier], {
       value: event.target.value,
-      valid: checkValidity(event.target.value, this.state.evaluacionForm[inputIdentifier].validation),
+      valid: validation.valid,
+      errorMessage: validation.errorMessage,
       touched: true
     })
 
@@ -218,6 +229,9 @@ class Evaluacion extends Component {
     }
 
     this.setState({evaluacionForm: updatedForm, formIsValid: formIsValid})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError()
+    }
   }
 
   render () {
@@ -243,6 +257,7 @@ class Evaluacion extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         return (
           <div key= {formElement.id}>
             <div className={classes.Inputs}>
@@ -254,7 +269,8 @@ class Evaluacion extends Component {
                 elementConfig={formElement.config.elementConfig }
                 value={formElement.config.value}
                 shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
+                invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                errorMessage={formElement.config.errorMessage + serverErrorMessage}
                 touched={formElement.config.touched}
                 disabled={this.props.loading}
                 hide={formElement.config.hide}
@@ -433,12 +449,14 @@ const mapStateToProps = state => {
     selectedSol: state.solicitudes.selectedSolicitud,
     saldosAcopios: state.acopios.socioSaldo,
     selSocioSaldo: state.acopios.selSocio,
+    formError: state.errors.errors,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    // onApproveSolForm: (token) => dispatch(actions.approveSolForm(token))
+    onSetError: (err) => dispatch(actions.setError(err)),
+    onClearError: () => dispatch(actions.clearError())
   }
 }
 

@@ -25,6 +25,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
           "detail" in err.response.data
         ) {
           setError(err.response)
+        } else if(err.response.data instanceof Array) {
+          setError(err.response.data.join(' '))
         }
         return Promise.reject(err)
       }

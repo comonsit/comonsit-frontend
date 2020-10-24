@@ -117,9 +117,8 @@ export const updateMovimiento = (movData, id, token) => {
         alert('Movimiento ' + response.data.id + ' actualizado correctamente')
       })
       .catch(error => {
-        dispatch(updateMovimientoFailed(error))
-        console.log('update crédito ERROR')
-        console.log(error)
+        dispatch(updateMovimientoFailed())
+        dispatch(setError(error.response.data))
       })
   }
 }
@@ -130,10 +129,9 @@ export const updateMovimientoSuccess = () => {
   }
 }
 
-export const updateMovimientoFailed = (error) => {
+export const updateMovimientoFailed = () => {
   return {
     type: actionTypes.UPDATE_MOVIMIENTO_FAILED,
-    error: error
   }
 }
 
