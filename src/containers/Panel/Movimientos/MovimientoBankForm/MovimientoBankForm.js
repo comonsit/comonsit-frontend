@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux'
-import axios from '../../../../store/axios-be.js'
+import { connect } from 'react-redux';
+import axios from '../../../../store/axios-be.js';
+import _ from 'lodash';
 
-import classes from './MovimientoBankForm.module.scss'
-import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
+import classes from './MovimientoBankForm.module.scss';
+import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler';
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
-import * as actions from '../../../../store/actions'
-import { updateObject } from '../../../../store/reducers/utility'
-import { checkValidity } from '../../../../utilities/validity'
+import * as actions from '../../../../store/actions';
+import { updateObject } from '../../../../store/reducers/utility';
+import { checkValidity } from '../../../../utilities/validity';
 
 
 class MovimientoBankForm extends Component {
@@ -34,6 +35,7 @@ class MovimientoBankForm extends Component {
             required: true
           },
           valid: true,
+          errorMessage: "",
           touched: true,
         },
         fecha_banco: {
@@ -48,6 +50,7 @@ class MovimientoBankForm extends Component {
             todayOrOlder: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         },
@@ -63,6 +66,7 @@ class MovimientoBankForm extends Component {
             required: true
           },
           valid: false,
+          errorMessage: "",
           touched: false,
           hide: false
         }
@@ -90,13 +94,16 @@ class MovimientoBankForm extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+    const validation = checkValidity(event.target.value, this.state.movimientoForm[inputIdentifier].validation, true)
+
     const value = this.state.movimientoForm[inputIdentifier].elementType === 'checkbox'
       ? event.target.checked
       : event.target.value
 
     const updatedFormElement = updateObject(this.state.movimientoForm[inputIdentifier], {
         value: value,
-        valid: checkValidity(event.target.value, this.state.movimientoForm[inputIdentifier].validation),
+        valid: validation.valid,
+        errorMessage: validation.errorMessage,
         touched: true
     })
 
@@ -105,6 +112,9 @@ class MovimientoBankForm extends Component {
     })
 
     this.setState({movimientoForm: updatedForm, formIsValid: this.checkIfFormIsValid(updatedForm)})
+    if (this.props.formError && inputIdentifier in this.props.formError) {
+      this.props.onClearError()
+    }
   }
 
   checkIfFormIsValid = (form) => {
@@ -130,6 +140,7 @@ class MovimientoBankForm extends Component {
 
     if (!this.props.loading) {
       formElements = formElementsArray.map(formElement => {
+        const serverErrorMessage = _.get(this.props.formError, formElement.id, "")
         return (
           <div
             key= {formElement.id}
@@ -142,7 +153,8 @@ class MovimientoBankForm extends Component {
                 elementConfig={formElement.config.elementConfig }
                 value={formElement.config.value}
                 shouldValidate={formElement.config.validation}
-                invalid={!formElement.config.valid}
+                invalid={!formElement.config.valid || serverErrorMessage !== ""}
+                errorMessage={formElement.config.errorMessage + serverErrorMessage}
                 touched={formElement.config.touched}
                 disabled={this.props.loading}
                 hide={formElement.config.hide}
@@ -183,6 +195,7 @@ const mapStateToProps = state => {
     role: state.generalData.role,
     loading: state.movimientos.loading,
     updated: state.movimientos.updated,
+    formError: state.errors.errors,
   }
 }
 
@@ -190,7 +203,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onInitSocios: (token) => dispatch(actions.initSocios(token)),
     onEditMovimiento: (movData, id, token) => dispatch(actions.updateMovimiento(movData, id, token)),
-    unSelMov: () => dispatch(actions.unSelectMov())
+    unSelMov: () => dispatch(actions.unSelectMov()),
+    onClearError: () => dispatch(actions.clearError())
   }
 }
 
