@@ -14,6 +14,7 @@ import HoverButton from '../../../components/UI/HoverButton/HoverButton';
 import RTable from '../../../components/Tables/RTable/RTable';
 import Title from '../../../components/UI/Title/Title';
 import Card from '../../../components/UI/Card/Card';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import Currency from '../../../components/UI/Formatting/Currency';
 import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
@@ -156,6 +157,20 @@ class Acopios extends Component {
       )
     }
 
+    const table = (this.props.listaAcopios)
+      ? (
+          <RTable
+            columns={columns}
+            data={this.props.listaAcopios}
+            onRowClick={row => this.showAcopio(row.values.id)}
+          />
+        )
+      : <Spinner/ >
+
+    if (this.props.listaAcopios) {
+
+    }
+
     return (
       <>
         <Title
@@ -169,11 +184,7 @@ class Acopios extends Component {
         </Card>
         <Card table >
           {downloadXLSButton}
-          <RTable
-            columns={columns}
-            data={this.props.listaAcopios}
-            onRowClick={row => this.showAcopio(row.values.id)}
-          />
+          {table}
       </Card>
       </>
     )
