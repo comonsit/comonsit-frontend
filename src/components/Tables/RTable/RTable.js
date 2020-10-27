@@ -63,6 +63,7 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
     nextPage,
     previousPage,
     setPageSize,
+    setAllFilters,
     state: { pageIndex, pageSize, selectedRowIds },
 
   } = useTable(
@@ -115,94 +116,106 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
   }, [selectedRowIds, dispatch, data]);
 
 
-  const globFilter = !hideSearch ? (
-    <tr>
-      <th className={classes.SearchHeader} colSpan="4">
-        <GlobalFilter
-            preGlobalFilteredRows={preGlobalFilteredRows}
-            globalFilter={state.globalFilter}
-            setGlobalFilter={setGlobalFilter}
-          />
-      </th>
-      <th
-        colSpan="0">
-        <SwitchToggle clicked={event => setAdvancedSearch(advancedSearch => !advancedSearch)}/>
-      </th>
+  const toggleSearch = () => {
+    setAdvancedSearch(advancedSearch => !advancedSearch)
+    setAllFilters([])
+  }
 
-    </tr>
-  ) : null
+  const globFilter = !hideSearch
+    ? (
+        <tr>
+          <th className={classes.SearchHeader} colSpan="4">
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={state.globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
+          </th>
+          <th colSpan="0">
+            <SwitchToggle clicked={event => toggleSearch()}/>
+          </th>
 
-  const paginationButtons = !hideSearch ? (
-    <div className={classes.Pagination}>
-      <button onClick={e => {
-          e.preventDefault();
-          gotoPage(0)
-        }} disabled={!canPreviousPage}>
-        {'<<'}
-      </button>{' '}
-      <button onClick={e => {
-          e.preventDefault();
-          previousPage();
-        }} disabled={!canPreviousPage}>
-        {'<'}
-      </button>{' '}
-      <button onClick={e => {
-          e.preventDefault();
-          nextPage();
-        }} disabled={!canNextPage}>
-        {'>'}
-      </button>{' '}
-      <button onClick={e => {
-          e.preventDefault();
-          gotoPage(pageCount - 1);
-        }} disabled={!canNextPage}>
-        {'>>'}
-      </button>{' '}
-      <span>
-        {' '}
-        <strong>
-          {pageIndex + 1} de {pageOptions.length}
-        </strong>{' '}
-      </span>
-      <span>
-        | Ir a:{' '}
-        <input
-          type="number"
-          defaultValue={pageIndex + 1}
-          onChange={e => {
-            const page = e.target.value ? Number(e.target.value) - 1 : 0
-            gotoPage(page)
-          }}
-          style={{ width: '100px' }}
-        />
-      </span>{' '}
-      <select
-        value={pageSize}
-        onChange={e => {
-          setPageSize(Number(e.target.value))
-        }}
-      >
-        {[10, 20, 30, 40, 50].map(pageSize => (
-          <option key={pageSize} value={pageSize}>
-            Mostrar {pageSize}
-          </option>
-        ))}
-      </select>
-    </div>
-  ) : null
-
-
-  const showFooter = hasFooter ? (
-    <tfoot>
-      {footerGroups.map(group => (
-        <tr{...group.getFooterGroupProps()}>
-          {group.headers.map(column => (
-            <td className={classes.TableFooter}  {...column.getFooterProps()}>{column.render('Footer')}</td>
-          ))}
         </tr>
-      ))}
-    </tfoot>
-  ) : null
+      )
+    : null
+
+  const paginationButtons = !hideSearch
+    ? (
+        <div className={classes.Pagination}>
+          <button onClick={e => {
+              e.preventDefault();
+              gotoPage(0)
+            }} disabled={!canPreviousPage}>
+            {'<<'}
+          </button>{' '}
+          <button onClick={e => {
+              e.preventDefault();
+              previousPage();
+            }} disabled={!canPreviousPage}>
+            {'<'}
+          </button>{' '}
+          <button onClick={e => {
+              e.preventDefault();
+              nextPage();
+            }} disabled={!canNextPage}>
+            {'>'}
+          </button>{' '}
+          <button onClick={e => {
+              e.preventDefault();
+              gotoPage(pageCount - 1);
+            }} disabled={!canNextPage}>
+            {'>>'}
+          </button>{' '}
+          <span>
+            {' '}
+            <strong>
+              {pageIndex + 1} de {pageOptions.length}
+            </strong>{' '}
+          </span>
+          <span>
+            | Ir a:{' '}
+            <input
+              type="number"
+              defaultValue={pageIndex + 1}
+              onChange={e => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                gotoPage(page)
+              }}
+              style={{ width: '100px' }}
+            />
+          </span>{' '}
+          <select
+            value={pageSize}
+            onChange={e => {
+              setPageSize(Number(e.target.value))
+            }}
+          >
+            {[10, 20, 30, 40, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Mostrar {pageSize}
+              </option>
+            ))}
+          </select>
+        </div>
+      )
+    : null
+
+
+  const showFooter = (hasFooter)
+    ? (
+        <tfoot>
+          {footerGroups.map(group => (
+            <tr{...group.getFooterGroupProps()}>
+              {group.headers.map(column => (
+                <td className={classes.TableFooter} {...column.getFooterProps()}>
+                  {column.render('Footer')}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
+      )
+    : null
 
   // Render the UI for your table
   return (
