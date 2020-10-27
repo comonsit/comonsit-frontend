@@ -227,9 +227,9 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render('Header')}
-                    <span>
+                  <th {...column.getHeaderProps()}>
+                    <span {...column.getSortByToggleProps()}>
+                      {column.render('Header')}
                         {column.isSorted
                           ? column.isSortedDesc
                             ? ' ▼'
