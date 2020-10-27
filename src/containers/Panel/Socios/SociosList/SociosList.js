@@ -90,17 +90,22 @@ const sociosList = (props) => {
     },
     {
       Header: <FormattedMessage id="socios.general"/>,
-    accessor: 'estatus_comonSit',
+      accessor: 'estatus_comonSit',
       Cell: renderStatus,
       Filter: SelectColumnFilter,
       filter: 'includes',
     },
+    {
+      accessor: 'full_name',
+      isVisible: false
+    }
   ]
   return (
     <RTable
       columns={columns}
       data={props.listaSocios}
       onRowClick={props.onClick}
+      hiddenCols={['full_name']}
     />
   )
 }
