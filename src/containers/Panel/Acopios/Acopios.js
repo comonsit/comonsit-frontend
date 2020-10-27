@@ -108,7 +108,7 @@ class Acopios extends Component {
         Header: <FormattedMessage id="region"/>,
         accessor: 'region',
         Filter: SelectColumnFilter,
-        filter: 'includes',
+        filter: 'equals',
       },
       {
         Header: <FormattedMessage id="comunidad"/>,

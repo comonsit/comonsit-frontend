@@ -299,7 +299,7 @@ class Movimientos extends Component {
         >
           <h3><FormattedMessage id="selectSocio"/></h3>
           <div
-            className={classes.TableContainer}>
+            className={classes.ContentContainer}>
           {sociosBusqueda}
           </div>
         </Modal>
