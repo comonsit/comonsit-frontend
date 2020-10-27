@@ -48,7 +48,7 @@ const sociosList = (props) => {
       Header: <FormattedMessage id="socios.region"/>,
       accessor: 'region',
       Filter: SelectColumnFilter,
-      filter: 'includes',
+      filter: 'equals',
     },
     {
       Header: <FormattedMessage id="socios.comunidad"/>,
