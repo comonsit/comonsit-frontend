@@ -198,7 +198,7 @@ class PagosForm extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitCreditos(this.props.token)
     if (this.props.selPago && this.props.selPago.credito) {
       this.props.onFetchSelContrato(this.props.token, this.props.selPago.credito)
@@ -435,7 +435,7 @@ class PagosForm extends Component {
   }
 
 
-  render () {
+  render() {
     const pagoFormOrder = [
       "credito",
       "fecha_pago",

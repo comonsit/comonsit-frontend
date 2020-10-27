@@ -22,7 +22,7 @@ class DeudasMap extends Component {
     loading: false,
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.onGetCarteras()
   }
 

@@ -64,11 +64,11 @@ class Bancos extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.onGetRegistros()
   }
 
-  getFormattedQueryDates () {
+  getFormattedQueryDates = () => {
     let stDate = ''
     if (this.state.form.initialDate.value) {
       const tmpStartDate = new Date(this.state.form.initialDate.value)
@@ -82,7 +82,7 @@ class Bancos extends Component {
     return [stDate, endDate]
   }
 
-  onGetRegistros () {
+  onGetRegistros = () => {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -165,7 +165,7 @@ class Bancos extends Component {
       })
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
     this.onGetRegistros()
   }
@@ -218,7 +218,7 @@ class Bancos extends Component {
     });
   }
 
-  render () {
+  render() {
     let saldosTable, registroTable = <Spinner/>
     if (!this.state.loadingReg) {
       registroTable = (

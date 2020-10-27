@@ -247,7 +247,7 @@ class MovimientosForm extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitSocios(this.props.token)
   }
 
@@ -352,12 +352,12 @@ class MovimientosForm extends Component {
     this.setState({modalOpen: true, searchSocio: true})
   }
 
-  cancelSearch =() => {
+  cancelSearch = () => {
     this.setState({modalOpen: false, searchSocio: false})
     this.props.unSelSocio()
   }
 
-  selectSocio =(id) => {
+  selectSocio = id => {
     const updatedForm = updateObject(this.state.movimientoForm, {
       clave_socio: updateObject(this.state.movimientoForm.clave_socio, {
         value: id,
@@ -438,7 +438,7 @@ class MovimientosForm extends Component {
     this.setState({modalOpen: true, confirmFormOpen: true})
   }
 
-  render () {
+  render() {
     const movimientoFormOrder = [
       "clave_socio",
       "fecha_entrega",

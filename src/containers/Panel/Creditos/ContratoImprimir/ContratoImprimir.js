@@ -25,7 +25,7 @@ class ContratoImprimir extends Component {
     this.props.unSelContrato()
   }
 
-  render () {
+  render() {
     // TODO: implement finish printing
     const updatedRedirect = (this.state.finished) ? <Redirect to="/creditos"/> : null
     // TODO: fetch GERENTES

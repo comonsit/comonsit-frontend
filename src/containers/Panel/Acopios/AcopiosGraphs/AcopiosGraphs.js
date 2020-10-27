@@ -69,7 +69,7 @@ class AcopiosGraphs extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.getYearSum('')
     this.props.onInitSocios(this.props.token)
   }
@@ -176,7 +176,7 @@ class AcopiosGraphs extends Component {
     this.getYearSum(query)
   }
 
-  render () {
+  render() {
 
     let form = <Spinner/>
     if (

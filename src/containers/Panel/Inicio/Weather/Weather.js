@@ -15,7 +15,7 @@ class Weather extends React.Component {
     }
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=17.07&lon=-91.62&units=metric&lang=es&APPID=${key}`
     fetch(weatherURL)
       .then(res => res.json())

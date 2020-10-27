@@ -66,17 +66,17 @@ class Movimientos extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitSocios(this.props.token)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.props.unSelSocio()
     this.props.unSetMov()
   }
 
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (
       this.props.selSocio
       && (!prevProps.selSocio
@@ -109,7 +109,7 @@ class Movimientos extends Component {
 //     }
 //   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
     this.updateData(this.state.form.clave_socio.value)
   }
@@ -169,7 +169,7 @@ class Movimientos extends Component {
       })
   }
 
-  showMovimiento =(id) => {
+  showMovimiento = id => {
     this.setState({movimientoSelected: true});
     // this.props.selectMovimiento(id)
   }
@@ -211,7 +211,7 @@ class Movimientos extends Component {
     this.updateData(id)
   }
 
-  render () {
+  render() {
     let sociosBusqueda = <Spinner/>
     let movimientosResults = null
     const today = new Date()

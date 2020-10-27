@@ -23,7 +23,7 @@ class Socios extends Component {
     socioSeleccionado: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitSocios(this.props.token)
   }
 
@@ -63,12 +63,12 @@ class Socios extends Component {
       })
   }
 
-  getComunidad = (id) => {
+  getComunidad = id => {
     const index = this.props.comunidades.findIndex(x => x.id === id)
     return this.props.comunidades[index].nombre_de_comunidad
   }
 
-  render () {
+  render() {
     let downloadXLSButton, newSocioButton = null
     let form, socioList = <Spinner/>
     if (this.state.socioSeleccionado && this.props.selSocio) {

@@ -74,7 +74,7 @@ class MovimientoBankForm extends Component {
     }
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
 
     let formData = {}
@@ -117,7 +117,7 @@ class MovimientoBankForm extends Component {
     }
   }
 
-  checkIfFormIsValid = (form) => {
+  checkIfFormIsValid = form => {
     let formIsValid = true
     for (let inputIds in form) {
       formIsValid = form[inputIds].valid && formIsValid
@@ -125,7 +125,7 @@ class MovimientoBankForm extends Component {
     return formIsValid
   }
 
-  render () {
+  render() {
     const movimientoFormOrder = ["tipo_de_movimiento", "fecha_banco", "referencia_banco"]
     const formElementsArray = []
     const formClasses = [classes.Form]

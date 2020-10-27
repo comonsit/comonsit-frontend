@@ -24,11 +24,11 @@ class Pagos extends Component {
     editPago: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitPagos(this.props.token)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (!this.state.editPago) {
       this.props.unSelPago()
     }
@@ -57,7 +57,7 @@ class Pagos extends Component {
     this.props.onFetchSelPago(this.props.token, id)
   }
 
-  cancelSelected =() => {
+  cancelSelected = () => {
     this.setState({
       showPagoModal: false,
     });
@@ -69,7 +69,7 @@ class Pagos extends Component {
     this.props.history.push('/pago-formato')
   }
 
-  render () {
+  render() {
     const pago = (this.props.selPago)
       ? <PagoDetail pago={this.props.selPago}/>
       : <Spinner/>

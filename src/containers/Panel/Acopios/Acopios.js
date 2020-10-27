@@ -32,7 +32,7 @@ class Acopios extends Component {
     salarioData: []
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitAcopios(this.props.token)
   }
 
@@ -43,7 +43,7 @@ class Acopios extends Component {
   }
 
   // TODO: delete?
-  showAcopio =(id) => {
+  showAcopio = id => {
     // this.setState({acopioSelected: true});
     // this.props.selectAcopio(id)
   }
@@ -86,7 +86,7 @@ class Acopios extends Component {
     }
  };
 
-  render () {
+  render() {
     const columns = [
       {
         Header: '#',

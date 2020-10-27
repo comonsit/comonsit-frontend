@@ -515,7 +515,7 @@ class SociosForm extends Component {
     this.setState({editing: true})
   }
 
-  calculateAge = (birthdayString) => { // birthday is a date
+  calculateAge = birthdayString => { // birthday is a date
     const birthday = new Date(birthdayString).toString() !== 'Invalid Date'
       ? new Date(birthdayString).getTime()
       : null
@@ -527,7 +527,7 @@ class SociosForm extends Component {
     }
 }
 
-  render () {
+  render() {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const sociosFormOrder = [

@@ -18,17 +18,17 @@ class EvalSocio extends Component {
     hint: null
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onGetSocioSaldo(this.props.token, this.props.selSocio.clave_socio)
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if(this.props.saldo !== prevProps.saldo) {
       this.setState({saldos: this.props.saldo})
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.props.unSelSocio()
   }
 
@@ -40,7 +40,7 @@ class EvalSocio extends Component {
     this.setState({hint: value})
   }
 
-  render () {
+  render() {
     const socioName = <h2>{'#' + this.props.selSocio.clave_socio + ' ' + this.props.selSocio.nombre_productor}</h2>
     const items1 = [
       "clave_socio",

@@ -210,7 +210,7 @@ class MesaControl extends Component {
     this.setState({mesaControlForm: updatedForm, formIsValid: formIsValid})
   }
 
-  render () {
+  render() {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const mesaControlFormOrder = [

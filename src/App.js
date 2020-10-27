@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { IntlProvider } from 'react-intl';
-import { Redirect, Route, withRouter, Switch} from "react-router-dom";
+import { Redirect, Route, withRouter, Switch } from "react-router-dom";
 import * as actions from './store/actions'
 
 import Layout from './hoc/Layout/Layout'
@@ -64,7 +64,7 @@ class App extends Component {
 
   // TODO: es demasiado tarde al mount, y no supo si tiene authenticación!
     // lo cual redirige siempre a home en caso de un refresh. :(
-  componentDidMount () {
+  componentDidMount() {
     this.props.onTryAutoSignup()
   }
 

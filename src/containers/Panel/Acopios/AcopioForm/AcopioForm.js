@@ -171,7 +171,7 @@ class AcopioForm extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitSocios(this.props.token)
   }
 
@@ -179,7 +179,7 @@ class AcopioForm extends Component {
     this.props.unSelSocio()
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
 
     const formData = {}
@@ -219,7 +219,7 @@ class AcopioForm extends Component {
     }
   }
 
-  checkIfFormIsValid = (form) => {
+  checkIfFormIsValid = form => {
     let formIsValid = true
     for (let inputIds in form) {
       formIsValid = form[inputIds].valid && formIsValid
@@ -232,12 +232,12 @@ class AcopioForm extends Component {
     this.setState({modalOpen: true, searchSocio: true})
   }
 
-  cancelSearch =() => {
+  cancelSearch = () => {
     this.setState({modalOpen: false, searchSocio: false, confirmFormOpen: false})
     this.props.unSelSocio()
   }
 
-  selectSocio =(id) => {
+  selectSocio = id => {
     const updatedForm = updateObject(this.state.acopioForm, {
       clave_socio: updateObject(this.state.acopioForm.clave_socio, {
         value: id,
@@ -307,7 +307,7 @@ class AcopioForm extends Component {
     this.setState({modalOpen: true, confirmFormOpen: true})
   }
 
-  render () {
+  render() {
     // SINGLE SOCIO
     const acopioFormOrder = [
       "clave_socio",

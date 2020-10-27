@@ -6,7 +6,7 @@ import classes from './ContratoImprimir.module.scss'
 
 
 class ContratoImprCont extends React.Component {
-  render () {
+  render() {
     return (
       <div className={classes.PrintContainer}>
         <ContratoDetail

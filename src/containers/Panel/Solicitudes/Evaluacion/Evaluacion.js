@@ -126,7 +126,7 @@ class Evaluacion extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -234,7 +234,7 @@ class Evaluacion extends Component {
     }
   }
 
-  render () {
+  render() {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const evaluacionFormOrder = [

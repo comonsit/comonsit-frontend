@@ -52,12 +52,12 @@ class Subcuentas extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.onGetRegistros()
   }
 
   // TODO: duplicated with bancos
-  getFormattedQueryDates () {
+  getFormattedQueryDates = () => {
     let stDate = ''
     if (this.state.form.initialDate.value) {
       const tmpStartDate = new Date(this.state.form.initialDate.value)
@@ -71,7 +71,7 @@ class Subcuentas extends Component {
     return [stDate, endDate]
   }
 
-  onGetRegistros () {
+  onGetRegistros = () => {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -96,7 +96,7 @@ class Subcuentas extends Component {
       })
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
     this.onGetRegistros()
   }
@@ -120,7 +120,7 @@ class Subcuentas extends Component {
     this.setState({form: updatedForm, formIsValid: formIsValid})
   }
 
-  render () {
+  render() {
     let saldosTable = <Spinner/>
 
     if (!this.state.loadingSaldos) {

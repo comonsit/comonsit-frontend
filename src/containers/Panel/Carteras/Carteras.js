@@ -49,12 +49,12 @@ class Carteras extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.onGetCarteras()
     this.props.unSelContrato()
   }
 
-  onGetCarteras () {
+  onGetCarteras = () => {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -91,7 +91,7 @@ class Carteras extends Component {
 
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
     this.onGetCarteras()
   }
@@ -137,7 +137,7 @@ class Carteras extends Component {
       })
   }
 
-  cancelSelected =() => {
+  cancelSelected = () => {
     this.setState({
       showContratoModal: false,
       selectedContratoPagos: null
@@ -145,7 +145,7 @@ class Carteras extends Component {
     this.props.unSelContrato()
   }
 
-  render () {
+  render() {
     let carterasTotales, creditosVigentesTable, creditosVencidosTable = <Spinner/>
     if (!this.state.loading) {
       carterasTotales = (

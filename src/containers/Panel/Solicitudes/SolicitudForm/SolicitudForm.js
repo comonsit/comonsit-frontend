@@ -352,7 +352,7 @@ class SolicitudForm extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitSocios(this.props.token)
   }
 
@@ -361,7 +361,7 @@ class SolicitudForm extends Component {
     this.props.onClearError()
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
 
     const formData = {}
@@ -553,7 +553,7 @@ class SolicitudForm extends Component {
     }
   }
 
-  render () {
+  render() {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const solicitudFormOrder = [

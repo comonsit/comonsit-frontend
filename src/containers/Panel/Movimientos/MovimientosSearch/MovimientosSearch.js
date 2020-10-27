@@ -212,7 +212,7 @@ class MovimientosSearch extends Component {
     this.props.onFetchSelMovimiento(this.props.token, id)
   }
 
-  cancelSelected =() => {
+  cancelSelected = () => {
     this.setState({
       showMovimientoModal: false,
       editBankData: false
@@ -220,7 +220,7 @@ class MovimientosSearch extends Component {
     this.props.unSelMov()
   }
 
-  render () {
+  render() {
     const movimientoFormOrder = [
       "comunidad",
       "region",

@@ -134,7 +134,7 @@ class ContratoActivate extends Component {
     this.props.onClearError()
   }
 
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
 
     const formData = {}
@@ -179,7 +179,7 @@ class ContratoActivate extends Component {
     }
   }
 
-  checkIfFormIsValid = (form) => {
+  checkIfFormIsValid = form => {
     let formIsValid = true
     for (let inputIds in form) {
       formIsValid = form[inputIds].valid && formIsValid
@@ -187,7 +187,7 @@ class ContratoActivate extends Component {
     return formIsValid
   }
 
-  render () {
+  render() {
     const contratoUpdateFormOrder = [
       "fecha_inicio",
       "tipo_tasa",

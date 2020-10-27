@@ -59,8 +59,7 @@ class ComunidadForm extends Component {
     }
   }
 
-
-  onSubmitForm = (event) => {
+  onSubmitForm = event => {
     event.preventDefault();
     this.setState({editing: false})
 
@@ -111,7 +110,7 @@ class ComunidadForm extends Component {
     this.setState({editing: true})
   }
 
-  render () {
+  render() {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const formOrder = ["nombre_de_comunidad", "region"]

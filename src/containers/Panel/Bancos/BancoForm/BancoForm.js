@@ -137,7 +137,7 @@ class BancoForm extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.onGetData()
   }
 
@@ -145,7 +145,7 @@ class BancoForm extends Component {
     this.props.onClearError()
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState) {
     if(this.props.selectedItems !== prevProps.selectedItems) {
       this.setState({
         formIsValid: this.checkIfFormIsValid(this.state.bankForm),
@@ -162,7 +162,7 @@ class BancoForm extends Component {
     }
   }
 
-  onValidateCantidad (currVal) {
+  onValidateCantidad = currVal => {
     if (!currVal) return null
 
     let cant = null
@@ -181,7 +181,7 @@ class BancoForm extends Component {
     return cant
   }
 
-  onValidateReferencia (currVal) {
+  onValidateReferencia = (currVal) => {
     if (!currVal) return null
     let resp = null
 

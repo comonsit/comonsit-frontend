@@ -20,7 +20,7 @@ class Tsumbalil extends Component {
     comunidadSelected: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchGralData(this.props.token)
   }
 
@@ -47,7 +47,7 @@ class Tsumbalil extends Component {
     this.props.onNewComunidad()
   }
 
-  render () {
+  render() {
     let form = (this.state.comunidadSelected && this.props.selComunidad)
       ? <ComunidadForm />
       : <Spinner/>

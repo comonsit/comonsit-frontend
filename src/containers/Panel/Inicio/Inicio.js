@@ -27,7 +27,7 @@ class Inicio extends Component {
     this.onGetCarteras()
   }
 
-  onGetCarteras () {
+  onGetCarteras = () => {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -54,16 +54,16 @@ class Inicio extends Component {
       })
   }
 
-  render () {
+  render() {
     let carterasTotales = <Spinner/>
     const title = (this.props.user)
-    ? (
-        <Title
-          titleName="inicio.title"
-          titleNameEx={" " + this.props.user.first_name}
-        />
-      )
-    : <Spinner/>
+      ? (
+          <Title
+            titleName="inicio.title"
+            titleNameEx={" " + this.props.user.first_name}
+          />
+        )
+      : <Spinner/>
 
     if (!this.state.loading) {
       carterasTotales = (

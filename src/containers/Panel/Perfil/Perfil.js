@@ -130,7 +130,7 @@ class Perfil extends Component {
     this.setState({editing: true})
   }
 
-  render () {
+  render() {
     const formOrder = ["first_name", "last_name", "phone"]
     const formElementsArray = []
     let submitButton, editButton

@@ -25,7 +25,7 @@ class Creditos extends Component {
     selectedContratoPagos: null
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.onInitCreditos(this.props.token, this.state.oldCreditos)
     // to cleanup previous selections
     this.props.unSelContrato()
@@ -97,7 +97,7 @@ class Creditos extends Component {
     this.setState(({oldCreditos: !this.state.oldCreditos}))
   }
 
-  render () {
+  render() {
     let actions = <Spinner/>
     let downloadXLSButton = null
 

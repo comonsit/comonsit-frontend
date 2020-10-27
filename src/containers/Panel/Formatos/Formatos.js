@@ -10,7 +10,7 @@ import Title from '../../../components/UI/Title/Title';
 
 
 class Socios extends Component {
-  render () {
+  render() {
     return (
       <div className={classes.Container}>
         <Title

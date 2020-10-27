@@ -52,7 +52,7 @@ class Solicitudes extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.unSelSol()
     this.props.onInitSolicitudes(this.props.token, this.state.oldSolicitudes)
   }
@@ -73,7 +73,7 @@ class Solicitudes extends Component {
     this.props.onGetSocioSaldo(this.props.token, socio)
   }
 
-  cancelSelected =() => {
+  cancelSelected = () => {
     this.setState({
       showSolicitudModal: false,
       selectedSol: null,
@@ -105,40 +105,40 @@ class Solicitudes extends Component {
         }}
       />
     )
- }
+  }
 
- onSubmitForm = event => {
-   event.preventDefault();
-   const formData = {
-     estatus_evaluacion: 'RV',
-     chat: [{'comentario': this.state.negociacionForm.comentarios_promotor.value}]
-   }
+  onSubmitForm = event => {
+    event.preventDefault();
+    const formData = {
+      estatus_evaluacion: 'RV',
+      chat: [{'comentario': this.state.negociacionForm.comentarios_promotor.value}]
+    }
 
-   const authData = {
-     headers: { 'Authorization': `Bearer ${this.props.token}` }
-   }
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` }
+    }
    // TODO: implement loading view
    // this.setState({loading: true})
 
-   axios.patch('/solic-creditos/' +this.props.selectedSol.folio_solicitud+'.json', formData, authData)
-     .then(response => {
-      // this.setState({loading: false})
-      alert('Renegociación enviada correctamente.')
-       // push or pop back to history?
-       this.setState({
-         showSolicitudModal: false,
-         selectedSol: null,
-         saldos: null
-       });
-       this.props.onInitSolicitudes(this.props.token)
-       //dispatch update user data
-     })
-     .catch(error => {
-       // alert('ALGO FALLÓ!')
-     })
- }
+    axios.patch('/solic-creditos/' +this.props.selectedSol.folio_solicitud+'.json', formData, authData)
+      .then(response => {
+        // this.setState({loading: false})
+        alert('Renegociación enviada correctamente.')
+        // push or pop back to history?
+        this.setState({
+          showSolicitudModal: false,
+          selectedSol: null,
+          saldos: null
+         });
+         this.props.onInitSolicitudes(this.props.token)
+        //dispatch update user data
+      })
+      .catch(error => {
+        // alert('ALGO FALLÓ!')
+      })
+  }
 
- inputChangedHandler = (event, inputIdentifier) => {
+  inputChangedHandler = (event, inputIdentifier) => {
 
     const updatedFormElement = updateObject(this.state.negociacionForm[inputIdentifier], {
       value: event.target.value,
@@ -165,7 +165,7 @@ class Solicitudes extends Component {
     }));
   }
 
-  render () {
+  render() {
     const columns = [
       {
         Header: <FormattedMessage id="solicitudes.folio_solicitud"/>,
