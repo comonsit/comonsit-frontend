@@ -37,6 +37,12 @@ const input = (props) => {
         <Alert/>{props.alertMessage}
       </div>
     )
+  } else if (props.helpMessage) {
+    validationError = (
+      <div className={classes.HelpMessage}>
+        {props.helpMessage}
+      </div>
+    )
   }
 
   const support = props.supportData

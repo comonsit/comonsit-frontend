@@ -115,6 +115,13 @@
   }
 }
 
+.HelpMessage {
+  display: flex;
+  font-size: .9em;
+  padding: 0 0 1rem 1rem;
+  color: $sec-darkish-blue;
+}
+
 .svgCont {
   width: 2rem;
   enable-background:new 0 0 507.425 507.425;
