@@ -489,5 +489,6 @@
   "nombre_comunidad": "Comunidad",
   "mesaControl.infoDelCredito": "Info del Crédito",
   "evaluacion.infoDeSoporte": "Información para Evaluar Solicitud",
-  "socioForm.doc_rfc": "Copia de RFC"
+  "socioForm.doc_rfc": "Copia de RFC",
+  "solicitudForm.justificacion_credito_placeholder": "Escribe aquí la actividad o los recursos con los que se va a cubrir el dinero de este préstamo, lo más detallado posible."
 }

@@ -240,14 +240,15 @@ class SolicitudForm extends Component {
         justificacion_credito: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
-            placeholder: '..'
+            type: 'textarea',
           },
           label:  (<><FormattedMessage id="solicitudForm.justificacion_credito"/>*</>),
           value: '',
           validation: {
-            required: true
+            required: true,
+            maxLength: 100
           },
+          helpMessage: <FormattedMessage id="solicitudForm.justificacion_credito_placeholder" />,
           valid: false,
           errorMessage: "",
           touched: false,
@@ -623,6 +624,7 @@ class SolicitudForm extends Component {
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}
                 supportData={formElement.config.supportData}
                 supportActions={formElement.config.supportActions}
+                helpMessage={formElement.config.helpMessage}
               />
             </div>
           )
