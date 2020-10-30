@@ -67,7 +67,7 @@ class Tsumbalil extends Component {
         Header: '# R',
         accessor: 'region',
         Filter: SelectColumnFilter,
-        filter: 'includes'
+        filter: 'equals',
       },
       {
         Header: <FormattedMessage id="region"/>,

@@ -124,7 +124,7 @@ const Sandbox = (props) => {
   return (
     <div>
       <div className={classes.Container}>
-        <Map center={center} zoom={10}>
+        <Map center={center} zoom={10} scrollWheelZoom={false}>
           <LayersControl position="topright">
             <BaseLayer checked name="General">
               <TileLayer

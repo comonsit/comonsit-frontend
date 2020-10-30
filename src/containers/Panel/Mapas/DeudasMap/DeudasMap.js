@@ -139,7 +139,7 @@ class DeudasMap extends Component {
     return (
       <div className={classes.Container}>
         <div className={classes.MapContainer}>
-          <Map center={center} zoom={10} closePopupOnClick={false}>
+          <Map center={center} zoom={10} closePopupOnClick={false} scrollWheelZoom={false}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
