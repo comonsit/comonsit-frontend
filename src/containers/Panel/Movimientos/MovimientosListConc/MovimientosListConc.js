@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import classes from './MovimientosListConc.module.scss'
 import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate'
 import Bee from '../../../../Icons/Bee.js';
 import Money from '../../../../Icons/Money.js';
 import Soap from '../../../../Icons/Soap.js';
@@ -58,6 +59,7 @@ const movimientosListConc = (props) => {
     {
       Header: <FormattedMessage id="movimientos.fecha_banco"/>,
       accessor: 'fecha_banco',
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="movimiento.tipo_de_movimiento"/>,

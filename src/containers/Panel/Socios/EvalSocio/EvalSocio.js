@@ -55,6 +55,7 @@ class EvalSocio extends Component {
           key={id}
           label={id}
           content={this.props.selSocio[id]}
+          isDate={id === "fecha_ingr_yomol_atel"}
         />
       )
     })

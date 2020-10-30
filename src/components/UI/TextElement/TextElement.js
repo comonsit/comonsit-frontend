@@ -1,9 +1,10 @@
 import React from 'react'
 import { FormattedMessage, IntlProvider } from 'react-intl';
 
-import classes from './TextElement.module.scss'
-import Currency from '../Formatting/Currency'
-import Percent from '../Formatting/Percent'
+import classes from './TextElement.module.scss';
+import Currency from '../Formatting/Currency';
+import Percent from '../Formatting/Percent';
+import FrmtedDate from '../Formatting/FrmtedDate'
 import messages_es from '../../../translations/es.json'
 import messages_tz from '../../../translations/tz.json'
 
@@ -20,6 +21,8 @@ const textElement = props => {
     cont = (<Currency value={props.content}/>)
   } else if (props.isPerc) {
     cont = (<Percent value={props.content}/>)
+  } else if (props.isDate) {
+    cont = (<FrmtedDate longDate value={props.content}/>)
   }
 
   let label = <label><FormattedMessage id={props.label}/></label>

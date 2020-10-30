@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate';
 import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus';
 import SelectColumnFilter from '../../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../../components/Tables/RTable/Filters/SliderColumnFilter';
@@ -27,7 +28,8 @@ const creditoListCont = (props) => {
     },
     {
       Header: <FormattedMessage id="creditos.fecha_inicio"/>,
-      accessor: 'fecha_inicio'
+      accessor: 'fecha_inicio',
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="estatus"/>,
@@ -52,7 +54,8 @@ const creditoListCont = (props) => {
     },
     {
       Header: <FormattedMessage id="creditos.fecha_banco"/>,
-      accessor: 'fecha_banco'
+      accessor: 'fecha_banco',
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="creditos.referencia_banco"/>,

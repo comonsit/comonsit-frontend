@@ -239,7 +239,7 @@ class Movimientos extends Component {
             />
             <TextElement
               label="fecha"
-              content={<FrmtedDate value={today.toString()}/>}
+              content={<FrmtedDate longDate value={today.toString()}/>}
             />
             <TextElement
               label="movimientos.saldo"
@@ -268,7 +268,7 @@ class Movimientos extends Component {
             />
           <TextElement
             label="fecha"
-            content={<FrmtedDate value={today.toString()}/>}
+            content={<FrmtedDate longDate value={today.toString()}/>}
           />
           <ProcessSelector
             label={'proceso'}

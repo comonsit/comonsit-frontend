@@ -35,6 +35,7 @@ const contratoDetail = props => {
         content={props.contrato[id]}
         twoLanguages={props.forPrinting}
         key={id}
+        isDate={id === "fecha_inicio"}
       />
     )
   })

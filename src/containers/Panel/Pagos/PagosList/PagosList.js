@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate'
 import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus';
 import SelectColumnFilter from '../../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../../components/Tables/RTable/Filters/SliderColumnFilter';
@@ -35,6 +36,7 @@ const pagosList = (props) => {
       Header: <FormattedMessage id="pagos.fecha_pago"/>,
       accessor: 'fecha_pago',
       Filter: SelectColumnFilter,
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="cantidad"/>,
@@ -54,6 +56,7 @@ const pagosList = (props) => {
       Header: <FormattedMessage id="pagos.fecha_banco"/>,
       accessor: 'fecha_banco',
       Filter: SelectColumnFilter,
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
   ]
 

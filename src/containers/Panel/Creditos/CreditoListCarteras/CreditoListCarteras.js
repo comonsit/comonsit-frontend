@@ -2,7 +2,8 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl';
 
 import RTable from '../../../../components/Tables/RTable/RTable';
-import Currency from '../../../../components/UI/Formatting/Currency'
+import Currency from '../../../../components/UI/Formatting/Currency';
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate';
 import RenderStatus from '../../../../components/Tables/RenderStatus/RenderStatus';
 import SelectColumnFilter from '../../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../../components/Tables/RTable/Filters/SliderColumnFilter';
@@ -40,11 +41,13 @@ const creditoList = (props) => {
     },
     {
       Header: <FormattedMessage id="creditos.fecha_inicio"/>,
-      accessor: 'fecha_inicio'
+      accessor: 'fecha_inicio',
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="creditos.fecha_vencimiento"/>,
-      accessor: 'fecha_vencimiento'
+      accessor: 'fecha_vencimiento',
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="plazo"/>,

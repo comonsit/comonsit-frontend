@@ -31,6 +31,7 @@ const pagoDetail = props => {
           || id === "interes_mor"
           || id === "abono_capital"
         }
+        isDate={id === "fecha_pago"}
       />
     )
   })
@@ -42,6 +43,7 @@ const pagoDetail = props => {
         key={id}
         label={"pagos."+id}
         content={props.pago[id]}
+        isDate={id === "fecha_banco"}
       />
     )
   })

@@ -2,7 +2,8 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl';
 
 import RTable from '../../../../components/Tables/RTable/RTable';
-import Currency from '../../../../components/UI/Formatting/Currency'
+import Currency from '../../../../components/UI/Formatting/Currency';
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate'
 
 
 const creditoHistorial = (props) => {
@@ -77,7 +78,8 @@ const creditoHistorial = (props) => {
     },
     {
       Header: <FormattedMessage id="fecha"/>,
-      accessor: 'fecha_pago'
+      accessor: 'fecha_pago',
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="creditoHistorial.diasTranscurridos"/>,

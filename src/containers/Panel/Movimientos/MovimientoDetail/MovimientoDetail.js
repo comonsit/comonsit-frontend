@@ -13,6 +13,7 @@ const movimientoDetail = props => {
         label={"movimiento."+id}
         content={props.pago[id]}
         isNum={id === "monto"}
+        isDate={id === "fecha_entrega"}
       />
     )
   })
@@ -25,6 +26,7 @@ const movimientoDetail = props => {
             key={id}
             label={id}
             content={props.pago[id]}
+            isDate={id === "fecha_banco"}
           />
         )
       })

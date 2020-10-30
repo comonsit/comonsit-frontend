@@ -31,6 +31,7 @@ const bancoDetail = props => {
         label={"registro."+id}
         content={content}
         isNum={id === "cantidad"}
+        isDate={id === "fecha" || id === "fecha_captura"}
       />
     )
   })

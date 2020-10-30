@@ -23,6 +23,7 @@ const solicitudDetail = (props) => {
         key={id}
         label={id}
         content={props.solicitud[id]}
+        isDate={id === "fecha_ingr_yomol_atel"}
       />
     )
   })
@@ -55,6 +56,7 @@ const solicitudDetail = (props) => {
               label={id}
               content={content}
               isNum={id === "monto_solicitado"}
+              isDate={id === "fecha_solicitud"}
               />)
   })
   // TODO: FIX!!

@@ -16,6 +16,7 @@ import Title from '../../../components/UI/Title/Title';
 import Card from '../../../components/UI/Card/Card';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Currency from '../../../components/UI/Formatting/Currency';
+import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
 import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterGreaterThan';
@@ -119,6 +120,7 @@ class Acopios extends Component {
       {
         Header: <FormattedMessage id="fecha"/>,
         accessor: 'fecha',
+        Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
         Filter: SliderColumnFilter,
         filter: filterGreaterThan
       },

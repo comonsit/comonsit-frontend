@@ -18,6 +18,7 @@ import Button from '../../../components/UI/Button/Button';
 import Card from '../../../components/UI/Card/Card';
 import Title from '../../../components/UI/Title/Title';
 import Currency from '../../../components/UI/Formatting/Currency';
+import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
 import * as actions from '../../../store/actions';
 import { isGerencia } from '../../../store/roles';
 import { updateObject } from '../../../store/reducers/utility';
@@ -175,7 +176,8 @@ class Solicitudes extends Component {
       },
       {
         Header: <FormattedMessage id="solicitudes.fecha_solicitud"/>,
-        accessor: 'fecha_solicitud'
+        accessor: 'fecha_solicitud',
+        Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
       },
       {
         Header: <FormattedMessage id="clave_socio"/>,

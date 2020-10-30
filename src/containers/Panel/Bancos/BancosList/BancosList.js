@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import RTable from '../../../../components/Tables/RTable/RTable';
 import Currency from '../../../../components/UI/Formatting/Currency'
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate';
 
 
 const bancosList = (props) => {
@@ -16,11 +17,12 @@ const bancosList = (props) => {
   const columns = [
     {
       Header: <FormattedMessage id="bancos.fecha"/>,
-      accessor: 'fecha'
+      accessor: 'fecha',
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
     },
     {
       Header: <FormattedMessage id="bancos.subcuenta"/>,
-    accessor: 'subcuenta_id_cont'
+      accessor: 'subcuenta_id_cont'
     },
     {
       Header: <FormattedMessage id="bancos.subcuenta_nombre"/>,
