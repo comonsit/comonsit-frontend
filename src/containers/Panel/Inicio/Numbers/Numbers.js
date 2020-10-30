@@ -18,7 +18,7 @@ class Weather extends React.Component {
         number: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '..'
           },
           label: <FormattedMessage id="inicio.numero"/>,

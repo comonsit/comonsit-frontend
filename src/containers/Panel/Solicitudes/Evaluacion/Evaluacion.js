@@ -32,7 +32,7 @@ class Evaluacion extends Component {
         monto_aprobado: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '$__.__'
           },
           label:  (<><FormattedMessage id="evaluacion.montoAprobado"/>*</>),
@@ -51,7 +51,7 @@ class Evaluacion extends Component {
         plazo_aprobado: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '# meses'
           },
           label:  (<><FormattedMessage id="evaluacion.plazoPagoAprobado"/>*</>),
@@ -70,7 +70,7 @@ class Evaluacion extends Component {
         tasa_aprobada: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '4.00%',
           },
           label:  (<><FormattedMessage id="evaluacion.tasa_aprobada"/>*</>),
@@ -89,7 +89,7 @@ class Evaluacion extends Component {
         tasa_mor_aprobada: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '1.00%'
           },
           label:  (<><FormattedMessage id="evaluacion.tasa_mor_aprobada"/>*</>),

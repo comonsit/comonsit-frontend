@@ -46,7 +46,7 @@ class AcopioForm extends Component {
         clave_socio: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '..'
           },
           label: (<><FormattedMessage id="clave"/>*</>),
@@ -99,7 +99,7 @@ class AcopioForm extends Component {
         kilos_de_producto: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
           },
           label:  (<><FormattedMessage id="acopioForm.kilos_de_producto"/>*</>),
           value: '',
@@ -115,7 +115,7 @@ class AcopioForm extends Component {
         ingreso: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
           },
           label:  (<><FormattedMessage id="acopioForm.ingreso"/>*</>),
           value: '',

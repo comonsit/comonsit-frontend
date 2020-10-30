@@ -34,7 +34,7 @@ class PagosForm extends Component {
         credito: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '..folio del crédito'
           },
           label: (<><FormattedMessage id="credito"/>*</>),
@@ -83,7 +83,7 @@ class PagosForm extends Component {
         cantidad: {
           elementType: 'input',
           elementConfig: {
-            type: 'text'
+            type: 'number'
           },
           label:  (<><FormattedMessage id="cantidad"/>*</>),
           value: this.props.selPago ? this.props.selPago.cantidad : 0,
@@ -137,7 +137,7 @@ class PagosForm extends Component {
         abono_capital: {
           elementType: 'input',
           elementConfig: {
-            type: 'text'
+            type: 'number'
           },
           label:  (<><FormattedMessage id="pagos.abono_capital"/>*</>),
           value: this.props.selPago ? this.props.selPago.abono_capital : 0,
@@ -157,7 +157,7 @@ class PagosForm extends Component {
         interes_ord: {
           elementType: 'input',
           elementConfig: {
-            type: 'text'
+            type: 'number'
           },
           label:  (<><FormattedMessage id="pagos.interes_ord"/>*</>),
           value: this.props.selPago ? this.props.selPago.interes_ord : 0,
@@ -177,7 +177,7 @@ class PagosForm extends Component {
         interes_mor: {
           elementType: 'input',
           elementConfig: {
-            type: 'text'
+            type: 'number'
           },
           label:  (<><FormattedMessage id="pagos.interes_mor"/>*</>),
           value: this.props.selPago ? this.props.selPago.interes_mor : 0,

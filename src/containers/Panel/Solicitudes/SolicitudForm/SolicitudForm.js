@@ -44,14 +44,15 @@ class SolicitudForm extends Component {
         clave_socio: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'nomber',
             placeholder: '..clave del socio'
           },
           label: (<><FormattedMessage id="clave_socio"/>*</>),
           value: '',
           validation: {
             required: true,
-            isNumeric: true
+            isNumeric: true,
+            minNumValue: 1
           },
           valid: false,
           errorMessage: "",
@@ -204,16 +205,15 @@ class SolicitudForm extends Component {
         monto_solicitado: {
           elementType: 'input',
           elementConfig: {
-            type: 'number',
-            max: '9999999',
-            min: '0',
-            step: '.01'
+            type: 'number'
           },
           label:  (<><FormattedMessage id="solicitudForm.monto_solicitado"/>*</>),
           value: '',
           validation: {
             required: true,
-            isDecimal: true
+            isDecimal: true,
+            minNumValue: .01,
+            maxNumValue: 9999999,
           },
           valid: false,
           errorMessage: "",
@@ -223,14 +223,16 @@ class SolicitudForm extends Component {
         plazo_de_pago_solicitado: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '..# meses'
           },
           label:  (<><FormattedMessage id="solicitudForm.plazo_de_pago_solicitado"/>*</>),
           value: '',
           validation: {
             required: true,
-            isNumeric: true
+            isNumeric: true,
+            minNumValue: 1,
+            maxNumValue: 100,
           },
           valid: false,
           errorMessage: "",

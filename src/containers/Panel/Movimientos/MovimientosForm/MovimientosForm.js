@@ -47,7 +47,7 @@ class MovimientosForm extends Component {
         clave_socio: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
             placeholder: '..clave del socio'
           },
           label: (<><FormattedMessage id="clave_socio"/>*</>),
@@ -85,7 +85,7 @@ class MovimientosForm extends Component {
         monto: {
           elementType: 'input',
           elementConfig: {
-            type: 'text'
+            type: 'number'
           },
           label:  (<><FormattedMessage id="movimientosForm.monto"/>*</>),
           value: '',

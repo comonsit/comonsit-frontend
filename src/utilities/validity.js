@@ -98,7 +98,9 @@ export const checkValidity = (originalValue, rules, withMessage=false) => {
     if (rules.required) {
       if (value === '' ) {
         isValid &= false
-        message = `-> Campo requerido ${value} `
+        message = (rules.isDecimalExact || rules.isDecimal || rules.isNumeric)
+          ? `-> Se requiere un número ${value} `
+          : `-> Campo requerido ${value} `
       }
     }
 

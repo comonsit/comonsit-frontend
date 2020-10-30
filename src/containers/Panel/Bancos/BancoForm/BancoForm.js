@@ -85,7 +85,7 @@ class BancoForm extends Component {
         cantidad: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'number',
           },
           label:  (<><FormattedMessage id="bancoForm.cantidad"/>*</>),
           value: '',
