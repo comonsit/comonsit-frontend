@@ -76,6 +76,7 @@ export const auth = (username, password, isSignUp) => {
         dispatch(fetchGralData(response.data.access))
         dispatch(startTokenTimeout(fiveMinutes))
         dispatch(startRefreshTokenTimeout(twentyFourHours))
+        dispatch(setAuthRedirectPath('inicio'))
       })
       .catch(error => {
         if (error.response) {
@@ -89,24 +90,28 @@ export const auth = (username, password, isSignUp) => {
 }
 
 
-export const refreshToken = () => {
+export const refreshToken = (initialRefresh=false) => {
   return dispatch => {
     const rToken = {
         refresh: localStorage.getItem('refreshToken')
     }
     axios.post('/token/refresh/' , rToken)
       .then(response => {
-        console.log('REFRESHING TOKEN')
+        // console.log('REFRESHED TOKEN')
         localStorage.setItem('token', response.data.access)
         const fiveMinutes = 5 * 60 * 1000
         dispatch(authSuccess(response.data.access, response.data.localId))
         dispatch (startTokenTimeout(fiveMinutes, false))
+        if (initialRefresh) {
+          dispatch(fetchGralData(response.data.access))
+        }
       })
       .catch(err=> {
-        console.log('FAILED TO REFRESH')
+        // console.log('FAILED TO REFRESH')
         alert(err)
         // console.log(err.response.data);
-        // dispatch(authFail(err.response.data.detail))
+        dispatch(authFail(err.response.data.detail))
+        // TODO: agregar logout???
       })
   }
 }
@@ -117,6 +122,12 @@ export const setAuthRedirectPath = (path) => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT_PATH,
     path: path
+  }
+}
+
+export const finishedAuthRedirectPath = () => {
+  return {
+    type: actionTypes.FINISHED_AUTH_REDIRECT
   }
 }
 
@@ -132,11 +143,11 @@ export const authCheckState = () => {
       if (refreshExpirationDate <= new Date()) {
         dispatch(logout())
       } else {
-        dispatch(refreshToken())
-        const userId = localStorage.getItem('userId')
-        dispatch(authSuccess(token, userId))
+        dispatch(refreshToken(true))
+        // const userId = localStorage.getItem('userId')
+        // dispatch(authSuccess(token, userId))
         dispatch(startRefreshTokenTimeout(refreshExpirationDate - new Date().getTime()))
-        dispatch(fetchGralData(token))
+        // dispatch(fetchGralData(token))
       }
     }
   }

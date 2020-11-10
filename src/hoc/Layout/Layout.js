@@ -7,6 +7,7 @@ import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import HoverButton from '../../components/UI/HoverButton/HoverButton';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import PToolbar from '../../components/NavigationPanel/PToolbar/PToolbar';
+import Loading from '../../containers/General/Loading/Loading';
 
 
 class Layout extends Component {
@@ -40,8 +41,11 @@ class Layout extends Component {
   }
 
   render() {
-    let layoutClasses, menu
-    if (this.state.auth && this.state.usr){
+    let layoutClasses = []
+    let menu
+    if (this.props.initialLoading || (this.state.auth && !this.state.usr)) {
+      menu = <Loading />
+    } else if (this.state.auth && this.state.usr){
       layoutClasses = [classes.PContent]
       menu = (
         <>
@@ -83,7 +87,8 @@ class Layout extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
-    user: state.generalData.user
+    user: state.generalData.user,
+    initialLoading: !state.auth.finishedAutoSignup
   }
 }
 

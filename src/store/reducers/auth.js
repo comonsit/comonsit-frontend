@@ -6,7 +6,8 @@ const initialState = {
   userId: null,
   error: null,
   loading: false,
-  authRedirectPath: '/acopios',
+  authRedirectPath: null,
+  finishedAutoSignup: false
 }
 
 const authSuccess = (state, action) => {
@@ -14,24 +15,36 @@ const authSuccess = (state, action) => {
     token: action.idToken,
     userId: action.userId,
     error: null,
-    loading: false
+    loading: false,
+    finishedAutoSignup: true
   })
 }
 
 const authFail = (state, action) => {
   return updateObject (state, {
     error: action.error,
-    loading: false
+    loading: false,
+    finishedAutoSignup: true
   })
 }
 
 const authLogout = (state, action) => {
-  return updateObject(state, {token: null, userId: null})
+  return updateObject(state, {
+    token: null,
+    userId: null,
+    finishedAutoSignup: true
+  })
 }
 
 const setAuthRedirectPath = (state, action) => {
   return updateObject(state, {
     authRedirectPath: action.path
+  })
+}
+
+const finishAuthRedirect = (state) => {
+  return updateObject(state, {
+    authRedirectPath: null
   })
 }
 
@@ -42,6 +55,8 @@ const reducer = (state=initialState , action) => {
     case actionTypes.AUTH_FAIL: return authFail(state, action)
     case actionTypes.AUTH_LOGOUT: return authLogout(state, action)
     case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action)
+    case actionTypes.FINISHED_AUTH_REDIRECT: return finishAuthRedirect(state)
+
     default: return state
   }
 }

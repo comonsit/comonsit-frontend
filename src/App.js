@@ -36,16 +36,15 @@ import perfil from './containers/Panel/Perfil/Perfil';
 import inicio from './containers/Panel/Inicio/Inicio';
 import logout from './containers/Panel/Logout/Logout';
 import mapaPrueba from './containers/Panel/Mapas/Sandbox/Sandbox';
-
-// import languageObject from './translations/messages'
+import Loading from './containers/General/Loading/Loading';
 import messages_es from './translations/es.json'
 import messages_tz from './translations/tz.json'
+
 
 const messages = {
   'es': messages_es,
   'tz': messages_tz
 }
-// const language = navigator.language.split(/[-_]/)[0]
 
 // import asyncComponent from './hoc/asyncComponent/asyncComponent'
 //
@@ -60,62 +59,64 @@ const messages = {
 //     return import ('./containers/Orders/Orders')
 // })
 
+
 class App extends Component {
 
-  // TODO: es demasiado tarde al mount, y no supo si tiene authenticación!
-    // lo cual redirige siempre a home en caso de un refresh. :(
   componentDidMount() {
     this.props.onTryAutoSignup()
   }
 
-  render(){
-    let authenticatedRoutes = null
-    if (this.props.isAuthenticated) {
-      authenticatedRoutes = (
-        <>
-          <Route path="/inicio" exact component={inicio}/>
-          <Route path="/socios" exact component={socios}/>
-          <Route path="/evaluacion-socio" exact component={evalSocios}/>
-          <Route path="/perfil" exact component={perfil}/>
-          <Route path="/acopios" exact component={acopios}/>
-          <Route path="/bancos" exact component={bancos}/>
-          <Route path="/subcuentas" exact component={subcuentas}/>
-          <Route path="/banco-form" exact component={bancoForm}/>
-          <Route path="/carteras" exact component={carteras}/>
-          <Route path="/creditos" exact component={creditos}/>
-          <Route path="/mapa-prueba" exact component={mapaPrueba}/>
-          <Route path="/pagos" exact component={pagos}/>
-          <Route path="/pago-formato" exact component={pagoForm}/>
-          <Route path="/credito-activar" exact component={contratoActivate}/>
-          <Route path="/credito-imprimir" exact component={contratoImprimir}/>
-          <Route path="/acopio-formato" exact component={acopioForm}/>
-          <Route path="/tsumbalil" exact component={tsumbalil}/>
-          <Route path="/movimientos" exact component={movimientos}/>
-          <Route path="/movimiento-formato" exact component={movimientosForm}/>
-          <Route path="/solicitudes" exact component={solicitudes}/>
-          <Route path="/solicitud-formato" exact component={solicitudForm}/>
-          <Route path="/mesa-control" exact component={mesaControl}/>
-          <Route path="/evaluacion" exact component={evaluacion}/>
-          <Route path="/formatos" exact component={formatos}/>
-        </>
-      )
-    }
+  render() {
+    const availableRoutes = this.props.isAuthenticated
+      ?
+        (
+          <Switch>
+            <Route path="/socios" component={socios}/>
+            <Route path="/evaluacion-socio" component={evalSocios}/>
+            <Route path="/perfil" component={perfil}/>
+            <Route path="/acopios" component={acopios}/>
+            <Route path="/bancos" component={bancos}/>
+            <Route path="/subcuentas" component={subcuentas}/>
+            <Route path="/banco-form" component={bancoForm}/>
+            <Route path="/carteras" component={carteras}/>
+            <Route path="/creditos" component={creditos}/>
+            <Route path="/mapa-prueba" component={mapaPrueba}/>
+            <Route path="/pagos" component={pagos}/>
+            <Route path="/pago-formato" component={pagoForm}/>
+            <Route path="/credito-activar" component={contratoActivate}/>
+            <Route path="/credito-imprimir" component={contratoImprimir}/>
+            <Route path="/acopio-formato" component={acopioForm}/>
+            <Route path="/tsumbalil" component={tsumbalil}/>
+            <Route path="/movimientos" component={movimientos}/>
+            <Route path="/movimiento-formato" component={movimientosForm}/>
+            <Route path="/solicitudes" component={solicitudes}/>
+            <Route path="/solicitud-formato" component={solicitudForm}/>
+            <Route path="/mesa-control" component={mesaControl}/>
+            <Route path="/evaluacion" component={evaluacion}/>
+            <Route path="/formatos" component={formatos}/>
+            <Route path="/inicio" component={inicio} />
+            <Route path="/logout" component={logout}/>
+            <Route path="/reportes" component={() => (<div>...En Construcción...</div>)}/>
+            <Route><Redirect to="/inicio" /></Route>
+          </Switch>
+        )
+      :
+        (
+          <Switch>
+            <Route exact path="/" component={homeContainer} />
+            <Route exact path="/conocenos" component={conocenos}/>
+            <Route exact path="/origen" component={origen}/>
+            <Route exact path="/publicaciones" component={publicaciones}/>
+            <Route exact path="/contacto" component={contacto}/>
+            <Route exact path="/acceso" component={acceso}/>
+            <Route><Redirect to="/" /></Route>
+          </Switch>
+        )
 
     return (
       <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
         <Layout>
-          <Switch>
-            <Route path="/conocenos" component={conocenos}/>
-            <Route path="/origen" component={origen}/>
-            <Route path="/publicaciones" component={publicaciones}/>
-            <Route path="/contacto" component={contacto}/>
-            <Route path="/acceso" exact component={acceso}/>
-            <Route path="/logout" component={logout}/>
-            {authenticatedRoutes}
-            <Route path="/" exact component={homeContainer}/>
-            {/* TODO: make 404 in redirect */}
-            <Redirect to={(this.props.isAuthenticated) ? "/inicio" : "/"}/> : <Redirect to="/"/>
-          </Switch>
+          {this.props.loading ? <Loading /> : availableRoutes}
         </Layout>
       </IntlProvider>
     );
@@ -129,13 +130,16 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
-    locale: state.locale.selectedLanguage
+    locale: state.locale.selectedLanguage,
+    loading: !state.auth.finishedAutoSignup,
+    authRedirectPath: state.auth.authRedirectPath
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch (actions.authCheckState())
+    onTryAutoSignup: () => dispatch (actions.authCheckState()),
+    onfinishAuthRedirect: () => dispatch (actions.finishedAuthRedirectPath())
   }
 }
 

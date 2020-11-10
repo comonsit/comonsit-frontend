@@ -9,7 +9,7 @@ import FormSol from '../../../assets/pdf/FormatosDeSolicitud3.pdf';
 import Title from '../../../components/UI/Title/Title';
 
 
-class Socios extends Component {
+class Formatos extends Component {
   render() {
     return (
       <div className={classes.Container}>
@@ -43,4 +43,4 @@ class Socios extends Component {
 }
 
 
-export default Socios
+export default Formatos
