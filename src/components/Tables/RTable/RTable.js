@@ -10,7 +10,17 @@ import DefaultColumnFilter from './Filters/DefaultColumnFilter'
 import SwitchToggle from '../../UI/SwitchToggle/SwitchToggle'
 import * as actions from '../../../store/actions'
 
-const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFooter, hiddenCols }) => {
+const RTable = (
+  {
+    columns,
+    data,
+    onRowClick,
+    hideSearch,
+    selectableRow,
+    hasFooter,
+    hiddenCols,
+    initialPageSize=10
+  }) => {
 
   const [advancedSearch, setAdvancedSearch] = useState(false);
 
@@ -74,7 +84,7 @@ const RTable = ({ columns, data, onRowClick, hideSearch, selectableRow, hasFoote
       filterTypes,
       initialState: {
         pageIndex: 0,
-        pageSize: hideSearch? 40 : 20,
+        pageSize: hideSearch? 40 : initialPageSize,
         hiddenColumns: hiddenCols || []
       },
     },
