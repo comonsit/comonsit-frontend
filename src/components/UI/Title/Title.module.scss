@@ -9,14 +9,15 @@
 
   h1 {
     font-family: 'Arquitecta';
-    font-size: 3em;
-    margin: .6em;
+    font-size: 4em;
+    margin: .2em;
     text-align: center;
     @include tablet {
-      font-size: 3.2em;
+      margin: .2em;
+      font-size: 4.2em;
     }
     @include desktop {
-      font-size: 3.5em;
+      font-size: 4.5em;
     }
   }
 
@@ -42,5 +43,12 @@
       width: 30%;
       align-items: stretch;
     }
+  }
+}
+
+.ModalTitle {
+  h1 {
+    font-size: 3em;
+    margin: .5rem;
   }
 }

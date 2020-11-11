@@ -639,6 +639,7 @@ class SociosForm extends Component {
         <Title
           titleName="socioForm.title"
           titleNameEx={": " + this.props.selSocio.clave_socio}
+          titleType="ModalTitle"
         >
           {editButton}
         </Title>
