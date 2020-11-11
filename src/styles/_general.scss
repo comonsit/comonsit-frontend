@@ -58,6 +58,7 @@ TABLE CONTAINER
   display: flex;
   flex-direction: column;
   overflow-x: scroll;
+  box-shadow: inset -4px 0px 3px 1px $sec-light-gray;
 }
 
 /*

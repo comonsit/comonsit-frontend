@@ -1,4 +1,5 @@
 @import 'styles/general';
+@import 'styles/variables';
 
 .CardsContainer {
   display: grid;
@@ -28,4 +29,5 @@
 .TableContainer {
   width: 100%;
   overflow-y: scroll;
+  box-shadow: inset -4px 0px 3px 1px $sec-light-gray;
 }
