@@ -5,8 +5,6 @@
   background-color: $extra-light-gray;
   padding: 2rem;
   border-radius: .5rem;
-  max-height: 90vh;
-  overflow-y:scroll;
   @include tablet {
     background-color: #f6fcf9;
     padding: 2rem;
