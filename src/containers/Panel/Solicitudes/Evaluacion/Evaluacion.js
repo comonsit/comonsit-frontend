@@ -328,7 +328,7 @@ class Evaluacion extends Component {
 
     return (
       <div className={classes.FormContainer}>
-        <Title titleName="mesaControl.title"/>
+        <Title titleName="mesaControl.evaluacion"/>
         <div className={classes.FormContainer_extra}>
           <div className={classes.FormContainer_extraInfo}>
             <h3><FormattedMessage id="evaluacion.infoDeSoporte" /></h3>
