@@ -23,6 +23,8 @@ const textElement = props => {
     cont = (<Percent value={props.content}/>)
   } else if (props.isDate) {
     cont = (<FrmtedDate longDate value={props.content}/>)
+  } else {
+    cont = props.content
   }
 
   let label = <label><FormattedMessage id={props.label}/></label>
@@ -51,7 +53,7 @@ const textElement = props => {
         {label}
       </div>
       <div className={classes.Content}>
-        <p>{cont}</p>
+        {cont}
       </div>
     </div>
   )
