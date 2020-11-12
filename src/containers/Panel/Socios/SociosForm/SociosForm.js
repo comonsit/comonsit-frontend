@@ -561,7 +561,7 @@ class SociosForm extends Component {
     const formElementsArray = []
     let supportData
     let formElements = <Spinner/>
-    let submitButton, editButton = null
+    let submitButton, editButton, evaluacionButton = null
 
     sociosFormOrder.forEach(key => {
       formElementsArray.push({
@@ -631,6 +631,18 @@ class SociosForm extends Component {
             <FormattedMessage id="editButton"/>
           </Button>
         )
+        evaluacionButton = (
+          <Route
+            render={({ history}) => (
+              <Button
+                clicked={() => history.push('/evaluacion-socio')}
+                btnType="Medium"
+              >
+                <FormattedMessage id="socios.evaluacionSocio"/>
+              </Button>
+            )}
+          />
+        )
       }
     }
 
@@ -649,16 +661,7 @@ class SociosForm extends Component {
           </div>
           {submitButton}
         </form>
-        <Route
-          render={({ history}) => (
-            <Button
-              clicked={() => history.push('/evaluacion-socio')}
-              btnType="Medium"
-            >
-              <FormattedMessage id="socios.evaluacionSocio"/>
-            </Button>
-          )}
-        />
+          {evaluacionButton}
       </div>
     )
   }
