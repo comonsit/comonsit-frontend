@@ -61,12 +61,12 @@ class SociosForm extends Component {
             type: 'text',
             placeholder: '..'
           },
-          label: (<><FormattedMessage id="apellido_materno"/>*</>),
+          label: (<><FormattedMessage id="apellido_materno"/></>),
           value: this.props.selSocio.apellido_materno,
           validation: {
-            required: true,
+            required: false,
           },
-          valid: !this.props.new,
+          valid: true,
           errorMessage: "",
           touched: false,
         },
@@ -120,7 +120,7 @@ class SociosForm extends Component {
           },
           valid: true,
           errorMessage: "",
-          touched: true,
+          touched: false,
         },
         fecha_nacimiento: {
           elementType: 'input',
