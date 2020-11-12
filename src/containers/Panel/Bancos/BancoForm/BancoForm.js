@@ -321,7 +321,7 @@ class BancoForm extends Component {
     }
   }
 
-  checkIfFormIsValid (form) {
+  checkIfFormIsValid = form => {
     let formIsValid = false
     if (
       this.state.selTab === 'bancoForm.Otros' ||
@@ -335,13 +335,13 @@ class BancoForm extends Component {
     return formIsValid
   }
 
-  onToggleIngreso () {
+  onToggleIngreso = () => {
     this.setState(prevState => ({
       subCtaIngrEgr: !prevState.subCtaIngrEgr
     }));
   }
 
-  changeCase () {
+  changeCase = () => {
     const updatedFormElement = updateObject(this.state.bankForm.referencia_banco, {
       value: this.state.bankForm.referencia_banco.value.toUpperCase(),
     })
@@ -351,7 +351,7 @@ class BancoForm extends Component {
     this.setState({ bankForm: updatedForm })
   }
 
-  render () {
+  render() {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
     const formOrder = [
