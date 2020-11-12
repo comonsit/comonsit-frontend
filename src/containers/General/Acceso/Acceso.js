@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import {NavLink, Redirect} from "react-router-dom";
-import {FormattedMessage} from 'react-intl';
+import { NavLink } from "react-router-dom";
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import _ from 'lodash';
 
 // import Spinner from '../../../components/UI/Spinner/Spinner'
-import Input from '../../../components/UI/Input/Input'
-import Button from '../../../components/UI/Button/Button'
-import Spinner from '../../../components/UI/Spinner/Spinner'
-import classes from './Acceso.module.scss'
-import * as actions from '../../../store/actions'
-import { updateObject } from '../../../store/reducers/utility'
-import {checkValidity } from '../../../utilities/validity'
+import Input from '../../../components/UI/Input/Input';
+import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import classes from './Acceso.module.scss';
+import * as actions from '../../../store/actions';
+import { updateObject } from '../../../store/reducers/utility';
+import {checkValidity } from '../../../utilities/validity';
 
 
 class Auth extends Component {
