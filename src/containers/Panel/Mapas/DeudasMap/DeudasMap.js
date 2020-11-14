@@ -5,7 +5,8 @@ import {
   Map,
   Polygon,
   TileLayer,
-  Popup
+  Popup,
+  ZoomControl
 } from 'react-leaflet';
 
 import classes from './DeudasMap.module.scss'
@@ -139,7 +140,14 @@ class DeudasMap extends Component {
     return (
       <div className={classes.Container}>
         <div className={classes.MapContainer}>
-          <Map center={center} zoom={10} closePopupOnClick={false} scrollWheelZoom={false}>
+          <Map
+            center={center}
+            zoom={10}
+            closePopupOnClick={false}
+            scrollWheelZoom={false}
+            zoomControl={false}
+          >
+            <ZoomControl position="bottomright"/>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

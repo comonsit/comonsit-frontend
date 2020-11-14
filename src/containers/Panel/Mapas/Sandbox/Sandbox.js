@@ -8,7 +8,8 @@ import {
   Polygon,
   Popup,
   LayersControl,
-  LayerGroup
+  LayerGroup,
+  ZoomControl
 } from 'react-leaflet';
 
 import classes from './Sandbox.module.scss'
@@ -124,7 +125,13 @@ const Sandbox = (props) => {
   return (
     <div>
       <div className={classes.Container}>
-        <Map center={center} zoom={10} scrollWheelZoom={false}>
+        <Map
+          center={center}
+          zoom={10}
+          scrollWheelZoom={false}
+          zoomControl={false}
+        >
+          <ZoomControl position="bottomright"/>
           <LayersControl position="topright">
             <BaseLayer checked name="General">
               <TileLayer
