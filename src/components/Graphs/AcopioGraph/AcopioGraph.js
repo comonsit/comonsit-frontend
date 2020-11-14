@@ -10,8 +10,8 @@ import {
   Hint
 } from 'react-vis';
 
-import classes from './AcopioGraph.module.scss'
-
+import classes from './AcopioGraph.module.scss';
+import Currency from '../../UI/Formatting/Currency';
 
 const acopioGraph = (props) => {
   return (
@@ -21,11 +21,10 @@ const acopioGraph = (props) => {
     </div>
     <XYPlot
       yPadding={10}
-      xType="ordinal"
       width={400}
       height={200}
-      className={classes.Graphs}
       margin={{left: 75}}
+      xType="ordinal"
     >
       <VerticalGridLines />
       <HorizontalGridLines />
@@ -47,7 +46,7 @@ const acopioGraph = (props) => {
                                 borderRadius: "1rem"}
                               }
                           >
-                            <p style={{fontSize: ".8em"}}>${props.hint.y} en {props.hint.x}</p>
+                            <p style={{fontSize: ".8em"}}><Currency value={props.hint.y}/> en {props.hint.x}</p>
                           </div>
                         </Hint> ): null}
     </XYPlot>
