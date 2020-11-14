@@ -22,14 +22,19 @@ class AcopiosGraphs extends Component {
       hintSA: null,
       formIsValid: false,
       loading: false,
+      coffeeData: [],
+      honeyData: [],
+      soapData: [],
+      salarioData: [],
       form: {
         clave_socio: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.listaSocios.map(r => ({
-              "value": r.clave_socio,
-              "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno
-            })),
+            options: [],
+            // options: this.props.listaSocios.map(r => ({
+            //   "value": r.clave_socio,
+            //   "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno
+            // })),
             optionBlank: true
           },
           label: <FormattedMessage id="clave"/>,
@@ -40,10 +45,7 @@ class AcopiosGraphs extends Component {
         comunidad: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.comunidades.map(r => ({
-              "value": r.id,
-              "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region
-            })),
+            options: [],
             optionBlank: true
           },
           label: <FormattedMessage id="comunidad"/>,
@@ -54,10 +56,7 @@ class AcopiosGraphs extends Component {
         region: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.regiones.map(r => ({
-              "value": r.id,
-              "displayValue": r.id +': ' + r.nombre_de_region
-            })),
+            options: [],
             optionBlank: true
           },
           label: <FormattedMessage id="region"/>,
@@ -72,10 +71,10 @@ class AcopiosGraphs extends Component {
   componentDidMount() {
     this.getYearSum('')
     this.props.onInitSocios(this.props.token)
+    this.props.fetchGralData(this.props.token)
   }
 
   componentDidUpdate(prevProps) {
-    // should be done for all options?
     if(this.props.listaSocios !== prevProps.listaSocios) {
       const updatedForm = updateObject(this.state.form, {
           clave_socio: updateObject(this.state.form.clave_socio, {
@@ -83,6 +82,34 @@ class AcopiosGraphs extends Component {
               options: this.props.listaSocios.map(r => ({
                 "value": r.clave_socio,
                 "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno
+              })),
+              optionBlank: true
+            },
+          })
+      })
+      this.setState({form: updatedForm});
+    }
+    if(this.props.regiones !== prevProps.regiones) {
+      const updatedForm = updateObject(this.state.form, {
+          region: updateObject(this.state.form.region, {
+            elementConfig: {
+              options: this.props.regiones.map(r => ({
+                "value": r.id,
+                "displayValue": r.id +': ' + r.nombre_de_region
+              })),
+              optionBlank: true
+            },
+          })
+      })
+      this.setState({form: updatedForm});
+    }
+    if(this.props.comunidades !== prevProps.comunidades) {
+      const updatedForm = updateObject(this.state.form, {
+          comunidad: updateObject(this.state.form.comunidad, {
+            elementConfig: {
+              options: this.props.comunidades.map(r => ({
+                "value": r.id,
+                "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region
               })),
               optionBlank: true
             },
@@ -180,9 +207,9 @@ class AcopiosGraphs extends Component {
 
     let form = <Spinner/>
     if (
-      this.props.comunidades.length > 0 &&
-      this.props.listaSocios.length > 0 &&
-      this.props.regiones.length > 0
+      this.props.comunidades && this.props.comunidades.length > 0 &&
+      this.props.listaSocios && this.props.listaSocios.length > 0 &&
+      this.props.regiones && this.props.regiones.length > 0
     ) {
       form = (<form className={classes.Form} onSubmit={this.onRefreshData}>
         <div className={classes.Inputs}>
@@ -292,7 +319,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitSocios: (token) => dispatch(actions.initSocios(token))
+    onInitSocios: (token) => dispatch(actions.initSocios(token)),
+    fetchGralData: (token) => dispatch(actions.fetchGralData(token)),
   }
 }
 

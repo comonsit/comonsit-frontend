@@ -169,10 +169,6 @@ class Acopios extends Component {
         )
       : <Spinner/ >
 
-    if (this.props.listaAcopios) {
-
-    }
-
     return (
       <>
         <Title

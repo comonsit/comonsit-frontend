@@ -18,6 +18,9 @@ import { checkValidity } from '../../../../utilities/validity';
 class MesaControl extends Component {
   constructor(props) {
     super(props);
+    if (!this.props.selectedSol) {
+      this.props.history.push('/')
+    }
     this.state = {
       formIsValid: false,
       selectedSol: this.props.selectedSol,

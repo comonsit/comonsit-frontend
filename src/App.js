@@ -32,7 +32,7 @@ import movimientos from './containers/Panel/Movimientos/Movimientos';
 import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
 import acopioForm from './containers/Panel/Acopios/AcopioForm/AcopioForm';
 import formatos from './containers/Panel/Formatos/Formatos';
-import perfil from './containers/Panel/Perfil/Perfil';
+import perfil from './containers/Panel/Perfil/PerfilCont';
 import inicio from './containers/Panel/Inicio/Inicio';
 import logout from './containers/Panel/Logout/Logout';
 import mapaPrueba from './containers/Panel/Mapas/Sandbox/Sandbox';

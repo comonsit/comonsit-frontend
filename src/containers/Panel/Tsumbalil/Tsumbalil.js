@@ -20,10 +20,6 @@ class Tsumbalil extends Component {
     comunidadSelected: false
   }
 
-  componentDidMount() {
-    this.props.fetchGralData(this.props.token)
-  }
-
   componentDidUpdate(prevProps) {
     if(this.props.updated !== prevProps.updated) {
       this.props.fetchGralData(this.props.token)

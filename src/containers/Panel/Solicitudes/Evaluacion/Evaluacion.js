@@ -23,6 +23,9 @@ import * as actions from '../../../../store/actions';
 class Evaluacion extends Component {
   constructor(props) {
     super(props);
+    if (!this.props.selectedSol) {
+      this.props.history.push('/')
+    }
     this.state = {
       formIsValid: false,
       selectedSol: this.props.selectedSol,

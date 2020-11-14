@@ -20,6 +20,9 @@ import axios from '../../../../store/axios-be.js'
 class ContratoActivate extends Component {
   constructor(props) {
     super(props);
+    if (!this.props.selContrato.id) {
+      this.props.history.push('/')
+    }
     this.state = {
       formIsValid: false,
       contratoUpdateForm: {

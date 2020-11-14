@@ -27,6 +27,10 @@ class Inicio extends Component {
     this.onGetCarteras()
   }
 
+  componentDidMount() {
+    this.props.fetchGralData(this.props.token)
+  }
+
   onGetCarteras = () => {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
@@ -131,7 +135,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateUser: (userData) => dispatch(actions.setUser(userData))
+    updateUser: (userData) => dispatch(actions.setUser(userData)),
+    fetchGralData: (token) => dispatch(actions.fetchGralData(token)),
   }
 }
 

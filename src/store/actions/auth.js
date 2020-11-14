@@ -73,7 +73,6 @@ export const auth = (username, password, isSignUp) => {
         localStorage.setItem('refreshExpirationDate', refreshExpirationDate)
         localStorage.setItem('userId', response.data.localId)
         dispatch(authSuccess(response.data.access, response.data.localId))
-        dispatch(fetchGralData(response.data.access))
         dispatch(startTokenTimeout(fiveMinutes))
         dispatch(startRefreshTokenTimeout(twentyFourHours))
         dispatch(setAuthRedirectPath('inicio'))

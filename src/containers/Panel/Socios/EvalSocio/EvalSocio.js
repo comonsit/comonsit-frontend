@@ -19,7 +19,9 @@ class EvalSocio extends Component {
   }
 
   componentDidMount() {
-    this.props.onGetSocioSaldo(this.props.token, this.props.selSocio.clave_socio)
+    if (this.props.selSocio) {
+      this.props.onGetSocioSaldo(this.props.token, this.props.selSocio.clave_socio)  
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -41,55 +43,61 @@ class EvalSocio extends Component {
   }
 
   render() {
-    const socioName = <h2>{'#' + this.props.selSocio.clave_socio + ' ' + this.props.selSocio.nombre_productor}</h2>
-    const items1 = [
-      "clave_socio",
-      "nombre_productor",
-      "nombre_region",
-      "nombre_comunidad",
-      "fecha_ingr_yomol_atel"
-    ]
-    const items1Array = items1.map(id => {
-      return (
-        <TextElement
-          key={id}
-          label={id}
-          content={this.props.selSocio[id]}
-          isDate={id === "fecha_ingr_yomol_atel"}
-        />
-      )
-    })
+    if (!this.props.selSocio) {
+      this.props.history.push('/')
+      return null
+    } else {
 
-    const saldoGraph = (this.state.saldos)
-      ? (
-          <SolicSaldosGraph
-            data={this.state.saldos}
-            monto={this.state.monto}
-            mouseOver={this._rememberValue}
-            mouseOut={this._forgetValues}
-            hint={this.state.hint}
+      const socioName = <h2>{'#' + this.props.selSocio.clave_socio + ' ' + this.props.selSocio.nombre_productor}</h2>
+      const items1 = [
+        "clave_socio",
+        "nombre_productor",
+        "nombre_region",
+        "nombre_comunidad",
+        "fecha_ingr_yomol_atel"
+      ]
+      const items1Array = items1.map(id => {
+        return (
+          <TextElement
+            key={id}
+            label={id}
+            content={this.props.selSocio[id]}
+            isDate={id === "fecha_ingr_yomol_atel"}
           />
         )
-      : <Spinner/>
-    // console.log(this.state.saldos)
+      })
 
-    return (
-      <div className={classes.Container}>
-        <Title titleName="evalSocio.title">
-          {socioName}
-        </Title>
-        <div className={classes.BlocksContainer}>
-          <Card title={"evalSocio.Datos"}>
-            <div className={classes.DataContainer}>
-              {items1Array}
-            </div>
-          </Card>
-          <Card title={"evalSocio.Acopios"}>
-            {saldoGraph}
-          </Card>
+      const saldoGraph = (this.state.saldos)
+        ? (
+            <SolicSaldosGraph
+              data={this.state.saldos}
+              monto={this.state.monto}
+              mouseOver={this._rememberValue}
+              mouseOut={this._forgetValues}
+              hint={this.state.hint}
+            />
+          )
+        : <Spinner/>
+      // console.log(this.state.saldos)
+
+      return (
+        <div className={classes.Container}>
+          <Title titleName="evalSocio.title">
+            {socioName}
+          </Title>
+          <div className={classes.BlocksContainer}>
+            <Card title={"evalSocio.Datos"}>
+              <div className={classes.DataContainer}>
+                {items1Array}
+              </div>
+            </Card>
+            <Card title={"evalSocio.Acopios"}>
+              {saldoGraph}
+            </Card>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
