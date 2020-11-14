@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination, useRowSelect } from 'react-table'
+import {
+  useTable,
+  useSortBy,
+  useFilters,
+  useGlobalFilter,
+  usePagination,
+  useRowSelect
+} from 'react-table'
 import IndeterminateCheckbox from './IndeterminateCheckbox'
 import { useDispatch } from "react-redux";
 

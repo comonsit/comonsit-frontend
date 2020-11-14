@@ -173,6 +173,7 @@ class ComunidadForm extends Component {
         <Title
           titleName="comunidadForm.title"
           titleNameEx={": " + this.state.comunidadForm.nombre_de_comunidad.value}
+          titleType="ModalTitle"
         >
           {editButton}
         </Title>

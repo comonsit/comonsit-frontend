@@ -3,7 +3,15 @@ import { updateObject } from './utility'
 
 const initialState = {
   creditos: [{}],
-  selectedContrato: null
+  selectedContrato: {
+    id: null,
+    fecha_inicio: null,
+    tipo_tasa: null,
+    iva: null,
+    estatus_ejecucion: null,
+    fecha_banco: null,
+    referencia_banco: null
+  }
 }
 
 const setCreditos = (state, action) => {
