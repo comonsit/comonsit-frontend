@@ -651,7 +651,7 @@ class SolicitudForm extends Component {
         <Modal
           show={this.state.searchingOpen}
           modalClosed={this.cancelSearch}>
-          <h3><FormattedMessage id="solicitudForm.elige"/></h3>
+          <h3 className={classes.Center}><FormattedMessage id="selectSocio"/></h3>
           <div className={classes.TableContainer}>
             {sociosBusqueda}
           </div>

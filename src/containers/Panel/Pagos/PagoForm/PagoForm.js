@@ -509,7 +509,7 @@ class PagosForm extends Component {
           show={this.state.searchingOpen}
           modalClosed={this.cancelSearch}
         >
-          <h3><FormattedMessage id="pagos.elige"/></h3>
+          <h3 className={classes.Center}><FormattedMessage id="pagos.elige"/></h3>
           <div className={classes.TableContainer}>
             {creditosBusqueda}
           </div>

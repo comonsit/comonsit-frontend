@@ -512,7 +512,7 @@ class MovimientosForm extends Component {
       if (this.props.listaSocios && this.state.searchSocio) {
         modalInfo = (
           <>
-            <h3><FormattedMessage id="solicitudForm.elige"/></h3>
+            <h3 className={classes.Center}><FormattedMessage id="solicitudForm.elige"/></h3>
             <div
               className={classes.TableContainer}>
               <SociosList

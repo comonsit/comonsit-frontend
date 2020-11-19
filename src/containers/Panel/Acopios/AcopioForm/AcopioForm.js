@@ -395,7 +395,7 @@ class AcopioForm extends Component {
       if (this.props.listaSocios && this.state.searchSocio) {
         modalInfo = (
           <>
-            <h3><FormattedMessage id="selectSocio"/></h3>
+            <h3 className={classes.Center}><FormattedMessage id="selectSocio"/></h3>
             <div className={classes.TableContainer}>
               <SociosList
                 listaSocios={this.props.listaSocios}
