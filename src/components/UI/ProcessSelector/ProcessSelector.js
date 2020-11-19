@@ -35,7 +35,9 @@ const processSelector = (props) => {
       </div>
       <div className={classes.IconContainer}>
         <div
+          tabindex={props.processes.CF === 'AC' ? "0" : "-1"}
           onClick={() => props.clicked('CF')}
+          onKeyDown={() => props.clicked('CF')}
           className={options[props.processes.CF].classes.join(' ')}
         >
           <Coffee
@@ -45,7 +47,9 @@ const processSelector = (props) => {
           />
         </div>
         <div
+          tabindex={props.processes.MI === 'AC' ? "0" : "-1"}
           onClick={() => props.clicked('MI')}
+          onKeyDown={() => props.clicked('MI')}
           className={options[props.processes.MI].classes.join(' ')}
         >
           <Bee
@@ -55,7 +59,9 @@ const processSelector = (props) => {
           />
         </div>
         <div
+          tabindex={props.processes.JA === 'AC' ? "0" : "-1"}
           onClick={() => props.clicked('JA')}
+          onKeyDown={() => props.clicked('JA')}
           className={options[props.processes.JA].classes.join(' ')}
         >
           <Soap
@@ -65,7 +71,9 @@ const processSelector = (props) => {
           />
         </div>
         <div
+          tabindex={props.processes.SL === 'AC' ? "0" : "-1"}
           onClick={() => props.clicked('SL')}
+          onKeyDown={() => props.clicked('SL')}
           className={options[props.processes.SL].classes.join(' ')}
         >
           <Money
