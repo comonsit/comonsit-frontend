@@ -1,31 +1,32 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import classes from './TotalCarteras.module.scss';
-import TextElement from '../../../../components/UI/TextElement/TextElement';
+import CarterasGraph from '../../../../components/Graphs/CarterasGraph/CarterasGraph';
 import Currency from '../../../../components/UI/Formatting/Currency';
 
 const totalCarteras = (props) => (
   <div className={classes.Container}>
     <div>
-      <TextElement
-        label={"carteras.total_vigentes"}
-        content={<Currency value={props.vigentes} returnString/>}
-      />
-      <TextElement
-        label={"carteras.total_vencidos"}
-        content={<Currency value={props.vencidos} returnString/>}
-      />
+      <div className={classes.Label}><div className={classes.VigBub}>&nbsp;&nbsp;</div> <FormattedMessage id="carteras.total_vigentes"/> <Currency value={props.vigentes}/> con {props.vigentes_count} créditos</div>
+      <div className={classes.Label}><div className={classes.VencidBub}>&nbsp;&nbsp;</div> <FormattedMessage id="carteras.total_vencidos"/> <Currency value={props.vencidos}/> con {props.vencidos_count} créditos</div>
     </div>
-    <div>
-      <TextElement
-        label={"carteras.num_vigentes"}
-        content={props.vigentes_count}
-      />
-      <TextElement
-        label={"carteras.num_vencidos"}
-        content={props.vencidos_count}
-      />
-    </div>
+    <CarterasGraph
+      data={
+        [
+          {
+            angle: props.vigentes,
+            label: `$${props.vigentes} Vigente  (${props.vigentes_count} creditos)`,
+            color: "#21a75a"
+          },
+          {
+            angle: props.vencidos,
+            label: `$${props.vencidos} Vencido  (${props.vencidos_count} creditos)`,
+            color: "#c23f3f"
+          }
+        ]
+      }
+    />
   </div>
 )
 

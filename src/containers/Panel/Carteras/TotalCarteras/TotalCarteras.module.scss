@@ -1,4 +1,30 @@
+@import 'styles/general';
+@import 'styles/variables';
+
 .Container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+.Label {
+  margin-bottom: 1rem;
+}
+
+@mixin circ($color) {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
+  background-color: $color;
+  display: inline;
+  padding: .2rem .4rem;
+}
+
+.VigBub {
+  @include circ($sec-green);
+}
+
+.VencidBub {
+  @include circ($red);
 }
