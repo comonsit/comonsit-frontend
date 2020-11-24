@@ -61,21 +61,6 @@ class ContratoActivate extends Component {
           touched: true,
           disabled: this.props.selContrato.fecha_inicio !== null,
         },
-        iva: {
-          elementType: 'checkbox',
-          elementConfig: {
-            type: 'checkbox'
-          },
-          label: (<FormattedMessage id="contratoActivate.iva"/>),
-          value: this.props.selContrato.iva  || false,
-          validation: {
-            required: false
-          },
-          valid: true,
-          errorMessage: "",
-          touched: false,
-          disabled: this.props.selContrato.iva !== null,
-        },
         estatus_ejecucion: {
           elementType: 'select',
           elementConfig: {
@@ -194,7 +179,6 @@ class ContratoActivate extends Component {
     const contratoUpdateFormOrder = [
       "fecha_inicio",
       "tipo_tasa",
-      "iva",
       "estatus_ejecucion",
       "referencia_banco",
       "fecha_banco"

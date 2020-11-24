@@ -7,7 +7,6 @@ const initialState = {
     id: null,
     fecha_inicio: null,
     tipo_tasa: null,
-    iva: null,
     estatus_ejecucion: null,
     fecha_banco: null,
     referencia_banco: null

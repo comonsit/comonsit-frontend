@@ -15,7 +15,6 @@ const pagoDetail = props => {
     "interes_ord",
     "interes_mor",
     "abono_capital",
-    "iva"
   ]
 
   // TODO: improve!
