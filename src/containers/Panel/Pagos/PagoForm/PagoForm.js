@@ -325,7 +325,7 @@ class PagosForm extends Component {
 
     return updateObject(previousForm, {
       cantidad: updateObject(previousForm.cantidad, {
-        value: total,
+        value: total.toFixed(2),
         valid: total !== 0,
         touched: true,
       })
@@ -427,7 +427,7 @@ class PagosForm extends Component {
           }
         })
         .catch(error => {
-          alert('ALGO FALLÓ!')
+
         })
     } else {
       alert ('Incluye crédito y fecha válida para buscar datos de deuda')
