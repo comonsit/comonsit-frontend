@@ -110,7 +110,7 @@ const mapStateToProps = state => {
     updated: state.generalData.updated,
     selComunidad: state.generalData.selectedComunidad,
     token: state.auth.token,
-    role: state.generalData.role
+    role: state.auth.role
   }
 }
 

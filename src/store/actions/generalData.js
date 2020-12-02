@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from '../axios-be.js';
+import { setUser } from './auth'
 
 
 export const fetchGralData = (token) => {
@@ -114,13 +115,6 @@ export const setPuestos = (puestos) => {
   return {
     type: actionTypes.SET_PUESTOS,
     puestos: puestos
-  }
-}
-
-export const setUser = (user) => {
-  return {
-    type: actionTypes.SET_USER,
-    user: user
   }
 }
 

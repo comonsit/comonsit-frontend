@@ -195,7 +195,7 @@ class Subcuentas extends Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    role: state.generalData.role
+    role: state.auth.role
   }
 }
 

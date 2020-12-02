@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { IntlProvider } from 'react-intl';
 import { Redirect, Route, withRouter, Switch } from "react-router-dom";
-import * as actions from './store/actions'
 
 import Layout from './hoc/Layout/Layout'
+import GerenciaRoute from './components/Navigation/GerenciaRoute/GerenciaRoute';
 import homeContainer from './containers/General/HomeContainer/HomeContainer';
 import bancos from './containers/Panel/Bancos/Bancos';
 import subcuentas from './containers/Panel/Bancos/Subcuentas/Subcuentas';
@@ -36,9 +36,9 @@ import perfil from './containers/Panel/Perfil/PerfilCont';
 import inicio from './containers/Panel/Inicio/Inicio';
 import logout from './containers/Panel/Logout/Logout';
 import mapaPrueba from './containers/Panel/Mapas/Sandbox/Sandbox';
-import Loading from './containers/General/Loading/Loading';
 import messages_es from './translations/es.json'
 import messages_tz from './translations/tz.json'
+import * as actions from './store/actions'
 
 
 const messages = {
@@ -75,9 +75,6 @@ class App extends Component {
             <Route path="/evaluacion-socio" component={evalSocios}/>
             <Route path="/perfil" component={perfil}/>
             <Route path="/acopios" component={acopios}/>
-            <Route path="/bancos" component={bancos}/>
-            <Route path="/subcuentas" component={subcuentas}/>
-            <Route path="/banco-form" component={bancoForm}/>
             <Route path="/carteras" component={carteras}/>
             <Route path="/creditos" component={creditos}/>
             <Route path="/mapa-prueba" component={mapaPrueba}/>
@@ -97,6 +94,9 @@ class App extends Component {
             <Route path="/inicio" component={inicio} />
             <Route path="/logout" component={logout}/>
             <Route path="/reportes" component={() => (<div>...En Construcción...</div>)}/>
+            <GerenciaRoute path="/bancos" component={bancos} role={this.props.role}/>
+            <GerenciaRoute path="/subcuentas" component={subcuentas} role={this.props.role}/>
+            <GerenciaRoute path="/banco-form" component={bancoForm} role={this.props.role}/>
             <Route><Redirect to="/inicio" /></Route>
           </Switch>
         )
@@ -116,7 +116,7 @@ class App extends Component {
     return (
       <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
         <Layout>
-          {this.props.loading ? <Loading /> : availableRoutes}
+          {availableRoutes}
         </Layout>
       </IntlProvider>
     );
@@ -131,15 +131,13 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
     locale: state.locale.selectedLanguage,
-    loading: !state.auth.finishedAutoSignup,
-    authRedirectPath: state.auth.authRedirectPath
+    role: state.auth.role
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch (actions.authCheckState()),
-    onfinishAuthRedirect: () => dispatch (actions.finishedAuthRedirectPath())
+    onTryAutoSignup: () => dispatch (actions.authCheckState())
   }
 }
 

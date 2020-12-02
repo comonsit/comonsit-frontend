@@ -193,7 +193,7 @@ const mapStateToProps = state => {
   return {
     listaAcopios: state.acopios.acopios,
     token: state.auth.token,
-    role: state.generalData.role
+    role: state.auth.role
   }
 }
 

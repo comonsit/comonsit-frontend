@@ -23,13 +23,13 @@ const ptoolbar = (props) =>{
           <div className={classes.UserName}>
             <NavLink onClick={props.closed} to="/perfil">{props.user.first_name} {props.user.last_name}</NavLink>
           </div>
-          <Role
-            userRole={props.user.role}/>
+          <Role userRole={props.user.role}/>
           <NavLink onClick={props.closed} to="/logout"><FormattedMessage id="pmenu.logout"/></NavLink>
         </div>
         <nav className={classes.NavigationItemsContainer}>
           <PNavigationItems
             clicked={props.closed}
+            userRole={props.user.role}
           />
         </nav>
         <div className={classes.PLogo}>

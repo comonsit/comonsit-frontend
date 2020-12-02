@@ -12,18 +12,7 @@ import Loading from '../../containers/General/Loading/Loading';
 
 class Layout extends Component {
   state = {
-    showSideDrawer: false,
-    auth: this.props.isAuthenticated,
-    usr: this.props.user
-  }
-
-  componentDidUpdate(prevProps) {
-    if(this.props.isAuthenticated !== prevProps.isAuthenticated) {
-      this.setState({auth: this.props.isAuthenticated})
-    }
-    if(this.props.user !== prevProps.user) {
-      this.setState({usr: this.props.user})
-    }
+    showSideDrawer: false
   }
 
   sideDrawerOpenHandler = () => {
@@ -43,18 +32,17 @@ class Layout extends Component {
   render() {
     let layoutClasses = []
     let menu
-    if (this.props.initialLoading || (this.state.auth && !this.state.usr)) {
-      menu = <Loading />
-    } else if (this.state.auth && this.state.usr){
+    if (this.props.isAuthenticated && this.props.user){
       layoutClasses = [classes.PContent]
       menu = (
         <>
           <PToolbar
             showMenu={this.sideDrawerOpenHandler}
-            isAuth={this.state.auth}
+            isAuth={this.props.isAuthenticated}
             open={this.state.showSideDrawer}
-            user={this.state.usr}
-            closed={this.sideDrawerClosedHandler}/>
+            user={this.props.user}
+            closed={this.sideDrawerClosedHandler}
+          />
         </>
       )
     } else {
@@ -63,31 +51,46 @@ class Layout extends Component {
         <>
           <SideDrawer
             open={this.state.showSideDrawer}
-            closed={this.sideDrawerClosedHandler}/>
-          <Toolbar
-            showMenu={this.sideDrawerOpenHandler}/>
+            closed={this.sideDrawerClosedHandler}
+          />
+          <Toolbar showMenu={this.sideDrawerOpenHandler}/>
         </>
       )
     }
 
-    return (
-      <>
-        {menu}
-        <main className={layoutClasses.join(' ')}>
-          {this.props.children}
-        </main>
-        <div className={classes.LanguageSelector}>
-          <HoverButton title="language" items={['es', 'tz']} clicked={this.onChangeLanguage}/>
-        </div>
-      </>
-    )
+
+    if (
+      this.props.initialLoading
+      || this.props.authLoading
+      || (this.props.isAuthenticated && !this.props.user && !this.props.role)
+    ) {
+      return <Loading />
+    } else {
+      return (
+        <>
+          {menu}
+          <div className={classes.LanguageSelector}>
+            <HoverButton
+              title="language"
+              items={['es', 'tz']}
+              clicked={this.onChangeLanguage}
+            />
+          </div>
+          <main className={layoutClasses.join(' ')}>
+            {this.props.children}
+          </main>
+        </>
+      )
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
-    user: state.generalData.user,
+    user: state.auth.user,
+    role: state.auth.role,
+    authLoading: state.auth.loading,
     initialLoading: !state.auth.finishedAutoSignup
   }
 }

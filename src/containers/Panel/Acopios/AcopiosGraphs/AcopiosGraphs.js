@@ -71,7 +71,6 @@ class AcopiosGraphs extends Component {
   componentDidMount() {
     this.getYearSum('')
     this.props.onInitSocios(this.props.token)
-    this.props.fetchGralData(this.props.token)
   }
 
   componentDidUpdate(prevProps) {
@@ -319,8 +318,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitSocios: (token) => dispatch(actions.initSocios(token)),
-    fetchGralData: (token) => dispatch(actions.fetchGralData(token)),
+    onInitSocios: (token) => dispatch(actions.initSocios(token))
   }
 }
 

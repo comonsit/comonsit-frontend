@@ -192,7 +192,7 @@ class MovimientoBankForm extends Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    role: state.generalData.role,
+    role: state.auth.role,
     loading: state.movimientos.loading,
     updated: state.movimientos.updated,
     formError: state.errors.errors,

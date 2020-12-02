@@ -27,7 +27,6 @@ export const logout = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('refreshToken')
   localStorage.removeItem('refreshExpirationDate')
-  localStorage.removeItem('userId')
   return {
     type: actionTypes.AUTH_LOGOUT
   }
@@ -71,11 +70,10 @@ export const auth = (username, password, isSignUp) => {
         // TODO: CHANGE FOR USE REFRESH!? response.data.refresh
         // const expirationRefreshDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
         localStorage.setItem('refreshExpirationDate', refreshExpirationDate)
-        localStorage.setItem('userId', response.data.localId)
         dispatch(authSuccess(response.data.access, response.data.localId))
         dispatch(startTokenTimeout(fiveMinutes))
         dispatch(startRefreshTokenTimeout(twentyFourHours))
-        dispatch(setAuthRedirectPath('inicio'))
+        dispatch(fetchGralData(response.data.access))
       })
       .catch(error => {
         if (error.response) {
@@ -115,21 +113,12 @@ export const refreshToken = (initialRefresh=false) => {
   }
 }
 
-
-
-export const setAuthRedirectPath = (path) => {
+export const setUser = (user) => {
   return {
-    type: actionTypes.SET_AUTH_REDIRECT_PATH,
-    path: path
+    type: actionTypes.SET_USER,
+    user: user
   }
 }
-
-export const finishedAuthRedirectPath = () => {
-  return {
-    type: actionTypes.FINISHED_AUTH_REDIRECT
-  }
-}
-
 
 export const authCheckState = () => {
   return dispatch => {
@@ -137,16 +126,12 @@ export const authCheckState = () => {
     if (!token) {
       dispatch(logout())
     } else {
-      // TODO: METER LÓGICA REFRESH
       const refreshExpirationDate = new Date( localStorage.getItem('refreshExpirationDate'))
       if (refreshExpirationDate <= new Date()) {
         dispatch(logout())
       } else {
         dispatch(refreshToken(true))
-        // const userId = localStorage.getItem('userId')
-        // dispatch(authSuccess(token, userId))
         dispatch(startRefreshTokenTimeout(refreshExpirationDate - new Date().getTime()))
-        // dispatch(fetchGralData(token))
       }
     }
   }

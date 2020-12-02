@@ -125,7 +125,7 @@ const mapStateToProps = state => {
     updated: state.socios.updated,
     token: state.auth.token,
     comunidades: state.generalData.comunidades,
-    role: state.generalData.role
+    role: state.auth.role
   }
 }
 

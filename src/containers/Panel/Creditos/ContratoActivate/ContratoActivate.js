@@ -262,7 +262,7 @@ const mapStateToProps = state => {
     updated: state.creditos.updated,
     loading: state.creditos.loading,
     token: state.auth.token,
-    role: state.generalData.role,
+    role: state.auth.role,
     formError: state.errors.errors,
   }
 }

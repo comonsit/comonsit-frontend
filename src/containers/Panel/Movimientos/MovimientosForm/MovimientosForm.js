@@ -602,7 +602,7 @@ class MovimientosForm extends Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    role: state.generalData.role,
+    role: state.auth.role,
     empresas: state.generalData.empresas,
     loading: state.movimientos.loading,
     updated: state.movimientos.updated,

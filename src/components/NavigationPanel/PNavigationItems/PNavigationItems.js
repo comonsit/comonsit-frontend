@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 
 import classes from './PNavigationItems.module.scss';
+import roles, { isGerencia } from '../../../store/roles';
 
 
 const pnavigationItems = props => (
@@ -40,12 +41,18 @@ const pnavigationItems = props => (
         triggerOpenedClassName={classes.AcordeaonTriggerOpen}
         trigger=<FormattedMessage id="pmenu.cuentas"/>
       >
-        <div className={classes.NavigationItem} onClick={props.clicked}>
-          <NavLink to="/bancos" exact activeClassName={classes.active}><FormattedMessage id="pmenu.bancos"/></NavLink>
-        </div>
-        <div className={classes.NavigationItem} onClick={props.clicked}>
-          <NavLink to="/subcuentas" exact activeClassName={classes.active}><FormattedMessage id="pmenu.subcuentas"/></NavLink>
-        </div>
+        {isGerencia(roles[props.userRole])
+          ? (
+              <>
+                <div className={classes.NavigationItem} onClick={props.clicked}>
+                  <NavLink to="/bancos" exact activeClassName={classes.active}><FormattedMessage id="pmenu.bancos"/></NavLink>
+                </div>
+                <div className={classes.NavigationItem} onClick={props.clicked}>
+                  <NavLink to="/subcuentas" exact activeClassName={classes.active}><FormattedMessage id="pmenu.subcuentas"/></NavLink>
+                </div>
+              </>
+            )
+          : null}
         <div className={classes.NavigationItem} onClick={props.clicked}>
           <NavLink to="/acopios" exact activeClassName={classes.active}><FormattedMessage id="pmenu.acopios"/></NavLink>
         </div>

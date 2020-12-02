@@ -11,7 +11,6 @@ import Card from '../../../components/UI/Card/Card';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import TotalCarteras from '../Carteras/TotalCarteras/TotalCarteras'
 import axios from '../../../store/axios-be.js';
-import * as actions from '../../../store/actions'
 
 
 class Inicio extends Component {
@@ -25,10 +24,6 @@ class Inicio extends Component {
       loading: false
     }
     this.onGetCarteras()
-  }
-
-  componentDidMount() {
-    this.props.fetchGralData(this.props.token)
   }
 
   onGetCarteras = () => {
@@ -128,16 +123,9 @@ class Inicio extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.generalData.user,
+    user: state.auth.user,
     token: state.auth.token
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateUser: (userData) => dispatch(actions.setUser(userData)),
-    fetchGralData: (token) => dispatch(actions.fetchGralData(token)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Inicio, axios))
+export default connect(mapStateToProps)(withErrorHandler(Inicio, axios))

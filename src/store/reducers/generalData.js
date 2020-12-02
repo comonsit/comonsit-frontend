@@ -1,12 +1,9 @@
 import * as actionTypes from '../actions/actionTypes'
-import roles from '../roles.js';
 import { updateObject } from './utility'
 
 const initialState = {
   regiones: null,
   comunidades: [{}],
-  user: null,
-  role: roles.SO,
   selectedComunidad: null,
   cargos: null,
   cargosCoop: null,
@@ -58,13 +55,6 @@ const setFuentes = (state, action) => {
 const setPuestos = (state, action) => {
   return updateObject(state, {
     puestos: action.puestos,
-  })
-}
-
-const setUser = (state, action) => {
-  return updateObject(state, {
-    user: action.user,
-    role: roles[action.user.role]
   })
 }
 
@@ -132,7 +122,6 @@ const reducer = (state=initialState , action) => {
     case actionTypes.SET_EMPRESAS: return setEmpresas(state, action)
     case actionTypes.SET_FUENTES: return setFuentes(state, action)
     case actionTypes.SET_PUESTOS: return setPuestos(state, action)
-    case actionTypes.SET_USER: return setUser(state, action)
     case actionTypes.UPDATE_COMUNIDAD_START: return updateComunidadStart(state)
     case actionTypes.UPDATE_COMUNIDAD_SUCCESS: return updateComunidadSuccess(state)
     case actionTypes.UPDATE_COMUNIDAD_FAILED: return updateComunidadFailed(state)

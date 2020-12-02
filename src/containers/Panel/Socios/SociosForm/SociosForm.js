@@ -679,7 +679,7 @@ const mapStateToProps = state => {
     empresas: state.generalData.empresas,
     fuentes: state.generalData.fuentes,
     puestos: state.generalData.puestos,
-    role: state.generalData.role,
+    role: state.auth.role,
     new: state.socios.newSocio,
     formError: state.errors.errors,
   }

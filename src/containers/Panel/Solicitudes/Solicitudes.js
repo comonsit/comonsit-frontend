@@ -335,7 +335,7 @@ const mapStateToProps = state => {
     listaSolicitudes: state.solicitudes.solicitudes,
     selectedSol: state.solicitudes.selectedSolicitud,
     token: state.auth.token,
-    role: state.generalData.role,
+    role: state.auth.role,
     saldo: state.acopios.socioSaldo
   }
 }

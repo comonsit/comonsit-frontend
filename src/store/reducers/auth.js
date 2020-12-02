@@ -1,12 +1,14 @@
 import * as actionTypes from '../actions/actionTypes'
 import { updateObject } from './utility'
+import roles from '../roles.js';
 
 const initialState = {
   token: null,
   userId: null,
+  user: null,
+  role: null,
   error: null,
   loading: false,
-  authRedirectPath: null,
   finishedAutoSignup: false
 }
 
@@ -32,19 +34,16 @@ const authLogout = (state, action) => {
   return updateObject(state, {
     token: null,
     userId: null,
+    user: null,
+    role: null,
     finishedAutoSignup: true
   })
 }
 
-const setAuthRedirectPath = (state, action) => {
+const setUser = (state, action) => {
   return updateObject(state, {
-    authRedirectPath: action.path
-  })
-}
-
-const finishAuthRedirect = (state) => {
-  return updateObject(state, {
-    authRedirectPath: null
+    user: action.user,
+    role: roles[action.user.role]
   })
 }
 
@@ -54,8 +53,7 @@ const reducer = (state=initialState , action) => {
     case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
     case actionTypes.AUTH_FAIL: return authFail(state, action)
     case actionTypes.AUTH_LOGOUT: return authLogout(state, action)
-    case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action)
-    case actionTypes.FINISHED_AUTH_REDIRECT: return finishAuthRedirect(state)
+    case actionTypes.SET_USER: return setUser(state, action)
 
     default: return state
   }

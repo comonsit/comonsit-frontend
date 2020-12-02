@@ -16,6 +16,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Modal from '../../../components/UI/Modal/Modal';
 import Title from '../../../components/UI/Title/Title';
 import Notification from '../../../components/UI/Notification/Notification';
+import { isGerencia } from '../../../store/roles'
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
 // import * as actions from '../../../store/actions'
@@ -131,6 +132,8 @@ class Bancos extends Component {
               return {pendingConcils: prevState.pendingConcils + +response.data.count }
           })
         })
+        .catch(error => {
+        })
 
       axios.get('/pagos/no-link/', authData)
         .then(response => {
@@ -138,12 +141,16 @@ class Bancos extends Component {
               return {pendingConcils: prevState.pendingConcils + +response.data.count }
           })
         })
+        .catch(error => {
+        })
 
       axios.get('/contratos/no-link/', authData)
         .then(response => {
           this.setState(prevState => {
               return {pendingConcils: prevState.pendingConcils + +response.data.count }
           })
+        })
+        .catch(error => {
         })
 
   }
@@ -219,116 +226,123 @@ class Bancos extends Component {
   }
 
   render() {
-    let saldosTable, registroTable = <Spinner/>
-    if (!this.state.loadingReg) {
-      registroTable = (
-        <BancosList
-          data={this.state.registros}
-          onClick={(row) => this.showRegistro(row.original.id)}
-        />
-      )
-    }
-    if (!this.state.loadingSaldos) {
-      saldosTable = (
-        <BancosSaldos
-          data={this.state.saldos}
-          onClick={() => {}}
-        />
-      )
-    }
+    if (!this.props.role) {
+      return <Spinner />
+    } else if(!isGerencia(this.props.role)) {
+      this.props.history.push('/')
+      return null
+    } else {
+      let saldosTable, registroTable = <Spinner/>
+      if (!this.state.loadingReg) {
+        registroTable = (
+          <BancosList
+            data={this.state.registros}
+            onClick={(row) => this.showRegistro(row.original.id)}
+          />
+        )
+      }
+      if (!this.state.loadingSaldos) {
+        saldosTable = (
+          <BancosSaldos
+            data={this.state.saldos}
+            onClick={() => {}}
+          />
+        )
+      }
 
-    const registro = (this.state.selectedRegistro)
-      ? <BancoDetail registro={this.state.selectedRegistro}/>
-      : <Spinner/>
+      const registro = (this.state.selectedRegistro)
+        ? <BancoDetail registro={this.state.selectedRegistro}/>
+        : <Spinner/>
 
-    return (
-      <>
-        <Modal
-          show={this.state.showRegistroModal}
-          modalClosed={this.cancelSelected}>
-          <div className={classes.Container}>
-            <div className={classes.SubTitle}>
-              <h3>
-                <FormattedMessage id={"bancos.selectedRegistro"}/>
-                # {this.state.selectedRegistro ? this.state.selectedRegistro.id : ''}
-              </h3>
-            </div>
-            <div className={classes.ContentContainer}>
-            {registro}
-            </div>
-          </div>
-        </Modal>
-        <Title
-          titleName="bancos.title">
-          <Notification number={this.state.pendingConcils}>
-            <Button clicked={() => this.props.history.push('banco-form')}>
-              <FormattedMessage id="bancos.newMovimiento"/>
-            </Button>
-          </Notification>
-        </Title>
-        <div className={classes.CardsContainer}>
-          <div>
-            <Card title={"banco.fechas"}>
-              <div label="movimientos.buscarSocio">
-                <form className={classes.Form} onSubmit={this.onSubmitForm}>
-                  <div className={classes.Inputs}>
-                    <Input
-                      label={this.state.form.initialDate.label}
-                      key= {'bancoFormInput1'}
-                      elementType={this.state.form.initialDate.elementType}
-                      elementConfig={this.state.form.initialDate.elementConfig}
-                      value={this.state.form.initialDate.value}
-                      shouldValidate={this.state.form.initialDate.validation}
-                      invalid={!this.state.form.initialDate.valid}
-                      touched={this.state.form.initialDate.touched}
-                      disabled={this.props.loading}
-                      hide={this.state.form.initialDate.hide}
-                      changed={(event) => this.inputChangedHandler(event, 'initialDate')}
-                      focused
-                      />
-                    <Input
-                      label={this.state.form.finalDate.label}
-                      key= {'bancoFormInput2'}
-                      elementType={this.state.form.finalDate.elementType}
-                      elementConfig={this.state.form.finalDate.elementConfig}
-                      value={this.state.form.finalDate.value}
-                      shouldValidate={this.state.form.finalDate.validation}
-                      invalid={!this.state.form.finalDate.valid}
-                      touched={this.state.form.finalDate.touched}
-                      disabled={this.props.loading}
-                      hide={this.state.form.finalDate.hide}
-                      changed={(event) => this.inputChangedHandler(event, 'finalDate')}
-                      />
-                  </div>
-                  <Button
-                    btnType="Success">
-                    <FormattedMessage id="banco.buscar"/>
-                  </Button>
-                </form>
+      return (
+        <>
+          <Modal
+            show={this.state.showRegistroModal}
+            modalClosed={this.cancelSelected}>
+            <div className={classes.Container}>
+              <div className={classes.SubTitle}>
+                <h3>
+                  <FormattedMessage id={"bancos.selectedRegistro"}/>
+                  # {this.state.selectedRegistro ? this.state.selectedRegistro.id : ''}
+                </h3>
               </div>
-            </Card>
+              <div className={classes.ContentContainer}>
+              {registro}
+              </div>
+            </div>
+          </Modal>
+          <Title
+            titleName="bancos.title">
+            <Notification number={this.state.pendingConcils}>
+              <Button clicked={() => this.props.history.push('banco-form')}>
+                <FormattedMessage id="bancos.newMovimiento"/>
+              </Button>
+            </Notification>
+          </Title>
+          <div className={classes.CardsContainer}>
+            <div>
+              <Card title={"banco.fechas"}>
+                <div label="movimientos.buscarSocio">
+                  <form className={classes.Form} onSubmit={this.onSubmitForm}>
+                    <div className={classes.Inputs}>
+                      <Input
+                        label={this.state.form.initialDate.label}
+                        key= {'bancoFormInput1'}
+                        elementType={this.state.form.initialDate.elementType}
+                        elementConfig={this.state.form.initialDate.elementConfig}
+                        value={this.state.form.initialDate.value}
+                        shouldValidate={this.state.form.initialDate.validation}
+                        invalid={!this.state.form.initialDate.valid}
+                        touched={this.state.form.initialDate.touched}
+                        disabled={this.props.loading}
+                        hide={this.state.form.initialDate.hide}
+                        changed={(event) => this.inputChangedHandler(event, 'initialDate')}
+                        focused
+                        />
+                      <Input
+                        label={this.state.form.finalDate.label}
+                        key= {'bancoFormInput2'}
+                        elementType={this.state.form.finalDate.elementType}
+                        elementConfig={this.state.form.finalDate.elementConfig}
+                        value={this.state.form.finalDate.value}
+                        shouldValidate={this.state.form.finalDate.validation}
+                        invalid={!this.state.form.finalDate.valid}
+                        touched={this.state.form.finalDate.touched}
+                        disabled={this.props.loading}
+                        hide={this.state.form.finalDate.hide}
+                        changed={(event) => this.inputChangedHandler(event, 'finalDate')}
+                        />
+                    </div>
+                    <Button
+                      btnType="Success">
+                      <FormattedMessage id="banco.buscar"/>
+                    </Button>
+                  </form>
+                </div>
+              </Card>
+            </div>
+            <div>
+              <Card table title={"banco.totales"}>
+                {saldosTable}
+              </Card>
+            </div>
+            <div className={classes.longCard}>
+              <Card table title={"banco.registros"}>
+                <XLSButton clicked={this.getXLSX} labelID={"bancos.registrosXLSX"}/>
+                {registroTable}
+              </Card>
+            </div>
           </div>
-          <div>
-            <Card table title={"banco.totales"}>
-              {saldosTable}
-            </Card>
-          </div>
-          <div className={classes.longCard}>
-            <Card table title={"banco.registros"}>
-              <XLSButton clicked={this.getXLSX} labelID={"bancos.registrosXLSX"}/>
-              {registroTable}
-            </Card>
-          </div>
-        </div>
-      </>
-    )
+        </>
+      )
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    role: state.generalData.role
+    role: state.auth.role
   }
 }
 

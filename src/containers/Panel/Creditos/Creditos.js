@@ -156,7 +156,7 @@ const mapStateToProps = state => {
     listaCreditos: state.creditos.creditos,
     selContrato: state.creditos.selectedContrato,
     token: state.auth.token,
-    role: state.generalData.role,
+    role: state.auth.role,
   }
 }
 

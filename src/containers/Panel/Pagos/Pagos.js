@@ -127,7 +127,7 @@ const mapStateToProps = state => {
     listaPagos: state.pagos.pagos,
     selPago: state.pagos.selectedPago,
     token: state.auth.token,
-    role: state.generalData.role,
+    role: state.auth.role,
   }
 }
 

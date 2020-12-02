@@ -56,9 +56,8 @@ export {
 export {
   auth,
   logout,
-  setAuthRedirectPath,
   authCheckState,
-  finishedAuthRedirectPath
+  setUser
 } from './auth'
 
 export {
@@ -69,8 +68,7 @@ export {
   selectComunidad,
   unSelectComunidad,
   newComunidad,
-  createNewComunidad,
-  setUser
+  createNewComunidad
 } from './generalData'
 
 export {
