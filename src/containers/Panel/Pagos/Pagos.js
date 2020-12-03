@@ -16,6 +16,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import PagosList from './PagosList/PagosList';
 import Title from '../../../components/UI/Title/Title';
 import * as actions from '../../../store/actions'
+import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'
 
 class Pagos extends Component {
@@ -70,6 +71,7 @@ class Pagos extends Component {
   }
 
   render() {
+    let downloadXLSButton = null
     const pago = (this.props.selPago)
       ? <PagoDetail pago={this.props.selPago}/>
       : <Spinner/>
@@ -84,6 +86,10 @@ class Pagos extends Component {
         <Button clicked={() => this.setState({editPago: true})}>
           <FormattedMessage id="pagoForm.editBankInfo"/>
         </Button>)
+    }
+
+    if (isGerencia(this.props.role)) {
+      downloadXLSButton = <XLSButton clicked={this.getXLSX} labelID={"pagosXLSX"}/>
     }
 
     return (
@@ -111,7 +117,7 @@ class Pagos extends Component {
           </Button>
         </Title>
         <Card table>
-          <XLSButton clicked={this.getXLSX} labelID={"pagosXLSX"}/>
+          {downloadXLSButton}
           <PagosList
             data={this.props.listaPagos}
             onClick={(row) => this.showPago(row.values.id)}
