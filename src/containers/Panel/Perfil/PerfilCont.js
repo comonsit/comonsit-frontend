@@ -19,7 +19,7 @@ class PerfilCont extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.generalData.user
+    user: state.auth.user
   }
 }
 
