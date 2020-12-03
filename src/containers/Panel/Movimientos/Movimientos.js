@@ -18,6 +18,7 @@ import ProcessSelector from '../../../components/UI/ProcessSelector/ProcessSelec
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
+import { isGerencia } from '../../../store/roles';
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
@@ -291,6 +292,15 @@ class Movimientos extends Component {
       // comunidadClasses.push(classes.porComunidadActive)
     }
 
+    const newMovimientoButton = isGerencia(this.props.role)
+      ?
+        (
+          <Button clicked={this.onNewMovimiento}>
+            <FormattedMessage id="movimientos.newMovimiento"/>
+          </Button>
+        )
+      : null
+
     return (
       <>
         <Modal
@@ -307,9 +317,7 @@ class Movimientos extends Component {
         <div className={classes.Container}>
           <Title
             titleName="movimientos.title">
-            <Button clicked={this.onNewMovimiento}>
-              <FormattedMessage id="movimientos.newMovimiento"/>
-            </Button>
+            {newMovimientoButton}
           </Title>
           <div className={classes.FormsContainer}>
             <Tabs
@@ -366,7 +374,8 @@ const mapStateToProps = state => {
     selSocio: state.socios.selectedSocio,
     listaMovimientos: state.movimientos.movimientos,
     listaSocios: state.socios.socios,
-    token: state.auth.token
+    token: state.auth.token,
+    role: state.auth.role
   }
 }
 

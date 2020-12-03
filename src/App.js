@@ -71,32 +71,32 @@ class App extends Component {
       ?
         (
           <Switch>
-            <Route path="/socios" component={socios}/>
-            <Route path="/perfil" component={perfil}/>
-            <Route path="/acopios" component={acopios}/>
-            <Route path="/carteras" component={carteras}/>
-            <Route path="/creditos" component={creditos}/>
-            <Route path="/mapa-prueba" component={mapaPrueba}/>
-            <Route path="/pagos" component={pagos}/>
-            <Route path="/pago-formato" component={pagoForm}/>
-            <Route path="/credito-imprimir" component={contratoImprimir}/>
-            <Route path="/acopio-formato" component={acopioForm}/>
-            <Route path="/tsumbalil" component={tsumbalil}/>
-            <Route path="/movimientos" component={movimientos}/>
-            <Route path="/movimiento-formato" component={movimientosForm}/>
-            <Route path="/solicitudes" component={solicitudes}/>
-            <Route path="/solicitud-formato" component={solicitudForm}/>
-            <Route path="/mesa-control" component={mesaControl}/>
-            <Route path="/formatos" component={formatos}/>
+            <Route path="/socios" component={socios} />
+            <Route path="/perfil" component={perfil} />
+            <Route path="/acopios" component={acopios} />
+            <Route path="/carteras" component={carteras} />
+            <Route path="/creditos" component={creditos} />
+            <Route path="/mapa-prueba" component={mapaPrueba} />
+            <Route path="/pagos" component={pagos} />
+            <Route path="/pago-formato" component={pagoForm} />
+            <Route path="/credito-imprimir" component={contratoImprimir} />
+            <Route path="/tsumbalil" component={tsumbalil} />
+            <Route path="/movimientos" component={movimientos} />
+            <Route path="/solicitudes" component={solicitudes} />
+            <Route path="/solicitud-formato" component={solicitudForm} />
+            <Route path="/mesa-control" component={mesaControl} />
+            <Route path="/formatos" component={formatos} />
             <Route path="/inicio" component={inicio} />
-            <Route path="/logout" component={logout}/>
-            <Route path="/reportes" component={() => (<div>...En Construcción...</div>)}/>
-            <GerenciaRoute path="/evaluacion" component={evaluacion} role={this.props.role}/>
-            <GerenciaRoute path="/credito-activar" component={contratoActivate} role={this.props.role}/>
-            <GerenciaRoute path="/evaluacion-socio" component={evalSocios} role={this.props.role}/>
-            <GerenciaRoute path="/bancos" component={bancos} role={this.props.role}/>
-            <GerenciaRoute path="/subcuentas" component={subcuentas} role={this.props.role}/>
-            <GerenciaRoute path="/banco-form" component={bancoForm} role={this.props.role}/>
+            <Route path="/logout" component={logout} />
+            <Route path="/reportes" component={() => (<div>...En Construcción...</div>)} />
+            <GerenciaRoute path="/movimiento-formato" component={movimientosForm} role={this.props.role} />
+            <GerenciaRoute path="/acopio-formato" component={acopioForm} role={this.props.role} />
+            <GerenciaRoute path="/evaluacion" component={evaluacion} role={this.props.role} />
+            <GerenciaRoute path="/credito-activar" component={contratoActivate} role={this.props.role} />
+            <GerenciaRoute path="/evaluacion-socio" component={evalSocios} role={this.props.role} />
+            <GerenciaRoute path="/bancos" component={bancos} role={this.props.role} />
+            <GerenciaRoute path="/subcuentas" component={subcuentas} role={this.props.role} />
+            <GerenciaRoute path="/banco-form" component={bancoForm} role={this.props.role} />
             <Route><Redirect to="/inicio" /></Route>
           </Switch>
         )
