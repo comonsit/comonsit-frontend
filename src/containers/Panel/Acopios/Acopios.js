@@ -21,7 +21,6 @@ import SelectColumnFilter from '../../../components/Tables/RTable/Filters/Select
 import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterGreaterThan';
 import * as actions from '../../../store/actions'
-import { isGerencia } from '../../../store/roles'
 import axios from '../../../store/axios-be.js'
 
 
@@ -60,7 +59,7 @@ class Acopios extends Component {
     this.props.onNewAcop()
   }
 
-  getXLSX = type => {
+  getXLSX = (type) => {
     type = type === 'ALL' ? '' : type
     const url = type ? '/acopiosXLSX/?tipo_de_producto='+type : '/acopiosXLSX/'
     const authData = {
@@ -146,19 +145,6 @@ class Acopios extends Component {
       },
     ]
 
-    let downloadXLSButton = null
-
-    if (isGerencia(this.props.role)) {
-      const processList = ['ALL', 'CF', 'MI', 'JA', 'SL']
-      downloadXLSButton = (
-        <HoverButton
-          title="acopiosXLSX"
-          items={processList}
-          clicked={this.getXLSX}
-        />
-      )
-    }
-
     const table = (this.props.listaAcopios)
       ? (
           <RTable
@@ -181,7 +167,11 @@ class Acopios extends Component {
           <AcopiosGraphs/>
         </Card>
         <Card table >
-          {downloadXLSButton}
+          <HoverButton
+            title="acopiosXLSX"
+            items={['ALL', 'CF', 'MI', 'JA', 'SL']}
+            clicked={this.getXLSX}
+          />
           {table}
       </Card>
       </>
