@@ -14,6 +14,7 @@ import XLSButton from '../../../../components/UI/XLSButton/XLSButton';
 import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import { updateObject } from '../../../../store/reducers/utility'
+import { isGerencia } from '../../../../store/roles';
 // import { checkValidity } from '../../../utilities/validity'
 import * as actions from '../../../../store/actions';
 import axios from '../../../../store/axios-be.js';
@@ -270,14 +271,15 @@ class MovimientosSearch extends Component {
       )
     }
 
+    const downloadXLSButton = isGerencia(this.props.role)
+      ? <XLSButton clicked={this.getXLSX} labelID={"aportacionesRetirosXLS"} />
+      : null
+
     let movList = this.state.loading ? <Spinner/> : null
     if (this.state.movs && !this.state.loading) {
       movList = (
         <div className={classes.Table}>
-          <XLSButton
-            clicked={this.getXLSX}
-            labelID={"aportacionesRetirosXLS"}
-          />
+          {downloadXLSButton}
           <MovimientosListConc
             data={this.state.movs}
             onClick={(row) => this.showMovimiento(row.original.id)}
@@ -378,7 +380,8 @@ const mapStateToProps = state => {
     fuentes: state.generalData.fuentes,
     selMov: state.movimientos.selectedMov,
     loadingPatch: state.movimientos.loadingPatch,
-    updatedPatch: state.movimientos.updatedPatch
+    updatedPatch: state.movimientos.updatedPatch,
+    role: state.auth.role
   }
 }
 
