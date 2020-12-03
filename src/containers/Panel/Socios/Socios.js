@@ -69,7 +69,7 @@ class Socios extends Component {
   }
 
   render() {
-    let downloadXLSButton, newSocioButton = null
+    let newSocioButton = null
     let form, socioList = <Spinner/>
     if (this.state.socioSeleccionado && this.props.selSocio) {
       form = <SociosForm/>
@@ -85,12 +85,6 @@ class Socios extends Component {
     }
 
     if (isGerencia(this.props.role)) {
-      downloadXLSButton = (
-        <XLSButton
-          clicked={this.getXLSX}
-          labelID={"sociosXLSX"}
-          />
-      )
       newSocioButton = (
         <Button clicked={this.onNewSocio}>
           <FormattedMessage id="socios.newSocioButton"/>
@@ -110,7 +104,10 @@ class Socios extends Component {
           {newSocioButton}
         </Title>
         <Card table>
-          {downloadXLSButton}
+          <XLSButton
+            clicked={this.getXLSX}
+            labelID={"sociosXLSX"}
+          />
           {socioList}
         </Card>
       </>
