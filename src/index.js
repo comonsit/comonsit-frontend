@@ -22,12 +22,14 @@ import movimientoReducer from './store/reducers/movimientos'
 import authReducer from './store/reducers/auth'
 import localeReducer from './store/reducers/locale'
 import listSelReducer from './store/reducers/selectList'
+// import * as actions from './store/actions'
+import * as actionTypes from './store/actions/actionTypes'
 import './assets/fonts/Arquitecta.otf'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   socios: sociosReducer,
   auth: authReducer,
   locale: localeReducer,
@@ -41,6 +43,13 @@ const rootReducer = combineReducers({
   errors: errorsReducer
 })
 
+const rootReducer = (state, action) => {
+  if (action.type === actionTypes.USER_LOGOUT) {
+    const { auth } = state
+    state = { auth }
+  }
+  return appReducer(state, action)
+}
 
 const composeEnhancers = process.env.NODE_ENV === 'development'
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

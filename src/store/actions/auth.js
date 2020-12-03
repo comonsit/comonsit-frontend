@@ -23,12 +23,25 @@ export const authFail = error => {
   }
 }
 
-export const logout = () => {
+export const resetAll = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('refreshToken')
   localStorage.removeItem('refreshExpirationDate')
   return {
     type: actionTypes.AUTH_LOGOUT
+  }
+}
+
+export const resetAuth = () => {
+  return {
+    type: actionTypes.USER_LOGOUT
+  }
+}
+
+export const logout = (expirationTime) => {
+  return dispatch => {
+    dispatch(resetAuth())
+    dispatch(resetAll())
   }
 }
 
