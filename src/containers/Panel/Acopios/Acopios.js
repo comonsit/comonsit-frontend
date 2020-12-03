@@ -20,6 +20,7 @@ import FrmtedDate from '../../../components/UI/Formatting/FrmtedDate';
 import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import SliderColumnFilter from '../../../components/Tables/RTable/Filters/SliderColumnFilter';
 import filterGreaterThan from '../../../components/Tables/RTable/Filters/FilterGreaterThan';
+import { isGerencia } from '../../../store/roles';
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 
@@ -155,13 +156,20 @@ class Acopios extends Component {
         )
       : <Spinner/ >
 
+    const newAcopioButton = isGerencia(this.props.role)
+      ?
+        (
+          <Button clicked={this.onNewAcopio}>
+            <FormattedMessage id="acopios.newAcopio"/>
+          </Button>
+        )
+      : null
+
     return (
       <>
         <Title
           titleName="acopios.title">
-          <Button clicked={this.onNewAcopio}>
-            <FormattedMessage id="acopios.newAcopio"/>
-          </Button>
+          {newAcopioButton}
         </Title>
         <Card>
           <AcopiosGraphs/>
