@@ -89,7 +89,7 @@ class App extends Component {
             <Route path="/inicio" component={inicio} />
             <Route path="/logout" component={logout} />
             <Route path="/reportes" component={() => (<div>...En Construcción...</div>)} />
-            <GerenciaRoute path="/movimiento-formato" component={movimientosForm} role={this.props.role} />
+            <Route path="/movimiento-formato" component={movimientosForm} />
             <GerenciaRoute path="/acopio-formato" component={acopioForm} role={this.props.role} />
             <GerenciaRoute path="/evaluacion" component={evaluacion} role={this.props.role} />
             <GerenciaRoute path="/credito-activar" component={contratoActivate} role={this.props.role} />

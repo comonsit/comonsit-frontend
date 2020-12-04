@@ -292,15 +292,6 @@ class Movimientos extends Component {
       // comunidadClasses.push(classes.porComunidadActive)
     }
 
-    const newMovimientoButton = isGerencia(this.props.role)
-      ?
-        (
-          <Button clicked={this.onNewMovimiento}>
-            <FormattedMessage id="movimientos.newMovimiento"/>
-          </Button>
-        )
-      : null
-
     return (
       <>
         <Modal
@@ -315,9 +306,10 @@ class Movimientos extends Component {
         </Modal>
 
         <div className={classes.Container}>
-          <Title
-            titleName="movimientos.title">
-            {newMovimientoButton}
+          <Title titleName="movimientos.title">
+            <Button clicked={this.onNewMovimiento}>
+              <FormattedMessage id="movimientos.newMovimiento"/>
+            </Button>
           </Title>
           <div className={classes.FormsContainer}>
             <Tabs
