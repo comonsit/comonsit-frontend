@@ -18,7 +18,6 @@ import ProcessSelector from '../../../components/UI/ProcessSelector/ProcessSelec
 import SociosList from '../Socios/SociosList/SociosList';
 import { updateObject } from '../../../store/reducers/utility'
 import { checkValidity } from '../../../utilities/validity'
-import { isGerencia } from '../../../store/roles';
 import * as actions from '../../../store/actions'
 import axios from '../../../store/axios-be.js'
 

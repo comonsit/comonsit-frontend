@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Map,
+  MapContainer,
   TileLayer,
   // SVGOverlay,
   Tooltip,
@@ -16,11 +16,22 @@ import classes from './Sandbox.module.scss'
 import axios from '../../../../store/axios-be.js';
 import { connect } from 'react-redux';
 import icons from './icons'
-import regionData from '../poligons'
 const { Overlay, BaseLayer } = LayersControl
 
 
 const center = [17.17, -92.0]
+const colores = [
+  "#00ff00",
+  "#1315a1ff",
+  "#aa0000",
+  "#555555",
+  "#999900",
+  "#04bbcc",
+  "#aa5533",
+  "#079977",
+  "#c014f0",
+  "#cee713"
+]
 
 
 const getRegionCom = (region, comunidades) => {
@@ -54,6 +65,61 @@ const Sandbox = (props) => {
   const [localSinErmita, setLocalSinErmita] = useState(null)
   const [regiones, setRegiones] = useState(null)
   const [cuenta, setCuenta] = useState({total: 0, asignadas: 0, sinErmita: 0, sinInegi: 0})
+  const [zona, setZona] = useState(null)
+  const [encuesta, setEncuesta] = useState()
+
+  useEffect(() => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${props.token}` }
+    }
+    let tmpZonas
+    axios.get('/zonas/' , authData)
+      .then(response => {
+        tmpZonas = response.data
+        const zonasPolygons = tmpZonas.map(z => {
+          if (z.poly) {
+            const multipoly = z.poly.coordinates.map(pl => pl[0].map(geoIt => geoIt.reverse()))
+            return (
+              <Polygon
+                key={z.id}
+                positions={multipoly}
+              >
+                <Tooltip sticky>
+                  <h5>{z.zona_id} - {z.nombre}</h5>
+                  <p>{z.interzona}</p>
+                </Tooltip>
+              </Polygon>
+            )
+          } else {
+            return null
+          }
+        })
+        const encuestaPolygons = tmpZonas.map(z => {
+          if (z.poly_encuesta) {
+            const multipoly = z.poly_encuesta.coordinates.map(pl => pl[0].map(geoIt => geoIt.reverse()))
+            return (
+              <Polygon
+                key={z.id}
+                positions={multipoly}
+                color={"#ec9e19"}
+              >
+                <Tooltip sticky>
+                  <h5>{z.zona_id} - {z.nombre}</h5>
+                  <p>{z.interzona}</p>
+                </Tooltip>
+              </Polygon>
+            )
+          } else {
+            return null
+          }
+        })
+        setZona(zonasPolygons)
+        setEncuesta(encuestaPolygons)
+      })
+      .catch(error => {
+
+      })
+  }, [props.token])
 
   useEffect(() => {
     if (
@@ -109,23 +175,32 @@ const Sandbox = (props) => {
     }
   }, [props.comunidades, props.regiones])
 
-  // useCallback en vez de esto?? o render normal?
   useEffect(() => {
-     setRegiones(regionData.map(r => {
-       return (
-             <Polygon key={r.id} color={r.color} positions={r.coordinates}>
-               <Tooltip>
-                 <p>{r.name}</p>
-               </Tooltip>
-             </Polygon>
-           )
-    }))
-  }, [])
+    if (props.regiones) {
+      setRegiones(props.regiones.map(r => {
+        if (r.poly) {
+          return (
+            <Polygon
+              key={r.id}
+              color={colores[+r.id-1]}
+              positions={r.poly.coordinates[0].map(geoIt => geoIt.reverse())}
+            >
+              <Tooltip>
+                <h5>{r.nombre_de_region}</h5>
+              </Tooltip>
+            </Polygon>
+          )
+        } else {
+          return null
+        }
+      }))
+    }
+  }, [props.regiones])
 
   return (
     <div>
       <div className={classes.Container}>
-        <Map
+        <MapContainer
           center={center}
           zoom={10}
           scrollWheelZoom={false}
@@ -165,9 +240,19 @@ const Sandbox = (props) => {
                 {regiones}
               </LayerGroup>
             </Overlay>
+            <Overlay name="Zonas Misión">
+              <LayerGroup>
+                {zona}
+              </LayerGroup>
+            </Overlay>
+            <Overlay name="Zonas Encuestadas">
+              <LayerGroup>
+                {encuesta}
+              </LayerGroup>
+            </Overlay>
           </LayersControl>
 
-        </Map>
+        </MapContainer>
       </div>
       <div className={classes.Container}>
         <h2 className={classes.Subtitle}>Comunidades Ubicadas {cuenta.asignadas}</h2>
@@ -186,6 +271,7 @@ const Sandbox = (props) => {
 
 const mapStateToProps = state => {
   return {
+    token: state.auth.token,
     comunidades: state.generalData.comunidades,
     regiones: state.generalData.regiones
   }

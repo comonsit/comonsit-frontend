@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
-  Map,
+  MapContainer,
   Polygon,
   TileLayer,
   Popup,
@@ -11,7 +11,6 @@ import {
 
 import classes from './DeudasMap.module.scss'
 import axios from '../../../../store/axios-be.js';
-import regionData from '../poligons';
 
 
 const center = [17.10, -92.05]
@@ -19,7 +18,7 @@ const center = [17.10, -92.05]
 
 class DeudasMap extends Component {
   state =  {
-    regiones: null,
+    regiones_debt: null,
     loading: false,
   }
 
@@ -35,13 +34,13 @@ class DeudasMap extends Component {
     axios.get('/contratos/carteras-per-region/' , authData)
       .then(response => {
         this.setState({
-          regiones: response.data,
+          regiones_debt: response.data,
           loading: false,
         })
       })
       .catch(error => {
         this.setState({
-          regiones: null,
+          regiones_debt: null,
           loading: false,
         })
         // TODO: FALTA!!
@@ -68,79 +67,83 @@ class DeudasMap extends Component {
 
   render() {
     let regionPoligons = null
-    if (this.state.regiones) {
-      regionPoligons = regionData.map(r => {
-        const selReg = this.state.regiones.find(el => el.region === r.id)
-        let vencidos
-        if (selReg.vencidos_count === 0) {
-          vencidos = <p>{selReg.vencidos_count} vencidos ${selReg.vencidos_total}</p>
-        } else {
+    if (this.state.regiones_debt && this.props.regiones) {
+      regionPoligons = this.props.regiones.map(r => {
+        if (r.poly) {
+          const selReg = this.state.regiones_debt.find(el => el.region === r.id)
+          let vencidos
+          if (selReg.vencidos_count === 0) {
+            vencidos = <p>{selReg.vencidos_count} vencidos ${selReg.vencidos_total}</p>
+          } else {
 
-          const lt30 = (selReg.vencidosLT30_count > 0)
-            ? (
-                <div className={classes.BubVenLT30}>
-                  {selReg.vencidosLT30_count} - ${selReg.vencidosLT30_total}
-                </div>
-              )
-            : null
-          const bt30to6M = (selReg.vencidos30to6M_count > 0)
-            ? (
-                <div className={classes.BubVen30to6M}>
-                  {selReg.vencidos30to6M_count} - ${selReg.vencidos30to6M_total}
-                </div>
-              )
-            : null
-          const gt6M = (selReg.vencidosGT6M_count > 0)
-            ? (
-                <div className={classes.BubVenGT6M}>
-                  {selReg.vencidosGT6M_count} -  ${selReg.vencidosGT6M_total}
-                </div>
-              )
-            : null
+            const lt30 = (selReg.vencidosLT30_count > 0)
+              ? (
+                  <div className={classes.BubVenLT30}>
+                    {selReg.vencidosLT30_count} - ${selReg.vencidosLT30_total}
+                  </div>
+                )
+              : null
+            const bt30to6M = (selReg.vencidos30to6M_count > 0)
+              ? (
+                  <div className={classes.BubVen30to6M}>
+                    {selReg.vencidos30to6M_count} - ${selReg.vencidos30to6M_total}
+                  </div>
+                )
+              : null
+            const gt6M = (selReg.vencidosGT6M_count > 0)
+              ? (
+                  <div className={classes.BubVenGT6M}>
+                    {selReg.vencidosGT6M_count} -  ${selReg.vencidosGT6M_total}
+                  </div>
+                )
+              : null
 
 
-          vencidos = <div className={classes.Parr}> {lt30} {bt30to6M} {gt6M}</div>
-        }
+            vencidos = <div className={classes.Parr}> {lt30} {bt30to6M} {gt6M}</div>
+          }
 
-        // 2nd option to use Tooltip
-        //  <Tooltip
-        //    permanent={(selReg.vigentes_total > 0 || selReg.vencidos_total)}
-        //    direction={r.toolDirection}
-        //  >
-        return (
-          <Polygon
-            key={r.id}
-            color={this.getColor(selReg.vigentes_count, selReg.vencidos_count)}
-            positions={r.coordinates}
-          >
-            <Popup
-              autoClose={false}
+          // 2nd option to use Tooltip
+          //  <Tooltip
+          //    permanent={(selReg.vigentes_total > 0 || selReg.vencidos_total)}
+          //    direction={r.toolDirection}
+          //  >
+          return (
+            <Polygon
+              key={r.id}
+              color={this.getColor(selReg.vigentes_count, selReg.vencidos_count)}
+              positions={r.poly.coordinates[0].map(geoIt => geoIt.reverse())}
             >
-              <div className={classes.Parr}>
-                <strong>{r.name}</strong>
-              </div>
-              <div className={classes.Parr}>
-                Vigentes:
-              </div>
-              <div className={classes.Parr}>
-                <div className={classes.BubVig}>
-                  {selReg.vigentes_count} - ${selReg.vigentes_total}
+              <Popup
+                autoClose={false}
+              >
+                <div className={classes.Parr}>
+                  <strong>{r.nombre_de_region}</strong>
                 </div>
-              </div>
-              <div className={classes.Parr}>
-                Vencidos:
-              </div>
-              {vencidos}
-            </Popup>
-          </Polygon>
-        )
-     })
+                <div className={classes.Parr}>
+                  Vigentes:
+                </div>
+                <div className={classes.Parr}>
+                  <div className={classes.BubVig}>
+                    {selReg.vigentes_count} - ${selReg.vigentes_total}
+                  </div>
+                </div>
+                <div className={classes.Parr}>
+                  Vencidos:
+                </div>
+                {vencidos}
+              </Popup>
+            </Polygon>
+          )
+        } else {
+          return null
+        }
+      })
     }
 
     return (
       <div className={classes.Container}>
         <div className={classes.MapContainer}>
-          <Map
+          <MapContainer
             center={center}
             zoom={10}
             closePopupOnClick={false}
@@ -153,7 +156,7 @@ class DeudasMap extends Component {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {regionPoligons}
-          </Map>
+          </MapContainer>
         </div>
         <div className={classes.Footer}>
           <div className={classes.region}>
@@ -208,7 +211,8 @@ class DeudasMap extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    regiones: state.generalData.regiones
   }
 }
 

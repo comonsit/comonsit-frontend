@@ -203,7 +203,6 @@ class AcopiosGraphs extends Component {
   }
 
   render() {
-
     let form = <Spinner/>
     if (
       this.props.comunidades && this.props.comunidades.length > 0 &&
