@@ -37,8 +37,9 @@ const colores = [
 const getRegionCom = (region, comunidades) => {
   return comunidades.filter(it => it.ubicacion !== null && it.region === region)
     .map(it => {
+      const ic = icons[it.region] ? icons[it.region] : icons[11]
       return (
-        <Marker key={it.id} position={it.ubicacion} icon={icons[it.region]}>
+        <Marker key={it.id} position={it.ubicacion} icon={ic}>
           <Popup>
           <p>Comunidad: <strong>{it.nombre_de_comunidad}</strong>  </p>
           <p>Región: <strong>{it.nombre_region}</strong> </p>
@@ -128,6 +129,8 @@ const Sandbox = (props) => {
       && props.regiones.length > 0
     ) {
       const localidadesWithGeo = props.regiones.map(region => {
+        // const coms_of_region =
+        // console.log(`REGION ${region.id} ${region.nombre_de_region} #${coms_of_region.length}`);
         return (
           <Overlay key={region.id} checked name={`Region ${region.nombre_de_region}`}>
             <LayerGroup>
@@ -162,6 +165,7 @@ const Sandbox = (props) => {
           return null
         })
 
+
       setLocalidades(localidadesWithGeo)
       setLocalSinGeo(localidadesNOGeo)
       setLocalSinErmita(localidadesNOErmita)
@@ -173,7 +177,7 @@ const Sandbox = (props) => {
         })
     }
   }, [props.comunidades, props.regiones])
-
+  //
   useEffect(() => {
     if (props.regiones) {
       setRegiones(props.regiones.map(r => {
