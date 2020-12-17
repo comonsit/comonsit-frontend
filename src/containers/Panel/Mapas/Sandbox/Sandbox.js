@@ -78,7 +78,7 @@ const Sandbox = (props) => {
         tmpZonas = response.data
         const zonasPolygons = tmpZonas.map(z => {
           if (z.poly) {
-            const multipoly = z.poly.coordinates.map(pl => pl[0].map(geoIt => geoIt.reverse()))
+            const multipoly = z.poly.coordinates.map(pl => pl[0].map(geoIt => [geoIt[1], geoIt[0]]))
             return (
               <Polygon
                 key={z.id}
@@ -86,7 +86,7 @@ const Sandbox = (props) => {
               >
                 <Tooltip sticky>
                   <h5>{z.zona_id} - {z.nombre}</h5>
-                  <p>{z.interzona}</p>
+                  <p>Interzona: {z.interzona}</p>
                 </Tooltip>
               </Polygon>
             )
@@ -96,7 +96,7 @@ const Sandbox = (props) => {
         })
         const encuestaPolygons = tmpZonas.map(z => {
           if (z.poly_encuesta) {
-            const multipoly = z.poly_encuesta.coordinates.map(pl => pl[0].map(geoIt => geoIt.reverse()))
+            const multipoly = z.poly_encuesta.coordinates.map(pl => pl[0].map(geoIt => [geoIt[1], geoIt[0]]))
             return (
               <Polygon
                 key={z.id}
@@ -105,7 +105,6 @@ const Sandbox = (props) => {
               >
                 <Tooltip sticky>
                   <h5>{z.zona_id} - {z.nombre}</h5>
-                  <p>{z.interzona}</p>
                 </Tooltip>
               </Polygon>
             )
@@ -179,11 +178,12 @@ const Sandbox = (props) => {
     if (props.regiones) {
       setRegiones(props.regiones.map(r => {
         if (r.poly) {
+          // console.log(`REGIÓN ${r.nombre_de_region} en ${r.poly.coordinates[0][0]}`);
           return (
             <Polygon
               key={r.id}
               color={colores[+r.id-1]}
-              positions={r.poly.coordinates[0].map(geoIt => geoIt.reverse())}
+              positions={r.poly.coordinates[0].map(geoIt => [geoIt[1], geoIt[0]])}
             >
               <Tooltip>
                 <h5>{r.nombre_de_region}</h5>

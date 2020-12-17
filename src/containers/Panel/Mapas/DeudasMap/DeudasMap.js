@@ -111,7 +111,7 @@ class DeudasMap extends Component {
             <Polygon
               key={r.id}
               color={this.getColor(selReg.vigentes_count, selReg.vencidos_count)}
-              positions={r.poly.coordinates[0].map(geoIt => geoIt.reverse())}
+              positions={r.poly.coordinates[0].map(geoIt => [geoIt[1], geoIt[0]])}
             >
               <Popup
                 autoClose={false}
