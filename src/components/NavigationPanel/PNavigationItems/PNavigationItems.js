@@ -41,7 +41,7 @@ const pnavigationItems = props => (
         triggerOpenedClassName={classes.AcordeaonTriggerOpen}
         trigger=<FormattedMessage id="pmenu.cuentas"/>
       >
-        {isGerencia(roles[props.userRole])
+        {isGerencia(roles[props.userRole]) || roles[props.userRole] === roles.VI
           ? (
               <>
                 <div className={classes.NavigationItem} onClick={props.clicked}>
