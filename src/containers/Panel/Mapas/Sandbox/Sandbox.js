@@ -235,7 +235,7 @@ const Sandbox = (props) => {
             </BaseLayer>
 
             {localidades}
-            <Overlay name="Polígonos">
+            <Overlay name="Regiones Comon">
               <LayerGroup>
                 {regiones}
               </LayerGroup>
