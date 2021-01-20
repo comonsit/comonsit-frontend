@@ -1,47 +1,30 @@
 @import 'styles/general';
 
-.Home {
+.LogoContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 3.5rem;
-  @include tablet {
-    flex-direction: row;
-    padding: 9rem 5rem;
-  }
-}
-
-.Image {
+  align-items: center;
   width: 100%;
-  height: auto;
-  padding: 0;
-  border-radius: 0.5rem;
   img {
-    width: 100%;
+    width: 50%;
+  }
+  .Image {
+    margin-top: 18vh;
+    width: 32%;
     height: auto;
-    border-radius: 0.5rem;
-    box-shadow: 0rem 0rem 2rem #000;
-  }
-  @include tablet {
-    width: 55%;
-  }
-}
-
-.Paragraph {
-  margin-top: 2rem;
-  width: 100%;
-  h3 {
-    text-align: center;
-  }
-  p {
-    text-align: justify;
-  }
-  @include tablet {
-    margin-top: 0;
-    width: 40%;
-    h3 {
-      margin: 0;
+    display: flex;
+    place-content: center;
+    overflow: hidden;
+    background: white;
+    border-radius: 30px;
+    // border: 1px solid $pr-dark-blue;
+    .Image_svg {
+      width: 56%;
+      overflow: visible;
+      stroke: $pr-dark-blue;
+      stroke-width: 0.3;
+      stroke-linejoin: round;
+      stroke-linecap: round;
     }
   }
 }
