@@ -8,7 +8,7 @@ import LogoText from '../../../assets/images/texto.png'
 
 const icon = {
   hidden: {
-    opacity: .5,
+    opacity: 1,
     pathLength: 0,
     stroke: "#243746",
     fill: "#fff"
@@ -20,6 +20,12 @@ const icon = {
     fill: "#243746"
   }
 };
+
+const textIcon = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1}
+}
+
 
 function HomeContainer() {
   return (
@@ -36,13 +42,23 @@ function HomeContainer() {
             initial="hidden"
             animate="visible"
             transition={{
-              default: { duration: 8, ease: "easeIn"},
-              fill: { duration: 6, ease: "easeIn" }
+              default: { duration: 9},
+              fill: { duration: 4, delay: 3, ease: "easeIn"}
             }}
           />
         </motion.svg>
       </div>
-      <img src={LogoText} alt="Imagen Inicial"/>
+      <motion.div
+        className={classes.LogoContainerTxt}
+        variants={textIcon}
+        initial="hidden"
+        animate="visible"
+        transition={{
+          default: { duration: 4, delay: 3, ease: "easeIn"}
+        }}
+      >
+        <img src={LogoText} alt="Imagen Inicial"/>
+      </motion.div>
     </div>
   );
 }
