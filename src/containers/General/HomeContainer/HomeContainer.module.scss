@@ -69,12 +69,17 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    &Card {
+    width: 40%;
+    &_card {
       width: 40%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      text-align: center;
+      img {
+        width: 80%;
+      }
     }
   }
   &.First {
@@ -97,8 +102,16 @@
     background-position: 160% 0%;
     background-repeat: no-repeat;
   }
+  &.Long {
+    &> div {
+      max-width: 80rem;
+    }
+  }
   p,
   &> div {
     max-width: 60rem;
+    &.Long {
+      max-width: 80rem;
+    }
   }
 }
