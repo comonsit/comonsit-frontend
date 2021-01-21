@@ -5,6 +5,11 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: -3;
+  height: 80%;
+  justify-content: center;
   &Txt {
     width: 50%;
     img {
@@ -29,5 +34,71 @@
       stroke-linejoin: round;
       stroke-linecap: round;
     }
+  }
+}
+
+.Intro {
+  display: flex;
+  height: 60vh;
+  background-color: #FAFAFA;
+  padding: 1%;
+  justify-content: space-around;
+  &Info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    padding: 2rem;
+    font-size: 1.7em;
+  }
+  &Photo{
+    width: 50%;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    // border: 1px solid $dark-gray;
+    img {
+      width: 100%;
+      border-radius: .4rem;
+    }
+  }
+  &Icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    &Card {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+  &.First {
+    margin-top: 100vh;
+    box-shadow: 2px -2px 5px 1px $borderGray;
+  }
+}
+
+.Phrase {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7em;
+  text-align: center;
+  padding: 4rem;
+  background-color: white;
+  &.Back {
+    background-image: url('../../../assets/photos/logoFondo.svg');
+    background-position: 160% 0%;
+    background-repeat: no-repeat;
+  }
+  p,
+  &> div {
+    max-width: 60rem;
   }
 }

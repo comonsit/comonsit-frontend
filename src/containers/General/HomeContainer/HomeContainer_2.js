@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
+// import { useInView } from "react-intersection-observer";
 import { useRef } from "react";
 // import {FormattedMessage} from 'react-intl';
 import classes from './HomeContainer.module.scss';
@@ -34,9 +35,31 @@ const textIcon = {
 
 export const HomeContainer = () => {
   const constraintsRef = useRef(null);
+  // const animationOfIcons = useAnimation();
+  // const [onScrollRef, inView, entry] = useInView({ threshold: 0.5 });
+  //
+  // React.useEffect(() => {
+  //   if (inView) {
+  //     animationOfIcons.start("visible");
+  //     console.log('YA SE VE!!!')
+  //   } else {
+  //     animationOfIcons.start("hidden");
+  //     console.log('... escondido')
+  //   }
+  // }, [animationOfIcons, inView]);
+  //
+  // const variantsIcons = {
+  //   hidden: {
+  //     opacity: 0,
+  //   },
+  //   visible: {
+  //     opacity: 1,
+  //     // transition: { duration: 0.5, delayChilden: 0.2, staggerChildren: 0.1 },
+  //   }
+  // }
 
   return (
-    <div className={classes.Cotainer}>
+    <div className={classes.Container}>
       <div className={classes.LogoContainer}>
         <motion.div
           className={classes.Image}
@@ -119,19 +142,27 @@ export const HomeContainer = () => {
           </p>
           <p>Generar nuevas capacidades financieras tomando en cuenta siempre las condiciones del territorio y su contexto.</p>
         </div>
-        <div
+        <motion.div
           className={classes.IntroIcons}
         >
+        {/*
+          <motion.div
+            className={classes.IntroIcons}
+            ref={onScrollRef}
+            animate={animationOfIcons}
+            initial="hidden"
+          >
+          */}
           <div className={classes.IntroIcons_card}>
-            <img src={Barras} alt="Cafetalero"/>
+            <img src={Barras} alt="Barras"/>
           </div>
           <div className={classes.IntroIcons_card}>
-            <img src={BolsaDinero} alt="Cafetalero"/>
+            <img src={BolsaDinero} alt="Bola Dinero"/>
           </div>
           <div className={classes.IntroIcons_card}>
-            <img src={Pastel} alt="Cafetalero"/>
+            <img src={Pastel} alt="Pastel"/>
           </div>
-        </div>
+        </motion.div>
       </section>
       <section className={classes.Phrase}>
         <p>Comon Sit Ca’teltic empezó con reinvertir parte del beneficio que trajo el precio construido del café, y tiene el potencial, de utilizar esos recursos para empezar actividades nuevas que a su vez generen excedentes que se reinviertan nuevamente en financiar otras actividades productivas, todo ello volteando a ver la dinámica económico-productiva que se puede incentivar en una familia, en una comunidad o una región y que trae consigo mejoras en el ingreso y estabilidad económica de  los productores y sus familias. </p>

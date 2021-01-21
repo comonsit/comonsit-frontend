@@ -13,7 +13,7 @@
   div {
       width: 90%;
       height: .3rem;
-      background-color: white;
+      background-color: $pr-dark-blue;
       border-radius: .1rem;
       @include tablet {
         height: .5rem;

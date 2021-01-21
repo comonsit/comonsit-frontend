@@ -7,11 +7,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: $pr-light-green;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   padding: 0;
   box-sizing: border-box;
+  z-index: 20;
+  box-shadow: 2px 2px 5px 1px $borderGray;
   .Logo {
     height: 100%;  /* sin este, se extiende el logo width:100%??*/
   }
