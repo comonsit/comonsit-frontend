@@ -12,6 +12,8 @@ export const YomolCard = props => {
   useEffect(() => {
     if (props.activate) {
       setIsOpen(true)
+    } else {
+      setIsOpen(false)
     }
   }, [props.activate])
 

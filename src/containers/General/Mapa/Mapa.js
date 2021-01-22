@@ -4,7 +4,7 @@ import classes from './Mapa.module.scss';
 
 function Mapa() {
   return (
-    <div className={classes.Paragraph}>
+    <div className={classes.Container}>
       <p>en construcción...</p>
     </div>
   );

@@ -1,1 +1,11 @@
-@import '../Conocenos/Conocenos.module';
+@import 'styles/general';
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: -3;
+  height: calc(100vh - #{$home-toolbar});
+}

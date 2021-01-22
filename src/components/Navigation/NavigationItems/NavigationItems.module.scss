@@ -52,7 +52,7 @@
   width: auto;
   font-size: 1.1em;
   background-color: $pr-light-pink;
-  border: .3rem solid white;
+  border: .3rem solid $pr-light-pink;
   border-radius: .4rem;
   outline: none;
   cursor: pointer;
@@ -60,7 +60,7 @@
   margin: 1rem;
   font-weight: bold;
   a {
-    padding: 1rem 2rem;
+    padding: .8rem 2rem;
     height: 100%;
     text-decoration: none;
     color: white;
@@ -70,7 +70,7 @@
     }
   }
   &:hover {
-    border: .3rem solid white;
+    border: .3rem solid $pr-light-pink;
     background-color: white;
   }
 }
