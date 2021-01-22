@@ -41,10 +41,8 @@ export const HomeContainer = () => {
   React.useEffect(() => {
     if (inView) {
       animationOfIcons.start("visible");
-      console.log('YA SE VE!!!')
     } else {
       // animationOfIcons.start("hidden");
-      console.log('... escondido')
     }
   }, [animationOfIcons, inView]);
 

@@ -1,21 +1,60 @@
 @import 'styles/general';
 
-.Paragraph {
-  padding: 4rem 4rem;
-  h3 {
-    text-align: center;
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5rem;
+  &_content {
+    width: 50%;
+    h3 {
+      text-align: center;
+    }
   }
-  p {
-    margin-top: 5rem;
-    text-align: justify;
+  img {
+    width: 40%;
+    .Long {
+      width: 60%;
+    }
   }
-  @include tablet {
-    padding: 7rem 15rem;
+  &.Gray {
+    background-color: $background-gray;
   }
 }
 
-.Calendario {
-  border: 0;
-  width: 60vw;
-  height: 60vh;
+.Yomol {
+  position: relative;
+  height: calc(100vh - #{$home-toolbar});
+  &_Center {
+    position: absolute;
+    width: 25%;
+    max-width: 40rem;
+    bottom: 5rem;
+    left: 37.5%;
+    z-index: -1;
+  }
+  &_Container {
+    display: flex;
+    justify-content: space-around;
+    padding: 4rem;
+    align-items: flex-start;
+  }
+  &_Card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    background-color: $background-gray;
+    border-radius: 4rem;
+    width: 20%;
+    border: 1px solid $sec-light-gray;
+    h4 {
+      text-align: center;
+    }
+    cursor: pointer;
+    max-width: 15rem;
+    img {
+      width: 100%;
+    }
+  }
 }

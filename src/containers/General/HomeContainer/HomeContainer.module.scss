@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   z-index: -3;
-  height: 80%;
+  height: calc(100vh - #{$home-toolbar});
   justify-content: center;
   &Txt {
     width: 50%;
@@ -39,8 +39,8 @@
 
 .Intro {
   display: flex;
-  height: 60vh;
-  background-color: #FAFAFA;
+  min-height: 60vh;
+  background-color: $background-gray;
   padding: 1%;
   justify-content: space-around;
   &Info {
