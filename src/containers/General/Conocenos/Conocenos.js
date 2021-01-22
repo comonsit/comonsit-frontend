@@ -72,7 +72,8 @@ export const Conocenos = () => {
         <div className={classes.Container_content}>
           <h4>Plataforma de créditos en línea</h4>
           <p>En circunstancias y geografías complicadas buscamos soluciones tecnológicas que nos permitieran enfocarnos en los procesos sociales, simplificando el acceso en una geografía complicada como la de nuestra región.</p>
-          <p>Esta plataforma de código abierto nos ha abierto nuevas posibilidades, teniendo una claridad de nuestros datos y procesos que a la fecha seguimos explorando y mejorando.</p>
+          <p>Esta plataforma multi-idioma de código abierto nos ha abierto nuevas posibilidades, teniendo una claridad de nuestros datos y procesos que a la fecha seguimos explorando y mejorando.</p>
+          <p>El código se encuentra disponible <a href="https://github.com/mauricioinaz/comonSit">aquí</a> ha sido desarrollado en un proceso junto con nuestro colaborador y amigo <a href="https://github.com/mauricioinaz/">@mauricioinaz</a> y cualquiera que pueda y guste puede revisarlo, copiarlo y mejorarlo</p>
         </div>
       </div>
     </div>

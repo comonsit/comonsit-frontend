@@ -15,10 +15,7 @@ const navigationItems = (props) => (
           <NavLink to="/conocenos" exact activeClassName={classes.active}><FormattedMessage id="menu.us"/></NavLink>
         </li>
         <li className={classes.NavigationItem}>
-          <NavLink to="/origen" exact activeClassName={classes.active}><FormattedMessage id="menu.origin"/></NavLink>
-        </li>
-        <li className={classes.NavigationItem}>
-          <NavLink to="/publicaciones" exact activeClassName={classes.active}><FormattedMessage id="menu.publication"/></NavLink>
+          <NavLink to="/mapa" exact activeClassName={classes.active}><FormattedMessage id="menu.mapa"/></NavLink>
         </li>
         <li className={classes.NavigationItem}>
           <NavLink to="/contacto" exact activeClassName={classes.active}><FormattedMessage id="menu.contact"/></NavLink>

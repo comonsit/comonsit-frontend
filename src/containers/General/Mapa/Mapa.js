@@ -1,14 +1,14 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import cl from './Origen.module.scss';
+import classes from './Mapa.module.scss';
 
-function Origen() {
+function Mapa() {
   return (
-    <div className={cl.Paragraph}>
+    <div className={classes.Paragraph}>
       <h3><FormattedMessage id="origen.title"/></h3>
       <p><FormattedMessage id="origen.text"/></p>
     </div>
   );
 }
 
-export default Origen;
+export default Mapa;

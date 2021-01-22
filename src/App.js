@@ -11,8 +11,7 @@ import subcuentas from './containers/Panel/Bancos/Subcuentas/Subcuentas';
 import carteras from './containers/Panel/Carteras/Carteras';
 import bancoForm from './containers/Panel/Bancos/BancoForm/BancoForm';
 import conocenos from './containers/General/Conocenos/Conocenos';
-import origen from './containers/General/Origen/Origen';
-import publicaciones from './containers/General/Publicaciones/Publicaciones';
+import mapa from './containers/General/Mapa/Mapa';
 import contacto from './containers/General/Contacto/Contacto';
 import acceso from './containers/General/Acceso/Acceso';
 import socios from './containers/Panel/Socios/Socios';
@@ -105,8 +104,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={homeContainer} />
             <Route exact path="/conocenos" component={conocenos}/>
-            <Route exact path="/origen" component={origen}/>
-            <Route exact path="/publicaciones" component={publicaciones}/>
+            <Route exact path="/mapa" component={mapa}/>
             <Route exact path="/contacto" component={contacto}/>
             <Route exact path="/acceso" component={acceso}/>
             <Route><Redirect to="/" /></Route>
