@@ -193,7 +193,7 @@ export const HomeContainer = () => {
         </motion.div>
       </section>
       <section className={classes.Phrase}>
-        <p className={ classes.Long}>Comon Sit Ca’teltic empezó con reinvertir parte del beneficio que trajo el precio construido del café, y tiene el potencial, de utilizar esos recursos para empezar actividades nuevas que a su vez generen excedentes que se reinviertan nuevamente en financiar otras actividades productivas, todo ello volteando a ver la dinámica económico-productiva que se puede incentivar en una familia, en una comunidad o una región y que trae consigo mejoras en el ingreso y estabilidad económica de  los productores y sus familias. </p>
+        <p>La microfinanciera es un motor económico, que distribuye los recursos generados hacia donde hacen falta.</p>
       </section>
       <section className={classes.Intro}>
         <div className={classes.IntroPhoto}>
@@ -201,7 +201,7 @@ export const HomeContainer = () => {
         </div>
         <div className={classes.IntroInfo}>
           <p>
-            La microfinanciera es un motor económico, que distribuye los recursos generados hacia donde hacen falta. Si se hace de manera eficiente y con responsabilidad, es una salida a la dependencia de la cultura del subsidio que actualmente impera en nuestra región.
+            Si se hace de manera eficiente y con responsabilidad, es una salida a la dependencia de la cultura del subsidio que actualmente impera en nuestra región.
           </p>
         </div>
       </section>

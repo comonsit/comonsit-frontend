@@ -11,6 +11,8 @@ import Tsumbal from '../../../assets/images/tsumbal_xitalha.png'
 import Chabtic from '../../../assets/images/Chabtic.png'
 import Xapontic from '../../../assets/images/XAPONTIC.png'
 import Comon from '../../../assets/images/ComonSitLogoNoBack.png'
+import Colab from '../../../assets/images/Colaboracion.svg'
+import Dashboard from '../../../assets/images/Dashboard.svg'
 import classes from './Conocenos.module.scss';
 
 
@@ -57,6 +59,21 @@ export const Conocenos = () => {
           </motion.div>
         </AnimateSharedLayout>
         <img className={classes.Yomol_Center} src={Yomol} alt="Yomol"/>
+      </div>
+      <div className={[classes.Container, classes.Gray].join(' ')}>
+        <div className={classes.Container_content}>
+          <h3>Comon Sit Ca’teltic</h3>
+          <p>Comon Sit Ca’teltic empezó con reinvertir parte del beneficio que trajo el precio construido del café, y tiene el potencial, de utilizar esos recursos para empezar actividades nuevas que a su vez generen excedentes que se reinviertan nuevamente en financiar otras actividades productivas, todo ello volteando a ver la dinámica económico-productiva que se puede incentivar en una familia, en una comunidad o una región y que trae consigo mejoras en el ingreso y estabilidad económica de  los productores y sus familias.</p>
+        </div>
+        <img className={classes.Long}  src={Colab} alt="Colaboración"/>
+      </div>
+      <div className={[classes.Container, classes.Gray].join(' ')}>
+        <img className={classes.Long}  src={Dashboard} alt="Dashboard"/>
+        <div className={classes.Container_content}>
+          <h4>Plataforma de créditos en línea</h4>
+          <p>En circunstancias y geografías complicadas buscamos soluciones tecnológicas que nos permitieran enfocarnos en los procesos sociales, simplificando el acceso en una geografía complicada como la de nuestra región.</p>
+          <p>Esta plataforma de código abierto nos ha abierto nuevas posibilidades, teniendo una claridad de nuestros datos y procesos que a la fecha seguimos explorando y mejorando.</p>
+        </div>
       </div>
     </div>
   );
