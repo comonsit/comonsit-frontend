@@ -1,4 +1,5 @@
 import React from 'react';
+import { useInView } from "react-intersection-observer";
 import { motion, AnimateSharedLayout } from "framer-motion"
 import YomolCard from './YomolCard'
 // import {FormattedMessage} from 'react-intl';
@@ -17,6 +18,7 @@ import classes from './Conocenos.module.scss';
 
 
 export const Conocenos = () => {
+  const [onScrollRef, inView ] = useInView({threshold: .8});
   return (
     <div className={classes.Conocenos}>
       <div className={classes.Container}>
@@ -38,27 +40,27 @@ export const Conocenos = () => {
       <div className={classes.Yomol}>
         <AnimateSharedLayout>
           <motion.div className={classes.Yomol_Container}>
-            <YomolCard key={1} title="Café orgánico">
+            <YomolCard key={1} title="Café orgánico" activate={inView}>
               <p>Producción agroecológica, transformación, exportación de producto terminado y venta en taza.</p>
               <img key="imgA" src={Capeltic} alt="Capeltic"/>
               <img key="imgB" src={Batsil} alt="Batsil"/>
               <img key="imgC" src={Tsumbal} alt="Tsumbal"/>
             </YomolCard>
-            <YomolCard key={2} title="Productos de higiene personal">
+            <YomolCard key={2} title="Productos de higiene personal" activate={inView}>
               <p>Jabones artesanales, shampoo, cremas y artesanías.</p>
               <img key="imgE" src={Xapontic} alt="Xapontic"/>
             </YomolCard>
-            <YomolCard key={3} title="Microfinanzas">
+            <YomolCard key={3} title="Microfinanzas" activate={inView}>
               <p>Microcréditos al consumo y a la producción para las familias que forman parte de Yomol A’tel.</p>
               <img key="imgF" src={Comon} alt="Comon"/>
             </YomolCard>
-            <YomolCard key={4} title="Miel Orgánica">
+            <YomolCard key={4} title="Miel Orgánica" activate={inView}>
               <p>Producción agroecológica y venta nacional, etapa temprana de transformación del producto terminado.</p>
               <img key="imgD" src={Chabtic} alt="Chabtic"/>
             </YomolCard>
           </motion.div>
         </AnimateSharedLayout>
-        <img className={classes.Yomol_Center} src={Yomol} alt="Yomol"/>
+        <img ref={onScrollRef} className={classes.Yomol_Center} src={Yomol} alt="Yomol"/>
       </div>
       <div className={[classes.Container, classes.Gray].join(' ')}>
         <div className={classes.Container_content}>

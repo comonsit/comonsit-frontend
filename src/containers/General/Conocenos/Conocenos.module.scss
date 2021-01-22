@@ -41,6 +41,7 @@
     align-items: flex-start;
   }
   &_Card {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
