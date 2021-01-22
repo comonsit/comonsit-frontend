@@ -9,7 +9,8 @@ const initialState = {
   role: null,
   error: null,
   loading: false,
-  finishedAutoSignup: false
+  finishedAutoSignup: false,
+  animatedLogo: false
 }
 
 const authSuccess = (state, action) => {
@@ -47,6 +48,13 @@ const setUser = (state, action) => {
   })
 }
 
+const animatedIntro = (state) => {
+  return updateObject(state, {
+    animatedLogo: true
+  })
+}
+
+
 const reducer = (state=initialState , action) => {
   switch(action.type) {
     case actionTypes.AUTH_START: return updateObject(state, { error: null, loading: true})
@@ -54,6 +62,7 @@ const reducer = (state=initialState , action) => {
     case actionTypes.AUTH_FAIL: return authFail(state, action)
     case actionTypes.AUTH_LOGOUT: return authLogout(state, action)
     case actionTypes.SET_USER: return setUser(state, action)
+    case actionTypes.ANIMATED_INTRO: return animatedIntro(state)
 
     default: return state
   }

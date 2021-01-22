@@ -149,3 +149,9 @@ export const authCheckState = () => {
     }
   }
 }
+
+export const animatedIntro = () => {
+  return {
+    type: actionTypes.ANIMATED_INTRO
+  }
+}

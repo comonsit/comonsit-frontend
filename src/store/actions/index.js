@@ -57,7 +57,8 @@ export {
   auth,
   logout,
   authCheckState,
-  setUser
+  setUser,
+  animatedIntro
 } from './auth'
 
 export {
