@@ -32,6 +32,7 @@ export const YomolCard = props => {
             animate={{ opacity: 1, }}
             transition={{ default: {duration: .3, delay: .1, ease: "easeIn"}}}
             exit={{ opacity: 0, }}
+            className={classes.Yomol_Card_data}
           >
             {props.children}
           </motion.div>)

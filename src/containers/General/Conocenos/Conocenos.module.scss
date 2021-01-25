@@ -5,27 +5,42 @@
   align-items: center;
   justify-content: space-between;
   padding: 5rem;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+  }
   &_content {
-    width: 50%;
+    width: 100%;
+    @include tablet {
+      width: 50%;
+    }
     h3,
     h4 {
       text-align: center;
     }
   }
   img {
-    width: 40%;
-    .Long {
-      width: 60%;
+    width: 110%;
+    @include tablet {
+      width: 40%;
+      .Long {
+        width: 60%;
+      }
     }
   }
   &.Gray {
     background-color: $background-gray;
+    flex-direction: column-reverse;
+    @include tablet {
+      flex-direction: row;
+    }
   }
 }
 
 .Yomol {
   position: relative;
   height: calc(100vh - #{$home-toolbar});
+  overflow: hidden;
   &_Center {
     position: absolute;
     width: 25%;
@@ -36,9 +51,16 @@
   }
   &_Container {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 4rem;
     align-items: flex-start;
+    overflow-x: scroll;
+    width: 80%;
+    @include tablet {
+      overflow-x: none;
+      width: auto;
+      justify-content: space-around;
+    }
   }
   &_Card {
     position: relative;
@@ -48,8 +70,14 @@
     padding: 2rem;
     background-color: $background-gray;
     border-radius: 4rem;
-    width: 20%;
+    width: 80%;
     border: 1px solid $sec-light-gray;
+    margin: 0 1rem;
+    @include tablet {
+      width: 20%;
+      max-width: 15rem;
+    }
+
     h4 {
       text-align: center;
     }
