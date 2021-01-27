@@ -11,6 +11,7 @@ import {
 import thunk from 'redux-thunk';
 
 import './index.scss';
+import ScrollToTop from './hoc/ScrollToTop/ScrollToTop'
 import sociosReducer from './store/reducers/socios'
 import errorsReducer from './store/reducers/errors'
 import generalDataReducer from './store/reducers/generalData'
@@ -68,6 +69,7 @@ const store = createStore(rootReducer, composeEnhancers(
 const app = (
   <Provider store={store}>
     <BrowserRouter >
+      <ScrollToTop />
       <App />
     </BrowserRouter>
   </Provider>
