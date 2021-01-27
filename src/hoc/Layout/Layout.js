@@ -53,7 +53,10 @@ class Layout extends Component {
             open={this.state.showSideDrawer}
             closed={this.sideDrawerClosedHandler}
           />
-          <Toolbar showMenu={this.sideDrawerOpenHandler}/>
+          <Toolbar
+            showMenu={this.sideDrawerOpenHandler}
+            open={this.state.showSideDrawer}
+          />
         </>
       )
     }

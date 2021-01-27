@@ -18,7 +18,7 @@ const toolbar = (props) => (
         <NavigationItems/>
       </nav>
       <div className={classes.HambDiv}>
-        <Hamburguesa clicked={props.showMenu}/>
+        <Hamburguesa clicked={props.showMenu} open={props.open}/>
       </div>
     </header>
 );

@@ -1,25 +1,362 @@
+@charset "UTF-8";
 @import 'styles/general';
+/*!
+ * Hamburgers
+ * @description Tasty CSS-animated hamburgers
+ * @author Jonathan Suh @jonsuh
+ * @site https://jonsuh.com/hamburgers
+ * @link https://github.com/jonsuh/hamburgers
+ */
 
-.Hamburguesa {
-  width: 100%;
-  height: 100%;
+// Settings
+// ==================================================
+$hamburger-padding-x           : 1px!default;
+$hamburger-padding-y           : 3px !default;
+$hamburger-layer-width         : 45px !default;
+$hamburger-layer-height        : 4px !default;
+$hamburger-layer-spacing       : 12px !default;
+$hamburger-layer-color         : $pr-dark-blue ;
+$hamburger-layer-border-radius : 7px !default;
+$hamburger-hover-opacity       : 0.7 !default;
+$hamburger-active-layer-color  : $hamburger-layer-color;
+$hamburger-active-hover-opacity: $hamburger-hover-opacity !default;
+
+// To use CSS filters as the hover effect instead of opacity,
+// set $hamburger-hover-use-filter as true and
+// change the value of $hamburger-hover-filter accordingly.
+$hamburger-hover-use-filter   : false !default;
+$hamburger-hover-filter       : opacity(50%) !default;
+$hamburger-active-hover-filter: $hamburger-hover-filter !default;
+
+// Types (Remove or comment out what you don’t need)
+// ==================================================
+$hamburger-types: (
+  arrowalt,
+) !default;
+
+
+.Container {
   display: flex;
-  flex-flow: column;
-  justify-content: space-around;
+  height: 40%;
   align-items: center;
-  padding: 0.8rem 0;
-  box-sizing: border-box;
+  justify-content: center;
+  width: 50%;
+}
+
+// Hamburger
+// ==================================================
+.hamburger {
+  padding: $hamburger-padding-y $hamburger-padding-x;
+  display: inline-block;
   cursor: pointer;
-  div {
-      width: 90%;
-      height: .3rem;
-      background-color: $pr-dark-blue;
-      border-radius: .1rem;
-      @include tablet {
-        height: .5rem;
-      }
+
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+
+  // Normalize (<button>)
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+
+  // @include coloring($pr-dark-blue);
+  // &.white {
+  //   @include coloring(white);
+  // }
+
+  &:hover {
+    @if $hamburger-hover-use-filter == true {
+      filter: $hamburger-hover-filter;
+    }
+    @else {
+      opacity: $hamburger-hover-opacity;
+    }
   }
-  @include desktop {
-    display: none;
+
+  &.is-active {
+    &:hover {
+      @if $hamburger-hover-use-filter == true {
+        filter: $hamburger-active-hover-filter;
+      }
+      @else {
+        opacity: $hamburger-active-hover-opacity;
+      }
+    }
+
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      background-color: $hamburger-active-layer-color;
+      &.white {
+        &,
+        &::before,
+        &::after {
+          background-color: white !important;
+        }
+      }
+    }
+
   }
 }
+
+.hamburger-box {
+  width: $hamburger-layer-width;
+  height: $hamburger-layer-height * 3 + $hamburger-layer-spacing * 2;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: $hamburger-layer-height / -2;
+
+  &,
+  &::before,
+  &::after {
+    width: $hamburger-layer-width;
+    height: $hamburger-layer-height;
+    background-color: $hamburger-layer-color;
+    border-radius: $hamburger-layer-border-radius;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+  }
+  &.white {
+    &,
+    &::before,
+    &::after {
+      background-color: white !important;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+  }
+
+  &::before {
+    top: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+
+  &::after {
+    bottom: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+}
+
+
+@if index($hamburger-types, arrowalt) {
+  /*
+   * Arrow Alt
+   */
+  .hamburger--arrowalt {
+    .hamburger-inner {
+      &::before {
+        transition: top 0.1s 0.1s ease,
+                    transform 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+
+      &::after {
+        transition: bottom 0.1s 0.1s ease,
+                    transform 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+    }
+
+    &.is-active {
+      .hamburger-inner {
+        &::before {
+          top: 0;
+          transform: translate3d($hamburger-layer-width * -0.2, $hamburger-layer-width * -0.25, 0) rotate(-45deg) scale(0.7, 1);
+          transition: top 0.1s ease,
+                      transform 0.1s 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+        }
+
+        &::after {
+          bottom: 0;
+          transform: translate3d($hamburger-layer-width * -0.2, $hamburger-layer-width * 0.25, 0) rotate(45deg) scale(0.7, 1);
+          transition: bottom 0.1s ease,
+                      transform 0.1s 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+        }
+      }
+    }
+  }
+}
+
+
+//
+//
+// /*
+// green: #3FAF82
+//
+// */
+//
+// .box {
+//   width: 100%;
+//   height: 100%;
+//   cursor: pointer;
+//   box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+//   @include desktop {
+//     display: none;
+//   }
+// }
+//
+// .btn {
+//   // position: absolute;
+//   // top: 50%;
+//   // right: 5%;
+//   // transform: translate(-50%, -50%);
+//   // width: 80px;
+//   cursor: pointer;
+// }
+//
+// span {
+//   display: block;
+//   width: 100%;
+//   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.3);
+//   border-radius: 3px;
+//   height: 8px;
+//   background: $pr-dark-blue;
+//   transition: all .3s;
+//   position: relative;
+// }
+//
+// span + span {
+//   margin-top: 14px;
+// }
+//
+// .active span:nth-child(1) {
+//   animation: ease .7s top forwards;
+// }
+//
+// .notActive span:nth-child(1) {
+//   animation: ease .7s top2 forwards;
+// }
+//
+// .active span:nth-child(2) {
+//   animation: ease .7s scaled forwards;
+// }
+//
+// .notActive span:nth-child(2) {
+//   animation: ease .7s scaled2 forwards;
+// }
+//
+// .active span:nth-child(3) {
+//   animation: ease .7s bottom forwards;
+// }
+//
+// .notActive span:nth-child(3) {
+//   animation: ease .7s bottom2 forwards;
+// }
+//
+// @keyframes top {
+//   0% {
+//     top: 0;
+//     transform: rotate(0);
+//   }
+//   50% {
+//     top: 22px;
+//     transform: rotate(0);
+//   }
+//   100% {
+//     top: 22px;
+//     transform: rotate(45deg);
+//   }
+// }
+//
+// @keyframes top2 {
+//   0% {
+//     top: 22px;
+//     transform: rotate(45deg);
+//   }
+//   50% {
+//     top: 22px;
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     top: 0;
+//     transform: rotate(0deg);
+//   }
+// }
+//
+// @keyframes bottom {
+//   0% {
+//     bottom: 0;
+//     transform: rotate(0);
+//   }
+//   50% {
+//     bottom: 22px;
+//     transform: rotate(0);
+//   }
+//   100% {
+//     bottom: 22px;
+//     transform: rotate(135deg);
+//   }
+// }
+//
+// @keyframes bottom2 {
+//   0% {
+//     bottom: 22px;
+//     transform: rotate(135deg);
+//   }
+//   50% {
+//     bottom: 22px;
+//     transform: rotate(0);
+//   }
+//   100% {
+//     bottom: 0;
+//     transform: rotate(0);
+//   }
+// }
+//
+// @keyframes scaled {
+//   50% {
+//     transform: scale(0);
+//   }
+//   100% {
+//     transform: scale(0);
+//   }
+// }
+//
+// @keyframes scaled2 {
+//   0% {
+//     transform: scale(0);
+//   }
+//   50% {
+//     transform: scale(0);
+//   }
+//   100% {
+//     transform: scale(1);
+//   }
+// }
+//
+//
+// //
+// // .Hamburguesa {
+// //   width: 100%;
+// //   height: 100%;
+// //   display: flex;
+// //   flex-flow: column;
+// //   justify-content: space-around;
+// //   align-items: center;
+// //   padding: 0.8rem 0;
+// //   box-sizing: border-box;
+// //   cursor: pointer;
+// //   div {
+// //       width: 90%;
+// //       height: .3rem;
+// //       background-color: $pr-dark-blue;
+// //       border-radius: .1rem;
+// //       @include tablet {
+// //         height: .5rem;
+// //       }
+// //   }
+// //   @include desktop {
+// //     display: none;
+// //   }
+// // }

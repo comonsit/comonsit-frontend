@@ -37,7 +37,11 @@ const ptoolbar = (props) =>{
         </div>
         <div className={classes.Border}>
           <div className={classes.Burger}>
-            <Hamburguesa clicked={props.showMenu}/>
+            <Hamburguesa
+              clicked={props.showMenu}
+              open={props.open}
+              toolbar
+            />
           </div>
         </div>
       </header>

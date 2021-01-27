@@ -12,8 +12,10 @@
   flex-direction: column;
   &Txt {
     width: 50%;
+    max-width: 64rem;
     img {
       width: 100%;
+      max-width: 64rem;
     }
   }
   .Image {
@@ -25,6 +27,7 @@
     overflow: hidden;
     background: white;
     border-radius: 30px;
+    max-width: 40rem;
     // border: 1px solid $pr-dark-blue;
     .Image_svg {
       width: 56%;
