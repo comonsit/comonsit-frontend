@@ -40,6 +40,40 @@
   }
 }
 
+.First {
+  margin-top: 98vh;
+  box-shadow: 2px -2px 5px 1px $borderGray;
+  background-color: white;
+}
+
+.CircleBox {
+  height: 50rem;
+  width: 100%;
+  background-color: $pr-dark-blue;
+  position: relative;
+  &Background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: $background-gray;
+    &Cnt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40rem;
+      text-align: center;
+      font-size: 1.7em;
+      padding: 7%;
+      background-color: $background-gray;
+      @include desktop {
+        height: 25rem;
+      }
+    }
+  }
+}
+
 .Intro {
   display: flex;
   min-height: 60vh;
@@ -99,10 +133,6 @@
       }
     }
   }
-  &.First {
-    margin-top: 100vh;
-    box-shadow: 2px -2px 5px 1px $borderGray;
-  }
   @include tablet {
     flex-direction: row;
     align-items: center;
@@ -118,6 +148,7 @@
   text-align: center;
   padding: 4rem;
   background-color: white;
+  flex-direction: column;
   &.Back {
     background-image: url('../../../assets/photos/logoFondo.svg');
     background-position: 160% 0%;

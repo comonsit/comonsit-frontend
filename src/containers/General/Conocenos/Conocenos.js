@@ -23,10 +23,11 @@ export const Conocenos = () => {
     <div className={classes.Conocenos}>
       <div className={classes.Container}>
         <div className={classes.Container_content}>
-          <h3>Territorio</h3>
-          <p>Vivimos al norte del estado de chiapas, entre las cañadas que abarcan los municipios de Chilón, Sitalá, Yajalón, Pantelhó y Ocosingo. Su clima tropical hace que la zona sea adecuado para el cultivo de café bajo sombra (principal fuente de ingreso para nuestras familias), pero lo que sostiene nuestra forma de vida es el cultivo de nuestras parcelas, el maíz y el frijol (entre una gran variedad de frutos) son la base de nuestra alimentación y de nuestra economía familiar.</p>
-          <p>En toda esta zona prevalece la cultura maya Tseltal, la cual conserva una gran riqueza cultural a través de nuestra lengua, nuestras tradiciones y nuestro sistema de cargos civiles y religiosos; todo esto, junto con el cuidado de la madre tierra, nos permite mantener mantener lo que llamamos el <strong>lequil cuxlejalil</strong> (la vida buena y en armonía) con nuestra comunidad, con el ambiente y con lo espiritual. </p>
-          <p>Aún así, esta región es una de las más empobrecidas de México, a pesar de ser una zona con grandes riquezas naturales, han sido siempre otras personas las que se quedan con el valor de nuestros recursos, por ejemplo, los intermediarios de café quienes también promueven la usura entre las comunidades. Es por eso que decidimos organizarnos para salir de estos esquemas de dependencia económica y construir nuestras alternativas.</p>
+          <h3>Nuestro Territorio</h3>
+          <p>Vivimos al norte del estado de Chiapas, entre las cañadas que abarcan los municipios de Chilón, Sitalá, Yajalón, Pantelhó y Ocosingo. El clima tropical hace que la zona sea adecuado para el cultivo de café bajo sombra (principal fuente de ingreso para nuestras familias), pero lo que sostiene nuestra forma de vida es el cultivo de nuestras parcelas; el maíz, el frijol y una gran variedad de frutos son la base de nuestra alimentación y de nuestra economía familiar.</p>
+          <p>En toda esta zona prevalece la cultura maya Tseltal, la cual conserva una gran riqueza cultural a través de nuestra lengua, nuestras tradiciones y nuestro sistema de cargos civiles y religiosos. Todo esto, junto con el cuidado de la madre tierra, nos permite mantener mantener lo que llamamos el <strong>lequil cuxlejalil</strong> (la vida buena y en armonía) con nuestra comunidad, con el ambiente y con lo espiritual. </p>
+          <p>Aún así, esta región es una de las más empobrecidas de México. A pesar de ser una zona con grandes riquezas naturales, han sido siempre otras personas las que se quedan con el valor de nuestros recursos.</p>
+          <p>Es por eso que decidimos organizarnos para salir de estos esquemas de dependencia económica y construir nuestras alternativas.</p>
         </div>
         <img src={Territorio} alt="Territorio"/>
       </div>
@@ -34,7 +35,8 @@ export const Conocenos = () => {
         <img className={classes.Long} src={Barista} alt="Barista"/>
         <div className={classes.Container_content}>
           <h3>Yomol A'tel</h3>
-          <p>Yomol A’tel significa en la lengua Tseltal <strong>juntos trabajamos, caminamos, soñamos</strong> es lo que entendemos el grupo de empresas sociales y cooperativas que lo conforman, lo integramos familias productoras de la región selva norte de Chiapas y colaboradores en diversas partes de la república Mexicana. Nos dedicamos a generar respuestas organizadas desde la base social para construir alternativas de agregación de valor en los recursos que tenemos actualmente en nuestro territorio, cuidando siempre nuestra relación con la madre tierra y acompañados por diversos actores sociales que coinciden con nuestra vocación (universidades, fundaciones, inversionistas, consumidores y otras experiencias sociales, entre otros).</p>
+          <p>Yomol A’tel significa en la lengua Tseltal <strong>juntos trabajamos, caminamos, soñamos</strong>. Es un grupo ingegrado por empresas sociales y cooperativas, así como las familias productoras de la región selva norte de Chiapas y colaboradores en diversas partes de la república Mexicana.</p>
+          <p>Nos dedicamos a generar respuestas organizadas desde la base social para construir alternativas de agregación de valor en los recursos que tenemos actualmente en nuestro territorio, cuidando siempre nuestra relación con la madre tierra y acompañados por diversos actores sociales que coinciden con nuestra vocación (universidades, fundaciones, inversionistas, consumidores y otras experiencias sociales, entre otros).</p>
         </div>
       </div>
       <div className={classes.Yomol}>
@@ -65,7 +67,8 @@ export const Conocenos = () => {
       <div className={[classes.Container, classes.Gray].join(' ')}>
         <div className={classes.Container_content}>
           <h3>Comon Sit Ca’teltic</h3>
-          <p>Comon Sit Ca’teltic empezó con reinvertir parte del beneficio que trajo el precio construido del café, y tiene el potencial, de utilizar esos recursos para empezar actividades nuevas que a su vez generen excedentes que se reinviertan nuevamente en financiar otras actividades productivas, todo ello volteando a ver la dinámica económico-productiva que se puede incentivar en una familia, en una comunidad o una región y que trae consigo mejoras en el ingreso y estabilidad económica de  los productores y sus familias.</p>
+          <p>Comon Sit Ca’teltic empezó con reinvertir parte del beneficio que trajo el precio construido del café, y utilozar esos recursos para empezar actividades nuevas que a su vez generen excedentes que se reinviertan nuevamente en financiar otras actividades productivas.</p>
+          <p>Todo ello volteando a ver la dinámica económico-productiva que se puede incentivar en una familia, en una comunidad o una región y que trae consigo mejoras en el ingreso y estabilidad económica de los y las productores y sus familias.</p>
         </div>
         <img className={classes.Long}  src={Colab} alt="Colaboración"/>
       </div>

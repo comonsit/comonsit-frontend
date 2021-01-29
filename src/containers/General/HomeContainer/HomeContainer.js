@@ -1,8 +1,13 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { connect } from 'react-redux'
-import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Parallax } from 'react-parallax';
+import { useDimensions } from "./useDimensions";
+import {
+  motion,
+  useAnimation
+} from "framer-motion";
 // import {FormattedMessage} from 'react-intl';
 import classes from './HomeContainer.module.scss';
 import LogoText from '../../../assets/images/texto.png'
@@ -67,17 +72,50 @@ const variantsIcons = {
   }
 }
 
+const circleShow = {
+  open: (height = 1000) => ({
+    clipPath: `circle(${height * 2 + 200}px at 50% 40px)`,
+    transition: {
+      type: "spring",
+      stiffness: 20,
+      restDelta: 2
+    }
+  }),
+  closed: {
+    clipPath: "circle(0 at 50% 40px)",
+    transition: {
+      delay: 0.5,
+      type: "spring",
+      stiffness: 400,
+      damping: 40
+    }
+  }
+};
+
 export const HomeContainer = props => {
   // const constraintsRef = useRef(null);
   const animationOfIcons = useAnimation();
   const animationOfLogo = useAnimation();
   const [onScrollRef, inView ] = useInView({threshold: .8});
-
   useEffect(() => {
     if (inView) {
       animationOfIcons.start("visible");
     }
   }, [animationOfIcons, inView]);
+
+
+  // EFECTO DEL LOGO
+
+  const containerRef = useRef(null);
+  const { height } = useDimensions(containerRef);
+  const animationOfCircle = useAnimation();
+  const [onScrollRefCircle, inViewCircle ] = useInView({threshold: 1});
+
+  useEffect(() => {
+    if (inViewCircle) {
+      animationOfCircle.start("open");
+    }
+  }, [animationOfCircle, inViewCircle]);
 
   useEffect(() => {
     props.onAnimated()
@@ -132,118 +170,141 @@ export const HomeContainer = props => {
           <img src={LogoText} alt="Imagen Inicial"/>
         </motion.div>
       </div>
-      <section
-        className={[classes.Intro, classes.First].join(' ')}
-      >
-        <div className={classes.IntroInfo}>
-          <p>
-            Somos una microfinanciera creada por productores y productoras indígenas tseltales ubicados en la selva norte de Chiapas y formamos parte del grupo Yomol A’tel.
-          </p>
-        </div>
+      <div className={classes.First}>
         <motion.div
-          className={classes.IntroPhoto}
-          whileHover={{
-            scale: 1.05,
-           }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20
-          }}
-          onHoverStart={e => {}}
-          onHoverEnd={e => {}}
+          initial="closed"
+          animate={animationOfCircle}
+          custom={height}
+          ref={containerRef}
+          className={classes.CircleBox}
         >
-          <img src={BeesPhoto} alt="Logo Comon Sit Ca'teltic"/>
+          <motion.div className={classes.CircleBoxBackground} variants={circleShow}/>
+          <motion.div className={classes.CircleBoxBackground} variants={circleShow} ref={onScrollRefCircle}>
+            <div className={classes.CircleBoxBackgroundCnt}>
+              <p>
+                Somos una microfinanciera creada por productores y productoras indígenas tseltales ubicados en la selva norte de Chiapas y formamos parte del grupo Yomol A’tel.
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
-      </section>
-      <motion.div
-        className={[classes.Phrase, classes.Back].join(' ')}
-       >
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20
-          }}
+        <Parallax
+          className={classes.Intro}
+          bgImage={BeesPhoto}
+          bgImageAlt="abejas"
+          strength={300}
         >
-        <p>En esta empresa social buscamos construir una alternativa propia y sostenible a las necesidades de acceso a crédito que se viven dentro de nuestro territorio.</p>
-      </motion.div>
+        </Parallax>
+        <div className={classes.IntroInfo}>
 
-      </motion.div>
-      <section className={classes.Intro}>
-        <div className={classes.IntroInfo}>
-          <p>
-            Esta microfinanciera tiene el reto de cambiar la forma en que entendemos el crédito y las microfinanzas.
-          </p>
-          <p>Generar nuevas capacidades financieras tomando en cuenta siempre las condiciones del territorio y su contexto.</p>
         </div>
+          {/*
+            <motion.div
+              className={classes.IntroPhoto}
+              whileHover={{
+                scale: 1.05,
+               }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 20
+              }}
+              onHoverStart={e => {}}
+              onHoverEnd={e => {}}
+            >
+              <img src={BeesPhoto} alt="Logo Comon Sit Ca'teltic"/>
+            </motion.div>
+            */}
         <motion.div
-          ref={onScrollRef}
-          className={classes.IntroIcons}
-          initial="hidden"
-          animate={animationOfIcons}
-          variants={variantsIcons}
-        >
+          className={[classes.Phrase, classes.Back].join(' ')}
+         >
           <motion.div
-            className={classes.IntroIcons_card}
-            variants={{
-              hidden: { y: 20, opacity: 0 },
-              visible: {
-                y: 0,
-                opacity: 1
-              }
+            whileHover={{ scale: 1.1 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20
             }}
           >
-            <img src={Barras} alt="Barras"/>
-            <p>mayor ahorro y patrimonio</p>
-          </motion.div>
-          <motion.div
-            className={classes.IntroIcons_card}
-            variants={{
-              hidden: { y: 20, opacity: 0 },
-              visible: {
-                y: 0,
-                opacity: 1
-              }
-            }}
-          >
-            <img src={BolsaDinero} alt="Dinero"/>
-            <p>reinvertir beneficios</p>
-          </motion.div>
-          <motion.div
-            className={classes.IntroIcons_card}
-            variants={{
-              hidden: { y: 20, opacity: 0 },
-              visible: {
-                y: 0,
-                opacity: 1
-              }
-            }}
-          >
-            <img src={Pastel} alt="Pastel"/>
-            <p>diversificar ingresos y riesgos</p>
-          </motion.div>
+          <p>En esta empresa social buscamos construir una alternativa propia y sostenible a las necesidades de acceso a crédito que se viven dentro de nuestro territorio.</p>
         </motion.div>
-      </section>
-      <section className={classes.Phrase}>
-        <p>La microfinanciera es un motor económico, que distribuye los recursos generados hacia donde hacen falta.</p>
-      </section>
-      <section className={classes.Intro}>
-        <div className={classes.IntroPhoto}>
-          <img src={HomeImage} alt="Cafetalero"/>
-        </div>
-        <div className={classes.IntroInfo}>
+
+        </motion.div>
+        <section className={classes.Intro}>
+          <div className={classes.IntroInfo}>
+            <p>
+              Tenemos el reto de cambiar la forma en que se piensa el crédito y las microfinanzas.
+            </p>
+            <p>Buscamos generar nuevas capacidades financieras, tomando en cuenta siempre las condiciones del territorio y su contexto.</p>
+          </div>
+          <motion.div
+            ref={onScrollRef}
+            className={classes.IntroIcons}
+            initial="hidden"
+            animate={animationOfIcons}
+            variants={variantsIcons}
+          >
+            <motion.div
+              className={classes.IntroIcons_card}
+              variants={{
+                hidden: { y: 20, opacity: 0 },
+                visible: {
+                  y: 0,
+                  opacity: 1
+                }
+              }}
+            >
+              <img src={Barras} alt="Barras"/>
+              <p>Mayor ahorro y patrimonio</p>
+            </motion.div>
+            <motion.div
+              className={classes.IntroIcons_card}
+              variants={{
+                hidden: { y: 20, opacity: 0 },
+                visible: {
+                  y: 0,
+                  opacity: 1
+                }
+              }}
+            >
+              <img src={BolsaDinero} alt="Dinero"/>
+              <p>Reinvertir beneficios</p>
+            </motion.div>
+            <motion.div
+              className={classes.IntroIcons_card}
+              variants={{
+                hidden: { y: 20, opacity: 0 },
+                visible: {
+                  y: 0,
+                  opacity: 1
+                }
+              }}
+            >
+              <img src={Pastel} alt="Pastel"/>
+              <p>Diversificar ingresos y riesgos</p>
+            </motion.div>
+          </motion.div>
+        </section>
+        <section className={classes.Phrase}>
           <p>
-            Si se hace de manera eficiente y con responsabilidad, es una salida a la dependencia de la cultura del subsidio que actualmente impera en nuestra región.
+            Comon Sit Ca'teltic es un motor económico, que distribuye los recursos generados hacia donde hacen falta.
           </p>
-        </div>
-      </section>
-      <section
-        className={classes.Phrase}
-      >
-        <p>Una apuesta por una economía social y solidaria.</p>
-      </section>
+          <p>
+            Este proyecto es una búsqueda para salir de la dependencia cultura del subsidio que actualmente impera en nuestra región.
+          </p>
+        </section>
+        <Parallax
+          className={[classes.Intro].join(' ')}
+          bgImage={HomeImage}
+          bgImageAlt="Cafetalero"
+          strength={300}
+        >
+        </Parallax>
+        <section
+          className={classes.Phrase}
+        >
+          <p>Una apuesta por una economía social y solidaria.</p>
+        </section>
+      </div>
     </div>
   );
 }
