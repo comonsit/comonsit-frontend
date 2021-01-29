@@ -25,9 +25,9 @@ export const Conocenos = () => {
     <div className={classes.Conocenos}>
       <div className={classes.Territorio}>
         <div className={classes.Territorio_content}>
-          <h3>Nuestro Territorio</h3>
+          <h2>Nuestro Territorio</h2>
           <div>
-            <p>Vivimos al norte del estado de Chiapas, entre las cañadas que abarcan los municipios de Chilón, Sitalá, Yajalón, Pantelhó y Ocosingo. El clima tropical hace que la zona sea adecuado para el cultivo de café bajo sombra (principal fuente de ingreso para nuestras familias), pero lo que sostiene nuestra forma de vida es el cultivo de nuestras parcelas; el maíz, el frijol y una gran variedad de frutos son la base de nuestra alimentación y de nuestra economía familiar.</p>
+            <p>Vivimos al norte del estado de Chiapas, entre las cañadas que abarcan los municipios de Chilón, Sitalá, Yajalón, Pantelhó y Ocosingo. El clima tropical hace que la zona sea adecuada para el cultivo de café bajo sombra (principal fuente de ingreso para nuestras familias), pero lo que sostiene nuestra forma de vida es el cultivo de nuestras parcelas; el maíz, el frijol y una gran variedad de frutos son la base de nuestra alimentación y de nuestra economía familiar.</p>
             <p>En toda esta zona prevalece la cultura maya Tseltal, la cual conserva una gran riqueza cultural a través de nuestra lengua, nuestras tradiciones y nuestro sistema de cargos civiles y religiosos. Todo esto, junto con el cuidado de la madre tierra, nos permite mantener mantener lo que llamamos el <strong>lequil cuxlejalil</strong> (la vida buena y en armonía) con nuestra comunidad, con el ambiente y con lo espiritual. </p>
             <p>Aún así, esta región es una de las más empobrecidas de México. A pesar de ser una zona con grandes riquezas naturales, han sido siempre otras personas las que se quedan con el valor de nuestros recursos.</p>
             <p>Es por eso que decidimos organizarnos para salir de estos esquemas de dependencia económica y construir nuestras alternativas.</p>
@@ -41,20 +41,20 @@ export const Conocenos = () => {
         >
         </Parallax>
       </div>
-      <div className={classes.Barista}>
-        <Parallax
-          bgImage={Barista}
-          bgImageAlt="Barista"
-          strength={100}
-          className={classes.Barista_img}
-        >
-        </Parallax>
-        <div className={classes.Barista_content}>
+      <div className={classes.YomolIntro}>
+        <div className={classes.YomolIntro_content}>
           <h3>Yomol A'tel</h3>
           <p>Yomol A’tel significa en la lengua Tseltal <strong>juntos trabajamos, caminamos, soñamos</strong>. Es un grupo ingegrado por empresas sociales y cooperativas, así como las familias productoras de la región selva norte de Chiapas y colaboradores en diversas partes de la república Mexicana.</p>
           <p>Nos dedicamos a generar respuestas organizadas desde la base social para construir alternativas de agregación de valor en los recursos que tenemos actualmente en nuestro territorio, cuidando siempre nuestra relación con la madre tierra y acompañados por diversos actores sociales que coinciden con nuestra vocación (universidades, fundaciones, inversionistas, consumidores y otras experiencias sociales, entre otros).</p>
         </div>
       </div>
+      <Parallax
+        bgImage={Barista}
+        bgImageAlt="Barista"
+        strength={200}
+      >
+        <div className={classes.Barista}></div>
+      </Parallax>
       <div className={classes.Yomol}>
         <AnimateSharedLayout>
           <motion.div className={classes.Yomol_Container}>
@@ -98,33 +98,34 @@ export const Conocenos = () => {
             <img src={Xapontic} alt="Xapontic"/>
           </div>
           <div>
-            <h3>Microfinanzas</h3>
-            <p>Microcréditos al consumo y a la producción para las familias que forman parte de Yomol A’tel.</p>
-            <img src={Comon} alt="Comon"/>
-          </div>
-          <div>
             <h3>Miel Orgánica</h3>
             <p>Producción agroecológica y venta nacional, etapa temprana de transformación del producto terminado.</p>
             <img src={Chabtic} alt="Chabtic"/>
           </div>
+          <div>
+            <h3>Microfinanzas</h3>
+            <p>Microcréditos al consumo y a la producción para las familias que forman parte de Yomol A’tel.</p>
+            <img src={Comon} alt="Comon"/>
+          </div>
         </div>
       </div>
-      <div className={[classes.Container, classes.Gray].join(' ')}>
+      <div className={classes.Container}>
         <div className={classes.Container_content}>
           <h3>Comon Sit Ca’teltic</h3>
-          <p>Comon Sit Ca’teltic empezó con reinvertir parte del beneficio que trajo el precio construido del café, y utilozar esos recursos para empezar actividades nuevas que a su vez generen excedentes que se reinviertan nuevamente en financiar otras actividades productivas.</p>
-          <p>Todo ello volteando a ver la dinámica económico-productiva que se puede incentivar en una familia, en una comunidad o una región y que trae consigo mejoras en el ingreso y estabilidad económica de los y las productores y sus familias.</p>
+          <p>Comon Sit Ca’teltic empezó con reinvertir parte del beneficio que trajo el precio construido del café. De ahí buscamos utilizar esos recursos para empezar actividades nuevas que a su vez generen excedentes que se reinviertan nuevamente en financiar otras actividades productivas.</p>
+          <p>El proceso ha sido siempore atentos a la dinámica económico-productiva que se puede incentivar en una familia, en una comunidad o región.</p>
         </div>
         <img className={classes.Long}  src={Colab} alt="Colaboración"/>
       </div>
-      <div className={[classes.Container, classes.Gray].join(' ')}>
-        <img className={classes.Long}  src={Dashboard} alt="Dashboard"/>
+      <div className={[classes.Container, classes.Reverse].join(' ')}>
         <div className={classes.Container_content}>
           <h4>Plataforma de créditos en línea</h4>
-          <p>En circunstancias y geografías complicadas buscamos soluciones tecnológicas que nos permitieran enfocarnos en los procesos sociales, simplificando el acceso en una geografía complicada como la de nuestra región.</p>
-          <p>Esta plataforma multi-idioma de código abierto nos ha abierto nuevas posibilidades, teniendo una claridad de nuestros datos y procesos que a la fecha seguimos explorando y mejorando.</p>
-          <p>El código se encuentra disponible <a href="https://github.com/mauricioinaz/comonSit">aquí</a> ha sido desarrollado en un proceso junto con nuestro colaborador y amigo <a href="https://github.com/mauricioinaz/">@mauricioinaz</a> y cualquiera que pueda y guste puede revisarlo, copiarlo y mejorarlo</p>
+          <p>Conforme el proyecto fue creciendo en tamaño y complejidad, y el acceso remoto a datos resultó cada vez más importante, iniciamos el desarrollo de este sitio.</p>
+          <p>comonsitcateltic.com es una plataforma multi-idioma que nos ha abierto nuevas posibilidades, permitiéndonos explorar mejor nuestros datos y formas de trabajo en un proceso que a la fecha seguimos explorando y mejorando.</p>
+          <p>Consideramos importante compartir nuestra experiencia, así que para quien esté interesada en ver, copiar, descargar o mejorar nuestro código, lo pueden hacer de manera libre aquí <a href="https://github.com/mauricioinaz/comonSit">aquí</a>.</p>
+          <p>El código de esta plataforma ha sido desarrollada en un proceso junto con nuestro colaborador y amigo <a href="https://github.com/mauricioinaz/">@mauricioinaz</a></p>
         </div>
+        <img src={Dashboard} alt="Dashboard"/>
       </div>
     </div>
   );

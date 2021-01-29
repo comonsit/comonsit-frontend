@@ -6,6 +6,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  @include tablet {
+    font-size: 1.1em;
+  }
   @include desktop {
     display: block;
     height: calc(100vh - #{$home-toolbar});
@@ -20,8 +23,7 @@
       flex-direction: column;
       justify-content: space-around;
     }
-    h3,
-    h4 {
+    h2 {
       text-align: center;
     }
   }
@@ -41,7 +43,7 @@
 }
 
 
-.Barista {
+.YomolIntro {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,9 +51,12 @@
   padding: 0;
   background-color: $background-gray;
   position: relative;
-  // @include tablet {
-  //   flex-direction: row;
-  // }
+  @include tablet {
+    font-size: 1.1em;
+  }
+  @include desktopXL {
+    font-size: 1.2em;
+  }
   &_content {
     padding: 4rem;
     @include desktop {
@@ -62,65 +67,22 @@
       justify-content: space-around;
       max-width: 100rem;
     }
-    h3,
-    h4 {
+    h3 {
       text-align: center;
     }
   }
-  &_img {
-    width: 100%;
-    position: inherit;
-    height: 25vh;
-    @include desktop {
-      height: 50rem;
-    }
-  }
-  // &.Gray {
-  //   background-color: $background-gray;
-  //   flex-direction: column-reverse;
-  //   @include tablet {
-  //     flex-direction: row;
-  //   }
-  // }
 }
 
-.Container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-
-  padding: 0;
-
-  position: relative;
-  background-color: $background-gray;
-  flex-direction: column-reverse;
-  @include tablet {
-    flex-direction: row;
+.Barista {
+  height: 40rem;
+  @include desktop {
+    height: 50rem;
   }
-  &_content {
-    width: 100%;
-    padding: 4rem;
-    @include tablet {
-      width: 50%;
-    }
-
+  @include desktop {
+    height: 60rem;
   }
-  &_img {
-    width: 110%;
-    position: absolute;
-    @include tablet {
-
-      // padding-top: 4rem;
-      // align-self: flex-end;
-      // top: 0;
-      // left: 50%;
-      // width: 50%;
-      // height: 60rem;
-      // .Long {
-      //   width: 60%;
-      // }
-    }
+  @include desktopXL {
+    height: 70rem;
   }
 }
 
@@ -128,6 +90,10 @@
   display: none;
   @include tablet {
     display: block;
+    font-size: 1.1em;
+  }
+  @include desktopXL {
+    font-size: 1.2em;
   }
   position: relative;
   height: calc(100vh - #{$home-toolbar});
@@ -209,8 +175,46 @@
       }
     }
   }
-
   @include tablet {
     display: none;
+  }
+}
+
+
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  position: relative;
+  background-color: $background-gray;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+    font-size: 1.1em;
+    &.Reverse {
+      flex-direction: row-reverse;
+    }
+  }
+  @include desktopXL {
+    font-size: 1.2em;
+  }
+  &_content {
+    padding: 4rem;
+    @include tablet {
+      width: 50%;
+    }
+  }
+  img {
+    width: 100%;
+    max-width: 80rem;
+    @include tablet {
+      width: 50%;
+    }
+  }
+  .Long {
+    @include tablet {
+      transform: translate(0%,-10%);
+    }
   }
 }

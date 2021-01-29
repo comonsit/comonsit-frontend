@@ -188,32 +188,13 @@ export const HomeContainer = props => {
           </motion.div>
         </motion.div>
         <Parallax
-          className={classes.Intro}
+          className={classes.ParallaxPhoto}
           bgImage={BeesPhoto}
           bgImageAlt="abejas"
-          strength={300}
+          strength={200}
         >
+        <div className={classes.ParallaxPhotoCnt}></div>
         </Parallax>
-        <div className={classes.IntroInfo}>
-
-        </div>
-          {/*
-            <motion.div
-              className={classes.IntroPhoto}
-              whileHover={{
-                scale: 1.05,
-               }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 20
-              }}
-              onHoverStart={e => {}}
-              onHoverEnd={e => {}}
-            >
-              <img src={BeesPhoto} alt="Logo Comon Sit Ca'teltic"/>
-            </motion.div>
-            */}
         <motion.div
           className={[classes.Phrase, classes.Back].join(' ')}
          >
@@ -293,11 +274,12 @@ export const HomeContainer = props => {
           </p>
         </section>
         <Parallax
-          className={[classes.Intro].join(' ')}
+          className={classes.ParallaxPhoto}
           bgImage={HomeImage}
           bgImageAlt="Cafetalero"
-          strength={300}
+          strength={200}
         >
+          <div className={classes.ParallaxPhotoCnt}></div>
         </Parallax>
         <section
           className={classes.Phrase}
