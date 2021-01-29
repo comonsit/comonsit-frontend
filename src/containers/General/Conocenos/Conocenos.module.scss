@@ -1,43 +1,134 @@
 @import 'styles/general';
 
-.Container {
+.Territorio {
+  width: 100%;
+
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5rem;
   flex-direction: column;
-  @include tablet {
-    flex-direction: row;
+  align-items: center;
+  @include desktop {
+    display: block;
+    height: calc(100vh - #{$home-toolbar});
   }
+
   &_content {
-    width: 100%;
-    @include tablet {
-      width: 50%;
+    padding: 4rem;
+    @include desktop {
+      width: 40%;
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
     }
     h3,
     h4 {
       text-align: center;
     }
   }
-  img {
-    width: 110%;
-    @include tablet {
-      width: 40%;
-      .Long {
-        width: 60%;
-      }
+  &_img {
+    width: 100%;
+    position: inherit;
+    height: 50vh;
+    @include desktop {
+      margin-top: $home-toolbar;
+      position: absolute !important;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 110%;
     }
   }
-  &.Gray {
-    background-color: $background-gray;
-    flex-direction: column-reverse;
+}
+
+
+.Barista {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column-reverse;
+  padding: 0;
+  background-color: $background-gray;
+  position: relative;
+  // @include tablet {
+  //   flex-direction: row;
+  // }
+  &_content {
+    padding: 4rem;
+    @include desktop {
+      width: 80%;
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      max-width: 100rem;
+    }
+    h3,
+    h4 {
+      text-align: center;
+    }
+  }
+  &_img {
+    width: 100%;
+    position: inherit;
+    height: 25vh;
+    @include desktop {
+      height: 50rem;
+    }
+  }
+  // &.Gray {
+  //   background-color: $background-gray;
+  //   flex-direction: column-reverse;
+  //   @include tablet {
+  //     flex-direction: row;
+  //   }
+  // }
+}
+
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
+  padding: 0;
+
+  position: relative;
+  background-color: $background-gray;
+  flex-direction: column-reverse;
+  @include tablet {
+    flex-direction: row;
+  }
+  &_content {
+    width: 100%;
+    padding: 4rem;
     @include tablet {
-      flex-direction: row;
+      width: 50%;
+    }
+
+  }
+  &_img {
+    width: 110%;
+    position: absolute;
+    @include tablet {
+
+      // padding-top: 4rem;
+      // align-self: flex-end;
+      // top: 0;
+      // left: 50%;
+      // width: 50%;
+      // height: 60rem;
+      // .Long {
+      //   width: 60%;
+      // }
     }
   }
 }
 
 .Yomol {
+  display: none;
+  @include tablet {
+    display: block;
+  }
   position: relative;
   height: calc(100vh - #{$home-toolbar});
   overflow: hidden;
@@ -54,13 +145,8 @@
     justify-content: flex-start;
     padding: 4rem;
     align-items: flex-start;
-    overflow-x: scroll;
-    width: 80%;
-    @include tablet {
-      overflow-x: none;
-      width: auto;
-      justify-content: space-around;
-    }
+    width: auto;
+    justify-content: space-around;
   }
   &_Card {
     position: relative;
@@ -69,15 +155,11 @@
     justify-content: flex-start;
     padding: 2rem;
     background-color: $background-gray;
-    border-radius: 4rem;
-    width: 80%;
+    border-radius: 2rem;
+    width: 20%;
     border: 1px solid $sec-light-gray;
     margin: 0 1rem;
-    @include tablet {
-      width: 20%;
-      max-width: 15rem;
-    }
-
+    max-width: 15rem;
     h4 {
       text-align: center;
     }
@@ -89,5 +171,46 @@
     img {
       width: 100%;
     }
+  }
+}
+
+.YomolMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  &_Center {
+    width: 80%;
+    align-self: center;
+    padding-top: 4rem;
+  }
+  &_Container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 3rem;
+    &> div {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+    }
+    img {
+      width: 70%;
+      align-self: center;
+      padding: 2rem;
+    }
+    .Three {
+      display: flex;
+      flex-direction: column;
+      img {
+        padding: 1.4rem;
+        width: 70%;
+      }
+    }
+  }
+
+  @include tablet {
+    display: none;
   }
 }
