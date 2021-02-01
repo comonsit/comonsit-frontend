@@ -43,7 +43,7 @@ const getRegionCom = (region, comunidades) => {
           <Popup>
           <p>Comunidad: <strong>{it.nombre_de_comunidad}</strong>  </p>
           <p>Región: <strong>{it.nombre_region}</strong> </p>
-          <p>Ermita  <strong>{it.ermita}</strong> </p>
+          <p>Ermita  <strong>{it.ermita_name}</strong> </p>
           <p>LocInegi: <strong>{it.inegiLocalidad}</strong></p>
           </Popup>
         </Marker>
@@ -141,19 +141,19 @@ const Sandbox = (props) => {
       })
 
       const localidadesNOGeo = props.comunidades
-        .filter(it => it.ermita !== null && it.ubicacion === null)
+        .filter(it => it.ermita_name !== null && it.ubicacion === null)
         .map(it => {
           if (it.ubicacion === null) {
             return (
               <div key={it.id} className={classes.DataContainer}>
-                <h5>Comunidad {it.nombre_de_comunidad} - Región {it.nombre_region} - Ermita  {it.ermita}</h5>
+                <h5>Comunidad {it.nombre_de_comunidad} - Región {it.nombre_region} - Ermita  {it.ermita_name}</h5>
               </div>
             )
           }
           return null
         })
       const localidadesNOErmita = props.comunidades
-        .filter(it => it.ermita === null)
+        .filter(it => it.ermita_name === null)
         .map(it => {
           if (it.ubicacion === null) {
             return (

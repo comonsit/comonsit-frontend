@@ -71,6 +71,18 @@ class Tsumbalil extends Component {
         Filter: SelectColumnFilter,
         filter: 'includes'
       },
+      {
+        Header: <FormattedMessage id="ermita"/>,
+        accessor: 'ermita',
+        Filter: SelectColumnFilter,
+        filter: 'includes'
+      },
+      {
+        Header: <FormattedMessage id="inegiLocalidad"/>,
+        accessor: 'inegiLocalidad',
+        Filter: SelectColumnFilter,
+        filter: 'includes'
+      },
     ]
 
     const newComunidadButton = isGerencia(this.props.role)
