@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // import classes from './Tsumbalil.module.scss';
 import ComunidadList from './ComunidadList/ComunidadList';
+import ErmitasList from './ErmitasList/ErmitasList';
 import ComunidadForm from './ComunidadForm/ComunidadForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -55,6 +56,24 @@ class Tsumbalil extends Component {
         )
       : null
 
+    const comunidadTable = this.props.comunidades
+      ? (
+          <ComunidadList
+            data={this.props.comunidades}
+            onClick={row => this.showComunidad(row.values.id)}
+          />
+        )
+      : <Spinner/>
+
+    const ermitaTable = this.props.ermitas
+      ? (
+          <ErmitasList
+            data={this.props.ermitas}
+            onClick={() => {}}
+          />
+        )
+      : <Spinner/>
+
     return (
       <>
         <Modal
@@ -66,11 +85,11 @@ class Tsumbalil extends Component {
         <Title titleName="tsumbalil.title">
           {newComunidadButton}
         </Title>
-        <Card table>
-          <ComunidadList
-            data={this.props.comunidades}
-            onClick={row => this.showComunidad(row.values.id)}
-          />
+        <Card table title={"tsumbalil.comunidades"}>
+          {comunidadTable}
+        </Card>
+        <Card table title={"tsumbalil.ermitas"}>
+          {ermitaTable}
         </Card>
       </>
     )
@@ -80,6 +99,7 @@ class Tsumbalil extends Component {
 const mapStateToProps = state => {
   return {
     comunidades: state.generalData.comunidades,
+    ermitas: state.generalData.ermitas,
     updated: state.generalData.updated,
     selComunidad: state.generalData.selectedComunidad,
     token: state.auth.token,

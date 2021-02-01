@@ -101,7 +101,8 @@
   "mesaControl.irregularidades": "Banti ma xchicnaj lec sc'oblal",
   "solicitudForm.aval": "Ants winiquetic te ya xchuc sbahic ta yutil a'tel",
   "solicitudForm.familiar_responsable": "Mach'a ya yihquitay hilel ta yutil sna",
-  "tsumbalil.title": "Comonaletic",
+  "tsumbalil.title": "Ts'umbalil",
+  "tsumbalil.comunidades": "Comonaletic",
   "tsumbalil.nombre_de_comunidad": "Comonal",
   "tsumbalil.nombre_region": "Jsehp squ'inalel",
   "tsumbalil.newComunidad": "Yach'il Comonal",
@@ -461,5 +462,6 @@
   "movimiento.tipo_de_movimiento": "Tipo de Movimiento",
   "tipo_de_movimiento": "Tipo de Aportacion/Retiro",
   "fecha_banco": "Fechan en Banco",
-  "referencia_banco": "Referencia Bancaria"
+  "referencia_banco": "Referencia Bancaria",
+  "tsumbalil.ermitas": "Ermitahetic"
 }
