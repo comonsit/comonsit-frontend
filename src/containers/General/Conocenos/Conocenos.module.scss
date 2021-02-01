@@ -11,7 +11,7 @@
   }
   @include desktop {
     display: block;
-    height: calc(100vh - #{$home-toolbar});
+    min-height: calc(100vh - #{$home-toolbar});
   }
 
   &_content {

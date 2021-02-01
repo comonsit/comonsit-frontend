@@ -84,17 +84,13 @@
 .Burger {
   position: absolute;
   top: 1rem;
-  right: -4rem;
-  width: 3.5rem;
-  height: 4.5rem;
+  right: -5.5rem;
+  width: 5.5rem;
+  height: 5.7rem;
   background-color: $pr-dark-blue;
-  padding:0 .5rem;
-  @include tablet {
-    right: -6rem;
-    width: 5rem;
-    height: 6rem;
-    padding:0 1rem;
-  }
+  padding: 0 .8rem;
+  border-radius: 0 .3rem .3rem 0;
+
   @include desktop {
     display: none;
   }

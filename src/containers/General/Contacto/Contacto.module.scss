@@ -5,12 +5,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
   z-index: -3;
   height: calc(100vh - #{$home-toolbar});
-  h2 {
-    text-align: center;
-  }
+  padding: 3rem;
+  text-align: center;
   a {
     text-decoration: none;
     color: #BBC392;

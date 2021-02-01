@@ -96,7 +96,7 @@ export const HomeContainer = props => {
   // const constraintsRef = useRef(null);
   const animationOfIcons = useAnimation();
   const animationOfLogo = useAnimation();
-  const [onScrollRef, inView ] = useInView({threshold: .8});
+  const [onScrollRef, inView ] = useInView({threshold: .7});
   useEffect(() => {
     if (inView) {
       animationOfIcons.start("visible");
@@ -105,11 +105,10 @@ export const HomeContainer = props => {
 
 
   // EFECTO DEL LOGO
-
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   const animationOfCircle = useAnimation();
-  const [onScrollRefCircle, inViewCircle ] = useInView({threshold: 1});
+  const [onScrollRefCircle, inViewCircle ] = useInView({threshold: .8});
 
   useEffect(() => {
     if (inViewCircle) {

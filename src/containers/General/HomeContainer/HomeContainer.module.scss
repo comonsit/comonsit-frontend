@@ -89,11 +89,12 @@
 .Intro {
   display: flex;
   min-height: 60vh;
-  background-color: $background-gray;
+  background-color: $pr-dark-blue;
   padding: 1%;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
+  color: white;
   &Info {
     display: flex;
     justify-content: center;
