@@ -54,6 +54,7 @@ export const NEW_ACOPIO_START = 'NEW_ACOPIO_START'
 
 export const SET_REGIONES = 'SET_REGIONES'
 export const SET_COMUNIDADES = 'SET_COMUNIDADES'
+export const SET_ERMITAS = 'SET_ERMITAS'
 export const SET_CARGOS = 'SET_CARGOS'
 export const SET_CARGOS_COOP = 'SET_CARGOS_COOP'
 export const SET_EMPRESAS = 'SET_EMPRESAS'

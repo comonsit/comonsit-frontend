@@ -65,6 +65,7 @@ export {
   fetchGralData,
   setRegiones,
   setComunidades,
+  setErmitas,
   updateComunidad,
   selectComunidad,
   unSelectComunidad,

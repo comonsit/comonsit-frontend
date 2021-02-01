@@ -4,6 +4,7 @@ import { updateObject } from './utility'
 const initialState = {
   regiones: null,
   comunidades: [{}],
+  ermitas: [{}],
   selectedComunidad: null,
   cargos: null,
   cargosCoop: null,
@@ -113,10 +114,17 @@ const newComunidadFailed = (state) => {
   return updateObject(state, {loading: false})
 }
 
+const setErmitas = (state, action) => {
+  return updateObject(state, {
+    ermitas: action.ermitas,
+  })
+}
+
 const reducer = (state=initialState , action) => {
   switch(action.type) {
     case actionTypes.SET_REGIONES: return setRegiones(state, action)
     case actionTypes.SET_COMUNIDADES: return setComunidades(state, action)
+    case actionTypes.SET_ERMITAS: return setErmitas(state, action)
     case actionTypes.SET_CARGOS: return setCargos(state, action)
     case actionTypes.SET_CARGOS_COOP: return setCargosCoop(state, action)
     case actionTypes.SET_EMPRESAS: return setEmpresas(state, action)

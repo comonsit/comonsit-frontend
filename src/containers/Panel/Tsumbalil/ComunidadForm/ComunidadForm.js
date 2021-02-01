@@ -54,7 +54,24 @@ class ComunidadForm extends Component {
           valid: true,
           errorMessage: "",
           touched: false,
-        }
+        },
+        ermita: {
+          elementType: 'select',
+          elementConfig: {
+            options: this.props.ermitas.map(e => ({
+              "value": e.ermita_id,
+              "displayValue": e.ermita_id+' - '+e.nombre
+            }))
+          },
+          label: (<><FormattedMessage id="tsumbalil.ermita"/>*</>),
+          value: this.props.selComunidad.ermita,
+          validation: {
+            required: true
+          },
+          valid: true,
+          errorMessage: "",
+          touched: false,
+        },
       }
     }
   }
@@ -113,7 +130,7 @@ class ComunidadForm extends Component {
   render() {
     // SINGLE SOCIO
     // TODO: done to keep order in Safari. improvement?
-    const formOrder = ["nombre_de_comunidad", "region"]
+    const formOrder = ["nombre_de_comunidad", "region", "ermita"]
     const formElementsArray = []
     let formElements = <Spinner/>
     let submitButton, editButton
@@ -195,6 +212,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
     regiones: state.generalData.regiones,
     comunidades: state.generalData.comunidades,
+    ermitas: state.generalData.ermitas,
     new: state.generalData.newComunidad,
     formError: state.errors.errors,
   }

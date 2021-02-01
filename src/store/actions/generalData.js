@@ -15,6 +15,13 @@ export const fetchGralData = (token) => {
       .catch(error => {
         // TODO:
       })
+    axios.get('/ermitas.json', authData)
+      .then(response => {
+        dispatch(setErmitas(response.data))
+      })
+      .catch(error => {
+        // TODO:
+      })
     axios.get('/regiones.json', authData)
       .then(response => {
         dispatch(setRegiones(response.data))
@@ -82,6 +89,13 @@ export const setComunidades = (comunidades) => {
   }
 }
 
+
+export const setErmitas = (ermitas) => {
+  return {
+    type: actionTypes.SET_ERMITAS,
+    ermitas: ermitas
+  }
+}
 
 export const setCargos = (cargos) => {
   return {
