@@ -3,11 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 // import classes from './Tsumbalil.module.scss';
+import ComunidadList from './ComunidadList/ComunidadList';
 import ComunidadForm from './ComunidadForm/ComunidadForm';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import RTable from '../../../components/Tables/RTable/RTable';
-import SelectColumnFilter from '../../../components/Tables/RTable/Filters/SelectColumnFilter';
 import Button from '../../../components/UI/Button/Button';
 import Card from '../../../components/UI/Card/Card';
 import Title from '../../../components/UI/Title/Title';
@@ -48,43 +47,6 @@ class Tsumbalil extends Component {
       ? <ComunidadForm />
       : <Spinner/>
 
-    const columns = [
-      {
-        Header: '# C',
-        accessor: 'id',
-        Filter: '',
-        filter: ''
-      },
-      {
-        Header: <FormattedMessage id="comunidad"/>,
-        accessor: 'nombre_de_comunidad'
-      },
-      {
-        Header: '# R',
-        accessor: 'region',
-        Filter: SelectColumnFilter,
-        filter: 'equals',
-      },
-      {
-        Header: <FormattedMessage id="region"/>,
-        accessor: 'nombre_region',
-        Filter: SelectColumnFilter,
-        filter: 'includes'
-      },
-      {
-        Header: <FormattedMessage id="ermita"/>,
-        accessor: 'ermita',
-        Filter: SelectColumnFilter,
-        filter: 'includes'
-      },
-      {
-        Header: <FormattedMessage id="inegiLocalidad"/>,
-        accessor: 'inegiLocalidad',
-        Filter: SelectColumnFilter,
-        filter: 'includes'
-      },
-    ]
-
     const newComunidadButton = isGerencia(this.props.role)
       ? (
           <Button clicked={this.onNewComunidad}>
@@ -105,10 +67,9 @@ class Tsumbalil extends Component {
           {newComunidadButton}
         </Title>
         <Card table>
-          <RTable
-            columns={columns}
+          <ComunidadList
             data={this.props.comunidades}
-            onRowClick={row => this.showComunidad(row.values.id)}
+            onClick={row => this.showComunidad(row.values.id)}
           />
         </Card>
       </>
