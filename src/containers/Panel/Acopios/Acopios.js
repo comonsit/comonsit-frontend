@@ -35,6 +35,7 @@ class Acopios extends Component {
 
   componentDidMount() {
     this.props.onInitAcopios(this.props.token)
+    this.props.onInitSocios(this.props.token)
   }
 
   componentDidUpdate(prevProps) {
@@ -165,6 +166,15 @@ class Acopios extends Component {
         )
       : null
 
+    let graphs = <Spinner />
+    if (
+      this.props.comunidades && this.props.comunidades.length > 1 &&
+      this.props.listaSocios && this.props.listaSocios.length > 1 &&
+      this.props.regiones && this.props.regiones.length > 1
+    ) {
+      graphs = <AcopiosGraphs/>
+    }
+
     return (
       <>
         <Title
@@ -172,7 +182,7 @@ class Acopios extends Component {
           {newAcopioButton}
         </Title>
         <Card>
-          <AcopiosGraphs/>
+          {graphs}
         </Card>
         <Card table >
           <HoverButton
@@ -190,6 +200,9 @@ class Acopios extends Component {
 const mapStateToProps = state => {
   return {
     listaAcopios: state.acopios.acopios,
+    listaSocios: state.socios.socios,
+    regiones: state.generalData.regiones,
+    comunidades: state.generalData.comunidades,
     token: state.auth.token,
     role: state.auth.role
   }
@@ -199,6 +212,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onInitAcopios: (token) => dispatch(actions.initAcopios(token)),
     onNewAcop: () => dispatch(actions.newAcopio()),
+    onInitSocios: (token) => dispatch(actions.initSocios(token))
   }
 }
 

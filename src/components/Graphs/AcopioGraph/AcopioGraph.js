@@ -14,6 +14,18 @@ import classes from './AcopioGraph.module.scss';
 import Currency from '../../UI/Formatting/Currency';
 
 const acopioGraph = (props) => {
+  const hint = props.hint
+    ? (
+        <Hint value={props.hint}>
+          <div className={classes.Hint}>
+            <p style={{fontSize: ".8em"}}>
+              <Currency value={props.hint.y}/> en {props.hint.x}
+            </p>
+          </div>
+        </Hint>
+      )
+    : null
+
   return (
   <div className={classes.Container}>
     <div className={classes.Label}>
@@ -36,23 +48,13 @@ const acopioGraph = (props) => {
         data={props.data}
         color={props.color}
         onValueMouseOver={props.mouseOver}
-        onValueMouseOut={props.mouseOut}/>
-      {props.hint ? (<Hint value={props.hint}>
-                          <div
-                            style={
-                              {
-                                background: '#656564',
-                                padding: '.5rem',
-                                borderRadius: "1rem"}
-                              }
-                          >
-                            <p style={{fontSize: ".8em"}}><Currency value={props.hint.y}/> en {props.hint.x}</p>
-                          </div>
-                        </Hint> ): null}
+        onValueMouseOut={props.mouseOut}
+      />
+      {hint}
     </XYPlot>
   </div>
   )
 }
 
 
-export default acopioGraph;
+export default React.memo(acopioGraph);

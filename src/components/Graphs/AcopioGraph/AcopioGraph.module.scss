@@ -1,5 +1,14 @@
+@import 'styles/variables';
+
 .Container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.Hint{
+  background-color: $tooltip-gray;
+  padding: .5rem;
+  border-radius: 1rem;
+  font-size: .9em;
 }
