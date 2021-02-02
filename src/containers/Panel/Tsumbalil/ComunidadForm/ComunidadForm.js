@@ -60,11 +60,11 @@ class ComunidadForm extends Component {
           elementConfig: {
             options: this.props.ermitas.map(e => ({
               "value": e.ermita_id,
-              "displayValue": e.nombre +' - ' + e.ermita_id 
+              "displayValue": e.nombre +' - ' + e.ermita_id
             })),
             optionBlank: true
           },
-          label: (<><FormattedMessage id="tsumbalil.ermita"/>*</>),
+          label: (<><FormattedMessage id="ermita"/>*</>),
           value: this.props.selComunidad.ermita,
           validation: {
             required: false
@@ -187,7 +187,7 @@ class ComunidadForm extends Component {
     }
 
     return (
-      <div classnName={classes.FormContainer}>
+      <div className={classes.FormContainer}>
         <Title
           titleName="comunidadForm.title"
           titleNameEx={": " + this.state.comunidadForm.nombre_de_comunidad.value}

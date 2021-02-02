@@ -21,8 +21,8 @@ MODAL CONTAINERS
   border: .1rem solid $pr-dark-blue;
   padding: .7rem;
   overflow-y: scroll;
-  height: 50vh;
   min-height: 40rem;
+  max-height: 80vh;
 }
 
 .SubSection {
