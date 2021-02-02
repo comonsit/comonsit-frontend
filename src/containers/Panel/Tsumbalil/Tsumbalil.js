@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import FileSaver from 'file-saver';
 
 import classes from './Tsumbalil.module.scss';
 import ComunidadList from './ComunidadList/ComunidadList';
@@ -11,6 +12,7 @@ import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
 import Card from '../../../components/UI/Card/Card';
+import XLSButton from '../../../components/UI/XLSButton/XLSButton';
 import Title from '../../../components/UI/Title/Title';
 import axios from '../../../store/axios-be.js';
 import * as actions from '../../../store/actions';
@@ -63,7 +65,40 @@ class Tsumbalil extends Component {
     this.props.onNewComunidad()
   }
 
+  getComunidadesXLSX = type => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+
+    axios.get('/comunidadesXLSX/', authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, 'comunidades.xlsx')
+      })
+      .catch(error => {
+        // TODO:
+      })
+  }
+
+
+  getErmitasXLSX = type => {
+    const authData = {
+      headers: { 'Authorization': `Bearer ${this.props.token}` },
+      responseType: 'blob',
+    }
+
+    axios.get('/ermitasXLSX/', authData)
+      .then(response => {
+        FileSaver.saveAs(response.data, 'ermitas.xlsx')
+      })
+      .catch(error => {
+        // TODO:
+      })
+  }
+
+
   render() {
+    let downloadErmitaXLSButton, downloadComunidadesXLSButton = null
     let modalContent = <Spinner/>
     if (this.state.itemSelected && this.props.selComunidad) {
       modalContent = <ComunidadForm />
@@ -110,6 +145,21 @@ class Tsumbalil extends Component {
         )
       : <Spinner/>
 
+    if (isGerencia(this.props.role)) {
+      downloadComunidadesXLSButton = (
+        <XLSButton
+          clicked={this.getComunidadesXLSX}
+          labelID={"comunidadesXLSX"}
+        />
+      )
+      downloadErmitaXLSButton = (
+        <XLSButton
+          clicked={this.getErmitasXLSX}
+          labelID={"ermitasXLSX"}
+        />
+      )
+    }
+
     return (
       <>
         <Modal
@@ -122,9 +172,11 @@ class Tsumbalil extends Component {
           {newComunidadButton}
         </Title>
         <Card table title={"tsumbalil.comunidades"}>
+          {downloadComunidadesXLSButton}
           {comunidadTable}
         </Card>
         <Card table title={"tsumbalil.ermitas"}>
+          {downloadErmitaXLSButton}
           {ermitaTable}
         </Card>
       </>

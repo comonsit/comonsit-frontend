@@ -495,5 +495,7 @@
   "ermita.interzona": "Interzona",
   "ermita.municipio": "Municipio",
   "ermita.localidad": "Localidad INEGI",
-  "ermita.localidad_nota": "Notas Localidad INEGI"
+  "ermita.localidad_nota": "Notas Localidad INEGI",
+  "ermitasXLSX": "Descargar ermitas.xlsx",
+  "comunidadesXLSX": "Descargar comunidades.xlsx"
 }
