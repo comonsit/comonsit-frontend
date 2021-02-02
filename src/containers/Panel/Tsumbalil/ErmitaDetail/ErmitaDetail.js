@@ -34,7 +34,6 @@ const ermitaDetail = props => {
 
   let map = null
   if (props.ermita.ubicacion) {
-    console.log('HAY UBICACIón!!!')
     map =  (
       <div className={classes.SubSection}>
         <div className={classes.MapContainer}>
