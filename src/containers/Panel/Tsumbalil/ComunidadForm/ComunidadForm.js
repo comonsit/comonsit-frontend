@@ -58,10 +58,13 @@ class ComunidadForm extends Component {
         ermita: {
           elementType: 'select',
           elementConfig: {
-            options: this.props.ermitas.map(e => ({
-              "value": e.ermita_id,
-              "displayValue": e.ermita_id+' - '+e.nombre
-            }))
+            options: [
+              {  "value": '', "displayValue": ' - '},
+              ...this.props.ermitas.map(e => ({
+                "value": e.ermita_id,
+                "displayValue": e.ermita_id +' - ' +e.nombre
+              }))
+            ]
           },
           label: (<><FormattedMessage id="tsumbalil.ermita"/>*</>),
           value: this.props.selComunidad.ermita,
