@@ -93,29 +93,27 @@ const circleShow = {
 };
 
 export const HomeContainer = props => {
-  // const constraintsRef = useRef(null);
+  // ICON ANIMATION
   const animationOfIcons = useAnimation();
   const animationOfLogo = useAnimation();
   const [onScrollRef, inView ] = useInView({threshold: .7});
-  useEffect(() => {
-    if (inView) {
-      animationOfIcons.start("visible");
-    }
-  }, [animationOfIcons, inView]);
 
-
-  // EFECTO DEL LOGO
+  // CIRCLE ANIMATION
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   const animationOfCircle = useAnimation();
-  const [onScrollRefCircle, inViewCircle ] = useInView({threshold: .8});
+  const [onScrollRefCircle, inViewCircle ] = useInView();
 
-  useEffect(() => {
-    if (inViewCircle) {
-      animationOfCircle.start("open");
-    }
-  }, [animationOfCircle, inViewCircle]);
+  if (inView) {
+    animationOfIcons.start("visible");
+  }
 
+  if (inViewCircle) {
+    animationOfCircle.start("open");
+  }
+
+  // Register animation of logo
+  // to only show animation once per loading page
   useEffect(() => {
     props.onAnimated()
   }, [props]);
@@ -129,12 +127,6 @@ export const HomeContainer = props => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (inView) {
-      animationOfIcons.start("visible");
-    }
-  }, [animationOfIcons, inView]);
 
   return (
     <div className={classes.Cotainer}>
@@ -178,7 +170,7 @@ export const HomeContainer = props => {
           className={classes.CircleBox}
         >
           <motion.div className={classes.CircleBoxBackground} variants={circleShow}/>
-          <motion.div className={classes.CircleBoxBackground} variants={circleShow} ref={onScrollRefCircle}>
+          <motion.div className={classes.CircleBoxBackground} variants={circleShow}>
             <div className={classes.CircleBoxBackgroundCnt}>
               <p>
                 Somos una microfinanciera creada por productores y productoras indígenas tseltales ubicados en la selva norte de Chiapas y formamos parte del grupo Yomol A’tel.
@@ -192,7 +184,7 @@ export const HomeContainer = props => {
           bgImageAlt="abejas"
           strength={200}
         >
-        <div className={classes.ParallaxPhotoCnt}></div>
+        <div ref={onScrollRefCircle} className={classes.ParallaxPhotoCnt}></div>
         </Parallax>
         <motion.div
           className={[classes.Phrase, classes.Back].join(' ')}
