@@ -113,6 +113,10 @@
     align-items: flex-start;
     width: auto;
     justify-content: space-around;
+    &_two {
+      display: flex;
+      align-items: center;
+    }
   }
   &_Card {
     position: relative;
@@ -138,6 +142,11 @@
       width: 100%;
     }
   }
+}
+
+.batsilMaya {
+  width: auto !important;
+  max-height: 6rem;
 }
 
 .YomolMobile {

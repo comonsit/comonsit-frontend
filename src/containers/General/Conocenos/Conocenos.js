@@ -61,8 +61,10 @@ export const Conocenos = () => {
             <YomolCard key={1} title="Café orgánico" activate={inView}>
               <p>Producción agroecológica, transformación, exportación de producto terminado y venta en taza.</p>
               <img key="imgA" src={Capeltic} alt="Capeltic"/>
-              <img key="imgB" src={Batsil} alt="Batsil"/>
-              <img key="imgC" src={Tsumbal} alt="Tsumbal"/>
+              <div className={classes.Yomol_Container_two}>
+                <img className={classes.batsilMaya}  key="imgB" src={Batsil} alt="Batsil"/>
+                <img key="imgC" src={Tsumbal} alt="Tsumbal"/>
+              </div>
             </YomolCard>
             <YomolCard key={2} title="Productos de higiene personal" activate={inView}>
               <p>Jabones artesanales, shampoo, cremas y artesanías.</p>
