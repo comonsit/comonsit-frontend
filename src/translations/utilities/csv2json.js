@@ -1,9 +1,8 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-const newTranslation = {}
-
 const reading = (csvInput, jsonNAME) => {
+  const newTranslation = {}
   fs.createReadStream(csvInput)
     .pipe(csv())
     .on('data', (row) => {
