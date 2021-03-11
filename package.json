@@ -54,6 +54,8 @@
   "devDependencies": {
     "@babel/compat-data": "~7.11.0",
     "@svgr/cli": "^5.2.0",
+    "csv-parser": "^3.0.0",
+    "json2csv": "^5.0.6",
     "source-map-explorer": "^2.5.0"
   },
   "resolutions": {

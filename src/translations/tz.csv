@@ -1,0 +1,563 @@
+id,value
+language,C'opojel
+home.title,Tut smajanel Taqu'in
+home.text,Quechel ta pasel
+conocenos.title,Na'botic jbahtic
+conocenos.text,Li' ay te sna'ojibal binut'il ya jna'bey jbahtic
+origen.title,Jhahchibaltic
+origen.text,Quechel ta pasel
+publicaciones.title,Spucoji'bal ta halel lec stuquinel taqu'in ta jun pajal
+publicaciones.text1,Quechel ta pasel
+publicaciones.text2,Quechel ta pasel
+contacto.title,Banti xhu' ya jchol jbahtic
+contacto.text,Ts'ihbaybotic bin ya sc'an a wo'tan yaca wal ta:
+acceder.pswd-help,Cha'y ta co'tan te smacojibal a'telil
+acceder.submit,Ochel
+layout.chooseLanguage,C'opojel
+menu.start,Shachi'bal
+menu.us,Jna'bey jbahtic
+menu.origin,Shachibal talel
+menu.publication,Chicnajtesbil ta spisil
+menu.contact,Banti xhu' ya jchol jbahtic
+menu.login,Sc'anel ochel
+pmenu.socios,Jwohc' ants winiquetic
+pmenu.movimientos,Yaqu'el tso'bil taqu'inetic
+pmenu.acopios,Stso'bel a'tel
+pmenu.solicitudes,Shunil c'ambajel
+pmenu.tsumbalil,Ts'umbalil
+pmenu.logout,Smaquel a'tel
+socios.title,Jwohc' ants winiquetic
+socios.clave,Yahtalul
+socios.claveCafe,Yahtalul TX
+socios.nombre,Sbihil
+apellido_paterno,Sbahbeyal sjol sbihil
+apellido_materno,Xche'bal sjol sbihil
+socios.region,Jsehp squ'inalel
+socios.comunidad,Comonal
+socios.ingreso-ya,Ochel ta YA
+socios.cafe,Capel
+socios.miel,Cha'b
+socios.jabon,Xapon
+socios.trabajador,J'a'teletic
+socios.general,Comon Sit Ca'teltic
+socios.newSocioButton,Yach'il jwohc' ants winic
+approveButton,Sc'asesel ta c'abal
+disapproveButton,Ma' sohltesel
+saveButton,Squ'ejel
+editButton,Scha' pasel
+cancelButton,Squehchanel ta spasel
+socioForm.title,Jwohc ants winiquetic
+socioForm.age,Ha'biletic
+nombres,Bihililetic
+apellidos,Sjol bihililetic
+socioForm.comunidad,Comonal- Jsehp squ'inalel
+socioForm.curp,Yahtalul ochel ta hun
+telefono,C'opoji'bal
+socioForm.genero,Ants/Winic
+socioForm.fecha_nacimiento,Sc'ahc'alel ayinel ta bahlumilal
+socioForm.fecha_ingr_yomol_atel,Sc'ahc'alel ochel ta Yomol A'tel
+socioForm.fecha_ingr_programa,Sc'ahc'alel ochel ta jwohc' a'tel
+socioForm.cargo,Ya'tel
+socioForm.cargoCoop,Ya'tel ta snahul jwohc' a'tel
+socioForm.clave_anterior,Yahtalul yu'un Capel
+socioForm.estatus_cafe,Stalel yu'un Capel
+socioForm.estatus_miel,Stalel yu'un Cha'b
+socioForm.estatus_yip,Stalel yu'un Yip Antsetic
+socioForm.estatus_trabajador,Stalel yu'un J'a'teletic
+socioForm.estatus_comonSit,Stalel yu'un Comon Sit Ca'teltic
+socioForm.doc_ine,Shunal sloc'ol sit elawil
+socioForm.doc_act_nac,Shunal sc'ahc'alel ayinel ta bahlumilal
+socioForm.doc_curp,Shunal yahtalul ochel ta hun
+socioForm.doc_domicilio,Shunal schicnajibal ban hahchemtalel
+empresa,Muc'ul a'tel
+solicitudes.title,Shunal c'ambajeletic
+solicitudes.new,Yach'il shunal c'ambajel
+solicitudes.folio_solicitud,Yahtalul
+solicitudes.fecha_solicitud,Sc'ahc'alel
+clave_socio,Ya'talul jwohc ants winic
+solicitudes.tipo_credito,Bintic yu'un te smajanel taqu'in
+solicitudes.monto_solicitado,Hich yipal
+plazo_de_pago_solicitado,Sc'ahc'alel
+solicitudes.estatus_solicitud,Stalel
+solicitudes.estatus_evaluacion,Stalel yocliyel
+solicitudes.disapprove,Ma' sohltesel
+solicitudes.goToMesaControl,Stso'bel xchahpanel a'tel
+solicitudForm.title,Yach'il shunal c'ambajel
+searchSocio,Scholel sbihil ants winic
+solicitudForm.fecha_solicitud,Sc'ahc'alel shunil c'ambajel
+solicitudForm.tipo_credito,Bintic yu'un te smajanel taqu'in
+solicitudForm.act_productiva,Sp'ohltesel shachel a'tel
+solicitudForm.other,Yan
+solicitudForm.motivo_credito,Bin yu'un te smajanel taqu'in
+solicitudForm.emergencia_medica,Ahnutic chamel
+solicitudForm.monto_solicitado,Jayeb c'ambil
+solicitudForm.plazo_de_pago_solicitado,Sc'ahc'alel sc'anel stojel betil
+solicitudForm.justificacion_credito,Ban ya xtuquin te smajanel taqu'in
+solicitudForm.comentarios_promotor,Sc'op tehc'ambil jyuc' a'tel
+solicitudForm.pregunta_1,Stso'bel xchahpanel a'tel - sbahbeyal johc'oyel
+solicitudForm.pregunta_2,Stso'bel xchahpanel a'tel - sche'bal johc'oyel
+solicitudForm.pregunta_3,Stso'bel xchahpanel a'tel - yoxe'bal johc'oyel
+solicitudForm.pregunta_4,Stso'bel xchahpanel a'tel - xchane'bal johc'oyel
+mesaControl.irregularidades,Banti ma xchicnaj lec sc'oblal
+solicitudForm.aval,Ants winiquetic te ya xchuc sbahic ta yutil a'tel
+solicitudForm.familiar_responsable,Mach'a ya yihquitay hilel ta yutil sna
+tsumbalil.title,Ts'umbalil
+tsumbalil.nombre_de_comunidad,Comonal
+tsumbalil.nombre_region,Jsehp squ'inalel
+tsumbalil.newComunidad,Yach'il Comonal
+tsumbalil.id,#
+comunidadForm.title,Comonal
+comunidadForm.nombre_de_comunidad,Sbihil comonal
+perfil.title,Sloc'ol bin quileltic
+buscar,Slehel
+apagar,Stup'el
+all,Spisil
+sociosXLSX,Scohtesel sbihil ants winic.xlsx
+acopiosXLSX,Scohtesel sts'obel a'tel.xlsx
+comunidad,Comonal
+region,Jsehp squ'inalel
+kilos,Yalal
+acopios.tipo_producto,Yantic ta chahp p'olmalil
+ingreso,Ochemtalel
+fecha,Sc'ahc'alel
+clave,Yahtalul ants winic
+acopios.title,Stsobel a'telil
+acopios.newAcopio,Yach'il stsobel a'telil
+selectSocio,P'eah ta banti ants winic
+acopioForm.ingreso,Ochem talel
+acopioForm.kilos_de_producto,Yalal p'olmalil
+tipo_de_producto,Yantic ta chahp p'olmalil
+acopioForm.title,Binut'il stsobel a'telil
+acopioForm.avg_price,Jaye'b wan ya stah c'ohel stojol
+movimientos.title,Yaqu'el tso'bil taqu'inetic
+movimientos.newMovimiento,Yach'il yaqu'el tso'bil taqu'in
+movimientos.actualizar,Slehel yaqu'el tso'bil taqu'inetic
+movimientos.aportacion_retiro,Yaqu'el tso'bil taqu'in ma'uc teme sloqu'esel tso'bil taqu'in
+movimientos.monto,Jaye'b
+movimientos.fecha_banco,Sc'ahc'alel snahul squ'ejohbil taqu'in
+movimientos.tipo,Yantic ta chahp yaqu'el tso'bil taqu'in
+movimientos.saldo,Staqu'inul c'alal ta
+movimientos.buscarSocio,Slehel ta tulutuhl ants winic
+movimientos.buscarComunidad,Slehel ta jujun comonal
+empresa,Muc'ul a'tel
+movimientosForm.proceso,Jchahp a'tel
+movimientosForm.fecha_entrega,Sc'ahc'alel yaqu'el
+movimientosForm.monto,Jaye'b
+movimientosForm.fecha_banco,Sc'ahc'alel snahul squ'ejohbil taqu'in
+movimientosForm.title,Yaqu'el tso'bil taqu'in mauc teme sloqu'esel tso'bil taqu'in
+movimientosForm.responsable_entrega,¿Mach'a la jyac te taqu'in?
+movimientosForm.referencia_banco,Schicnaji'bal yahtalul ta snahul taqu'in
+error.title,ma'ba lec la stsac
+error.message1,Te binti jelticlambil ma'ba lec a qu'ejot
+mesaControl.title,Stso'bel xchahpanel a'tel
+mesaControl.solicitud,Shunil c'ambajel
+mesaControl.datos,Bintic junetic ay yu'un te jc'ambahel
+mesaControl.descripcion,Sts'ihbayel
+mesaControl.ingresos_de_cooperativa,Yac'oj sit ya'tel ta yutil snahul chombajel
+mesaControl.tiempoSolicitud,Sc'ahc'alel sc'anel smajanel taqu'in
+mesaControl.observaciones,Ocliyeletic
+mesaControl.promotResponsable,Macha tehc'ambil te la spasbey shunal jc'ambahel
+porc_acopio_por_anio,Hich yipal xch'uhunel yaqu'el sit a'tel ta jujun ha'bil
+mesaControl.familiaresYA,Jwohc nahinel ta Yomol A'tel
+mesaControl.obsPromotor,Ocliyel yu'un tehc'ambil jyuc' a'tel
+mesaControl.revisionCoord,Yocliyel yu'un te jolal a'tel
+mesaControl.pregunta_1,¿Ts'acal bal te shun?
+mesaControl.pregunta_2,¿Ay bal te c'ambil shunal ya bal stsac sbah soc te ay ta c'abal?
+mesaControl.pregunta_3,¿Chican bal ta ilel te bin c'ambil soc lec bal chahpambil?
+mesaControl.pregunta_4,¿Ts'acal bal te shunal soc te halbil smajanel taqu'in?
+mesaControl.comentarios_coordinador,Sc'op te jolal yu'un j'a'tel
+cargo,Ya'tel
+cargo_coop,Ya'tel ta snahul jwohc' a'tel
+cargo_mision,Ya'tel ta yutil yu'un ch'ul nah
+fecha_ingr_yomol_atel,Ya'bilal ochel ta Yomol A'tel
+aval,Mach'a ya xchuc hilel sbah
+justificacion,Bin yu'un
+tipo_credito_nombre,Bintic yu'un te smajanel taqu'in
+interes_mensual,Sjol taqu'in ta jujun uh
+forma_pago,Bin ut'il stojel
+nombre_productor,Sbihil jloqu'esej p'olmalil
+area_proceso,Jwohc' a'tel
+monto_solicitado,Jayeb c'ambil
+act_productiva_nombre,Sp'ohltesel shachel a'tel
+mot_credito_nombre,Bin yu'un te smajanel taqu'in
+fecha_solicitud,Sc'ahc'alel shunil c'ambajel
+aval_nombre,Mach'a ya xchuc hilel sbah
+familiar_responsable,Mach'a ya yihquitay hilel ta yutil sna
+justificacion_credito,Bin yu'un
+promotor,Tehc'ambil jyuc' a'tel
+irregularidades,Banti ma xchicnaj lec sc'oblal
+proceso_nombre,Jchahp a'tel
+preguntas_mesa,Johc'oyel yu'un stso'bel xchahpanel a'tel
+graph_montoVsacopios,Spajaltayel stsobel a'tel soc te c'ambil
+cafe,Capel
+miel,Cha'b
+jabon,Xapon
+salarios,Stojel a'telil
+language.es,Caxlan Còp
+language.tz,Bats'il c'op
+pmenu.inicio,Shachi'bal
+pmenu.bancos,Snahul squ'ejohbil taqu'in
+pmenu.reportes,Yaqu'el ta na'el a'tel
+pmenu.formatos,Shunal xchicnajtesel
+pmenu.registro,Snahcanel ta hun
+pmenu.creditos,Smajanel taqu'in
+pmenu.pagos,Stojel
+pmenu.cuentas,Ahtaletic.
+pmenu.datos,Bintic ay yu'un
+socios.evaluacionSocio,Yocliyel smajanel taqu'in
+movimientos.empresa,Muc'ul a'tel
+solicitudes.allCreditsTrue,Spisil
+solicitudes.allCreditsFalse,Quechel ta ocliyel
+searchSocioAval,Slehel mach'a ya xchuc hilel sbah
+searchCredito,Slehel smajanel taqu'in
+searchDeuda,Yahtayel betil ta hai c'ahc'al ini
+acopiosXLSX.ALL,Spisil
+acopiosXLSX.CF,Capel
+acopiosXLSX.MI,Cha'b
+acopiosXLSX.JA,Xapon
+acopiosXLSX.SL,Stojel a'telil
+movimientos.aportacion,Yaqu'el tso'bil taqu'in
+movimientos.retiro,Sloqu'esel taqu'in
+movimientos.vacio,Mayuc bin yuc'ticlambil ta tsihbayel
+tipo_credito,Bintic yu'un te smajanel taqu'in
+proceso,Jchahp a'tel
+solicitudForm.elige,Tsaja jtuhl ants winic
+solicitudes.goToEvaluacion,Yocliyel
+evaluacion.solvencia,Te me xu' tojbeltic
+evaluacion.volumenIngresosPresente,Jich yipal yac'o sit ya'tel ha' ini habil
+evaluacion.volumenIngresosAnterior,Jich yipal yac'o sit ya'tel te c'ax habil
+evaluacion.nivelSolvencia,Jich yipal ya xu' stojel
+evaluacion.ultimoCredito,Slajibal smajanel taqu'in
+evaluacion.UltimoCreditoMonto,Jich yipal te slajibal smajanel taqu'in
+evaluacion.UltimoCreditoEstatus,Stalel te slajibal smajanel taqu'in
+evaluacion.UltimoCreditoVida,Sc'ahc'alel ban c'alal ya stsacay te slajibal smajanel taqu'in
+evaluacion.UltimoCreditoTotal,Ta spisil te quechelto ay betil
+evaluacion.morosidad,Sc'axemal sc'ahc'alel betil
+evaluacion.morosidadSocio,Sc'axemal sc'ahc'alel betil yu'un ants winic
+evaluacion.morosidadComunidad,Sc'axemal sc'ahc'alel betil ta comonal
+evaluacion.morosidadRegion,Sc'axemal sc'ahc'alel betil ta jsehp squ'inalel
+evaluacion.posibleCredito,Yabal stah te smajanel taqu'in
+evaluacion.nivelRiesgo,Bin ut'il ya stah c'ohel
+evaluacion.montoSugerido,Jaye'b halbil
+evaluacion.montoAprobado,Jaye'b c'asesbil ta c'abal
+evaluacion.plazoPagoAprobado,Sc'ahc'alel stohel te c'asesbil ta c'abal taqu'in
+evaluacion.comentariosGerente,Sc'op te muc'ul jolal yu'un a'tel
+evaluacion.tasa_aprobada,Sjol taqu'in te c'asesbil ta c'abal
+evaluacion.tasa_mor_aprobada,Sjol taqu'in te C'axemix ta sc'ahc'alel
+negotiateButton,Schapel sc'oblal
+evaluacion.30saldo,Snopel yu'un 30%
+evaluacion.50saldo,Snopel yu'un 50%
+mesaControl.evaluacion,Yocliyel
+comentariosPromotor,C'opetic yu'un te sch'a chapel sc'oblal
+reNegotiateButton,Sc'anel yan sch'a chapel sc'oblal
+creditos.title,Xchicnajtesojibal sc'ahc'alel smajanel taqu'in
+creditos.fecha_inicio,Shachi'bal
+creditos.pagado,Tohbilix
+monto,Jaye'b
+plazo,Sc'ahc'alel te jayeb yuhil
+tasa,Sjol taqu'in
+tasa_moratoria,Sjol taqu'in te C'axemix ta sc'ahc'alel
+estatus,Stalel
+fecha_inicio,Sjahchibal ta sc'ahc'alel
+id,Yahtalul
+total,Ta spisil
+creditos.estatus_ejecucion,Schahpanel
+creditos.deuda_al_dia,Ta spisil betil yotic
+creditos.interes_ordinario,Sjol taqu'in ta sc'ahc'alel
+creditos.interes_moratorio,Sjol taqu'in ta sc'axemal sc'ahc'alel
+creditos.status.PA,Tohbilix
+creditos.status.VE,C'axemix ta sc'ahc'alel
+creditos.status.VI,Ay to ta sc'ahc'alel
+creditos.status.DP,--
+creditos.status.CO,Tojbilix
+creditos.status.PC,Ma to tojbil
+creditos.status.CA,Quehchambil ta pasel
+contratoDetail.title,Sjunal sc'uhbanel sbah yu'un ta stojel taqu'in ta junax
+contratoDetail.datos,Bintic junetic ay yu'un te jc'ambahel
+contratoDetail.especificaciones,Schicnajtesel ta a'iyel bin yu'un te smajanel taqu'in
+contratoDetail.informacion,Yaqu'el ta na'el yu'un te stojel smajanel taqu'in
+contratoDetail.texto1,Yaqu'el sme' jc'ab ta ha' ini shunal sc'uhbanel jbah yu'un te stojel jbet ta sc'ahc'alel bin ut'il te yabeyejon jmajan Comon sit Ca'teltic.
+contratoDetail.firma,Sbihil soc sme' sc'ab te jmajan taqu'in
+contratoDetail.graphTitle,Betil
+intereses,Sjol taqu'inetic
+contratoDetail.prestamo,Smajanel
+creditos.condonacionButton,Sch'ayel jtebuc ta o'tanil te sjol taqu'inetic
+creditos.prorrogaButton,Snajtubtesbeyel sc'ahc'alel
+creditos.imprimirContratoButton,Sloqu'esel shunal sc'ahc'alel smajanel taqu'in
+creditos.iniciarContrato,Xchicnajtesel jahchel shunal smajanel taqu'in
+creditos.datosCobro,Bintic junetic ya sc'ambat te stojel betil
+creditos.registrarPago,Snahcanel ta hun stojel betil
+creditos.fecha_vencimiento,Sc'axemal sc'ahc'alel
+creditos.allCreditsTrue,Spisil
+creditos.allCreditsFalse,Soc betil
+creditos.vida_credito,Sc'ahc'alel banc'alal smajanel taqu'in
+creditos.cartera_vigente,Cuxul ay taqu'in te behenemtal ta sc'ahc'alel
+creditos.cartera_vencida,Cuxul ay taqu'in te behenemtal te caxemix ta sc'ahc'alel
+creditos.imprimirContrato,Sloqu'esel shunal sc'ahc'alel smajanel taqu'in
+creditos.historialCredito,Behenemtalel sbehlal a'tel
+contratosXLSX,Scohtesel shunal sc'ahc'alel smajanel taqu'in
+contratosXLSX.ALL,Spisil
+contratosXLSX.1,Sbahbeyal jsehp squ'inalel
+contratosXLSX.2,Xchebal jsehp squ'inalel
+contratosXLSX.3,Yoxebal jsehp squ'inalel
+contratosXLSX.4,Xchanebal jsehp squ'inalel
+contratosXLSX.5,Yo'ebal jsehp squ'inalel
+contratosXLSX.6,Swaquebal jsehp squ'inalel
+contratosXLSX.7,Sjuquebal jsehp squ'inalel
+contratosXLSX.8,Swaxaquebal jsehp squ'inalel
+contratosXLSX.9,Sbalunebal jsehp squ'inalel
+contratosXLSX.10,Slajunebal jsehp squ'inalel
+contratoUpdateForm.title,Xchicnajtesel jahchel smajanel taqu'in
+contratoUpdateForm.supportText,Nahcana ta hun te sjahchibal sc'ahc'alel sjamel majambil taqu'in
+contratoActivate.fechaFirma,Sc'ahc'alel yaqu'el sme' c'abal yu'un majan taqu'in
+contratoActivate.tipo_tasa,Bintic yu'un te sjol taqu'in
+contratoActivate.estatus_ejecucion,Stalel schahpanel (Yaqu'el taqu'in)
+contratoActivate.referencia_banco,Schicnaji'bal yahtalul ta snahul taqu'in
+contratoActivate.fecha_banco,Sc'ahc'alel sjunal sloqu'el taqu'in/sc'asesel taqu'in
+contratoActivate.actualizar,Yach'ubtesel bintic ay yu'un te smajanel taqu'in
+contratoActivate.iva,Spitel loqu'el stojol patanil
+contratoPrint.gerente,Muc'ul jolal te ya yac' sc'ahtalul sbihil
+contratoPrint.title,Sloqu'esel shunal sc'ahc'alel smajanel taqu'in
+contratoPrint.supportText,Tsaja te bin ya sc'ambat yu'un sloqu'esel hun ta smajanel taqu'in
+contratoPrint.imprimir,Sloqu'esel shunal
+contratoPrint.vistaPrevia,Yocliyel teme lec ay te sloqu'esel hun
+puesto,Jwohc' awa'tel
+fuente,Bantic ya jtahtic yan taqu'in
+pagos.id,# stojol
+pagos.title,Tojoliletic
+pagos.selectedPago,Xchicnajtesel yu'un stojel
+pagos.folio,Yahtalul
+pagos.credito,Smajanel taqu'in
+pagos.fecha_pago,Sc'ahc'alel stojel
+pagos.autor,Mach'a la snahcan ta hun te stojel betil
+pagos.cantidad,Jaye'b
+pagos.fecha_banco,Sc'ahc'alel ta snahul squ'ejohbil taqu'in
+pagos.referencia_banco,Schicnaji'bal yahtalul ta snahul taqu'in
+pagos.interes_ord,Spitic lanel stojel sjol taqu'inetic ta sc'ahc'alel
+pagos.interes_mor,Spitic lanel stojel sjol taqu'inetic ta sc'axemal sc'ahc'alel
+pagos.abono_capital,Spitic lanel stojel taqu'in
+pagos.estatus_previo,Stsaquel stojel betil / stalel te smajanel taqu'in ta sc'ahc'alel stojel
+pagos.deuda_prev_total,Spisil betil ta sc'ahc'alel stojel
+pagos.deuda_prev_int_ord,Stojel sjol taqu'in ta sc'ahc'alel
+pagos.deuda_prev_int_mor,Stojel sc'axemal sjol taqu'in ta sc'ahc'alel
+credito,Smajanel taqu'in
+cantidad,Jaye'b
+tipo_tasa,Bintic yu'un te sjol taqu'in
+pagos.fecha_pago,Sc'ahc'alel stojel
+pagoForm.title,Binut'il stojel
+pagos.elige,Leha hun smajanel taqu'in yu'un ta stojel
+pagos.deuda_pend,Quechelto ay betil
+pagos.cap_pend,Quechelto ay ta tojel taqu'in
+pagos.intOrd_pend,Quechelto ay ta tojel sjol taqu'in ta sc'ahc'alel
+pagos.intMor_pend,Quechelto ay ta tojel sjol taqu'in te c'axemix ta sc'ahc'alel
+pagoForm.editBankInfo,Scha' pasel bintic ay yu'un ta snahul taqu'in
+cartera,Cuxul ay taqu'in
+creditoHistorial.diasTranscurridos,C'ahc'aletic
+creditoHistorial.pago,Stojol
+creditoHistorial.pago_interes_ord,Stojel jxuhtuc' sjol taqu'in ta sc'ahc'alel
+creditoHistorial.pago_interes_mor,Stojel jxuhtuc' sjol taqu'in te c'axemix ta sc'ahc'alel
+creditoHistorial.abono_capital,Stojel jxuhtuc' taqu'in
+creditoHistorial.saldoInsoluto,Ta spisil te quechelto ay betil
+creditoHistorial.pendienteIntOrd,Quechelto ay ta tojel sjol taqu'in ta sc'ahc'alel
+creditoHistorial.pendienteIntMor,Quechelto ay ta tojel sjol taqu'in te c'axemix ta sc'ahc'alel
+creditoHistorial.pendienteCapital,Quechelto ay ta tojel taqu'in
+pagosXLSX,Scohtesel stojel
+confirmacionInfo,Ac'a ta na'el te me lec te junetic
+enviar,Sticunel
+formatos.title,Shunal
+formatos.comprobantePago,Shunal stojel betil
+formatos.formActReg,Shunal chapbil c'op ta jsehp squ'inalel
+formatos.formActReg1,Shunal chapbil c'op ta jsehp squ'inalel 2
+formatos.formSol,Shunal sc'anel smajanel taqu'in
+actualizarDatos,Yach'ubtesel bintic ay yu'un
+evalSocio.title,Yocliyel
+evalSocio.Datos,Bintic ay yu'un
+evalSocio.Acopios,Stsobel a'telil
+creditos.fecha_banco,Sc'ahc'alel sjunal sloqu'el taqu'in/sc'asesel taqu'in
+creditos.referencia_banco,Schicnaji'bal yahtalul ta snahul taqu'in
+inicio.title,Bin xchih
+inicio.calendario,Yilojibal c'ahc'al
+inicio.pronostico,Yilojibal qu'inal ta jujun c'ahc'al
+inicio.mapa,Sloc'ombah jpahm qu'inal
+inicio.saldos,Jaye'b xan hay cu'un ta spisil
+inicio.numeros,Tseltal ahtaletic
+inicio.numero,Ahtal
+inicio.numeroTradcurir,Sc'asesel ahtal ta yan c'op 
+bancos.title,Spajaltayel taqu'in soc ta snahul squ'ejojbil
+bancos.fecha,Sc'ahc'alel
+bancos.subcuenta,Stsahlal yahtalul ca'teltic
+bancos.subcuenta_nombre,Xchicnajtesel sc'oblalul
+bancos.referencia,Yich'abul banti ya xchicnah
+bancos.ingreso,Och talel 
+bancos.egreso,Loc' bahel
+bancos.saldo_bancos,Jaye'b xan ay cu'un
+bancos.newMovimiento,Yach'il syuhqu'el a'tel ta snahul squ'ejojbil taqu'in
+bancoForm.referencia_alf,Yich'abul yahtalul banti ya xchicnah
+bancoForm.ingreso,Och talel 
+bancoForm.egreso,Loc' bahel
+bancoForm.seleccionados,ho'eb tsahbil tojbil
+bancoForm.seleccionadosOPC,Jun tsahbil stojel
+bancoForm.respuesta,La jyich pasel ho'eb snahcanel ta hun yu'un yich'elbahel ta ahtayel 
+bancoForm.respuestaOPC,La jyich nahcanel  jp'ij ta hun yu'un yich'elbahel ta ahtayel 
+bancoForm.terminar,Slajinel ta stsihbayel ochel
+bancoForm.nuevo,Yan snahcanel ta hun   
+movimientosForm.ordinario,Yaqu'el yan tso'bil taqu'in
+movimientosForm.extraordinario,Yaqu'el tso'bil shilemal taqu'in
+banco.totales,Jaye'b ay cu'un spisil c'alal ta slaji'bal
+banco.total_periodo,Jayeb ay cu'un spsil ta sc'ahc'alel ini
+banco.cuenta,Yahtalul xchapojibal ca'teltic
+banco.tot_ingresos,Och talel 
+banco.tot_egresos,Loc' bahel
+banco.registros,Nahcanlambil ta hun
+banco.initialDate,Shachi'bal sc'ahc'alel
+banco.finalDate,Slaji'bal sc'ahc'alel
+banco.fechas,Slehel ta cacaj sc'ac'alel
+banco.buscar,Slehel
+banco.tot_prev,Jaye'b ay cu'un spisil ta shachi'bal
+pmenu.carteras,Betiletic
+carteras.title,Betiletic
+carteras.fechas,Sc'ahc'alel
+carteras.totales,Ta spisil betiletic
+carteras.vigentes,Majambil taqu'in ay ta sc'ahc'alel
+carteras.vencidos,Majambil taqu'in c'axemix ta sc'ahc'alel
+carteras.total_vigentes,Ay ta scahc'alel betiletic
+carteras.total_vencidos,Ca'xemix ta sc'ahc'alel betiletic
+carteras.num_vigentes,Majambil taqu'in ay ta sc'ahc'alel
+carteras.num_vencidos,Majambil taqu'in c'axemix ta sc'ahc'alel
+bancoForm.sinReferenciaAlert,Ma'yuquic tsihbabil ochel yich'abul yahtalul
+bancoForm.noCoincideAlert!!!,Te yich'abul yahtalul XXXXX ma'ba ya stsac sbah soc te tsahbil ZZZZZZZ
+bancoForm.diferentesAlert,Te yich'abul yahtalul ma'ba ya stsac sbah soc binut'il chahpambil ta ha' nix
+registro.id,#
+registro.fecha,Sc'ahc'alel
+registro.referencia_banco,Yich'abul yahtalul squ'ejojibal taqu'in
+registro.referencia_alf,Yich'abul yahtalul ta cajal caj
+registro.fecha_captura,Sc'ahca'lel stsihbayel ochel
+registro.usuario,Mach'a ya stuquin
+registro.subcuenta_id,Stsahlal yahtalul ca'teltic
+registro.subcuenta_nombre,Sbihil stsahlal yahtalul ca'teltic 
+registro.banco_cuenta,Yahtalul ca'teltic
+registro.banco_nombre,Snahul squ'ejohbil taqu'in
+registro.relacion_sistema,Bintic ay yu'un schahplejal a'telil
+registro.cantidad,Hich yipal
+registro.ingr_egr,Ochem talel/Loc' bahel
+registro.aport_retiro,Yaqu'el tso'bil taqu'in/Sloqu'esel
+registro.pago,#Stojel
+registro.ej_credito,#Majambil taqu'in
+bancos.selectedRegistro,Nahcambil ta hun
+movimientos.buscarGrupo,Slehel ta jujun wohc'
+movimiento.nombre_socio,Bihililetic
+movimiento.fecha_entrega,Sc'ahc'alel yaqu'el
+movimiento.monto,Jaye'b
+movimiento.aportacion,Yaqu'el tso'bil taqu'in/Sloqu'esel
+movimiento.proceso,Jchahp a'tel
+movimiento.tipo_de_movimiento,Yantic ta chahp syuqu'el a'telil
+tipo_de_movimiento,Yich'abul yahtalul squ'ejojibal taqu'in
+fecha_banco,Stsahlal yahtalul ca'teltic
+referencia_banco,Sloc'ombah spahmal bahlumilal
+pmenu.subcuentas,Jchahp a'teliletic
+pmenu.mapas,Ay ta sc'ahc'alel
+procesos,C'axem ta sc'ahc'alel te ma' stah lajune'b scha'winic c'ahc'al
+mapa.vigentes,C'axemix ta sc'ahc'alel lajune'b scha'winic c'ahc'al soc ma' stah waque'b uh
+mapa.lt30,C'axemix ta sc'ahc'alel waque'b uh
+mapa.bt30to6M,Jsehp squ'inalel te ha'nax ay majambil taqu'in ay ta sc'ahc'alel
+mapa.gt6M,"Jsehp squ'inalel te bayelto hay ta sc'ahc'alel,"
+mapa.regionVerde,Jsehp squ'inalel te bayel c'axemix ta sc'ahc'alel
+mapa.regionAmarilla,Jsehp squ'inalel banti ma'yuc majambil taqu'in
+mapa.regionRoja,Stsahlal yahtalul ca'teltic ta schahpanel ahtaletic
+mapa.regionGris,xcha' pasel bintic ay ta yutil squ'ejojbil taqu'in
+subcuentas.title,Jsehp squ'inalel
+editarDatosBancarios,Comonal
+nombre_region,Sna'beyel sc'oblal smajanel taqu'in
+nombre_comunidad,Sna'beyel sc'oblal yu'un sc'asesel shunal c'anbajel
+mesaControl.infoDelCredito,Sloc'ol shunal RFC
+evaluacion.infoDeSoporte,"Tsihbaya li'i binti at'elil soc banti ya xtuquin a wu'un te smajanel taqu'in, te chican ya xhil ta aiyel."
+socioForm.doc_rfc,Ch'ul nahetic
+solicitudForm.justificacion_credito_placeholder,Ch'ul nah
+tsumbalil.ermitas,Squ'inalel jwohc' muc'ul tso'blej
+ermita,Stsahlalul squ'inal muc'ul tso'blej
+zona,Stsahlalul squ'inalel
+interzona,INEGI
+municipio,INEGI
+localidad,#
+inegiLocalidad,Sbihil ch'ul nah
+ermita.ermita_id,Squ'inalel jwohc' muc'ul tso'blej
+ermita.nombre,Stsahlalul squ'inal muc'ul tso'blej
+ermita.zona,Stsahlalul squ'inalel
+ermita.interzona,Banti ay ta INEGI
+ermita.municipio,Ts'ihbabil banti ay ta INEGI
+ermita.localidad,Ayoncotic ta jwohc’ tut smajanel taqu’in banti shachoj te jloqu’esej p’olmaliletic bats’il swinquilel lum tseltal te ayic ta jsehp squ’inalel yu’un Chiapas soc nix te ayoncotic ta yutil jwohc’ Yomol A’tel.
+ermita.localidad_nota,Ha’ ini syomel sbah muc’ul slecubtesel a’telil ya jlehcotic xchahpanel hachel yantic sbehlal ta stuqueltayel soc pajal scoltayel jbahcotic ta smajanel taqu’in ta biluc wocolil te yacal jcuxlejalimbel ta jlumalcotic.
+ermitasXLSX,Ayotic ta spasel tulan ta sjeltayel sbehlal binut’il ta nopel yaqu’el te majan taqu’in soc nix tut smajanel taqu’in.
+comunidadesXLSX,"Yacal jlehbelcotic muc’ yach’il sbehlal p’ijubtesel yu’un stuquinel taqu’in, te ich’bil ta  muc’ spisil  bintic ay ta sjoylejal lum qu’inal soc te mach’atic tey ayic ah."
+inicio.phrase1,Uts stso’bel taqu’in soc binti ay cu’untic 
+inicio.phrase2,Xcha’ yaqu’el ta a’tel bintic ay cu’un.
+inicio.phrase3,Xchahpanlanel yantic a’tel yuun ya scoltaoyotic ta taquin yu’un ma jta’htic wocolil.
+inicio.phrase4,"Comon Sit Ca’teltic ha’ jun syuqu’el hach’el stomal a’tel, soc ya yich’ puquel ta jujun xuht’ taqu’in banti ay to xan bin ya sc’an pasel."
+inicio.icon1,Ha’ ini jchahp muc’ul a’tel ha’ jun slehel sbehlal yu’un ya xloc’otic ta yaqu’el bahtic ta stojol sc’ahyinel stsaquel coltayel taqu’in te yacal ta c’ohel ta pasel yo’tic ta sjehp squinalel cu’untic.
+inicio.icon2,Jun halbil xchahpanel a’tel ta stojol lec stuquinel taquin ta jun pajal soc ta yomol.
+inicio.icon3,Na'botic Jbahtic
+inicio.phrase5,"Ayotic ta sjsehp squinalel jlumaltic yu’un chiapas te smacoj jtsahl squ’inalel Chilon, Sitalá, Yajalon, soc Ocosingo. te squ’ixnal qu’inal ya spas yu’un ya yich’ ts’unel capel ta yaxinal te’ (shachibal a’tel te ya yotseses talel taqu’in ta yutil jnahcotic), te binti ya jcoltay jbahcotic ta sjunal cuxlejalil ha’ te  sit jts’unub cawalcotic hay ta qu’inalcotic; te ixim, chenec’ soc bayel ta chahp te sit tsu’nub awalil te ha’ stuc yu’un jwe’el cucheltic soc lec stuquinel taqu’in ta jwohc’tic soc te ants winiquetic."
+inicio.phrase6,"Ta spisil ini jsehp squ’inalel xcuxlejanilej stalel sc’ahyinel maya tseltal, banti scanantayej scu’hlejal yu’un jc’opojeltic, jtalel jc’ahyineltic soc yantic ta chahp a’telil ta comonal soc a’tel sch’uhunel cajwaltic. spisil ini, ta yomol soc te scanantayel jnantic lum qu’inal, banti  xhu’ ya jcanantaytic ha’ te ya caltic "
+inicio.phrase7,lequil cuxlejalil
+conocenos.territorioTitle1," (lequil cuxlejalil soc ta stse’elil qu’inal) soc jcomonaltic, yutsilal qu’inal soc xch’uhunel co’tantic."
+conocenos.territorioP1,"Ha’nix hich, ha’ ini jsehp su’inalel ha’ te c’ax me’ba obol ta squ’inal Mexico. Manchucnix ha jun jsehp squ’inalel te nojel ta sc’uhlejal lum qu’inal, ha’tic te ants winic te ya xhilic soc yich’el ta muc’ te jlum jqu’inaltic."
+conocenos.territorioP2_1,Ha’ yu’un la jnopcotic syomel jbahcotic yu’un ya xloc’oncotic ta ha’ ini coltayeletic yu’un taqu’in soc slehbeyel hahchel yan sbehlal cu’uncotic.
+conocenos.territorioP2_2,Yomol A'tel
+conocenos.territorioP2_3,Yomol A’tel ya sc’an ya yal ta bats’il c’op tseltal 
+conocenos.territorioP3,"junax ya xha’tejotic, junax ya xbehenotic, junax ya xwayichinotic"
+conocenos.territorioP4,". Ha’ jun jwohc’ te syomoj sbah ta jujun muc’ul slecubtesel syomon bah chombajel soc smucu’ubtesel jwohc’ a’teliletic, ha’ hich binut’il te jwohc’ nahinel jloqu’esej p’olmalil ta squ’inalel jlumaltic yu’un chiapas soc jwohc’ jcoltaywanej j’a’teletic te ayic ta stsahlalul squ’inalel republica Mexicana."
+conocenos.yomolAtelT1,"Yacal ca’teltaybelcotic ta sbehentesel suhti’b binut’il chahpambil to talel ta shachibal yu’un schahpambeyel yan sbehlal lec stojol a’telil te binti ay cu’untic ta jlum jqu’inaltic yo’tic ini, ta scanantayel xch’ixil c’ahc’al te stsaquel sbah jol co’tantic soc te jnantic lum qu’inal soc joquimbil yu’un yantic jwohc’ chahpanej a’telil te stsacoj sbah jc’optic soc (Toyol snopel hun, jhach a’teliletic, yaqu’el ta a’tel taqu’in, jmambajeletic, yantic yomol p’ijubteseletic, soc yantic xan)."
+conocenos.yomolAtelP1_1,Capel ma’ yich’oj chopol pox
+conocenos.yomolAtelP1_2,"Sloqu’esel p’olmalil te chahpambil soc lequil swe’el lum qu’inal, sjelontesel ta pasel, xchonel p’olmalil ta yan jech c’al soc xchonel ta uch’ibal."
+conocenos.yomolAtelP1_3,Bintic ya xtuhun cu’untic ta sbaxbultayel jbahtic
+conocenos.yomolAtelP2,"Chahpambil xapon, shampoo, spoxil jnuhculeltic soc luchetic."
+conocenos.cafeT,Tut smajanel taqu’in
+conocenos.cafeP1,Tut smajanel taqu’in te ya yich’ tuquinel soc xchahpanel a’telil yu’un jwohl nahinel te ayic ta yutil a’tel.
+conocenos.japonT,Cha’b ma’ yich’oj chopol pox
+conocenos.japonP1,"Sloqu’esel p’olmalil te chahpambil soc lequil swe’el lum qu’inal soc schonel ta jpahm lum,nopol nax sjelontesel ta pasel sloqu’esel p’olmalil."
+conocenos.microfinanczasT,Comon Sit Ca’teltic
+conocenos.microfinanczasP1,Comon Sit Ca’teltic hahch xcha’ yaqu’el ta a’teltayel jsuht’uc te slequilal a’telil te ha’ chahpambil talel soc te stojol capel. ta banti la jlehbecotic stuc ha’ me ine taqu’in yu’un shachel yach’il a’teliletic te ha’ nix ya sp’ohltes mohel te shilemal taqu’in yu’un ya yich sutel xan ochel ta majanel yu’un yantic smuc’ubtesel a’telil
+conocenos.mielT,"Ha’ ini jujun caj a’telil ha’ yac’oj talel yo’tan ta ya’teltayel stuquinel jtaqu’intic soc ca’teltic ta banti xhu’ ya scoltay hahchel sbah jwohl nahinel, jun comanal ma’uc teme jsehp squ’inalel."
+conocenos.mielP1,Schicnaji’bal smajanel taqu’in
+conocenos.comonT,"Binu’til yacal ta behenel bahel te schaplejal a’tel hahch ta muc’ubel bahel  soc stsacticlanej sbah ta ha’tic nix, ha’nix hich te ochel yu’un ta yantic jechc’al te bintic hay ta yutil a’telil, ha’ ini hach ta tulanijel sc’oblal soc laj yich chahpanel hachel ta a’teltayel."
+conocenos.comonP1,"comonsitcateltic.com ha’ banti chican ta pasel spisil a’telil soc yan c’opojeletic, ha’ sjambeyejotic yach’il sbehlal, te ya xhu cocheltic ta sna’beyel xan sbehlal, soc binuti’il ya xha’tejotic ta jujun wohc’ c’alal to ini c’ahc’al, yaj na’beycotic xan bahel sbehlal soc slecubtesel te a’telil."
+conocenos.comonP2,"Ya jnopcotic te ha’ tulan sc’oblal yaq’uel ta na’el sc’asesel ta a’iyel te binti jnopojcotic, ha’ yu¿un te mach’a hich yo’tan ya sc’an ya yil, sloc’tayel, scohtesel ma’uc teme slecubtesel binut’il chahpambil, ya xhu’ ya capsic bint’il yaca c’anic "
+conocenos.plataformaT,li’i
+conocenos.plataformaP1,"Te jcaj chahpambil xchicnajtesel a’telil, behlaltesbil talel ta jujun caj soc te jcoltaywanej cu’untic soc quichantic "
+conocenos.plataformaP2,Sloc'ombah jpahm qu'inal soc Bintic ay yu'un jsehp squ’inalel
+conocenos.plataformaP3,"Ta yutil talel schahpanel ta jujun caj ini xchicnaji’bal ya jtahtic bayel ta chahp a’telil te ay yu’un ta spisil jsehp squ’inalel,te ya ca’beytic snop’ jpahm swinquilel lum."
+conocenos.plataformaP4,"Li’ ta yan uh baheli, ta scoltabelotic te mach’atic yac’oj sbahic ta a’batinel soc te mach’a yac’oj yo’tan ya jchahpancotic bahel jun sloc’ombah jpahm squ’inalel te jamal ay yu’un ya xhochotic ta yilel bintic yacajtic ta c’ohel ta pasel ta jpahm squ’inal jlumaltic."
+conocenos.plataformaP5,Banti xhu' ya jchol jbahtic
+mapa.title,Xhu’ ya ts’ihbabotic biluc johc’oyel ma’uc teme ay bin yaca wal:
+mapa.p1,Yantic ta chahp yaqu'el tso'bil taqu'in/sloqu'esel
+mapa.p2,Sc'ahc'alel ta snahul squ'ejohbil taqu'in
+contacto.title,traduccion_pendiente
+contacto.text,traduccion_pendiente
+menu.mapa,traduccion_pendiente
+tsumbalil.comunidades,traduccion_pendiente
+error.messagePost,traduccion_pendiente
+error.message500,traduccion_pendiente
+error.message400,traduccion_pendiente
+error.message,traduccion_pendiente
+error.messageForbidden,traduccion_pendiente
+error.extraInfo,traduccion_pendiente
+error.mensajeServidor,traduccion_pendiente
+inicio.carteras,traduccion_pendiente
+aportacionesRetirosXLS,traduccion_pendiente
+movimientos.detalle,traduccion_pendiente
+movimiento.clase,traduccion_pendiente
+bancos.registrosXLSX,traduccion_pendiente
+bancoForm.title,traduccion_pendiente
+bancoForm.cuenta_banco,traduccion_pendiente
+bancoForm.referencia_banco,traduccion_pendiente
+bancoForm.fecha,traduccion_pendiente
+bancoForm.cantidad,traduccion_pendiente
+bancoForm.Movimientos,traduccion_pendiente
+bancoForm.Pagos,traduccion_pendiente
+bancoForm.EjCredito,traduccion_pendiente
+bancoForm.Otros,traduccion_pendiente
+bancoForm.respuesta1,traduccion_pendiente
+bancoForm.respuesta2,traduccion_pendiente
+bancoForm.noCoincideAlert1,traduccion_pendiente
+bancoForm.subcuenta,traduccion_pendiente
+bancoForm.noCoincideAlert2,traduccion_pendiente
