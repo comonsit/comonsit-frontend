@@ -12,6 +12,7 @@
   @include desktop {
     display: block;
     min-height: calc(100vh - #{$home-toolbar});
+    position: relative;
   }
 
   &_content {
@@ -32,12 +33,11 @@
     position: inherit;
     height: 50vh;
     @include desktop {
-      margin-top: $home-toolbar;
       position: absolute !important;
       top: 0;
       left: 50%;
       width: 50%;
-      height: 110%;
+      height: 100%;
     }
   }
 }
@@ -91,6 +91,7 @@
   @include tablet {
     display: block;
     font-size: 1.1em;
+    min-height: 70rem;
   }
   @include desktopXL {
     font-size: 1.2em;
@@ -116,6 +117,9 @@
     &_two {
       display: flex;
       align-items: center;
+      img {
+        width: 50% !important;
+      }
     }
   }
   &_Card {

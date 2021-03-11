@@ -451,88 +451,88 @@ movimiento.monto,Jaye'b
 movimiento.aportacion,Yaqu'el tso'bil taqu'in/Sloqu'esel
 movimiento.proceso,Jchahp a'tel
 movimiento.tipo_de_movimiento,Yantic ta chahp syuqu'el a'telil
-tipo_de_movimiento,Yich'abul yahtalul squ'ejojibal taqu'in
-fecha_banco,Stsahlal yahtalul ca'teltic
-referencia_banco,Sloc'ombah spahmal bahlumilal
-pmenu.subcuentas,Jchahp a'teliletic
-pmenu.mapas,Ay ta sc'ahc'alel
-procesos,C'axem ta sc'ahc'alel te ma' stah lajune'b scha'winic c'ahc'al
-mapa.vigentes,C'axemix ta sc'ahc'alel lajune'b scha'winic c'ahc'al soc ma' stah waque'b uh
-mapa.lt30,C'axemix ta sc'ahc'alel waque'b uh
-mapa.bt30to6M,Jsehp squ'inalel te ha'nax ay majambil taqu'in ay ta sc'ahc'alel
-mapa.gt6M,"Jsehp squ'inalel te bayelto hay ta sc'ahc'alel,"
-mapa.regionVerde,Jsehp squ'inalel te bayel c'axemix ta sc'ahc'alel
-mapa.regionAmarilla,Jsehp squ'inalel banti ma'yuc majambil taqu'in
-mapa.regionRoja,Stsahlal yahtalul ca'teltic ta schahpanel ahtaletic
-mapa.regionGris,xcha' pasel bintic ay ta yutil squ'ejojbil taqu'in
-subcuentas.title,Jsehp squ'inalel
-editarDatosBancarios,Comonal
-nombre_region,Sna'beyel sc'oblal smajanel taqu'in
-nombre_comunidad,Sna'beyel sc'oblal yu'un sc'asesel shunal c'anbajel
-mesaControl.infoDelCredito,Sloc'ol shunal RFC
-evaluacion.infoDeSoporte,"Tsihbaya li'i binti at'elil soc banti ya xtuquin a wu'un te smajanel taqu'in, te chican ya xhil ta aiyel."
-socioForm.doc_rfc,Ch'ul nahetic
-solicitudForm.justificacion_credito_placeholder,Ch'ul nah
-tsumbalil.ermitas,Squ'inalel jwohc' muc'ul tso'blej
-ermita,Stsahlalul squ'inal muc'ul tso'blej
-zona,Stsahlalul squ'inalel
-interzona,INEGI
-municipio,INEGI
-localidad,#
-inegiLocalidad,Sbihil ch'ul nah
-ermita.ermita_id,Squ'inalel jwohc' muc'ul tso'blej
-ermita.nombre,Stsahlalul squ'inal muc'ul tso'blej
-ermita.zona,Stsahlalul squ'inalel
-ermita.interzona,Banti ay ta INEGI
-ermita.municipio,Ts'ihbabil banti ay ta INEGI
-ermita.localidad,Ayoncotic ta jwohc’ tut smajanel taqu’in banti shachoj te jloqu’esej p’olmaliletic bats’il swinquilel lum tseltal te ayic ta jsehp squ’inalel yu’un Chiapas soc nix te ayoncotic ta yutil jwohc’ Yomol A’tel.
-ermita.localidad_nota,Ha’ ini syomel sbah muc’ul slecubtesel a’telil ya jlehcotic xchahpanel hachel yantic sbehlal ta stuqueltayel soc pajal scoltayel jbahcotic ta smajanel taqu’in ta biluc wocolil te yacal jcuxlejalimbel ta jlumalcotic.
-ermitasXLSX,Ayotic ta spasel tulan ta sjeltayel sbehlal binut’il ta nopel yaqu’el te majan taqu’in soc nix tut smajanel taqu’in.
-comunidadesXLSX,"Yacal jlehbelcotic muc’ yach’il sbehlal p’ijubtesel yu’un stuquinel taqu’in, te ich’bil ta  muc’ spisil  bintic ay ta sjoylejal lum qu’inal soc te mach’atic tey ayic ah."
-inicio.phrase1,Uts stso’bel taqu’in soc binti ay cu’untic 
-inicio.phrase2,Xcha’ yaqu’el ta a’tel bintic ay cu’un.
-inicio.phrase3,Xchahpanlanel yantic a’tel yuun ya scoltaoyotic ta taquin yu’un ma jta’htic wocolil.
-inicio.phrase4,"Comon Sit Ca’teltic ha’ jun syuqu’el hach’el stomal a’tel, soc ya yich’ puquel ta jujun xuht’ taqu’in banti ay to xan bin ya sc’an pasel."
-inicio.icon1,Ha’ ini jchahp muc’ul a’tel ha’ jun slehel sbehlal yu’un ya xloc’otic ta yaqu’el bahtic ta stojol sc’ahyinel stsaquel coltayel taqu’in te yacal ta c’ohel ta pasel yo’tic ta sjehp squinalel cu’untic.
-inicio.icon2,Jun halbil xchahpanel a’tel ta stojol lec stuquinel taquin ta jun pajal soc ta yomol.
-inicio.icon3,Na'botic Jbahtic
-inicio.phrase5,"Ayotic ta sjsehp squinalel jlumaltic yu’un chiapas te smacoj jtsahl squ’inalel Chilon, Sitalá, Yajalon, soc Ocosingo. te squ’ixnal qu’inal ya spas yu’un ya yich’ ts’unel capel ta yaxinal te’ (shachibal a’tel te ya yotseses talel taqu’in ta yutil jnahcotic), te binti ya jcoltay jbahcotic ta sjunal cuxlejalil ha’ te  sit jts’unub cawalcotic hay ta qu’inalcotic; te ixim, chenec’ soc bayel ta chahp te sit tsu’nub awalil te ha’ stuc yu’un jwe’el cucheltic soc lec stuquinel taqu’in ta jwohc’tic soc te ants winiquetic."
-inicio.phrase6,"Ta spisil ini jsehp squ’inalel xcuxlejanilej stalel sc’ahyinel maya tseltal, banti scanantayej scu’hlejal yu’un jc’opojeltic, jtalel jc’ahyineltic soc yantic ta chahp a’telil ta comonal soc a’tel sch’uhunel cajwaltic. spisil ini, ta yomol soc te scanantayel jnantic lum qu’inal, banti  xhu’ ya jcanantaytic ha’ te ya caltic "
-inicio.phrase7,lequil cuxlejalil
-conocenos.territorioTitle1," (lequil cuxlejalil soc ta stse’elil qu’inal) soc jcomonaltic, yutsilal qu’inal soc xch’uhunel co’tantic."
-conocenos.territorioP1,"Ha’nix hich, ha’ ini jsehp su’inalel ha’ te c’ax me’ba obol ta squ’inal Mexico. Manchucnix ha jun jsehp squ’inalel te nojel ta sc’uhlejal lum qu’inal, ha’tic te ants winic te ya xhilic soc yich’el ta muc’ te jlum jqu’inaltic."
-conocenos.territorioP2_1,Ha’ yu’un la jnopcotic syomel jbahcotic yu’un ya xloc’oncotic ta ha’ ini coltayeletic yu’un taqu’in soc slehbeyel hahchel yan sbehlal cu’uncotic.
-conocenos.territorioP2_2,Yomol A'tel
-conocenos.territorioP2_3,Yomol A’tel ya sc’an ya yal ta bats’il c’op tseltal 
-conocenos.territorioP3,"junax ya xha’tejotic, junax ya xbehenotic, junax ya xwayichinotic"
-conocenos.territorioP4,". Ha’ jun jwohc’ te syomoj sbah ta jujun muc’ul slecubtesel syomon bah chombajel soc smucu’ubtesel jwohc’ a’teliletic, ha’ hich binut’il te jwohc’ nahinel jloqu’esej p’olmalil ta squ’inalel jlumaltic yu’un chiapas soc jwohc’ jcoltaywanej j’a’teletic te ayic ta stsahlalul squ’inalel republica Mexicana."
-conocenos.yomolAtelT1,"Yacal ca’teltaybelcotic ta sbehentesel suhti’b binut’il chahpambil to talel ta shachibal yu’un schahpambeyel yan sbehlal lec stojol a’telil te binti ay cu’untic ta jlum jqu’inaltic yo’tic ini, ta scanantayel xch’ixil c’ahc’al te stsaquel sbah jol co’tantic soc te jnantic lum qu’inal soc joquimbil yu’un yantic jwohc’ chahpanej a’telil te stsacoj sbah jc’optic soc (Toyol snopel hun, jhach a’teliletic, yaqu’el ta a’tel taqu’in, jmambajeletic, yantic yomol p’ijubteseletic, soc yantic xan)."
-conocenos.yomolAtelP1_1,Capel ma’ yich’oj chopol pox
-conocenos.yomolAtelP1_2,"Sloqu’esel p’olmalil te chahpambil soc lequil swe’el lum qu’inal, sjelontesel ta pasel, xchonel p’olmalil ta yan jech c’al soc xchonel ta uch’ibal."
-conocenos.yomolAtelP1_3,Bintic ya xtuhun cu’untic ta sbaxbultayel jbahtic
-conocenos.yomolAtelP2,"Chahpambil xapon, shampoo, spoxil jnuhculeltic soc luchetic."
-conocenos.cafeT,Tut smajanel taqu’in
-conocenos.cafeP1,Tut smajanel taqu’in te ya yich’ tuquinel soc xchahpanel a’telil yu’un jwohl nahinel te ayic ta yutil a’tel.
-conocenos.japonT,Cha’b ma’ yich’oj chopol pox
-conocenos.japonP1,"Sloqu’esel p’olmalil te chahpambil soc lequil swe’el lum qu’inal soc schonel ta jpahm lum,nopol nax sjelontesel ta pasel sloqu’esel p’olmalil."
-conocenos.microfinanczasT,Comon Sit Ca’teltic
-conocenos.microfinanczasP1,Comon Sit Ca’teltic hahch xcha’ yaqu’el ta a’teltayel jsuht’uc te slequilal a’telil te ha’ chahpambil talel soc te stojol capel. ta banti la jlehbecotic stuc ha’ me ine taqu’in yu’un shachel yach’il a’teliletic te ha’ nix ya sp’ohltes mohel te shilemal taqu’in yu’un ya yich sutel xan ochel ta majanel yu’un yantic smuc’ubtesel a’telil
-conocenos.mielT,"Ha’ ini jujun caj a’telil ha’ yac’oj talel yo’tan ta ya’teltayel stuquinel jtaqu’intic soc ca’teltic ta banti xhu’ ya scoltay hahchel sbah jwohl nahinel, jun comanal ma’uc teme jsehp squ’inalel."
-conocenos.mielP1,Schicnaji’bal smajanel taqu’in
-conocenos.comonT,"Binu’til yacal ta behenel bahel te schaplejal a’tel hahch ta muc’ubel bahel  soc stsacticlanej sbah ta ha’tic nix, ha’nix hich te ochel yu’un ta yantic jechc’al te bintic hay ta yutil a’telil, ha’ ini hach ta tulanijel sc’oblal soc laj yich chahpanel hachel ta a’teltayel."
-conocenos.comonP1,"comonsitcateltic.com ha’ banti chican ta pasel spisil a’telil soc yan c’opojeletic, ha’ sjambeyejotic yach’il sbehlal, te ya xhu cocheltic ta sna’beyel xan sbehlal, soc binuti’il ya xha’tejotic ta jujun wohc’ c’alal to ini c’ahc’al, yaj na’beycotic xan bahel sbehlal soc slecubtesel te a’telil."
-conocenos.comonP2,"Ya jnopcotic te ha’ tulan sc’oblal yaq’uel ta na’el sc’asesel ta a’iyel te binti jnopojcotic, ha’ yu¿un te mach’a hich yo’tan ya sc’an ya yil, sloc’tayel, scohtesel ma’uc teme slecubtesel binut’il chahpambil, ya xhu’ ya capsic bint’il yaca c’anic "
-conocenos.plataformaT,li’i
-conocenos.plataformaP1,"Te jcaj chahpambil xchicnajtesel a’telil, behlaltesbil talel ta jujun caj soc te jcoltaywanej cu’untic soc quichantic "
-conocenos.plataformaP2,Sloc'ombah jpahm qu'inal soc Bintic ay yu'un jsehp squ’inalel
-conocenos.plataformaP3,"Ta yutil talel schahpanel ta jujun caj ini xchicnaji’bal ya jtahtic bayel ta chahp a’telil te ay yu’un ta spisil jsehp squ’inalel,te ya ca’beytic snop’ jpahm swinquilel lum."
-conocenos.plataformaP4,"Li’ ta yan uh baheli, ta scoltabelotic te mach’atic yac’oj sbahic ta a’batinel soc te mach’a yac’oj yo’tan ya jchahpancotic bahel jun sloc’ombah jpahm squ’inalel te jamal ay yu’un ya xhochotic ta yilel bintic yacajtic ta c’ohel ta pasel ta jpahm squ’inal jlumaltic."
-conocenos.plataformaP5,Banti xhu' ya jchol jbahtic
-mapa.title,Xhu’ ya ts’ihbabotic biluc johc’oyel ma’uc teme ay bin yaca wal:
-mapa.p1,Yantic ta chahp yaqu'el tso'bil taqu'in/sloqu'esel
-mapa.p2,Sc'ahc'alel ta snahul squ'ejohbil taqu'in
-contacto.title,traduccion_pendiente
-contacto.text,traduccion_pendiente
+referencia_banco,Yich'abul yahtalul squ'ejojibal taqu'in
+pmenu.subcuentas,Stsahlal yahtalul ca'teltic
+pmenu.mapas,Sloc'ombah spahmal bahlumilal
+procesos,Jchahp a'teliletic
+mapa.vigentes,Ay ta sc'ahc'alel
+mapa.lt30,C'axem ta sc'ahc'alel te ma' stah lajune'b scha'winic c'ahc'al
+mapa.bt30to6M,C'axemix ta sc'ahc'alel lajune'b scha'winic c'ahc'al soc ma' stah waque'b uh
+mapa.gt6M,C'axemix ta sc'ahc'alel waque'b uh
+mapa.regionVerde,Jsehp squ'inalel te ha'nax ay majambil taqu'in ay ta sc'ahc'alel
+mapa.regionAmarilla,"Jsehp squ'inalel te bayelto hay ta sc'ahc'alel,"
+mapa.regionRoja,Jsehp squ'inalel te bayel c'axemix ta sc'ahc'alel
+mapa.regionGris,Jsehp squ'inalel banti ma'yuc majambil taqu'in
+subcuentas.title,Stsahlal yahtalul ca'teltic ta schahpanel ahtaletic
+editarDatosBancarios,xcha' pasel bintic ay ta yutil squ'ejojbil taqu'in
+nombre_region,Jsehp squ'inalel
+nombre_comunidad,Comonal
+mesaControl.infoDelCredito,Sna'beyel sc'oblal smajanel taqu'in
+evaluacion.infoDeSoporte,Sna'beyel sc'oblal yu'un sc'asesel shunal c'anbajel
+socioForm.doc_rfc,Sloc'ol shunal RFC
+solicitudForm.justificacion_credito_placeholder,"Tsihbaya li'i binti at'elil soc banti ya xtuquin a wu'un te smajanel taqu'in, te chican ya xhil ta aiyel."
+tsumbalil.ermitas,Ch'ul nahetic
+ermita,Ch'ul nah
+zona,Squ'inalel jwohc' muc'ul tso'blej
+interzona,Stsahlalul squ'inal muc'ul tso'blej
+municipio,Stsahlalul squ'inalel
+localidad,INEGI
+inegiLocalidad,INEGI
+ermita.ermita_id,#
+ermita.nombre,Sbihil ch'ul nah
+ermita.zona,Squ'inalel jwohc' muc'ul tso'blej
+ermita.interzona,Stsahlalul squ'inal muc'ul tso'blej
+ermita.municipio,Stsahlalul squ'inalel
+ermita.localidad,Banti ay ta INEGI
+ermita.localidad_nota,Ts'ihbabil banti ay ta INEGI
+inicio.phrase1,Ayoncotic ta jwohc’ tut smajanel taqu’in banti shachoj te jloqu’esej p’olmaliletic bats’il swinquilel lum tseltal te ayic ta jsehp squ’inalel yu’un Chiapas soc nix te ayoncotic ta yutil jwohc’ Yomol A’tel.
+inicio.phrase2,Ha’ ini syomel sbah muc’ul slecubtesel a’telil ya jlehcotic xchahpanel hachel yantic sbehlal ta stuqueltayel soc pajal scoltayel jbahcotic ta smajanel taqu’in ta biluc wocolil te yacal jcuxlejalimbel ta jlumalcotic.
+inicio.phrase3,Ayotic ta spasel tulan ta sjeltayel sbehlal binut’il ta nopel yaqu’el te majan taqu’in soc nix tut smajanel taqu’in.
+inicio.phrase4,"Yacal jlehbelcotic muc’ yach’il sbehlal p’ijubtesel yu’un stuquinel taqu’in, te ich’bil ta  muc’ spisil  bintic ay ta sjoylejal lum qu’inal soc te mach’atic tey ayic ah."
+inicio.icon1,Uts stso’bel taqu’in soc binti ay cu’untic 
+inicio.icon2,Xcha’ yaqu’el ta a’tel bintic ay cu’un.
+inicio.icon3,Xchahpanlanel yantic a’tel yuun ya scoltaoyotic ta taquin yu’un ma jta’htic wocolil.
+inicio.phrase5,"Comon Sit Ca’teltic ha’ jun syuqu’el hach’el stomal a’tel, soc ya yich’ puquel ta jujun xuht’ taqu’in banti ay to xan bin ya sc’an pasel."
+inicio.phrase6,Ha’ ini jchahp muc’ul a’tel ha’ jun slehel sbehlal yu’un ya xloc’otic ta yaqu’el bahtic ta stojol sc’ahyinel stsaquel coltayel taqu’in te yacal ta c’ohel ta pasel yo’tic ta sjehp squinalel cu’untic.
+inicio.phrase7,Jun halbil xchahpanel a’tel ta stojol lec stuquinel taquin ta jun pajal soc ta yomol.
+conocenos.territorioTitle1,Na'botic Jbahtic
+conocenos.territorioP1,"Ayotic ta sjsehp squinalel jlumaltic yu’un chiapas te smacoj jtsahl squ’inalel Chilon, Sitalá, Yajalon, soc Ocosingo. te squ’ixnal qu’inal ya spas yu’un ya yich’ ts’unel capel ta yaxinal te’ (shachibal a’tel te ya yotseses talel taqu’in ta yutil jnahcotic), te binti ya jcoltay jbahcotic ta sjunal cuxlejalil ha’ te  sit jts’unub cawalcotic hay ta qu’inalcotic; te ixim, chenec’ soc bayel ta chahp te sit tsu’nub awalil te ha’ stuc yu’un jwe’el cucheltic soc lec stuquinel taqu’in ta jwohc’tic soc te ants winiquetic."
+conocenos.territorioP2_1,"Ta spisil ini jsehp squ’inalel xcuxlejanilej stalel sc’ahyinel maya tseltal, banti scanantayej scu’hlejal yu’un jc’opojeltic, jtalel jc’ahyineltic soc yantic ta chahp a’telil ta comonal soc a’tel sch’uhunel cajwaltic. spisil ini, ta yomol soc te scanantayel jnantic lum qu’inal, banti  xhu’ ya jcanantaytic ha’ te ya caltic "
+conocenos.territorioP2_2,lequil cuxlejalil
+conocenos.territorioP2_3," (lequil cuxlejalil soc ta stse’elil qu’inal) soc jcomonaltic, yutsilal qu’inal soc xch’uhunel co’tantic."
+conocenos.territorioP3,"Ha’nix hich, ha’ ini jsehp su’inalel ha’ te c’ax me’ba obol ta squ’inal Mexico. Manchucnix ha jun jsehp squ’inalel te nojel ta sc’uhlejal lum qu’inal, ha’tic te ants winic te ya xhilic soc yich’el ta muc’ te jlum jqu’inaltic."
+conocenos.territorioP4,Ha’ yu’un la jnopcotic syomel jbahcotic yu’un ya xloc’oncotic ta ha’ ini coltayeletic yu’un taqu’in soc slehbeyel hahchel yan sbehlal cu’uncotic.
+conocenos.yomolAtelT1,Yomol A'tel
+conocenos.yomolAtelP1_1,Yomol A’tel ya sc’an ya yal ta bats’il c’op tseltal 
+conocenos.yomolAtelP1_2,"junax ya xha’tejotic, junax ya xbehenotic, junax ya xwayichinotic"
+conocenos.yomolAtelP1_3,". Ha’ jun jwohc’ te syomoj sbah ta jujun muc’ul slecubtesel syomon bah chombajel soc smucu’ubtesel jwohc’ a’teliletic, ha’ hich binut’il te jwohc’ nahinel jloqu’esej p’olmalil ta squ’inalel jlumaltic yu’un chiapas soc jwohc’ jcoltaywanej j’a’teletic te ayic ta stsahlalul squ’inalel republica Mexicana."
+conocenos.yomolAtelP2,"Yacal ca’teltaybelcotic ta sbehentesel suhti’b binut’il chahpambil to talel ta shachibal yu’un schahpambeyel yan sbehlal lec stojol a’telil te binti ay cu’untic ta jlum jqu’inaltic yo’tic ini, ta scanantayel xch’ixil c’ahc’al te stsaquel sbah jol co’tantic soc te jnantic lum qu’inal soc joquimbil yu’un yantic jwohc’ chahpanej a’telil te stsacoj sbah jc’optic soc (Toyol snopel hun, jhach a’teliletic, yaqu’el ta a’tel taqu’in, jmambajeletic, yantic yomol p’ijubteseletic, soc yantic xan)."
+conocenos.cafeT,Capel ma’ yich’oj chopol pox
+conocenos.cafeP1,"Sloqu’esel p’olmalil te chahpambil soc lequil swe’el lum qu’inal, sjelontesel ta pasel, xchonel p’olmalil ta yan jech c’al soc xchonel ta uch’ibal."
+conocenos.japonT,Bintic ya xtuhun cu’untic ta sbaxbultayel jbahtic
+conocenos.japonP1,"Chahpambil xapon, shampoo, spoxil jnuhculeltic soc luchetic."
+conocenos.microfinanczasT,Tut smajanel taqu’in
+conocenos.microfinanczasP1,Tut smajanel taqu’in te ya yich’ tuquinel soc xchahpanel a’telil yu’un jwohl nahinel te ayic ta yutil a’tel.
+conocenos.mielT,Cha’b ma’ yich’oj chopol pox
+conocenos.mielP1,"Sloqu’esel p’olmalil te chahpambil soc lequil swe’el lum qu’inal soc schonel ta jpahm lum,nopol nax sjelontesel ta pasel sloqu’esel p’olmalil."
+conocenos.comonT,Comon Sit Ca’teltic
+conocenos.comonP1,Comon Sit Ca’teltic hahch xcha’ yaqu’el ta a’teltayel jsuht’uc te slequilal a’telil te ha’ chahpambil talel soc te stojol capel. ta banti la jlehbecotic stuc ha’ me ine taqu’in yu’un shachel yach’il a’teliletic te ha’ nix ya sp’ohltes mohel te shilemal taqu’in yu’un ya yich sutel xan ochel ta majanel yu’un yantic smuc’ubtesel a’telil
+conocenos.comonP2,"Ha’ ini jujun caj a’telil ha’ yac’oj talel yo’tan ta ya’teltayel stuquinel jtaqu’intic soc ca’teltic ta banti xhu’ ya scoltay hahchel sbah jwohl nahinel, jun comanal ma’uc teme jsehp squ’inalel."
+conocenos.plataformaT,Schicnaji’bal smajanel taqu’in
+conocenos.plataformaP1,"Binu’til yacal ta behenel bahel te schaplejal a’tel hahch ta muc’ubel bahel  soc stsacticlanej sbah ta ha’tic nix, ha’nix hich te ochel yu’un ta yantic jechc’al te bintic hay ta yutil a’telil, ha’ ini hach ta tulanijel sc’oblal soc laj yich chahpanel hachel ta a’teltayel."
+conocenos.plataformaP2,"comonsitcateltic.com ha’ banti chican ta pasel spisil a’telil soc yan c’opojeletic, ha’ sjambeyejotic yach’il sbehlal, te ya xhu cocheltic ta sna’beyel xan sbehlal, soc binuti’il ya xha’tejotic ta jujun wohc’ c’alal to ini c’ahc’al, yaj na’beycotic xan bahel sbehlal soc slecubtesel te a’telil."
+conocenos.plataformaP3,"Ya jnopcotic te ha’ tulan sc’oblal yaq’uel ta na’el sc’asesel ta a’iyel te binti jnopojcotic, ha’ yu¿un te mach’a hich yo’tan ya sc’an ya yil, sloc’tayel, scohtesel ma’uc teme slecubtesel binut’il chahpambil, ya xhu’ ya capsic bint’il yaca c’anic "
+conocenos.plataformaP4,li’i
+conocenos.plataformaP5,"Te jcaj chahpambil xchicnajtesel a’telil, behlaltesbil talel ta jujun caj soc te jcoltaywanej cu’untic soc quichantic "
+mapa.title,Sloc'ombah jpahm qu'inal soc Bintic ay yu'un jsehp squ’inalel
+mapa.p1,"Ta yutil talel schahpanel ta jujun caj ini xchicnaji’bal ya jtahtic bayel ta chahp a’telil te ay yu’un ta spisil jsehp squ’inalel,te ya ca’beytic snop’ jpahm swinquilel lum."
+mapa.p2,"Li’ ta yan uh baheli, ta scoltabelotic te mach’atic yac’oj sbahic ta a’batinel soc te mach’a yac’oj yo’tan ya jchahpancotic bahel jun sloc’ombah jpahm squ’inalel te jamal ay yu’un ya xhochotic ta yilel bintic yacajtic ta c’ohel ta pasel ta jpahm squ’inal jlumaltic."
+contacto.title,Banti xhu' ya jchol jbahtic
+contacto.text,Xhu’ ya ts’ihbabotic biluc johc’oyel ma’uc teme ay bin yaca wal:
+tipo_de_movimiento,Yantic ta chahp yaqu'el tso'bil taqu'in/sloqu'esel
+fecha_banco,Sc'ahc'alel ta snahul squ'ejohbil taqu'in
+ermitasXLSX,traduccion_pendiente
+comunidadesXLSX,traduccion_pendiente
 menu.mapa,traduccion_pendiente
 tsumbalil.comunidades,traduccion_pendiente
 error.messagePost,traduccion_pendiente
