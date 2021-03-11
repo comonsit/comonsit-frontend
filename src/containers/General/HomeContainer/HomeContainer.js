@@ -8,7 +8,7 @@ import {
   motion,
   useAnimation
 } from "framer-motion";
-// import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classes from './HomeContainer.module.scss';
 import LogoText from '../../../assets/images/texto.png'
 import HomeImage from '../../../assets/photos/homeImage.jpg'
@@ -173,7 +173,7 @@ export const HomeContainer = props => {
           <motion.div className={classes.CircleBoxBackground} variants={circleShow}>
             <div className={classes.CircleBoxBackgroundCnt}>
               <p>
-                Somos una microfinanciera creada por productores y productoras indígenas tseltales ubicados en la selva norte de Chiapas y formamos parte del grupo Yomol A’tel.
+                <FormattedMessage id="inicio.phrase1"/>
               </p>
             </div>
           </motion.div>
@@ -197,16 +197,17 @@ export const HomeContainer = props => {
               damping: 20
             }}
           >
-          <p>En esta empresa social buscamos construir una alternativa propia y sostenible a las necesidades de acceso a crédito que se viven dentro de nuestro territorio.</p>
-        </motion.div>
-
+            <p><FormattedMessage id="inicio.phrase2"/></p>
+          </motion.div>
         </motion.div>
         <section className={classes.Intro}>
           <div className={classes.IntroInfo}>
             <p>
-              Tenemos el reto de cambiar la forma en que se piensa el crédito y las microfinanzas.
+              <FormattedMessage id="inicio.phrase3"/>
             </p>
-            <p>Buscamos generar nuevas capacidades financieras, tomando en cuenta siempre las condiciones del territorio y su contexto.</p>
+            <p>
+              <FormattedMessage id="inicio.phrase4"/>
+            </p>
           </div>
           <motion.div
             ref={onScrollRef}
@@ -226,7 +227,7 @@ export const HomeContainer = props => {
               }}
             >
               <img src={Barras} alt="Barras"/>
-              <p>Mayor ahorro y patrimonio</p>
+              <p><FormattedMessage id="inicio.icon1"/></p>
             </motion.div>
             <motion.div
               className={classes.IntroIcons_card}
@@ -239,7 +240,7 @@ export const HomeContainer = props => {
               }}
             >
               <img src={BolsaDinero} alt="Dinero"/>
-              <p>Reinvertir beneficios</p>
+              <p><FormattedMessage id="inicio.icon2"/></p>
             </motion.div>
             <motion.div
               className={classes.IntroIcons_card}
@@ -252,16 +253,16 @@ export const HomeContainer = props => {
               }}
             >
               <img src={Pastel} alt="Pastel"/>
-              <p>Diversificar ingresos y riesgos</p>
+              <p><FormattedMessage id="inicio.icon3"/></p>
             </motion.div>
           </motion.div>
         </section>
         <section className={classes.Phrase}>
           <p>
-            Comon Sit Ca'teltic es un motor económico, que distribuye los recursos generados hacia donde hacen falta.
+            <FormattedMessage id="inicio.phrase5"/>
           </p>
           <p>
-            Este proyecto es una búsqueda para salir de la dependencia cultura del subsidio que actualmente impera en nuestra región.
+            <FormattedMessage id="inicio.phrase6"/>
           </p>
         </section>
         <Parallax
@@ -275,7 +276,7 @@ export const HomeContainer = props => {
         <section
           className={classes.Phrase}
         >
-          <p>Una apuesta por una economía social y solidaria.</p>
+          <p><FormattedMessage id="inicio.phrase7"/></p>
         </section>
       </div>
     </div>

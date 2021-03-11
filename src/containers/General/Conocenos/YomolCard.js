@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import classes from './Conocenos.module.scss';
@@ -23,7 +24,7 @@ export const YomolCard = props => {
       onClick={toggleOpen}
       className={classes.Yomol_Card}
     >
-      <motion.div layout><h4>{props.title}{isOpen}</h4></motion.div>
+      <motion.div layout><h4><FormattedMessage id={props.title}/>{isOpen}</h4></motion.div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
