@@ -28,11 +28,15 @@ const processSelector = (props) => {
     }
   }
 
+  const label = props.label ? (
+    <div className={classes.Label}>
+      <label><FormattedMessage id={props.label}/></label>
+    </div>
+  ) : null
+
   return (
     <div className={classes.Container}>
-      <div className={classes.Label}>
-        <label><FormattedMessage id={props.label}/></label>
-      </div>
+      {label}
       <div className={classes.IconContainer}>
         <div
           tabindex={props.processes.CF === 'AC' ? "0" : "-1"}

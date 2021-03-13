@@ -42,7 +42,7 @@ const acopioGraph = (props) => {
       <HorizontalGridLines />
       <XAxis />
       <YAxis
-        title="$MXN"
+        title={props.kilos ? 'KG' : "$MXN"}
         tickPadding={0} />
       <VerticalBarSeries
         data={props.data}

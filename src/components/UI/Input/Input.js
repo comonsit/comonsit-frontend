@@ -119,7 +119,7 @@ const input = (props) => {
               key={props.elementConfig.options.length+1}
               value={""}
             >
-              --
+              {props.elementConfig.optionBlank}
             </option>
           )
         : null

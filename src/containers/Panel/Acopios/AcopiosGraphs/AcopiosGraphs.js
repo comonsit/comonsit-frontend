@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import classes from './AcopiosGraphs.module.scss'
 import AcopioGraph from '../../../../components/Graphs/AcopioGraph/AcopioGraph';
 import Button from '../../../../components/UI/Button/Button';
+import SwitchToggle from '../../../../components/UI/SwitchToggle/SwitchToggle'
+import ProcessSelector from '../../../../components/UI/ProcessSelector/ProcessSelector';
 import Input from '../../../../components/UI/Input/Input';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import { updateObject } from '../../../../store/reducers/utility'
@@ -25,6 +27,20 @@ class AcopiosGraphs extends Component {
       honeyData: [],
       soapData: [],
       salarioData: [],
+      kgCurrencyForm: false,
+      showKgCurrency: false,
+      showProcess: {
+        CF: 'SEL',
+        MI: 'AC',
+        JA: 'AC',
+        SL: 'AC'
+      },
+      processOptionsForm: {
+        CF: 'SEL',
+        MI: 'AC',
+        JA: 'AC',
+        SL: 'AC'
+      },
       form: {
         clave_socio: {
           elementType: 'select',
@@ -33,7 +49,7 @@ class AcopiosGraphs extends Component {
               "value": r.clave_socio,
               "displayValue": r.clave_socio + ': ' + r.nombres+' '+r.apellido_paterno+' '+r.apellido_materno
             })),
-            optionBlank: true
+            optionBlank: '- todos -'
           },
           label: <FormattedMessage id="clave"/>,
           value: "",
@@ -47,7 +63,7 @@ class AcopiosGraphs extends Component {
               "value": r.id,
               "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region
             })),
-            optionBlank: true
+            optionBlank: '- todas -'
           },
           label: <FormattedMessage id="comunidad"/>,
           value: "",
@@ -61,7 +77,7 @@ class AcopiosGraphs extends Component {
               "value": r.id,
               "displayValue": r.id +': ' + r.nombre_de_region
             })),
-            optionBlank: true
+            optionBlank: '- todas -'
           },
           label: <FormattedMessage id="region"/>,
           value: "",
@@ -73,7 +89,7 @@ class AcopiosGraphs extends Component {
   }
 
   componentDidMount() {
-    this.getYearSum('')
+    this.getYearSum(`?CF=CF`)
   }
 
   getYearSum = query => {
@@ -102,11 +118,17 @@ class AcopiosGraphs extends Component {
       saData.push({x: yearData.fecha__year, y: yearData.year_sum_sl})
     }
 
+    const previous = this.state.kgCurrencyForm
+    const previousProcess = this.state.processOptionsForm
+
     this.setState({
       coffeeData: cData,
       honeyData: hData,
       soapData: soData,
       salarioData: saData,
+      formIsValid: false,
+      showKgCurrency: previous,
+      showProcess: previousProcess
     })
   }
 
@@ -149,19 +171,52 @@ class AcopiosGraphs extends Component {
 
   onRefreshData = event => {
     event.preventDefault();
-    let query = ''
+    let query = '?'
     if (this.state.form.clave_socio.value) {
-      query = '?clave_socio='+this.state.form.clave_socio.value
+      query += 'clave_socio='+this.state.form.clave_socio.value
     } else if (this.state.form.region.value) {
-      query = '?region='+this.state.form.region.value
+      query += 'region='+this.state.form.region.value
     } else if (this.state.form.comunidad.value) {
-      query = '?comunidad='+this.state.form.comunidad.value
+      query += 'comunidad='+this.state.form.comunidad.value
     }
+    if (this.state.kgCurrencyForm) {
+      query += '&kg=True'
+    }
+
+    for (let key of Object.keys(this.state.processOptionsForm)) {
+      if (this.state.processOptionsForm[key] === 'SEL') {
+        query += `&${key}=${key}`
+      }
+    }
+
+
     this.getYearSum(query)
+  }
+
+  onKgCurrencyToggle = () => {
+    this.setState(prevState => ({
+      kgCurrencyForm: !prevState.kgCurrencyForm,
+      formIsValid: true
+    }));
+  }
+
+  OnChooseProcess = current => {
+    // event.preventDefault();
+    const newValue = this.state.processOptionsForm[current] === 'SEL' ? 'AC' : 'SEL'
+
+    const newProcesses = updateObject(this.state.processOptionsForm, {
+      [current]: newValue
+    })
+
+    this.setState({
+      processOptionsForm: newProcesses,
+      formIsValid: true
+    })
   }
 
   render() {
     let form = <Spinner/>
+    const kgMessId = this.state.kgCurrencyForm ? 'kilos' : 'mxn'
     if (
       this.props.comunidades && this.props.comunidades.length > 1 &&
       this.props.listaSocios && this.props.listaSocios.length > 1 &&
@@ -212,6 +267,14 @@ class AcopiosGraphs extends Component {
             focused
           />
         </div>
+        <div className={classes.kgCurrencyToggleContainer}>
+          <SwitchToggle clicked={this.onKgCurrencyToggle}/>
+          <p><FormattedMessage id={kgMessId}/></p>
+        </div>
+        <ProcessSelector
+          processes={this.state.processOptionsForm}
+          clicked={this.OnChooseProcess}
+        />
         <Button
           btnType="Success"
           disabled={!this.state.formIsValid}>
@@ -220,44 +283,68 @@ class AcopiosGraphs extends Component {
       </form>)
     }
 
+    const acopioGraph = this.state.showProcess['CF'] === 'SEL'
+      ? (
+        <AcopioGraph
+          data={this.state.coffeeData}
+          label="cafe"
+          color="#92c3c0"
+          mouseOver={this._rememberValueCF}
+          mouseOut={this._forgetValues}
+          hint={this.state.hintCF}
+          kilos={this.state.showKgCurrency}
+        />
+      ) : null
+
+    const honeyGraph = this.state.showProcess['MI'] === 'SEL'
+      ? (
+        <AcopioGraph
+          data={this.state.honeyData}
+          label="miel"
+          color="#D5B49E"
+          mouseOver={this._rememberValueMI}
+          mouseOut={this._forgetValues}
+          hint={this.state.hintMI}
+          kilos={this.state.showKgCurrency}
+        />
+      ) : null
+
+    const soapGraph = this.state.showProcess['JA'] === 'SEL'
+      ? (
+        <AcopioGraph
+          data={this.state.soapData}
+          label="jabon"
+          color="#ac92c3"
+          mouseOver={this._rememberValueJA}
+          mouseOut={this._forgetValues}
+          hint={this.state.hintJA}
+          kilos={this.state.showKgCurrency}
+        />
+      ) : null
+
+    const salarioGraph = this.state.showProcess['SL'] === 'SEL'
+      ? (
+        <AcopioGraph
+          data={this.state.salarioData}
+          label="salarios"
+          color="#BBC392"
+          mouseOver={this._rememberValueSA}
+          mouseOut={this._forgetValues}
+          hint={this.state.hintSA}
+          kilos={this.state.showKgCurrency}
+        />
+      ) : null
+
     return (
       <>
         <div className={classes.FormContainer}>
           {form}
         </div>
         <div className={classes.AllGraphs}>
-          <AcopioGraph
-            data={this.state.coffeeData}
-            label="cafe"
-            color="#92c3c0"
-            mouseOver={this._rememberValueCF}
-            mouseOut={this._forgetValues}
-            hint={this.state.hintCF}
-          />
-          <AcopioGraph
-            data={this.state.honeyData}
-            label="miel"
-            color="#D5B49E"
-            mouseOver={this._rememberValueMI}
-            mouseOut={this._forgetValues}
-            hint={this.state.hintMI}
-          />
-          <AcopioGraph
-            data={this.state.soapData}
-            label="jabon"
-            color="#ac92c3"
-            mouseOver={this._rememberValueJA}
-            mouseOut={this._forgetValues}
-            hint={this.state.hintJA}
-          />
-          <AcopioGraph
-            data={this.state.salarioData}
-            label="salarios"
-            color="#BBC392"
-            mouseOver={this._rememberValueSA}
-            mouseOut={this._forgetValues}
-            hint={this.state.hintSA}
-          />
+          {acopioGraph}
+          {honeyGraph}
+          {soapGraph}
+          {salarioGraph}
         </div>
       </>
     )

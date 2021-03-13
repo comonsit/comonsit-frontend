@@ -54,7 +54,7 @@ class MovimientosSearch extends Component {
             "value": r.id,
             "displayValue": r.nombre_de_comunidad+' - '+r.nombre_region
           })),
-          optionBlank: true
+          optionBlank: '--'
         },
         label: (<><FormattedMessage id="comunidad"/></>),
         value: "",
@@ -68,7 +68,7 @@ class MovimientosSearch extends Component {
             "value": r.id,
             "displayValue": r.id +': ' + r.nombre_de_region
           })),
-          optionBlank: true
+          optionBlank: '--'
         },
         label: (<><FormattedMessage id="region"/></>),
         value: "",
@@ -82,7 +82,7 @@ class MovimientosSearch extends Component {
             "value": r.id,
             "displayValue": r.id +': ' + r.nombre_empresa
           })),
-          optionBlank: true
+          optionBlank: '--'
         },
         label: (<><FormattedMessage id="empresa"/></>),
         value: "",
@@ -96,7 +96,7 @@ class MovimientosSearch extends Component {
             "value": r.id,
             "displayValue": r.id +': ' + r.fuente
           })),
-          optionBlank: true
+          optionBlank: '--'
         },
         label: (<><FormattedMessage id="fuente"/></>),
         value: "",
@@ -107,7 +107,7 @@ class MovimientosSearch extends Component {
         elementType: 'select',
         elementConfig: {
           options: procesos_values,
-          optionBlank: true
+          optionBlank: '--'
         },
         label: (<><FormattedMessage id="proceso"/></>),
         value: "",

@@ -556,5 +556,7 @@
   "bancoForm.respuesta2": "registros contables nuevos",
   "bancoForm.noCoincideAlert1": "La referencia ",
   "bancoForm.subcuenta": "Subcuenta",
-  "bancoForm.noCoincideAlert2": "  no coincide con la seleccionada "
+  "bancoForm.noCoincideAlert2": "  no coincide con la seleccionada ",
+  "mxn": "$MXN",
+  "kilos": "KG"
 }

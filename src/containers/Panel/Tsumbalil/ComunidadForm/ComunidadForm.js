@@ -62,7 +62,7 @@ class ComunidadForm extends Component {
               "value": e.ermita_id,
               "displayValue": e.nombre +' - ' + e.ermita_id
             })),
-            optionBlank: true
+            optionBlank: '--'
           },
           label: (<><FormattedMessage id="ermita"/>*</>),
           value: this.props.selComunidad.ermita,
