@@ -37,6 +37,7 @@ import logout from './containers/Panel/Logout/Logout';
 import mapaPrueba from './containers/Panel/Mapas/Sandbox/Sandbox';
 import messages_es from './translations/es.json'
 import messages_tz from './translations/tz.json'
+import roles from './store/roles';
 import * as actions from './store/actions'
 
 
@@ -66,9 +67,30 @@ class App extends Component {
   }
 
   render() {
-    const availableRoutes = this.props.isAuthenticated
-      ?
-        (
+    // UNAUTHENTICATED PATHS
+    let availableRoutes = (
+      <Switch>
+        <Route exact path="/" component={homeContainer} />
+        <Route exact path="/conocenos" component={conocenos}/>
+        <Route exact path="/mapa" component={mapa}/>
+        <Route exact path="/contacto" component={contacto}/>
+        <Route exact path="/acceso" component={acceso}/>
+        <Route><Redirect to="/" /></Route>
+      </Switch>
+    )
+    if (this.props.isAuthenticated) {
+      // AUTHENTICATED SOCIO PATHS
+      if (roles[this.props.role] === "Socio") {
+        availableRoutes = (
+          <Switch>
+            <Route path="/inicio" component={inicio} />
+            <Route path="/socios" component={socios} />
+            <Route><Redirect to="/socios" /></Route>
+          </Switch>
+        )
+      } else {
+        // AUTHENTICATED PATHS
+        availableRoutes = (
           <Switch>
             <Route path="/socios" component={socios} />
             <Route path="/perfil" component={perfil} />
@@ -99,17 +121,8 @@ class App extends Component {
             <Route><Redirect to="/inicio" /></Route>
           </Switch>
         )
-      :
-        (
-          <Switch>
-            <Route exact path="/" component={homeContainer} />
-            <Route exact path="/conocenos" component={conocenos}/>
-            <Route exact path="/mapa" component={mapa}/>
-            <Route exact path="/contacto" component={contacto}/>
-            <Route exact path="/acceso" component={acceso}/>
-            <Route><Redirect to="/" /></Route>
-          </Switch>
-        )
+      }
+    }
 
     return (
       <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>

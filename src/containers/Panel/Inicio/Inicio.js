@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import classes from './Inicio.module.scss'
 import { connect } from 'react-redux';
@@ -9,7 +10,9 @@ import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import Title from '../../../components/UI/Title/Title';
 import Card from '../../../components/UI/Card/Card';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Button from '../../../components/UI/Button/Button';
 import TotalCarteras from '../Carteras/TotalCarteras/TotalCarteras'
+import { isGerencia } from '../../../store/roles';
 import axios from '../../../store/axios-be.js';
 
 
@@ -23,7 +26,11 @@ class Inicio extends Component {
       count_vencidos: null,
       loading: false
     }
-    this.onGetCarteras()
+    console.log('El rol es: ')
+    console.log(props.role)
+    if (props.role && props.role !== "Socio") {
+        this.onGetCarteras()
+    }
   }
 
   onGetCarteras = () => {
@@ -53,6 +60,11 @@ class Inicio extends Component {
       })
   }
 
+  // TEMPORAL BUTTON FOR INFO CATCHING OF ASAMBLEA
+  onGoToSocios = () => {
+    this.props.history.push('socios');
+  }
+
   render() {
     let carterasTotales = <Spinner/>
     const title = (this.props.user)
@@ -75,33 +87,56 @@ class Inicio extends Component {
       )
     }
 
+    // TEMPORAL BUTTON FOR INFO CATCHING OF ASAMBLEA
+    let deudasMap = (
+      <Button clicked={this.onGoToSocios}>
+        TABLA <FormattedMessage id="socios.title"/>
+      </Button>
+    )
+    let carteras = null
+    let calendario = null
+
+    if (isGerencia(this.props.role)) {
+      deudasMap = (
+        <div className={classes.Mapa}>
+          <Card title={"inicio.mapa"}>
+            <DeudasMap/>
+          </Card>
+        </div>
+      )
+      carteras = (
+        <div>
+          <Card title={"inicio.carteras"}>
+            {carterasTotales}
+          </Card>
+        </div>
+      )
+      calendario = (
+        <div>
+          <Card title={"inicio.calendario"}>
+            <div className={classes.CalContainer}>
+              <iframe title="calendarZoho" src="https://calendar.zoho.com/embed/575533f4249269e89e9f1e319706ea26b1d364a17c5cb0bafd0a5bf726ca2b265a1327a523a2eaf1b9d51b897c47f45e?title=Website%20CSC&type=1&l=en&tz=America%2FMexico_City&shtitle=1&shtz=1&shdv=0&v=0" frameBorder="0" scrolling="no"></iframe>
+            </div>
+          </Card>
+        </div>
+      )
+    }
+
+    console.log('HACIENDO RENDER DE INICIO')
+
     return (
       <>
         <div className={classes.Container}>
           {title}
           <div className={classes.CardsContainer}>
-            <div className={classes.Mapa}>
-              <Card title={"inicio.mapa"}>
-                <DeudasMap/>
-              </Card>
-            </div>
+            {deudasMap}
             <div>
               <Card title={"inicio.pronostico"}>
                 <Weather/>
               </Card>
             </div>
-            <div>
-              <Card title={"inicio.carteras"}>
-                {carterasTotales}
-              </Card>
-            </div>
-            <div>
-              <Card title={"inicio.calendario"}>
-                <div className={classes.CalContainer}>
-                  <iframe title="calendarZoho" src="https://calendar.zoho.com/embed/575533f4249269e89e9f1e319706ea26b1d364a17c5cb0bafd0a5bf726ca2b265a1327a523a2eaf1b9d51b897c47f45e?title=Website%20CSC&type=1&l=en&tz=America%2FMexico_City&shtitle=1&shtz=1&shdv=0&v=0" frameBorder="0" scrolling="no"></iframe>
-                </div>
-              </Card>
-            </div>
+            {carteras}
+            {calendario}
             <div>
               <Card title={"inicio.numeros"}>
                 <Numbers/>
@@ -117,6 +152,7 @@ class Inicio extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
+    role: state.auth.role,
     token: state.auth.token
   }
 }
