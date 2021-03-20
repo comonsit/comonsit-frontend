@@ -32,20 +32,21 @@ class Creditos extends Component {
   }
 
   getXLSX = type => {
-    let query, name, nameFilt
+    let query = '?'
+    let name, nameFilt
     if (this.state.oldCreditos) {
-      query = '?all=true'
+      query += '&all=true'
       nameFilt = '_todos'
     } else {
-      query = ''
+      query += ''
       nameFilt = '_conDeuda'
     }
 
     if (type === 'ALL') {
-      query = query + ''
+      query += ''
       name = ''
     } else {
-      query = query +'&?region='+type
+      query += '&region='+type
       name = '_region_'+type
     }
     const authData = {

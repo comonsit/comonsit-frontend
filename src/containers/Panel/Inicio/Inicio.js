@@ -26,8 +26,6 @@ class Inicio extends Component {
       count_vencidos: null,
       loading: false
     }
-    console.log('El rol es: ')
-    console.log(props.role)
     if (props.role && props.role !== "Socio") {
         this.onGetCarteras()
     }
