@@ -40,12 +40,28 @@ const contratoDetail = props => {
     )
   })
 
+  const special_content = ["tipo_tasa", "intereses", "total"]
   const tipoTasa = {'FI': 'Fija', 'VA': 'Variable'}
+
+  const get_special = id => {
+    if (id === "tipo_tasa") {
+      return tipoTasa[props.contrato[id]]
+    }
+    // TODO: IMPROVE OR MOVE TO BACKEND!
+    const plazo = parseInt(props.contrato.plazo) + parseInt(props.contrato.prorroga)
+    const intereses = parseInt(props.contrato.monto*(props.contrato.tasa/100)*plazo)
+    if (id === "intereses") {
+      return intereses
+    }
+    if (id === "total") {
+      return parseInt(intereses)+ parseInt(props.contrato.monto)
+    }
+  }
 
   const items2 = [
     "monto",
     "tipo_credito",
-    "plazo",
+    "plazo_disp",
     "intereses",
     "tasa",
     "tasa_moratoria",
@@ -56,7 +72,7 @@ const contratoDetail = props => {
     return (
       <TextElement
         label={id}
-        content={id === "tipo_tasa" ? tipoTasa[props.contrato[id]] : props.contrato[id]}
+        content={special_content.includes(id) ? get_special(id) : props.contrato[id]}
         isNum={id === "monto" || id === "total" || id === "intereses"}
         isPerc={id === "tasa" || id === "tasa_moratoria"}
         twoLanguages={props.forPrinting}

@@ -254,6 +254,7 @@
   "creditos.pagado": "Pagado",
   "monto": "Monto",
   "plazo": "Plazo Meses",
+  "plazo_disp": "Plazo Meses",
   "tasa": "Tasa",
   "tasa_moratoria": "Tasa Moratoria",
   "estatus": "Estatus",
