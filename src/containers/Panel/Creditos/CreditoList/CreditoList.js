@@ -83,6 +83,20 @@ const creditoList = (props) => {
       filter: filterGreaterThan
     },
     {
+      Header: <FormattedMessage id="creditos.pagado"/>,
+      accessor: 'pagado',
+      Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+      Filter: SliderColumnFilter,
+      filter: filterGreaterThan
+    },
+    {
+      Header: <FormattedMessage id="creditoHistorial.pendienteCapital"/>,
+      accessor: 'deuda_al_dia.capital_por_pagar',
+      Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
+      Filter: SliderColumnFilter,
+      filter: filterGreaterThan
+    },
+    {
       Header: <FormattedMessage id="creditos.interes_ordinario"/>,
     accessor: 'deuda_al_dia.interes_ordinario_deuda',
       Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
@@ -92,13 +106,6 @@ const creditoList = (props) => {
     {
       Header: <FormattedMessage id="creditos.interes_moratorio"/>,
       accessor: 'deuda_al_dia.interes_moratorio_deuda',
-      Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
-      Filter: SliderColumnFilter,
-      filter: filterGreaterThan
-    },
-    {
-      Header: <FormattedMessage id="creditos.pagado"/>,
-      accessor: 'pagado',
       Cell: (cellInfo) => <Currency value={cellInfo.cell.value}/>,
       Filter: SliderColumnFilter,
       filter: filterGreaterThan

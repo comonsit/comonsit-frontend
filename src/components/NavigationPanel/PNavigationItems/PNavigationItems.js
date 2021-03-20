@@ -9,9 +9,6 @@ import roles, { isGerencia } from '../../../store/roles';
 
 const pnavigationItems = props => {
 
-  console.log('YO SOY UN??')
-  console.log(props.userRole)
-
   if (roles[props.userRole] === "Socio") {
     return (
       <div className={classes.NavigationItems}>
