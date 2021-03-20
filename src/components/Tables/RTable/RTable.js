@@ -26,6 +26,7 @@ const RTable = (
     selectableRow,
     hasFooter,
     hiddenCols,
+    disableSortBy,
     initialPageSize=10
   }) => {
 
@@ -89,6 +90,7 @@ const RTable = (
       data,
       defaultColumn,
       filterTypes,
+      disableSortBy,
       initialState: {
         pageIndex: 0,
         pageSize: hideSearch? 40 : initialPageSize,

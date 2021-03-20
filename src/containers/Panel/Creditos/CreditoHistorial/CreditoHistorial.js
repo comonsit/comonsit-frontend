@@ -79,7 +79,7 @@ const creditoHistorial = (props) => {
     {
       Header: <FormattedMessage id="fecha"/>,
       accessor: 'fecha_pago',
-      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>,
+      Cell: (cellInfo) => <FrmtedDate value={cellInfo.cell.value}/>
     },
     {
       Header: <FormattedMessage id="creditoHistorial.diasTranscurridos"/>,
@@ -139,6 +139,7 @@ const creditoHistorial = (props) => {
       data={modifiedData}
       onRowClick={() => {}}
       hideSearch
+      disableSortBy
     />
   )
 }
