@@ -113,14 +113,12 @@ class Inicio extends Component {
         <div>
           <Card title={"inicio.calendario"}>
             <div className={classes.CalContainer}>
-              <iframe title="calendarZoho" src="https://calendar.zoho.com/embed/575533f4249269e89e9f1e319706ea26b1d364a17c5cb0bafd0a5bf726ca2b265a1327a523a2eaf1b9d51b897c47f45e?title=Website%20CSC&type=1&l=en&tz=America%2FMexico_City&shtitle=1&shtz=1&shdv=0&v=0" frameBorder="0" scrolling="no"></iframe>
+              <iframe title="calendarZoho" src="https://calendar.zoho.com/embed/575533f4249269e89e9f1e319706ea26b1d364a17c5cb0bafd0a5bf726ca2b265a1327a523a2eaf1b9d51b897c47f45e?title=Website%20CSC&type=1&l=es&tz=America%2FMexico_City&shtitle=0&shtz=0&shdv=0&v=2" width="600" height="500" frameborder="0" scroll="auto"></iframe>
             </div>
           </Card>
         </div>
       )
     }
-
-    console.log('HACIENDO RENDER DE INICIO')
 
     return (
       <>
@@ -128,13 +126,13 @@ class Inicio extends Component {
           {title}
           <div className={classes.CardsContainer}>
             {deudasMap}
+            {calendario}
+            {carteras}
             <div>
               <Card title={"inicio.pronostico"}>
                 <Weather/>
               </Card>
             </div>
-            {carteras}
-            {calendario}
             <div>
               <Card title={"inicio.numeros"}>
                 <Numbers/>
