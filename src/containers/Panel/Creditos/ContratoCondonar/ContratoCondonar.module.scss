@@ -1,0 +1,22 @@
+@import 'styles/form';
+
+.SupportText {
+  padding: 3rem 6rem;
+}
+
+.MessageContainer {
+  display: flex;
+  flex-direction: column; 
+}
+
+.Message {
+  padding: 3rem;
+  h2, h4 {
+    text-align: center;
+    padding: 0 4rem;
+  }
+}
+
+.SuccessResponse {
+  padding: 2rem;
+}

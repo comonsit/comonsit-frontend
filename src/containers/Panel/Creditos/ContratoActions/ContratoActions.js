@@ -24,28 +24,29 @@ const contratoActions = props => {
 
   if (props.role === 'Gerente') {
     gerenteButtons = (
-      <>
-        <Button
-          disabled
-          clicked={() => {}}
-          btnType="Medium"
-        >
-          <FormattedMessage id="creditos.condonacionButton"/>
-        </Button>
-        <Button
-          disabled
-          clicked={() => {}}
-          btnType="Medium"
-        >
-          <FormattedMessage id="creditos.prorrogaButton"/>
-        </Button>
-      </>
+      <Route render={({ history }) => (
+        <>
+          <Button
+            clicked={() => history.push('/condonacion')}
+            btnType="Medium"
+          >
+            <FormattedMessage id="creditos.condonacionButton"/>
+          </Button>
+          <Button
+            disabled
+            clicked={() => {}}
+            btnType="Medium"
+          >
+            <FormattedMessage id="creditos.prorrogaButton"/>
+          </Button>
+        </>
+      )} />
     )
   }
 
   if (isGerencia(props.role)) {
     actionButtons = (
-      <Route render={({ history}) => (
+      <Route render={({ history }) => (
         <>
           <Button
             clicked={() => history.push('/credito-activar')}

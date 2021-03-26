@@ -272,6 +272,7 @@
   "creditos.status.CO": "Cobrado",
   "creditos.status.PC": "Por Cobrar",
   "creditos.status.CA": "Cancelado",
+  "creditos.status.CN": "Condonado",
   "contratoDetail.title": "PAGARÉ DE CRÉDITO PARA PAGO ÚNICO",
   "contratoDetail.datos": "DATOS DEL PRESTATARIO",
   "contratoDetail.especificaciones": "ESPECIFICACIONES DEL CRÉDITO",
@@ -559,5 +560,18 @@
   "bancoForm.subcuenta": "Subcuenta",
   "bancoForm.noCoincideAlert2": "  no coincide con la seleccionada ",
   "mxn": "$MXN",
-  "kilos": "KG"
+  "kg": "KG",
+  "contratoCondonar.title": "Condonación de Crédito",
+  "contratoCondonar.condonar": "Condonar",
+  "contratoCondonar.messageDenied1": "Este crédito no se puede condonar",
+  "contratoCondonar.messageDenied2a": "Sólo los créditos que tienen todo su capital abonado se pueden condonar. El crédito ",
+  "contratoCondonar.messageDenied2b": "  todavía tiene ",
+  "contratoCondonar.messageDenied2c": "  de capital por pagar.",
+  "contratoCondonar.message1": "La siguiente acción dará por concluído el crédito, condonando el total de deuda de intereses.",
+  "contratoCondonar.message2a": "Al aceptar se estarían condonando ",
+  "contratoCondonar.message2b": " de interés ordinario y ",
+  "contratoCondonar.message2c": " de interés moratorio. El capital pendiente es ",
+  "contratoCondonar.message3": "Por favor escribe detalladamente la justificación para condonar y dar por concluído este crédito.",
+  "contratoCondonar.respuesta1": "El Crédito ",
+  "contratoCondonar.respuesta2": "ha sido condonado"
 }

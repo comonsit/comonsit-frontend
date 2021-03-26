@@ -216,7 +216,7 @@ class AcopiosGraphs extends Component {
 
   render() {
     let form = <Spinner/>
-    const kgMessId = this.state.kgCurrencyForm ? 'kilos' : 'mxn'
+    const kgMessId = this.state.kgCurrencyForm ? 'kg' : 'mxn'
     if (
       this.props.comunidades && this.props.comunidades.length > 1 &&
       this.props.listaSocios && this.props.listaSocios.length > 1 &&
