@@ -573,5 +573,12 @@
   "contratoCondonar.message2c": " de interés moratorio. El capital pendiente es ",
   "contratoCondonar.message3": "Por favor escribe detalladamente la justificación para condonar y dar por concluído este crédito.",
   "contratoCondonar.respuesta1": "El Crédito ",
-  "contratoCondonar.respuesta2": "ha sido condonado"
+  "contratoCondonar.respuesta2": "ha sido condonado",
+  "contratoProrroga.title": "Otorgar Prórroga",
+  "contratoProrroga.message1": "Agrega la cantidad de meses que se extenderá la fecha de vencimiento.",
+  "contratoProrroga.message2": "La fecha de vencimiento original era: ",
+  "contratoProrroga.message3": "La nueva fecha de vencimiento sera: ",
+  "contratoProrroga.respuesta1": "La nueva fecha de vencimiento quedó el ", 
+  "prorroga": "Prórroga",
+  "prorroga_justificacion": "Jusitificación de la Prórroga"
 }

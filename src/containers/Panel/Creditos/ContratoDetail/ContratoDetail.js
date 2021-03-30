@@ -81,6 +81,16 @@ const contratoDetail = props => {
     )
   })
 
+  const prorroga_justificacion = props.contrato.prorroga 
+    ? 
+      (
+        <TextElement
+          label={"prorroga_justificacion"}
+          content={props.contrato.prorroga_justificacion}
+        />
+      )
+    : null
+
   const columns = [
     {
       Header: "Jayeb Sc'ahc'alel (Plazo)",
@@ -212,6 +222,7 @@ const contratoDetail = props => {
           </h3>
         </div>
         {items2Array}
+        {prorroga_justificacion}
       </div>
       {tableAndGraph}
       <p>{props.forPrinting ? titlesArray[4] : ''}</p>

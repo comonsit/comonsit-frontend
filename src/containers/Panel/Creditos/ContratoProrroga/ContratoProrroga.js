@@ -3,14 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux'
 import _ from 'lodash';
 
-import classes from './ContratoCondonar.module.scss'
+import classes from './ContratoProrroga.module.scss'
 import ContratoDetail from '../ContratoDetail/ContratoDetail'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 import Input from '../../../../components/UI/Input/Input';
-import Alert from '../../../../components/UI/Input/Alert';
 import Button from '../../../../components/UI/Button/Button';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
-import Currency from '../../../../components/UI/Formatting/Currency';
+import FrmtedDate from '../../../../components/UI/Formatting/FrmtedDate'
 import Title from '../../../../components/UI/Title/Title';
 import Modal from '../../../../components/UI/Modal/Modal';
 import FormConfirmation from '../../../../components/UI/FormConfirmation/FormConfirmation';
@@ -20,7 +19,7 @@ import { checkValidity } from '../../../../utilities/validity'
 import axios from '../../../../store/axios-be.js'
 
 
-class ContratoCondonar extends Component {
+class ContratoProrroga extends Component {
   constructor(props) {
     super(props);
     if (!this.props.selContrato.id) {
@@ -28,21 +27,37 @@ class ContratoCondonar extends Component {
     }
     this.state = {
       formIsValid: false,
-      condonable: null,
-      capital_pendiente: null,
-      interes_ord: null,
-      interes_mor: null,
       modalOpen: false, 
       confirmFormOpen: false,
       form: {
-        justificacion: {
-          elementType: 'textarea',
+        prorroga: {
+          elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '..',
-            maxLength: '100'
+            placeholder: '# meses'
           },
-          label: (<><FormattedMessage id="justificacion"/></>),
+          label: (<><FormattedMessage id="prorroga"/></>),
+          value: "",
+          validation: {
+            required: true,
+            isNumeric: true,
+            minNumValue: 1,
+            maxNumValue: 14
+          },
+          valid: true,
+          errorMessage: "",
+          touched: false,
+          hide: false
+        },
+        prorroga_justificacion: {
+          elementType: 'textarea',
+          elementConfig: {
+            required: true,
+            type: 'text',
+            placeholder: '..',
+            maxLength: '100', 
+          },
+          label: (<><FormattedMessage id="prorroga_justificacion"/></>),
           value: "",
           validation: {
             required: true
@@ -56,38 +71,9 @@ class ContratoCondonar extends Component {
     }
   }
 
-  componentDidMount() {
-    this.getCondonableStatus()
-  }
-
   componentWillUnmount() {
     this.props.unSelContrato()
     this.props.onClearError()
-  }
-
-  getCondonableStatus() {
-    const authData = {
-      headers: { 'Authorization': `Bearer ${this.props.token}` }
-    }
-
-    axios.get('/contratos/'+this.props.selContrato.id+'/deuda/', authData)
-      .then(response => {
-        if ('capital_por_pagar' in response.data) {
-          let condonable = false
-          if (response.data.capital_por_pagar === 0) {
-            condonable = true
-          }
-          this.setState({
-            condonable: condonable,
-            capital_pendiente: response.data.capital_por_pagar,
-            interes_ord: response.data.interes_ordinario_deuda,
-            interes_mor: response.data.interes_moratorio_deuda
-          })
-        }
-      })
-      .catch(error => {
-
-      })
   }
 
   onSubmitForm = event => {
@@ -97,14 +83,14 @@ class ContratoCondonar extends Component {
     }
 
     const data = {
-      credito: this.props.selContrato.id,
-      justificacion: this.state.form.justificacion.value
+      prorroga: this.state.form.prorroga.value,
+      prorroga_justificacion: this.state.form.prorroga_justificacion.value
     }
     this.setState({confirmFormOpen: false})
     
-    axios.post('/condonaciones/', data, authData)
+    axios.patch(`/contratos/${this.props.selContrato.id}/prorroga/`, data, authData)
       .then(response => {
-        this.setState({successResponse: response.data.credito})
+        this.setState({successResponse: response.data.fecha_vencimiento})
         this.props.onClearError()
       })
       .catch(error => {
@@ -115,13 +101,9 @@ class ContratoCondonar extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
     const validation = checkValidity(event.target.value, this.state.form[inputIdentifier].validation, true)
-    // TODO: checkbox check unnecesary
-    // const value = this.state.form[inputIdentifier].elementType === 'checkbox'
-    //   ? event.target.checked
-    //   : event.target.value
 
     const updatedFormElement = updateObject(this.state.form[inputIdentifier], {
-      value: event.target.value,
+      value:  event.target.value,
       valid: validation.valid,
       errorMessage: validation.errorMessage,
       touched: true
@@ -151,40 +133,63 @@ class ContratoCondonar extends Component {
   }
 
   render() {
-    let form, message
+    let newDate = null
 
-    if (this.state.condonable === null) {
-      message = null
-      form = <Spinner />
-    } else if (this.state.condonable === true) {
-      message = (
-        <div className={classes.Message}>
-          <h4><FormattedMessage id="contratoCondonar.message1"/></h4>
-          <p><FormattedMessage id="contratoCondonar.message2a"/><Currency value={this.state.interes_ord} /><FormattedMessage id="contratoCondonar.message2b"/><Currency value={this.state.interes_mor}/><FormattedMessage id="contratoCondonar.message2c"/><Currency value={this.state.capital_pendiente} />.</p>
-          <p><FormattedMessage id="contratoCondonar.message3"/></p>
-        </div>
-      )
-      const serverErrorMessage = _.get(this.props.formError, 'justificacion', "")
-      form = (
+    const vencimiento = (isNaN(this.props.selContrato.fecha_vencimiento) && !isNaN(Date.parse(this.props.selContrato.fecha_vencimiento)))
+      ? new Date(this.props.selContrato.fecha_vencimiento.replace(/-/g, '/'))
+      : null
+    if (this.state.formIsValid && !isNaN(this.state.form.prorroga.value) && vencimiento) {
+      newDate = new Date(vencimiento);
+      newDate = new Date(newDate.setMonth(newDate.getMonth()+parseInt(this.state.form.prorroga.value)));
+    }
+    const message = (
+      <div className={classes.Message}>
+        <h4><FormattedMessage id="contratoProrroga.message1"/></h4>
+        <p><FormattedMessage id="contratoProrroga.message2"/><FrmtedDate value={vencimiento ? vencimiento.toString() : null}/></p>
+        <p><FormattedMessage id="contratoProrroga.message3"/><strong><FrmtedDate value={newDate ? newDate.toString() : null}/></strong></p>
+      </div>
+    )  
+
+    const serverErrorMessage1 = _.get(this.props.formError, 'prorroga', "")
+    const serverErrorMessage2 = _.get(this.props.formError, 'prorroga_justificacion', "")
+    const form = (
         <form onSubmit={this.onShowConfirmation}>
           <div className={[classes.Form, classes.noScroll].join(' ')}>
             <div>
               <div className={classes.Inputs}>
                 <Input
-                  label={this.state.form.justificacion.label}
-                  key= {'contractoCondonacion1'}
-                  elementType={this.state.form.justificacion.elementType }
-                  elementConfig={this.state.form.justificacion.elementConfig }
-                  value={this.state.form.justificacion.value}
-                  shouldValidate={this.state.form.justificacion.validation}
-                  invalid={!this.state.form.justificacion.valid || serverErrorMessage !== ""}
-                  errorMessage={this.state.form.justificacion.errorMessage + serverErrorMessage}
-                  touched={this.state.form.justificacion.touched}
-                  disabled={this.props.loading || this.state.form.justificacion.disabled}
-                  hide={this.state.form.justificacion.hide}
-                  changed={(event) => this.inputChangedHandler(event, 'justificacion')}
-                  supportData={this.state.form.justificacion.supportData}
-                  focused
+                  label={this.state.form.prorroga.label}
+                  key= {'contractoProrroga1'}
+                  elementType={this.state.form.prorroga.elementType }
+                  elementConfig={this.state.form.prorroga.elementConfig }
+                  value={this.state.form.prorroga.value}
+                  shouldValidate={this.state.form.prorroga.validation}
+                  invalid={!this.state.form.prorroga.valid || serverErrorMessage1 !== ""}
+                  errorMessage={this.state.form.prorroga.errorMessage + serverErrorMessage1}
+                  touched={this.state.form.prorroga.touched}
+                  disabled={this.props.loading || this.state.form.prorroga.disabled}
+                  hide={this.state.form.prorroga.hide}
+                  changed={(event) => this.inputChangedHandler(event, 'prorroga')}
+                  supportData={this.state.form.prorroga.supportData}
+                />
+              </div>
+            </div>
+            <div>
+              <div className={classes.Inputs}>
+                <Input
+                  label={this.state.form.prorroga_justificacion.label}
+                  key= {'contractoProrroga2'}
+                  elementType={this.state.form.prorroga_justificacion.elementType }
+                  elementConfig={this.state.form.prorroga_justificacion.elementConfig }
+                  value={this.state.form.prorroga_justificacion.value}
+                  shouldValidate={this.state.form.prorroga_justificacion.validation}
+                  invalid={!this.state.form.prorroga_justificacion.valid || serverErrorMessage2 !== ""}
+                  errorMessage={this.state.form.prorroga_justificacion.errorMessage + serverErrorMessage2}
+                  touched={this.state.form.prorroga_justificacion.touched}
+                  disabled={this.props.loading || this.state.form.prorroga_justificacion.disabled}
+                  hide={this.state.form.prorroga_justificacion.hide}
+                  changed={(event) => this.inputChangedHandler(event, 'prorroga_justificacion')}
+                  supportData={this.state.form.prorroga_justificacion.supportData}
                 />
               </div>
             </div>
@@ -194,40 +199,27 @@ class ContratoCondonar extends Component {
               btnType="Success"
               disabled={!this.state.formIsValid}
             >
-              <FormattedMessage id="contratoCondonar.condonar"/>
+              <FormattedMessage id="enviar"/>
             </Button>
           </div>
         </form>
       )
-    } else if (this.state.condonable === false) {
-      message = (
-        <div  className={classes.Message}>
-          <h2><Alert />&nbsp;<FormattedMessage id="contratoCondonar.messageDenied1"/></h2>
-          <h4><FormattedMessage id="contratoCondonar.messageDenied2a"/>#{this.props.selContrato.id}<FormattedMessage id="contratoCondonar.messageDenied2b"/><Currency value={this.state.capital_pendiente} /><FormattedMessage id="contratoCondonar.messageDenied2c"/></h4>
-        </div>
-        )
-      form = null
-    }
 
     let modalInfo = <Spinner />
     if (this.state.modalOpen) {
       if (this.state.confirmFormOpen) {
-        const extraTitle = (
-          <h3><FormattedMessage id="contratoCondonar.message1"/></h3>
-        )
         modalInfo = (
           <FormConfirmation
-            formOrder={['justificacion']}
+            formOrder={['prorroga', 'prorroga_justificacion']}
             formData={this.state.form}
             onSubmitAction={this.onSubmitForm}
             onCancelAction={() => this.setState({modalOpen: false, confirmFormOpen: false})}
-            extraTitle={extraTitle}
           />
         )
       } else if (this.state.successResponse) {
         modalInfo = (
           <div className={classes.SuccessResponse}>
-            <p><FormattedMessage id="contratoCondonar.respuesta1"/> #{this.state.successResponse}<FormattedMessage id="contratoCondonar.respuesta2"/></p>
+            <p><FormattedMessage id="contratoProrroga.respuesta1"/> <strong><FrmtedDate value={this.state.successResponse}/></strong></p>
             <Button
               btnType="Success"
               clicked={() => this.props.history.replace('/creditos')}
@@ -249,7 +241,7 @@ class ContratoCondonar extends Component {
           {modalInfo}
         </Modal>
         <div className={classes.FormContainer}>
-          <Title titleName="contratoCondonar.title"/>
+          <Title titleName="contratoProrroga.title"/>
           <div className={classes.FormContainer_extra}>
             <div className={classes.FormContainer_extraInfo}>
               <h3><FormattedMessage id="credito" /> {this.props.selContrato.id}</h3>
@@ -284,4 +276,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContratoCondonar, axios))
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContratoProrroga, axios))

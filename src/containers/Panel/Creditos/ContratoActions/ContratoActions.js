@@ -21,7 +21,7 @@ const contratoActions = props => {
     : null
 
   const vida = vidaCartera(props.selContrato.fecha_inicio, props.selContrato.fecha_vencimiento)
-
+  const actionsDisabled = !((props.selContrato.estatus_detail === 'VI' || props.selContrato.estatus_detail === 'VE') && props.selContrato.estatus_ejecucion === 'CO')
   if (props.role === 'Gerente') {
     gerenteButtons = (
       <Route render={({ history }) => (
@@ -29,12 +29,13 @@ const contratoActions = props => {
           <Button
             clicked={() => history.push('/condonacion')}
             btnType="Medium"
+            disabled={actionsDisabled}
           >
             <FormattedMessage id="creditos.condonacionButton"/>
           </Button>
           <Button
-            disabled
-            clicked={() => {}}
+            disabled={props.selContrato.prorroga !== 0 || actionsDisabled}
+            clicked={() => history.push('/prorroga')}
             btnType="Medium"
           >
             <FormattedMessage id="creditos.prorrogaButton"/>

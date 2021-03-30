@@ -27,6 +27,7 @@ import pagos from './containers/Panel/Pagos/Pagos';
 import pagoForm from './containers/Panel/Pagos/PagoForm/PagoForm';
 import contratoActivate from './containers/Panel/Creditos/ContratoActivate/ContratoActivate';
 import contratoCondonar from './containers/Panel/Creditos/ContratoCondonar/ContratoCondonar';
+import contratoProrroga from './containers/Panel/Creditos/ContratoProrroga/ContratoProrroga';
 import contratoImprimir from './containers/Panel/Creditos/ContratoImprimir/ContratoImprimir';
 import movimientos from './containers/Panel/Movimientos/Movimientos';
 import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
@@ -98,6 +99,7 @@ class App extends Component {
             <Route path="/acopios" component={acopios} />
             <Route path="/carteras" component={carteras} />
             <Route path="/condonacion" component={contratoCondonar} />
+            <Route path="/prorroga" component={contratoProrroga} />
             <Route path="/creditos" component={creditos} />
             <Route path="/mapa-prueba" component={mapaPrueba} />
             <Route path="/pagos" component={pagos} />
