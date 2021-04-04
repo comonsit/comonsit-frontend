@@ -36,6 +36,7 @@ import formatos from './containers/Panel/Formatos/Formatos';
 import perfil from './containers/Panel/Perfil/PerfilCont';
 import inicio from './containers/Panel/Inicio/Inicio';
 import logout from './containers/Panel/Logout/Logout';
+import mapaProcesos from './containers/Panel/Mapas/MapaProcesos/MapaProcesos';
 import mapaMision from './containers/Panel/Mapas/MapaMision/MapaMision';
 import messages_es from './translations/es.json'
 import messages_tz from './translations/tz.json'
@@ -101,7 +102,7 @@ class App extends Component {
             <Route path="/condonacion" component={contratoCondonar} />
             <Route path="/prorroga" component={contratoProrroga} />
             <Route path="/creditos" component={creditos} />
-            <Route path="/mapa-procesos" component={mapaMision} />
+            <Route path="/mapa-procesos" component={mapaProcesos} />
             <Route path="/mapa-mision" component={mapaMision} />
             <Route path="/pagos" component={pagos} />
             <Route path="/pago-formato" component={pagoForm} />

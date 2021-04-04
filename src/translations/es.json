@@ -582,5 +582,6 @@
   "prorroga": "Prórroga",
   "prorroga_justificacion": "Jusitificación de la Prórroga",
   "pmenu.mapaProcesos": "Mapa Procesos",
-  "pmenu.mapaMision": "Mapa Misión"
+  "pmenu.mapaMision": "Mapa Misión",
+  "mapa.leyendaDeudas": "Las cantidades acumuladas son solo del capital por pagar de cada crédito activo"
 }
