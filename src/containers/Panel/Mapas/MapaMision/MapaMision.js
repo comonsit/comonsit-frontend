@@ -12,7 +12,7 @@ import {
 } from 'react-leaflet';
 
 import MapLayers from '../MapLayers/MapLayers'
-import classes from './Sandbox.module.scss'
+import classes from './MapaMision.module.scss'
 import axios from '../../../../store/axios-be.js';
 import { connect } from 'react-redux';
 import icons from './icons'
@@ -60,7 +60,7 @@ const getRegionCom = (region, comunidades) => {
 }
 
 
-const Sandbox = (props) => {
+const MapaMision = (props) => {
   const [localidades, setLocalidades] = useState(null)
   const [localSinGeo, setLocalSinGeo] = useState(null)
   const [localSinErmita, setLocalSinErmita] = useState(null)
@@ -259,4 +259,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sandbox, axios)
+export default connect(mapStateToProps, mapDispatchToProps)(MapaMision, axios)

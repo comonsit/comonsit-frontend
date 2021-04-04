@@ -580,5 +580,7 @@
   "contratoProrroga.message3": "La nueva fecha de vencimiento sera: ",
   "contratoProrroga.respuesta1": "La nueva fecha de vencimiento quedó el ", 
   "prorroga": "Prórroga",
-  "prorroga_justificacion": "Jusitificación de la Prórroga"
+  "prorroga_justificacion": "Jusitificación de la Prórroga",
+  "pmenu.mapaProcesos": "Mapa Procesos",
+  "pmenu.mapaMision": "Mapa Misión"
 }

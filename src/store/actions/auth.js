@@ -116,11 +116,11 @@ export const refreshToken = (initialRefresh=false) => {
           dispatch(fetchGralData(response.data.access))
         }
       })
-      .catch(err=> {
+      .catch(err => {
         // console.log('FAILED TO REFRESH')
         alert(err)
         // console.log(err.response.data);
-        dispatch(authFail(err.response.data.detail))
+        dispatch(authFail(err.response.data.detail ?? err))
         // TODO: agregar logout???
       })
   }

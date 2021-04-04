@@ -90,7 +90,10 @@ const pnavigationItems = props => {
             <NavLink to="/tsumbalil" exact activeClassName={classes.active}><FormattedMessage id="pmenu.tsumbalil"/></NavLink>
           </div>
           <div className={classes.NavigationItem} onClick={props.clicked}>
-            <NavLink to="/mapa-prueba" exact activeClassName={classes.active}><FormattedMessage id="pmenu.mapas"/></NavLink>
+            <NavLink to="/mapa-procesos" exact activeClassName={classes.active}><FormattedMessage id="pmenu.mapaProcesos"/></NavLink>
+          </div>
+          <div className={classes.NavigationItem} onClick={props.clicked}>
+            <NavLink to="/mapa-mision" exact activeClassName={classes.active}><FormattedMessage id="pmenu.mapaMision"/></NavLink>
           </div>
         </Collapsible>
         <Collapsible
