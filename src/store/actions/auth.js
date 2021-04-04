@@ -120,7 +120,9 @@ export const refreshToken = (initialRefresh=false) => {
         // console.log('FAILED TO REFRESH')
         alert(err)
         // console.log(err.response.data);
-        dispatch(authFail(err.response.data.detail ?? err))
+        if (err.response) {
+          dispatch(authFail(err.response.data.detail))
+        }
         // TODO: agregar logout???
       })
   }

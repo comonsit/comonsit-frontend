@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   MapContainer,
   // SVGOverlay,
@@ -186,7 +187,7 @@ const MapaMision = (props) => {
           return (
             <Polygon
               key={r.id}
-              color={colores[+r.id-1]}
+              color="#555555"
               positions={r.poly.coordinates[0].map(geoIt => [geoIt[1], geoIt[0]])}
             >
               <Tooltip>
@@ -213,7 +214,7 @@ const MapaMision = (props) => {
           <ZoomControl position="bottomright"/>
           <MapLayers>
             {localidades}
-            <Overlay name="Regiones Comon">
+            <Overlay checked name="Regiones Comon">
               <LayerGroup>
                 {regiones}
               </LayerGroup>
@@ -232,6 +233,7 @@ const MapaMision = (props) => {
         </MapContainer>
       </div>
       <div className={classes.Container}>
+        <h1><FormattedMessage id="pmenu.mapaMision"/></h1>
         <h2 className={classes.Subtitle}>Comunidades Ubicadas {cuenta.asignadas}</h2>
         <h2 className={classes.Subtitle}>Comunidades Sin Ermita {cuenta.sinErmita}</h2>
         <h2 className={classes.Subtitle}>Comunidades Sin INEGI {cuenta.sinInegi}</h2>

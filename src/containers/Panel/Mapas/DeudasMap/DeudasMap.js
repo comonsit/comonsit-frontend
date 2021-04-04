@@ -202,6 +202,7 @@ class DeudasMap extends Component {
               <div className={classes.BubVenGT6M}>-</div>
               &nbsp;<FormattedMessage id="mapa.gt6M"/>
             </div>
+            <div className={classes.Parr}><FormattedMessage id="mapa.leyendaDeudas"/></div>
           </div>
         </div>
       </div>
