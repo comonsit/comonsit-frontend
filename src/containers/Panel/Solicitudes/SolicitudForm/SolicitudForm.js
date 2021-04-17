@@ -125,6 +125,7 @@ class SolicitudForm extends Component {
               {value: 'EL', displayValue: 'Elaboración de Alimentos'},
               {value: 'ER', displayValue: 'Elaboración de Artesanía'},
               {value: 'HE', displayValue: 'Herramientas y Equipo de Trabajo'},
+              {value: 'AP', displayValue: 'Trabajo con Apiarios'},
               {value: 'OT', displayValue: 'Otro'}
             ]
           },
