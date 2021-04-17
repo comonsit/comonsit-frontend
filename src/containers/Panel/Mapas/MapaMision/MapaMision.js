@@ -21,18 +21,6 @@ const { Overlay } = LayersControl
 
 
 const center = [17.17, -92.0]
-const colores = [
-  "#00ff00",
-  "#1315a1ff",
-  "#aa0000",
-  "#555555",
-  "#999900",
-  "#04bbcc",
-  "#aa5533",
-  "#079977",
-  "#c014f0",
-  "#cee713"
-]
 
 
 const getRegionCom = (region, comunidades) => {
