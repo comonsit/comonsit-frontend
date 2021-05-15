@@ -11,7 +11,7 @@ const frmtedDate = props => {
       return (
         <IntlProvider locale='es'>
           <FormattedDate
-            value={props.value}
+            value={new Date(props.value+" 00:00:00")}
             day="numeric"
             month="long"
             year={(props.noYear) ? undefined : "numeric"}
@@ -22,7 +22,7 @@ const frmtedDate = props => {
       return (
         <IntlProvider locale='es'>
           <FormattedDate
-            value={props.value}
+            value={new Date(props.value+" 00:00:00")}
             day="numeric"
             month="short"
             formatMatcher='best fit'
