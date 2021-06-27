@@ -75,7 +75,7 @@ class Layout extends Component {
           <div className={classes.LanguageSelector}>
             <HoverButton
               title="language"
-              items={['es', 'tz']}
+              items={['es', 'tz', 'en']}
               clicked={this.onChangeLanguage}
             />
           </div>

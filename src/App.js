@@ -40,13 +40,15 @@ import mapaProcesos from './containers/Panel/Mapas/MapaProcesos/MapaProcesos';
 import mapaMision from './containers/Panel/Mapas/MapaMision/MapaMision';
 import messages_es from './translations/es.json'
 import messages_tz from './translations/tz.json'
+import messages_en from './translations/en.json'
 import roles from './store/roles';
 import * as actions from './store/actions'
 
 
 const messages = {
   'es': messages_es,
-  'tz': messages_tz
+  'tz': messages_tz,
+  'en': messages_en
 }
 
 // import asyncComponent from './hoc/asyncComponent/asyncComponent'
