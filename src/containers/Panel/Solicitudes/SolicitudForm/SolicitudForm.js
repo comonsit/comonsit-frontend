@@ -97,7 +97,8 @@ class SolicitudForm extends Component {
           elementConfig: {
             options: [
               {value: 'MC', displayValue: 'Microcrédito'},
-              {value: 'CP', displayValue: 'Crédito Productivo'}
+              {value: 'CP', displayValue: 'Crédito Productivo'},
+              {value: 'FC', displayValue: 'Fondo Común'},
             ]
           },
           label: (<><FormattedMessage id="solicitudForm.tipo_credito"/>*</>),

@@ -32,6 +32,7 @@ import contratoImprimir from './containers/Panel/Creditos/ContratoImprimir/Contr
 import movimientos from './containers/Panel/Movimientos/Movimientos';
 import movimientosForm from './containers/Panel/Movimientos/MovimientosForm/MovimientosForm';
 import acopioForm from './containers/Panel/Acopios/AcopioForm/AcopioForm';
+import fondosComunes from './containers/Panel/FondosComunes/FondosComunes';
 import formatos from './containers/Panel/Formatos/Formatos';
 import perfil from './containers/Panel/Perfil/PerfilCont';
 import inicio from './containers/Panel/Inicio/Inicio';
@@ -113,6 +114,7 @@ class App extends Component {
             <Route path="/movimientos" component={movimientos} />
             <Route path="/solicitudes" component={solicitudes} />
             <Route path="/solicitud-formato" component={solicitudForm} />
+            <Route path="/fondos-comunes" component={fondosComunes} />
             <Route path="/mesa-control" component={mesaControl} />
             <Route path="/formatos" component={formatos} />
             <Route path="/inicio" component={inicio} />

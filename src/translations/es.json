@@ -26,6 +26,7 @@
     "pmenu.solicitudes": "Solicitudes",
     "pmenu.tsumbalil": "Tsumbalil",
     "pmenu.logout": "Cerrar Sesión",
+    "pmenu.fondos": "Fondos Comunes",
     "socios.title": "Socios",
     "socios.clave": "Clave",
     "socios.claveCafe": "Clave TX",
@@ -588,5 +589,6 @@
     "formatos.formatosActuales": "Formatos actuales",
     "formatos.manualesOperacion": "Manuales de operación",
     "formatos.materialFormacion": "Material de formación",
-    "formatos.reporterInfografias": "Reportes e infografías"
+    "formatos.reporterInfografias": "Reportes e infografías",
+    "FondosComunes.title": "Fondos Comunes"
 }
