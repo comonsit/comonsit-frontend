@@ -38,6 +38,7 @@ class BancoForm extends Component {
       movs: null,
       pagos: null,
       creditos: null,
+      fondosComunes: null,
       subcuentas: null,
       selTab: "bancoForm.Movimientos",
       cantidadCheck: null,
@@ -199,6 +200,7 @@ class BancoForm extends Component {
   }
 
   onGetData = () => {
+    // todo change for a getAll request
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
@@ -216,6 +218,11 @@ class BancoForm extends Component {
     axios.get('/contratos/no-link/', authData)
       .then(response => {
         this.setState({creditos: response.data.results})
+      })
+
+    axios.get('/contratos/no-link/?fondocomun=1', authData)
+      .then(response => {
+        this.setState({fondosComunes: response.data.results})
       })
 
     axios.get('/subcuentas/', authData)
@@ -402,8 +409,15 @@ class BancoForm extends Component {
     }
 
     let movsList = <Spinner/>
-    let pagosList = <Spinner/>
-    let creditosList = <Spinner/>
+    let pagosList = (this.state.pagos) 
+      ? <PagosList data={this.state.pagos} onClick={() => {}} selectable/>
+      : <Spinner/>
+    let creditosList = (this.state.creditos)
+      ? <CreditoListCont data={this.state.creditos} selectable/>
+      : <Spinner/>
+    let fondoComunList = (this.state.fondosComunes)
+      ? <CreditoListCont data={this.state.fondosComunes} selectable/>
+      : <Spinner/>
     const subcuentaInput = _.remove(formElements, el => el.key === "subcuenta" )
 
     if (this.state.movs) {
@@ -415,12 +429,6 @@ class BancoForm extends Component {
           bankDetail
         />
       )
-    }
-    if (this.state.pagos) {
-      pagosList = <PagosList data={this.state.pagos} onClick={() => {}} selectable/>
-    }
-    if (this.state.creditos) {
-      creditosList = <CreditoListCont data={this.state.creditos} selectable/>
     }
 
     const selectableTabs = (
@@ -436,6 +444,9 @@ class BancoForm extends Component {
          </div>
          <div label="bancoForm.EjCredito">
            {creditosList}
+         </div>
+         <div label="FondosComunes.title">
+           {fondoComunList}
          </div>
          <div label="bancoForm.Otros">
            <div className={classes.SubcuentaContainer}>

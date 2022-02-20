@@ -9,7 +9,8 @@ const initialState = {
     tipo_tasa: null,
     estatus_ejecucion: null,
     fecha_banco: null,
-    referencia_banco: null
+    referencia_banco: null,
+    fondo_comun: null 
   }
 }
 

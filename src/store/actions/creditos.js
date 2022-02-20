@@ -26,14 +26,15 @@ export const initCreditos = (token, fetchAll) => {
   }
 }
 
-export const fetchSelContrato = (token, id) => {
-  return dispatch => {
+export const fetchSelContrato = (token, id, fc=false) => {
+  return async dispatch => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }
     }
-    axios.get(`/contratos/${id}.json`, authData)
+    const fondoComun = fc ? '?fondocomun=1' : ''
+    return axios.get(`/contratos/${id}.json`+fondoComun, authData)
       .then(response => {
-        dispatch(setSelContrato(response.data))
+        dispatch(setSelContrato({...response.data, fondo_comun: fc}))
       })
       .catch(error => {
         // TODO: FALTA!!
@@ -42,7 +43,7 @@ export const fetchSelContrato = (token, id) => {
   }
 }
 
-export const setSelContrato = selectedContrato => {
+export const setSelContrato = (selectedContrato) => {
   return {
     type: actionTypes.SET_SEL_CONTRATO,
     selectedContrato: selectedContrato
@@ -55,13 +56,14 @@ export const unSelectContrato = () => {
   }
 }
 
-export const updateCredito = (creditoData, id, token) => {
+export const updateCredito = (creditoData, id, token, fondo_comun) => {
   return dispatch => {
     const authData = {
       headers: { 'Authorization': `Bearer ${token}` }
     }
+    const fondoComun = fondo_comun ? '?fondocomun=1' : ''
     dispatch(updateCreditoStart())
-    axios.patch(`/contratos/${id}.json`, creditoData, authData)
+    axios.patch(`/contratos/${id}.json`+fondoComun, creditoData, authData)
       .then(response => {
         dispatch(updateCreditoSuccess(response.data.name, creditoData ))
         alert('Credito ' + response.data.id + ' actualizado correctamente')

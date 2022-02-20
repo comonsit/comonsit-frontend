@@ -140,7 +140,7 @@ class ContratoActivate extends Component {
       delete formData.tipo_tasa
     }
 
-    this.props.onUpdateContrato(formData, this.props.selContrato.id, this.props.token)
+    this.props.onUpdateContrato(formData, this.props.selContrato.id, this.props.token, this.props.selContrato.fondo_comun)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -223,7 +223,8 @@ class ContratoActivate extends Component {
 
     formClasses.push(classes.noScroll)
 
-    const updatedRedirect = (this.props.updated) ? <Redirect to="/creditos"/> : null
+    const redirectUrl = (this.props.selContrato.fondo_comun) ? "/fondos-comunes" :  "/creditos"
+    let updatedRedirect = (this.props.updated) ? <Redirect to={redirectUrl}/> : null
 
     return (
       <div className={classes.FormContainer}>
@@ -269,7 +270,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUpdateContrato: (contrato, id, token) => dispatch(actions.updateCredito(contrato, id, token)),
+    onUpdateContrato: (contrato, id, token, fondo_comun) => dispatch(actions.updateCredito(contrato, id, token, fondo_comun)),
     unSelContrato: () => dispatch(actions.unSelectContrato()),
     onClearError: () => dispatch(actions.clearError())
   }

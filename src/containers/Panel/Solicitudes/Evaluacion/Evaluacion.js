@@ -194,7 +194,9 @@ class Evaluacion extends Component {
         // this.props.updateUser(response.data)
         // console.log('CAMBIAR STATUS === AP POR:')
         if (status === 'AP') {
-          alert('Solicitud de Crédito aprobado correctamente. Contrato: ' + response.data.contrato + ' creado.')
+          const fondoComunText = response.data.tipo_credito === 'FC' ? ' de Fondo Común ' : ''
+          alert('Solicitud de Crédito aprobado correctamente. Crédito' + fondoComunText  + response.data.contrato + ' creado.')
+          
         } else if (status === 'NE') {
           alert('Solicitud de Crédito enviada a negociación')
         } else {

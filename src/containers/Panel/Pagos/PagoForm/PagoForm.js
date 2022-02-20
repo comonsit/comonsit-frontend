@@ -19,6 +19,7 @@ import * as actions from '../../../../store/actions'
 import { updateObject } from '../../../../store/reducers/utility'
 import { checkValidity } from '../../../../utilities/validity'
 import axios from '../../../../store/axios-be.js'
+import Tabs from '../../../../components/UI/Tabs/Tabs';
 
 
 class PagosForm extends Component {
@@ -29,7 +30,9 @@ class PagosForm extends Component {
       searchingOpen: false,
       loading: false,
       updated: false,
+      selTab: "bancoForm.EjCredito",
       editing: this.props.selPago !== null,
+      fondosComunes: null,
       pagoForm: {
         credito: {
           elementType: 'input',
@@ -203,6 +206,12 @@ class PagosForm extends Component {
     if (this.props.selPago && this.props.selPago.credito) {
       this.props.onFetchSelContrato(this.props.token, this.props.selPago.credito)
     }
+    axios.get("/contratos/?fondocomun=1", { headers: { Authorization: `Bearer ${this.props.token}`}})
+      .then(res => {
+        this.setState({
+          fondosComunes: res.data
+        })
+      })
   }
 
   componentWillUnmount() {
@@ -377,7 +386,8 @@ class PagosForm extends Component {
       searchingOpen: false,
       pagoForm: updatedForm
     });
-    this.props.onFetchSelContrato(this.props.token, id)
+    const fondoComun = this.state.selTab === "FondosComunes.title"
+    this.props.onFetchSelContrato(this.props.token, id, fondoComun)
     // TODO: CLEAR SUPPORT DATA
   }
 
@@ -385,7 +395,8 @@ class PagosForm extends Component {
     const contratoID = this.state.pagoForm.credito.value
     // TODO: validation of credito to search
     if (contratoID && !isNaN(contratoID)) {
-      this.props.onFetchSelContrato(this.props.token, contratoID)
+      const fondoComun = this.state.selTab === "FondosComunes.title"
+      this.props.onFetchSelContrato(this.props.token, contratoID, fondoComun)
       const updatedForm = updateObject(this.state.pagoForm, {
         ...this.clearSupportData()
       })
@@ -402,8 +413,9 @@ class PagosForm extends Component {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
+    const fondoComun = this.props.selContrato.fondo_comun ? '&fondocomun=1' : ''
     if (contratoID && !isNaN(contratoID) && isNaN(fecha_pago) && !isNaN(Date.parse(fecha_pago))) {
-      axios.get('/contratos/'+contratoID+'/deuda/?fecha='+fecha_pago, authData)
+      axios.get('/contratos/'+contratoID+'/deuda/?fecha='+fecha_pago+fondoComun, authData)
         .then(response => {
           if ('total_deuda' in response.data) {
             const updatedForm = updateObject(this.state.pagoForm, {
@@ -491,11 +503,26 @@ class PagosForm extends Component {
     formClasses.push(classes.noScroll)
 
     if (this.state.searchingOpen && this.props.listaCreditos) {
+      let creditosList = (this.props.listaCreditos) 
+        ? <CreditoList data={this.props.listaCreditos} onClick={(row) => this.selectContrato(row.values.id)}/> 
+        : <Spinner/>
+      let fondosList =(this.state.fondosComunes) 
+        ? <CreditoList data={this.state.fondosComunes} onClick={(row) => this.selectContrato(row.values.id)}/> 
+        : <Spinner/>
+
       creditosBusqueda = (
-        <CreditoList
-          data={this.props.listaCreditos}
-          onClick={(row) => this.selectContrato(row.values.id)}
-        />
+        <div className={[classes.Inputs, classes.TabsInput].join(' ')} key="tabInput">
+        <Tabs
+          onSelectTab={(activeTab) => this.setState({selTab: activeTab})}
+        >
+         <div label="bancoForm.EjCredito">
+          {creditosList}
+         </div>
+         <div label="FondosComunes.title">
+          {fondosList}
+         </div>
+       </Tabs>
+     </div>
       )
     }
 
@@ -561,7 +588,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onInitCreditos: (token) => dispatch(actions.initCreditos(token)),
-    onFetchSelContrato: (token, id) => dispatch(actions.fetchSelContrato(token, id)),
+    onFetchSelContrato: (token, id, fc) => dispatch(actions.fetchSelContrato(token, id, fc)),
     unselContrato: () => dispatch(actions.unSelectContrato()),
     unSelPago: () => dispatch(actions.unSelectPago()),
     onClearError: () => dispatch(actions.clearError()),

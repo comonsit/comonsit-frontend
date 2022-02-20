@@ -69,8 +69,8 @@ class ContratoCondonar extends Component {
     const authData = {
       headers: { 'Authorization': `Bearer ${this.props.token}` }
     }
-
-    axios.get('/contratos/'+this.props.selContrato.id+'/deuda/', authData)
+    const fondoComun = this.props.selContrato.fondo_comun ? '?fondocomun=1' : ''
+    axios.get('/contratos/'+this.props.selContrato.id+'/deuda/'+fondoComun, authData)
       .then(response => {
         if ('capital_por_pagar' in response.data) {
           let condonable = false
@@ -225,12 +225,13 @@ class ContratoCondonar extends Component {
           />
         )
       } else if (this.state.successResponse) {
+        const urlRedirect = (this.props.selContrato.fondo_comun) ? '/fondos-comunes/' : '/contratos/'
         modalInfo = (
           <div className={classes.SuccessResponse}>
             <p><FormattedMessage id="contratoCondonar.respuesta1"/> #{this.state.successResponse}<FormattedMessage id="contratoCondonar.respuesta2"/></p>
             <Button
               btnType="Success"
-              clicked={() => this.props.history.replace('/creditos')}
+              clicked={() => this.props.history.replace(urlRedirect)}
             >
               <FormattedMessage id="bancoForm.terminar"/>
             </Button>
