@@ -553,6 +553,7 @@
     "bancoForm.Movimientos": "Movimientos",
     "bancoForm.Pagos": "Pagos",
     "bancoForm.EjCredito": "Crédito",
+    "FondosComunes.EjCredito": "Crédito de Fondo Común",
     "bancoForm.Otros": "Otros",
     "bancoForm.respuesta1": "Se crearon ",
     "bancoForm.respuesta2": "registros contables nuevos",

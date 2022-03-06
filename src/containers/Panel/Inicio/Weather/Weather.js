@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 
 import classes from './Weather.module.scss'
-import key from './apiKey';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import DayCard from './DayCard';
 
@@ -16,7 +15,7 @@ class Weather extends React.Component {
   }
 
   componentDidMount() {
-    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=17.07&lon=-91.62&units=metric&lang=es&APPID=${key}`
+    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=17.07&lon=-91.62&units=metric&lang=es&APPID=${process.env.REACT_APP_WEATHER_KEY}`
     fetch(weatherURL)
       .then(res => res.json())
       .then(data => {

@@ -445,7 +445,7 @@ class BancoForm extends Component {
          <div label="bancoForm.EjCredito">
            {creditosList}
          </div>
-         <div label="FondosComunes.title">
+         <div label="FondosComunes.EjCredito">
            {fondoComunList}
          </div>
          <div label="bancoForm.Otros">

@@ -24,6 +24,11 @@ const pagosList = (props) => {
       accessor: 'credito'
     },
     {
+      Header: <FormattedMessage id="solicitudes.tipo_credito"/>,
+      accessor: 'tipo',
+      Filter: SelectColumnFilter
+    },
+    {
       Header: <FormattedMessage id="nombres"/>,
       accessor: 'nombres'
     },

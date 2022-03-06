@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history"
 import { Provider } from 'react-redux'
 import {
   createStore,
@@ -28,6 +29,7 @@ import * as actionTypes from './store/actions/actionTypes'
 import './assets/fonts/Arquitecta.otf'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ReactGA from 'react-ga4'
 
 
 const appReducer = combineReducers({
@@ -63,15 +65,21 @@ const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ))
 
+// Google Analytics
+ReactGA.initialize(`${process.env.REACT_APP_ANALYTICS}`, )
+const history = createBrowserHistory()
+history.listen((location) => {
+  ReactGA.send({ hitType: "pageview", page_title:  location.pathname + location.search });
+});
 
 // Si el archivo NO va a estar en el ROOT,
 // .. hay que definitlo aquí en el BrowserRouter
 const app = (
   <Provider store={store}>
-    <BrowserRouter >
+    <Router history={history} >
       <ScrollToTop />
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>
 )
 

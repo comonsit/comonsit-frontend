@@ -15,7 +15,7 @@ const DayCard = props => {
 
   return (
     <div className={classes.CardContainer}>
-        <h3 className={classes.Text}><FrmtedDate value={props.day+" 00:00:00"} noYear/></h3>
+        <h3 className={classes.Text}><FrmtedDate value={props.day} noYear/></h3>
         <i className={imgURL}></i>
         <h3 className={classes.Text}>{Math.round(props.reading.maxTemp)} / {Math.round(props.reading.minTemp)} °C</h3>
         <p className={classes.Text}>{description}</p>
