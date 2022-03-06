@@ -124,7 +124,7 @@ export const Conocenos = () => {
           <h4><FormattedMessage id="conocenos.plataformaT"/></h4>
           <p><FormattedMessage id="conocenos.plataformaP1"/></p>
           <p><FormattedMessage id="conocenos.plataformaP2"/></p>
-          <p><FormattedMessage id="conocenos.plataformaP3"/><a href="https://github.com/mauricioinaz/comonSit"><FormattedMessage id="conocenos.plataformaP4"/></a>.</p>
+          <p><FormattedMessage id="conocenos.plataformaP3"/><a href="https://github.com/comonSit"><FormattedMessage id="conocenos.plataformaP4"/></a>.</p>
           <p><FormattedMessage id="conocenos.plataformaP5"/><a href="https://github.com/mauricioinaz/">@mauricioinaz</a></p>
         </div>
         <img src={Dashboard} alt="Dashboard"/>
