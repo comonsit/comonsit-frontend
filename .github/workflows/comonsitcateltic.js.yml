@@ -14,7 +14,6 @@ jobs:
       matrix:
         node-version: [12.x, 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -22,7 +21,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
+    working-directory: /home/mauricioinaz/comonsit-frontend    
     - run: pwd
-    - run: yarn ci
+    - run: yarn install
     - run: yarn run build --if-present
     # - run: yarn test
